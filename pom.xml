@@ -91,6 +91,9 @@
                 <configuration>
                     <configLocation>${basedir}/src/main/resources/PitchFinderCodeStyle.xml</configLocation>
                     <encoding>UTF-8</encoding>
+                    <consoleOutput>true</consoleOutput>
+                    <failsOnError>false</failsOnError>
+                    <linkXRef>false</linkXRef>
                 </configuration>
                 <executions>
                     <execution>
