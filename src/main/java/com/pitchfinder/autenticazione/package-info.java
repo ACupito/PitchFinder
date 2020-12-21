@@ -1,5 +1,5 @@
-package com.pitchfinder.autenticazione;
-
-/*
- * This package contains the classes which manage authentication operations
+/**
+ * This package contains the classes which manage authentication operations.
  */
+
+package com.pitchfinder.autenticazione;
