@@ -34,7 +34,7 @@ public class Prenotazione {
      * @param eventoData - is the date of the event.
      * @param codicePrenotazione - is the code of booking.
      */
-    public Prenotazione(final String utenteEmail, final String eventoNome, final Date eventoData, final int codicePrenotazione) {
+    public Prenotazione(String utenteEmail, String eventoNome, Date eventoData, int codicePrenotazione) {
         this.utenteEmail = utenteEmail;
         this.eventoNome = eventoNome;
         this.eventoData = eventoData;
@@ -53,7 +53,7 @@ public class Prenotazione {
      * Sets the variable utenteEmail.
      * @param utenteEmail - is the utente email.
      */
-    public void setUtenteEmail(final String utenteEmail) {
+    public void setUtenteEmail(String utenteEmail) {
         this.utenteEmail = utenteEmail;
     }
 
@@ -69,7 +69,7 @@ public class Prenotazione {
      * Sets eventoNome.
      * @param eventoNome - is the name of event
      */
-    public void setEventoNome(final String eventoNome) {
+    public void setEventoNome(String eventoNome) {
         this.eventoNome = eventoNome;
     }
 
@@ -85,7 +85,7 @@ public class Prenotazione {
      * Sets eventoData.
      * @param eventoData - is the date of the even.
      */
-    public void setEventoData(final Date eventoData) {
+    public void setEventoData(Date eventoData) {
         this.eventoData = eventoData;
     }
 
@@ -101,7 +101,7 @@ public class Prenotazione {
      * Sets the booking code.
      * @param codicePrenotazione - is the code of booking.
      */
-    public void setCodicePrenotazione(final int codicePrenotazione) {
+    public void setCodicePrenotazione(int codicePrenotazione) {
         this.codicePrenotazione = codicePrenotazione;
     }
 
@@ -111,7 +111,7 @@ public class Prenotazione {
      * @return boolean
      */
     @Override
-    public boolean equals(final Object o) {
+    public boolean equals(Object o) {
         if (this == o) {
             return true;
         }
