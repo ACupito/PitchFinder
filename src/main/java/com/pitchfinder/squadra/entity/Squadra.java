@@ -55,9 +55,9 @@ public class Squadra {
      * @param capitano - is the name of captain.
      * @param utenteEmail - is the user email.
      */
-    public Squadra(final String nome, final String torneoNome, final Date torneoDataInizio,
-                   final int torneoCampoIdentificativo, final int numeroMembri, final String capitano,
-                   final String utenteEmail) {
+    public Squadra(String nome, String torneoNome, Date torneoDataInizio,
+                   int torneoCampoIdentificativo, int numeroMembri,
+                   String capitano, String utenteEmail) {
         this.nome = nome;
         this.torneoNome = torneoNome;
         this.torneoDataInizio = torneoDataInizio;
@@ -79,7 +79,7 @@ public class Squadra {
      * Sets the name of team.
      * @param nome - is the name of the team
      */
-    public void setNome(final String nome) {
+    public void setNome(String nome) {
         this.nome = nome;
     }
 
@@ -95,7 +95,7 @@ public class Squadra {
      * Sets the tournament's name.
      * @param torneoNome - is the tournament's name
      */
-    public void setTorneoNome(final String torneoNome) {
+    public void setTorneoNome(String torneoNome) {
         this.torneoNome = torneoNome;
     }
 
@@ -111,7 +111,7 @@ public class Squadra {
      * Sets  the start date of the tournament.
      * @param torneoDataInizio -  is the start date of the tournament.
      */
-    public void setTorneoDataInizio(final Date torneoDataInizio) {
+    public void setTorneoDataInizio(Date torneoDataInizio) {
         this.torneoDataInizio = torneoDataInizio;
     }
 
@@ -127,7 +127,7 @@ public class Squadra {
      * Sets the id of tournament's pitch.
      * @param torneoCampoIdentificativo - is the id of tournament's pitch.
      */
-    public void setTorneoCampoIdentificativo(final int torneoCampoIdentificativo) {
+    public void setTorneoCampoIdentificativo(int torneoCampoIdentificativo) {
         this.torneoCampoIdentificativo = torneoCampoIdentificativo;
     }
 
@@ -143,7 +143,7 @@ public class Squadra {
      * Sets the number of players.
      * @param numeroMembri - is the number of players.
      */
-    public void setNumeroMembri(final int numeroMembri) {
+    public void setNumeroMembri(int numeroMembri) {
         this.numeroMembri = numeroMembri;
     }
 
@@ -159,7 +159,7 @@ public class Squadra {
      * Sets the team's captain.
      * @param capitano - is the team's captain.
      */
-    public void setCapitano(final String capitano) {
+    public void setCapitano(String capitano) {
         this.capitano = capitano;
     }
 
@@ -175,7 +175,7 @@ public class Squadra {
      * Sets user email.
      * @param utenteEmail - is the  user email.
      */
-    public void setUtenteEmail(final String utenteEmail) {
+    public void setUtenteEmail(String utenteEmail) {
         this.utenteEmail = utenteEmail;
     }
 
@@ -185,7 +185,7 @@ public class Squadra {
      * @return boolean
      */
     @Override
-    public boolean equals(final Object o) {
+    public boolean equals(Object o) {
         if (this == o) {
             return true;
         }
