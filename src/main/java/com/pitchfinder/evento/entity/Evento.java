@@ -82,8 +82,8 @@ public class Evento {
     /**
      * @return Date
      */
-    public Date getDate() {
-        return date;
+    public java.sql.Date getDate() {
+        return (java.sql.Date) date;
     }
 
     /**
