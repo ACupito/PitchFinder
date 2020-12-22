@@ -1,7 +1,11 @@
 package com.pitchfinder.evento.dao;
 
 import com.pitchfinder.evento.entity.Evento;
+import com.pitchfinder.singleton.ConPool;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.util.Date;
 import java.util.List;
 
@@ -9,6 +13,17 @@ import java.util.List;
  * This interface manages the Evento dao.
  */
 public class EventoDAOImpl {
+
+    private static final int ONE = 1;
+    private static final int TWO = 2;
+    private static final int THREE = 3;
+    private static final int FOUR = 4;
+    private static final int FIVE = 5;
+    private static final int SIX = 6;
+    private static final int SEVEN = 7;
+    private static final int EIGHT = 8;
+    private static final int NINE = 9;
+
 
         /**
          *
@@ -18,7 +33,24 @@ public class EventoDAOImpl {
          * @return boolean
          */
         public boolean doSaveEvento(final Evento evento) {
-            return false;
+
+            try (Connection con = ConPool.getInstance().getConnection()) {
+                PreparedStatement ps =
+                        con.prepareStatement("INSERT into evento(Nome,Data,Immagine,Ospite,Descrizione,OrarioInizio,OrarioFine,MaxPartecipanti,AdminUsername)"
+                                +" values(?,?,?,?,?,?,?,?,?)");
+                ps.setString(ONE,evento.getName());
+                ps.setDate(TWO,evento.getDate());
+                ps.setString(THREE,evento.getImage());
+                ps.setString(FOUR,evento.getGuest());
+                ps.setString(FIVE,evento.getDescription());
+                ps.setString(SIX,evento.getStartHour());
+                ps.setString(SEVEN,evento.getEndHour());
+                ps.setInt(EIGHT,evento.getAvailableSits());
+                ps.setString(NINE,evento.getAdmin());
+                return 1 == ps.executeUpdate();
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
         }
 
         /**
