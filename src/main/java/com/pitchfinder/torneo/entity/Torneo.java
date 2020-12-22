@@ -239,10 +239,10 @@ public class Torneo {
 
     /**
      * This method returns the start date of the tournament.
-     * @return DataInizio : Date
+     * @return DataInizio : java.sql.Date
      */
-    public Date getDataInizio() {
-        return dataInizio;
+    public java.sql.Date getDataInizio() {
+        return (java.sql.Date) dataInizio;
     }
 
     /**
@@ -257,8 +257,8 @@ public class Torneo {
      * This method returns the end date of the tournament.
      * @return DataFine : Date
      */
-    public Date getDataFine() {
-        return dataFine;
+    public java.sql.Date getDataFine() {
+        return (java.sql.Date) dataFine;
     }
 
     /**
