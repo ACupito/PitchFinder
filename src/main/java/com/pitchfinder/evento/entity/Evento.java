@@ -188,7 +188,7 @@ public class Evento {
      *
      * @param admin - admin's username
      */
-    public void setAdmin(String admin) {
+    public void setAdmin(final String admin) {
         this.admin = admin;
     }
 

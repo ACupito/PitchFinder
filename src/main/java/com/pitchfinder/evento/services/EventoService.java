@@ -1,4 +1,4 @@
 package com.pitchfinder.evento.services;
 
-public class EventoService {
+public interface EventoService {
 }
