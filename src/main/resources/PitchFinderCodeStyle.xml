@@ -194,10 +194,7 @@
     <!-- Miscellaneous other checks.                   -->
     <!-- See https://checkstyle.org/config_misc.html -->
     <module name="ArrayTypeStyle"/>
-    <module name="FinalParameters">
-      <property name="ignorePrimitiveTypes" value="true"/>
-      <property name="tokens" value=""/>
-    </module>
+
     <module name="TodoComment"/>
     <module name="UpperEll"/>
 
