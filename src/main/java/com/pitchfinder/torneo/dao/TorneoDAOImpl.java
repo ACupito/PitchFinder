@@ -82,22 +82,7 @@ public class TorneoDAOImpl implements TorneoDAO {
      */
     @Override
     public List<Torneo> doRetrieveAllTornei() {
-        try (Connection con = ConPool.getInstance().getConnection()) {
-
-            PreparedStatement ps = con.prepareStatement("select * from Torneo");
-            ResultSet rs = ps.executeQuery();
-
-            List<Torneo> tornei = new ArrayList<>();
-            Torneo t;
-
-            while(rs.next()) {
-
-            }
-
-            return tornei;
-        } catch (SQLException s) {
-            throw new RuntimeException(s);
-        }
+        return null;
     }
 
     /**
