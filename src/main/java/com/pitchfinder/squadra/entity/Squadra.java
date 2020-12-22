@@ -47,22 +47,24 @@ public class Squadra {
 
     /**
      *
-     * @param nomesquadra - is the name of team.
-     * @param torneonome - is the tournament's name.
-     * @param torneodatainizio - is the start date of the tournament.
-     * @param torneocampoidentificativo - is the id of pitch's tournament.
-     * @param numeromembri - is the number of players.
-     * @param nomecapitano - is the name of captain.
-     * @param utenteemail - is the user email.
+     * @param nome - is the name of team.
+     * @param torneoNome - is the tournament's name.
+     * @param torneoDataInizio - is the start date of the tournament.
+     * @param torneoCampoIdentificativo - is the id of pitch's tournament.
+     * @param numeroMembri - is the number of players.
+     * @param capitano - is the name of captain.
+     * @param utenteEmail - is the user email.
      */
-    public Squadra(final String nomesquadra, final String torneonome, final Date torneodatainizio, final int torneocampoidentificativo, final int numeromembri, final String nomecapitano, final String utenteemail) {
-        this.nome = nomesquadra;
-        this.torneoNome = torneonome;
-        this.torneoDataInizio = torneodatainizio;
-        this.torneoCampoIdentificativo = torneocampoidentificativo;
+    public Squadra(final String nome, final String torneoNome, final Date torneoDataInizio,
+                   final int torneoCampoIdentificativo, final int numeroMembri, final String capitano,
+                   final String utenteEmail) {
+        this.nome = nome;
+        this.torneoNome = torneoNome;
+        this.torneoDataInizio = torneoDataInizio;
+        this.torneoCampoIdentificativo = torneoCampoIdentificativo;
         this.numeroMembri = numeroMembri;
-        this.capitano = nomecapitano;
-        this.utenteEmail = utenteemail;
+        this.capitano = capitano;
+        this.utenteEmail = utenteEmail;
     }
 
     /**
@@ -75,10 +77,10 @@ public class Squadra {
 
     /**
      * Sets the name of team.
-     * @param nomeTeam - is the name of the team
+     * @param nome - is the name of the team
      */
-    public void setNome(final String nomeTeam) {
-        this.nome = nomeTeam;
+    public void setNome(final String nome) {
+        this.nome = nome;
     }
 
     /**
@@ -91,10 +93,10 @@ public class Squadra {
 
     /**
      * Sets the tournament's name.
-     * @param torneo- is the tournament's name
+     * @param torneoNome - is the tournament's name
      */
-    public void setTorneoNome(final String torneo) {
-        this.torneoNome = torneo;
+    public void setTorneoNome(final String torneoNome) {
+        this.torneoNome = torneoNome;
     }
 
     /**
@@ -107,10 +109,10 @@ public class Squadra {
 
     /**
      * Sets  the start date of the tournament.
-     * @param torneoData -  is the start date of the tournament.
+     * @param torneoDataInizio -  is the start date of the tournament.
      */
-    public void setTorneoDataInizio(final Date torneoData) {
-        this.torneoDataInizio = torneoData;
+    public void setTorneoDataInizio(final Date torneoDataInizio) {
+        this.torneoDataInizio = torneoDataInizio;
     }
 
     /**
@@ -123,10 +125,10 @@ public class Squadra {
 
     /**
      * Sets the id of tournament's pitch.
-     * @param torneoCampoidentificativo - is the id of tournament's pitch.
+     * @param torneoCampoIdentificativo - is the id of tournament's pitch.
      */
-    public void setTorneoCampoIdentificativo(final int torneoCampoidentificativo) {
-        this.torneoCampoIdentificativo = torneoCampoidentificativo;
+    public void setTorneoCampoIdentificativo(final int torneoCampoIdentificativo) {
+        this.torneoCampoIdentificativo = torneoCampoIdentificativo;
     }
 
     /**
@@ -139,9 +141,9 @@ public class Squadra {
 
     /**
      * Sets the number of players.
-     * @param numeroGiocatori - is the number of players.
+     * @param numeroMembri - is the number of players.
      */
-    public void setNumeroMembri(final int numeroGiocatori) {
+    public void setNumeroMembri(final int numeroMembri) {
         this.numeroMembri = numeroMembri;
     }
 
@@ -162,7 +164,7 @@ public class Squadra {
     }
 
     /**
-     * Returns utente email.
+     * Returns user email.
      * @return String
      */
     public String getUtenteEmail() {
@@ -170,8 +172,8 @@ public class Squadra {
     }
 
     /**
-     * Sets user email
-     * @param utenteEmail - is the  user email
+     * Sets user email.
+     * @param utenteEmail - is the  user email.
      */
     public void setUtenteEmail(final String utenteEmail) {
         this.utenteEmail = utenteEmail;
@@ -191,7 +193,10 @@ public class Squadra {
             return false;
         }
         Squadra squadra = (Squadra) o;
-        return torneoCampoIdentificativo == squadra.torneoCampoIdentificativo && numeroMembri == squadra.numeroMembri && Objects.equals(nome, squadra.nome) && Objects.equals(torneoNome, squadra.torneoNome) && Objects.equals(torneoDataInizio, squadra.torneoDataInizio) && Objects.equals(capitano, squadra.capitano) && Objects.equals(utenteEmail, squadra.utenteEmail);
+        return torneoCampoIdentificativo == squadra.torneoCampoIdentificativo
+                && numeroMembri == squadra.numeroMembri && Objects.equals(nome, squadra.nome)
+                && Objects.equals(torneoNome, squadra.torneoNome) && Objects.equals(torneoDataInizio, squadra.torneoDataInizio)
+                && Objects.equals(capitano, squadra.capitano) && Objects.equals(utenteEmail, squadra.utenteEmail);
     }
 
     /**

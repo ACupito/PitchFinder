@@ -6,7 +6,6 @@ import java.util.Objects;
 public class Prenotazione {
     /**
      * Is the user email.
-     *
      */
     private String utenteEmail;
     /**
@@ -30,16 +29,16 @@ public class Prenotazione {
 
     /**
      *Is the Constructor.
-     * @param utenteemail - is the user email.
-     * @param eventonome - is the name of the event.
-     * @param eventodata - is the date of the event.
-     * @param codiceprenotazione - is the code of booking.
+     * @param utenteEmail - is the user email.
+     * @param eventoNome - is the name of the event.
+     * @param eventoData - is the date of the event.
+     * @param codicePrenotazione - is the code of booking.
      */
-    public Prenotazione(final String utenteemail, final String eventonome, final Date eventodata, final int codiceprenotazione) {
-        this.utenteEmail = utenteemail;
-        this.eventoNome = eventonome;
-        this.eventoData = eventodata;
-        this.codicePrenotazione = codiceprenotazione;
+    public Prenotazione(final String utenteEmail, final String eventoNome, final Date eventoData, final int codicePrenotazione) {
+        this.utenteEmail = utenteEmail;
+        this.eventoNome = eventoNome;
+        this.eventoData = eventoData;
+        this.codicePrenotazione = codicePrenotazione;
     }
 
     /**
@@ -52,10 +51,10 @@ public class Prenotazione {
 
     /**
      * Sets the variable utenteEmail.
-     * @param utenteemail - is the utente email.
+     * @param utenteEmail - is the utente email.
      */
-    public void setUtenteEmail(final String utenteemail) {
-        this.utenteEmail = utenteemail;
+    public void setUtenteEmail(final String utenteEmail) {
+        this.utenteEmail = utenteEmail;
     }
 
     /**
@@ -68,10 +67,10 @@ public class Prenotazione {
 
     /**
      * Sets eventoNome.
-     * @param eventonome - is the name of event
+     * @param eventoNome - is the name of event
      */
-    public void setEventoNome(final String eventonome) {
-        this.eventoNome = eventonome;
+    public void setEventoNome(final String eventoNome) {
+        this.eventoNome = eventoNome;
     }
 
     /**
@@ -84,9 +83,9 @@ public class Prenotazione {
 
     /**
      * Sets eventoData.
-     * @param eventodata - is the date of the even.
+     * @param eventoData - is the date of the even.
      */
-    public void setEventoData(final Date eventodata) {
+    public void setEventoData(final Date eventoData) {
         this.eventoData = eventoData;
     }
 
@@ -100,10 +99,10 @@ public class Prenotazione {
 
     /**
      * Sets the booking code.
-     * @param codiceprenotazione - is the code of booking.
+     * @param codicePrenotazione - is the code of booking.
      */
-    public void setCodicePrenotazione(final int codiceprenotazione) {
-        this.codicePrenotazione = codiceprenotazione;
+    public void setCodicePrenotazione(final int codicePrenotazione) {
+        this.codicePrenotazione = codicePrenotazione;
     }
 
     /**
@@ -122,7 +121,8 @@ public class Prenotazione {
         }
 
         Prenotazione that = (Prenotazione) o;
-        return codicePrenotazione == that.codicePrenotazione && Objects.equals(utenteEmail, that.utenteEmail) && Objects.equals(eventoNome, that.eventoNome) && Objects.equals(eventoData, that.eventoData);
+        return codicePrenotazione == that.codicePrenotazione && Objects.equals(utenteEmail, that.utenteEmail)
+                && Objects.equals(eventoNome, that.eventoNome) && Objects.equals(eventoData, that.eventoData);
     }
 
     /**
