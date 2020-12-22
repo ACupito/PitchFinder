@@ -20,6 +20,8 @@ public class Evento {
     private String description;
     /** The Event's available sits. */
     private int availableSits;
+    /** The Event's admin Username. */
+    private String admin;
 
     /**
      *
@@ -30,7 +32,8 @@ public class Evento {
      * @param data - date of the event
      * @param ospite - guest of the event
      * @param descrizione - description of the event
-     * @param postiDisponibili available sits of the event
+     * @param postiDisponibili - available sits of the event
+     * @param adminUsername - admin's username
      */
     public Evento(final String nome,
                   final String immagine,
@@ -39,7 +42,8 @@ public class Evento {
                   final Date data,
                   final String ospite,
                   final String descrizione,
-                  final int postiDisponibili) {
+                  final int postiDisponibili,
+                  final String adminUsername) {
 
         this.name = nome;
         this.image = immagine;
@@ -49,6 +53,7 @@ public class Evento {
         this.guest = ospite;
         this.description = descrizione;
         this.availableSits = postiDisponibili;
+        this.admin = adminUsername;
     }
 
     /**
@@ -106,6 +111,13 @@ public class Evento {
      */
     public int getAvailableSits() {
         return availableSits;
+    }
+
+    /**
+     * @return String
+     */
+    public String getAdmin() {
+        return admin;
     }
 
     /**
@@ -170,6 +182,14 @@ public class Evento {
      */
     public void setAvailableSits(final int postiDisponibili) {
         this.availableSits = postiDisponibili;
+    }
+
+    /**
+     *
+     * @param admin - admin's username
+     */
+    public void setAdmin(String admin) {
+        this.admin = admin;
     }
 
     /**
