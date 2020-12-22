@@ -4,6 +4,7 @@ import com.pitchfinder.singleton.ConPool;
 import com.pitchfinder.torneo.entity.Torneo;
 
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -18,7 +19,7 @@ public class TorneoDAOImpl implements TorneoDAO {
      * This method makes the Torneo object persist
      * in the database.
      * @param torneo object
-     * @return boolean
+     * @return boolean -> true execute success / false execute failed
      */
     @Override
     public boolean doSaveTorneo(Torneo torneo) {
@@ -54,11 +55,24 @@ public class TorneoDAOImpl implements TorneoDAO {
      * This method allows to delete a Torneo object
      * from the database.
      * @param torneo object
-     * @return boolean
+     * @return boolean -> true execute success / false execute failed
      */
     @Override
     public boolean doRemoveTorneo(Torneo torneo) {
-        return false;
+        try (Connection con = ConPool.getInstance().getConnection()) {
+            PreparedStatement ps = con.prepareStatement("delete from Torneo where Nome = ? and DataInizio = ? and CampoIdentificativo = ?");
+
+            ps.setString(1, torneo.getNome());
+            ps.setDate(2, torneo.getDataInizio());
+            ps.setInt(3, torneo.getCampoIdentificativo());
+
+            if(ps.executeUpdate() != 1) {
+                return false;
+            }
+            return true;
+        } catch (SQLException s) {
+            throw new RuntimeException(s);
+        }
     }
 
     /**
@@ -68,7 +82,22 @@ public class TorneoDAOImpl implements TorneoDAO {
      */
     @Override
     public List<Torneo> doRetrieveAllTornei() {
-        return null;
+        try (Connection con = ConPool.getInstance().getConnection()) {
+
+            PreparedStatement ps = con.prepareStatement("select * from Torneo");
+            ResultSet rs = ps.executeQuery();
+
+            List<Torneo> tornei = new ArrayList<>();
+            Torneo t;
+
+            while(rs.next()) {
+
+            }
+
+            return tornei;
+        } catch (SQLException s) {
+            throw new RuntimeException(s);
+        }
     }
 
     /**
