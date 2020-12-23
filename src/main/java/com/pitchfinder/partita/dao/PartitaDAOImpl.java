@@ -19,7 +19,7 @@ public class PartitaDAOImpl implements PartitaDAO {
      * @param partita partita
      */
     @Override
-    public void doSavePartita(Partita partita) {
+    public boolean doSavePartita(Partita partita) {
 
         try (Connection con = ConPool.getInstance().getConnection()) {
             PreparedStatement ps =
