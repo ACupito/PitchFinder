@@ -6,7 +6,7 @@ public interface UtenteDAO {
 
     /**
      * This method memorizes a user into the database.
-     * @param utente
+     * @param utente is the user who wants to join the platform
      * @return boolean
      */
     boolean doSaveUtente(Utente utente);
@@ -14,7 +14,7 @@ public interface UtenteDAO {
     /**
      * This method checks weather the subject who is trying to
      * access is a registered user o not.
-     * @param utente
+     * @param utente is the user who wants to log in
      * @return boolean
      */
     Utente checkUtente(Utente utente);

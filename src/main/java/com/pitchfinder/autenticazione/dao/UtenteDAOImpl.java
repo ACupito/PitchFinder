@@ -42,7 +42,7 @@ public class UtenteDAOImpl implements UtenteDAO {
 
     /**
      * This method memorizes a user into the database.
-     * @param utente
+     * @param utente is the user who want do join the platform
      * @return boolean
      */
     public boolean doSaveUtente(final Utente utente) {
@@ -54,19 +54,12 @@ public class UtenteDAOImpl implements UtenteDAO {
                             + "Password, DataDiNascita) "
                             + "values (?, ?, ?, ?, ?, ?)");
 
-            int anno = utente.getDataDiNascita().getYear();
-            int mese = utente.getDataDiNascita().getMonth();
-            int giorno = utente.getDataDiNascita().getDay();
-
-            String date = anno + "-" + mese + "-" + giorno;
-            java.sql.Date d = java.sql.Date.valueOf(date);
-
             ps.setString(INDEX1, utente.getEmail());
             ps.setString(INDEX2, utente.getUsername());
             ps.setString(INDEX3, utente.getNome());
             ps.setString(INDEX4, utente.getCognome());
             ps.setString(INDEX5, utente.getPasswordHash());
-            ps.setDate(INDEX6, d);
+            ps.setDate(INDEX6, utente.getDataDiNascita());
 
             return ps.executeUpdate() == 1;
 
@@ -79,7 +72,7 @@ public class UtenteDAOImpl implements UtenteDAO {
     /**
      * This method checks weather the subject who is trying to
      * access is a registered user o not.
-     * @param utente
+     * @param utente is the user who is logging in
      * @return utente
      */
     public Utente checkUtente(final Utente utente) {
@@ -105,10 +98,10 @@ public class UtenteDAOImpl implements UtenteDAO {
                     utente.setDataDiNascita(rs.getDate(INDEX6));
 
                     return utente;
+
                 } else {
                     throw new IllegalArgumentException("Il login non va a buon "
-                            + "fine perché la password " 
-                            + "inserita non è corretta");
+                            + "fine perché la password inserita non è corretta");
                 }
 
             } else {

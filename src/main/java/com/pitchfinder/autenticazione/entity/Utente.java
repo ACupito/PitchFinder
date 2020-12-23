@@ -4,7 +4,7 @@ import java.math.BigInteger;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.util.Date;
+import java.sql.Date;
 
 public class Utente {
 
@@ -55,7 +55,7 @@ public class Utente {
 
     /**
      * This method sets the value of the variable email.
-     * @param emailPar
+     * @param emailPar is the user email
      */
     public void setEmail(final String emailPar) {
         this.email = emailPar;
@@ -71,7 +71,7 @@ public class Utente {
 
     /**
      * This method sets the value of the variable username.
-     * @param usernamePar
+     * @param usernamePar is the user username
      */
     public void setUsername(final String usernamePar) {
         this.username = usernamePar;
@@ -87,7 +87,7 @@ public class Utente {
 
     /**
      * This sets the value of the variable nome.
-     * @param nomePar
+     * @param nomePar is the user name
      */
     public void setNome(final String nomePar) {
         this.nome = nomePar;
@@ -103,7 +103,7 @@ public class Utente {
 
     /**
      * This method sets the value of the variable cognome.
-     * @param cognomePar
+     * @param cognomePar is the user surname
      */
     public void setCognome(final String cognomePar) {
         this.cognome = cognomePar;
@@ -119,7 +119,7 @@ public class Utente {
 
     /**
      * This method sets the value of the variable passwordHash.
-     * @param password
+     * @param password is the user password
      */
     public void setPassword(final String password) {
 
@@ -148,9 +148,10 @@ public class Utente {
 
     /**
      * This method sets the vaue of the variable dataDiNascita.
-     * @param dataDiNascitaPar
+     * @param dataDiNascitaPar is the user date of birth
      */
     public void setDataDiNascita(final Date dataDiNascitaPar) {
+
         this.dataDiNascita = dataDiNascitaPar;
     }
 }
