@@ -16,51 +16,51 @@ public interface CampoDAO {
 
     /**
      *
-     * @param id_campo
+     * @param idCampo
      * @param data
      * @param inizio
      * @param fine
-     * @param username_admin
+     * @param usernameAdmin
      * @return boolean
      */
-    boolean doSaveOccupazione(int id_campo, Date data, Time inizio, Time fine, String username_admin);
+    boolean doSaveOccupazione(int idCampo, Date data, Time inizio, Time fine, String usernameAdmin);
 
     /**
      *
-     * @param id_campo
-     * @param data
-     * @param inizio
-     * @param fine
-     * @return boolean
-     */
-    boolean doRemoveOccupazione(int id_campo, Date data, Time inizio, Time fine);
-
-    /**
-     *
-     * @param email_utente
-     * @param id_campo
+     * @param idCampo
      * @param data
      * @param inizio
      * @param fine
      * @return boolean
      */
-    boolean doSaveDisponibilita(String email_utente, int id_campo, Date data, Time inizio, Time fine);
+    boolean doRemoveOccupazione(int idCampo, Date data, Time inizio, Time fine);
 
     /**
      *
-     * @param email_utente
-     * @param id_campo
+     * @param emailUtente
+     * @param idCampo
+     * @param data
+     * @param inizio
+     * @param fine
      * @return boolean
      */
-    boolean doRemoveDisponibilita(String email_utente,  int id_campo);
+    boolean doSaveDisponibilita(String emailUtente, int idCampo, Date data, Time inizio, Time fine);
 
     /**
      *
-     * @param id_campo
+     * @param emailUtente
+     * @param idCampo
+     * @return boolean
+     */
+    boolean doRemoveDisponibilita(String emailUtente,  int idCampo);
+
+    /**
+     *
+     * @param idCampo
      * @param data
      * @param inizio
      * @param fine
      * @return List<String>
      */
-    List<String> doRetriveEmailByDisponibilita(int id_campo, Date data, Time inizio, Time fine);
+    List<String> doRetriveEmailByDisponibilita(int idCampo, Date data, Time inizio, Time fine);
 }
