@@ -48,7 +48,7 @@ public class TorneoController extends HttpServlet {
 
         if (flag == 1) { //tournament creation
 
-            Campo campo = (Campo) request.getSession().getAttribute("campo"); //get campo from the session
+            Campo campo = (Campo) request.getSession().getAttribute("campo"); //get campo from the context
 
             String nome = request.getParameter("nome");
             if (nome == null) {
