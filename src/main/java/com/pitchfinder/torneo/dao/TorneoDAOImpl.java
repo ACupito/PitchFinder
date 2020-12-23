@@ -9,7 +9,7 @@ import java.sql.SQLException;
 
 
 /**
- * This interface manages the Torneo dao.
+ * This class manages the Torneo dao.
  */
 
 public class TorneoDAOImpl implements TorneoDAO {
