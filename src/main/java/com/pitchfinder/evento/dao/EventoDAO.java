@@ -38,8 +38,8 @@ public interface EventoDAO {
     /**
      *
      * @param event looking for its prenotation.
-     * @return List<Evento>
+     * @return int
      */
-    List<Evento> doRetrieveNPrenotazioniByEvento(Evento event);
+    int doRetrieveNPrenotazioniByEvento(Evento event);
 
 }
