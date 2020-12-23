@@ -57,6 +57,13 @@ public class Evento {
     }
 
     /**
+     * Void Construct.
+     */
+    public Evento(){
+
+    }
+
+    /**
      * @return String
      */
     public String getName() {
