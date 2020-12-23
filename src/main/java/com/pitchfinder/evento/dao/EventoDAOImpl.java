@@ -153,7 +153,22 @@ public class EventoDAOImpl implements EventoDAO {
          * @param event looking for its prenotation.
          * @return List<Evento>
          */
-            public List<Evento> doRetrieveNPrenotazioniByEvento(final Evento event) {
-                return null;
+            public int doRetrieveNPrenotazioniByEvento(final Evento event) {
+
+
+                String query = "SELECT count(CodicePrenotazione)"
+                        + " FROM prenotazione WHERE EventoNome = ?";
+
+                try (Connection con = ConPool.getConnection()) {
+                    PreparedStatement ps =
+                            con.prepareStatement(query);
+                    ps.setString(ONE, event.getName());
+                    ResultSet rs =  ps.executeQuery();
+                    int numberPrenotation = rs.getInt(ONE);
+                    return numberPrenotation;
+
+                } catch (SQLException e) {
+                    throw new RuntimeException(e);
+                }
             }
 }
