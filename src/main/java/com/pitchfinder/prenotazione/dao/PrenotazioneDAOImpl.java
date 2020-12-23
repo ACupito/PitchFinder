@@ -4,7 +4,6 @@ import com.pitchfinder.prenotazione.entity.Prenotazione;
 import com.pitchfinder.singleton.ConPool;
 
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
@@ -24,7 +23,7 @@ public class PrenotazioneDAOImpl implements PrenotazioneDAO {
                             + "VALUES (?, ?, ?, ?)");
             ps.setString(1, prenotazione.getUtenteEmail());
             ps.setString(2, prenotazione.getEventoNome());
-            ps.setDate(3, (Date) prenotazione.getEventoData());
+            ps.setDate(3, prenotazione.getEventoData());
             ps.setInt(4, prenotazione.getCodicePrenotazione());
 
             if (ps.executeUpdate() != 1) {
