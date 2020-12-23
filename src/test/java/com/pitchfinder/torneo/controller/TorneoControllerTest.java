@@ -18,12 +18,13 @@ class TorneoControllerTest {
     private TorneoController servlet;
     private HttpServletRequest mockedRequest;
     private HttpServletResponse mockedResponse;
-
+    private HttpSession session;
     @BeforeAll
     void setUp() {
         servlet = new TorneoController();
         mockedRequest = Mockito.mock(HttpServletRequest.class);
         mockedResponse = Mockito.mock(HttpServletResponse.class);
+        session = Mockito.mock(HttpSession.class);
         Mockito.when(mockedRequest.getParameter("flag")).thenReturn("1");
     }
 
@@ -36,7 +37,6 @@ class TorneoControllerTest {
         admin.setCognome("Mezzi");
         admin.setUsername("memex99");
         admin.setPassword("password");
-        HttpSession session = Mockito.mock(HttpSession.class);
         Mockito.when(mockedRequest.getSession()).thenReturn(session);
         Mockito.when(mockedRequest.getSession().getAttribute("admin")).thenReturn(admin);
         IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
