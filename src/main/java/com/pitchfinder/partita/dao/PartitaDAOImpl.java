@@ -17,6 +17,7 @@ public class PartitaDAOImpl implements PartitaDAO {
     /**
      * This method create an instance of partita in table partita.
      * @param partita partita
+     * @return boolean
      */
     @Override
     public boolean doSavePartita(Partita partita) {
@@ -32,7 +33,11 @@ public class PartitaDAOImpl implements PartitaDAO {
             ps.setTime(4, partita.getOrarioInizio());
             ps.setTime(5, partita.getOrarioFine());
 
-            ps.executeUpdate();
+           if (ps.executeUpdate() != 1) {
+               return false;
+           }
+           return true;
+
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }

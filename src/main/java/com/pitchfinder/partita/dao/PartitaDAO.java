@@ -8,6 +8,7 @@ public interface PartitaDAO {
     /**
      * This method create an instance of partita in table partita.
      * @param partita partita
+     * @return boolean
      */
     boolean doSavePartita(Partita partita);
 
