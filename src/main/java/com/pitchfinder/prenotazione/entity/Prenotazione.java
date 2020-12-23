@@ -4,26 +4,16 @@ import java.util.Date;
 import java.util.Objects;
 
 public class Prenotazione {
-    /**
-     * Is the user email.
-     */
+    /**Is the user email.*/
     private String utenteEmail;
-    /**
-     * Is the event name.
-     */
+    /**Is the event name.*/
     private String eventoNome;
-    /**
-     * Is the event's date.
-     */
+    /**Is the event's date.*/
     private Date eventoData;
-    /**
-     * Is the code of booking.
-     */
+    /**Is the code of booking.*/
     private int codicePrenotazione;
 
-    /**
-     * Is the void constructor.
-     */
+    /**Is the void constructor.*/
     public Prenotazione() {
     }
 
@@ -83,14 +73,14 @@ public class Prenotazione {
 
     /**
      * Sets eventoData.
-     * @param eventoData - is the date of the even.
+     * @param eventoData - is the date of the event.
      */
     public void setEventoData(Date eventoData) {
         this.eventoData = eventoData;
     }
 
     /**
-     * Returns codiceP.
+     * Returns codicePrenotazione.
      * @return int
      */
     public int getCodicePrenotazione() {
