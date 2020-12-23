@@ -3,10 +3,10 @@ package com.pitchfinder.torneo.dao;
 import com.pitchfinder.singleton.ConPool;
 import com.pitchfinder.torneo.entity.Torneo;
 
-import java.sql.*;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+
 
 /**
  * This interface manages the Torneo dao.
@@ -22,7 +22,7 @@ public class TorneoDAOImpl implements TorneoDAO {
      * @return boolean -> true execute success / false execute failed
      */
     @Override
-    public boolean doSaveTorneo(Torneo torneo) {
+    public boolean doSaveTorneo(final Torneo torneo) {
 
         try (Connection con = ConPool.getInstance().getConnection()) {
             PreparedStatement ps = con.prepareStatement("insert into Torneo(Nome, DataInizio,"
@@ -42,7 +42,7 @@ public class TorneoDAOImpl implements TorneoDAO {
             ps.setInt(10, torneo.getMaxNumeroPartecipantiPerSquadra());
             ps.setString(11, torneo.getGiornoPartite());
 
-            if(ps.executeUpdate() != 1) {
+            if (ps.executeUpdate() != 1) {
                 return false;
             }
             return true;
@@ -51,72 +51,4 @@ public class TorneoDAOImpl implements TorneoDAO {
         }
     }
 
-    /**
-     * This method allows to delete a Torneo object
-     * from the database.
-     * @param torneo object
-     * @return boolean -> true execute success / false execute failed
-     */
-    @Override
-    public boolean doRemoveTorneo(Torneo torneo) {
-        try (Connection con = ConPool.getInstance().getConnection()) {
-            PreparedStatement ps = con.prepareStatement("delete from Torneo where Nome = ? and DataInizio = ? and CampoIdentificativo = ?");
-
-            ps.setString(1, torneo.getNome());
-            ps.setDate(2, torneo.getDataInizio());
-            ps.setInt(3, torneo.getCampoIdentificativo());
-
-            if(ps.executeUpdate() != 1) {
-                return false;
-            }
-            return true;
-        } catch (SQLException s) {
-            throw new RuntimeException(s);
-        }
-    }
-
-    /**
-     * This method allows to get all Torneo items
-     * from the database.
-     * @return List<Torneo>
-     */
-    @Override
-    public List<Torneo> doRetrieveAllTornei() {
-        return null;
-    }
-
-    /**
-     * This method allows to get Torneo item
-     * from the database.
-     * @param nome name of the tournament.
-     * @param dataInizio start date of the tournament.
-     * @param idCampo pitch identifier.
-     * @return Torneo
-     */
-    @Override
-    public Torneo doRetrieveTorneo(String nome, Date dataInizio, int idCampo) {
-        return null;
-    }
-
-    /**
-     * This method allows to get Torneo items from filters.
-     * @param dataInizio start date of the tournament.
-     * @param dataFine  end date og the tournament.
-     * @param tipo type of the tournament.
-     * @return List<Torneo>
-     */
-    @Override
-    public List<Torneo> doRetrieveTorneoByFilter(Date dataInizio, Date dataFine, String tipo) {
-        return null;
-    }
-
-    /**
-     * This method allows to get Torneo items from through a certain sport.
-     * @param sport sport of the tournament.
-     * @return List<Torneo>
-     */
-    @Override
-    public List<Torneo> doRetrieveTorneoBySport(String sport) {
-        return null;
-    }
 }
