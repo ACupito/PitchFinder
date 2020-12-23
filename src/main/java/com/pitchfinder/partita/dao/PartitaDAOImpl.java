@@ -31,7 +31,6 @@ public class PartitaDAOImpl implements PartitaDAO {
             ps.setDate(3, partita.getData());
             ps.setTime(4, partita.getOrarioInizio());
             ps.setTime(5, partita.getOrarioFine());
-
             ps.executeUpdate();
         } catch (SQLException e) {
             throw new RuntimeException(e);
