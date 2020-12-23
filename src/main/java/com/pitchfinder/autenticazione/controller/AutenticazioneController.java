@@ -28,28 +28,29 @@ public class AutenticazioneController extends HttpServlet {
     }
 
     /**
+     * doPost() method.
+     * @param request is the servlet request
+     * @param response is the servlet response
+     */
+
+    public void doPost(final HttpServletRequest request,
+                       final HttpServletResponse response) {
+
+        doGet(request, response);
+    }
+
+    /**
      * doGet() method.
      * @param request is the servlet request
      * @param response is the servlet response
      */
     public void doGet(final HttpServletRequest request, final HttpServletResponse response) {
-        doPost(request, response);
-    }
-
-
-    /**
-     * doPost() method.
-     * @param request is the servlet request
-     * @param response is the servlet response
-     */
-    public void doPost(final HttpServletRequest request,
-                       final HttpServletResponse response) {
-
         AutenticazioneService as = new AutenticazioneServiceImpl();
 
         int flag = Integer.parseInt(request.getParameter("flag"));
 
-        if (flag == 1) {
+        //if (flag == 1) {
+
             String email = request.getParameter("email");
             String username = request.getParameter("username");
             String nome = request.getParameter("nome");
@@ -58,8 +59,8 @@ public class AutenticazioneController extends HttpServlet {
             String giorno = request.getParameter("giorno");
             String mese = request.getParameter("mese");
             String anno = request.getParameter("anno");
-            Date dataDiNascita = new Date(Integer.parseInt(giorno),
-                    Integer.parseInt(mese), Integer.parseInt(anno));
+
+            //Date dataDiNascita = new Date(anno, mese, giorno);
 
             if (email.length() < MINLIMIT || email.length() > MAXLIMIT) {
                 throw new IllegalArgumentException("La registrazione "
@@ -122,14 +123,18 @@ public class AutenticazioneController extends HttpServlet {
                         + "va a buon fine perché la password inserita"
                         + " non rispetta il formato richiesto");
             }
-            if (dataDiNascita == null) {
+
+            /*if (dataDiNascita == null) {
                 throw new IllegalArgumentException("La registrazione "
                         + "non va a buon fine perché "
                         + "la data di nascita non è stata selezionata");
-            }
-            as.registraUtente(email, username, nome, cognome, password, dataDiNascita);
+            }*/
 
-        } else if (flag == 2) {
+
+
+            as.registraUtente(email, username, nome, cognome, password, null);
+
+       /* } else if (flag == 2) {
             String email = request.getParameter("email");
             String password = request.getParameter("password");
             if (email.length() < MINLIMIT || email.length() > MAXLIMIT) {
@@ -182,5 +187,6 @@ public class AutenticazioneController extends HttpServlet {
 
             as.loginAdmin(username, password);
         }
+        */
     }
 }
