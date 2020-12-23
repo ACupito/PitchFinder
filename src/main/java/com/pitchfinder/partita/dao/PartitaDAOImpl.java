@@ -19,7 +19,7 @@ public class PartitaDAOImpl implements PartitaDAO {
      * @param partita partita
      */
     @Override
-    public void doSave(Partita partita) {
+    public void doSavePartita(Partita partita) {
 
         try (Connection con = ConPool.getInstance().getConnection()) {
             PreparedStatement ps =
@@ -31,6 +31,7 @@ public class PartitaDAOImpl implements PartitaDAO {
             ps.setDate(3, partita.getData());
             ps.setTime(4, partita.getOrarioInizio());
             ps.setTime(5, partita.getOrarioFine());
+
             ps.executeUpdate();
         } catch (SQLException e) {
             throw new RuntimeException(e);
