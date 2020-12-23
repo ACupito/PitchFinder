@@ -18,6 +18,7 @@ public interface EventoService {
      * @param ospite of the event
      * @param descrizione of the event
      * @param postiDisponibili of the event
+     * @param adminUsername of the event
      * @return Evento
      */
     Evento createEvento(String nome,
@@ -27,7 +28,8 @@ public interface EventoService {
                         Date data,
                         String ospite,
                         String descrizione,
-                        int postiDisponibili);
+                        int postiDisponibili,
+                        String adminUsername);
 
     /**
      *
