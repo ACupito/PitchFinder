@@ -3,7 +3,7 @@ package com.pitchfinder.campo.entity;
 
 public class Campo {
     /**
-     * is the id of the Campo
+     * is the id of the Campo.
      */
     private int identificativo;
     /**
