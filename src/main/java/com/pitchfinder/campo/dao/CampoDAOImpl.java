@@ -3,7 +3,13 @@ package com.pitchfinder.campo.dao;
 import com.pitchfinder.campo.entity.Campo;
 import com.pitchfinder.singleton.ConPool;
 
-import java.sql.*;
+
+import java.sql.Connection;
+import java.sql.Date;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Time;
 import java.util.ArrayList;
 import java.util.List;
 
