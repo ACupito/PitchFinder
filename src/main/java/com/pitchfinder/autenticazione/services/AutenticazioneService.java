@@ -2,34 +2,34 @@ package com.pitchfinder.autenticazione.services;
 
 import com.pitchfinder.autenticazione.entity.Admin;
 import com.pitchfinder.autenticazione.entity.Utente;
-import java.util.Date;
+import java.sql.Date;
 
 public interface AutenticazioneService {
 
     /**
      * This methods manages the user login.
-     * @param email
-     * @param password
+     * @param email is the user email
+     * @param password is the user password
      * @return Utente
      */
     Utente loginUtente(String email, String password);
 
     /**
      * This method manages the admin login.
-     * @param username
-     * @param password
+     * @param username is the admin username
+     * @param password is the admin password
      * @return Admin
      */
     Admin loginAdmin(String username, String password);
 
     /**
      * This method manages the registration of the user.
-     * @param email
-     * @param username
-     * @param nome
-     * @param cognome
-     * @param password
-     * @param dataDiNascita
+     * @param email is the user email
+     * @param username is the user username
+     * @param nome is the user name
+     * @param cognome is the user surname
+     * @param password is the user password
+     * @param dataDiNascita is the user date of birth
      * @return Utente
      */
     boolean registraUtente(String email, String username,

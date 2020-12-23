@@ -33,7 +33,7 @@ public class AdminDAOImpl implements AdminDAO {
     /**
      * This method checks weather the subject who is trying to access
      * is a registered admin.
-     * @param admin
+     * @param admin is the admin who is logging in
      * @return boolean
      */
     public Admin checkAdmin(final Admin admin) {
@@ -76,7 +76,7 @@ public class AdminDAOImpl implements AdminDAO {
         try (Connection con = ConPool.getInstance().getConnection()) {
 
             PreparedStatement ps = con.prepareStatement(
-                    "select count(*) from Utente where Email=?");
+                    "select count(*) from Admin where Username=?");
             ps.setString(INDEX1, admin.getUsername());
             ResultSet rs = ps.executeQuery();
 
