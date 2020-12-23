@@ -3,7 +3,7 @@ package com.pitchfinder.torneo.services;
 import java.sql.Date;
 
 /**
- * This interface manages the TorneoService
+ * This interface manages the TorneoService.
  */
 public interface TorneoService {
 
@@ -21,7 +21,7 @@ public interface TorneoService {
      * @param minPartecipanti minimum number of players for the team
      * @param maxPartecipanti maximum number of players for the team
      * @param giornoPartite match day of the tournament
-     * @return
+     * @return boolean -> true : created / false : failed creation
      */
     boolean createTorneo(String usernameAdmin, int idCampo, String sport, String nome, String tipo, String struttura, int maxSquadre,
                          Date dataInizio, Date dateFine, int minPartecipanti, int maxPartecipanti, String giornoPartite);
