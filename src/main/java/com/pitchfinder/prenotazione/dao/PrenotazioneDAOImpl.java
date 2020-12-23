@@ -3,7 +3,11 @@ package com.pitchfinder.prenotazione.dao;
 import com.pitchfinder.prenotazione.entity.Prenotazione;
 import com.pitchfinder.singleton.ConPool;
 
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.Date;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+
 
 public class PrenotazioneDAOImpl implements PrenotazioneDAO {
 
@@ -16,8 +20,8 @@ public class PrenotazioneDAOImpl implements PrenotazioneDAO {
     public boolean doSavePrenotazione(Prenotazione prenotazione) {
         try (Connection con = ConPool.getInstance().getConnection()) {
             PreparedStatement ps =
-                    con.prepareStatement("INSERT INTO prenotazione(UtenteEmail, EventoNome, EventoData, CodicePrenotazione) VALUES (?, ?, ?, ?)");
-
+                    con.prepareStatement("INSERT INTO prenotazione(UtenteEmail, EventoNome, EventoData, CodicePrenotazione) "
+                            + "VALUES (?, ?, ?, ?)");
             ps.setString(1, prenotazione.getUtenteEmail());
             ps.setString(2, prenotazione.getEventoNome());
             ps.setDate(3, (Date) prenotazione.getEventoData());
@@ -57,6 +61,5 @@ public class PrenotazioneDAOImpl implements PrenotazioneDAO {
             return false;
         }
     }
-
 
 }

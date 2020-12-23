@@ -1,10 +1,13 @@
 package com.pitchfinder.squadra.dao;
 
-
-
 import com.pitchfinder.singleton.ConPool;
 import com.pitchfinder.squadra.entity.Squadra;
-import java.sql.*;
+
+import java.sql.Connection;
+import java.sql.Date;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+
 
 public class SquadraDAOImpl implements SquadraDAO {
 
@@ -18,7 +21,9 @@ public class SquadraDAOImpl implements SquadraDAO {
 
         try (Connection con = ConPool.getInstance().getConnection()) {
             PreparedStatement ps =
-                    con.prepareStatement("INSERT INTO squadra (Nome, TorneoNome, TorneoDataInizio, TorneoCampoIdentificativo, NumeroMembri, Capitano, UtenteEmail) VALUES (?, ?, ?, ?, ?, ?, ?)");
+                    con.prepareStatement("INSERT INTO squadra "
+                            + "(Nome, TorneoNome, TorneoDataInizio, TorneoCampoIdentificativo, NumeroMembri, Capitano, UtenteEmail) "
+                            + "VALUES (?, ?, ?, ?, ?, ?, ?)");
 
             ps.setString(1, squadra.getNome());
             ps.setString(2, squadra.getTorneoNome());
@@ -50,7 +55,8 @@ public class SquadraDAOImpl implements SquadraDAO {
     public boolean doRemoveSquadra(Squadra squadra) {
         try (Connection con = ConPool.getInstance().getConnection()) {
             PreparedStatement ps =
-                    con.prepareStatement("DELETE FROM squadra WHERE Nome = ? AND TorneoNome = ? AND TorneoDataInizio = ? AND  TorneoCampoIdentificativo = ?");
+                    con.prepareStatement("DELETE FROM squadra "
+                            + "WHERE Nome = ? AND TorneoNome = ? AND TorneoDataInizio = ? AND  TorneoCampoIdentificativo = ?");
 
                     ps.setString(1, squadra.getNome());
                     ps.setString(2, squadra.getTorneoNome());
