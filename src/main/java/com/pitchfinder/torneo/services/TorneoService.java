@@ -1,7 +1,7 @@
 package com.pitchfinder.torneo.services;
 
 
-import java.util.Date;
+import java.sql.Date;
 
 /**
  * This interface manages the TorneoService.
