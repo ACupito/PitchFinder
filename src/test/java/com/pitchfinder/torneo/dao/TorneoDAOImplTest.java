@@ -8,19 +8,36 @@ import java.sql.Date;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ *  This class manages the test for TorneoDAOImpl.
+ */
+
 class TorneoDAOImplTest {
 
+    /**
+     *  This is an instance of TorneoDAO.
+     */
     private static TorneoDAO tdao;
+
+    /**
+     * This is an instance of Torneo entity.
+     */
     private static Torneo t;
 
+    /**
+     * This method set up the enviroment.
+     */
     @BeforeAll
     static void setUp() {
         tdao = new TorneoDAOImpl();
         t = new Torneo();
     }
 
+    /**
+     * This method tests the method doSaveTorneo.
+     */
     @Test
-    void doSaveTorneo() {
+    void doSaveTorneoTest() {
 
         t.setAdminUsername("memex99");
         t.setNome("Champions");
@@ -39,4 +56,5 @@ class TorneoDAOImplTest {
         assertTrue(tdao.doSaveTorneo(t));
 
     }
+
 }
