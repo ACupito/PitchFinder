@@ -31,7 +31,7 @@ public final class ConPool {
      *  Return an instance of the DB connection.
      *  @return Connection
      */
-    public Connection getConnection() throws SQLException {
+    public static Connection getConnection() throws SQLException {
         final int maxActive = 100;
         final int initialSize = 10;
         final int minIdle = 10;
