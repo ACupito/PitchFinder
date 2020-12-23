@@ -3,6 +3,7 @@ package com.pitchfinder.torneo.dao;
 import com.pitchfinder.torneo.entity.Torneo;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
 
 import java.sql.Date;
 
@@ -11,24 +12,24 @@ import static org.junit.jupiter.api.Assertions.*;
 /**
  *  This class manages the test for TorneoDAOImpl.
  */
-
+@TestInstance(TestInstance.Lifecycle.PER_CLASS)
 class TorneoDAOImplTest {
 
     /**
      *  This is an instance of TorneoDAO.
      */
-    private static TorneoDAO tdao;
+    private TorneoDAO tdao;
 
     /**
      * This is an instance of Torneo entity.
      */
-    private static Torneo t;
+    private Torneo t;
 
     /**
      * This method set up the enviroment.
      */
     @BeforeAll
-    static void setUp() {
+    public void setUp() {
         tdao = new TorneoDAOImpl();
         t = new Torneo();
     }
