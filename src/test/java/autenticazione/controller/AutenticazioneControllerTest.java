@@ -1,13 +1,12 @@
 package autenticazione.controller;
 
 import com.pitchfinder.autenticazione.controller.AutenticazioneController;
-import com.pitchfinder.autenticazione.entity.Utente;
 import com.pitchfinder.autenticazione.services.AutenticazioneServiceImpl;
-import org.junit.Before;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
-import java.sql.Date;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -19,15 +18,17 @@ class AutenticazioneControllerTest extends Mockito {
     private final String nome = "Mario";
     private final String cognome = "Rossi";
     private final String password = "PitchFinder57";
-    private final Date d = new Date(1999, 5, 23);
+    private final int giorno = 19;
+    private final int mese = 11;
+    private final int anno = 1999;
+
     IllegalArgumentException exception = null;
+
     private AutenticazioneController servlet;
+    private HttpServletRequest request;
+    private HttpServletResponse response;
 
-    @Before
-    public void setUp() {
-        servlet = new AutenticazioneController();
-    }
-
+    /*
     @Test
     void TC_4_1_1() {
 
@@ -37,6 +38,7 @@ class AutenticazioneControllerTest extends Mockito {
 
         exception = assertThrows(
                 IllegalArgumentException.class, () -> {
+                    //asi.loginUtente("", password);
                     //servlet.doPost(request, response);
                 });
 
@@ -51,7 +53,7 @@ class AutenticazioneControllerTest extends Mockito {
 
         exception = assertThrows(
                 IllegalArgumentException.class, () -> {
-                    //asi.loginUtente("mario99 @gmail.com", password);
+                    asi.loginUtente("mario99 @gmail.com", password);
                     //servlet.doPost(request, response);
                 });
 
@@ -66,7 +68,7 @@ class AutenticazioneControllerTest extends Mockito {
 
         exception = assertThrows(
                 IllegalArgumentException.class, () -> {
-                    //asi.loginUtente("mario99@gmail.com", "Pitch Finder57");
+                    asi.loginUtente("mario99@gmail.com", "Pitch Finder57");
                     //servlet.doPost(request, response);
                 });
 
@@ -79,25 +81,40 @@ class AutenticazioneControllerTest extends Mockito {
         assertEquals(asi.loginUtente(email, password).getClass().getName(),
                 Utente.class.getName());
     }
+     */
 
     @Test
     void TC_4_2_1() {
 
-        String message = "La registrazione " +
-                "non va a buon fine perché l’email inserita non " +
-                "rispetta la lunghezza corretta";
+        AutenticazioneController servlet = new AutenticazioneController();
+        request = mock(HttpServletRequest.class);
+        response = mock(HttpServletResponse.class);
 
+        request.setAttribute("flag", 2);
+        request.setAttribute("email", email);
+        request.setAttribute("username", username);
+        request.setAttribute("nome", nome);
+        request.setAttribute("cognome", cognome);
+        request.setAttribute("password", password);
+        request.setAttribute("giorno", giorno);
+        request.setAttribute("mese", mese);
+        request.setAttribute("anno", anno);
+
+        /*String message = "La registrazione " +
+                "non va a buon fine perché l’email inserita non " +
+                "rispetta la lunghezza corretta";*/
+
+        servlet.doGet(request, response);
+
+        /*
         exception = assertThrows(
                 IllegalArgumentException.class, () -> {
-                    //asi.registraUtente("",
-                      //      username, nome,
-                        //    cognome, password, d);
-                    //servlet.doPost(request, response);
-                });
-
-        assertEquals(message, exception.getMessage());
+                    //asi.registraUtente("", username, nome, cognome, password, d);
+                    servlet.doGet(request, response);
+                });*/
     }
 
+    /*
     @Test
     void TC_4_2_2() {
 
@@ -107,7 +124,8 @@ class AutenticazioneControllerTest extends Mockito {
 
         exception = assertThrows(
                 IllegalArgumentException.class, () -> {
-                    // asi.registraUtente("mario 99@gmail.com", username, nome, cognome, password, null);
+                    asi.registraUtente("mario 99@gmail.com", username, nome,
+                            cognome, password, null);
                     //servlet.doPost(request, response);
                 });
 
@@ -123,8 +141,7 @@ class AutenticazioneControllerTest extends Mockito {
 
         exception = assertThrows(
                 IllegalArgumentException.class, () -> {
-                    //asi.registraUtente(email, "", nome,
-                      //      cognome, password, d);
+                    asi.registraUtente(email, "", nome, cognome, password, d);
                    // servlet.doPost(request, response);
                 });
 
@@ -140,8 +157,8 @@ class AutenticazioneControllerTest extends Mockito {
 
         exception = assertThrows(
                 IllegalArgumentException.class, () -> {
-                    //asi.registraUtente(email, "ciao 99", nome,
-                      //      cognome, password, d);
+                    asi.registraUtente(email, "ciao 99", nome,
+                            cognome, password, d);
                     //servlet.doPost(request, response);
                 });
 
@@ -157,8 +174,7 @@ class AutenticazioneControllerTest extends Mockito {
 
         exception = assertThrows(
                 IllegalArgumentException.class, () -> {
-                   // asi.registraUtente(email, username, "",
-                     //       cognome, password, d);
+                    asi.registraUtente(email, username, "", cognome, password, d);
                     //servlet.doPost(request, response);
                 });
 
@@ -174,8 +190,7 @@ class AutenticazioneControllerTest extends Mockito {
 
         exception = assertThrows(
                 IllegalArgumentException.class, () -> {
-                    //asi.registraUtente(email, username, "emane nulds",
-                      //      cognome, password, d);
+                    asi.registraUtente(email, username, "emane nulds", cognome, password, d);
                     //servlet.doPost(request, response);
                 });
 
@@ -191,8 +206,7 @@ class AutenticazioneControllerTest extends Mockito {
 
         exception = assertThrows(
                 IllegalArgumentException.class, () -> {
-                   // asi.registraUtente(email, username, nome,
-                     //       "", password, d);
+                    asi.registraUtente(email, username, nome, "", password, d);
                     //servlet.doPost(request, response);
                 });
 
@@ -208,8 +222,7 @@ class AutenticazioneControllerTest extends Mockito {
 
         exception = assertThrows(
                 IllegalArgumentException.class, () -> {
-                    //asi.registraUtente(email, username, nome,
-                      //      "bellociao dds", password, d);
+                    asi.registraUtente(email, username, nome, "bellociao dds", password, d);
                     //servlet.doPost(request, response);
                 });
 
@@ -225,8 +238,7 @@ class AutenticazioneControllerTest extends Mockito {
 
         exception = assertThrows(
                 IllegalArgumentException.class, () -> {
-                   // asi.registraUtente(email, username, nome,
-                     //       cognome, "", d);
+                    asi.registraUtente(email, username, nome, cognome, "", d);
                     //servlet.doPost(request, response);
                 });
 
@@ -242,8 +254,7 @@ class AutenticazioneControllerTest extends Mockito {
 
         exception = assertThrows(
                 IllegalArgumentException.class, () -> {
-                   // asi.registraUtente(email, username, nome,
-                     //       cognome, "Pitch Finder57", d);
+                    asi.registraUtente(email, username, nome, cognome, "Pitch Finder57", d);
                     //servlet.doPost(request, response);
                 });
 
@@ -258,8 +269,7 @@ class AutenticazioneControllerTest extends Mockito {
 
         exception = assertThrows(
                 IllegalArgumentException.class, () -> {
-                    //asi.registraUtente(email, username, nome,
-                      //      cognome, password, null);
+                    asi.registraUtente(email, username, nome, cognome, password, null);
                     //servlet.doPost(request, response);
                 });
 
@@ -275,8 +285,7 @@ class AutenticazioneControllerTest extends Mockito {
 
         exception = assertThrows(
                 IllegalArgumentException.class, () -> {
-                   // asi.registraUtente(email, username, nome,
-                     //       cognome, password, d);
+                    asi.registraUtente(email, username, nome, cognome, password, d);
                     //servlet.doPost(request, response);
                 });
 
@@ -288,5 +297,6 @@ class AutenticazioneControllerTest extends Mockito {
 
         assertTrue(asi.registraUtente(email, username, nome, cognome, password, d));
     }
+    */
 
 }
