@@ -146,4 +146,27 @@ public class Partita {
     public void setOrarioFine(Time orarioFine) {
         this.orarioFine = orarioFine;
     }
+
+    /**
+     * toString method for partita object
+     * @return String
+     */
+    @Override
+    public String toString() {
+        return "Partita{" +
+                "idPartita="
+                + idPartita
+                + ", idCampo="
+                + idCampo
+                + ", emailUtente='"
+                + emailUtente
+                + '\''
+                + ", data="
+                + data
+                + ", orarioInizio="
+                + orarioInizio
+                + ", orarioFine="
+                + orarioFine
+                + '}';
+    }
 }
