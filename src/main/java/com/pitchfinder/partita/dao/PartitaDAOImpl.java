@@ -25,12 +25,12 @@ public class PartitaDAOImpl implements PartitaDAO {
             PreparedStatement ps =
                     con.prepareStatement("INSERT into partita(CampoIdentificativo, "
                             + "UtenteEmail, Data, OrarioInizio, OrarioFine)"
-                            + " values(?,?,?,?,?)");
-            ps.setInt(1,partita.getIdCampo());
-            ps.setString(2,partita.getEmailUtente());
-            ps.setDate(3,partita.getData());
-            ps.setTime(4,partita.getOrarioInizio());
-            ps.setTime(5,partita.getOrarioFine());
+                            + " values(?, ?, ?, ?, ?)");
+            ps.setInt(1, partita.getIdCampo());
+            ps.setString(2, partita.getEmailUtente());
+            ps.setDate(3, partita.getData());
+            ps.setTime(4, partita.getOrarioInizio());
+            ps.setTime(5, partita.getOrarioFine());
 
             ps.executeUpdate();
         } catch (SQLException e) {
@@ -47,16 +47,16 @@ public class PartitaDAOImpl implements PartitaDAO {
         try (Connection con = ConPool.getInstance().getConnection()) {
 
             String query = "SELECT IdentificativoPartita, CampoIdentificativo,"
-                    +" UtenteEmail, Data, OrarioInizio, OrarioFine"
-                    +"FROM partita";
+                    + " UtenteEmail, Data, OrarioInizio, OrarioFine"
+                    + "FROM partita";
             PreparedStatement ps =
                     con.prepareStatement(query);
             ResultSet rs =  ps.executeQuery();
             List<Partita> partite = new ArrayList<Partita>();
             while (rs.next()) {
-                Partita nuovo = new Partita(rs.getInt(1),rs.getInt(2),
-                                rs.getString(3),rs.getDate(4),
-                                rs.getTime(5),rs.getTime(6));
+                Partita nuovo = new Partita(rs.getInt(1), rs.getInt(2),
+                                rs.getString(3), rs.getDate(4),
+                                rs.getTime(5), rs.getTime(6));
                 partite.add(nuovo);
             }
             return partite;
