@@ -134,8 +134,8 @@ public class EventoDAOImpl implements EventoDAO {
                 ps.setString(ONE, nome);
                 ps.setDate(TWO, (java.sql.Date) date);
                 ResultSet rs =  ps.executeQuery();
-                Evento event= new Evento();
-                if(rs.next()) {
+                Evento event = new Evento();
+                if (rs.next()) {
                     event = new Evento(rs.getString(ONE),
                             rs.getString(TWO), rs.getString(THREE),
                             rs.getString(FOUR), rs.getDate(FIVE),

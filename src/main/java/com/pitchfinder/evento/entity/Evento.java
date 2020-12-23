@@ -59,7 +59,7 @@ public class Evento {
     /**
      * Void Construct.
      */
-    public Evento(){
+    public Evento() {
 
     }
 
