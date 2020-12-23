@@ -173,11 +173,6 @@
     </module>
     <module name="IllegalInstantiation"/>
     <module name="InnerAssignment"/>
-    <module name="MagicNumber">
-      <property name="ignoreAnnotation" value="true"/>
-      <property name="ignoreFieldDeclaration" value="true"/>
-      <property name="ignoreHashCodeMethod" value="true"/>
-    </module>
     <module name="MissingSwitchDefault"/>
     <module name="MultipleVariableDeclarations"/>
     <module name="SimplifyBooleanExpression"/>
@@ -194,9 +189,6 @@
     <!-- Miscellaneous other checks.                   -->
     <!-- See https://checkstyle.org/config_misc.html -->
     <module name="ArrayTypeStyle"/>
-    <module name="FinalParameters">
-      <property name="ignorePrimitiveTypes" value="true"/>
-    </module>
     <module name="TodoComment"/>
     <module name="UpperEll"/>
 
