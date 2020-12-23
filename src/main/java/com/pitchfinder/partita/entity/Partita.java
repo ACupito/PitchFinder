@@ -19,6 +19,39 @@ public class Partita {
     private Time orarioFine;
 
     /**
+     * Partita constructor.
+     * @param idPartita idPartita
+     * @param idCampo idCampo
+     * @param emailUtente emailUtente
+     * @param data data
+     * @param orarioInizio orarioInizio
+     * @param orarioFine orarioFine
+     */
+    public Partita(int idPartita, int idCampo, String emailUtente, Date data, Time orarioInizio, Time orarioFine) {
+        this.idPartita = idPartita;
+        this.idCampo = idCampo;
+        this.emailUtente = emailUtente;
+        this.data = data;
+        this.orarioInizio = orarioInizio;
+        this.orarioFine = orarioFine;
+    }
+
+    /**
+     * Partita Constructor without idPartita attribute.
+     * @param idCampo idCampo
+     * @param emailUtente emailUtente
+     * @param data data
+     * @param orarioInizio orarioInizio
+     * @param orarioFine orarioFine
+     */
+    public Partita(int idCampo, String emailUtente, Date data, Time orarioInizio, Time orarioFine) {
+        this.idCampo = idCampo;
+        this.emailUtente = emailUtente;
+        this.data = data;
+        this.orarioInizio = orarioInizio;
+        this.orarioFine = orarioFine;
+    }
+    /**
      * getter for idPartita attribute.
      * @return int
      */
