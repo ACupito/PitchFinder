@@ -1,6 +1,6 @@
 package com.pitchfinder.torneo.entity;
 
-import java.util.Date;
+import java.sql.Date;
 import java.util.Objects;
 
 /**
@@ -241,8 +241,8 @@ public class Torneo {
      * This method returns the start date of the tournament.
      * @return DataInizio : java.sql.Date
      */
-    public java.sql.Date getDataInizio() {
-        return (java.sql.Date) dataInizio;
+    public Date getDataInizio() {
+        return dataInizio;
     }
 
     /**
@@ -257,8 +257,8 @@ public class Torneo {
      * This method returns the end date of the tournament.
      * @return DataFine : Date
      */
-    public java.sql.Date getDataFine() {
-        return (java.sql.Date) dataFine;
+    public Date getDataFine() {
+        return dataFine;
     }
 
     /**

@@ -4,7 +4,7 @@ import com.pitchfinder.torneo.dao.TorneoDAO;
 import com.pitchfinder.torneo.dao.TorneoDAOImpl;
 import com.pitchfinder.torneo.entity.Torneo;
 
-import java.util.Date;
+import java.sql.Date;
 
 /**
  * This class manages the TorneoService implementation.
