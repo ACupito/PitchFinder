@@ -148,13 +148,13 @@ public class Partita {
     }
 
     /**
-     * toString method for partita object
+     * toString method for partita object.
      * @return String
      */
     @Override
     public String toString() {
-        return "Partita{" +
-                "idPartita="
+        return "Partita{"
+                + "idPartita="
                 + idPartita
                 + ", idCampo="
                 + idCampo
