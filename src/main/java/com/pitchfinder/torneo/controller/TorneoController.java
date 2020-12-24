@@ -61,7 +61,7 @@ public class TorneoController extends HttpServlet {
             }
 
             String sport = request.getParameter("sport");
-            if(sport == null || !campo.getSport().equals(sport)) {
+            if(sport == null) {
                 throw new IllegalArgumentException("Sport non selezionato");
             }
 
