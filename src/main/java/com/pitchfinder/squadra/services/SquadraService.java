@@ -9,12 +9,13 @@ public interface SquadraService {
      * Create a new Squadra.
      * @param nome
      * @param torneo
-     * @param numeroMwmbri
+     * @param numeroMembri
      * @param capitano
      * @param utente
      * @return Squadra
      */
-    Squadra createSquadra(String nome, Torneo torneo, int numeroMwmbri, String capitano, Utente utente);
+    Squadra createSquadra(String nome, Torneo torneo, int numeroMembri, String capitano, Utente utente);
+
 
 
 }
