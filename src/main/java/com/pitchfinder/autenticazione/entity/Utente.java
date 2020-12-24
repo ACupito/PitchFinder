@@ -46,6 +46,24 @@ public class Utente {
     }
 
     /**
+     * Constructor utente.
+     * @param email
+     * @param username
+     * @param nome
+     * @param cognome
+     * @param passwordHash
+     * @param dataDiNascita
+     */
+    public Utente(String email, String username, String nome, String cognome, String passwordHash, Date dataDiNascita) {
+        this.email = email;
+        this.username = username;
+        this.nome = nome;
+        this.cognome = cognome;
+        this.passwordHash = passwordHash;
+        this.dataDiNascita = dataDiNascita;
+    }
+
+    /**
      * This method returns the value od the variable email.
      * @return email
      */

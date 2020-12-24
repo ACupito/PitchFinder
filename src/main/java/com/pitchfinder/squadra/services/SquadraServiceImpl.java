@@ -12,17 +12,18 @@ public class SquadraServiceImpl implements SquadraService {
      * Create a new Squadra, the team is registered for the tournament.
      * @param nome
      * @param torneo
-     * @param numeroMwmbri
+     * @param numeroMembri
      * @param capitano
      * @param utente
      * @return
      */
     @Override
-    public Squadra createSquadra(String nome, Torneo torneo, int numeroMwmbri, String capitano, Utente utente) {
+    public Squadra createSquadra(String nome, Torneo torneo, int numeroMembri, String capitano, Utente utente) {
 
         Squadra squadra = new Squadra();
         squadra.setNome(nome);
         squadra.setTorneoNome(torneo.getNome());
+        squadra.setNumeroMembri(numeroMembri);
         squadra.setTorneoCampoIdentificativo(torneo.getCampoIdentificativo());
         squadra.setTorneoDataInizio(torneo.getDataInizio());
         squadra.setCapitano(capitano);
