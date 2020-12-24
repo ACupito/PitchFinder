@@ -20,14 +20,10 @@ public class SquadraServiceImpl implements SquadraService {
     @Override
     public Squadra createSquadra(String nome, Torneo torneo, int numeroMembri, String capitano, Utente utente) {
 
-        Squadra squadra = new Squadra();
-        squadra.setNome(nome);
-        squadra.setTorneoNome(torneo.getNome());
-        squadra.setNumeroMembri(numeroMembri);
-        squadra.setTorneoCampoIdentificativo(torneo.getCampoIdentificativo());
-        squadra.setTorneoDataInizio(torneo.getDataInizio());
-        squadra.setCapitano(capitano);
-        squadra.setUtenteEmail(utente.getEmail());
+        Squadra squadra =
+                new Squadra(nome, torneo.getNome(), torneo.getDataInizio(),
+                        torneo.getCampoIdentificativo(), numeroMembri, capitano,
+                        utente.getEmail());
 
         SquadraDAO squadraDAO = new SquadraDAOImpl();
 
