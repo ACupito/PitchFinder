@@ -1,6 +1,7 @@
 package com.pitchfinder.torneo.controller;
 
 import com.pitchfinder.autenticazione.entity.Admin;
+import com.pitchfinder.campo.entity.Campo;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
@@ -37,12 +38,75 @@ class TorneoControllerTest {
         admin.setCognome("Mezzi");
         admin.setUsername("memex99");
         admin.setPassword("password");
+        Campo campo = new Campo();
+        campo.setIdentificativo(1001);
+        campo.setSport("Tennis");
         Mockito.when(mockedRequest.getSession()).thenReturn(session);
         Mockito.when(mockedRequest.getSession().getAttribute("admin")).thenReturn(admin);
-        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
-            servlet.doGet(mockedRequest, mockedResponse);
-        });
+        Mockito.when(mockedRequest.getSession().getAttribute("campo")).thenReturn(campo);
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () ->
+                servlet.doGet(mockedRequest, mockedResponse));
         assertEquals(message, exception.getMessage());
     }
 
+    @Test
+    void TC_2_12() {
+        Mockito.when(mockedRequest.getParameter("nome")).thenReturn("?<<Champions?F");
+        String message = "Formato nome non valido";
+        Admin admin = new Admin();
+        admin.setNome("Emanuele");
+        admin.setCognome("Mezzi");
+        admin.setUsername("memex99");
+        admin.setPassword("password");
+        Campo campo = new Campo();
+        campo.setIdentificativo(1001);
+        campo.setSport("Tennis");
+        Mockito.when(mockedRequest.getSession()).thenReturn(session);
+        Mockito.when(mockedRequest.getSession().getAttribute("admin")).thenReturn(admin);
+        Mockito.when(mockedRequest.getSession().getAttribute("campo")).thenReturn(campo);
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () ->
+                servlet.doGet(mockedRequest, mockedResponse));
+        assertEquals(message, exception.getMessage());
+    }
+
+    @Test
+    void TC_2_13() {
+        Mockito.when(mockedRequest.getParameter("nome")).thenReturn("Champions Five");
+        String message = "Tipo non selezionato";
+        Admin admin = new Admin();
+        admin.setNome("Emanuele");
+        admin.setCognome("Mezzi");
+        admin.setUsername("memex99");
+        admin.setPassword("password");
+        Campo campo = new Campo();
+        campo.setIdentificativo(1001);
+        campo.setSport("Tennis");
+        Mockito.when(mockedRequest.getSession()).thenReturn(session);
+        Mockito.when(mockedRequest.getSession().getAttribute("admin")).thenReturn(admin);
+        Mockito.when(mockedRequest.getSession().getAttribute("campo")).thenReturn(campo);
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () ->
+                servlet.doGet(mockedRequest, mockedResponse));
+        assertEquals(message, exception.getMessage());
+    }
+
+    @Test
+    void TC_2_14() {
+        Mockito.when(mockedRequest.getParameter("nome")).thenReturn("Champions Five");
+        Mockito.when(mockedRequest.getParameter("tipo")).thenReturn("Gironi");
+        String message = "Struttura non selezionata";
+        Admin admin = new Admin();
+        admin.setNome("Emanuele");
+        admin.setCognome("Mezzi");
+        admin.setUsername("memex99");
+        admin.setPassword("password");
+        Campo campo = new Campo();
+        campo.setIdentificativo(1001);
+        campo.setSport("Tennis");
+        Mockito.when(mockedRequest.getSession()).thenReturn(session);
+        Mockito.when(mockedRequest.getSession().getAttribute("admin")).thenReturn(admin);
+        Mockito.when(mockedRequest.getSession().getAttribute("campo")).thenReturn(campo);
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () ->
+                servlet.doGet(mockedRequest, mockedResponse));
+        assertEquals(message, exception.getMessage());
+    }
 }
