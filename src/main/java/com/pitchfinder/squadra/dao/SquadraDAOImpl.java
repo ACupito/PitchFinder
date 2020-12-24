@@ -41,7 +41,7 @@ public class SquadraDAOImpl implements SquadraDAO {
             return true;
 
         } catch (SQLException e) {
-            return false;
+            throw new RuntimeException(e);
         }
 
     }
@@ -71,7 +71,9 @@ public class SquadraDAOImpl implements SquadraDAO {
                     return true;
 
         } catch (SQLException throwables) {
-            return false;
+
+            throw new RuntimeException(throwables);
+
         }
 
     }

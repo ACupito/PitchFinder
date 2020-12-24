@@ -19,21 +19,17 @@ public class PrenotazioneDAOImpl implements PrenotazioneDAO {
     public boolean doSavePrenotazione(Prenotazione prenotazione) {
         try (Connection con = ConPool.getInstance().getConnection()) {
             PreparedStatement ps =
-                    con.prepareStatement("INSERT INTO prenotazione(UtenteEmail, EventoNome, EventoData, CodicePrenotazione) "
-                            + "VALUES (?, ?, ?, ?)");
+                    con.prepareStatement("INSERT INTO Prenotazione VALUES (?,?,?,?)");
+
             ps.setString(1, prenotazione.getUtenteEmail());
             ps.setString(2, prenotazione.getEventoNome());
             ps.setDate(3, prenotazione.getEventoData());
             ps.setInt(4, prenotazione.getCodicePrenotazione());
 
-            if (ps.executeUpdate() != 1) {
-                return false;
-            }
-
-            return true;
+            return ps.executeUpdate() == 1;
 
         } catch (SQLException throwables) {
-            return false;
+           throw  new RuntimeException(throwables);
         }
     }
 
@@ -50,14 +46,12 @@ public class PrenotazioneDAOImpl implements PrenotazioneDAO {
 
             ps.setInt(1, prenotazione.getCodicePrenotazione());
 
-            if (ps.executeUpdate() != 1) {
-                return false;
-            }
-
-            return true;
+            return ps.executeUpdate() == 1;
 
         } catch (SQLException throwables) {
-            return false;
+
+            throw new RuntimeException(throwables);
+
         }
     }
 
