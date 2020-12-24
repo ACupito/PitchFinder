@@ -60,6 +60,11 @@ public class TorneoController extends HttpServlet {
                 throw new IllegalArgumentException("Formato nome non valido");
             }
 
+            String sport = request.getParameter("sport");
+            if(sport == null || !campo.getSport().equals(sport)) {
+                throw new IllegalArgumentException("Sport non selezionato");
+            }
+
             String tipo = request.getParameter("tipo");
             if (tipo == null) {
                 throw new IllegalArgumentException("Tipo non selezionato");
@@ -68,6 +73,39 @@ public class TorneoController extends HttpServlet {
             String struttura = request.getParameter("struttura");
             if (struttura == null) {
                 throw new IllegalArgumentException("Struttura non selezionata");
+            }
+
+            String startDate = request.getParameter("dataInizio");
+            Date dataInizio;
+            if(startDate == null) {
+                throw new IllegalArgumentException("Data inizio non selezionata");
+            }
+            try{
+                dataInizio = Date.valueOf(startDate);
+            } catch (IllegalArgumentException e) {
+                throw new IllegalArgumentException("Formato data inizio non valido");
+            }
+
+            String endDate = request.getParameter("dataFine");
+            Date dataFine;
+            if(endDate == null) {
+                throw new IllegalArgumentException("Data fine non selezionata");
+            }
+            try{
+                 dataFine = Date.valueOf(endDate);
+            } catch (IllegalArgumentException e) {
+                throw new IllegalArgumentException("Formato data fine non valido");
+            }
+
+            String giornoPartite = request.getParameter("giornoPartite");
+            if (giornoPartite == null) {
+                throw new IllegalArgumentException("Giorno partite non inserito");
+            }
+            if (giornoPartite.length() < 1 || giornoPartite.length() > 20) {
+                throw new IllegalArgumentException("Lunghezza giorno partite non valida");
+            }
+            if (!giornoPartite.matches("^[ a-zA-Z\\u00C0-\\u00ff']+$")) {
+                throw new IllegalArgumentException("Formato giorno partite non valido");
             }
 
             int maxSquadre;
@@ -89,20 +127,6 @@ public class TorneoController extends HttpServlet {
             if (maxPartecipanti < 5 || maxPartecipanti > 12) {
                 throw new IllegalArgumentException("Numero massi di partecipanti non valido");
             }
-
-            String giornoPartite = request.getParameter("giornoPartite");
-            if (giornoPartite == null) {
-                throw new IllegalArgumentException("Giorno partite non inserito");
-            }
-            if (giornoPartite.length() < 1 || giornoPartite.length() > 20) {
-                throw new IllegalArgumentException("Lunghezza giorno partite non valida");
-            }
-            if (!giornoPartite.matches("^[ a-zA-Z\\u00C0-\\u00ff']+$")) {
-                throw new IllegalArgumentException("Formato giorno partite non valido");
-            }
-
-            Date dataInizio = Date.valueOf(request.getParameter("dataInizio"));
-            Date dataFine = Date.valueOf(request.getParameter("dataFine"));
 
             ts.createTorneo(admin.getUsername(), campo.getIdentificativo(), nome, tipo,
                     struttura, maxSquadre, dataInizio, dataFine, minPartecipanti, maxPartecipanti,
