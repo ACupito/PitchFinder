@@ -5,6 +5,7 @@ import com.pitchfinder.campo.entity.Campo;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
+import org.mockito.Mock;
 import org.mockito.Mockito;
 
 
@@ -30,7 +31,7 @@ class TorneoControllerTest {
     }
 
     @Test
-    void TC_2_11() {
+    void TC_21_1() {
         Mockito.when(mockedRequest.getParameter("nome")).thenReturn("");
         String message = "Lunghezza nome non valida";
         Admin admin = new Admin();
@@ -50,7 +51,7 @@ class TorneoControllerTest {
     }
 
     @Test
-    void TC_2_12() {
+    void TC_21_2() {
         Mockito.when(mockedRequest.getParameter("nome")).thenReturn("?<<Champions?F");
         String message = "Formato nome non valido";
         Admin admin = new Admin();
@@ -70,8 +71,29 @@ class TorneoControllerTest {
     }
 
     @Test
-    void TC_2_13() {
+    void TC_21_3() {
         Mockito.when(mockedRequest.getParameter("nome")).thenReturn("Champions Five");
+        String message = "Sport non selezionato";
+        Admin admin = new Admin();
+        admin.setNome("Emanuele");
+        admin.setCognome("Mezzi");
+        admin.setUsername("memex99");
+        admin.setPassword("password");
+        Campo campo = new Campo();
+        campo.setIdentificativo(1001);
+        campo.setSport("Tennis");
+        Mockito.when(mockedRequest.getSession()).thenReturn(session);
+        Mockito.when(mockedRequest.getSession().getAttribute("admin")).thenReturn(admin);
+        Mockito.when(mockedRequest.getSession().getAttribute("campo")).thenReturn(campo);
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () ->
+                servlet.doGet(mockedRequest, mockedResponse));
+        assertEquals(message, exception.getMessage());
+    }
+
+    @Test
+    void TC_21_4() {
+        Mockito.when(mockedRequest.getParameter("nome")).thenReturn("Champions Five");
+        Mockito.when(mockedRequest.getParameter("sport")).thenReturn("Tennis");
         String message = "Tipo non selezionato";
         Admin admin = new Admin();
         admin.setNome("Emanuele");
@@ -90,9 +112,10 @@ class TorneoControllerTest {
     }
 
     @Test
-    void TC_2_14() {
+    void TC_21_5() {
         Mockito.when(mockedRequest.getParameter("nome")).thenReturn("Champions Five");
-        Mockito.when(mockedRequest.getParameter("tipo")).thenReturn("Gironi");
+        Mockito.when(mockedRequest.getParameter("sport")).thenReturn("Tennis");
+        Mockito.when(mockedRequest.getParameter("tipo")).thenReturn("Eliminazione diretta");
         String message = "Struttura non selezionata";
         Admin admin = new Admin();
         admin.setNome("Emanuele");
@@ -111,11 +134,12 @@ class TorneoControllerTest {
     }
 
     @Test
-    void TC_2_15() {
+    void TC_21_6() {
         Mockito.when(mockedRequest.getParameter("nome")).thenReturn("Champions Five");
-        Mockito.when(mockedRequest.getParameter("tipo")).thenReturn("Gironi");
+        Mockito.when(mockedRequest.getParameter("sport")).thenReturn("Tennis");
+        Mockito.when(mockedRequest.getParameter("tipo")).thenReturn("Eliminazione diretta");
         Mockito.when(mockedRequest.getParameter("struttura")).thenReturn("Partite singole");
-        String message = "Formato numero squadre non valido";
+        String message = "Data inizio non selezionata";
         Admin admin = new Admin();
         admin.setNome("Emanuele");
         admin.setCognome("Mezzi");
@@ -132,5 +156,51 @@ class TorneoControllerTest {
         assertEquals(message, exception.getMessage());
     }
 
+    @Test
+    void TC_21_7() {
+        Mockito.when(mockedRequest.getParameter("nome")).thenReturn("Champions Five");
+        Mockito.when(mockedRequest.getParameter("sport")).thenReturn("Tennis");
+        Mockito.when(mockedRequest.getParameter("tipo")).thenReturn("Eliminazione diretta");
+        Mockito.when(mockedRequest.getParameter("struttura")).thenReturn("Partite singole");
+        Mockito.when(mockedRequest.getParameter("dataInizio")).thenReturn("5/13/1980");
+        String message = "Formato data inizio non valido";
+        Admin admin = new Admin();
+        admin.setNome("Emanuele");
+        admin.setCognome("Mezzi");
+        admin.setUsername("memex99");
+        admin.setPassword("password");
+        Campo campo = new Campo();
+        campo.setIdentificativo(1001);
+        campo.setSport("Tennis");
+        Mockito.when(mockedRequest.getSession()).thenReturn(session);
+        Mockito.when(mockedRequest.getSession().getAttribute("admin")).thenReturn(admin);
+        Mockito.when(mockedRequest.getSession().getAttribute("campo")).thenReturn(campo);
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () ->
+                servlet.doGet(mockedRequest, mockedResponse));
+        assertEquals(message, exception.getMessage());
+    }
 
+    @Test
+    void TC_21_8() {
+        Mockito.when(mockedRequest.getParameter("nome")).thenReturn("Champions Five");
+        Mockito.when(mockedRequest.getParameter("sport")).thenReturn("Tennis");
+        Mockito.when(mockedRequest.getParameter("tipo")).thenReturn("Eliminazione diretta");
+        Mockito.when(mockedRequest.getParameter("struttura")).thenReturn("Partite singole");
+        Mockito.when(mockedRequest.getParameter("dataInizio")).thenReturn("2021-12-5");
+        String message = "Data fine non selezionata";
+        Admin admin = new Admin();
+        admin.setNome("Emanuele");
+        admin.setCognome("Mezzi");
+        admin.setUsername("memex99");
+        admin.setPassword("password");
+        Campo campo = new Campo();
+        campo.setIdentificativo(1001);
+        campo.setSport("Tennis");
+        Mockito.when(mockedRequest.getSession()).thenReturn(session);
+        Mockito.when(mockedRequest.getSession().getAttribute("admin")).thenReturn(admin);
+        Mockito.when(mockedRequest.getSession().getAttribute("campo")).thenReturn(campo);
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () ->
+                servlet.doGet(mockedRequest, mockedResponse));
+        assertEquals(message, exception.getMessage());
+    }
 }
