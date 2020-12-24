@@ -45,10 +45,9 @@ public class TorneoController extends HttpServlet {
 
         int flag = Integer.parseInt(request.getParameter("flag"));
         Admin admin = (Admin) request.getSession().getAttribute("admin"); //get admin from the session
+        Campo campo = (Campo) request.getSession().getAttribute("campo"); //get campo from the session
 
-        if (flag == 1) { //tournament creation
-
-            Campo campo = (Campo) request.getSession().getAttribute("campo"); //get campo from the context
+        if (flag == 1 && admin != null && campo != null) { //tournament creation
 
             String nome = request.getParameter("nome");
             if (nome == null) {
@@ -71,7 +70,12 @@ public class TorneoController extends HttpServlet {
                 throw new IllegalArgumentException("Struttura non selezionata");
             }
 
-            int maxSquadre = Integer.parseInt(request.getParameter("maxSquadre"));
+            int maxSquadre;
+            try{
+                maxSquadre = Integer.parseInt(request.getParameter("maxSquadre"));
+            } catch (NumberFormatException e) {
+                throw new IllegalArgumentException("Formato numero squadre non valido");
+            }
             if (maxSquadre < 1 || maxSquadre > 50) {
                 throw new IllegalArgumentException("Numero di squadre non valido");
             }
