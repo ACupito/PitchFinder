@@ -10,7 +10,6 @@ import java.sql.Date;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class SquadraDaoImplTest {
-    Squadra squadra = new Squadra();
     SquadraDAO squadraDAO = new SquadraDAOImpl();
 
     /**
@@ -18,33 +17,21 @@ public class SquadraDaoImplTest {
      */
     @Test
     public void checkDoSaveSquadraTr(){
-        squadra.setNome("Juventus");
-        squadra.setTorneoNome("serieA");
+
         Date dataInizio = new Date(2022-1900, 11-1, 11);
-        squadra.setTorneoDataInizio(dataInizio);
-        squadra.setTorneoCampoIdentificativo(1002);
-        squadra.setNumeroMembri(10);
-        squadra.setCapitano("Lucia");
-        squadra.setUtenteEmail("mario96@gmail.com");
+        Squadra squadra = new Squadra("Juventus", "serieA", dataInizio, 1002, 10, "Lucia", "mario96@gmail.com");
 
         assertTrue(squadraDAO.doSaveSquadra(squadra));
-
     }
 
     /**
-     * The team is duplicated.
+     * Failure, there isn't a tournament called serieAA in database.
      */
     @Test
     public void checkDoSaveSquadraFailure(){
-        squadra.setNome("Juventus");
-        squadra.setTorneoNome("serieA");
-        Date dataInizio = new Date(2022-1900, 11-1, 11);
-        squadra.setTorneoDataInizio(dataInizio);
-        squadra.setTorneoCampoIdentificativo(1002);
-        squadra.setNumeroMembri(10);
-        squadra.setCapitano("Lucia");
-        squadra.setUtenteEmail("mario96@gmail.com");
 
+        Date dataInizio = new Date(2022-1900, 11-1, 11);
+        Squadra squadra = new Squadra("Juventus", "serieAA", dataInizio, 1002, 10, "Lucia", "mario96@gmail.com");
         assertThrows(RuntimeException.class ,() -> {squadraDAO.doSaveSquadra(squadra);});
 
     }
@@ -54,18 +41,10 @@ public class SquadraDaoImplTest {
      */
     @Test
     public void checkDoRemoveTr(){
-        squadra.setNome("Juventus");
-        squadra.setTorneoNome("serieA");
+
         Date dataInizio = new Date(2022-1900, 11-1, 11);
-        squadra.setTorneoDataInizio(dataInizio);
-        squadra.setTorneoCampoIdentificativo(1002);
-        squadra.setNumeroMembri(10);
-        squadra.setCapitano("Lucia");
-        squadra.setUtenteEmail("mario96@gmail.com");
-
+        Squadra squadra = new Squadra("Juventus", "serieA", dataInizio, 1002, 10, "Lucia", "mario96@gmail.com");
         assertTrue(squadraDAO.doRemoveSquadra(squadra));
-
-
     }
 
     /**
@@ -73,18 +52,32 @@ public class SquadraDaoImplTest {
      */
     @Test
     public void checkDoRemoveFailure(){
-        squadra.setNome("Juventusss");
-        squadra.setTorneoNome("serieA");
-        Date dataInizio = new Date(2022-1900, 11-1, 11);
-        squadra.setTorneoDataInizio(dataInizio);
-        squadra.setTorneoCampoIdentificativo(1002);
-        squadra.setNumeroMembri(10);
-        squadra.setCapitano("Lucia");
-        squadra.setUtenteEmail("mario96@gmail.com");
 
+        Date dataInizio = new Date(2022-1900, 11-1, 11);
+        Squadra squadra = new Squadra("Juventusss", "serieA", dataInizio, 1002, 10, "Lucia", "mario96@gmail.com");
         assertFalse(squadraDAO.doRemoveSquadra(squadra));
 
     }
 
+    /**
+     * Success.
+     */
+    @Test
+    public void checkDoSaveGiocatoreSquadraTr() {
+        Date dataInizio = new Date(2022-1900, 11-1, 11);
+        Squadra squadra = new Squadra("Juventus", "serieA", dataInizio, 1002, 10, "Lucia", "mario96@gmail.com");
+        assertTrue(squadraDAO.doSaveGiocatoreSquadra("Lucia","Gaeta", squadra));
+
+    }
+
+    /**
+     * Failure, there isn't a team with name Juventusss.
+     */
+    @Test
+    public void checkDoSaveGiocatoreSquadraFailure() {
+        Date dataInizio = new Date(2022-1900, 11-1, 11);
+        Squadra squadra = new Squadra("Juventusss", "serieA", dataInizio, 1002, 10, "Lucia", "mario96@gmail.com");
+        assertThrows(RuntimeException.class,()->{squadraDAO.doSaveGiocatoreSquadra("Lucia","Gaeta", squadra);});
+    }
 
 }

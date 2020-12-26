@@ -6,10 +6,9 @@ import com.pitchfinder.prenotazione.entity.Prenotazione;
 public interface PrenotazioneService {
     /**
      * Create booking.
-     * @param utenteEmail
-     * @param evento
-     * @param codicePrenotazione
+     * @param utenteEmail - utenteEmail.
+     * @param evento - evento.
      * @return Prenotazione
      */
-    Prenotazione createPrenotazione(String utenteEmail, Evento evento, int codicePrenotazione);
+    Prenotazione createPrenotazione(String utenteEmail, Evento evento);
 }

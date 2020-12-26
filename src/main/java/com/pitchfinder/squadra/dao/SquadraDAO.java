@@ -17,4 +17,13 @@ public interface SquadraDAO {
      * @return boolean
      */
     boolean doRemoveSquadra(Squadra squadra);
+
+    /**
+     * Saves players.
+     * @param nome - name player
+     * @param cognome - surname player
+     * @param squadra - squadra of player
+     * @return boolean
+     */
+    boolean doSaveGiocatoreSquadra(String nome, String cognome, Squadra squadra);
 }

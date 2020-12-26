@@ -2,6 +2,8 @@ package squadra.services;
 
 import com.pitchfinder.autenticazione.entity.Utente;
 import static org.junit.jupiter.api.Assertions.*;
+
+import com.pitchfinder.squadra.entity.Squadra;
 import com.pitchfinder.squadra.services.SquadraService;
 import com.pitchfinder.squadra.services.SquadraServiceImpl;
 import com.pitchfinder.torneo.entity.Torneo;
@@ -48,6 +50,27 @@ public class SquadraServiceImplTest {
         assertThrows(RuntimeException.class, ()->{squadraService.createSquadra("Torino",torneo, 10, "Lucia",utente);});
 
     }
+
+    /**
+     * Success.
+     */
+    @Test
+    public void checkCreateGiocatoreSuccess(){
+        Date dataInizio = new Date(2022-1900, 11-1, 11);
+        Squadra squadra = new Squadra("Juventus", "serieA", dataInizio, 1002, 10, "Lucia", "mario96@gmail.com");
+        assertNotNull(squadraService.createGiocatoreSquadra("Eugenio","DeSimone", squadra));
+    }
+
+    /**
+     * Failure, there isn't a team called Juventusss.
+     */
+    @Test
+    public void checkCreateGiocatoreFailure(){
+        Date dataInizio = new Date(2022-1900, 11-1, 11);
+        Squadra squadra = new Squadra("Juventusss", "serieA", dataInizio, 1002, 10, "Lucia", "mario96@gmail.com");
+        assertThrows(RuntimeException.class,()->{squadraService.createGiocatoreSquadra("Eugenio","DeSimone", squadra);});
+    }
+
 
 
 }
