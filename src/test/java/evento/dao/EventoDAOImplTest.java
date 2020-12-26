@@ -45,7 +45,7 @@ public class EventoDAOImplTest {
         Evento evento = new Evento();
         EventoDAO eventoDAO = new EventoDAOImpl();
 
-        evento.setName("Evento di Prova 9");
+        evento.setName("Evento di Prova 11");
         evento.setDate(new Date(2000 - 1900, 10 - 1, 3 ));
         evento.setImage("web/evento/immagini/eventoImage1");
         evento.setGuest("Giuseppe Verdi");
