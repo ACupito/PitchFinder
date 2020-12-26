@@ -108,16 +108,28 @@ public class EventoController extends HttpServlet {
         if (!nome.matches("^[ a-zA-Z\u00C0-\u00ff']+$")) {
             throw new IllegalArgumentException("Errato: formato non valido");
         }
-        if ((immagine.length() / (1024 * 1024)) > MAXLIMITIMAGE) {
-            throw new IllegalArgumentException("La creazione "
-                    + "non va a buon fine perché l'immagine inserita non "
-                    + "rispetta la grandezza corretta [<= 2MB]");
+        if (!immagine.equals("")) {
+            if (!immagine.matches(".*\\.(jpg|png)$")) {
+                throw new IllegalArgumentException("Errato: Formato non valido");
+            }
+            File file = new File(immagine);
+            // Get length of file in bytes
+            long fileSizeInBytes = file.length();
+            // Convert the bytes to Kilobytes (1 KB = 1024 Bytes)
+            long fileSizeInKB = fileSizeInBytes / 1024;
+            // Convert the KB to MegaBytes (1 MB = 1024 KBytes)
+            long fileSizeInMB = fileSizeInKB / 1024;
+
+            if (fileSizeInKB > MAXLIMITIMAGE) {
+                throw new IllegalArgumentException("Errato: dimensione non valida");
+            }
+
+        }else{
+            //Default image
+            File defaultImage = new File("defaultDirectory");
         }
-        if (!immagine.matches(".*\\.(jpg|png)$")) {
-            throw new IllegalArgumentException("La creazione non va a buon "
-                    + "fine perché l'immagine inserita "
-                    + "non rispetta il formato richiesto jpg ");
-        }
+
+
         if (orarioInizioStr.matches("")) {
             throw new IllegalArgumentException("Errato: orario non selezionato");
         }
