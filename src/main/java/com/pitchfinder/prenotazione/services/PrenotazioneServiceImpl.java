@@ -8,14 +8,13 @@ import com.pitchfinder.prenotazione.entity.Prenotazione;
 public class PrenotazioneServiceImpl implements PrenotazioneService {
     /**
      * Create Booking.
-     * @param utenteEmail
-     * @param evento
-     * @param codicePrenotazione
-     * @return
+     * @param utenteEmail - utenteEmail.
+     * @param evento - evento.
+     * @return Prenotazione
      */
     @Override
-    public Prenotazione createPrenotazione(String utenteEmail, Evento evento, int codicePrenotazione) {
-        Prenotazione prenotazione = new Prenotazione(utenteEmail, evento.getName(), evento.getDate(), codicePrenotazione);
+    public Prenotazione createPrenotazione(String utenteEmail, Evento evento) {
+        Prenotazione prenotazione = new Prenotazione(utenteEmail, evento.getName(), evento.getDate());
         PrenotazioneDAO prenotazioneDAO = new PrenotazioneDAOImpl();
 
         if (!prenotazioneDAO.doSavePrenotazione(prenotazione)) {

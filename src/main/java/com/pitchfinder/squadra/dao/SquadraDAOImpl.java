@@ -78,4 +78,38 @@ public class SquadraDAOImpl implements SquadraDAO {
 
     }
 
+    /**
+     * Save Player.
+     * @param nome - name player
+     * @param cognome - surname player
+     * @param squadra - squadra of player
+     * @return boolean
+     */
+    @Override
+    public boolean doSaveGiocatoreSquadra(String nome, String cognome, Squadra squadra) {
+        try (Connection con = ConPool.getInstance().getConnection()) {
+            PreparedStatement ps =
+                    con.prepareStatement("INSERT INTO giocatore "
+                            + "(Nome, Cognome, SquadraNome, SquadraTorneoNome, SquadraTorneoDataInizio, SquadraTorneoCampoIdentificativo) "
+                            + "VALUES (?, ?, ?, ?, ?, ?)");
+
+            ps.setString(1, nome);
+            ps.setString(2, cognome);
+            ps.setString(3, squadra.getNome());
+            ps.setString(4, squadra.getTorneoNome());
+            ps.setDate(5, (Date) squadra.getTorneoDataInizio());
+            ps.setInt(6, squadra.getTorneoCampoIdentificativo());
+
+            if (ps.executeUpdate() != 1) {
+
+                return false;
+            }
+
+            return true;
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
 }

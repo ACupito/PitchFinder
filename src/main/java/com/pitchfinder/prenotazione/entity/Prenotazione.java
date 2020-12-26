@@ -22,13 +22,11 @@ public class Prenotazione {
      * @param utenteEmail - is the user email.
      * @param eventoNome - is the name of the event.
      * @param eventoData - is the date of the event.
-     * @param codicePrenotazione - is the code of booking.
      */
-    public Prenotazione(String utenteEmail, String eventoNome, Date eventoData, int codicePrenotazione) {
+    public Prenotazione(String utenteEmail, String eventoNome, Date eventoData) {
         this.utenteEmail = utenteEmail;
         this.eventoNome = eventoNome;
         this.eventoData = eventoData;
-        this.codicePrenotazione = codicePrenotazione;
     }
 
     /**

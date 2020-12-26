@@ -10,12 +10,12 @@ public class SquadraServiceImpl implements SquadraService {
 
     /**
      * Create a new Squadra, the team is registered for the tournament.
-     * @param nome
-     * @param torneo
-     * @param numeroMembri
-     * @param capitano
-     * @param utente
-     * @return
+     * @param nome - nome.
+     * @param torneo - torneo.
+     * @param numeroMembri - numeroMembri.
+     * @param capitano - capitano.
+     * @param utente - utente.
+     * @return Squadra
      */
     @Override
     public Squadra createSquadra(String nome, Torneo torneo, int numeroMembri, String capitano, Utente utente) {
@@ -33,5 +33,22 @@ public class SquadraServiceImpl implements SquadraService {
 
             return null;
 
+    }
+
+    /**
+     * Create Player.
+     * @param nome - nome.
+     * @param cognome - cognome.
+     * @param squadra - squadra.
+     * @return String
+     */
+    @Override
+    public String createGiocatoreSquadra(String nome, String cognome, Squadra squadra) {
+        SquadraDAO squadraDAO = new SquadraDAOImpl();
+        if (!squadraDAO.doSaveGiocatoreSquadra(nome, cognome, squadra)) {
+            return null;
+        }
+
+        return nome + "" + cognome;
     }
 }
