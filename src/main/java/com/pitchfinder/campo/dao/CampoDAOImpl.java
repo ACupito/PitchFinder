@@ -57,8 +57,8 @@ public class CampoDAOImpl implements CampoDAO {
     public boolean doSaveOccupazione(int idCampo, Date data, Time inizio, Time fine, String usernameAdmin) {
 
         try (Connection con = ConPool.getInstance().getConnection()) {
-            PreparedStatement ps = con.prepareStatement(
-                    "INSERT INTO Occupazione (Data, OrarioInizio, OrarioFine, CampoIdentificativo, AdminUsername) VALUES(?,?,?,?,?)");
+            PreparedStatement ps =
+                    con.prepareStatement("INSERT INTO Occupazione (Data, OrarioInizio, OrarioFine, CampoIdentificativo, AdminUsername) VALUES(?,?,?,?,?)");
             ps.setDate(1, data);
             ps.setTime(2, inizio);
             ps.setTime(3, fine);
