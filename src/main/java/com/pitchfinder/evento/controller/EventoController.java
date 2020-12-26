@@ -19,10 +19,6 @@ public class EventoController extends HttpServlet {
      */
     private static final int MINLIMIT = 1;
     /**
-     * Minimum limit for year.
-     */
-    private static final int MINLIMITYEAR = new Date(Calendar.getInstance().getWeekYear()).getYear();
-    /**
      * Maximum limit for name.
      */
     private static final int MAXLIMIT = 50;
@@ -103,20 +99,13 @@ public class EventoController extends HttpServlet {
         /* The Event's date (String). */
         String dateStr = request.getParameter("date");
         /* The Event's date (Date)*/
-        Date date = new Date(1);
+        Date dataEvento = new Date(1);
         try {
-            date = Date.valueOf(dateStr);
+            /* The Event's date (Date). */
+            dataEvento = Date.valueOf(dateStr);
         } catch (IllegalArgumentException e) {
             throw new IllegalArgumentException("Formato Data non valido");
         }
-        /* The Event's day (Integer). */
-        int giorno = date.getDay();
-        /* The Event's month (Integer). */
-        int mese = date.getMonth();
-        /* The Event's year (Integer). */
-        int anno = date.getYear();
-        /* The Event's date (Date). */
-        Date dataEvento = new Date(anno - 1900, mese - 1, giorno);
         /* The Event's guest (String). */
         String ospite = request.getParameter("ospite");
         /* The Event's description (String). */
@@ -181,10 +170,11 @@ public class EventoController extends HttpServlet {
         /* The end time of the Event (Time). */
         Time orarioFine = new Time(oraFine, minutiFine, 0);
 
-        if (anno < MINLIMITYEAR) {
+        Date myDate = new Date(System.currentTimeMillis());
+        if (dataEvento.before(myDate)) {
             throw new IllegalArgumentException("La creazione "
                     + "non va a buon fine perché "
-                    + "l'anno dell'evento è errato");
+                    + "il giorno/mese/anno è antecedente a oggi");
         }
         if (!ospite.matches("^[ a-zA-Z\\u00C0-\\u00ff']+$")) {
             throw new IllegalArgumentException("La creazione non va a "
