@@ -60,4 +60,23 @@ public class TorneoServiceImpl implements TorneoService {
         return tdao.doSaveTorneo(torneo);
 
     }
+
+    /**
+     * This method allows to remove a tournament.
+     * @param idCampo pitch identifier
+     * @param nome nome of the tournament
+     * @param dataInizio dataInizio of the tournament
+     * @return boolean -> true : created / false : failed creation
+     */
+    public boolean deleteTorneo(int idCampo, String nome, Date dataInizio) {
+
+        Torneo torneo = new Torneo();
+        torneo.setCampoIdentificativo(idCampo);
+        torneo.setNome(nome);
+        torneo.setDataInizio(dataInizio);
+
+        return tdao.doRemoveTorneo(torneo);
+
+    }
+
 }
