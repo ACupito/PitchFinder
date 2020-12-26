@@ -87,23 +87,11 @@ public class EventoController extends HttpServlet {
         /* The image's file of the event (File). */
         File immagine = new File(request.getParameter("immagine"));
         /* The start of the Event's hour (String). */
-        String oraInizioStr = request.getParameter("orarioInizio").substring(0, 2);
-        /* The start of the Event's minute (String). */
-        String minutiInizioStr = request.getParameter("orarioInizio").substring(2);
-        /* The start of the Event's hour (Integer). */
-        int oraInizio = Integer.parseInt(oraInizioStr);
-        /* The start of the Event's minute (Integer). */
-        int minutiInizio = Integer.parseInt(minutiInizioStr);
+        String orarioInizioStr = request.getParameter("orarioInizio").substring(0, 5);
         /* The end of the Event's hour (String). */
-        String oraFineStr = request.getParameter("orarioInizio").substring(0, 2);
-        /* The end of the Event's minute (String). */
-        String minutiFineStr = request.getParameter("orarioInizio").substring(2);
-        /* The end of the Event's hour (Integer). */
-        int oraFine = Integer.parseInt(oraFineStr);
-        /* The end of the Event's minute (Integer). */
-        int minutiFine = Integer.parseInt(minutiFineStr);
+        String orarioFineStr = request.getParameter("orarioFine").substring(0, 5);
         /* The Event's date (String). */
-        String dateStr = request.getParameter("date");
+        String dateStr = request.getParameter("data");
         /* The Event's date (Date)*/
         new Date(1);
         Date dataEvento;
@@ -142,40 +130,20 @@ public class EventoController extends HttpServlet {
                     + "fine perché l'immagine inserita "
                     + "non rispetta il formato richiesto [jpg o png]");
         }
-        if (!oraInizioStr.matches("^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$")) {
+        if (!orarioInizioStr.matches("^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$")) {
             throw new IllegalArgumentException("La creazione "
                     + "non va a buon fine perché l'orario di inizio "
                     + "non ha un formato valido");
         }
-        if (oraInizio <= 0 || minutiInizio < 0) {
-            throw new IllegalArgumentException("La creazione "
-                    + "non va a buon fine perché non è stato inserito "
-                    + "l'orario di inizio");
-        }
-        if (oraInizio > MAXHOUR || minutiInizio > MAXMINUTE) {
-            throw new IllegalArgumentException("La creazione "
-                    + "non va a buon fine perché l'orario inserito "
-                    + "non rispetta il formato corretto");
-        }
         /* The start time of the Event (Time). */
-        Time orarioInizio = new Time(oraInizio, minutiInizio, 0);
-        if (!oraFineStr.matches("^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$")) {
+        Time orarioInizio = new Time(Integer.parseInt(orarioInizioStr.substring(0,2)),Integer.parseInt(orarioInizioStr.substring(3,5)),0);
+        if (!orarioFineStr.matches("^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$")) {
             throw new IllegalArgumentException("La creazione "
                     + "non va a buon fine perché l'orario di fine "
                     + "non ha un formato valido");
         }
-        if (oraFine <= 0 || minutiFine < 0) {
-            throw new IllegalArgumentException("La creazione "
-                    + "non va a buon fine perché non è stato inserito "
-                    + "l'orario di fine");
-        }
-        if (oraFine > MAXHOUR || minutiFine > MAXMINUTE) {
-            throw new IllegalArgumentException("La creazione "
-                    + "non va a buon fine perché l'orario inserito "
-                    + "non rispetta il formato corretto");
-        }
         /* The end time of the Event (Time). */
-        Time orarioFine = new Time(oraFine, minutiFine, 0);
+        Time orarioFine = new Time(Integer.parseInt(orarioFineStr.substring(0,2)),Integer.parseInt(orarioFineStr.substring(3,5)),0);
 
         Date myDate = new Date(System.currentTimeMillis());
         if (dataEvento.before(myDate)) {
