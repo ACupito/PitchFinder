@@ -93,22 +93,14 @@ public class EventoController extends HttpServlet {
         /* The Event's date (String). */
         String dateStr = request.getParameter("data");
         /* The Event's date (Date)*/
-        new Date(1);
         Date dataEvento;
-        try {
-            /* The Event's date (Date). */
-            dataEvento = Date.valueOf(dateStr);
-        } catch (IllegalArgumentException e) {
-            throw new IllegalArgumentException("Formato Data non valido");
-        }
         /* The Event's guest (String). */
         String ospite = request.getParameter("ospite");
         /* The Event's description (String). */
         String descrizione = request.getParameter("descrizione");
         /* The Event's available sits (String). */
         String postiDisponibiliStr = request.getParameter("postiDisponibili");
-        /* The Event's available sits (Integer). */
-        int postiDisponibili = Integer.parseInt(postiDisponibiliStr);
+
 
         if (nome.length() < MINLIMIT || nome.length() > MAXLIMIT) {
             throw new IllegalArgumentException("Errato: lunghezza nome non valida");
@@ -132,57 +124,53 @@ public class EventoController extends HttpServlet {
         if (!orarioInizioStr.matches("^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$")) {
             throw new IllegalArgumentException("Errato: formato non valido");
         }
+
         /* The start time of the Event (Time). */
         Time orarioInizio = new Time(Integer.parseInt(orarioInizioStr.substring(0,2)),Integer.parseInt(orarioInizioStr.substring(3,5)),0);
-        if (!orarioFineStr.matches("^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$")) {
-            throw new IllegalArgumentException("La creazione "
-                    + "non va a buon fine perché l'orario di fine "
-                    + "non ha un formato valido");
+
+        if (orarioFineStr.matches("")) {
+            throw new IllegalArgumentException("Errato: orario non selezionato");
         }
+        if (!orarioFineStr.matches("^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$")) {
+            throw new IllegalArgumentException("Errato: formato non valido");
+        }
+
         /* The end time of the Event (Time). */
         Time orarioFine = new Time(Integer.parseInt(orarioFineStr.substring(0,2)),Integer.parseInt(orarioFineStr.substring(3,5)),0);
 
+        if (dateStr.equals("")) {
+            throw new IllegalArgumentException("Errato: data non selezionata");
+        }
+        try {
+            /* The Event's date (Date). */
+            dataEvento = Date.valueOf(dateStr);
+        } catch (IllegalArgumentException e) {
+            throw new IllegalArgumentException("Errato: formato non valido");
+        }
         Date myDate = new Date(System.currentTimeMillis());
         if (dataEvento.before(myDate)) {
-            throw new IllegalArgumentException("La creazione "
-                    + "non va a buon fine perché "
-                    + "il giorno/mese/anno è antecedente a oggi");
+            throw new IllegalArgumentException("Errato: formato non valido");
+        }
+        if (ospite.length() < MINLIMIT || ospite.length() > MAXGUESTLIMIT ) {
+            throw new IllegalArgumentException("Errato: lunghezza non valida");
         }
         if (!ospite.matches("^[ a-zA-Z\\u00C0-\\u00ff']+$")) {
-            throw new IllegalArgumentException("La creazione non va a "
-                    + "buon fine perché il nome dell'ospite inserito non "
-                    + "rispetta il formato richiesto");
+            throw new IllegalArgumentException("Errato: formato non valido");
         }
-        if (ospite.length() < MINLIMIT || ospite.length() > MAXGUESTLIMIT) {
-            throw new IllegalArgumentException("La creazione non "
-                    + "va a buon fine perché il nome dell'ospite "
-                    + "inserito non rispetta "
-                    + "la lunghezza corretta [1 - 20]");
-        }
-        if (ospite.equals("")) {
-            throw new IllegalArgumentException("La creazione non "
-                    + "va a buon fine perché il nome dell'ospite "
-                    + "inserito non è presente.");
-        }
+
         if (descrizione.length() < MINLIMIT || descrizione.length() > MAXDESCRIPTIONLIMIT) {
-            throw new IllegalArgumentException("La creazione non "
-                    + "va a buon fine perché la descrizione "
-                    + "inserita non rispetta "
-                    + "la lunghezza corretta [1 - 500]");
-        }
-        if (!postiDisponibiliStr.matches("[0-9]+$")) {
-            throw new IllegalArgumentException("La creazione non va a "
-                    + "buon fine poiché i posti disponibili non "
-                    + "rispettano il formato richiesto");
+            throw new IllegalArgumentException("Errato: lunghezza non valida");
         }
         if (postiDisponibiliStr.equals("")) {
-            throw new IllegalArgumentException("La creazione non va a buon "
-                    + "fine poiché non sono stati inseriti i posti disponibili.");
+            throw new IllegalArgumentException("Errato: lunghezza non valida");
         }
+        if (!postiDisponibiliStr.matches("[0-9]+$")) {
+            throw new IllegalArgumentException("Errato: formato non valido");
+        }
+        /* The Event's available sits (Integer). */
+        int postiDisponibili = Integer.parseInt(postiDisponibiliStr);
         if (postiDisponibili < MINLIMIT || postiDisponibili > MAXSITSLIMIT) {
-            throw new IllegalArgumentException("La creazione non va a "
-                    + "buon fine perché il numero dei posti inseriti "
-                    + "non rispetta la grandezza richiesta [1 - 300]");
+            throw new IllegalArgumentException("Errato: lunghezza non valida");
         }
 
 
@@ -191,33 +179,33 @@ public class EventoController extends HttpServlet {
          *  ***********************************
          */
 
-        /* We take the parameter file (it's like "getParameter"). */
-        Part filePart = request.getPart("fileAddProduct");
-        /* We take the file's name. */
-        String fileName = Paths.get(filePart.getSubmittedFileName()).getFileName().toString();
-        /* We take the servletContextRealPath + FileSeparator (/) + the folder's name (images). */
-        String path = getServletContext().getRealPath("") + File.separator + "images";
-
-        File uploads = new File(path);
-        /* This is the name's length. */
-        int lenght = fileName.length();
-
-        File file = File.createTempFile(fileName.substring(0, lenght - 4), fileName.substring(lenght - 4, lenght), uploads);
-
-        try (InputStream input = filePart.getInputStream()) {
-            Files.copy(input, file.toPath(), StandardCopyOption.REPLACE_EXISTING);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        /* Start of the file's name (the true one). */
-        int lastIndex = file.getAbsoluteFile().toString().lastIndexOf("\\") + 1;
-        /* Lenght of the absolute path. */
-        int  totalLenght = file.getAbsoluteFile().toString().length();
-        /* We get the true name's file. */
-        String finalFileName = file.getAbsolutePath().toString().substring(lastIndex, totalLenght);
-        /* We add the "images" folder to the name's file */
-        String immagineStr = "images/events" + finalFileName;
+//        /* We take the parameter file (it's like "getParameter"). */
+//        Part filePart = request.getPart("fileAddProduct");
+//        /* We take the file's name. */
+//        String fileName = Paths.get(filePart.getSubmittedFileName()).getFileName().toString();
+//        /* We take the servletContextRealPath + FileSeparator (/) + the folder's name (images). */
+//        String path = getServletContext().getRealPath("") + File.separator + "images";
+//
+//        File uploads = new File(path);
+//        /* This is the name's length. */
+//        int lenght = fileName.length();
+//
+//        File file = File.createTempFile(fileName.substring(0, lenght - 4), fileName.substring(lenght - 4, lenght), uploads);
+//
+//        try (InputStream input = filePart.getInputStream()) {
+//            Files.copy(input, file.toPath(), StandardCopyOption.REPLACE_EXISTING);
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//
+//        /* Start of the file's name (the true one). */
+//        int lastIndex = file.getAbsoluteFile().toString().lastIndexOf("\\") + 1;
+//        /* Lenght of the absolute path. */
+//        int  totalLenght = file.getAbsoluteFile().toString().length();
+//        /* We get the true name's file. */
+//        String finalFileName = file.getAbsolutePath().toString().substring(lastIndex, totalLenght);
+//        /* We add the "images" folder to the name's file */
+//        String immagineStr = "images/events" + finalFileName;
 
         /* *********************************
          *  Here ends the Image upload part *
@@ -234,7 +222,7 @@ public class EventoController extends HttpServlet {
 
         String adminUsername = "memex99";
 
-        es.createEvento(nome, immagineStr, orarioInizio, orarioFine, dataEvento, ospite, descrizione, postiDisponibili, adminUsername);
+        es.createEvento(nome,  "immagineStr", orarioInizio, orarioFine, dataEvento, ospite, descrizione, postiDisponibili, adminUsername);
 
     }
 
