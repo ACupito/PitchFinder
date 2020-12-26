@@ -156,15 +156,20 @@ public class EventoDAOImpl implements EventoDAO {
             public int doRetrieveNPrenotazioniByEvento(final Evento event) {
 
 
-                String query = "SELECT count(CodicePrenotazione)"
+                String query = "SELECT count(CodicePrenotazione) as nPrenotazioni"
                         + " FROM prenotazione WHERE EventoNome = ?";
+
 
                 try (Connection con = ConPool.getConnection()) {
                     PreparedStatement ps =
                             con.prepareStatement(query);
                     ps.setString(ONE, event.getName());
                     ResultSet rs =  ps.executeQuery();
-                    int numberPrenotation = rs.getInt(ONE);
+                    int numberPrenotation = 0;
+                    if(rs.next()){
+                        numberPrenotation = rs.getInt("nPrenotazioni");
+                    }
+
                     return numberPrenotation;
 
                 } catch (SQLException e) {
