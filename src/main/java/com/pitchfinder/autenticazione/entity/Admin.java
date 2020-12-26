@@ -35,6 +35,20 @@ public class Admin {
     }
 
     /**
+     * @param username is the user username
+     * @param nome is the user name
+     * @param cognome is the user surname
+     * @param passwordHash is the user password
+     */
+    public Admin(String username, String nome, String cognome,
+                 String passwordHash) {
+        this.username = username;
+        this.nome = nome;
+        this.cognome = cognome;
+        this.passwordHash = passwordHash;
+    }
+
+    /**
      * This method returns the value of the variable username.
      * @return username
      */
