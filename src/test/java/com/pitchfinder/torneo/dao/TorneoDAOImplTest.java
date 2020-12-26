@@ -21,6 +21,21 @@ class TorneoDAOImplTest {
     private TorneoDAO tdao;
 
     /**
+     * Parameters declaration.
+     */
+    private static final String USERNAME_ADMIN = "memex99";
+    private static final String NOME = "Champions";
+    private static final int ID_CAMPO = 1002;
+    private static final String TIPO = "Gironi";
+    private static final String STRUTTURA = "Partite singole";
+    private static final int MAX_SQUADRE = 12;
+    private static final int MIN_PARTECIPANTI = 1;
+    private static final int MAX_PARTECIPANTI = 5;
+    private static final String GIORNO_PARTITE = "Lunedì";
+    private static final String DATA_INIZIO = "2020-12-24";
+    private static final String DATA_FINE = "2020-12-31";
+
+    /**
      * This is an instance of Torneo entity.
      */
     private Torneo t;
@@ -43,14 +58,14 @@ class TorneoDAOImplTest {
         t.setAdminUsername("");
         t.setNome("");
         t.setCampoIdentificativo(0);
-        t.setTipo("Gironi");
-        t.setStruttura("Partite singole");
-        t.setNumeroSquadre(12);
-        t.setMinNumeroPartecipantiPerSquadra(1);
-        t.setMaxNumeroPartecipantiPerSquadra(2);
-        t.setGiornoPartite("Lunedì");
-        t.setDataInizio(Date.valueOf("2000-12-24"));
-        t.setDataFine(Date.valueOf("2000-12-31"));
+        t.setTipo(TIPO);
+        t.setStruttura(STRUTTURA);
+        t.setNumeroSquadre(MAX_SQUADRE);
+        t.setMinNumeroPartecipantiPerSquadra(MIN_PARTECIPANTI);
+        t.setMaxNumeroPartecipantiPerSquadra(MAX_PARTECIPANTI);
+        t.setGiornoPartite(GIORNO_PARTITE);
+        t.setDataInizio(Date.valueOf(DATA_INIZIO));
+        t.setDataFine(Date.valueOf(DATA_FINE));
 
         assertFalse(tdao.doSaveTorneo(t));
 
@@ -62,17 +77,17 @@ class TorneoDAOImplTest {
     @Test
     void checkSaveTorneoTest2() {
 
-        t.setAdminUsername("memex99");
-        t.setNome("Champions");
-        t.setCampoIdentificativo(1002);
-        t.setTipo("Gironi");
-        t.setStruttura("Partite singole");
-        t.setNumeroSquadre(12);
-        t.setMinNumeroPartecipantiPerSquadra(1);
-        t.setMaxNumeroPartecipantiPerSquadra(2);
-        t.setGiornoPartite("Lunedì");
-        t.setDataInizio(Date.valueOf("2020-12-24"));
-        t.setDataFine(Date.valueOf("2020-12-31"));
+        t.setAdminUsername(USERNAME_ADMIN);
+        t.setNome(NOME);
+        t.setCampoIdentificativo(ID_CAMPO);
+        t.setTipo(TIPO);
+        t.setStruttura(STRUTTURA);
+        t.setNumeroSquadre(MAX_SQUADRE);
+        t.setMinNumeroPartecipantiPerSquadra(MIN_PARTECIPANTI);
+        t.setMaxNumeroPartecipantiPerSquadra(MAX_PARTECIPANTI);
+        t.setGiornoPartite(GIORNO_PARTITE);
+        t.setDataInizio(Date.valueOf(DATA_INIZIO));
+        t.setDataFine(Date.valueOf(DATA_FINE));
 
         assertTrue(tdao.doSaveTorneo(t));
 
@@ -87,14 +102,14 @@ class TorneoDAOImplTest {
         t.setAdminUsername("");
         t.setNome("");
         t.setCampoIdentificativo(0);
-        t.setTipo("Gironi");
-        t.setStruttura("Partite singole");
-        t.setNumeroSquadre(12);
-        t.setMinNumeroPartecipantiPerSquadra(1);
-        t.setMaxNumeroPartecipantiPerSquadra(2);
-        t.setGiornoPartite("Lunedì");
-        t.setDataInizio(Date.valueOf("2000-12-24"));
-        t.setDataFine(Date.valueOf("2000-12-31"));
+        t.setTipo(TIPO);
+        t.setStruttura(STRUTTURA);
+        t.setNumeroSquadre(MAX_SQUADRE);
+        t.setMinNumeroPartecipantiPerSquadra(MIN_PARTECIPANTI);
+        t.setMaxNumeroPartecipantiPerSquadra(MAX_PARTECIPANTI);
+        t.setGiornoPartite(GIORNO_PARTITE);
+        t.setDataInizio(Date.valueOf(DATA_INIZIO));
+        t.setDataFine(Date.valueOf(DATA_FINE));
 
 
         assertFalse(tdao.doRemoveTorneo(t));
@@ -107,17 +122,17 @@ class TorneoDAOImplTest {
     @Test
     void checkRemoveTorneoTest4() {
 
-        t.setAdminUsername("memex99");
-        t.setNome("Champions");
-        t.setCampoIdentificativo(1002);
-        t.setTipo("Gironi");
-        t.setStruttura("Partite singole");
-        t.setNumeroSquadre(12);
-        t.setMinNumeroPartecipantiPerSquadra(1);
-        t.setMaxNumeroPartecipantiPerSquadra(2);
-        t.setGiornoPartite("Lunedì");
-        t.setDataInizio(Date.valueOf("2020-12-24"));
-        t.setDataFine(Date.valueOf("2020-12-24"));
+        t.setAdminUsername(USERNAME_ADMIN);
+        t.setNome(NOME);
+        t.setCampoIdentificativo(ID_CAMPO);
+        t.setTipo(TIPO);
+        t.setStruttura(STRUTTURA);
+        t.setNumeroSquadre(MAX_SQUADRE);
+        t.setMinNumeroPartecipantiPerSquadra(MIN_PARTECIPANTI);
+        t.setMaxNumeroPartecipantiPerSquadra(MAX_PARTECIPANTI);
+        t.setGiornoPartite(GIORNO_PARTITE);
+        t.setDataInizio(Date.valueOf(DATA_INIZIO));
+        t.setDataFine(Date.valueOf(DATA_FINE));
 
         assertTrue(tdao.doRemoveTorneo(t));
 
