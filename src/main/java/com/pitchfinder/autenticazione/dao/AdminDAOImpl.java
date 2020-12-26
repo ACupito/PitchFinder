@@ -57,6 +57,9 @@ public class AdminDAOImpl implements AdminDAO {
                     admin.setCognome(rs.getString(INDEX3));
 
                     return admin;
+                } else {
+                    throw new IllegalArgumentException("Il login non va a buon "
+                            + "fine perché la password inserita non è corretta");
                 }
 
             } else {
@@ -67,8 +70,6 @@ public class AdminDAOImpl implements AdminDAO {
 
             return null;
         }
-
-        return null;
     }
 
     private int checkAdminExistence(final Admin admin) {
@@ -85,7 +86,6 @@ public class AdminDAOImpl implements AdminDAO {
             }
 
         } catch (SQLException e) {
-
             return 0;
         }
 

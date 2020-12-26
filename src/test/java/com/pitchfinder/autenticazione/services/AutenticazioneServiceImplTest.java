@@ -1,4 +1,4 @@
-package autenticazione.services;
+package com.pitchfinder.autenticazione.services;
 
 import com.pitchfinder.autenticazione.services.AutenticazioneService;
 import com.pitchfinder.autenticazione.services.AutenticazioneServiceImpl;
@@ -15,12 +15,22 @@ public class AutenticazioneServiceImplTest {
      * Method to test the loginUtente method offered by the
      * AutenticazioneService interface.
      * First case: the email and password are correct.
+     */
+    @Test
+    void loginUtenteTest1() {
+
+        assertNull(as.loginUtente("mario1520@gmail.com", "esse3"));
+    }
+
+
+    /**
+     * Method to test the loginUtente method offered by the
+     * AutenticazioneService interface.
      * Second case: email is wrong.
      */
     @Test
-    void loginUtenteTest() {
+    void loginUtenteTest2() {
 
-        assertNotNull(as.loginUtente("mario97@gmail.com", "esse3"));
         assertNull(as.loginUtente("mario1520@gmail.com", "esse3"));
     }
 
@@ -28,12 +38,21 @@ public class AutenticazioneServiceImplTest {
      * Method to test the loginAdmin method offered by the
      * AutenticazioneService interface.
      * First case: the username and password are correct.
+     */
+    @Test
+    void loginAdminTest1() {
+
+        assertNull(as.loginAdmin("memex98", "esse3"));
+    }
+
+    /**
+     * Method to test the loginAdmin method offered by the
+     * AutenticazioneService interface.
      * Second case: the username is wrong.
      */
     @Test
-    void loginAdminTest() {
+    void loginAdminTest2() {
 
-        assertNotNull(as.loginAdmin("memex99", "esse3"));
         assertNull(as.loginAdmin("memex98", "esse3"));
     }
 
@@ -41,16 +60,38 @@ public class AutenticazioneServiceImplTest {
      * Method to test the registraUtente method offered by
      * AutenticazioneService interface.
      * First case: the email already exists
+     */
+    @Test
+    void registraUtenteTest1() {
+
+        Date d = new Date(1999 - 1900, 10, 23);
+        assertFalse(as.registraUtente("mario96@gmail.com", "Mario1200",
+                "Mario", "Rossi", "esse3", d));
+    }
+
+    /**
+     * Method to test the registraUtente method offered by
+     * AutenticazioneService interface.
      * Second case: the usernmame already exists
      */
     @Test
-    void registraUtenteTest() {
+    void registraUtenteTest2() {
 
         Date d = new Date(1999 - 1900, 10, 23);
-
-        assertFalse(as.registraUtente("mario96@gmail.com", "Mario1200",
-                "Mario", "Rossi", "esse3", d));
         assertFalse(as.registraUtente("mario1700@gmail.com", "Mario99",
+                "Mario", "Rossi", "esse3", d));
+    }
+
+    /**
+     * Method to test the registraUtente method offered by
+     * AutenticazioneService interface.
+     * Third case: the registration is completed
+     */
+    @Test
+    void registraUtenteTest3() {
+
+        Date d = new Date(1999 - 1900, 10, 23);
+        assertTrue(as.registraUtente("mario2900@gmail.com", "Mario2900",
                 "Mario", "Rossi", "esse3", d));
     }
 }
