@@ -10,26 +10,30 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.File;
 import java.sql.Date;
 import java.sql.Time;
+import java.util.Calendar;
 
 public class EventoController extends HttpServlet {
 
     /**
-     * Maximum limit for name.
+     * Minimum limit for name.
      */
     private static final int MINLIMIT = 1;
-
     /**
-     * Minimum limit for name.
+     * Minimum limit for year.
+     */
+    private static final int MINLIMITYEAR = new Date(Calendar.getInstance().getWeekYear()).getYear();
+    /**
+     * Maximum limit for name.
      */
     private static final int MAXLIMIT = 50;
 
     /**
-     * Minimum limit for image.
+     * Maximum limit for image.
      */
     private static final int MAXLIMITIMAGE = 2;
 
     /**
-     * Minimum limit for hours.
+     * Maximum limit for hours.
      */
     private static final int MAXHOUR = 24;
 
@@ -124,15 +128,17 @@ public class EventoController extends HttpServlet {
         String ospite = request.getParameter("ospite");
         /* The Event's description (String). */
         String descrizione = request.getParameter("descrizione");
+        /* The Event's available sits (String). */
+        String postiDisponibiliStr = request.getParameter("postiDisponibili");
         /* The Event's available sits (Integer). */
-        int postiDisponibili = Integer.parseInt(request.getParameter("postiDisponibili"));
+        int postiDisponibili = Integer.parseInt(postiDisponibiliStr);
 
         if (nome.length() < MINLIMIT || nome.length() > MAXLIMIT) {
             throw new IllegalArgumentException("La creazione "
                     + "non va a buon fine perché il nome inserito non "
                     + "rispetta la lunghezza corretta [1 - 50]");
         }
-        if (nome.matches("^\\S*$")) {
+        if (!nome.matches("^[ a-zA-Z\u00C0-\u00ff']+$")) {
             throw new IllegalArgumentException("La registrazione non va a buon "
                     + "fine perché il nome inserito "
                     + "non rispetta il formato richiesto");
@@ -147,6 +153,11 @@ public class EventoController extends HttpServlet {
                     + "fine perché l'immagine inserita "
                     + "non rispetta il formato richiesto [jpg o png]");
         }
+        if (!oraInizioStr.matches("^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$")) {
+            throw new IllegalArgumentException("La creazione "
+                    + "non va a buon fine perché l'orario di inizio "
+                    + "non ha un formato valido");
+        }
         if (oraInizio <= 0 || minutiInizio < 0) {
             throw new IllegalArgumentException("La creazione "
                     + "non va a buon fine perché non è stato inserito "
@@ -156,11 +167,14 @@ public class EventoController extends HttpServlet {
             throw new IllegalArgumentException("La creazione "
                     + "non va a buon fine perché l'orario inserito "
                     + "non rispetta il formato corretto");
-
         }
         /* The start time of the Event (Time). */
         Time orarioInizio = new Time(oraInizio, minutiInizio, 0);
-
+        if (!oraFineStr.matches("^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$")) {
+            throw new IllegalArgumentException("La creazione "
+                    + "non va a buon fine perché l'orario di fine "
+                    + "non ha un formato valido");
+        }
         if (oraFine <= 0 || minutiFine < 0) {
             throw new IllegalArgumentException("La creazione "
                     + "non va a buon fine perché non è stato inserito "
@@ -170,17 +184,21 @@ public class EventoController extends HttpServlet {
             throw new IllegalArgumentException("La creazione "
                     + "non va a buon fine perché l'orario inserito "
                     + "non rispetta il formato corretto");
-
         }
         /* The end time of the Event (Time). */
         Time orarioFine = new Time(oraFine, minutiFine, 0);
 
-        if (giorno > MAXDAY || mese > MAXMONTH) {
+        if (!giornoStr.matches("[0-9]+$") || !meseStr.matches("[0-9]+$") || !annoStr.matches("[0-9]+$")) {
+            throw new IllegalArgumentException("La creazione non va a "
+                    + "buon fine poiché giorno/mese/anno non "
+                    + "rispettano il formato richiesto");
+        }
+        if (giorno > MAXDAY || mese > MAXMONTH || giorno < MINLIMIT || mese < MINLIMIT  || anno < MINLIMITYEAR) {
             throw new IllegalArgumentException("La creazione "
                     + "non va a buon fine perché "
-                    + "il mese o il giorno dell'evento è errato");
+                    + "il giorno/mese/anno dell'evento è errato");
         }
-        if (!ospite.matches("[A-Z][a-z]+")) {
+        if (!ospite.matches("^[ a-zA-Z\\u00C0-\\u00ff']+$")) {
             throw new IllegalArgumentException("La creazione non va a "
                     + "buon fine perché il nome dell'ospite inserito non "
                     + "rispetta il formato richiesto");
@@ -191,11 +209,25 @@ public class EventoController extends HttpServlet {
                     + "inserito non rispetta "
                     + "la lunghezza corretta [1 - 20]");
         }
+        if (ospite.equals("")) {
+            throw new IllegalArgumentException("La creazione non "
+                    + "va a buon fine perché il nome dell'ospite "
+                    + "inserito non è presente.");
+        }
         if (descrizione.length() < MINLIMIT || descrizione.length() > MAXDESCRIPTIONLIMIT) {
             throw new IllegalArgumentException("La creazione non "
                     + "va a buon fine perché la descrizione "
                     + "inserita non rispetta "
                     + "la lunghezza corretta [1 - 500]");
+        }
+        if (!postiDisponibiliStr.matches("[0-9]+$")) {
+            throw new IllegalArgumentException("La creazione non va a "
+                    + "buon fine poiché i posti disponibili non "
+                    + "rispettano il formato richiesto");
+        }
+        if (postiDisponibiliStr.equals("")) {
+            throw new IllegalArgumentException("La creazione non va a buon "
+                    + "fine poiché non sono stati inseriti i posti disponibili.");
         }
         if (postiDisponibili < MINLIMIT || postiDisponibili > MAXSITSLIMIT) {
             throw new IllegalArgumentException("La creazione non va a "
