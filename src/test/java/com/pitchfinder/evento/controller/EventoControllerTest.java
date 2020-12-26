@@ -357,9 +357,33 @@ public class EventoControllerTest {
             });
             assertEquals(message, exception.getMessage());
         }
-
         @Test
         void TC_11_14(){
+            Mockito.when(mockedRequest.getParameter("nome")).thenReturn("NomeEvento");
+            Mockito.when(mockedRequest.getParameter("immagine")).thenReturn("tiyftyfifift.jpg");
+            Mockito.when(mockedRequest.getParameter("ospite")).thenReturn("Giuseppe Verdi");
+            Mockito.when(mockedRequest.getParameter("descrizione")).thenReturn("#@Descrizione <> Evento");
+            Mockito.when(mockedRequest.getParameter("orarioInizio")).thenReturn("15:30");
+            Mockito.when(mockedRequest.getParameter("orarioFine")).thenReturn("18:30");
+            Mockito.when(mockedRequest.getParameter("data")).thenReturn("2021-10-08");
+            Mockito.when(mockedRequest.getParameter("postiDisponibili")).thenReturn(String.valueOf(150));
+            String message = "Errato: formato non valido";
+            Admin admin = new Admin();
+            admin.setNome("Emanuele");
+            admin.setCognome("Mezzi");
+            admin.setUsername("memex99");
+            admin.setPassword("password");
+            Mockito.when(mockedRequest.getSession()).thenReturn(session);
+            Mockito.when(mockedRequest.getSession().getAttribute("admin")).thenReturn(admin);
+            IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
+                servlet.doGet(mockedRequest, mockedResponse);
+            });
+            assertEquals(message, exception.getMessage());
+        }
+
+
+        @Test
+        void TC_11_15(){
             Mockito.when(mockedRequest.getParameter("nome")).thenReturn("NomeEvento");
             Mockito.when(mockedRequest.getParameter("immagine")).thenReturn("tiyftyfifift.jpg");
             Mockito.when(mockedRequest.getParameter("ospite")).thenReturn("Giuseppe Verdi");
@@ -383,7 +407,7 @@ public class EventoControllerTest {
 
         }
         @Test
-        void TC_11_15(){
+        void TC_11_16(){
             Mockito.when(mockedRequest.getParameter("nome")).thenReturn("NomeEvento");
             Mockito.when(mockedRequest.getParameter("immagine")).thenReturn("tiyftyfifift.jpg");
             Mockito.when(mockedRequest.getParameter("ospite")).thenReturn("Giuseppe Verdi");
@@ -406,7 +430,7 @@ public class EventoControllerTest {
             assertEquals(message, exception.getMessage());
         }
         @Test
-        void TC_11_16(){
+        void TC_11_17(){
             Mockito.when(mockedRequest.getParameter("nome")).thenReturn("NomeEvento");
             Mockito.when(mockedRequest.getParameter("immagine")).thenReturn("tiyftyfifift.jpg");
             Mockito.when(mockedRequest.getParameter("ospite")).thenReturn("Giuseppe Verdi");
