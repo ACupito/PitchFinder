@@ -42,7 +42,7 @@ class TorneoDAOImplTest {
 
         t.setAdminUsername("memex99");
         t.setNome("Champions");
-        t.setCampoIdentificativo(1001);
+        t.setCampoIdentificativo(1002);
         t.setTipo("Gironi");
         t.setStruttura("Partite singole");
         t.setNumeroSquadre(12);
