@@ -1,5 +1,6 @@
 package com.pitchfinder.torneo.services;
 
+import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
@@ -98,6 +99,16 @@ class TorneoServiceImplTest {
 
         Date dataInizio = Date.valueOf(DATA_INIZIO);
         assertTrue(tservice.deleteTorneo(ID_CAMPO, NOME, dataInizio));
+
+    }
+
+    /**
+     * Cleanup the environment.
+     */
+    @AfterAll
+    void tearDown() {
+
+        tservice = null;
 
     }
 
