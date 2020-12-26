@@ -14,6 +14,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.servlet.http.Part;
 import java.io.File;
 import java.io.IOException;
 import java.sql.Date;
@@ -42,16 +43,28 @@ public class EventoControllerTest {
     private static final String POSTI_DISPONIBILI = "150";
 
     /**
-     *
+     *  Setting up the enviroment.
      */
-
     @BeforeAll
-        void setUp() {
+        void setUp() throws IOException, ServletException {
+
+            //Servlet, mockedRequest, mockedResponse and Session instantiation.
             servlet = new EventoController();
             mockedRequest = Mockito.mock(HttpServletRequest.class);
             mockedResponse = Mockito.mock(HttpServletResponse.class);
             session = Mockito.mock(HttpSession.class);
-            Mockito.when(mockedRequest.getParameter("flag")).thenReturn("1");
+
+            //Admin creation for the session.
+            Admin admin = new Admin();
+            admin.setNome("Emanuele");
+            admin.setCognome("Mezzi");
+            admin.setUsername("memex99");
+            admin.setPassword("password");
+
+            //session setting.
+            Mockito.when(mockedRequest.getSession()).thenReturn(session);
+            Mockito.when(mockedRequest.getSession().getAttribute("admin")).thenReturn(admin);
+
         }
 
     /**
@@ -68,14 +81,9 @@ public class EventoControllerTest {
         Mockito.when(mockedRequest.getParameter("orarioFine")).thenReturn(ORARIO_FINE);
         Mockito.when(mockedRequest.getParameter("data")).thenReturn(DATA);
         Mockito.when(mockedRequest.getParameter("postiDisponibili")).thenReturn(POSTI_DISPONIBILI);
+
         String message = "Errato: lunghezza nome non valida";
-        Admin admin = new Admin();
-        admin.setNome("Emanuele");
-        admin.setCognome("Mezzi");
-        admin.setUsername("memex99");
-        admin.setPassword("password");
-        Mockito.when(mockedRequest.getSession()).thenReturn(session);
-        Mockito.when(mockedRequest.getSession().getAttribute("admin")).thenReturn(admin);
+
         IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
             servlet.doGet(mockedRequest, mockedResponse);
         });
@@ -97,14 +105,9 @@ public class EventoControllerTest {
         Mockito.when(mockedRequest.getParameter("orarioFine")).thenReturn(ORARIO_FINE);
         Mockito.when(mockedRequest.getParameter("data")).thenReturn(DATA);
         Mockito.when(mockedRequest.getParameter("postiDisponibili")).thenReturn(POSTI_DISPONIBILI);
+
         String message = "Errato: formato non valido";
-        Admin admin = new Admin();
-        admin.setNome("Emanuele");
-        admin.setCognome("Mezzi");
-        admin.setUsername("memex99");
-        admin.setPassword("password");
-        Mockito.when(mockedRequest.getSession()).thenReturn(session);
-        Mockito.when(mockedRequest.getSession().getAttribute("admin")).thenReturn(admin);
+
         IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
             servlet.doGet(mockedRequest, mockedResponse);
         });
@@ -125,14 +128,9 @@ public class EventoControllerTest {
         Mockito.when(mockedRequest.getParameter("orarioFine")).thenReturn(ORARIO_FINE);
         Mockito.when(mockedRequest.getParameter("data")).thenReturn(DATA);
         Mockito.when(mockedRequest.getParameter("postiDisponibili")).thenReturn(POSTI_DISPONIBILI);
+
         String message = "Errato: Formato non valido";
-        Admin admin = new Admin();
-        admin.setNome("Emanuele");
-        admin.setCognome("Mezzi");
-        admin.setUsername("memex99");
-        admin.setPassword("password");
-        Mockito.when(mockedRequest.getSession()).thenReturn(session);
-        Mockito.when(mockedRequest.getSession().getAttribute("admin")).thenReturn(admin);
+
         IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
             servlet.doGet(mockedRequest, mockedResponse);
         });
@@ -152,14 +150,9 @@ public class EventoControllerTest {
         Mockito.when(mockedRequest.getParameter("orarioFine")).thenReturn(ORARIO_FINE);
         Mockito.when(mockedRequest.getParameter("data")).thenReturn(DATA);
         Mockito.when(mockedRequest.getParameter("postiDisponibili")).thenReturn(POSTI_DISPONIBILI);
+
         String message = "Errato: dimensione non valida";
-        Admin admin = new Admin();
-        admin.setNome("Emanuele");
-        admin.setCognome("Mezzi");
-        admin.setUsername("memex99");
-        admin.setPassword("password");
-        Mockito.when(mockedRequest.getSession()).thenReturn(session);
-        Mockito.when(mockedRequest.getSession().getAttribute("admin")).thenReturn(admin);
+
         IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
             servlet.doGet(mockedRequest, mockedResponse);
         });
@@ -171,26 +164,21 @@ public class EventoControllerTest {
      */
     @Test
     void TC_11_5(){
-            Mockito.when(mockedRequest.getParameter("nome")).thenReturn(NOME);
-            Mockito.when(mockedRequest.getParameter("immagine")).thenReturn(IMMAGINE);
-            Mockito.when(mockedRequest.getParameter("ospite")).thenReturn(OSPITE);
-            Mockito.when(mockedRequest.getParameter("descrizione")).thenReturn(DESCRIZIONE);
-            Mockito.when(mockedRequest.getParameter("orarioInizio")).thenReturn("");
-            Mockito.when(mockedRequest.getParameter("orarioFine")).thenReturn(ORARIO_FINE);
-            Mockito.when(mockedRequest.getParameter("data")).thenReturn(DATA);
-            Mockito.when(mockedRequest.getParameter("postiDisponibili")).thenReturn(POSTI_DISPONIBILI);
-            String message = "Errato: orario non selezionato";
-            Admin admin = new Admin();
-            admin.setNome("Emanuele");
-            admin.setCognome("Mezzi");
-            admin.setUsername("memex99");
-            admin.setPassword("password");
-            Mockito.when(mockedRequest.getSession()).thenReturn(session);
-            Mockito.when(mockedRequest.getSession().getAttribute("admin")).thenReturn(admin);
-            IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
-    servlet.doGet(mockedRequest, mockedResponse);
-    });
-    assertEquals(message, exception.getMessage());
+        Mockito.when(mockedRequest.getParameter("nome")).thenReturn(NOME);
+        Mockito.when(mockedRequest.getParameter("immagine")).thenReturn(IMMAGINE);
+        Mockito.when(mockedRequest.getParameter("ospite")).thenReturn(OSPITE);
+        Mockito.when(mockedRequest.getParameter("descrizione")).thenReturn(DESCRIZIONE);
+        Mockito.when(mockedRequest.getParameter("orarioInizio")).thenReturn("");
+        Mockito.when(mockedRequest.getParameter("orarioFine")).thenReturn(ORARIO_FINE);
+        Mockito.when(mockedRequest.getParameter("data")).thenReturn(DATA);
+        Mockito.when(mockedRequest.getParameter("postiDisponibili")).thenReturn(POSTI_DISPONIBILI);
+
+        String message = "Errato: orario non selezionato";
+
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
+        servlet.doGet(mockedRequest, mockedResponse);
+        });
+        assertEquals(message, exception.getMessage());
 
     }
 
@@ -207,14 +195,9 @@ public class EventoControllerTest {
         Mockito.when(mockedRequest.getParameter("orarioFine")).thenReturn(ORARIO_FINE);
         Mockito.when(mockedRequest.getParameter("data")).thenReturn(DATA);
         Mockito.when(mockedRequest.getParameter("postiDisponibili")).thenReturn(POSTI_DISPONIBILI);
+
         String message = "Errato: formato non valido";
-        Admin admin = new Admin();
-        admin.setNome("Emanuele");
-        admin.setCognome("Mezzi");
-        admin.setUsername("memex99");
-        admin.setPassword("password");
-        Mockito.when(mockedRequest.getSession()).thenReturn(session);
-        Mockito.when(mockedRequest.getSession().getAttribute("admin")).thenReturn(admin);
+
         IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
             servlet.doGet(mockedRequest, mockedResponse);
         });
@@ -235,14 +218,9 @@ public class EventoControllerTest {
         Mockito.when(mockedRequest.getParameter("orarioFine")).thenReturn("");
         Mockito.when(mockedRequest.getParameter("data")).thenReturn(DATA);
         Mockito.when(mockedRequest.getParameter("postiDisponibili")).thenReturn(POSTI_DISPONIBILI);
+
         String message = "Errato: orario non selezionato";
-        Admin admin = new Admin();
-        admin.setNome("Emanuele");
-        admin.setCognome("Mezzi");
-        admin.setUsername("memex99");
-        admin.setPassword("password");
-        Mockito.when(mockedRequest.getSession()).thenReturn(session);
-        Mockito.when(mockedRequest.getSession().getAttribute("admin")).thenReturn(admin);
+
         IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
             servlet.doGet(mockedRequest, mockedResponse);
         });
@@ -263,14 +241,9 @@ public class EventoControllerTest {
         Mockito.when(mockedRequest.getParameter("orarioFine")).thenReturn("43:77");
         Mockito.when(mockedRequest.getParameter("data")).thenReturn(DATA);
         Mockito.when(mockedRequest.getParameter("postiDisponibili")).thenReturn(POSTI_DISPONIBILI);
+
         String message = "Errato: formato non valido";
-        Admin admin = new Admin();
-        admin.setNome("Emanuele");
-        admin.setCognome("Mezzi");
-        admin.setUsername("memex99");
-        admin.setPassword("password");
-        Mockito.when(mockedRequest.getSession()).thenReturn(session);
-        Mockito.when(mockedRequest.getSession().getAttribute("admin")).thenReturn(admin);
+
         IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
             servlet.doGet(mockedRequest, mockedResponse);
         });
@@ -291,14 +264,9 @@ public class EventoControllerTest {
         Mockito.when(mockedRequest.getParameter("orarioFine")).thenReturn(ORARIO_FINE);
         Mockito.when(mockedRequest.getParameter("data")).thenReturn("");
         Mockito.when(mockedRequest.getParameter("postiDisponibili")).thenReturn(POSTI_DISPONIBILI);
+
         String message = "Errato: data non selezionata";
-        Admin admin = new Admin();
-        admin.setNome("Emanuele");
-        admin.setCognome("Mezzi");
-        admin.setUsername("memex99");
-        admin.setPassword("password");
-        Mockito.when(mockedRequest.getSession()).thenReturn(session);
-        Mockito.when(mockedRequest.getSession().getAttribute("admin")).thenReturn(admin);
+
         IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
             servlet.doGet(mockedRequest, mockedResponse);
         });
@@ -318,14 +286,9 @@ public class EventoControllerTest {
         Mockito.when(mockedRequest.getParameter("orarioFine")).thenReturn(ORARIO_FINE);
         Mockito.when(mockedRequest.getParameter("data")).thenReturn("2019-12-22");
         Mockito.when(mockedRequest.getParameter("postiDisponibili")).thenReturn(POSTI_DISPONIBILI);
+
         String message = "Errato: formato non valido";
-        Admin admin = new Admin();
-        admin.setNome("Emanuele");
-        admin.setCognome("Mezzi");
-        admin.setUsername("memex99");
-        admin.setPassword("password");
-        Mockito.when(mockedRequest.getSession()).thenReturn(session);
-        Mockito.when(mockedRequest.getSession().getAttribute("admin")).thenReturn(admin);
+
         IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
             servlet.doGet(mockedRequest, mockedResponse);
         });
@@ -345,14 +308,9 @@ public class EventoControllerTest {
         Mockito.when(mockedRequest.getParameter("orarioFine")).thenReturn(ORARIO_FINE);
         Mockito.when(mockedRequest.getParameter("data")).thenReturn(DATA);
         Mockito.when(mockedRequest.getParameter("postiDisponibili")).thenReturn(POSTI_DISPONIBILI);
+
         String message = "Errato: lunghezza non valida";
-        Admin admin = new Admin();
-        admin.setNome("Emanuele");
-        admin.setCognome("Mezzi");
-        admin.setUsername("memex99");
-        admin.setPassword("password");
-        Mockito.when(mockedRequest.getSession()).thenReturn(session);
-        Mockito.when(mockedRequest.getSession().getAttribute("admin")).thenReturn(admin);
+
         IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
             servlet.doGet(mockedRequest, mockedResponse);
         });
@@ -372,14 +330,9 @@ public class EventoControllerTest {
         Mockito.when(mockedRequest.getParameter("orarioFine")).thenReturn(ORARIO_FINE);
         Mockito.when(mockedRequest.getParameter("data")).thenReturn(DATA);
         Mockito.when(mockedRequest.getParameter("postiDisponibili")).thenReturn(POSTI_DISPONIBILI);
+
         String message = "Errato: formato non valido";
-        Admin admin = new Admin();
-        admin.setNome("Emanuele");
-        admin.setCognome("Mezzi");
-        admin.setUsername("memex99");
-        admin.setPassword("password");
-        Mockito.when(mockedRequest.getSession()).thenReturn(session);
-        Mockito.when(mockedRequest.getSession().getAttribute("admin")).thenReturn(admin);
+
         IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
             servlet.doGet(mockedRequest, mockedResponse);
         });
@@ -399,14 +352,9 @@ public class EventoControllerTest {
         Mockito.when(mockedRequest.getParameter("orarioFine")).thenReturn(ORARIO_FINE);
         Mockito.when(mockedRequest.getParameter("data")).thenReturn(DATA);
         Mockito.when(mockedRequest.getParameter("postiDisponibili")).thenReturn(POSTI_DISPONIBILI);
+
         String message = "Errato: lunghezza non valida";
-        Admin admin = new Admin();
-        admin.setNome("Emanuele");
-        admin.setCognome("Mezzi");
-        admin.setUsername("memex99");
-        admin.setPassword("password");
-        Mockito.when(mockedRequest.getSession()).thenReturn(session);
-        Mockito.when(mockedRequest.getSession().getAttribute("admin")).thenReturn(admin);
+
         IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
             servlet.doGet(mockedRequest, mockedResponse);
         });
@@ -426,14 +374,9 @@ public class EventoControllerTest {
         Mockito.when(mockedRequest.getParameter("orarioFine")).thenReturn(ORARIO_FINE);
         Mockito.when(mockedRequest.getParameter("data")).thenReturn(DATA);
         Mockito.when(mockedRequest.getParameter("postiDisponibili")).thenReturn(POSTI_DISPONIBILI);
+
         String message = "Errato: formato non valido";
-        Admin admin = new Admin();
-        admin.setNome("Emanuele");
-        admin.setCognome("Mezzi");
-        admin.setUsername("memex99");
-        admin.setPassword("password");
-        Mockito.when(mockedRequest.getSession()).thenReturn(session);
-        Mockito.when(mockedRequest.getSession().getAttribute("admin")).thenReturn(admin);
+
         IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
             servlet.doGet(mockedRequest, mockedResponse);
         });
@@ -453,14 +396,9 @@ public class EventoControllerTest {
         Mockito.when(mockedRequest.getParameter("orarioFine")).thenReturn(ORARIO_FINE);
         Mockito.when(mockedRequest.getParameter("data")).thenReturn(DATA);
         Mockito.when(mockedRequest.getParameter("postiDisponibili")).thenReturn("");
+
         String message = "Errato: lunghezza non valida";
-        Admin admin = new Admin();
-        admin.setNome("Emanuele");
-        admin.setCognome("Mezzi");
-        admin.setUsername("memex99");
-        admin.setPassword("password");
-        Mockito.when(mockedRequest.getSession()).thenReturn(session);
-        Mockito.when(mockedRequest.getSession().getAttribute("admin")).thenReturn(admin);
+
         IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
             servlet.doGet(mockedRequest, mockedResponse);
         });
@@ -481,14 +419,9 @@ public class EventoControllerTest {
         Mockito.when(mockedRequest.getParameter("orarioFine")).thenReturn(ORARIO_FINE);
         Mockito.when(mockedRequest.getParameter("data")).thenReturn(DATA);
         Mockito.when(mockedRequest.getParameter("postiDisponibili")).thenReturn("@");
+
         String message = "Errato: formato non valido";
-        Admin admin = new Admin();
-        admin.setNome("Emanuele");
-        admin.setCognome("Mezzi");
-        admin.setUsername("memex99");
-        admin.setPassword("password");
-        Mockito.when(mockedRequest.getSession()).thenReturn(session);
-        Mockito.when(mockedRequest.getSession().getAttribute("admin")).thenReturn(admin);
+
         IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
             servlet.doGet(mockedRequest, mockedResponse);
         });
@@ -508,18 +441,11 @@ public class EventoControllerTest {
         Mockito.when(mockedRequest.getParameter("orarioFine")).thenReturn(ORARIO_FINE);
         Mockito.when(mockedRequest.getParameter("data")).thenReturn(DATA);
         Mockito.when(mockedRequest.getParameter("postiDisponibili")).thenReturn(POSTI_DISPONIBILI);
-        Admin admin = new Admin();
-        admin.setNome("Emanuele");
-        admin.setCognome("Mezzi");
-        admin.setUsername("memex99");
-        admin.setPassword("password");
-        Mockito.when(mockedRequest.getSession()).thenReturn(session);
-        Mockito.when(mockedRequest.getSession().getAttribute("admin")).thenReturn(admin);
-        Mockito.verify(mockedResponse).setContentType("Creazione avvenuta");
-
 
         servlet.doGet(mockedRequest, mockedResponse);
         Mockito.verify(mockedResponse).setContentType("Creazione avvenuta");
+
+
     }
 
     /**
@@ -537,8 +463,8 @@ public class EventoControllerTest {
         evento.setName(NOME);
         evento.setImage(IMMAGINE);
         evento.setDate(Date.valueOf(DATA));
-        evento.setStartHour(Time.valueOf(ORARIO_INIZIO));
-        evento.setEndHour(Time.valueOf(ORARIO_FINE));
+        evento.setStartHour(Time.valueOf(ORARIO_INIZIO.concat(":00")));
+        evento.setEndHour(Time.valueOf(ORARIO_FINE.concat(":00")));
         evento.setGuest(OSPITE);
         evento.setDescription(DESCRIZIONE);
         evento.setAvailableSits(Integer.valueOf(POSTI_DISPONIBILI));
@@ -546,9 +472,4 @@ public class EventoControllerTest {
         es.removeEvento(evento);
 
     }
-
-
-
-
-    }
-
+}
