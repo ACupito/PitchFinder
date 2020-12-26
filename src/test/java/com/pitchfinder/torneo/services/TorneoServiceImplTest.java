@@ -20,6 +20,21 @@ class TorneoServiceImplTest {
     private TorneoService tservice;
 
     /**
+     * Parameters declaration.
+     */
+    private static final String USERNAME_ADMIN = "memex99";
+    private static final String NOME = "Champions";
+    private static final int ID_CAMPO = 1002;
+    private static final String TIPO = "Gironi";
+    private static final String STRUTTURA = "Partite singole";
+    private static final int MAX_SQUADRE = 12;
+    private static final int MIN_PARTECIPANTI = 1;
+    private static final int MAX_PARTECIPANTI = 5;
+    private static final String GIORNO_PARTITE = "Lunedì";
+    private static final String DATA_INIZIO = "2020-12-24";
+    private static final String DATA_FINE = "2020-12-31";
+
+    /**
      * This method setup the enviroment.
      */
     @BeforeAll
@@ -34,21 +49,14 @@ class TorneoServiceImplTest {
     void checkCreateTorneoTest_1() {
 
         String usernameAdmin = "";
-        String nome = "Champions";
         int idCampo = 0;
-        String tipo = "Gironi";
-        String struttura = "Partite singole";
-        int maxSquadre = 12;
-        int minPartecipanti = 1;
-        int maxPartecipanti = 2;
-        String giornoPartite = "Lunedì";
-        Date dataInizio = Date.valueOf("2020-12-24");
-        Date dataFine = Date.valueOf("2020-12-31");
+        Date dataInizio = Date.valueOf(DATA_INIZIO);
+        Date dataFine = Date.valueOf(DATA_FINE);
 
         //check if the method return true
-        assertFalse(tservice.createTorneo(usernameAdmin, idCampo, nome, tipo,
-                struttura, maxSquadre, dataInizio, dataFine, minPartecipanti, maxPartecipanti,
-                giornoPartite));
+        assertFalse(tservice.createTorneo(usernameAdmin, idCampo, NOME, TIPO,
+               STRUTTURA, MAX_SQUADRE, dataInizio, dataFine, MIN_PARTECIPANTI, MAX_PARTECIPANTI,
+                GIORNO_PARTITE));
 
     }
 
@@ -58,22 +66,13 @@ class TorneoServiceImplTest {
     @Test
     void checkCreateTorneoTest_2() {
 
-        String usernameAdmin = "memex99";
-        String nome = "Champions";
-        int idCampo = 1002;
-        String tipo = "Gironi";
-        String struttura = "Partite singole";
-        int maxSquadre = 12;
-        int minPartecipanti = 1;
-        int maxPartecipanti = 2;
-        String giornoPartite = "Lunedì";
-        Date dataInizio = Date.valueOf("2020-12-24");
-        Date dataFine = Date.valueOf("2020-12-31");
+        Date dataInizio = Date.valueOf(DATA_INIZIO);
+        Date dataFine = Date.valueOf(DATA_FINE);
 
         //check if the method return true
-        assertTrue(tservice.createTorneo(usernameAdmin, idCampo, nome, tipo,
-                struttura, maxSquadre, dataInizio, dataFine, minPartecipanti, maxPartecipanti,
-                giornoPartite));
+        assertTrue(tservice.createTorneo(USERNAME_ADMIN, ID_CAMPO, NOME, TIPO,
+                STRUTTURA, MAX_SQUADRE, dataInizio, dataFine, MIN_PARTECIPANTI, MAX_PARTECIPANTI,
+                GIORNO_PARTITE));
 
     }
 
@@ -85,7 +84,7 @@ class TorneoServiceImplTest {
 
         int idCampo = 0;
         String nome = "";
-        Date dataInizio = Date.valueOf("2020-12-24");
+        Date dataInizio = Date.valueOf(DATA_INIZIO);
 
         assertFalse(tservice.deleteTorneo(idCampo, nome, dataInizio));
 
@@ -97,11 +96,8 @@ class TorneoServiceImplTest {
     @Test
     void checkDeleteTorneoTest_4() {
 
-        int idCampo = 1002;
-        String nome = "Champions";
-        Date dataInizio = Date.valueOf("2020-12-24");
-
-        assertTrue(tservice.deleteTorneo(idCampo, nome, dataInizio));
+        Date dataInizio = Date.valueOf(DATA_INIZIO);
+        assertTrue(tservice.deleteTorneo(ID_CAMPO, NOME, dataInizio));
 
     }
 
