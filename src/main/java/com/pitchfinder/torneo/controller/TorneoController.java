@@ -144,7 +144,7 @@ public class TorneoController extends HttpServlet {
                     struttura, maxSquadre, dataInizio, dataFine, minPartecipanti, maxPartecipanti,
                     giornoPartite);
 
-            if(creationResult){
+            if(creationResult){ //creation occurred
                 response.setContentType("Creazione avvenuta");
             }
 
