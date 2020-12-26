@@ -43,16 +43,6 @@ public class EventoController extends HttpServlet {
     private static final int MAXMINUTE = 60;
 
     /**
-     * Maximum limit for the Month.
-     */
-    private static final int MAXMONTH = 12;
-
-    /**
-     * Maximum limit for the day.
-     */
-    private static final int MAXDAY = 31;
-
-    /**
      * Maximum limit for the Guest.
      */
     private static final int MAXGUESTLIMIT = 20;
@@ -110,18 +100,21 @@ public class EventoController extends HttpServlet {
         int oraFine = Integer.parseInt(oraFineStr);
         /* The end of the Event's minute (Integer). */
         int minutiFine = Integer.parseInt(minutiFineStr);
-        /* The Event's day (String). */
-        String giornoStr = request.getParameter("giorno");
-        /* The Event's month (String). */
-        String meseStr = request.getParameter("mese");
-        /* The Event's year (String). */
-        String annoStr = request.getParameter("anno");
+        /* The Event's date (String). */
+        String dateStr = request.getParameter("date");
+        /* The Event's date (Date)*/
+        Date date = new Date(1);
+        try {
+            date = Date.valueOf(dateStr);
+        } catch (IllegalArgumentException e) {
+            throw new IllegalArgumentException("Formato Data non valido");
+        }
         /* The Event's day (Integer). */
-        int giorno = Integer.parseInt(giornoStr);
+        int giorno = date.getDay();
         /* The Event's month (Integer). */
-        int mese = Integer.parseInt(meseStr);
+        int mese = date.getMonth();
         /* The Event's year (Integer). */
-        int anno = Integer.parseInt(annoStr);
+        int anno = date.getYear();
         /* The Event's date (Date). */
         Date dataEvento = new Date(anno - 1900, mese - 1, giorno);
         /* The Event's guest (String). */
@@ -188,15 +181,10 @@ public class EventoController extends HttpServlet {
         /* The end time of the Event (Time). */
         Time orarioFine = new Time(oraFine, minutiFine, 0);
 
-        if (!giornoStr.matches("[0-9]+$") || !meseStr.matches("[0-9]+$") || !annoStr.matches("[0-9]+$")) {
-            throw new IllegalArgumentException("La creazione non va a "
-                    + "buon fine poiché giorno/mese/anno non "
-                    + "rispettano il formato richiesto");
-        }
-        if (giorno > MAXDAY || mese > MAXMONTH || giorno < MINLIMIT || mese < MINLIMIT  || anno < MINLIMITYEAR) {
+        if (anno < MINLIMITYEAR) {
             throw new IllegalArgumentException("La creazione "
                     + "non va a buon fine perché "
-                    + "il giorno/mese/anno dell'evento è errato");
+                    + "l'anno dell'evento è errato");
         }
         if (!ospite.matches("^[ a-zA-Z\\u00C0-\\u00ff']+$")) {
             throw new IllegalArgumentException("La creazione non va a "
