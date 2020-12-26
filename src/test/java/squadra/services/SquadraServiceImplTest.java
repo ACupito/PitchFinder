@@ -28,7 +28,6 @@ public class SquadraServiceImplTest {
                 "memex99", 20, 10,
                 12, dataInizio, dataFine, 1002);
         Utente utente = new Utente("manuzzi97@gmail.com","memex97","Emanuele","Mezzi","ciao", dataDiNascita);
-
         assertNotNull(squadraService.createSquadra("Palermo",torneo, 10, "Insigne",utente));
 
     }
