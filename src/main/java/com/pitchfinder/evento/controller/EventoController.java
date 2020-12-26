@@ -252,7 +252,7 @@ public class EventoController extends HttpServlet {
         /* We get the true name's file. */
         String finalFileName = file.getAbsolutePath().toString().substring(lastIndex, totalLenght);
         /* We add the "images" folder to the name's file */
-        String immagineStr = "images/" + finalFileName;
+        String immagineStr = "images/events" + finalFileName;
 
         /* *********************************
          *  Here ends the Image upload part *
