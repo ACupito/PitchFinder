@@ -76,14 +76,4 @@ public class AutenticazioneServiceImpl implements AutenticazioneService {
 
         return ud.doSaveUtente(u);
     }
-
-    /**
-     * This method checks weather the user is in the session.
-     * @return boolean
-     */
-    public boolean controllaLoginUtente() {
-
-        return true;
-    }
-
 }
