@@ -9,56 +9,79 @@ import static org.junit.jupiter.api.Assertions.*;
 import java.sql.Date;
 import java.sql.Time;
 
-
 public class EventoDAOImplTest {
 
         /**
-         * Method to test the doSaveEvento method offered by EventoDAOImpl interface.
-         * All the parameters are correct.
+         *  This Method tests the doSaveEvento method of the EventoDAOImpl class.
          */
         @Test
-        void checkdoSaveEventoTestTr() {
+        void check1() {
+                Evento evento = new Evento();
+                EventoDAO eventoDAO = new EventoDAOImpl();
 
-            Evento evento = new Evento();
-            EventoDAO eventoDAO = new EventoDAOImpl();
+                evento.setName("Evento di Prova 700");
+                evento.setDate(new Date(2000 - 1900, 10 - 1, 3 ));
+                evento.setImage("web/evento/immagini/eventoImage1");
+                evento.setGuest("Giuseppe Verdi");
+                evento.setDescription("Questo è un evento fittizio di prova");
+                evento.setStartHour(new Time(16,0,0));
+                evento.setEndHour(new Time(18,0,0));
+                evento.setAvailableSits(150);
+                evento.setAdmin("memex99");
 
-            evento.setName("Evento di Prova 7");
-            evento.setDate(new Date(2000 - 1900, 10 - 1, 3 ));
-            evento.setImage("web/evento/immagini/eventoImage1");
-            evento.setGuest("Giuseppe Verdi");
-            evento.setDescription("Questo è un evento fittizio di prova");
-            evento.setStartHour(new Time(16,00,00));
-            evento.setEndHour(new Time(18,00,00));
-            evento.setAvailableSits(150);
-            evento.setAdmin("memex99");
-
-            assertTrue(eventoDAO.doSaveEvento(evento));
+                assertTrue(eventoDAO.doSaveEvento(evento));
         }
 
-    /**
-     * Method to test the doSaveEvento method offered by EventoDAOImpl interface.
-     * Start Hour is incorrect
-     */
-    @Test
-    void checkdoSaveEventoTestFl() {
+        /**
+         *  This Method tests the doRetrieveEventoTest method of the EventoDAOImpl class.
+         */
+        @Test
+        void check2(){
+            EventoDAO eventoDAO = new EventoDAOImpl();
 
-        Evento evento = new Evento();
-        EventoDAO eventoDAO = new EventoDAOImpl();
-
-        evento.setName("Evento di Prova 11");
-        evento.setDate(new Date(2000 - 1900, 10 - 1, 3 ));
-        evento.setImage("web/evento/immagini/eventoImage1");
-        evento.setGuest("Giuseppe Verdi");
-        evento.setDescription("Questo è un evento fittizio di prova");
-        evento.setStartHour(new Time(04,00,00));
-        evento.setEndHour(new Time(18,00,00));
-        evento.setAvailableSits(150);
-        evento.setAdmin("memex99");
-        assertNotNull(eventoDAO.doSaveEvento(evento));
-
-        assertThrows(RuntimeException.class, () ->{eventoDAO.doSaveEvento(evento);});
-    }
+            assertNotNull(eventoDAO.doRetrieveEvento("Evento di Prova 700",new Date(2000 - 1900, 10 - 1, 3 )));
 
 
+        }
+
+        /**
+         *  This Method tests the doRetrieveNPrenotazioniByEventoTest method of the EventoDAOImpl class.
+         */
+        @Test
+        void check3(){
+            EventoDAO eventoDAO = new EventoDAOImpl();
+            Evento evento = eventoDAO.doRetrieveEvento("Evento di Prova 700",new Date(2000 - 1900, 10 - 1, 3 ));
+            assertNotNull(eventoDAO.doRetrieveNPrenotazioniByEvento(evento));
+        }
+
+        /**
+         *  This Method tests the doRetrieveByAllEventiTest method of the EventoDAOImpl class.
+         */
+        @Test
+        void check4(){
+            EventoDAO eventoDAO = new EventoDAOImpl();
+            assertNotNull(eventoDAO.doRetrieveByAllEventi());
+        }
+
+        /**
+         *  This Method tests the doRemoveEventoTest method of the EventoDAOImpl class.
+         */
+        @Test
+        void check5(){
+                Evento evento = new Evento();
+                EventoDAO eventoDAO = new EventoDAOImpl();
+
+                evento.setName("Evento di Prova 700");
+                evento.setDate(new Date(2000 - 1900, 10 - 1, 3 ));
+                evento.setImage("web/evento/immagini/eventoImage1");
+                evento.setGuest("Giuseppe Verdi");
+                evento.setDescription("Questo è un evento fittizio di prova");
+                evento.setStartHour(new Time(16,0,0));
+                evento.setEndHour(new Time(18,0,0));
+                evento.setAvailableSits(150);
+                evento.setAdmin("memex99");
+
+                assertTrue(eventoDAO.doRemoveEvento(evento));
+        }
 
 }
