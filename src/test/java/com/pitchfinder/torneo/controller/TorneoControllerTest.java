@@ -2,6 +2,7 @@ package com.pitchfinder.torneo.controller;
 
 import com.pitchfinder.autenticazione.entity.Admin;
 import com.pitchfinder.campo.entity.Campo;
+import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
@@ -202,5 +203,90 @@ class TorneoControllerTest {
         IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () ->
                 servlet.doGet(mockedRequest, mockedResponse));
         assertEquals(message, exception.getMessage());
+    }
+
+    @Test
+     void TC_21_9() {
+        Mockito.when(mockedRequest.getParameter("nome")).thenReturn("Champions Five");
+        Mockito.when(mockedRequest.getParameter("sport")).thenReturn("Tennis");
+        Mockito.when(mockedRequest.getParameter("tipo")).thenReturn("Eliminazione diretta");
+        Mockito.when(mockedRequest.getParameter("struttura")).thenReturn("Partite singole");
+        Mockito.when(mockedRequest.getParameter("dataInizio")).thenReturn("2021-12-5");
+        Mockito.when(mockedRequest.getParameter("dataFine")).thenReturn("1970-13-10");
+        String message = "Formato data fine non valido";
+        Admin admin = new Admin();
+        admin.setNome("Emanuele");
+        admin.setCognome("Mezzi");
+        admin.setUsername("memex99");
+        admin.setPassword("password");
+        Campo campo = new Campo();
+        campo.setIdentificativo(1001);
+        campo.setSport("Tennis");
+        Mockito.when(mockedRequest.getSession()).thenReturn(session);
+        Mockito.when(mockedRequest.getSession().getAttribute("admin")).thenReturn(admin);
+        Mockito.when(mockedRequest.getSession().getAttribute("campo")).thenReturn(campo);
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () ->
+                servlet.doGet(mockedRequest, mockedResponse));
+        assertEquals(message, exception.getMessage());
+    }
+
+    @Test
+    void TC_21_10() {
+        Mockito.when(mockedRequest.getParameter("nome")).thenReturn("Champions Five");
+        Mockito.when(mockedRequest.getParameter("sport")).thenReturn("Tennis");
+        Mockito.when(mockedRequest.getParameter("tipo")).thenReturn("Eliminazione diretta");
+        Mockito.when(mockedRequest.getParameter("struttura")).thenReturn("Partite singole");
+        Mockito.when(mockedRequest.getParameter("dataInizio")).thenReturn("2021-12-5");
+        Mockito.when(mockedRequest.getParameter("dataFine")).thenReturn("2021-12-15");
+        Mockito.when(mockedRequest.getParameter("giornoPartite")).thenReturn("");
+        String message = "Lunghezza giorno partite non valida";
+        Admin admin = new Admin();
+        admin.setNome("Emanuele");
+        admin.setCognome("Mezzi");
+        admin.setUsername("memex99");
+        admin.setPassword("password");
+        Campo campo = new Campo();
+        campo.setIdentificativo(1001);
+        campo.setSport("Tennis");
+        Mockito.when(mockedRequest.getSession()).thenReturn(session);
+        Mockito.when(mockedRequest.getSession().getAttribute("admin")).thenReturn(admin);
+        Mockito.when(mockedRequest.getSession().getAttribute("campo")).thenReturn(campo);
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () ->
+                servlet.doGet(mockedRequest, mockedResponse));
+        assertEquals(message, exception.getMessage());
+    }
+
+    @Test
+    void TC_21_11() {
+        Mockito.when(mockedRequest.getParameter("nome")).thenReturn("Champions Five");
+        Mockito.when(mockedRequest.getParameter("sport")).thenReturn("Tennis");
+        Mockito.when(mockedRequest.getParameter("tipo")).thenReturn("Eliminazione diretta");
+        Mockito.when(mockedRequest.getParameter("struttura")).thenReturn("Partite singole");
+        Mockito.when(mockedRequest.getParameter("dataInizio")).thenReturn("2021-12-5");
+        Mockito.when(mockedRequest.getParameter("dataFine")).thenReturn("2021-12-15");
+        Mockito.when(mockedRequest.getParameter("giornoPartite")).thenReturn("<<>/Giove/dì");
+        String message = "Formato giorno partite non valido";
+        Admin admin = new Admin();
+        admin.setNome("Emanuele");
+        admin.setCognome("Mezzi");
+        admin.setUsername("memex99");
+        admin.setPassword("password");
+        Campo campo = new Campo();
+        campo.setIdentificativo(1001);
+        campo.setSport("Tennis");
+        Mockito.when(mockedRequest.getSession()).thenReturn(session);
+        Mockito.when(mockedRequest.getSession().getAttribute("admin")).thenReturn(admin);
+        Mockito.when(mockedRequest.getSession().getAttribute("campo")).thenReturn(campo);
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () ->
+                servlet.doGet(mockedRequest, mockedResponse));
+        assertEquals(message, exception.getMessage());
+    }
+
+    @AfterAll
+    void tearDown() {
+        servlet = null;
+        mockedRequest = null;
+        mockedResponse = null;
+        session = null;
     }
 }
