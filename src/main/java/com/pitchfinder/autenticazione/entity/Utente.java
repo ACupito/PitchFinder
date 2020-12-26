@@ -46,15 +46,16 @@ public class Utente {
     }
 
     /**
-     * Constructor utente.
-     * @param email
-     * @param username
-     * @param nome
-     * @param cognome
-     * @param passwordHash
-     * @param dataDiNascita
+     *
+     * @param email is the user email
+     * @param username is the user username
+     * @param nome is the user name
+     * @param cognome is the user surname
+     * @param passwordHash is the user password
+     * @param dataDiNascita is the user date of birth
      */
-    public Utente(String email, String username, String nome, String cognome, String passwordHash, Date dataDiNascita) {
+    public Utente(String email, String username, String nome, String cognome,
+                  String passwordHash, Date dataDiNascita) {
         this.email = email;
         this.username = username;
         this.nome = nome;
