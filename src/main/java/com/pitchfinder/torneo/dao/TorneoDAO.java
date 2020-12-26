@@ -16,6 +16,13 @@ public interface TorneoDAO {
      * @return boolean
      */
     boolean doSaveTorneo(Torneo torneo);
+
+    /**
+     * This method remove Torneo object
+     * from database.
+     * @param torneo object
+     * @return boolean -> true: execute success / false: execute failed
+     */
     boolean doRemoveTorneo(Torneo torneo);
 
 }
