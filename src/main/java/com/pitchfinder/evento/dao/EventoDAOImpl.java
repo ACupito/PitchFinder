@@ -166,7 +166,7 @@ public class EventoDAOImpl implements EventoDAO {
                     ps.setString(ONE, event.getName());
                     ResultSet rs =  ps.executeQuery();
                     int numberPrenotation = 0;
-                    if(rs.next()){
+                    if (rs.next()) {
                         numberPrenotation = rs.getInt("nPrenotazioni");
                     }
 

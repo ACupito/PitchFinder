@@ -18,6 +18,20 @@ public class Prenotazione {
     }
 
     /**
+     * Constructor with id.
+     * @param utenteEmail - utente email.
+     * @param eventoNome - evento nome.
+     * @param eventoData - evento data.
+     * @param codicePrenotazione - codice prenotazione.
+     */
+    public Prenotazione(String utenteEmail, String eventoNome, Date eventoData, int codicePrenotazione) {
+        this.utenteEmail = utenteEmail;
+        this.eventoNome = eventoNome;
+        this.eventoData = eventoData;
+        this.codicePrenotazione = codicePrenotazione;
+    }
+
+    /**
      *Is the Constructor.
      * @param utenteEmail - is the user email.
      * @param eventoNome - is the name of the event.

@@ -11,4 +11,5 @@ public interface PrenotazioneService {
      * @return Prenotazione
      */
     Prenotazione createPrenotazione(String utenteEmail, Evento evento);
+
 }
