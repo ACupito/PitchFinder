@@ -51,8 +51,7 @@ public class PartitaDAOImpl implements PartitaDAO {
     public List<Partita> doRetrieveAll() {
         try (Connection con = ConPool.getInstance().getConnection()) {
 
-            String query = "SELECT IdentificativoPartita, CampoIdentificativo,"
-                    + " UtenteEmail, Data, OrarioInizio, OrarioFine"
+            String query = "SELECT *"
                     + "FROM partita";
             PreparedStatement ps =
                     con.prepareStatement(query);
