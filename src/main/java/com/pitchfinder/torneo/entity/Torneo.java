@@ -285,48 +285,5 @@ public class Torneo {
             final int pitchId) {
         this.campoIdentificativo = pitchId;
     }
-
-    /**
-     * This method checks if the instance of a class
-     * is equal to another instance of the same.
-     * @param o instance of a class
-     * @return boolean
-     */
-    @Override
-    public boolean equals(final Object o) {
-
-        if (this == o) {
-            return true;
-        }
-
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
-
-        Torneo torneo = (Torneo) o;
-        return numeroSquadre == torneo.numeroSquadre
-                && minNumeroPartecipantiPerSquadra
-                == torneo.minNumeroPartecipantiPerSquadra
-                && maxNumeroPartecipantiPerSquadra
-                == torneo.maxNumeroPartecipantiPerSquadra
-                && campoIdentificativo == torneo.campoIdentificativo
-                && Objects.equals(nome, torneo.nome)
-                && Objects.equals(tipo, torneo.tipo)
-                && Objects.equals(struttura, torneo.struttura)
-                && Objects.equals(giornoPartite, torneo.giornoPartite)
-                && Objects.equals(adminUsername, torneo.adminUsername)
-                && Objects.equals(dataInizio, torneo.dataInizio)
-                && Objects.equals(dataFine, torneo.dataFine);
-    }
-
-    /**
-     * @return int
-     */
-    @Override
-    public int hashCode() {
-        return Objects.hash(nome, tipo, struttura, giornoPartite,
-                adminUsername, numeroSquadre, minNumeroPartecipantiPerSquadra,
-                maxNumeroPartecipantiPerSquadra, dataInizio, dataFine,
-                campoIdentificativo);
-    }
+    
 }

@@ -46,8 +46,10 @@ class TorneoDAOImplTest {
      */
     @BeforeAll
     public void setUp() {
+
         tdao = new TorneoDAOImpl();
         t = new Torneo();
+
     }
 
     /**
