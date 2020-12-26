@@ -35,10 +35,32 @@ class TorneoDAOImplTest {
     }
 
     /**
-     * This method tests the method doSaveTorneo.
+     * This method tests the method doSaveTorneo in case it fails.
      */
     @Test
-    void doSaveTorneoTest() {
+    void checkSaveTorneoTest1() {
+
+        t.setAdminUsername("");
+        t.setNome("");
+        t.setCampoIdentificativo(0);
+        t.setTipo("Gironi");
+        t.setStruttura("Partite singole");
+        t.setNumeroSquadre(12);
+        t.setMinNumeroPartecipantiPerSquadra(1);
+        t.setMaxNumeroPartecipantiPerSquadra(2);
+        t.setGiornoPartite("Lunedì");
+        t.setDataInizio(Date.valueOf("2000-12-24"));
+        t.setDataFine(Date.valueOf("2000-12-31"));
+
+        assertFalse(tdao.doSaveTorneo(t));
+
+    }
+
+    /**
+     * This method tests the method doSaveTorneo in case it successful.
+     */
+    @Test
+    void checkSaveTorneoTest2() {
 
         t.setAdminUsername("memex99");
         t.setNome("Champions");
@@ -49,13 +71,58 @@ class TorneoDAOImplTest {
         t.setMinNumeroPartecipantiPerSquadra(1);
         t.setMaxNumeroPartecipantiPerSquadra(2);
         t.setGiornoPartite("Lunedì");
-        Date dataInizio = new Date(2020 - 1900, 11, 24);
-        t.setDataInizio(dataInizio);
-        Date dataFine = new Date(2020 - 1900, 11, 31);
-        t.setDataFine(dataFine);
+        t.setDataInizio(Date.valueOf("2020-12-24"));
+        t.setDataFine(Date.valueOf("2020-12-31"));
 
         assertTrue(tdao.doSaveTorneo(t));
 
     }
+
+    /**
+     * This method tests the method doRemoveTorneo in case it fails.
+     */
+    @Test
+    void checkRemoveTorneoTest3() {
+
+        t.setAdminUsername("");
+        t.setNome("");
+        t.setCampoIdentificativo(0);
+        t.setTipo("Gironi");
+        t.setStruttura("Partite singole");
+        t.setNumeroSquadre(12);
+        t.setMinNumeroPartecipantiPerSquadra(1);
+        t.setMaxNumeroPartecipantiPerSquadra(2);
+        t.setGiornoPartite("Lunedì");
+        t.setDataInizio(Date.valueOf("2000-12-24"));
+        t.setDataFine(Date.valueOf("2000-12-31"));
+
+
+        assertFalse(tdao.doRemoveTorneo(t));
+
+    }
+
+    /**
+     * This method tests the method doRemoveTorneo in case it successful.
+     */
+    @Test
+    void checkRemoveTorneoTest4() {
+
+        t.setAdminUsername("memex99");
+        t.setNome("Champions");
+        t.setCampoIdentificativo(1002);
+        t.setTipo("Gironi");
+        t.setStruttura("Partite singole");
+        t.setNumeroSquadre(12);
+        t.setMinNumeroPartecipantiPerSquadra(1);
+        t.setMaxNumeroPartecipantiPerSquadra(2);
+        t.setGiornoPartite("Lunedì");
+        t.setDataInizio(Date.valueOf("2020-12-24"));
+        t.setDataFine(Date.valueOf("2020-12-24"));
+
+        assertTrue(tdao.doRemoveTorneo(t));
+
+    }
+
+
 
 }
