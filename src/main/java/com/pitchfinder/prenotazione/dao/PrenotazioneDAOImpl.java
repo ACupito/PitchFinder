@@ -2,7 +2,6 @@ package com.pitchfinder.prenotazione.dao;
 
 import com.pitchfinder.prenotazione.entity.Prenotazione;
 import com.pitchfinder.singleton.ConPool;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
@@ -42,9 +41,11 @@ public class PrenotazioneDAOImpl implements PrenotazioneDAO {
     public boolean doRemovePrenotazione(Prenotazione prenotazione) {
         try (Connection con = ConPool.getInstance().getConnection()) {
             PreparedStatement ps =
-                    con.prepareStatement("DELETE FROM prenotazione WHERE CodicePrenotazione = ?");
+                    con.prepareStatement("DELETE FROM prenotazione WHERE UtenteEmail = ? && EventoNome = ? && EventoData = ?");
 
-            ps.setInt(1, prenotazione.getCodicePrenotazione());
+            ps.setString(1, prenotazione.getUtenteEmail());
+            ps.setString(2, prenotazione.getEventoNome());
+            ps.setDate(3, prenotazione.getEventoData());
 
             return ps.executeUpdate() == 1;
 
@@ -54,5 +55,6 @@ public class PrenotazioneDAOImpl implements PrenotazioneDAO {
 
         }
     }
+
 
 }

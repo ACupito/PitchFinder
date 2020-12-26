@@ -78,54 +78,33 @@ public class EventoController extends HttpServlet {
      */
     public void doGet(final HttpServletRequest request,
                       final HttpServletResponse response) {
-        /* The EventoService object. */
+
         EventoService es = new EventoServiceImpl();
-        /* The name of the Event (String). */
         String nome = request.getParameter("nome");
-        /* The image's file of the event (File). */
         File immagine = new File(request.getParameter("immagine"));
-        /* The start of the Event's hour (String). */
         String oraInizioStr = request.getParameter("orarioInizio").substring(0, 2);
-        /* The start of the Event's minute (String). */
         String minutiInizioStr = request.getParameter("orarioInizio").substring(2);
-        /* The start of the Event's hour (Integer). */
         int oraInizio = Integer.parseInt(oraInizioStr);
-        /* The start of the Event's minute (Integer). */
         int minutiInizio = Integer.parseInt(minutiInizioStr);
-        /* The end of the Event's hour (String). */
         String oraFineStr = request.getParameter("orarioInizio").substring(0, 2);
-        /* The end of the Event's minute (String). */
         String minutiFineStr = request.getParameter("orarioInizio").substring(2);
-        /* The end of the Event's hour (Integer). */
         int oraFine = Integer.parseInt(oraFineStr);
-        /* The end of the Event's minute (Integer). */
         int minutiFine = Integer.parseInt(minutiFineStr);
-        /* The Event's date (String). */
         String dateStr = request.getParameter("date");
-        /* The Event's date (Date)*/
         Date date = new Date(1);
         try {
             date = Date.valueOf(dateStr);
         } catch (IllegalArgumentException e) {
             throw new IllegalArgumentException("Formato Data non valido");
         }
-        /* The Event's day (Integer). */
         int giorno = date.getDay();
-        /* The Event's month (Integer). */
         int mese = date.getMonth();
-        /* The Event's year (Integer). */
         int anno = date.getYear();
-        /* The Event's date (Date). */
         Date dataEvento = new Date(anno - 1900, mese - 1, giorno);
-        /* The Event's guest (String). */
         String ospite = request.getParameter("ospite");
-        /* The Event's description (String). */
         String descrizione = request.getParameter("descrizione");
-        /* The Event's available sits (String). */
         String postiDisponibiliStr = request.getParameter("postiDisponibili");
-        /* The Event's available sits (Integer). */
         int postiDisponibili = Integer.parseInt(postiDisponibiliStr);
-
         if (nome.length() < MINLIMIT || nome.length() > MAXLIMIT) {
             throw new IllegalArgumentException("La creazione "
                     + "non va a buon fine perché il nome inserito non "
@@ -161,7 +140,6 @@ public class EventoController extends HttpServlet {
                     + "non va a buon fine perché l'orario inserito "
                     + "non rispetta il formato corretto");
         }
-        /* The start time of the Event (Time). */
         Time orarioInizio = new Time(oraInizio, minutiInizio, 0);
         if (!oraFineStr.matches("^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$")) {
             throw new IllegalArgumentException("La creazione "
@@ -178,9 +156,7 @@ public class EventoController extends HttpServlet {
                     + "non va a buon fine perché l'orario inserito "
                     + "non rispetta il formato corretto");
         }
-        /* The end time of the Event (Time). */
         Time orarioFine = new Time(oraFine, minutiFine, 0);
-
         if (anno < MINLIMITYEAR) {
             throw new IllegalArgumentException("La creazione "
                     + "non va a buon fine perché "
@@ -223,18 +199,8 @@ public class EventoController extends HttpServlet {
                     + "non rispetta la grandezza richiesta [1 - 300]");
         }
 
-        /*
-            Qui va inserito l'immagine e il percorso dell'immagine
-
-         */
         String immagineStr = "null";
-
-        /*
-            Qui prendiamo l'adminUsername dalla sessione
-         */
-        //Work in progress
         String adminUsername = "null";
-
         es.createEvento(nome, immagineStr, orarioInizio, orarioFine, dataEvento, ospite, descrizione, postiDisponibili, adminUsername);
 
     }
