@@ -1,7 +1,5 @@
-package partita.dao;
+package com.pitchfinder.partita.dao;
 
-import com.pitchfinder.partita.dao.PartitaDAO;
-import com.pitchfinder.partita.dao.PartitaDAOImpl;
 import com.pitchfinder.partita.entity.Partita;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;

@@ -2,4 +2,4 @@
  * This package contains unit test about partita package.
  */
 
-package partita;
+package com.pitchfinder.partita;
