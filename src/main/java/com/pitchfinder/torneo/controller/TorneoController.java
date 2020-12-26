@@ -5,6 +5,7 @@ import com.pitchfinder.campo.entity.Campo;
 import com.pitchfinder.torneo.services.TorneoService;
 import com.pitchfinder.torneo.services.TorneoServiceImpl;
 
+
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -118,19 +119,36 @@ public class TorneoController extends HttpServlet {
                 throw new IllegalArgumentException("Numero di squadre non valido");
             }
 
-            int minPartecipanti = Integer.parseInt(request.getParameter("minPartecipanti"));
-            if (minPartecipanti < 1 || minPartecipanti > 5) {
+            int minPartecipanti;
+            try {
+                minPartecipanti = Integer.parseInt(request.getParameter("minPartecipanti"));
+            } catch (NumberFormatException e) {
+                throw new IllegalArgumentException("Formato minimo partecipanti non valido");
+            }
+                if (minPartecipanti < 1 || minPartecipanti > 5) {
                 throw new IllegalArgumentException("Numero minimo di partecipanti non valido");
             }
 
-            int maxPartecipanti = Integer.parseInt(request.getParameter("maxPartecipanti"));
+            int maxPartecipanti;
+            try{
+                maxPartecipanti = Integer.parseInt(request.getParameter("maxPartecipanti"));
+            } catch (NumberFormatException e) {
+                throw new IllegalArgumentException("Numero massimo di partecipanti non valido");
+            }
             if (maxPartecipanti < 5 || maxPartecipanti > 12) {
-                throw new IllegalArgumentException("Numero massi di partecipanti non valido");
+                throw new IllegalArgumentException("Numero massimo di partecipanti non valido");
             }
 
-            ts.createTorneo(admin.getUsername(), campo.getIdentificativo(), nome, tipo,
+            //creation tournament
+            boolean creationResult = ts.createTorneo(admin.getUsername(), campo.getIdentificativo(), nome, tipo,
                     struttura, maxSquadre, dataInizio, dataFine, minPartecipanti, maxPartecipanti,
                     giornoPartite);
+
+            if(creationResult){
+                response.setContentType("Creazione avvenuta");
+            }
+
+
         }
 
 
