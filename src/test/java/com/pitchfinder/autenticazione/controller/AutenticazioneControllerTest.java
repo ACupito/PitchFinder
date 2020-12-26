@@ -1,4 +1,4 @@
-package autenticazione.controller;
+package com.pitchfinder.autenticazione.controller;
 
 import com.pitchfinder.autenticazione.controller.AutenticazioneController;
 import com.pitchfinder.autenticazione.services.AutenticazioneServiceImpl;
