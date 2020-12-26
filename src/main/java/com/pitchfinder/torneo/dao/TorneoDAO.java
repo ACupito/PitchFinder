@@ -16,6 +16,6 @@ public interface TorneoDAO {
      * @return boolean
      */
     boolean doSaveTorneo(Torneo torneo);
-
+    boolean doRemoveTorneo(Torneo torneo);
 
 }
