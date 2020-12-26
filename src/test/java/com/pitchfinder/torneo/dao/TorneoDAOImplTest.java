@@ -1,6 +1,7 @@
 package com.pitchfinder.torneo.dao;
 
 import com.pitchfinder.torneo.entity.Torneo;
+import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
@@ -138,6 +139,13 @@ class TorneoDAOImplTest {
 
     }
 
-
+    /**
+     * Cleanup the environment.
+     */
+    @AfterAll
+    void tearDown() {
+        tdao = null;
+        t = null;
+    }
 
 }
