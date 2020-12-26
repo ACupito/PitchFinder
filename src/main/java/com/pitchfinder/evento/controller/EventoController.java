@@ -85,11 +85,11 @@ public class EventoController extends HttpServlet {
         /* The name of the Event (String). */
         String nome = request.getParameter("nome");
         /* The image's file of the event (File). */
-        File immagine = new File(request.getParameter("immagine"));
+        String immagine = request.getParameter("immagine");
         /* The start of the Event's hour (String). */
-        String orarioInizioStr = request.getParameter("orarioInizio").substring(0, 5);
+        String orarioInizioStr = request.getParameter("orarioInizio");
         /* The end of the Event's hour (String). */
-        String orarioFineStr = request.getParameter("orarioFine").substring(0, 5);
+        String orarioFineStr = request.getParameter("orarioFine");
         /* The Event's date (String). */
         String dateStr = request.getParameter("data");
         /* The Event's date (Date)*/
@@ -111,29 +111,26 @@ public class EventoController extends HttpServlet {
         int postiDisponibili = Integer.parseInt(postiDisponibiliStr);
 
         if (nome.length() < MINLIMIT || nome.length() > MAXLIMIT) {
-            throw new IllegalArgumentException("La creazione "
-                    + "non va a buon fine perché il nome inserito non "
-                    + "rispetta la lunghezza corretta [1 - 50]");
+            throw new IllegalArgumentException("Errato: lunghezza nome non valida");
         }
         if (!nome.matches("^[ a-zA-Z\u00C0-\u00ff']+$")) {
-            throw new IllegalArgumentException("La registrazione non va a buon "
-                    + "fine perché il nome inserito "
-                    + "non rispetta il formato richiesto");
+            throw new IllegalArgumentException("Errato: formato non valido");
         }
         if ((immagine.length() / (1024 * 1024)) > MAXLIMITIMAGE) {
             throw new IllegalArgumentException("La creazione "
                     + "non va a buon fine perché l'immagine inserita non "
                     + "rispetta la grandezza corretta [<= 2MB]");
         }
-        if (!immagine.toString().matches(".jpg") || !immagine.toString().matches(".png")) {
+        if (!immagine.matches(".*\\.(jpg|png)$")) {
             throw new IllegalArgumentException("La creazione non va a buon "
                     + "fine perché l'immagine inserita "
-                    + "non rispetta il formato richiesto [jpg o png]");
+                    + "non rispetta il formato richiesto jpg ");
+        }
+        if (orarioInizioStr.matches("")) {
+            throw new IllegalArgumentException("Errato: orario non selezionato");
         }
         if (!orarioInizioStr.matches("^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$")) {
-            throw new IllegalArgumentException("La creazione "
-                    + "non va a buon fine perché l'orario di inizio "
-                    + "non ha un formato valido");
+            throw new IllegalArgumentException("Errato: formato non valido");
         }
         /* The start time of the Event (Time). */
         Time orarioInizio = new Time(Integer.parseInt(orarioInizioStr.substring(0,2)),Integer.parseInt(orarioInizioStr.substring(3,5)),0);
