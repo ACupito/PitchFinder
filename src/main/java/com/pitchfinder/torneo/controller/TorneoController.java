@@ -62,7 +62,7 @@ public class TorneoController extends HttpServlet {
             }
 
             String sport = request.getParameter("sport");
-            if(sport == null) {
+            if (sport == null) {
                 throw new IllegalArgumentException("Sport non selezionato");
             }
 
@@ -78,10 +78,10 @@ public class TorneoController extends HttpServlet {
 
             String startDate = request.getParameter("dataInizio");
             Date dataInizio;
-            if(startDate == null) {
+            if (startDate == null) {
                 throw new IllegalArgumentException("Data inizio non selezionata");
             }
-            try{
+            try {
                 dataInizio = Date.valueOf(startDate);
             } catch (IllegalArgumentException e) {
                 throw new IllegalArgumentException("Formato data inizio non valido");
@@ -89,10 +89,10 @@ public class TorneoController extends HttpServlet {
 
             String endDate = request.getParameter("dataFine");
             Date dataFine;
-            if(endDate == null) {
+            if (endDate == null) {
                 throw new IllegalArgumentException("Data fine non selezionata");
             }
-            try{
+            try {
                  dataFine = Date.valueOf(endDate);
             } catch (IllegalArgumentException e) {
                 throw new IllegalArgumentException("Formato data fine non valido");
@@ -110,7 +110,7 @@ public class TorneoController extends HttpServlet {
             }
 
             int maxSquadre;
-            try{
+            try {
                 maxSquadre = Integer.parseInt(request.getParameter("maxSquadre"));
             } catch (NumberFormatException e) {
                 throw new IllegalArgumentException("Formato numero squadre non valido");
@@ -125,12 +125,12 @@ public class TorneoController extends HttpServlet {
             } catch (NumberFormatException e) {
                 throw new IllegalArgumentException("Formato minimo partecipanti non valido");
             }
-                if (minPartecipanti < 1 || minPartecipanti > 5) {
+            if (minPartecipanti < 1 || minPartecipanti > 5) {
                 throw new IllegalArgumentException("Numero minimo di partecipanti non valido");
             }
 
             int maxPartecipanti;
-            try{
+            try {
                 maxPartecipanti = Integer.parseInt(request.getParameter("maxPartecipanti"));
             } catch (NumberFormatException e) {
                 throw new IllegalArgumentException("Numero massimo di partecipanti non valido");
@@ -144,7 +144,7 @@ public class TorneoController extends HttpServlet {
                     struttura, maxSquadre, dataInizio, dataFine, minPartecipanti, maxPartecipanti,
                     giornoPartite);
 
-            if(creationResult){ //creation occurred
+            if (creationResult) { //creation occurred
                 response.setContentType("Creazione avvenuta");
             }
 
