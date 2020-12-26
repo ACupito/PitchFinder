@@ -19,7 +19,7 @@ public class TorneoDAOImpl implements TorneoDAO {
      * This method makes the Torneo object persist
      * in the database.
      * @param torneo object
-     * @return boolean -> true execute success / false execute failed
+     * @return boolean -> true: execute success / false: execute failed
      */
     @Override
     public boolean doSaveTorneo(final Torneo torneo) {
@@ -43,6 +43,28 @@ public class TorneoDAOImpl implements TorneoDAO {
             ps.setString(11, torneo.getGiornoPartite());
 
             return ps.executeUpdate() == 1;
+        } catch (SQLException s) {
+            return false;
+        }
+    }
+
+    /**
+     * This method remove Torneo object
+     * from database.
+     * @param torneo object
+     * @return boolean -> true: execute success / false: execute failed
+     */
+    @Override
+    public boolean doRemoveTorneo(Torneo torneo) {
+        try (Connection con = ConPool.getInstance().getConnection()) {
+            PreparedStatement ps = con.prepareStatement("delete from Torneo where Nome = ? and DataInizio = ? and CampoIdentificativo = ?");
+
+            ps.setString(1, torneo.getNome());
+            ps.setDate(2, torneo.getDataInizio());
+            ps.setInt(3, torneo.getCampoIdentificativo());
+
+            return ps.executeUpdate() == 1;
+
         } catch (SQLException s) {
             return false;
         }
