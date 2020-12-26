@@ -4,13 +4,19 @@ package com.pitchfinder.evento.controller;
 import com.pitchfinder.evento.services.EventoService;
 import com.pitchfinder.evento.services.EventoServiceImpl;
 
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.Part;
 import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.sql.Date;
 import java.sql.Time;
-import java.util.Calendar;
 
 public class EventoController extends HttpServlet {
 
@@ -61,7 +67,7 @@ public class EventoController extends HttpServlet {
      */
 
     public void doPost(final HttpServletRequest request,
-                       final HttpServletResponse response) {
+                       final HttpServletResponse response) throws IOException, ServletException {
 
         doGet(request, response);
     }
@@ -73,7 +79,7 @@ public class EventoController extends HttpServlet {
      * @param response is the servlet response.
      */
     public void doGet(final HttpServletRequest request,
-                      final HttpServletResponse response) {
+                      final HttpServletResponse response) throws IOException, ServletException {
         /* The EventoService object. */
         EventoService es = new EventoServiceImpl();
         /* The name of the Event (String). */
@@ -99,7 +105,8 @@ public class EventoController extends HttpServlet {
         /* The Event's date (String). */
         String dateStr = request.getParameter("date");
         /* The Event's date (Date)*/
-        Date dataEvento = new Date(1);
+        new Date(1);
+        Date dataEvento;
         try {
             /* The Event's date (Date). */
             dataEvento = Date.valueOf(dateStr);
@@ -213,17 +220,54 @@ public class EventoController extends HttpServlet {
                     + "non rispetta la grandezza richiesta [1 - 300]");
         }
 
-        /*
-            Qui va inserito l'immagine e il percorso dell'immagine
 
+        /* ***********************************
+         *  Here begins the Image upload part *
+         *  ***********************************
          */
-        String immagineStr = "null";
+
+        /* We take the parameter file (it's like "getParameter"). */
+        Part filePart = request.getPart("fileAddProduct");
+        /* We take the file's name. */
+        String fileName = Paths.get(filePart.getSubmittedFileName()).getFileName().toString();
+        /* We take the servletContextRealPath + FileSeparator (/) + the folder's name (images). */
+        String path = getServletContext().getRealPath("") + File.separator + "images";
+
+        File uploads = new File(path);
+        /* This is the name's length. */
+        int lenght = fileName.length();
+
+        File file = File.createTempFile(fileName.substring(0, lenght - 4), fileName.substring(lenght - 4, lenght), uploads);
+
+        try (InputStream input = filePart.getInputStream()) {
+            Files.copy(input, file.toPath(), StandardCopyOption.REPLACE_EXISTING);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        /* Start of the file's name (the true one). */
+        int lastIndex = file.getAbsoluteFile().toString().lastIndexOf("\\") + 1;
+        /* Lenght of the absolute path. */
+        int  totalLenght = file.getAbsoluteFile().toString().length();
+        /* We get the true name's file. */
+        String finalFileName = file.getAbsolutePath().toString().substring(lastIndex, totalLenght);
+        /* We add the "images" folder to the name's file */
+        String immagineStr = "images/" + finalFileName;
+
+        /* *********************************
+         *  Here ends the Image upload part *
+         *  *********************************
+         */
 
         /*
-            Qui prendiamo l'adminUsername dalla sessione
+         *  We get the admin username from the session.
+         *
+         * HttpSession session = request.getSession();
+         * Admin admin = (Admin) session.getAttribute("adminUsername");
+         * String adminUsername = admin.getUsername();
          */
-        //Work in progress
-        String adminUsername = "null";
+
+        String adminUsername = "memex99";
 
         es.createEvento(nome, immagineStr, orarioInizio, orarioFine, dataEvento, ospite, descrizione, postiDisponibili, adminUsername);
 
