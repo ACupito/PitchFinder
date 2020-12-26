@@ -78,7 +78,22 @@ public class PartitaDAOImpl implements PartitaDAO {
      */
     @Override
     public boolean doSaveGiocatore(int idPartita, String nome, String cognome) {
-        return false;
+        try (Connection con = ConPool.getInstance().getConnection()) {
+            PreparedStatement ps =
+                    con.prepareStatement("INSERT into giocatore(Nome,Cognome,"
+                            + "PartitaIdentificativoPartita) " + " values(?, ?, ?)");
+            ps.setString(1, nome);
+            ps.setString(2, cognome);
+            ps.setInt(3, idPartita);
+
+            if (ps.executeUpdate() != 1) {
+                return false;
+            }
+            return true;
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     /**
@@ -88,6 +103,22 @@ public class PartitaDAOImpl implements PartitaDAO {
      */
     @Override
     public List<String> doRetrieveAllGiocatori(int idPartita) {
-        return null;
+        try (Connection con = ConPool.getInstance().getConnection()) {
+
+            String query = "SELECT Nome, Cognome FROM giocatore";
+            PreparedStatement ps =
+                    con.prepareStatement(query);
+            ResultSet rs =  ps.executeQuery();
+            List<String> giocatori = new ArrayList<String>();
+            while (rs.next()) {
+                String nome = rs.getString(1);
+                String cognome = rs.getString(2);
+                giocatori.add(nome);
+                giocatori.add(cognome);
+            }
+            return giocatori;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 }
