@@ -3,7 +3,7 @@ package partita.dao;
 import com.pitchfinder.partita.dao.PartitaDAO;
 import com.pitchfinder.partita.dao.PartitaDAOImpl;
 import com.pitchfinder.partita.entity.Partita;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.sql.Date;
@@ -23,9 +23,9 @@ public class PartitaDAOImplTest {
         Partita pTest = new Partita(1002,"mario96@gmail.com",
                 date,start,end);
 
-        PartitaDAO dao = new PartitaDAOImpl();
+        PartitaDAO daoTest = new PartitaDAOImpl();
 
-        assertTrue(dao.doSavePartita(pTest));
+        assertTrue(daoTest.doSavePartita(pTest));
     }
 
     /**
@@ -33,8 +33,8 @@ public class PartitaDAOImplTest {
      */
     @Test
     public void checkdoRetrieveAll() {
-        PartitaDAO dao = new PartitaDAOImpl();
-        List<Partita> partite = dao.doRetrieveAll();
+        PartitaDAO daoTest = new PartitaDAOImpl();
+        List<Partita> partite = daoTest.doRetrieveAll();
 
         assertNotNull(partite);
     }
