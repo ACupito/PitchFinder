@@ -16,12 +16,11 @@ import java.util.List;
 public class CampoDAOImpl implements CampoDAO {
     /**
      * get the campo using the id.
-     *
-     * @param id
+     * @param id of the pitch.
      * @return Campo
      */
     @Override
-    public Campo getCampo(int id) {
+    public Campo doRetriveCampo(int id) {
         try (Connection con = ConPool.getInstance().getConnection()) {
             PreparedStatement ps =
                     con.prepareStatement("SELECT Identificativo, Sport FROM Campo WHERE Identificativo=?");
@@ -45,12 +44,11 @@ public class CampoDAOImpl implements CampoDAO {
 
     /**
      * save in the Database the Occupazione.
-     *
-     * @param idCampo
-     * @param data
-     * @param inizio
-     * @param fine
-     * @param usernameAdmin
+     * @param idCampo is the id of the pitch.
+     * @param data is the date of the occupation.
+     * @param inizio is the start of the occupation.
+     * @param fine is the end of the occupation.
+     * @param usernameAdmin is the admin username.
      * @return boolean
      */
 
@@ -81,11 +79,10 @@ public class CampoDAOImpl implements CampoDAO {
 
     /**
      * delete an Occupazione from Database.
-     *
-     * @param idCampo
-     * @param data
-     * @param inizio
-     * @param fine
+     * @param idCampo is the id of the pitch.
+     * @param data is the date of the occupation.
+     * @param inizio is the start of the occupation.
+     * @param fine is the end of the occupation.
      * @return boolean
      */
     @Override
@@ -109,13 +106,47 @@ public class CampoDAOImpl implements CampoDAO {
     }
 
     /**
+     * check if the Occupazione exists.
+     * @param idCampo is the id of the pitch.
+     * @param data is the date of the occupation.
+     * @param inizio is the start of the occupation.
+     * @param fine is the end of the occupation.
+     * @return boolean
+     */
+    public boolean checkOccupazioneExistence(int idCampo, Date data, Time inizio, Time fine) {
+        try (Connection con = ConPool.getInstance().getConnection()) {
+            PreparedStatement ps =
+                    con.prepareStatement("SELECT CampoIdentificativo, Data, OrarioInizio, OrarioFine FROM Occupazione "
+                            + "WHERE CampoIdentificativo=? && Data=? && OrarioInizio=? && OrarioFine=?");
+            ps.setInt(1, idCampo);
+            ps.setDate(2, data);
+            ps.setTime(3, inizio);
+            ps.setTime(4, fine);
+
+
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+
+                if (rs.getInt(1) == idCampo) {
+                return true;
+                }
+            }
+
+        } catch (SQLException e) {
+            return false;
+        }
+
+        return false;
+    }
+
+
+    /**
      * save in the Database the Disponibilita.
-     *
-     * @param emailUtente
-     * @param idCampo
-     * @param data
-     * @param inizio
-     * @param fine
+     * @param emailUtente is the email of the user.
+     * @param idCampo is the id of the pitch.
+     * @param data is the date of the availability.
+     * @param inizio is the start of the availability.
+     * @param fine is the end of the availability.
      * @return boolean
      */
     @Override
@@ -144,9 +175,8 @@ public class CampoDAOImpl implements CampoDAO {
 
     /**
      * delete a Disponibilita from Database.
-     *
-     * @param emailUtente
-     * @param idCampo
+     * @param emailUtente is the email of the user.
+     * @param idCampo is the id of the pitch.
      * @return boolean
      */
 
@@ -170,11 +200,10 @@ public class CampoDAOImpl implements CampoDAO {
 
     /**
      * take all the email by the Disponibilita giving the id_campo, data and time to find the ones that the user needs.
-     *
-     * @param idCampo
-     * @param data
-     * @param inizio
-     * @param fine
+     * @param idCampo is the id of the pitch.
+     * @param data is the date of the availability.
+     * @param inizio is the start of the availability.
+     * @param fine is the end of the availability.
      * @return List<String>
      */
 
