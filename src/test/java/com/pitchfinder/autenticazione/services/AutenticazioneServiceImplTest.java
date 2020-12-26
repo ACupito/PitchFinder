@@ -1,4 +1,4 @@
-package autenticazione.services;
+package com.pitchfinder.autenticazione.services;
 
 import com.pitchfinder.autenticazione.services.AutenticazioneService;
 import com.pitchfinder.autenticazione.services.AutenticazioneServiceImpl;

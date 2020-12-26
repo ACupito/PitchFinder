@@ -1,4 +1,4 @@
-package autenticazione.dao;
+package com.pitchfinder.autenticazione.dao;
 
 import com.pitchfinder.autenticazione.dao.UtenteDAO;
 import com.pitchfinder.autenticazione.dao.UtenteDAOImpl;
