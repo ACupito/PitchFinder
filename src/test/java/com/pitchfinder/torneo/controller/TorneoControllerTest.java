@@ -22,6 +22,10 @@ import static org.junit.jupiter.api.Assertions.*;
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 class TorneoControllerTest {
 
+    /**
+     * object instances: TorneoController, HttpServletRequest, HttpServletResponse,
+     * HttpSession.
+     */
     private TorneoController servlet;
     private HttpServletRequest mockedRequest;
     private HttpServletResponse mockedResponse;
@@ -43,31 +47,40 @@ class TorneoControllerTest {
     private static final String MAX_PARTECIPANTI = "5";
     private static final int ID_CAMPO = 1002;
 
+    /**
+     * This method setup the enviroment.
+     */
     @BeforeAll
     void setUp() {
 
+        //instantiation servlet, mockedRequest, mockedResponse and session.
         servlet = new TorneoController();
         mockedRequest = Mockito.mock(HttpServletRequest.class);
         mockedResponse = Mockito.mock(HttpServletResponse.class);
         session = Mockito.mock(HttpSession.class);
 
-
+        //Admin creation for the session.
         Admin admin = new Admin();
         admin.setNome("Emanuele");
         admin.setCognome("Mezzi");
         admin.setUsername("memex99");
         admin.setPassword("password");
 
+        //Campo creation for the session.
         Campo campo = new Campo();
         campo.setIdentificativo(ID_CAMPO);
         campo.setSport(SPORT);
 
+        //session setting.
         Mockito.when(mockedRequest.getSession()).thenReturn(session);
         Mockito.when(mockedRequest.getSession().getAttribute("admin")).thenReturn(admin);
         Mockito.when(mockedRequest.getSession().getAttribute("campo")).thenReturn(campo);
 
     }
 
+    /**
+     * Test case: TC_21_1 -> Lunghezza nome non valida.
+     */
     @Test
     void TC_21_1() {
 
@@ -92,6 +105,9 @@ class TorneoControllerTest {
 
     }
 
+    /**
+     * Test case: TC_21_2 -> Formato nome non valido.
+     */
     @Test
     void TC_21_2() {
 
@@ -113,8 +129,12 @@ class TorneoControllerTest {
         IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () ->
                 servlet.doPost(mockedRequest, mockedResponse));
         assertEquals(message, exception.getMessage());
+
     }
 
+    /**
+     * Test case: TC_21_3 -> Sport non selezionato.
+     */
     @Test
     void TC_21_3() {
 
@@ -136,8 +156,12 @@ class TorneoControllerTest {
         IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () ->
                 servlet.doPost(mockedRequest, mockedResponse));
         assertEquals(message, exception.getMessage());
+
     }
 
+    /**
+     * Test case: TC_21_4 -> Tipo non selezionato.
+     */
     @Test
     void TC_21_4() {
 
@@ -162,6 +186,9 @@ class TorneoControllerTest {
 
     }
 
+    /**
+     * Test case: TC_21_5 -> Struttura non selezionata.
+     */
     @Test
     void TC_21_5() {
 
@@ -183,8 +210,12 @@ class TorneoControllerTest {
         IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () ->
                 servlet.doPost(mockedRequest, mockedResponse));
         assertEquals(message, exception.getMessage());
+
     }
 
+    /**
+     * Test case: TC_21_6 -> Data inizio non selezionata.
+     */
     @Test
     void TC_21_6() {
 
@@ -209,6 +240,9 @@ class TorneoControllerTest {
 
     }
 
+    /**
+     * Test case: TC_21_7 -> Formato data inizio non valido.
+     */
     @Test
     void TC_21_7() {
 
@@ -230,8 +264,12 @@ class TorneoControllerTest {
         IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () ->
                 servlet.doPost(mockedRequest, mockedResponse));
         assertEquals(message, exception.getMessage());
+
     }
 
+    /**
+     * Test case: TC_21_8 -> Data fine non selezionata.
+     */
     @Test
     void TC_21_8() {
 
@@ -253,8 +291,12 @@ class TorneoControllerTest {
         IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () ->
                 servlet.doPost(mockedRequest, mockedResponse));
         assertEquals(message, exception.getMessage());
+
     }
 
+    /**
+     * Test case: TC_21_9 -> Formata data fine non valido.
+     */
     @Test
      void TC_21_9() {
 
@@ -276,9 +318,12 @@ class TorneoControllerTest {
         IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () ->
                 servlet.doPost(mockedRequest, mockedResponse));
         assertEquals(message, exception.getMessage());
+
     }
 
-
+    /**
+     * Test case: TC_21_10 -> Lunghezza giorno partite non valida.
+     */
     @Test
     void TC_21_10() {
 
@@ -300,8 +345,12 @@ class TorneoControllerTest {
         IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () ->
                 servlet.doPost(mockedRequest, mockedResponse));
         assertEquals(message, exception.getMessage());
+
     }
 
+    /**
+     * Test case: TC_21_11 -> Formato giorno partite non valido.
+     */
     @Test
     void TC_21_11() {
 
@@ -323,8 +372,12 @@ class TorneoControllerTest {
         IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () ->
                 servlet.doPost(mockedRequest, mockedResponse));
         assertEquals(message, exception.getMessage());
+
     }
 
+    /**
+     * Test case: TC_21_10 -> Formato giorno partite non valido.
+     */
     @Test
     void TC_21_12() {
 
@@ -349,6 +402,9 @@ class TorneoControllerTest {
 
     }
 
+    /**
+     * Test case: TC_21_13 -> Numero di squadre non valido.
+     */
     @Test
     void TC_21_13() {
 
@@ -373,6 +429,9 @@ class TorneoControllerTest {
 
     }
 
+    /**
+     * Test case: TC_21_14 -> Formato minimo partecipanti non valido.
+     */
     @Test
     void TC_21_14() {
 
@@ -394,8 +453,12 @@ class TorneoControllerTest {
         IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () ->
                 servlet.doPost(mockedRequest, mockedResponse));
         assertEquals(message, exception.getMessage());
+
     }
 
+    /**
+     * Test case: TC_21_15 -> Numero minimo di partecipanti non valido.
+     */
     @Test
     void TC_21_15() {
 
@@ -417,8 +480,12 @@ class TorneoControllerTest {
         IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () ->
                 servlet.doPost(mockedRequest, mockedResponse));
         assertEquals(message, exception.getMessage());
+
     }
 
+    /**
+     * Test case: TC_21_16 -> Numero massimo di partecipanti non valido.
+     */
     @Test
     void TC_21_16() {
 
@@ -442,6 +509,9 @@ class TorneoControllerTest {
         assertEquals(message, exception.getMessage());
     }
 
+    /**
+     * Test case: TC_21_17 -> Numero massimo di partecipanti non valido.
+     */
     @Test
     void TC_21_17() {
 
@@ -466,6 +536,9 @@ class TorneoControllerTest {
 
     }
 
+    /**
+     * Test case: TC_21_18 -> Dati corretti - Creazione torneo avvenuta.
+     */
     @Test
     void TC_21_18() {
 
@@ -487,8 +560,12 @@ class TorneoControllerTest {
 
     }
 
+    /**
+     * Cleanup the environment.
+     */
     @AfterAll
     void tearDown() {
+
         servlet = null;
         mockedRequest = null;
         mockedResponse = null;
