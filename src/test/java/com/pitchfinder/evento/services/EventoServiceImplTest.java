@@ -1,7 +1,5 @@
 package com.pitchfinder.evento.services;
 
-import com.pitchfinder.evento.dao.EventoDAO;
-import com.pitchfinder.evento.dao.EventoDAOImpl;
 import com.pitchfinder.evento.entity.Evento;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
