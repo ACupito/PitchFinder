@@ -36,7 +36,7 @@ class TorneoServiceImplTest {
 
         String usernameAdmin = "memex99";
         String nome = "Champions";
-        int idCampo = 1001;
+        int idCampo = 1002;
         String tipo = "Gironi";
         String struttura = "Partite singole";
         int maxSquadre = 12;
