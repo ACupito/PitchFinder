@@ -7,6 +7,7 @@ import com.pitchfinder.partita.entity.Partita;
 
 import java.sql.Date;
 import java.sql.Time;
+import java.util.List;
 
 public class PartitaServiceImpl implements PartitaService {
     /**
@@ -28,4 +29,35 @@ public class PartitaServiceImpl implements PartitaService {
 
         return null;
     }
+
+    /**
+     * This method is used to view the players participating in a match
+     *
+     * @return List<String>
+     */
+    @Override
+    public List<String> showGiocatori(Partita partita) {
+        PartitaDAO dao= new PartitaDAOImpl();
+        List<String> giocatori = dao.doRetrieveAllGiocatori(partita.getIdPartita());
+
+        if(giocatori!= null) {
+            return giocatori;
+        }
+
+        return null;
+    }
+
+    /**
+     * This method is used to add a player to the players of a match
+     *
+     * @param idPartita idPartita
+     * @param nome      nome
+     * @param cognome   cognome
+     */
+    @Override
+    public void createGiocatorePartita(int idPartita, String nome, String cognome) {
+
+    }
+
+
 }
