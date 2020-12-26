@@ -2,6 +2,8 @@ package com.pitchfinder.torneo.controller;
 
 import com.pitchfinder.autenticazione.entity.Admin;
 import com.pitchfinder.campo.entity.Campo;
+import com.pitchfinder.torneo.services.TorneoService;
+import com.pitchfinder.torneo.services.TorneoServiceImpl;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -13,6 +15,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import java.sql.Date;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
@@ -21,6 +25,7 @@ class TorneoControllerTest {
     private HttpServletRequest mockedRequest;
     private HttpServletResponse mockedResponse;
     private HttpSession session;
+
     @BeforeAll
     void setUp() {
         servlet = new TorneoController();
@@ -559,5 +564,8 @@ class TorneoControllerTest {
         mockedRequest = null;
         mockedResponse = null;
         session = null;
+        TorneoService ts = new TorneoServiceImpl();
+        ts.deleteTorneo(1002, "Champions Five", Date.valueOf("2021-12-5"));
+
     }
 }
