@@ -35,7 +35,7 @@ public class EventoServiceImplTest {
     void check1() {
 
         String nome = "Evento di prova Bello";
-        String immagineStr = "web/evento/immagini/eventoImage1";
+        String immagineStr = "images/events/eventoImage1";
         String ospite = "Giuseppe Verdi";
         String descrizione = "Questo è un evento bello però fittizio";
         Time orarioInizio = new Time(12,0,0);
