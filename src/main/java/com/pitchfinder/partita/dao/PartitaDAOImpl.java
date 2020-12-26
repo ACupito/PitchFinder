@@ -68,4 +68,26 @@ public class PartitaDAOImpl implements PartitaDAO {
             throw new RuntimeException(e);
         }
     }
+
+    /**
+     * This method create an instance of giocatore in table Giocatore.
+     * @param idPartita idPartita
+     * @param nome      nome
+     * @param cognome   cognome
+     * @return boolean
+     */
+    @Override
+    public boolean doSaveGiocatore(int idPartita, String nome, String cognome) {
+        return false;
+    }
+
+    /**
+     * This method return all the players from the table Giocatore.
+     * @param idPartita
+     * @return List<String>
+     */
+    @Override
+    public List<String> doRetrieveAllGiocatori(int idPartita) {
+        return null;
+    }
 }
