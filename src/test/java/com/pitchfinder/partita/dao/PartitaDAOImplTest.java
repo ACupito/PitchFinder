@@ -112,7 +112,7 @@ public class PartitaDAOImplTest {
             throw new RuntimeException(e);
         }
 
-        //Delete user used for the testing
+        //Delete match used for the testing
         try (Connection con = ConPool.getInstance().getConnection()) {
 
             String query = "DELETE FROM partita "

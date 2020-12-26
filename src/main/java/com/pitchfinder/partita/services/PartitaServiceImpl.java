@@ -31,16 +31,16 @@ public class PartitaServiceImpl implements PartitaService {
     }
 
     /**
-     * This method is used to view the players participating in a match
-     *
+     * This method is used to view the players participating in a match.
+     * @param partita Partita
      * @return List<String>
      */
     @Override
     public List<String> showGiocatori(Partita partita) {
-        PartitaDAO dao= new PartitaDAOImpl();
+        PartitaDAO dao = new PartitaDAOImpl();
         List<String> giocatori = dao.doRetrieveAllGiocatori(partita.getIdPartita());
 
-        if(giocatori!= null) {
+        if (giocatori != null) {
             return giocatori;
         }
 
@@ -48,7 +48,7 @@ public class PartitaServiceImpl implements PartitaService {
     }
 
     /**
-     * This method is used to add a player to the players of a match
+     * This method is used to add a player to the players of a match.
      *
      * @param idPartita idPartita
      * @param nome      nome
