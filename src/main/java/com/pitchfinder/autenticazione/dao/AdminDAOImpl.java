@@ -36,7 +36,7 @@ public class AdminDAOImpl implements AdminDAO {
      * @param admin is the admin who is logging in
      * @return boolean
      */
-    public Admin checkAdmin(final Admin admin) {
+    public Admin checkAdmin(Admin admin) {
 
         try (Connection con = ConPool.getInstance().getConnection()) {
 
@@ -57,6 +57,9 @@ public class AdminDAOImpl implements AdminDAO {
                     admin.setCognome(rs.getString(INDEX3));
 
                     return admin;
+                } else {
+                    throw new IllegalArgumentException("Il login non va a buon "
+                            + "fine perché la password inserita non è corretta");
                 }
 
             } else {
@@ -67,11 +70,9 @@ public class AdminDAOImpl implements AdminDAO {
 
             return null;
         }
-
-        return null;
     }
 
-    private int checkAdminExistence(final Admin admin) {
+    private int checkAdminExistence(Admin admin) {
 
         try (Connection con = ConPool.getInstance().getConnection()) {
 
@@ -85,7 +86,6 @@ public class AdminDAOImpl implements AdminDAO {
             }
 
         } catch (SQLException e) {
-
             return 0;
         }
 

@@ -46,6 +46,25 @@ public class Utente {
     }
 
     /**
+     *
+     * @param email is the user email
+     * @param username is the user username
+     * @param nome is the user name
+     * @param cognome is the user surname
+     * @param passwordHash is the user password
+     * @param dataDiNascita is the user date of birth
+     */
+    public Utente(String email, String username, String nome, String cognome,
+                  String passwordHash, Date dataDiNascita) {
+        this.email = email;
+        this.username = username;
+        this.nome = nome;
+        this.cognome = cognome;
+        this.passwordHash = passwordHash;
+        this.dataDiNascita = dataDiNascita;
+    }
+
+    /**
      * This method returns the value od the variable email.
      * @return email
      */
@@ -73,7 +92,7 @@ public class Utente {
      * This method sets the value of the variable username.
      * @param usernamePar is the user username
      */
-    public void setUsername(final String usernamePar) {
+    public void setUsername(String usernamePar) {
         this.username = usernamePar;
     }
 
@@ -89,7 +108,7 @@ public class Utente {
      * This sets the value of the variable nome.
      * @param nomePar is the user name
      */
-    public void setNome(final String nomePar) {
+    public void setNome(String nomePar) {
         this.nome = nomePar;
     }
 
@@ -105,7 +124,7 @@ public class Utente {
      * This method sets the value of the variable cognome.
      * @param cognomePar is the user surname
      */
-    public void setCognome(final String cognomePar) {
+    public void setCognome(String cognomePar) {
         this.cognome = cognomePar;
     }
 
@@ -121,7 +140,7 @@ public class Utente {
      * This method sets the value of the variable passwordHash.
      * @param password is the user password
      */
-    public void setPassword(final String password) {
+    public void setPassword(String password) {
 
         try {
 
@@ -150,7 +169,7 @@ public class Utente {
      * This method sets the vaue of the variable dataDiNascita.
      * @param dataDiNascitaPar is the user date of birth
      */
-    public void setDataDiNascita(final Date dataDiNascitaPar) {
+    public void setDataDiNascita(Date dataDiNascitaPar) {
 
         this.dataDiNascita = dataDiNascitaPar;
     }
