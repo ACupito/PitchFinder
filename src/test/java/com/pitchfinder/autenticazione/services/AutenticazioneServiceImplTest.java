@@ -132,4 +132,24 @@ public class AutenticazioneServiceImplTest {
         assertTrue(as.registraUtente("mario2900@gmail.com", "Mario2900",
                 "Mario", "Rossi", "esse3", d));
     }
+
+    /**
+     * Method to test prelevaUtenteByEmail
+     * First case: the user is retrieved
+     */
+    @Test
+    void prelevaUtenteByEmailTest1() {
+
+        assertNotNull(as.prelevaUtenteByEmail("mario99@gmail.com"));
+    }
+
+    /**
+     * Method to test prelevaUtenteByEmail
+     * Second case: the user is not retrieved
+     */
+    @Test
+    void prelevaUtenteByEmailTest2() {
+
+        assertNull(as.prelevaUtenteByEmail("sprikkesprakke99@gmail.com"));
+    }
 }

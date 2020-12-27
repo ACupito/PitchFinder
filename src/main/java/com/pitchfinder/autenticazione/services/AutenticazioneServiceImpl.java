@@ -73,4 +73,18 @@ public class AutenticazioneServiceImpl implements AutenticazioneService {
 
         return ud.doSaveUtente(u);
     }
+
+    /**
+     * @param email is the user email
+     * @return utente
+     */
+    public Utente prelevaUtenteByEmail(String email) {
+
+        Utente u = new Utente();
+        u.setEmail(email);
+
+        UtenteDAO ud = new UtenteDAOImpl();
+
+        return ud.doRetrieveUtenteByEmail(u);
+    }
 }

@@ -133,4 +133,36 @@ public class UtenteDAOImpl implements UtenteDAO {
 
         return -1;
     }
+
+    /**
+     * Method to retrive a user given his email.
+     * @param u is the user email
+     * @return utente
+     */
+    public Utente doRetrieveUtenteByEmail(Utente u) {
+
+        try (Connection con = ConPool.getInstance().getConnection()) {
+
+            PreparedStatement ps = con.prepareStatement(
+                    "select username, nome, cognome from Utente where email=?");
+
+            ps.setString(INDEX1, u.getEmail());
+
+            ResultSet rs = ps.executeQuery();
+
+            if (rs.next()) {
+                String username = rs.getString(INDEX1);
+                String nome = rs.getString(INDEX2);
+                String cognome = rs.getString(INDEX3);
+
+                return new Utente(u.getEmail(), username, nome, cognome,
+                        null, null);
+
+            } else return null;
+
+        } catch (SQLException e) {
+
+            return null;
+        }
+    }
 }

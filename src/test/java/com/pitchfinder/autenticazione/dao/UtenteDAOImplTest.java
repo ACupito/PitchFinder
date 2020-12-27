@@ -128,4 +128,38 @@ public class UtenteDAOImplTest {
         a.setUsername("Mario3330");
         assertTrue(ad.doSaveUtente(a));
     }
+
+    /**
+     * Method to retrieve a user given his email
+     * First case: the user exists
+     */
+    @Test
+    void doRetrieveUtenteByEmailTest1() {
+
+        String email = "mario99@gmail.com";
+
+        Utente u = new Utente();
+        u.setEmail(email);
+
+        UtenteDAO ad = new UtenteDAOImpl();
+
+        assertNotNull(ad.doRetrieveUtenteByEmail(u));
+    }
+
+    /**
+     * Method to retrieve a user given his email
+     * Second case: the user does not exists
+     */
+    @Test
+    void doRetrieveUtenteByEmailTest2() {
+
+        String email = "sprikkesprakke99@gmail.com";
+
+        Utente u = new Utente();
+        u.setEmail(email);
+
+        UtenteDAO ad = new UtenteDAOImpl();
+
+        assertNull(ad.doRetrieveUtenteByEmail(u));
+    }
 }
