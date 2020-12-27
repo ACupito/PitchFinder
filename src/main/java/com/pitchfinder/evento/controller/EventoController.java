@@ -89,7 +89,7 @@ public class EventoController extends HttpServlet {
                 long fileSizeInKB = fileSizeInBytes / 1024;
                 // Convert the KB to MegaBytes (1 MB = 1024 KBytes)
                 long fileSizeInMB = fileSizeInKB / 1024;
-                if (fileSizeInKB > MAXLIMITIMAGE) {
+                if (fileSizeInMB > MAXLIMITIMAGE) {
                     throw new IllegalArgumentException("Errato: dimensione non valida");
                 }
             }
