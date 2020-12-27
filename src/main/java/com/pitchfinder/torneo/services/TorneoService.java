@@ -1,7 +1,10 @@
 package com.pitchfinder.torneo.services;
 
 
+import com.pitchfinder.torneo.entity.Torneo;
+
 import java.sql.Date;
+import java.util.List;
 
 /**
  * This interface manages the TorneoService.
@@ -34,4 +37,11 @@ public interface TorneoService {
      * @return boolean -> true : created / false : failed creation
      */
     boolean deleteTorneo(int idCampo, String nome, Date dataInizio);
+
+    /**
+     * This method allows to get all tournaments.
+     * @return A list of Torneo items
+     */
+    List<Torneo> getAllTornei();
+
 }
