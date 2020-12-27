@@ -92,7 +92,7 @@ public class Utente {
      * This method sets the value of the variable username.
      * @param usernamePar is the user username
      */
-    public void setUsername(String usernamePar) {
+    public void setUsername(final String usernamePar) {
         this.username = usernamePar;
     }
 
@@ -108,7 +108,7 @@ public class Utente {
      * This sets the value of the variable nome.
      * @param nomePar is the user name
      */
-    public void setNome(String nomePar) {
+    public void setNome(final String nomePar) {
         this.nome = nomePar;
     }
 
@@ -124,7 +124,7 @@ public class Utente {
      * This method sets the value of the variable cognome.
      * @param cognomePar is the user surname
      */
-    public void setCognome(String cognomePar) {
+    public void setCognome(final String cognomePar) {
         this.cognome = cognomePar;
     }
 
@@ -140,7 +140,7 @@ public class Utente {
      * This method sets the value of the variable passwordHash.
      * @param password is the user password
      */
-    public void setPassword(String password) {
+    public void setPassword(final String password) {
 
         try {
 
@@ -169,7 +169,7 @@ public class Utente {
      * This method sets the vaue of the variable dataDiNascita.
      * @param dataDiNascitaPar is the user date of birth
      */
-    public void setDataDiNascita(Date dataDiNascitaPar) {
+    public void setDataDiNascita(final Date dataDiNascitaPar) {
 
         this.dataDiNascita = dataDiNascitaPar;
     }
