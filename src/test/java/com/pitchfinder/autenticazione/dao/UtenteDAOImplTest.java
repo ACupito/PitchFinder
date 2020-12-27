@@ -11,7 +11,7 @@ public class UtenteDAOImplTest {
 
     /**
      * Method to test the checkAdmin method offered by UtenteDAO interface.
-     * First case: the email and password are correct.
+     * First case: the username and password are correct.
      */
     @Test
     void checkUtenteTest1() {
@@ -19,14 +19,14 @@ public class UtenteDAOImplTest {
         Utente a = new Utente();
         UtenteDAO ad = new UtenteDAOImpl();
 
-        a.setEmail("mario97@gmail.com");
+        a.setUsername("Mariox97");
         a.setPassword("esse3");
         assertNotNull(ad.checkUtente(a));
     }
 
     /**
      * Method to test the checkAdmin method offered by UtenteDAO interface.
-     * Second case: the email is wrong.
+     * Second case: the username is wrong.
      */
     @Test
     void checkUtenteTest2() {
@@ -34,7 +34,7 @@ public class UtenteDAOImplTest {
         Utente a = new Utente();
         UtenteDAO ad = new UtenteDAOImpl();
 
-        a.setEmail("mario1300@gmail.com");
+        a.setUsername("Mariox29");
         a.setPassword("esse3");
         assertNull(ad.checkUtente(a));
     }
@@ -49,7 +49,7 @@ public class UtenteDAOImplTest {
         Utente a = new Utente();
         UtenteDAO ad = new UtenteDAOImpl();
 
-        a.setEmail("mario99@gmail.com");
+        a.setUsername("Mario99");
         a.setPassword("PitchFinder 57");
 
         String message = "Il login non va a buon " +
