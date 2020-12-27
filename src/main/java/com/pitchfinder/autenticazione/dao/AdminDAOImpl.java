@@ -36,7 +36,7 @@ public class AdminDAOImpl implements AdminDAO {
      * @param admin is the admin who is logging in
      * @return boolean
      */
-    public Admin checkAdmin(Admin admin) {
+    public Admin checkAdmin(final Admin admin) {
 
         try (Connection con = ConPool.getInstance().getConnection()) {
 
@@ -72,7 +72,7 @@ public class AdminDAOImpl implements AdminDAO {
         }
     }
 
-    private int checkAdminExistence(Admin admin) {
+    private int checkAdminExistence(final Admin admin) {
 
         try (Connection con = ConPool.getInstance().getConnection()) {
 

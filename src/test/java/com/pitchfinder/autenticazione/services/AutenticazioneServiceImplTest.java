@@ -1,5 +1,7 @@
 package com.pitchfinder.autenticazione.services;
 
+import com.pitchfinder.autenticazione.services.AutenticazioneService;
+import com.pitchfinder.autenticazione.services.AutenticazioneServiceImpl;
 import org.junit.jupiter.api.Test;
 import java.sql.Date;
 
@@ -12,44 +14,24 @@ public class AutenticazioneServiceImplTest {
     /**
      * Method to test the loginUtente method offered by the
      * AutenticazioneService interface.
-     * First case: username and password are correct.
+     * First case: the email and password are correct.
      */
     @Test
     void loginUtenteTest1() {
 
-        assertNotNull(as.loginUtente("Mariox97", "esse3"));
+        assertNull(as.loginUtente("mario1520@gmail.com", "esse3"));
     }
 
 
     /**
      * Method to test the loginUtente method offered by the
      * AutenticazioneService interface.
-     * Second case: username is wrong.
+     * Second case: email is wrong.
      */
     @Test
     void loginUtenteTest2() {
 
-        assertNull(as.loginUtente("Mario29", "esse3"));
-    }
-
-    /**
-     * Method to test the loginUtente method offered by the
-     * AutenticazioneService interface.
-     * Third case: password is wrong.
-     */
-    @Test
-    void loginUtenteTest3() {
-
-        String message = "Il login non va a buon " +
-                "fine perché la password inserita non " +
-                "è corretta";
-
-        IllegalArgumentException exception = assertThrows(
-                IllegalArgumentException.class, () -> {
-                    as.loginUtente("Mario99", "PitchFinder 57");
-                });
-
-        assertEquals(message, exception.getMessage());
+        assertNull(as.loginUtente("mario1520@gmail.com", "esse3"));
     }
 
     /**
@@ -60,7 +42,7 @@ public class AutenticazioneServiceImplTest {
     @Test
     void loginAdminTest1() {
 
-        assertNotNull(as.loginAdmin("memex99", "esse3"));
+        assertNull(as.loginAdmin("memex98", "esse3"));
     }
 
     /**
@@ -72,26 +54,6 @@ public class AutenticazioneServiceImplTest {
     void loginAdminTest2() {
 
         assertNull(as.loginAdmin("memex98", "esse3"));
-    }
-
-    /**
-     * Method to test the loginAdmin method offered by the
-     * AutenticazioneService interface.
-     * Second case: password is wrong.
-     */
-    @Test
-    void loginAdminTest3() {
-
-        String message = "Il login non va a buon " +
-                "fine perché la password inserita non " +
-                "è corretta";
-
-        IllegalArgumentException exception = assertThrows(
-                IllegalArgumentException.class, () -> {
-                    as.loginUtente("memex99", "PitchFinder 57");
-                });
-
-        assertEquals(message, exception.getMessage());
     }
 
     /**
@@ -131,25 +93,5 @@ public class AutenticazioneServiceImplTest {
         Date d = new Date(1999 - 1900, 10, 23);
         assertTrue(as.registraUtente("mario2900@gmail.com", "Mario2900",
                 "Mario", "Rossi", "esse3", d));
-    }
-
-    /**
-     * Method to test prelevaUtenteByEmail
-     * First case: the user is retrieved
-     */
-    @Test
-    void prelevaUtenteByEmailTest1() {
-
-        assertNotNull(as.prelevaUtenteByEmail("mario99@gmail.com"));
-    }
-
-    /**
-     * Method to test prelevaUtenteByEmail
-     * Second case: the user is not retrieved
-     */
-    @Test
-    void prelevaUtenteByEmailTest2() {
-
-        assertNull(as.prelevaUtenteByEmail("sprikkesprakke99@gmail.com"));
     }
 }
