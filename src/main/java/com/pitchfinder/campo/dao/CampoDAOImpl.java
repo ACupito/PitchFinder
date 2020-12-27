@@ -74,7 +74,7 @@ public class CampoDAOImpl implements CampoDAO {
             throw new RuntimeException(e);
         }
 
-        return false;
+        return true;
     }
 
     /**
@@ -89,20 +89,21 @@ public class CampoDAOImpl implements CampoDAO {
     public boolean doRemoveOccupazione(int idCampo, Date data, Time inizio, Time fine) {
         try (Connection con = ConPool.getInstance().getConnection()) {
             PreparedStatement ps =
-                    con.prepareStatement("delete from Occupazione where CampoIdentificativo=? && Data=? && OrarioInizio=? && OrarioFine=?");
+                    con.prepareStatement("delete from Occupazione where CampoIdentificativo=? and Data=? and OrarioInizio=? and OrarioFine=?");
 
             ps.setInt(1, idCampo);
             ps.setDate(2, data);
             ps.setTime(3, inizio);
             ps.setTime(4, fine);
 
-            ResultSet rs = ps.executeQuery();
+            if(ps.executeUpdate() == 1)
+                return true;
 
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
 
-        return false;
+        return true;
     }
 
     /**
@@ -127,9 +128,8 @@ public class CampoDAOImpl implements CampoDAO {
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
 
-                if (rs.getInt(1) == idCampo) {
                 return true;
-                }
+                
             }
 
         } catch (SQLException e) {
@@ -170,7 +170,7 @@ public class CampoDAOImpl implements CampoDAO {
             throw new RuntimeException(e);
         }
 
-        return false;
+        return true;
     }
 
     /**
@@ -189,7 +189,8 @@ public class CampoDAOImpl implements CampoDAO {
             ps.setString(1, emailUtente);
             ps.setInt(2, idCampo);
 
-            ResultSet rs = ps.executeQuery();
+            if(ps.executeUpdate() == 1)
+                return true;
 
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -212,7 +213,7 @@ public class CampoDAOImpl implements CampoDAO {
         ArrayList<String> d = new ArrayList<>();
         try (Connection con = ConPool.getInstance().getConnection()) {
             PreparedStatement ps =
-                    con.prepareStatement("SELECT Email FROM Disponibilita "
+                    con.prepareStatement("SELECT UtenteEmail FROM Disponibilita "
                             + "WHERE CampoIdentificativo=? && Data=? && OrarioInizio=? && OrarioFine=?");
             ps.setInt(1, idCampo);
             ps.setDate(2, data);
