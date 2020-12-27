@@ -47,13 +47,15 @@ public class TorneoController extends HttpServlet {
         int flag = Integer.parseInt(request.getParameter("flag"));
         Admin admin = (Admin) request.getSession().getAttribute("admin"); //get admin from the session
         Campo campo = (Campo) request.getSession().getAttribute("campo"); //get campo from the session
+        String nome = request.getParameter("nome");
+        if (nome == null) {
+            throw new IllegalArgumentException("Nome non inserito");
+        }
+        String startDate = request.getParameter("dataInizio");
+
 
         if (flag == 1 && admin != null && campo != null) { //tournament creation
 
-            String nome = request.getParameter("nome");
-            if (nome == null) {
-                throw new IllegalArgumentException("Nome non inserito");
-            }
             if (nome.length() < 1 || nome.length() > 50) {
                 throw new IllegalArgumentException("Lunghezza nome non valida");
             }
@@ -76,7 +78,6 @@ public class TorneoController extends HttpServlet {
                 throw new IllegalArgumentException("Struttura non selezionata");
             }
 
-            String startDate = request.getParameter("dataInizio");
             Date dataInizio;
             if (startDate == null) {
                 throw new IllegalArgumentException("Data inizio non selezionata");
@@ -148,7 +149,29 @@ public class TorneoController extends HttpServlet {
                 response.setContentType("Creazione avvenuta");
             }
 
+        }
+        else if (flag == 2 && admin != null && campo != null) {
+            //when remove button clicked.
 
+            if (nome.length() < 1 || nome.length() > 50) {
+                throw new IllegalArgumentException("Lunghezza nome non valida");
+            }
+            if (!nome.matches("^[ a-zA-Z\\u00C0-\\u00ff']+$")) {
+                throw new IllegalArgumentException("Formato nome non valido");
+            }
+
+            Date dataInizio;
+            if (startDate == null) {
+                throw new IllegalArgumentException("Data inizio non selezionata");
+            }
+            try {
+                dataInizio = Date.valueOf(startDate);
+            } catch (IllegalArgumentException e) {
+                throw new IllegalArgumentException("Formato data inizio non valido");
+            }
+
+            boolean removeResult = ts.deleteTorneo(campo.getIdentificativo(), nome, dataInizio);
+            if(removeResult) response.setContentType("Eliminazione avvenuta");
         }
 
 
