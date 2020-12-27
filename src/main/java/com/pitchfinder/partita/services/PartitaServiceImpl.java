@@ -22,8 +22,8 @@ public class PartitaServiceImpl implements PartitaService {
     @Override
     public Partita createPartita(int idCampo, Utente utente, Date date, Time start, Time end) {
         Partita match = new Partita(idCampo, utente.getEmail(), date, start, end);
-        PartitaDAO dao = new PartitaDAOImpl();
-        if (dao.doSavePartita(match)) {
+        PartitaDAO daoPartita = new PartitaDAOImpl();
+        if (daoPartita.doSavePartita(match)) {
             return match;
         }
 
