@@ -2,6 +2,8 @@ package com.pitchfinder.torneo.dao;
 
 import com.pitchfinder.torneo.entity.Torneo;
 
+import java.util.List;
+
 /**
  * This interface manages the Torneo dao.
  */
@@ -25,4 +27,10 @@ public interface TorneoDAO {
      */
     boolean doRemoveTorneo(Torneo torneo);
 
+    /**
+     * This method allows to get all the tournaments
+     * from the database.
+     * @return A List of Torneo items.
+     */
+    List<Torneo> doRetrieveAllTornei();
 }
