@@ -16,7 +16,9 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.sql.Date;
 import java.sql.Time;
 
@@ -46,7 +48,7 @@ public class EventoControllerTest {
      *  Setting up the enviroment.
      */
     @BeforeAll
-        void setUp() throws IOException, ServletException {
+        void setUp() {
 
             //Servlet, mockedRequest, mockedResponse and Session instantiation.
             servlet = new EventoController();
@@ -84,9 +86,9 @@ public class EventoControllerTest {
 
         String message = "Errato: lunghezza nome non valida";
 
-        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
-            servlet.doGet(mockedRequest, mockedResponse);
-        });
+        IllegalArgumentException exception;
+        exception = assertThrows(IllegalArgumentException.class,
+                () -> servlet.doGet(mockedRequest, mockedResponse));
         assertEquals(message, exception.getMessage());
 
         }
@@ -108,9 +110,9 @@ public class EventoControllerTest {
 
         String message = "Errato: formato non valido";
 
-        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
-            servlet.doGet(mockedRequest, mockedResponse);
-        });
+        IllegalArgumentException exception;
+        exception = assertThrows(IllegalArgumentException.class,
+                () -> servlet.doGet(mockedRequest, mockedResponse));
         assertEquals(message, exception.getMessage());
 
     }
@@ -131,9 +133,9 @@ public class EventoControllerTest {
 
         String message = "Errato: Formato non valido";
 
-        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
-            servlet.doGet(mockedRequest, mockedResponse);
-        });
+        IllegalArgumentException exception;
+        exception = assertThrows(IllegalArgumentException.class,
+                () -> servlet.doGet(mockedRequest, mockedResponse));
         assertEquals(message, exception.getMessage());
     }
 
@@ -153,9 +155,9 @@ public class EventoControllerTest {
 
         String message = "Errato: dimensione non valida";
 
-        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
-            servlet.doGet(mockedRequest, mockedResponse);
-        });
+        IllegalArgumentException exception;
+        exception = assertThrows(IllegalArgumentException.class,
+                () -> servlet.doGet(mockedRequest, mockedResponse));
         assertEquals(message, exception.getMessage());
     }
 
@@ -175,9 +177,9 @@ public class EventoControllerTest {
 
         String message = "Errato: orario non selezionato";
 
-        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
-        servlet.doGet(mockedRequest, mockedResponse);
-        });
+        IllegalArgumentException exception;
+        exception = assertThrows(IllegalArgumentException.class,
+                () -> servlet.doGet(mockedRequest, mockedResponse));
         assertEquals(message, exception.getMessage());
 
     }
@@ -198,9 +200,9 @@ public class EventoControllerTest {
 
         String message = "Errato: formato non valido";
 
-        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
-            servlet.doGet(mockedRequest, mockedResponse);
-        });
+        IllegalArgumentException exception;
+        exception = assertThrows(IllegalArgumentException.class,
+                () -> servlet.doGet(mockedRequest, mockedResponse));
         assertEquals(message, exception.getMessage());
 
     }
@@ -221,9 +223,9 @@ public class EventoControllerTest {
 
         String message = "Errato: orario non selezionato";
 
-        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
-            servlet.doGet(mockedRequest, mockedResponse);
-        });
+        IllegalArgumentException exception;
+        exception = assertThrows(IllegalArgumentException.class,
+                () -> servlet.doGet(mockedRequest, mockedResponse));
         assertEquals(message, exception.getMessage());
 
     }
@@ -244,9 +246,9 @@ public class EventoControllerTest {
 
         String message = "Errato: formato non valido";
 
-        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
-            servlet.doGet(mockedRequest, mockedResponse);
-        });
+        IllegalArgumentException exception;
+        exception = assertThrows(IllegalArgumentException.class,
+                () -> servlet.doGet(mockedRequest, mockedResponse));
         assertEquals(message, exception.getMessage());
 
     }
@@ -267,9 +269,9 @@ public class EventoControllerTest {
 
         String message = "Errato: data non selezionata";
 
-        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
-            servlet.doGet(mockedRequest, mockedResponse);
-        });
+        IllegalArgumentException exception;
+        exception = assertThrows(IllegalArgumentException.class,
+                () -> servlet.doGet(mockedRequest, mockedResponse));
         assertEquals(message, exception.getMessage());
     }
 
@@ -289,9 +291,9 @@ public class EventoControllerTest {
 
         String message = "Errato: formato non valido";
 
-        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
-            servlet.doGet(mockedRequest, mockedResponse);
-        });
+        IllegalArgumentException exception;
+        exception = assertThrows(IllegalArgumentException.class,
+                () -> servlet.doGet(mockedRequest, mockedResponse));
         assertEquals(message, exception.getMessage());
     }
 
@@ -311,9 +313,9 @@ public class EventoControllerTest {
 
         String message = "Errato: lunghezza non valida";
 
-        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
-            servlet.doGet(mockedRequest, mockedResponse);
-        });
+        IllegalArgumentException exception;
+        exception = assertThrows(IllegalArgumentException.class,
+                () -> servlet.doGet(mockedRequest, mockedResponse));
         assertEquals(message, exception.getMessage());
     }
 
@@ -333,9 +335,9 @@ public class EventoControllerTest {
 
         String message = "Errato: formato non valido";
 
-        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
-            servlet.doGet(mockedRequest, mockedResponse);
-        });
+        IllegalArgumentException exception;
+        exception = assertThrows(IllegalArgumentException.class,
+                () -> servlet.doGet(mockedRequest, mockedResponse));
         assertEquals(message, exception.getMessage());
     }
 
@@ -355,9 +357,9 @@ public class EventoControllerTest {
 
         String message = "Errato: lunghezza non valida";
 
-        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
-            servlet.doGet(mockedRequest, mockedResponse);
-        });
+        IllegalArgumentException exception;
+        exception = assertThrows(IllegalArgumentException.class,
+                () -> servlet.doGet(mockedRequest, mockedResponse));
         assertEquals(message, exception.getMessage());
     }
 
@@ -377,9 +379,9 @@ public class EventoControllerTest {
 
         String message = "Errato: formato non valido";
 
-        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
-            servlet.doGet(mockedRequest, mockedResponse);
-        });
+        IllegalArgumentException exception;
+        exception = assertThrows(IllegalArgumentException.class,
+                () -> servlet.doGet(mockedRequest, mockedResponse));
         assertEquals(message, exception.getMessage());
     }
 
@@ -399,9 +401,9 @@ public class EventoControllerTest {
 
         String message = "Errato: lunghezza non valida";
 
-        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
-            servlet.doGet(mockedRequest, mockedResponse);
-        });
+        IllegalArgumentException exception;
+        exception = assertThrows(IllegalArgumentException.class,
+                () -> servlet.doGet(mockedRequest, mockedResponse));
         assertEquals(message, exception.getMessage());
 
     }
@@ -422,9 +424,9 @@ public class EventoControllerTest {
 
         String message = "Errato: formato non valido";
 
-        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
-            servlet.doGet(mockedRequest, mockedResponse);
-        });
+        IllegalArgumentException exception;
+        exception = assertThrows(IllegalArgumentException.class,
+                () -> servlet.doGet(mockedRequest, mockedResponse));
         assertEquals(message, exception.getMessage());
     }
 
@@ -432,7 +434,7 @@ public class EventoControllerTest {
      * Everything is working fine! Good job.
      */
     @Test
-    void TC_11_17() throws IOException, ServletException {
+    void TC_11_17() {
         Mockito.when(mockedRequest.getParameter("nome")).thenReturn(NOME);
         Mockito.when(mockedRequest.getParameter("immagine")).thenReturn(IMMAGINE);
         Mockito.when(mockedRequest.getParameter("ospite")).thenReturn(OSPITE);
@@ -442,7 +444,7 @@ public class EventoControllerTest {
         Mockito.when(mockedRequest.getParameter("data")).thenReturn(DATA);
         Mockito.when(mockedRequest.getParameter("postiDisponibili")).thenReturn(POSTI_DISPONIBILI);
 
-        servlet.doGet(mockedRequest, mockedResponse);
+        servlet.doPost(mockedRequest, mockedResponse);
         Mockito.verify(mockedResponse).setContentType("Creazione avvenuta");
 
 
@@ -467,7 +469,7 @@ public class EventoControllerTest {
         evento.setEndHour(Time.valueOf(ORARIO_FINE.concat(":00")));
         evento.setGuest(OSPITE);
         evento.setDescription(DESCRIZIONE);
-        evento.setAvailableSits(Integer.valueOf(POSTI_DISPONIBILI));
+        evento.setAvailableSits(Integer.parseInt(POSTI_DISPONIBILI));
         evento.setAdmin("memex99");
         es.removeEvento(evento);
 

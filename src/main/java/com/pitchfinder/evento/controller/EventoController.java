@@ -9,18 +9,12 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.Part;
 import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.nio.file.StandardCopyOption;
 import java.sql.Date;
 import java.sql.Time;
 
 public class EventoController extends HttpServlet {
-
     /** Minimum limit for name. */
     private static final int MINLIMIT = 1;
     /** Maximum limit for name. */
@@ -37,14 +31,13 @@ public class EventoController extends HttpServlet {
     private static final int MAXDESCRIPTIONLIMIT = 500;
     /** Maximum limit for the description. */
     private static final int MAXSITSLIMIT = 300;
-
     /**
      * doPost() method.
      * @param request is the servlet request.
      * @param response is the servlet response.
      */
     public void doPost(final HttpServletRequest request,
-                       final HttpServletResponse response) throws IOException, ServletException {
+                       final HttpServletResponse response) {
         doGet(request, response);
     }
 
@@ -54,7 +47,7 @@ public class EventoController extends HttpServlet {
      * @param response is the servlet response.
      */
     public void doGet(final HttpServletRequest request,
-                      final HttpServletResponse response) throws IOException, ServletException {
+                      final HttpServletResponse response) {
         Admin admin = (Admin) request.getSession().getAttribute("admin"); //get admin from the session
 
         if (admin != null) {
@@ -96,15 +89,10 @@ public class EventoController extends HttpServlet {
                 long fileSizeInKB = fileSizeInBytes / 1024;
                 // Convert the KB to MegaBytes (1 MB = 1024 KBytes)
                 long fileSizeInMB = fileSizeInKB / 1024;
-
                 if (fileSizeInKB > MAXLIMITIMAGE) {
                     throw new IllegalArgumentException("Errato: dimensione non valida");
                 }
-            } else {
-                //Default image
-                File defaultImage = new File("defaultDirectory");
             }
-
             if (orarioInizioStr.matches("")) {
                 throw new IllegalArgumentException("Errato: orario non selezionato");
             }
@@ -113,27 +101,23 @@ public class EventoController extends HttpServlet {
             }
             /* The start time of the Event (Time). */
             Time orarioInizio = Time.valueOf(orarioInizioStr.concat(":00"));
-
             if (orarioFineStr.matches("")) {
                 throw new IllegalArgumentException("Errato: orario non selezionato");
             }
             if (!orarioFineStr.matches("^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$")) {
                 throw new IllegalArgumentException("Errato: formato non valido");
             }
-            /* The end time of the Event (Time). */
-            Time orarioFine = Time.valueOf(orarioFineStr.concat(":00"));
-
+            Time orarioFine = Time.valueOf(orarioFineStr.concat(":00")); /* The end time of the Event (Time). */
             if (dateStr.equals("")) {
                 throw new IllegalArgumentException("Errato: data non selezionata");
             }
-            try {
-                /* The Event's date (Date). */
-                dataEvento = Date.valueOf(dateStr);
-            } catch (IllegalArgumentException e) {
-                throw new IllegalArgumentException("Errato: formato non valido");
-            }
             Date myDate = new Date(System.currentTimeMillis());
-            if (dataEvento.before(myDate)) {
+            try {
+                dataEvento = Date.valueOf(dateStr);/* The Event's date (Date). */
+                if (dataEvento.before(myDate)) {
+                    throw new IllegalArgumentException("Errato: formato non valido");
+                }
+            } catch (IllegalArgumentException e) {
                 throw new IllegalArgumentException("Errato: formato non valido");
             }
             if (ospite.length() < MINLIMIT || ospite.length() > MAXGUESTLIMIT) {
@@ -154,50 +138,13 @@ public class EventoController extends HttpServlet {
             if (!postiDisponibiliStr.matches("[0-9]+$")) {
                 throw new IllegalArgumentException("Errato: formato non valido");
             }
-            /* The Event's available sits (Integer). */
-            int postiDisponibili = Integer.parseInt(postiDisponibiliStr);
+            int postiDisponibili = Integer.parseInt(postiDisponibiliStr); /* The Event's available sits (Integer). */
             if (postiDisponibili < MINLIMIT || postiDisponibili > MAXSITSLIMIT) {
                 throw new IllegalArgumentException("Errato: lunghezza non valida");
             }
-//            /* ***********************************
-//             *  Here begins the Image upload part *
-//             *  ***********************************
-//             */
-//            /* We take the parameter file (it's like "getParameter"). */
-//            Part filePart = request.getPart("fileAddProduct");
-//            /* We take the file's name. */
-//            String fileName = Paths.get(filePart.getSubmittedFileName()).getFileName().toString();
-//            /* We take the servletContextRealPath + FileSeparator (/) + the folder's name (images). */
-//            String path = getServletContext().getRealPath("") + File.separator + "images";
-//            File uploads = new File(path);
-//            /* This is the name's length. */
-//            int lenght = fileName.length();
-//            File file = File.createTempFile(fileName.substring(0, lenght - 4), fileName.substring(lenght - 4, lenght), uploads);
-//            try (InputStream input = filePart.getInputStream()) {
-//            Files.copy(input, file.toPath(), StandardCopyOption.REPLACE_EXISTING);
-//            } catch (Exception e) {
-//                e.printStackTrace();
-//            }
-//            /* Start of the file's name (the true one). */
-//            int lastIndex = file.getAbsoluteFile().toString().lastIndexOf("\\") + 1;
-//            /* Lenght of the absolute path. */
-//            int  totalLenght = file.getAbsoluteFile().toString().length();
-//            /* We get the true name's file. */
-//            String finalFileName = file.getAbsolutePath().toString().substring(lastIndex, totalLenght);
-//            /* We add the "images" folder to the name's file */
-//            String immagineStr = "images/events" + finalFileName;
-//            /* *********************************
-//             *  Here ends the Image upload part *
-//             *  *********************************
-//             */
             es.createEvento(nome, "immagineStr", orarioInizio, orarioFine, dataEvento,
                             ospite, descrizione, postiDisponibili, admin.getUsername());
             response.setContentType("Creazione avvenuta");
         }
-
     }
-
-
-
-
 }
