@@ -5,7 +5,10 @@ import com.pitchfinder.torneo.entity.Torneo;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 
 /**
@@ -67,6 +70,44 @@ public class TorneoDAOImpl implements TorneoDAO {
 
         } catch (SQLException s) {
             return false;
+        }
+    }
+
+    /**
+     * This method allows to get all the tournaments
+     * from the database.
+     * @return A List of Torneo items.
+     */
+    public List<Torneo> doRetrieveAllTornei() {
+
+        try (Connection con = ConPool.getInstance().getConnection()) {
+            PreparedStatement ps = con.prepareStatement("select * from torneo");
+            ResultSet rs = ps.executeQuery();
+
+            List<Torneo> tornei = new ArrayList<>();
+            Torneo t = new Torneo();
+
+            while (rs.next()) {
+
+                t.setNome(rs.getString(1));
+                t.setDataInizio(rs.getDate(2));
+                t.setCampoIdentificativo(rs.getInt(3));
+                t.setAdminUsername(rs.getString(4));
+                t.setTipo(rs.getString(5));
+                t.setStruttura(rs.getString(6));
+                t.setNumeroSquadre(rs.getInt(7));
+                t.setDataFine(rs.getDate(8));
+                t.setMinNumeroPartecipantiPerSquadra(rs.getInt(9));
+                t.setMaxNumeroPartecipantiPerSquadra(rs.getInt(10));
+                t.setGiornoPartite(rs.getString(11));
+                tornei.add(t);
+
+            }
+
+            return tornei;
+
+        } catch (SQLException s) {
+            throw new RuntimeException(s);
         }
     }
 
