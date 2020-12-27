@@ -44,19 +44,9 @@ public class TorneoServiceImpl implements TorneoService {
                                 int maxSquadre, Date dataInizio, Date dateFine, int minPartecipanti,
                                 int maxPartecipanti, String giornoPartite) {
 
-        Torneo torneo = new Torneo();
-
-        torneo.setAdminUsername(usernameAdmin);
-        torneo.setCampoIdentificativo(idCampo);
-        torneo.setNome(nome);
-        torneo.setTipo(tipo);
-        torneo.setStruttura(struttura);
-        torneo.setNumeroSquadre(maxSquadre);
-        torneo.setDataInizio(dataInizio);
-        torneo.setDataFine(dateFine);
-        torneo.setMinNumeroPartecipantiPerSquadra(minPartecipanti);
-        torneo.setMaxNumeroPartecipantiPerSquadra(maxPartecipanti);
-        torneo.setGiornoPartite(giornoPartite);
+        Torneo torneo = new Torneo(nome, tipo, struttura, giornoPartite, usernameAdmin,
+                maxSquadre, minPartecipanti, maxPartecipanti, dataInizio,
+                dateFine, idCampo);
 
         return tdao.doSaveTorneo(torneo);
 
