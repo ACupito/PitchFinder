@@ -1,5 +1,6 @@
 package com.pitchfinder.autenticazione.controller;
 
+import com.pitchfinder.autenticazione.entity.Admin;
 import com.pitchfinder.autenticazione.entity.Utente;
 import com.pitchfinder.autenticazione.services.AutenticazioneService;
 import com.pitchfinder.autenticazione.services.AutenticazioneServiceImpl;
@@ -34,8 +35,8 @@ public class AutenticazioneController extends HttpServlet {
      * @param response is the servlet response
      */
 
-    public void doPost(final HttpServletRequest request,
-                       final HttpServletResponse response) {
+    public void doPost(HttpServletRequest request,
+                       HttpServletResponse response) {
 
         doGet(request, response);
     }
@@ -45,7 +46,7 @@ public class AutenticazioneController extends HttpServlet {
      * @param request is the servlet request
      * @param response is the servlet response
      */
-    public void doGet(final HttpServletRequest request, final HttpServletResponse response) {
+    public void doGet(HttpServletRequest request, HttpServletResponse response) {
         AutenticazioneService as = new AutenticazioneServiceImpl();
 
         int flag = Integer.parseInt(request.getParameter("flag"));
@@ -74,7 +75,8 @@ public class AutenticazioneController extends HttpServlet {
                         + "non va a buon fine perché la username non "
                         + "rispetta la lunghezza corretta");
             }
-            if (!username.matches("(?!^[0-9]*$)(?!^[a-zA-Z]*$)^([a-zA-Z0-9]{6,15})$")) {
+            if (!username.matches("(?!^[0-9]*$)(?!^[a-zA-Z]*$)^([a-zA-Z0-9]{6,15})$")
+                    || username.matches("@[A-Za-z]+")) {
                 throw new IllegalArgumentException("La registrazione non va a buon "
                         + "fine perché la username inserita "
                         + "non rispetta il formato richiesto");
@@ -133,62 +135,42 @@ public class AutenticazioneController extends HttpServlet {
             }
 
         } else if (flag == 2) {
-            String email = request.getParameter("email");
-            String password = request.getParameter("password");
-
-            if (email.length() < MINLIMIT || email.length() > MAXLIMIT) {
-                throw new IllegalArgumentException("Il login non va a buon fine "
-                        + "perché l’e-mail non rispetta la "
-                        + "lunghezza corretta");
-            }
-            if (!email.matches("^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]"
-                    + "{0,61}[a-zA-Z0-9])?(?:\\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$")) {
-                throw new IllegalArgumentException("Il login non va a buon fine "
-                        + "perché il formato dell’e-mail non è corretto");
-            }
-            if (password.length() < MINLIMIT || password.length() > MAXLIMIT) {
-                throw new IllegalArgumentException("La registrazione "
-                        + "non va a buon fine perché la password "
-                        + "inserita non rispetta la "
-                        + "lunghezza corretta");
-            }
-            if (!password.matches("(?!^[0-9]*$)(?!^[a-zA-Z]*$)^([a-zA-Z0-9]{6,15})$")) {
-                throw new IllegalArgumentException("La registrazione non "
-                        + "va a buon fine perché la password inserita"
-                        + " non rispetta il formato richiesto");
-            }
-
-            Utente u = as.loginUtente(email, password);
-            if (u != null) {
-                response.setContentType("Il login è avvenuto correttamente");
-            }
-
-        } else {
             String username = request.getParameter("username");
             String password = request.getParameter("password");
+
             if (username.length() < MINLIMIT || username.length() > MAXLIMIT) {
-                throw new IllegalArgumentException("La registrazione "
-                        + "non va a buon fine perché la username non "
-                        + "rispetta la lunghezza corretta");
+                throw new IllegalArgumentException("Il login non va a buon fine "
+                        + "perché la username non rispetta la "
+                        + "lunghezza corretta");
             }
+
             if (!username.matches("(?!^[0-9]*$)(?!^[a-zA-Z]*$)^([a-zA-Z0-9]{6,15})$")) {
-                throw new IllegalArgumentException("La registrazione non va a buon "
-                        + "fine perché la username inserita "
-                        + "non rispetta il formato richiesto");
+                throw new IllegalArgumentException("Il login non va a buon fine "
+                        + "perché il formato della username non è corretto");
             }
+
             if (password.length() < MINLIMIT || password.length() > MAXLIMIT) {
                 throw new IllegalArgumentException("La registrazione "
                         + "non va a buon fine perché la password "
                         + "inserita non rispetta la "
                         + "lunghezza corretta");
             }
+
             if (!password.matches("(?!^[0-9]*$)(?!^[a-zA-Z]*$)^([a-zA-Z0-9]{6,15})$")) {
                 throw new IllegalArgumentException("La registrazione non "
                         + "va a buon fine perché la password inserita"
                         + " non rispetta il formato richiesto");
             }
 
-            as.loginAdmin(username, password);
+            if (username.matches("@[A-Za-z]+")) {
+                Admin a = as.loginAdmin(username, password);
+
+            } else {
+                Utente u = as.loginUtente(username, password);
+                if (u != null) {
+                    response.setContentType("Il login è avvenuto correttamente");
+                }
+            }
         }
     }
 }
