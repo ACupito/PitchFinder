@@ -8,11 +8,11 @@ public interface AutenticazioneService {
 
     /**
      * This methods manages the user login.
-     * @param email is the user email
+     * @param username is the user username
      * @param password is the user password
      * @return Utente
      */
-    Utente loginUtente(String email, String password);
+    Utente loginUtente(String username, String password);
 
     /**
      * This method manages the admin login.
