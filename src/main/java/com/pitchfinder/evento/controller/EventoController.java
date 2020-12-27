@@ -1,6 +1,7 @@
 
 package com.pitchfinder.evento.controller;
 
+import com.pitchfinder.autenticazione.entity.Admin;
 import com.pitchfinder.evento.services.EventoService;
 import com.pitchfinder.evento.services.EventoServiceImpl;
 
@@ -10,66 +11,33 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.File;
 import java.sql.Date;
 import java.sql.Time;
-import java.util.Calendar;
 
 public class EventoController extends HttpServlet {
-
-    /**
-     * Minimum limit for name.
-     */
+    /** Minimum limit for name. */
     private static final int MINLIMIT = 1;
-    /**
-     * Minimum limit for year.
-     */
-    private static final int MINLIMITYEAR = new Date(Calendar.getInstance().getWeekYear()).getYear();
-    /**
-     * Maximum limit for name.
-     */
+    /** Maximum limit for name. */
     private static final int MAXLIMIT = 50;
-
-    /**
-     * Maximum limit for image.
-     */
+    /** Maximum limit for image. */
     private static final int MAXLIMITIMAGE = 2;
-
-    /**
-     * Maximum limit for hours.
-     */
+    /** Maximum limit for hours. */
     private static final int MAXHOUR = 24;
-
-    /**
-     * Maximum limit for the minutes.
-     */
+    /** Maximum limit for the minutes. */
     private static final int MAXMINUTE = 60;
-
-    /**
-     * Maximum limit for the Guest.
-     */
+    /** Maximum limit for the Guest. */
     private static final int MAXGUESTLIMIT = 20;
-
-    /**
-     * Maximum limit for the description.
-     */
+    /** Maximum limit for the description. */
     private static final int MAXDESCRIPTIONLIMIT = 500;
-
-    /**
-     * Maximum limit for the description.
-     */
+    /** Maximum limit for the description. */
     private static final int MAXSITSLIMIT = 300;
-
-
     /**
      * doPost() method.
      * @param request is the servlet request.
      * @param response is the servlet response.
      */
-
     public void doPost(final HttpServletRequest request,
                        final HttpServletResponse response) {
-
         doGet(request, response);
     }
-
 
     /**
      * doGet() method.
@@ -78,134 +46,103 @@ public class EventoController extends HttpServlet {
      */
     public void doGet(final HttpServletRequest request,
                       final HttpServletResponse response) {
+        Admin admin = (Admin) request.getSession().getAttribute("admin"); //get admin from the session
 
-        EventoService es = new EventoServiceImpl();
-        String nome = request.getParameter("nome");
-        File immagine = new File(request.getParameter("immagine"));
-        String oraInizioStr = request.getParameter("orarioInizio").substring(0, 2);
-        String minutiInizioStr = request.getParameter("orarioInizio").substring(2);
-        int oraInizio = Integer.parseInt(oraInizioStr);
-        int minutiInizio = Integer.parseInt(minutiInizioStr);
-        String oraFineStr = request.getParameter("orarioInizio").substring(0, 2);
-        String minutiFineStr = request.getParameter("orarioInizio").substring(2);
-        int oraFine = Integer.parseInt(oraFineStr);
-        int minutiFine = Integer.parseInt(minutiFineStr);
-        String dateStr = request.getParameter("date");
-        Date date = new Date(1);
-        try {
-            date = Date.valueOf(dateStr);
-        } catch (IllegalArgumentException e) {
-            throw new IllegalArgumentException("Formato Data non valido");
-        }
-        int giorno = date.getDay();
-        int mese = date.getMonth();
-        int anno = date.getYear();
-        Date dataEvento = new Date(anno - 1900, mese - 1, giorno);
-        String ospite = request.getParameter("ospite");
-        String descrizione = request.getParameter("descrizione");
-        String postiDisponibiliStr = request.getParameter("postiDisponibili");
-        int postiDisponibili = Integer.parseInt(postiDisponibiliStr);
-        if (nome.length() < MINLIMIT || nome.length() > MAXLIMIT) {
-            throw new IllegalArgumentException("La creazione "
-                    + "non va a buon fine perché il nome inserito non "
-                    + "rispetta la lunghezza corretta [1 - 50]");
-        }
-        if (!nome.matches("^[ a-zA-Z\u00C0-\u00ff']+$")) {
-            throw new IllegalArgumentException("La registrazione non va a buon "
-                    + "fine perché il nome inserito "
-                    + "non rispetta il formato richiesto");
-        }
-        if ((immagine.length() / (1024 * 1024)) > MAXLIMITIMAGE) {
-            throw new IllegalArgumentException("La creazione "
-                    + "non va a buon fine perché l'immagine inserita non "
-                    + "rispetta la grandezza corretta [<= 2MB]");
-        }
-        if (!immagine.toString().matches(".jpg") || !immagine.toString().matches(".png")) {
-            throw new IllegalArgumentException("La creazione non va a buon "
-                    + "fine perché l'immagine inserita "
-                    + "non rispetta il formato richiesto [jpg o png]");
-        }
-        if (!oraInizioStr.matches("^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$")) {
-            throw new IllegalArgumentException("La creazione "
-                    + "non va a buon fine perché l'orario di inizio "
-                    + "non ha un formato valido");
-        }
-        if (oraInizio <= 0 || minutiInizio < 0) {
-            throw new IllegalArgumentException("La creazione "
-                    + "non va a buon fine perché non è stato inserito "
-                    + "l'orario di inizio");
-        }
-        if (oraInizio > MAXHOUR || minutiInizio > MAXMINUTE) {
-            throw new IllegalArgumentException("La creazione "
-                    + "non va a buon fine perché l'orario inserito "
-                    + "non rispetta il formato corretto");
-        }
-        Time orarioInizio = new Time(oraInizio, minutiInizio, 0);
-        if (!oraFineStr.matches("^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$")) {
-            throw new IllegalArgumentException("La creazione "
-                    + "non va a buon fine perché l'orario di fine "
-                    + "non ha un formato valido");
-        }
-        if (oraFine <= 0 || minutiFine < 0) {
-            throw new IllegalArgumentException("La creazione "
-                    + "non va a buon fine perché non è stato inserito "
-                    + "l'orario di fine");
-        }
-        if (oraFine > MAXHOUR || minutiFine > MAXMINUTE) {
-            throw new IllegalArgumentException("La creazione "
-                    + "non va a buon fine perché l'orario inserito "
-                    + "non rispetta il formato corretto");
-        }
-        Time orarioFine = new Time(oraFine, minutiFine, 0);
-        if (anno < MINLIMITYEAR) {
-            throw new IllegalArgumentException("La creazione "
-                    + "non va a buon fine perché "
-                    + "l'anno dell'evento è errato");
-        }
-        if (!ospite.matches("^[ a-zA-Z\\u00C0-\\u00ff']+$")) {
-            throw new IllegalArgumentException("La creazione non va a "
-                    + "buon fine perché il nome dell'ospite inserito non "
-                    + "rispetta il formato richiesto");
-        }
-        if (ospite.length() < MINLIMIT || ospite.length() > MAXGUESTLIMIT) {
-            throw new IllegalArgumentException("La creazione non "
-                    + "va a buon fine perché il nome dell'ospite "
-                    + "inserito non rispetta "
-                    + "la lunghezza corretta [1 - 20]");
-        }
-        if (ospite.equals("")) {
-            throw new IllegalArgumentException("La creazione non "
-                    + "va a buon fine perché il nome dell'ospite "
-                    + "inserito non è presente.");
-        }
-        if (descrizione.length() < MINLIMIT || descrizione.length() > MAXDESCRIPTIONLIMIT) {
-            throw new IllegalArgumentException("La creazione non "
-                    + "va a buon fine perché la descrizione "
-                    + "inserita non rispetta "
-                    + "la lunghezza corretta [1 - 500]");
-        }
-        if (!postiDisponibiliStr.matches("[0-9]+$")) {
-            throw new IllegalArgumentException("La creazione non va a "
-                    + "buon fine poiché i posti disponibili non "
-                    + "rispettano il formato richiesto");
-        }
-        if (postiDisponibiliStr.equals("")) {
-            throw new IllegalArgumentException("La creazione non va a buon "
-                    + "fine poiché non sono stati inseriti i posti disponibili.");
-        }
-        if (postiDisponibili < MINLIMIT || postiDisponibili > MAXSITSLIMIT) {
-            throw new IllegalArgumentException("La creazione non va a "
-                    + "buon fine perché il numero dei posti inseriti "
-                    + "non rispetta la grandezza richiesta [1 - 300]");
-        }
+        if (admin != null) {
+            /* The EventoService object. */
+            EventoService es = new EventoServiceImpl();
+            /* The name of the Event (String). */
+            String nome = request.getParameter("nome");
+            /* The image's file of the event (File). */
+            String immagine = request.getParameter("immagine");
+            /* The start of the Event's hour (String). */
+            String orarioInizioStr = request.getParameter("orarioInizio");
+            /* The end of the Event's hour (String). */
+            String orarioFineStr = request.getParameter("orarioFine");
+            /* The Event's date (String). */
+            String dateStr = request.getParameter("data");
+            /* The Event's date (Date)*/
+            Date dataEvento;
+            /* The Event's guest (String). */
+            String ospite = request.getParameter("ospite");
+            /* The Event's description (String). */
+            String descrizione = request.getParameter("descrizione");
+            /* The Event's available sits (String). */
+            String postiDisponibiliStr = request.getParameter("postiDisponibili");
 
-        String immagineStr = "null";
-        String adminUsername = "null";
-        es.createEvento(nome, immagineStr, orarioInizio, orarioFine, dataEvento, ospite, descrizione, postiDisponibili, adminUsername);
-
+            if (nome.length() < MINLIMIT || nome.length() > MAXLIMIT) {
+                throw new IllegalArgumentException("Errato: lunghezza nome non valida");
+            }
+            if (!nome.matches("^[ a-zA-Z\u00C0-\u00ff']+$")) {
+                throw new IllegalArgumentException("Errato: formato non valido");
+            }
+            if (!immagine.equals("")) {
+                if (!immagine.matches(".*\\.(jpg|png)$")) {
+                    throw new IllegalArgumentException("Errato: Formato non valido");
+                }
+                File file = new File(immagine);
+                // Get length of file in bytes
+                long fileSizeInBytes = file.length();
+                // Convert the bytes to Kilobytes (1 KB = 1024 Bytes)
+                long fileSizeInKB = fileSizeInBytes / 1024;
+                // Convert the KB to MegaBytes (1 MB = 1024 KBytes)
+                long fileSizeInMB = fileSizeInKB / 1024;
+                if (fileSizeInKB > MAXLIMITIMAGE) {
+                    throw new IllegalArgumentException("Errato: dimensione non valida");
+                }
+            }
+            if (orarioInizioStr.matches("")) {
+                throw new IllegalArgumentException("Errato: orario non selezionato");
+            }
+            if (!orarioInizioStr.matches("^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$")) {
+                throw new IllegalArgumentException("Errato: formato non valido");
+            }
+            /* The start time of the Event (Time). */
+            Time orarioInizio = Time.valueOf(orarioInizioStr.concat(":00"));
+            if (orarioFineStr.matches("")) {
+                throw new IllegalArgumentException("Errato: orario non selezionato");
+            }
+            if (!orarioFineStr.matches("^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$")) {
+                throw new IllegalArgumentException("Errato: formato non valido");
+            }
+            Time orarioFine = Time.valueOf(orarioFineStr.concat(":00")); /* The end time of the Event (Time). */
+            if (dateStr.equals("")) {
+                throw new IllegalArgumentException("Errato: data non selezionata");
+            }
+            Date myDate = new Date(System.currentTimeMillis());
+            try {
+                dataEvento = Date.valueOf(dateStr); /* The Event's date (Date). */
+                if (dataEvento.before(myDate)) {
+                    throw new IllegalArgumentException("Errato: formato non valido");
+                }
+            } catch (IllegalArgumentException e) {
+                throw new IllegalArgumentException("Errato: formato non valido");
+            }
+            if (ospite.length() < MINLIMIT || ospite.length() > MAXGUESTLIMIT) {
+                throw new IllegalArgumentException("Errato: lunghezza non valida");
+            }
+            if (!ospite.matches("^[ a-zA-Z\\u00C0-\\u00ff']+$")) {
+                throw new IllegalArgumentException("Errato: formato non valido");
+            }
+            if (descrizione.length() < MINLIMIT || descrizione.length() > MAXDESCRIPTIONLIMIT) {
+                throw new IllegalArgumentException("Errato: lunghezza non valida");
+            }
+            if (!descrizione.matches("^[ a-zA-Z\\u00C0-\\u00ff']+$")) {
+                throw new IllegalArgumentException("Errato: formato non valido");
+            }
+            if (postiDisponibiliStr.equals("")) {
+                throw new IllegalArgumentException("Errato: lunghezza non valida");
+            }
+            if (!postiDisponibiliStr.matches("[0-9]+$")) {
+                throw new IllegalArgumentException("Errato: formato non valido");
+            }
+            int postiDisponibili = Integer.parseInt(postiDisponibiliStr); /* The Event's available sits (Integer). */
+            if (postiDisponibili < MINLIMIT || postiDisponibili > MAXSITSLIMIT) {
+                throw new IllegalArgumentException("Errato: lunghezza non valida");
+            }
+            es.createEvento(nome, "immagineStr", orarioInizio, orarioFine, dataEvento,
+                            ospite, descrizione, postiDisponibili, admin.getUsername());
+            response.setContentType("Creazione avvenuta");
+        }
     }
-
-
-
-
 }
