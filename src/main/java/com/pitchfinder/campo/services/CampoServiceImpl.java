@@ -100,7 +100,7 @@ public class CampoServiceImpl {
         for (i = 0; i < emailList.size(); i++) {
             String email = emailList.get(i);
 
-            u = ut.doRetrieveUtenteByEmail(email);
+            u = ut.prelevaUtenteByEmail(email);
 
             listaUtenti.add(u);
         }
