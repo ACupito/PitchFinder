@@ -35,10 +35,10 @@ public class Admin {
     }
 
     /**
-     * @param username is the admin username
-     * @param nome is the admin name
-     * @param cognome is the admin surname
-     * @param passwordHash is the admin password
+     * @param username is the user username
+     * @param nome is the user name
+     * @param cognome is the user surname
+     * @param passwordHash is the user password
      */
     public Admin(String username, String nome, String cognome,
                  String passwordHash) {
@@ -60,7 +60,7 @@ public class Admin {
      * This method set the value of the variable username.
      * @param usernamePar the admin username
      */
-    public void setUsername(String usernamePar) {
+    public void setUsername(final String usernamePar) {
         this.username = usernamePar;
     }
 
@@ -76,7 +76,7 @@ public class Admin {
      * This method sets the value of the variable nome.
      * @param nomePar is the admin name
      */
-    public void setNome(String nomePar) {
+    public void setNome(final String nomePar) {
         this.nome = nomePar;
     }
 
@@ -92,7 +92,7 @@ public class Admin {
      * This method sets the value of the variable cognome.
      * @param cognomePar is the admin surname
      */
-    public void setCognome(String cognomePar) {
+    public void setCognome(final String cognomePar) {
         this.cognome = cognomePar;
     }
 
@@ -108,7 +108,7 @@ public class Admin {
      * This method sets the value of the passwordHash.
      * @param password is the admin password
      */
-    public void setPassword(String password) {
+    public void setPassword(final String password) {
 
         try {
 

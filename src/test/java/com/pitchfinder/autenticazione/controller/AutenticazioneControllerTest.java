@@ -37,11 +37,11 @@ class AutenticazioneControllerTest extends Mockito {
     void TC_4_1_1() {
 
         Mockito.when(mockedRequest.getParameter("flag")).thenReturn("2");
-        Mockito.when(mockedRequest.getParameter("username")).thenReturn("");
+        Mockito.when(mockedRequest.getParameter("email")).thenReturn("");
         Mockito.when(mockedRequest.getParameter("password")).thenReturn(password);
 
         String message = "Il login non va a buon fine " +
-                "perché la username non rispetta la " +
+                "perché l’e-mail non rispetta la " +
                 "lunghezza corretta";
 
         exception = assertThrows(
@@ -56,11 +56,11 @@ class AutenticazioneControllerTest extends Mockito {
     void TC_4_1_2() {
 
         Mockito.when(mockedRequest.getParameter("flag")).thenReturn("2");
-        Mockito.when(mockedRequest.getParameter("username")).thenReturn("Mariox 99");
+        Mockito.when(mockedRequest.getParameter("email")).thenReturn("mario99 @gmail.com");
         Mockito.when(mockedRequest.getParameter("password")).thenReturn(password);
 
         String message = "Il login non va a buon fine " +
-                "perché il formato della username non è corretto";
+                "perché il formato dell’e-mail non è corretto";
 
         exception = assertThrows(
                 IllegalArgumentException.class, () -> {
@@ -74,7 +74,7 @@ class AutenticazioneControllerTest extends Mockito {
     void TC_4_1_3() {
 
         Mockito.when(mockedRequest.getParameter("flag")).thenReturn("2");
-        Mockito.when(mockedRequest.getParameter("username")).thenReturn(username);
+        Mockito.when(mockedRequest.getParameter("email")).thenReturn(email);
         Mockito.when(mockedRequest.getParameter("password")).thenReturn("PitchFind57");
 
         String message = "Il login non va a buon " +
@@ -92,7 +92,7 @@ class AutenticazioneControllerTest extends Mockito {
     void TC_4_1_4() {
 
         Mockito.when(mockedRequest.getParameter("flag")).thenReturn("2");
-        Mockito.when(mockedRequest.getParameter("username")).thenReturn(username);
+        Mockito.when(mockedRequest.getParameter("email")).thenReturn(email);
         Mockito.when(mockedRequest.getParameter("password")).thenReturn(password);
 
         servlet.doGet(mockedRequest, mockedResponse);
@@ -173,7 +173,7 @@ class AutenticazioneControllerTest extends Mockito {
 
         Mockito.when(mockedRequest.getParameter("flag")).thenReturn("1");
         Mockito.when(mockedRequest.getParameter("email")).thenReturn(email);
-        Mockito.when(mockedRequest.getParameter("username")).thenReturn("@Mariox99");
+        Mockito.when(mockedRequest.getParameter("username")).thenReturn("Mariox 99");
         Mockito.when(mockedRequest.getParameter("nome")).thenReturn(nome);
         Mockito.when(mockedRequest.getParameter("cognome")).thenReturn(cognome);
         Mockito.when(mockedRequest.getParameter("password")).thenReturn(password);
