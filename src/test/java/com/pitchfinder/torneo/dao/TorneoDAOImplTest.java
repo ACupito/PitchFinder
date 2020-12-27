@@ -142,6 +142,15 @@ class TorneoDAOImplTest {
     }
 
     /**
+     * This method tests the method doRetrieveAllTornei.
+     */
+    @Test
+    void checkGetAllTornei5() {
+         assertNotNull(tdao.doRetrieveAllTornei());
+    }
+
+
+    /**
      * Cleanup the environment.
      */
     @AfterAll
