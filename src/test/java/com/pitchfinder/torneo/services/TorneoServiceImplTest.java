@@ -47,7 +47,7 @@ class TorneoServiceImplTest {
      * This method tests the method createTorneo in case it fails.
      */
     @Test
-    void checkCreateTorneoTest_1() {
+    void check_1() {
 
         String usernameAdmin = "";
         int idCampo = 0;
@@ -65,7 +65,7 @@ class TorneoServiceImplTest {
      * This method tests the method createTorneo in case it successful.
      */
     @Test
-    void checkCreateTorneoTest_2() {
+    void check_2() {
 
         Date dataInizio = Date.valueOf(DATA_INIZIO);
         Date dataFine = Date.valueOf(DATA_FINE);
@@ -78,10 +78,20 @@ class TorneoServiceImplTest {
     }
 
     /**
+     * This method tests the method getAllTornei.
+     */
+    @Test
+    void check_3() {
+
+        assertNotNull(tservice.getAllTornei());
+
+    }
+
+    /**
      * This method tests the method deleteTorneo in case it fails.
      */
     @Test
-    void checkDeleteTorneoTest_3() {
+    void check_4() {
 
         int idCampo = 0;
         String nome = "";
@@ -95,12 +105,13 @@ class TorneoServiceImplTest {
      * This method tests the method deleteTorneo in case it successful.
      */
     @Test
-    void checkDeleteTorneoTest_4() {
+    void check_5() {
 
         Date dataInizio = Date.valueOf(DATA_INIZIO);
         assertTrue(tservice.deleteTorneo(ID_CAMPO, NOME, dataInizio));
 
     }
+
 
     /**
      * Cleanup the environment.
