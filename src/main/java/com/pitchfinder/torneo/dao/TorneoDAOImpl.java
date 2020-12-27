@@ -44,7 +44,6 @@ public class TorneoDAOImpl implements TorneoDAO {
             ps.setInt(9, torneo.getMinNumeroPartecipantiPerSquadra());
             ps.setInt(10, torneo.getMaxNumeroPartecipantiPerSquadra());
             ps.setString(11, torneo.getGiornoPartite());
-
             return ps.executeUpdate() == 1;
         } catch (SQLException s) {
             return false;
@@ -67,7 +66,6 @@ public class TorneoDAOImpl implements TorneoDAO {
             ps.setInt(3, torneo.getCampoIdentificativo());
 
             return ps.executeUpdate() == 1;
-
         } catch (SQLException s) {
             return false;
         }
