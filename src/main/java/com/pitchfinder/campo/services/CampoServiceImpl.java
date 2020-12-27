@@ -2,6 +2,7 @@ package com.pitchfinder.campo.services;
 
 import com.pitchfinder.autenticazione.dao.UtenteDAOImpl;
 import com.pitchfinder.autenticazione.entity.Utente;
+import com.pitchfinder.autenticazione.services.AutenticazioneServiceImpl;
 import com.pitchfinder.campo.dao.CampoDAOImpl;
 import java.sql.Date;
 import java.sql.Time;
@@ -87,10 +88,11 @@ public class CampoServiceImpl {
      * @param fine    is the end of the availability.
      * @return List<Utente>
      */
+
     List<Utente> showAllDisponibilita(int idCampo, Date data, Time inizio, Time fine) {
         CampoDAOImpl c = new CampoDAOImpl();
-        Utente u = new Utente();
-        UtenteDAOImpl ut = new UtenteDAOImpl();
+        AutenticazioneServiceImpl ut = new AutenticazioneServiceImpl();
+        Utente u =new Utente();
         List<Utente> listaUtenti = new ArrayList<>();
         int i;
 
@@ -98,11 +100,9 @@ public class CampoServiceImpl {
         for (i = 0; i < emailList.size(); i++) {
             String email = emailList.get(i);
 
-            u.setEmail(email);
+            u = ut.doRetrieveUtenteByEmail(email);
 
-            Utente completo = ut.checkUtente(u);
-
-            listaUtenti.add(completo);
+            listaUtenti.add(u);
         }
         return listaUtenti;
     }

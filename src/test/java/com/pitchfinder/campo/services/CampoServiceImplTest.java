@@ -1,5 +1,4 @@
 package com.pitchfinder.campo.services;
-import com.pitchfinder.campo.dao.CampoDAO;
 import com.pitchfinder.campo.dao.CampoDAOImpl;
 import com.pitchfinder.campo.entity.Campo;
 import org.junit.jupiter.api.AfterAll;
