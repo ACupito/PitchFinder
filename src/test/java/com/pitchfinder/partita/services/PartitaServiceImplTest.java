@@ -48,13 +48,14 @@ class PartitaServiceImplTest {
                 date,start,end);
 
         daoPartita.doSavePartita(pTest);
-
         List<Partita> partite = daoPartita.doRetrieveAll();
         for (Partita p: partite) {
             if(p.getEmailUtente().equals("test99@gmail.com")){
                 pTest = p;
             }
         }
+
+        daoPartita.doSaveGiocatore(pTest.getIdPartita(), "Eugenio", "Montale");
 
     }
 
@@ -75,7 +76,7 @@ class PartitaServiceImplTest {
 
     @Test
     void createGiocatorePartitaTest(){
-
+        assertTrue(serviceTest.createGiocatorePartita(pTest.getIdPartita(), "Catello", "Ercolano"));
     }
 
     @AfterAll
@@ -106,5 +107,19 @@ class PartitaServiceImplTest {
             throw new RuntimeException(e);
         }
 
+        //Delete player used for the testing
+
+        try (Connection con = ConPool.getInstance().getConnection()) {
+
+            String query = "DELETE FROM giocatore "
+                    + "WHERE PartitaIdentificativoPartita = ?";
+            PreparedStatement ps =
+                    con.prepareStatement(query);
+            ps.setInt(1, pTest.getIdPartita());
+            ps.executeUpdate();
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 }
