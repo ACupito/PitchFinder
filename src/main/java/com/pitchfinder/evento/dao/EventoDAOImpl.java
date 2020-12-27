@@ -78,10 +78,7 @@ public class EventoDAOImpl implements EventoDAO {
                         con.prepareStatement("DELETE FROM evento WHERE Nome=? and Data=?");
                 ps.setString(ONE, event.getName());
                 ps.setDate(TWO, event.getDate());
-                if (1 == ps.executeUpdate()) {
-                    return true;
-                }
-                return false;
+                return 1 == ps.executeUpdate();
             } catch (SQLException e) {
                 throw new RuntimeException(e);
             }
@@ -100,7 +97,7 @@ public class EventoDAOImpl implements EventoDAO {
                 PreparedStatement ps =
                         con.prepareStatement(query);
                 ResultSet rs =  ps.executeQuery();
-                List<Evento> allEvents = new ArrayList<Evento>();
+                List<Evento> allEvents = new ArrayList<>();
                 while (rs.next()) {
                     Evento eventoAdd = new Evento(rs.getString(ONE),
                             rs.getString(TWO), rs.getTime(THREE),

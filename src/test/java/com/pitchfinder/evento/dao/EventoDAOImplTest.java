@@ -1,4 +1,4 @@
-package evento.dao;
+package com.pitchfinder.evento.dao;
 
 import com.pitchfinder.evento.dao.EventoDAO;
 import com.pitchfinder.evento.dao.EventoDAOImpl;
