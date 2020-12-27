@@ -35,4 +35,10 @@ public interface AutenticazioneService {
     boolean registraUtente(String email, String username,
                            String nome, String cognome,
                            String password, Date dataDiNascita);
+
+    /**
+     * @param email is the user email
+     * @return utente
+     */
+    Utente prelevaUtenteByEmail(String email);
 }
