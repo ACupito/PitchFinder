@@ -31,6 +31,7 @@ public interface PartitaService {
      * @param idPartita idPartita
      * @param nome nome
      * @param cognome cognome
+     * @return boolean
      */
-    void createGiocatorePartita(int idPartita, String nome, String cognome);
+    boolean createGiocatorePartita(int idPartita, String nome, String cognome);
 }

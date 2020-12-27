@@ -53,10 +53,15 @@ public class PartitaServiceImpl implements PartitaService {
      * @param idPartita idPartita
      * @param nome      nome
      * @param cognome   cognome
+     * @return boolean
      */
     @Override
-    public void createGiocatorePartita(int idPartita, String nome, String cognome) {
-
+    public boolean createGiocatorePartita(int idPartita, String nome, String cognome) {
+        PartitaDAO dao = new PartitaDAOImpl();
+        if (dao.doSaveGiocatore(idPartita, nome, cognome)) {
+            return true;
+        }
+        return  false;
     }
 
 
