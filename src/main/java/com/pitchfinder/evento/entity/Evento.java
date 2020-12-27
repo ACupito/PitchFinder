@@ -1,6 +1,7 @@
 package com.pitchfinder.evento.entity;
 
-import java.util.Date;
+import java.sql.Date;
+import java.sql.Time;
 import java.util.Objects;
 
 public class Evento {
@@ -9,9 +10,9 @@ public class Evento {
     /** The Event's image path. */
     private String image;
     /** The Event's start time. */
-    private String startHour;
+    private Time startHour;
     /** The Event's end time. */
-    private String endHour;
+    private Time endHour;
     /** The Event's date. */
     private Date date;
     /** The Event's Guest. */
@@ -37,8 +38,8 @@ public class Evento {
      */
     public Evento(final String nome,
                   final String immagine,
-                  final String oraInizio,
-                  final String oraFine,
+                  final Time oraInizio,
+                  final Time oraFine,
                   final Date data,
                   final String ospite,
                   final String descrizione,
@@ -80,22 +81,22 @@ public class Evento {
     /**
      * @return String
      */
-    public String getStartHour() {
+    public Time getStartHour() {
         return startHour;
     }
 
     /**
      * @return String
      */
-    public String getEndHour() {
+    public Time getEndHour() {
         return endHour;
     }
 
     /**
      * @return Date
      */
-    public java.sql.Date getDate() {
-        return (java.sql.Date) date;
+    public Date getDate() {
+        return date;
     }
 
     /**
@@ -147,7 +148,7 @@ public class Evento {
      *
      * @param oraInizio - start hour of the event
      */
-    public void setStartHour(final String oraInizio) {
+    public void setStartHour(final Time oraInizio) {
         this.startHour = oraInizio;
     }
 
@@ -155,7 +156,7 @@ public class Evento {
      *
      * @param oraFine - end hour start of the event
      */
-    public void setEndHour(final String oraFine) {
+    public void setEndHour(final Time oraFine) {
         this.endHour = oraFine;
     }
 

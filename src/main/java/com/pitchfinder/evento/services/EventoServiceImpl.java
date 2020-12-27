@@ -4,6 +4,7 @@ import com.pitchfinder.evento.dao.EventoDAOImpl;
 import com.pitchfinder.evento.entity.Evento;
 
 import java.sql.Date;
+import java.sql.Time;
 import java.util.List;
 
 public class EventoServiceImpl implements EventoService {
@@ -24,8 +25,8 @@ public class EventoServiceImpl implements EventoService {
      */
     public Evento createEvento(final String nome,
                                final String immagine,
-                               final String oraInizio,
-                               final String oraFine,
+                               final Time oraInizio,
+                               final Time oraFine,
                                final Date data,
                                final String ospite,
                                final String descrizione,
