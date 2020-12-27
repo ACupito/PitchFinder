@@ -1,7 +1,6 @@
 package com.pitchfinder.torneo.entity;
 
 import java.sql.Date;
-import java.util.Objects;
 
 /**
  * This class manages the Torneo entity.
@@ -285,5 +284,4 @@ public class Torneo {
             final int pitchId) {
         this.campoIdentificativo = pitchId;
     }
-    
 }

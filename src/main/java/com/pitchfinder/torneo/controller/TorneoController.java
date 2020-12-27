@@ -149,8 +149,7 @@ public class TorneoController extends HttpServlet {
                 response.setContentType("Creazione avvenuta");
             }
 
-        }
-        else if (flag == 2 && admin != null && campo != null) {
+        } else if (flag == 2 && admin != null && campo != null) {
             //when remove button clicked.
 
             if (nome.length() < 1 || nome.length() > 50) {
@@ -171,7 +170,7 @@ public class TorneoController extends HttpServlet {
             }
 
             boolean removeResult = ts.deleteTorneo(campo.getIdentificativo(), nome, dataInizio);
-            if(removeResult) response.setContentType("Eliminazione avvenuta");
+            if (removeResult) response.setContentType("Eliminazione avvenuta");
         }
 
 
