@@ -1,8 +1,4 @@
-package com.pitchfinder.campo.controller;
-
-
-import com.pitchfinder.campo.dao.CampoDAO;
-import com.pitchfinder.campo.dao.CampoDAOImpl;
+package com.pitchfinder.campo.dao;
 import com.pitchfinder.campo.entity.Campo;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
