@@ -5,12 +5,10 @@ import com.pitchfinder.autenticazione.entity.Admin;
 import com.pitchfinder.evento.services.EventoService;
 import com.pitchfinder.evento.services.EventoServiceImpl;
 
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.File;
-import java.io.IOException;
 import java.sql.Date;
 import java.sql.Time;
 
@@ -113,7 +111,7 @@ public class EventoController extends HttpServlet {
             }
             Date myDate = new Date(System.currentTimeMillis());
             try {
-                dataEvento = Date.valueOf(dateStr);/* The Event's date (Date). */
+                dataEvento = Date.valueOf(dateStr); /* The Event's date (Date). */
                 if (dataEvento.before(myDate)) {
                     throw new IllegalArgumentException("Errato: formato non valido");
                 }
