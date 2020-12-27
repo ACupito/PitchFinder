@@ -58,7 +58,8 @@ public class CampoDAOImpl implements CampoDAO {
 
         try (Connection con = ConPool.getInstance().getConnection()) {
             PreparedStatement ps =
-                    con.prepareStatement("INSERT INTO Occupazione (Data, OrarioInizio, OrarioFine, CampoIdentificativo, AdminUsername) VALUES(?,?,?,?,?)");
+                    con.prepareStatement("INSERT INTO Occupazione "
+                            + "(Data, OrarioInizio, OrarioFine, CampoIdentificativo, AdminUsername) VALUES(?,?,?,?,?)");
             ps.setDate(1, data);
             ps.setTime(2, inizio);
             ps.setTime(3, fine);
@@ -89,15 +90,17 @@ public class CampoDAOImpl implements CampoDAO {
     public boolean doRemoveOccupazione(int idCampo, Date data, Time inizio, Time fine) {
         try (Connection con = ConPool.getInstance().getConnection()) {
             PreparedStatement ps =
-                    con.prepareStatement("delete from Occupazione where CampoIdentificativo=? and Data=? and OrarioInizio=? and OrarioFine=?");
+                    con.prepareStatement("delete from Occupazione "
+                            + "where CampoIdentificativo=? and Data=? and OrarioInizio=? and OrarioFine=?");
 
             ps.setInt(1, idCampo);
             ps.setDate(2, data);
             ps.setTime(3, inizio);
             ps.setTime(4, fine);
 
-            if(ps.executeUpdate() == 1)
+            if (ps.executeUpdate() == 1) {
                 return true;
+            }
 
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -129,7 +132,6 @@ public class CampoDAOImpl implements CampoDAO {
             if (rs.next()) {
 
                 return true;
-                
             }
 
         } catch (SQLException e) {
@@ -189,8 +191,9 @@ public class CampoDAOImpl implements CampoDAO {
             ps.setString(1, emailUtente);
             ps.setInt(2, idCampo);
 
-            if(ps.executeUpdate() == 1)
+            if (ps.executeUpdate() == 1) {
                 return true;
+            }
 
         } catch (SQLException e) {
             throw new RuntimeException(e);

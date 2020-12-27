@@ -1,6 +1,4 @@
 package com.pitchfinder.campo.services;
-
-import com.pitchfinder.autenticazione.dao.UtenteDAOImpl;
 import com.pitchfinder.autenticazione.entity.Utente;
 import com.pitchfinder.autenticazione.services.AutenticazioneServiceImpl;
 import com.pitchfinder.campo.dao.CampoDAOImpl;
@@ -92,7 +90,7 @@ public class CampoServiceImpl {
     List<Utente> showAllDisponibilita(int idCampo, Date data, Time inizio, Time fine) {
         CampoDAOImpl c = new CampoDAOImpl();
         AutenticazioneServiceImpl ut = new AutenticazioneServiceImpl();
-        Utente u =new Utente();
+        Utente u = new Utente();
         List<Utente> listaUtenti = new ArrayList<>();
         int i;
 
