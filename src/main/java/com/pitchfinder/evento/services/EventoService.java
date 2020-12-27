@@ -3,6 +3,7 @@ package com.pitchfinder.evento.services;
 import com.pitchfinder.evento.entity.Evento;
 
 import java.sql.Date;
+import java.sql.Time;
 import java.util.List;
 
 public interface EventoService {
@@ -23,8 +24,8 @@ public interface EventoService {
      */
     Evento createEvento(String nome,
                         String immagine,
-                        String oraInizio,
-                        String oraFine,
+                        Time oraInizio,
+                        Time oraFine,
                         Date data,
                         String ospite,
                         String descrizione,
