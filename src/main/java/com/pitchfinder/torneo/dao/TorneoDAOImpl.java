@@ -104,8 +104,7 @@ public class TorneoDAOImpl implements TorneoDAO {
 
             }
 
-            if(tornei.size() == 0)  return null;
-            else return tornei;
+            return tornei;
 
         } catch (SQLException s) {
             throw new RuntimeException(s);
