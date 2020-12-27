@@ -5,6 +5,7 @@ import com.pitchfinder.torneo.dao.TorneoDAOImpl;
 import com.pitchfinder.torneo.entity.Torneo;
 
 import java.sql.Date;
+import java.util.List;
 
 /**
  * This class manages the TorneoService implementation.
@@ -79,4 +80,13 @@ public class TorneoServiceImpl implements TorneoService {
 
     }
 
+    /**
+     * This method allows to get all tournaments.
+     * @return A list of Torneo items
+     */
+    public List<Torneo> getAllTornei() {
+
+        return tdao.doRetrieveAllTornei();
+
+    }
 }
