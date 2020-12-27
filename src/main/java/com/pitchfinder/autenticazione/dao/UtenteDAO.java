@@ -2,7 +2,6 @@ package com.pitchfinder.autenticazione.dao;
 
 import com.pitchfinder.autenticazione.entity.Utente;
 
-
 public interface UtenteDAO {
 
     /**
@@ -19,11 +18,4 @@ public interface UtenteDAO {
      * @return boolean
      */
     Utente checkUtente(Utente utente);
-
-    /**
-     * This method returns a list of users using input emails.
-     * @param u is the user
-     * @return utente
-     */
-    Utente doRetrieveUtenteByEmail(Utente u);
 }
