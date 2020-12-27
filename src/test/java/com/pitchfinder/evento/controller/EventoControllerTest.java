@@ -30,7 +30,7 @@ public class EventoControllerTest {
      * Parameters declaration.
      */
     private static final String NOME = "NomeEvento";
-    private static final String IMMAGINE = "D:\\ScreenShots\\2020-12\\UI_GE_5.jpg";
+    private static final String IMMAGINE = "src/main/webapp/images/events/imageTest.jpg";
     private static final String OSPITE = "Giuseppe Verdi";
     private static final String DESCRIZIONE = "Questo è un evento bello però fittizio";
     private static final String ORARIO_INIZIO = "15:30";
@@ -117,7 +117,7 @@ public class EventoControllerTest {
     @Test
     void TC_11_3(){
         Mockito.when(mockedRequest.getParameter("nome")).thenReturn(NOME);
-        Mockito.when(mockedRequest.getParameter("immagine")).thenReturn("D:\\ScreenShots\\2020-12\\UI_GE_5.gif");
+        Mockito.when(mockedRequest.getParameter("immagine")).thenReturn("src/main/webapp/images/events/imageTest.gif");
         Mockito.when(mockedRequest.getParameter("ospite")).thenReturn(OSPITE);
         Mockito.when(mockedRequest.getParameter("descrizione")).thenReturn(DESCRIZIONE);
         Mockito.when(mockedRequest.getParameter("orarioInizio")).thenReturn(ORARIO_INIZIO);
@@ -139,7 +139,7 @@ public class EventoControllerTest {
     @Test
     void TC_11_4(){
         Mockito.when(mockedRequest.getParameter("nome")).thenReturn(NOME);
-        Mockito.when(mockedRequest.getParameter("immagine")).thenReturn("D:\\Downloads\\hdPicture.jpg");
+        Mockito.when(mockedRequest.getParameter("immagine")).thenReturn("src/main/webapp/images/events/hdPicture.jpg");
         Mockito.when(mockedRequest.getParameter("ospite")).thenReturn(OSPITE);
         Mockito.when(mockedRequest.getParameter("descrizione")).thenReturn(DESCRIZIONE);
         Mockito.when(mockedRequest.getParameter("orarioInizio")).thenReturn(ORARIO_INIZIO);
