@@ -65,34 +65,37 @@ public class Torneo {
     private int campoIdentificativo;
 
     /**
-     * Constructor.
-     * @param nome
-     * @param tipo
-     * @param struttura
-     * @param giornoPartite
-     * @param adminUsername
-     * @param numeroSquadre
-     * @param minNumeroPartecipantiPerSquadra
-     * @param maxNumeroPartecipantiPerSquadra
-     * @param dataInizio
-     * @param dataFine
-     * @param campoIdentificativo
+     * Constructor for the Torneo entity.
+     * @param name name of the tournament
+     * @param type type of the tournament
+     * @param structure structure of the tournament
+     * @param matchDay match day of the tournament
+     * @param username admin username
+     * @param numberTeams maximum number of the teams
+     * @param minNumberPlayers minimum number of players for the team
+     * @param maxNumberPlayers maximum number of players for the team
+     * @param startDate start date of the tournament
+     * @param endDate end date of the tournament
+     * @param pitchId identifier of the pitch
      */
-    public Torneo(String nome, String tipo, String struttura, String giornoPartite,
-                  String adminUsername, int numeroSquadre, int minNumeroPartecipantiPerSquadra,
-                  int maxNumeroPartecipantiPerSquadra, Date dataInizio, Date dataFine,
-                  int campoIdentificativo) {
-        this.nome = nome;
-        this.tipo = tipo;
-        this.struttura = struttura;
-        this.giornoPartite = giornoPartite;
-        this.adminUsername = adminUsername;
-        this.numeroSquadre = numeroSquadre;
-        this.minNumeroPartecipantiPerSquadra = minNumeroPartecipantiPerSquadra;
-        this.maxNumeroPartecipantiPerSquadra = maxNumeroPartecipantiPerSquadra;
-        this.dataInizio = dataInizio;
-        this.dataFine = dataFine;
-        this.campoIdentificativo = campoIdentificativo;
+
+    public Torneo(final String name, final String type,
+                  final String structure, final String matchDay,
+                  final String username, final int numberTeams,
+                  final int minNumberPlayers, final int maxNumberPlayers,
+                  final Date startDate, final Date endDate,
+                  final int pitchId) {
+        this.nome = name;
+        this.tipo = type;
+        this.struttura = structure;
+        this.giornoPartite = matchDay;
+        this.adminUsername = username;
+        this.numeroSquadre = numberTeams;
+        this.minNumeroPartecipantiPerSquadra = minNumberPlayers;
+        this.maxNumeroPartecipantiPerSquadra = maxNumberPlayers;
+        this.dataInizio = startDate;
+        this.dataFine = endDate;
+        this.campoIdentificativo = pitchId;
     }
 
     /**
