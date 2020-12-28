@@ -8,11 +8,11 @@ public interface AutenticazioneService {
 
     /**
      * This methods manages the user login.
-     * @param username is the user username
+     * @param email is the user email
      * @param password is the user password
      * @return Utente
      */
-    Utente loginUtente(String username, String password);
+    Utente loginUtente(String email, String password);
 
     /**
      * This method manages the admin login.
@@ -35,10 +35,4 @@ public interface AutenticazioneService {
     boolean registraUtente(String email, String username,
                            String nome, String cognome,
                            String password, Date dataDiNascita);
-
-    /**
-     * @param email is the user email
-     * @return utente
-     */
-    Utente prelevaUtenteByEmail(String email);
 }
