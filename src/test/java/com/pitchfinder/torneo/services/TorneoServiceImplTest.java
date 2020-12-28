@@ -54,10 +54,12 @@ class TorneoServiceImplTest {
         Date dataInizio = Date.valueOf(DATA_INIZIO);
         Date dataFine = Date.valueOf(DATA_FINE);
 
-        //check if the method return true
-        assertFalse(tservice.createTorneo(usernameAdmin, idCampo, NOME, TIPO,
-               STRUTTURA, MAX_SQUADRE, dataInizio, dataFine, MIN_PARTECIPANTI, MAX_PARTECIPANTI,
+        String message = "Creazione fallita";
+
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> tservice.createTorneo(usernameAdmin, idCampo, NOME, TIPO,
+                STRUTTURA, MAX_SQUADRE, dataInizio, dataFine, MIN_PARTECIPANTI, MAX_PARTECIPANTI,
                 GIORNO_PARTITE));
+        assertEquals(message, exception.getMessage());
 
     }
 
@@ -97,7 +99,10 @@ class TorneoServiceImplTest {
         String nome = "";
         Date dataInizio = Date.valueOf(DATA_INIZIO);
 
-        assertFalse(tservice.deleteTorneo(idCampo, nome, dataInizio));
+        String message = "Eliminazione fallita";
+
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> tservice.deleteTorneo(idCampo, nome, dataInizio));
+        assertEquals(message, exception.getMessage());
 
     }
 
