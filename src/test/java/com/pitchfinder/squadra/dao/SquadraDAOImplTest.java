@@ -15,7 +15,7 @@ import java.sql.SQLException;
 import static org.junit.jupiter.api.Assertions.*;
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
- class SquadraDaoImplTest {
+ class SquadraDAOImplTest {
     SquadraDAO squadraDAO = new SquadraDAOImpl();
 
     @BeforeAll
@@ -38,6 +38,15 @@ import static org.junit.jupiter.api.Assertions.*;
         assertTrue(squadraDAO.doSaveSquadra(squadra));
     }
 
+    @Test
+    public void checkDoSaveSquadraError(){
+
+        Date dataInizio = new Date(2020-1900, 1-1, 8);
+        Squadra squadra = new Squadra(null, "serieA", dataInizio, 1002, 10, "Lucia", "mario96@gmail.com");
+
+        assertThrows(RuntimeException.class,()->{squadraDAO.doSaveSquadra(squadra);});
+    }
+
     /**
      * Success.
      */
@@ -48,7 +57,6 @@ import static org.junit.jupiter.api.Assertions.*;
         Squadra squadra = new Squadra("Palermo", "serieA", dataInizio, 1002, 10, "Lucia", "mario96@gmail.com");
         assertTrue(squadraDAO.doRemoveSquadra(squadra));
     }
-
 
     /**
      * Success.

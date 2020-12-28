@@ -33,12 +33,8 @@ public class SquadraDAOImpl implements SquadraDAO {
             ps.setString(6, squadra.getCapitano());
             ps.setString(7, squadra.getUtenteEmail());
 
-            if (ps.executeUpdate() != 1) {
 
-                return false;
-            }
-
-            return true;
+            return ps.executeUpdate() == 1;
 
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -63,12 +59,8 @@ public class SquadraDAOImpl implements SquadraDAO {
             ps.setDate(3, (Date) squadra.getTorneoDataInizio());
             ps.setInt(4, squadra.getTorneoCampoIdentificativo());
 
-            if (ps.executeUpdate() != 1) {
+            return ps.executeUpdate() == 1;
 
-                return false;
-            }
-
-            return true;
 
         } catch (SQLException throwables) {
 
@@ -100,12 +92,8 @@ public class SquadraDAOImpl implements SquadraDAO {
             ps.setDate(5, (Date) squadra.getTorneoDataInizio());
             ps.setInt(6, squadra.getTorneoCampoIdentificativo());
 
-            if (ps.executeUpdate() != 1) {
 
-                return false;
-            }
-
-            return true;
+            return ps.executeUpdate() == 1;
 
         } catch (SQLException e) {
             throw new RuntimeException(e);
