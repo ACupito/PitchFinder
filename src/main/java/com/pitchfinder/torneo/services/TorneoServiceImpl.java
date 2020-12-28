@@ -48,8 +48,11 @@ public class TorneoServiceImpl implements TorneoService {
                 maxSquadre, minPartecipanti, maxPartecipanti, dataInizio,
                 dateFine, idCampo);
 
-        return tdao.doSaveTorneo(torneo);
-
+        boolean result = tdao.doSaveTorneo(torneo);
+        if (!result) {
+           throw new IllegalArgumentException("Creazione fallita");
+        }
+        return true;
     }
 
     /**
@@ -59,6 +62,7 @@ public class TorneoServiceImpl implements TorneoService {
      * @param dataInizio dataInizio of the tournament
      * @return boolean -> true : created / false : failed creation
      */
+    @Override
     public boolean deleteTorneo(int idCampo, String nome, Date dataInizio) {
 
         Torneo torneo = new Torneo();
@@ -66,17 +70,24 @@ public class TorneoServiceImpl implements TorneoService {
         torneo.setNome(nome);
         torneo.setDataInizio(dataInizio);
 
-        return tdao.doRemoveTorneo(torneo);
-
+        boolean result = tdao.doRemoveTorneo(torneo);
+        if (!result) {
+            throw new IllegalArgumentException("Eliminazione fallita");
+        }
+        return true;
     }
 
     /**
      * This method allows to get all tournaments.
      * @return A list of Torneo items
      */
+    @Override
     public List<Torneo> getAllTornei() {
 
-        return tdao.doRetrieveAllTornei();
-
+        List<Torneo> tornei = tdao.doRetrieveAllTornei();
+        if (tornei == null) {
+            throw new NullPointerException("Lista tornei null.");
+        }
+        return tornei;
     }
 }
