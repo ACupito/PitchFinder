@@ -87,4 +87,18 @@ public class AutenticazioneServiceImpl implements AutenticazioneService {
 
         return ud.doRetrieveUtenteByEmail(u);
     }
+
+    /**
+     * @param username is the user username
+     * @return boolean
+     */
+    public boolean removeUtente(String username) {
+
+        Utente u = new Utente();
+        u.setUsername(username);
+
+        UtenteDAO ud = new UtenteDAOImpl();
+
+        return ud.doRemoveUtente(u);
+    }
 }

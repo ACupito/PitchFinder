@@ -26,4 +26,12 @@ public interface UtenteDAO {
      * @return utente
      */
     Utente doRetrieveUtenteByEmail(Utente u);
+
+
+    /**
+     * This method removes a user.
+     * @param u is the user
+     * @return boolean
+     */
+    boolean doRemoveUtente(Utente u);
 }

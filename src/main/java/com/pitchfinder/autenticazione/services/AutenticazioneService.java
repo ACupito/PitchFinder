@@ -37,8 +37,15 @@ public interface AutenticazioneService {
                            String password, Date dataDiNascita);
 
     /**
-     * @param email is the user email
+     * @param email is the user email.
      * @return utente
      */
     Utente prelevaUtenteByEmail(String email);
+
+    /**
+     * @param username is the user username
+     * @return boolean
+     */
+    boolean removeUtente(String username);
+
 }

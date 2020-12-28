@@ -1,5 +1,7 @@
 package com.pitchfinder.autenticazione.services;
 
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import java.sql.Date;
 
@@ -10,6 +12,22 @@ public class AutenticazioneServiceImplTest {
     private AutenticazioneService as = new AutenticazioneServiceImpl();
 
     /**
+     * Start
+     */
+    @BeforeAll
+    static void start() {
+
+        Date d = new Date(1999 - 1900, 10, 4);
+
+        AutenticazioneService as1 = new AutenticazioneServiceImpl();
+
+        as1.registraUtente("mario129@gmail.com", "Mariox129",
+                "Mario", "Rossi", "esse3", d);
+        as1.registraUtente("mario130@gmail.com", "Mariox130",
+                "Mario", "Rossi", "esse3", d);
+    }
+
+    /**
      * Method to test the loginUtente method offered by the
      * AutenticazioneService interface.
      * First case: username and password are correct.
@@ -17,7 +35,7 @@ public class AutenticazioneServiceImplTest {
     @Test
     void loginUtenteTest1() {
 
-        assertNotNull(as.loginUtente("Mariox97", "esse3"));
+        assertNotNull(as.loginUtente("Mariox129", "esse3"));
     }
 
 
@@ -29,7 +47,7 @@ public class AutenticazioneServiceImplTest {
     @Test
     void loginUtenteTest2() {
 
-        assertNull(as.loginUtente("Mario29", "esse3"));
+        assertNull(as.loginUtente("Mario2300", "esse3"));
     }
 
     /**
@@ -46,7 +64,7 @@ public class AutenticazioneServiceImplTest {
 
         IllegalArgumentException exception = assertThrows(
                 IllegalArgumentException.class, () -> {
-                    as.loginUtente("Mario99", "PitchFinder 57");
+                    as.loginUtente("Mariox129", "PitchFinder 57");
                 });
 
         assertEquals(message, exception.getMessage());
@@ -103,7 +121,7 @@ public class AutenticazioneServiceImplTest {
     void registraUtenteTest1() {
 
         Date d = new Date(1999 - 1900, 10, 23);
-        assertFalse(as.registraUtente("mario96@gmail.com", "Mario1200",
+        assertFalse(as.registraUtente("mario129@gmail.com", "Mario1200",
                 "Mario", "Rossi", "esse3", d));
     }
 
@@ -116,7 +134,7 @@ public class AutenticazioneServiceImplTest {
     void registraUtenteTest2() {
 
         Date d = new Date(1999 - 1900, 10, 23);
-        assertFalse(as.registraUtente("mario1700@gmail.com", "Mario99",
+        assertFalse(as.registraUtente("mario1700@gmail.com", "Mariox129",
                 "Mario", "Rossi", "esse3", d));
     }
 
@@ -140,7 +158,7 @@ public class AutenticazioneServiceImplTest {
     @Test
     void prelevaUtenteByEmailTest1() {
 
-        assertNotNull(as.prelevaUtenteByEmail("mario99@gmail.com"));
+        assertNotNull(as.prelevaUtenteByEmail("mario129@gmail.com"));
     }
 
     /**
@@ -151,5 +169,17 @@ public class AutenticazioneServiceImplTest {
     void prelevaUtenteByEmailTest2() {
 
         assertNull(as.prelevaUtenteByEmail("sprikkesprakke99@gmail.com"));
+    }
+
+    /**
+     * After All
+     */
+    @AfterAll
+    static void remove() {
+
+        AutenticazioneService as1 = new AutenticazioneServiceImpl();
+        as1.removeUtente("Mariox129");
+        as1.removeUtente("Mariox130");
+        as1.removeUtente("Mario2900");
     }
 }
