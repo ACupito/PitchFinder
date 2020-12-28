@@ -35,10 +35,4 @@ public interface AutenticazioneService {
     boolean registraUtente(String email, String username,
                            String nome, String cognome,
                            String password, Date dataDiNascita);
-
-    /**
-     * This method checks weather the user is in the session.
-     * @return boolean
-     */
-    boolean controllaLoginUtente();
 }
