@@ -45,7 +45,7 @@ public class UtenteDAOImpl implements UtenteDAO {
      * @param utente is the user who want do join the platform
      * @return boolean
      */
-    public boolean doSaveUtente(final Utente utente) {
+    public boolean doSaveUtente(Utente utente) {
 
         try (Connection con = ConPool.getInstance().getConnection()) {
 
@@ -75,24 +75,23 @@ public class UtenteDAOImpl implements UtenteDAO {
      * @param utente is the user who is logging in
      * @return utente
      */
-    public Utente checkUtente(final Utente utente) {
+    public Utente checkUtente(Utente utente) {
 
         try (Connection con = ConPool.getInstance().getConnection()) {
 
             int nUtenti = checkUtenteExistence(utente);
 
             PreparedStatement ps = con.prepareStatement(
-                    "select * from Utente where Email=?");
-            ps.setString(INDEX1, utente.getEmail());
+                    "select * from Utente where Username=?");
+            ps.setString(INDEX1, utente.getUsername());
 
             if (nUtenti == 1) {
 
                 ResultSet rs = ps.executeQuery();
                 rs.next();
 
-                if (rs.getString(INDEX5).
-                        equalsIgnoreCase(utente.getPasswordHash())) {
-                    utente.setUsername(rs.getString(INDEX2));
+                if (rs.getString(INDEX5).equalsIgnoreCase(utente.getPasswordHash())) {
+                    utente.setEmail(rs.getString(INDEX1));
                     utente.setNome(rs.getString(INDEX3));
                     utente.setCognome(rs.getString(INDEX4));
                     utente.setDataDiNascita(rs.getDate(INDEX6));
@@ -114,13 +113,13 @@ public class UtenteDAOImpl implements UtenteDAO {
         }
     }
 
-    private int checkUtenteExistence(final Utente utente) {
+    private int checkUtenteExistence(Utente utente) {
 
         try (Connection con = ConPool.getInstance().getConnection()) {
 
             PreparedStatement ps = con.prepareStatement(
-                    "select count(*) from Utente where Email=?");
-            ps.setString(INDEX1, utente.getEmail());
+                    "select count(*) from Utente where Username=?");
+            ps.setString(INDEX1, utente.getUsername());
             ResultSet rs = ps.executeQuery();
 
             if (rs.next()) {
@@ -133,5 +132,58 @@ public class UtenteDAOImpl implements UtenteDAO {
         }
 
         return -1;
+    }
+
+    /**
+     * Method to retrive a user given his email.
+     * @param u is the user email
+     * @return utente
+     */
+    public Utente doRetrieveUtenteByEmail(Utente u) {
+
+        try (Connection con = ConPool.getInstance().getConnection()) {
+
+            PreparedStatement ps = con.prepareStatement(
+                    "select username, nome, cognome from Utente where email=?");
+
+            ps.setString(INDEX1, u.getEmail());
+
+            ResultSet rs = ps.executeQuery();
+
+            if (rs.next()) {
+                String username = rs.getString(INDEX1);
+                String nome = rs.getString(INDEX2);
+                String cognome = rs.getString(INDEX3);
+
+                return new Utente(u.getEmail(), username, nome, cognome,
+                        null, null);
+
+            } else return null;
+
+        } catch (SQLException e) {
+
+            return null;
+        }
+    }
+
+    /**
+     * @param u is the user
+     * @return boolean
+     */
+    public boolean doRemoveUtente(Utente u) {
+
+        try (Connection con = ConPool.getInstance().getConnection()) {
+
+            PreparedStatement ps = con.prepareStatement(
+                    "delete from Utente where username=?");
+
+            ps.setString(INDEX1, u.getUsername());
+
+            return ps.executeUpdate() == 1;
+
+        } catch (SQLException e) {
+
+            return false;
+        }
     }
 }
