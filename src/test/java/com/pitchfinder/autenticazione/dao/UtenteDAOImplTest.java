@@ -3,9 +3,9 @@ package com.pitchfinder.autenticazione.dao;
 import com.pitchfinder.autenticazione.entity.Utente;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 import java.sql.Date;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 public class UtenteDAOImplTest {
 
