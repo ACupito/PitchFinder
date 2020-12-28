@@ -16,12 +16,11 @@ import java.util.List;
 public class CampoDAOImpl implements CampoDAO {
     /**
      * get the campo using the id.
-     *
-     * @param id
+     * @param id of the pitch.
      * @return Campo
      */
     @Override
-    public Campo getCampo(int id) {
+    public Campo doRetriveCampo(int id) {
         try (Connection con = ConPool.getInstance().getConnection()) {
             PreparedStatement ps =
                     con.prepareStatement("SELECT Identificativo, Sport FROM Campo WHERE Identificativo=?");
@@ -45,12 +44,11 @@ public class CampoDAOImpl implements CampoDAO {
 
     /**
      * save in the Database the Occupazione.
-     *
-     * @param idCampo
-     * @param data
-     * @param inizio
-     * @param fine
-     * @param usernameAdmin
+     * @param idCampo is the id of the pitch.
+     * @param data is the date of the occupation.
+     * @param inizio is the start of the occupation.
+     * @param fine is the end of the occupation.
+     * @param usernameAdmin is the admin username.
      * @return boolean
      */
 
@@ -59,8 +57,9 @@ public class CampoDAOImpl implements CampoDAO {
     public boolean doSaveOccupazione(int idCampo, Date data, Time inizio, Time fine, String usernameAdmin) {
 
         try (Connection con = ConPool.getInstance().getConnection()) {
-            PreparedStatement ps = con.prepareStatement(
-                    "INSERT INTO Occupazione (Data, OrarioInizio, OrarioFine, CampoIdentificativo, AdminUsername) VALUES(?,?,?,?,?)");
+            PreparedStatement ps =
+                    con.prepareStatement("INSERT INTO Occupazione "
+                            + "(Data, OrarioInizio, OrarioFine, CampoIdentificativo, AdminUsername) VALUES(?,?,?,?,?)");
             ps.setDate(1, data);
             ps.setTime(2, inizio);
             ps.setTime(3, fine);
@@ -76,46 +75,80 @@ public class CampoDAOImpl implements CampoDAO {
             throw new RuntimeException(e);
         }
 
-        return false;
+        return true;
     }
 
     /**
      * delete an Occupazione from Database.
-     *
-     * @param idCampo
-     * @param data
-     * @param inizio
-     * @param fine
+     * @param idCampo is the id of the pitch.
+     * @param data is the date of the occupation.
+     * @param inizio is the start of the occupation.
+     * @param fine is the end of the occupation.
      * @return boolean
      */
     @Override
     public boolean doRemoveOccupazione(int idCampo, Date data, Time inizio, Time fine) {
         try (Connection con = ConPool.getInstance().getConnection()) {
             PreparedStatement ps =
-                    con.prepareStatement("delete from Occupazione where CampoIdentificativo=? && Data=? && OrarioInizio=? && OrarioFine=?");
+                    con.prepareStatement("delete from Occupazione "
+                            + "where CampoIdentificativo=? and Data=? and OrarioInizio=? and OrarioFine=?");
 
             ps.setInt(1, idCampo);
             ps.setDate(2, data);
             ps.setTime(3, inizio);
             ps.setTime(4, fine);
 
-            ResultSet rs = ps.executeQuery();
+            if (ps.executeUpdate() == 1) {
+                return true;
+            }
 
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
 
-        return false;
+        return true;
     }
 
     /**
+     * check if the Occupazione exists.
+     * @param idCampo is the id of the pitch.
+     * @param data is the date of the occupation.
+     * @param inizio is the start of the occupation.
+     * @param fine is the end of the occupation.
+     * @return boolean
+     */
+    public boolean checkOccupazioneExistence(int idCampo, Date data, Time inizio, Time fine) {
+        try (Connection con = ConPool.getInstance().getConnection()) {
+            PreparedStatement ps =
+                    con.prepareStatement("SELECT CampoIdentificativo, Data, OrarioInizio, OrarioFine FROM Occupazione "
+                            + "WHERE CampoIdentificativo=? && Data=? && OrarioInizio=? && OrarioFine=?");
+            ps.setInt(1, idCampo);
+            ps.setDate(2, data);
+            ps.setTime(3, inizio);
+            ps.setTime(4, fine);
+
+
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+
+                return true;
+            }
+
+        } catch (SQLException e) {
+            return false;
+        }
+
+        return false;
+    }
+
+
+    /**
      * save in the Database the Disponibilita.
-     *
-     * @param emailUtente
-     * @param idCampo
-     * @param data
-     * @param inizio
-     * @param fine
+     * @param emailUtente is the email of the user.
+     * @param idCampo is the id of the pitch.
+     * @param data is the date of the availability.
+     * @param inizio is the start of the availability.
+     * @param fine is the end of the availability.
      * @return boolean
      */
     @Override
@@ -139,14 +172,13 @@ public class CampoDAOImpl implements CampoDAO {
             throw new RuntimeException(e);
         }
 
-        return false;
+        return true;
     }
 
     /**
      * delete a Disponibilita from Database.
-     *
-     * @param emailUtente
-     * @param idCampo
+     * @param emailUtente is the email of the user.
+     * @param idCampo is the id of the pitch.
      * @return boolean
      */
 
@@ -159,7 +191,9 @@ public class CampoDAOImpl implements CampoDAO {
             ps.setString(1, emailUtente);
             ps.setInt(2, idCampo);
 
-            ResultSet rs = ps.executeQuery();
+            if (ps.executeUpdate() == 1) {
+                return true;
+            }
 
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -170,11 +204,10 @@ public class CampoDAOImpl implements CampoDAO {
 
     /**
      * take all the email by the Disponibilita giving the id_campo, data and time to find the ones that the user needs.
-     *
-     * @param idCampo
-     * @param data
-     * @param inizio
-     * @param fine
+     * @param idCampo is the id of the pitch.
+     * @param data is the date of the availability.
+     * @param inizio is the start of the availability.
+     * @param fine is the end of the availability.
      * @return List<String>
      */
 
@@ -183,7 +216,7 @@ public class CampoDAOImpl implements CampoDAO {
         ArrayList<String> d = new ArrayList<>();
         try (Connection con = ConPool.getInstance().getConnection()) {
             PreparedStatement ps =
-                    con.prepareStatement("SELECT Email FROM Disponibilita "
+                    con.prepareStatement("SELECT UtenteEmail FROM Disponibilita "
                             + "WHERE CampoIdentificativo=? && Data=? && OrarioInizio=? && OrarioFine=?");
             ps.setInt(1, idCampo);
             ps.setDate(2, data);
