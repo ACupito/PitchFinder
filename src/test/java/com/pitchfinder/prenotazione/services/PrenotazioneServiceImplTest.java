@@ -5,15 +5,14 @@ import com.pitchfinder.evento.entity.Evento;
 import com.pitchfinder.prenotazione.dao.PrenotazioneDAO;
 import com.pitchfinder.prenotazione.dao.PrenotazioneDAOImpl;
 import com.pitchfinder.prenotazione.entity.Prenotazione;
-import com.pitchfinder.singleton.ConPool;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 
 import java.sql.*;
 
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.*;
+
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public class PrenotazioneServiceImplTest {
