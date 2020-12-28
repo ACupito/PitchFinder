@@ -56,7 +56,10 @@ public class EventoServiceImpl implements EventoService {
      */
     public Boolean removeEvento(final Evento evento) {
         EventoDAOImpl eventoDAO = new EventoDAOImpl();
-        return eventoDAO.doRemoveEvento(evento);
+        if (eventoDAO.doRemoveEvento(evento)) {
+            return true;
+        }
+        return false;
     }
 
     /**
@@ -76,7 +79,11 @@ public class EventoServiceImpl implements EventoService {
      */
     public Evento getEvento(final String nome, final Date date) {
         EventoDAOImpl eventoDAO = new EventoDAOImpl();
-        return eventoDAO.doRetrieveEvento(nome, date);
+        Evento evento = eventoDAO.doRetrieveEvento(nome, date);
+        if (evento == null) {
+            return null;
+        }
+        return evento;
     }
 
     /**
@@ -86,6 +93,10 @@ public class EventoServiceImpl implements EventoService {
      */
     public int findNumeroPartecipantiByEvento(final Evento evento) {
         EventoDAOImpl eventoDAO = new EventoDAOImpl();
-        return eventoDAO.doRetrieveNPrenotazioniByEvento(evento);
+        int nPrenotazioni = eventoDAO.doRetrieveNPrenotazioniByEvento(evento);
+        if (nPrenotazioni == 0) {
+            return 0;
+        }
+            return nPrenotazioni;
     }
 }
