@@ -15,7 +15,7 @@ import java.sql.SQLException;
 import static org.junit.jupiter.api.Assertions.*;
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
-public class SquadraDaoImplTest {
+ class SquadraDaoImplTest {
     SquadraDAO squadraDAO = new SquadraDAOImpl();
 
     @BeforeAll

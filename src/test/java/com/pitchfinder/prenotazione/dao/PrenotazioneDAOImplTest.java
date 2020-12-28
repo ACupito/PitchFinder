@@ -4,6 +4,8 @@ package com.pitchfinder.prenotazione.dao;
 import com.pitchfinder.autenticazione.dao.UtenteDAO;
 import com.pitchfinder.autenticazione.dao.UtenteDAOImpl;
 import com.pitchfinder.autenticazione.entity.Utente;
+import com.pitchfinder.evento.dao.EventoDAO;
+import com.pitchfinder.evento.dao.EventoDAOImpl;
 import com.pitchfinder.evento.entity.Evento;
 import com.pitchfinder.prenotazione.entity.Prenotazione;
 import com.pitchfinder.singleton.ConPool;
@@ -15,12 +17,14 @@ import org.junit.jupiter.api.TestInstance;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.sql.Date;
+import java.sql.Time;
 
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public class PrenotazioneDAOImplTest {
     private Utente utente;
     private Evento evento;
+    private EventoDAO eventoDAO = new EventoDAOImpl();
     private PrenotazioneDAO prenotazioneDAO = new PrenotazioneDAOImpl();
 
     /**
@@ -34,12 +38,20 @@ public class PrenotazioneDAOImplTest {
         utente.setPassword("ciao");
         UtenteDAO utenteDAO = new UtenteDAOImpl();
         utenteDAO.doSaveUtente(utente);
-        /**Create a evento*/
-        evento = new Evento();
-        /**Create a booking.*/
+
+        /**Create a event.*/
         Date eventoData = new Date(2021-1900, 12-1, 18);
-        Prenotazione prenotazione = new Prenotazione(utente.getEmail(), "NomeEvento", eventoData);
+        Time oraInizio = new Time(13, 00, 00);
+        Time oraFine = new Time(17, 00,00);
+        evento = new Evento("EventoTest", "path", oraInizio, oraFine, eventoData, "lucia", "Descrizione", 100,"memex99");
+        eventoDAO.doSaveEvento(evento);
+
+        /**Create a booking.*/
+
+        Prenotazione prenotazione = new Prenotazione(utente.getEmail(), evento.getName(), eventoData);
         prenotazioneDAO.doSavePrenotazione(prenotazione);
+
+
     }
 
     /**
@@ -47,8 +59,12 @@ public class PrenotazioneDAOImplTest {
      */
     @Test
     public void checkDoSave() {
-        Date eventoData = new Date(2021-1900, 12-1, 18);
-        Prenotazione prenotazione = new Prenotazione("manuzzi98@gmail.com", "NomeEvento", eventoData);
+        Date dataDiNascita = new Date(1998-1900, 3-1, 6);
+        Utente utenteDue = new Utente("lucia.ercole.98@gmail.com", "lErcole", "Lucia", "Ercole", "ciao", dataDiNascita);
+        utenteDue.setPassword("ciao");
+        UtenteDAO utenteDAO = new UtenteDAOImpl();
+        utenteDAO.doSaveUtente(utenteDue);
+        Prenotazione prenotazione = new Prenotazione(utenteDue.getEmail(), evento.getName(), evento.getDate());
 
         assertTrue(prenotazioneDAO.doSavePrenotazione(prenotazione));
 
@@ -60,8 +76,8 @@ public class PrenotazioneDAOImplTest {
     @Test
     public void checkDoRemove() {
 
-        Date eventoData = new Date(2021-1900, 12-1, 18);
-        Prenotazione prenotazione = new Prenotazione("manuzzi97@gmail.com","NomeEvento", eventoData);
+
+        Prenotazione prenotazione = new Prenotazione(utente.getEmail(), evento.getName(), evento.getDate());
 
         assertTrue(prenotazioneDAO.doRemovePrenotazione(prenotazione));
     }
@@ -71,11 +87,18 @@ public class PrenotazioneDAOImplTest {
      */
     @AfterAll
     public void clean (){
-        Date eventoData = new Date(2021-1900, 12-1, 18);
-        Prenotazione prenotazione = new Prenotazione("manuzzi98@gmail.com", "NomeEvento", eventoData);
-
+        //Remove booking
+        Prenotazione prenotazione = new Prenotazione(utente.getEmail(), evento.getName(), evento.getDate());
         prenotazioneDAO.doRemovePrenotazione(prenotazione);
 
+        //remove users
+        UtenteDAO utenteDAO = new UtenteDAOImpl();
+        utenteDAO.doRemoveUtente(utente);
+        Date dataDiNascita = new Date(1998-1900, 3-1, 6);
+        Utente utenteDue = new Utente("lucia.ercole.98@gmail.com", "lErcole", "Lucia", "Ercole", "ciao", dataDiNascita);
+        utenteDAO.doRemoveUtente(utenteDue);
+        //remove event
+        eventoDAO.doRemoveEvento(evento);
     }
 
 
