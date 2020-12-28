@@ -94,12 +94,11 @@ public class CampoServiceImpl {
         List<Utente> listaUtenti = new ArrayList<>();
         int i;
 
-        List<String> emailList = c.doRetriveEmailByDisponibilita(idCampo, data, inizio, fine);
+        List<String> emailList = new ArrayList<>();
+        emailList.addAll(c.doRetriveEmailByDisponibilita(idCampo, data, inizio, fine));
         for (i = 0; i < emailList.size(); i++) {
             String email = emailList.get(i);
-
             u = ut.prelevaUtenteByEmail(email);
-
             listaUtenti.add(u);
         }
         return listaUtenti;
