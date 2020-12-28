@@ -85,9 +85,10 @@ public class TorneoServiceImpl implements TorneoService {
     public List<Torneo> getAllTornei() {
 
         List<Torneo> tornei = tdao.doRetrieveAllTornei();
-        if (tornei == null) {
-            throw new NullPointerException("Lista tornei null.");
+        if (tornei.isEmpty()) {
+
         }
         return tornei;
+
     }
 }
