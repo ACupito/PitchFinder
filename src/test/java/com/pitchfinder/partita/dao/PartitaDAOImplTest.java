@@ -83,6 +83,7 @@ public class PartitaDAOImplTest {
         assertNotNull(giocatori);
     }
 
+
     @AfterAll
     public void clean(){
         //Delete player used for the testing
@@ -126,5 +127,4 @@ public class PartitaDAOImplTest {
         }
 
     }
-
 }
