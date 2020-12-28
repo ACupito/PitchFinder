@@ -50,7 +50,7 @@ public class TorneoController extends HttpServlet {
         Admin admin = (Admin) request.getSession().getAttribute("admin"); //get admin from the session
         Campo campo = (Campo) request.getSession().getAttribute("campo"); //get campo from the session
 
-        if(admin != null && campo != null) {
+        if (admin != null && campo != null) {
 
             String nome = request.getParameter("nome");
             if (nome == null) {

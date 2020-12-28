@@ -117,7 +117,6 @@ class TorneoServiceImplTest {
 
     }
 
-
     /**
      * Cleanup the environment.
      */
