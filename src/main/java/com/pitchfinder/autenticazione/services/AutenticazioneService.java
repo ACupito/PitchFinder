@@ -28,7 +28,7 @@ public interface AutenticazioneService {
      * @param username is the user username
      * @param nome is the user name
      * @param cognome is the user surname
-     * @param password is the user password
+     * @param password is the  user password
      * @param dataDiNascita is the user date of birth
      * @return Utente
      */
