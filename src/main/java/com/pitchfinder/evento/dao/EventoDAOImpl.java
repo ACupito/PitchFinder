@@ -56,8 +56,8 @@ public class EventoDAOImpl implements EventoDAO {
                 ps.setString(THREE, event.getImage());
                 ps.setString(FOUR, event.getGuest());
                 ps.setString(FIVE, event.getDescription());
-                ps.setString(SIX, event.getStartHour());
-                ps.setString(SEVEN, event.getEndHour());
+                ps.setTime(SIX, event.getStartHour());
+                ps.setTime(SEVEN, event.getEndHour());
                 ps.setInt(EIGHT, event.getAvailableSits());
                 ps.setString(NINE, event.getAdmin());
                 return 1 == ps.executeUpdate();
@@ -78,10 +78,7 @@ public class EventoDAOImpl implements EventoDAO {
                         con.prepareStatement("DELETE FROM evento WHERE Nome=? and Data=?");
                 ps.setString(ONE, event.getName());
                 ps.setDate(TWO, event.getDate());
-                if (1 == ps.executeUpdate()) {
-                    return true;
-                }
-                return false;
+                return 1 == ps.executeUpdate();
             } catch (SQLException e) {
                 throw new RuntimeException(e);
             }
@@ -100,11 +97,11 @@ public class EventoDAOImpl implements EventoDAO {
                 PreparedStatement ps =
                         con.prepareStatement(query);
                 ResultSet rs =  ps.executeQuery();
-                List<Evento> allEvents = new ArrayList<Evento>();
+                List<Evento> allEvents = new ArrayList<>();
                 while (rs.next()) {
                     Evento eventoAdd = new Evento(rs.getString(ONE),
-                            rs.getString(TWO), rs.getString(THREE),
-                            rs.getString(FOUR), rs.getDate(FIVE),
+                            rs.getString(TWO), rs.getTime(THREE),
+                            rs.getTime(FOUR), rs.getDate(FIVE),
                             rs.getString(SIX), rs.getString(SEVEN),
                             rs.getInt(EIGHT), rs.getString(NINE));
                     allEvents.add(eventoAdd);
@@ -137,8 +134,8 @@ public class EventoDAOImpl implements EventoDAO {
                 Evento event = new Evento();
                 if (rs.next()) {
                     event = new Evento(rs.getString(ONE),
-                            rs.getString(TWO), rs.getString(THREE),
-                            rs.getString(FOUR), rs.getDate(FIVE),
+                            rs.getString(TWO), rs.getTime(THREE),
+                            rs.getTime(FOUR), rs.getDate(FIVE),
                             rs.getString(SIX), rs.getString(SEVEN),
                             rs.getInt(EIGHT), rs.getString(NINE));
                 }
@@ -156,15 +153,20 @@ public class EventoDAOImpl implements EventoDAO {
             public int doRetrieveNPrenotazioniByEvento(final Evento event) {
 
 
-                String query = "SELECT count(CodicePrenotazione)"
+                String query = "SELECT count(CodicePrenotazione) as nPrenotazioni"
                         + " FROM prenotazione WHERE EventoNome = ?";
+
 
                 try (Connection con = ConPool.getConnection()) {
                     PreparedStatement ps =
                             con.prepareStatement(query);
                     ps.setString(ONE, event.getName());
                     ResultSet rs =  ps.executeQuery();
-                    int numberPrenotation = rs.getInt(ONE);
+                    int numberPrenotation = 0;
+                    if (rs.next()) {
+                        numberPrenotation = rs.getInt("nPrenotazioni");
+                    }
+
                     return numberPrenotation;
 
                 } catch (SQLException e) {

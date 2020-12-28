@@ -11,7 +11,7 @@ public class UtenteDAOImplTest {
 
     /**
      * Method to test the checkAdmin method offered by UtenteDAO interface.
-     * First case: the username and password are correct.
+     * First case: the email and password are correct.
      */
     @Test
     void checkUtenteTest1() {
@@ -19,14 +19,14 @@ public class UtenteDAOImplTest {
         Utente a = new Utente();
         UtenteDAO ad = new UtenteDAOImpl();
 
-        a.setUsername("Mariox97");
+        a.setEmail("mario97@gmail.com");
         a.setPassword("esse3");
         assertNotNull(ad.checkUtente(a));
     }
 
     /**
      * Method to test the checkAdmin method offered by UtenteDAO interface.
-     * Second case: the username is wrong.
+     * Second case: the email is wrong.
      */
     @Test
     void checkUtenteTest2() {
@@ -34,7 +34,7 @@ public class UtenteDAOImplTest {
         Utente a = new Utente();
         UtenteDAO ad = new UtenteDAOImpl();
 
-        a.setUsername("Mariox29");
+        a.setEmail("mario1300@gmail.com");
         a.setPassword("esse3");
         assertNull(ad.checkUtente(a));
     }
@@ -49,7 +49,7 @@ public class UtenteDAOImplTest {
         Utente a = new Utente();
         UtenteDAO ad = new UtenteDAOImpl();
 
-        a.setUsername("Mario99");
+        a.setEmail("mario99@gmail.com");
         a.setPassword("PitchFinder 57");
 
         String message = "Il login non va a buon " +
@@ -127,39 +127,5 @@ public class UtenteDAOImplTest {
         a.setEmail("mario3330@gmail.com");
         a.setUsername("Mario3330");
         assertTrue(ad.doSaveUtente(a));
-    }
-
-    /**
-     * Method to retrieve a user given his email
-     * First case: the user exists
-     */
-    @Test
-    void doRetrieveUtenteByEmailTest1() {
-
-        String email = "mario99@gmail.com";
-
-        Utente u = new Utente();
-        u.setEmail(email);
-
-        UtenteDAO ad = new UtenteDAOImpl();
-
-        assertNotNull(ad.doRetrieveUtenteByEmail(u));
-    }
-
-    /**
-     * Method to retrieve a user given his email
-     * Second case: the user does not exists
-     */
-    @Test
-    void doRetrieveUtenteByEmailTest2() {
-
-        String email = "sprikkesprakke99@gmail.com";
-
-        Utente u = new Utente();
-        u.setEmail(email);
-
-        UtenteDAO ad = new UtenteDAOImpl();
-
-        assertNull(ad.doRetrieveUtenteByEmail(u));
     }
 }
