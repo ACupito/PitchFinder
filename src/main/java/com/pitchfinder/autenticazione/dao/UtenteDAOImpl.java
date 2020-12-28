@@ -165,4 +165,25 @@ public class UtenteDAOImpl implements UtenteDAO {
             return null;
         }
     }
+
+    /**
+     * @param u is the user
+     * @return boolean
+     */
+    public boolean doRemoveUtente(Utente u) {
+
+        try (Connection con = ConPool.getInstance().getConnection()) {
+
+            PreparedStatement ps = con.prepareStatement(
+                    "delete from Utente where username=?");
+
+            ps.setString(INDEX1, u.getUsername());
+
+            return ps.executeUpdate() == 1;
+
+        } catch (SQLException e) {
+
+            return false;
+        }
+    }
 }
