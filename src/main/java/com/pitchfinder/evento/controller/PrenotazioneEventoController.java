@@ -3,6 +3,7 @@ package com.pitchfinder.evento.controller;
 import com.pitchfinder.evento.entity.Evento;
 import com.pitchfinder.prenotazione.services.PrenotazioneService;
 import com.pitchfinder.prenotazione.services.PrenotazioneServiceImpl;
+import org.apache.commons.mail.EmailException;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -45,7 +46,11 @@ public class PrenotazioneEventoController extends HttpServlet {
         }
 
         PrenotazioneService prenotazioneService = new PrenotazioneServiceImpl();
-        prenotazioneService.createPrenotazione(email, evento);
+        try {
+            prenotazioneService.createPrenotazione(email, evento);
+        } catch (EmailException e) {
+            e.printStackTrace();
+        }
         resp.setContentType("La prenotazione all’evento va a buon fine.");
     }
 

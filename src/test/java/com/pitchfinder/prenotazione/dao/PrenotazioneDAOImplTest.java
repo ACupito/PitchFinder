@@ -12,10 +12,7 @@ import com.pitchfinder.evento.dao.EventoDAOImpl;
 import com.pitchfinder.evento.entity.Evento;
 import com.pitchfinder.prenotazione.entity.Prenotazione;
 import com.pitchfinder.singleton.ConPool;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.TestInstance;
+import org.junit.jupiter.api.*;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -70,6 +67,7 @@ public class PrenotazioneDAOImplTest {
         prenotazioneDAO.doSavePrenotazione(prenotazione);
 
 
+
     }
 
     /**
@@ -98,6 +96,13 @@ public class PrenotazioneDAOImplTest {
         assertTrue(prenotazioneDAO.doRemovePrenotazione(prenotazione));
     }
 
+    @Test
+    public void doRetrievePrenotazione(){
+        Prenotazione prenotazione = new Prenotazione(utente.getEmail(), evento.getName(), evento.getDate());
+        prenotazioneDAO.doSavePrenotazione(prenotazione);
+
+        assertNotNull(prenotazioneDAO.doRetrievePrenotazione(prenotazione.getUtenteEmail(), prenotazione.getEventoNome(), prenotazione.getEventoData()));
+    }
     /**
      * Clean DB.
      */
