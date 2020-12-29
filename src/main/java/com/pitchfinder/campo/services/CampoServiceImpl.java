@@ -23,7 +23,7 @@ public class CampoServiceImpl {
         if (c.doSaveOccupazione(idCampo, data, inizio, fine, usernameAdmin)) {
             return true;
         }
-        return false;
+            return false;
 
     }
 

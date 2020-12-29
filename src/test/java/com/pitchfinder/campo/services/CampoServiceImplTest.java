@@ -64,7 +64,7 @@ public class CampoServiceImplTest {
         cs.createOccupazione(ID_CAMPO,Date.valueOf("2010-10-10"), Time.valueOf("20:20".concat(":00")), Time.valueOf("21:00".concat(":00")), USERNAME_ADMIN);
 
         cdao.doSaveDisponibilita("mario111@gmail.com", ID_CAMPO, Date.valueOf(DATA), Time.valueOf(TEMPO_INIZIO.concat(":00")), Time.valueOf(TEMPO_FINE.concat(":00")));
-
+        cs.createDisponibilita("mario129@gmail.com", ID_CAMPO, Date.valueOf(DATA), Time.valueOf(TEMPO_INIZIO.concat(":00")), Time.valueOf(TEMPO_FINE.concat(":00")));
     }
     /**
      * This method tests the method createOccupazione.
@@ -77,17 +77,28 @@ public class CampoServiceImplTest {
         assertTrue(cs.createOccupazione(ID_CAMPO, Date.valueOf(DATA), Time.valueOf(TEMPO_INIZIO.concat(":00")), Time.valueOf(TEMPO_FINE.concat(":00")), USERNAME_ADMIN));
 
     }
+
+
     /**
      * This method tests the method deleteOccupazione.
      * deletes an Occupazione.
      */
     @Test
-    void doRemoveOccupazioneTest() {
+    void deleteOccupazioneTest() {
 
         assertTrue(cs.deleteOccupazione(ID_CAMPO,Date.valueOf("2010-10-10"), Time.valueOf("20:20".concat(":00")), Time.valueOf("21:00".concat(":00"))));
 
     }
+    /**
+     * This method tests the method deleteOccupazione.
+     * error in deletes an Occupazione.
+     */
+    @Test
+    void deleteOccupazioneTestError() {
 
+        assertFalse(cs.deleteOccupazione(10000,Date.valueOf("2010-10-10"), Time.valueOf("20:20".concat(":00")), Time.valueOf("21:00".concat(":00"))));
+
+    }
     /**
      * This method tests the method controllaOccupazione.
      * checks that the Occupazione exists.
@@ -100,6 +111,17 @@ public class CampoServiceImplTest {
 
     }
     /**
+     * This method tests the method controllaOccupazione.
+     * error in checks that the Occupazione exists.
+     */
+
+    @Test
+    void controllaOccupazioneTestError() {
+
+        assertFalse(cs.controllaOccupazione(123000, Date.valueOf(DATA), Time.valueOf(TEMPO_INIZIO.concat(":00")), Time.valueOf(TEMPO_FINE.concat(":00"))));
+
+    }
+    /**
      * This method tests the method createDisponibilita.
      * create a Disponibilita.
      */
@@ -107,9 +129,10 @@ public class CampoServiceImplTest {
     @Test
     void createDisponibilitaTest() {
 
-        assertTrue(cs.createDisponibilita("mario129@gmail.com", ID_CAMPO, Date.valueOf(DATA), Time.valueOf(TEMPO_INIZIO.concat(":00")), Time.valueOf(TEMPO_FINE.concat(":00"))));
+        assertTrue(cs.createDisponibilita(EMAIL, ID_CAMPO, Date.valueOf(DATA), Time.valueOf(TEMPO_INIZIO.concat(":00")), Time.valueOf(TEMPO_FINE.concat(":00"))));
 
     }
+
     /**
      * This method tests the method showAllDisponibilita.
      * return a list of Utenti.
