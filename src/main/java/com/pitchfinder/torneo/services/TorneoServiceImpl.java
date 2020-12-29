@@ -1,10 +1,14 @@
 package com.pitchfinder.torneo.services;
 
+import com.pitchfinder.campo.dao.CampoDAO;
+import com.pitchfinder.campo.dao.CampoDAOImpl;
 import com.pitchfinder.torneo.dao.TorneoDAO;
 import com.pitchfinder.torneo.dao.TorneoDAOImpl;
 import com.pitchfinder.torneo.entity.Torneo;
 
 import java.sql.Date;
+import java.sql.Time;
+import java.util.Calendar;
 import java.util.List;
 
 /**
@@ -49,6 +53,8 @@ public class TorneoServiceImpl implements TorneoService {
                 dateFine, idCampo);
 
         boolean result = tdao.doSaveTorneo(torneo);
+
+
         if (!result) {
            throw new IllegalArgumentException("Creazione fallita");
         }
@@ -85,10 +91,50 @@ public class TorneoServiceImpl implements TorneoService {
     public List<Torneo> getAllTornei() {
 
         List<Torneo> tornei = tdao.doRetrieveAllTornei();
-        if (tornei.isEmpty()) {
-
-        }
         return tornei;
+
+    }
+
+    private void createOccupazione(int idCampo, Date startDate, Date endDate, String giornoPartite) {
+
+        CampoDAO campo = new CampoDAOImpl();
+
+        int dayNumber = 0;
+        switch (giornoPartite) { //get day number
+            case "Domenica": dayNumber = 1; break;
+            case "Lunedì": dayNumber = 2; break;
+            case "Martedì": dayNumber = 3; break;
+            case "Mercoledì": dayNumber = 4; break;
+            case "Giovedì": dayNumber = 5; break;
+            case "Venerdì": dayNumber = 6; break;
+            case "Sabato": dayNumber = 7; break;
+        }
+
+        //remaining days between start date and end date
+        long days = ((endDate.getTime() - startDate.getTime()) / (1000 * 60 * 60 * 24)) + 1;
+
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(startDate); //set time to start date of the tournament
+        Time timeInizio = Time.valueOf("00:00:00"); //start time of occupation
+        Time timeFine = Time.valueOf("23:59:59"); //end time of occupation
+
+        while (days > 0) { //get date form start date to end date of the tournament
+            if (calendar.get(Calendar.DAY_OF_WEEK) == dayNumber) { //check if the date is a match day
+                int day = calendar.get(Calendar.DATE); //get day
+                int month = calendar.get(Calendar.MONTH); //get month
+                int year = calendar.get(Calendar.YEAR); //get year
+                String date = year+"-"+(month+1)+"-"+day; //create date
+                Date dateCurrent = Date.valueOf(date);
+
+                if (campo.checkOccupazioneExistence(idCampo, dateCurrent, timeInizio, timeFine)) {
+                    campo.doRemoveOccupazione(idCampo, dateCurrent, timeInizio, timeFine);
+                }
+
+            }
+            calendar.add(Calendar.DATE, 1); //advance in the days until the end date of the tournament
+            days--;
+        }
+
 
     }
 }
