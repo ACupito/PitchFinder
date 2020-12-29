@@ -71,13 +71,5 @@ public interface CampoDAO {
      */
     List<String> doRetriveEmailByDisponibilita(int idCampo, Date data, Time inizio, Time fine);
 
-    /**
-     *
-     * @param idCampo is the id of the pitch.
-     * @param data is the date of the occupation.
-     * @param inizio is the start of the occupation.
-     * @param fine is the end of the occupation.
-     * @return
-     */
-    String doRetriveAdminByOccupazione(int idCampo, Date data, Time inizio, Time fine);
+
 }
