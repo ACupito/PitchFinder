@@ -106,6 +106,13 @@ public class TorneoDAOImpl implements TorneoDAO {
         }
     }
 
+    /**
+     * This mehod allows to check if other tournaments have been scheduled in the same period
+     * @param dataInizio start data of the tournament
+     * @param dataFine end data of the tournament
+     * @param IdCampo pitch identifier
+     * @return boolean : true -> there are other tournaments / false -> empty at the time
+     */
     public boolean doCheckTorneo(Date dataInizio, Date dataFine, int IdCampo) {
 
         try (Connection con = ConPool.getInstance().getConnection()) {
@@ -121,11 +128,7 @@ public class TorneoDAOImpl implements TorneoDAO {
 
             ResultSet rs = ps.executeQuery();
 
-            if (rs.next()) {
-                return true;
-            }
-
-            return false;
+            return rs.next();
 
         } catch (SQLException s) {
             throw new RuntimeException(s);
