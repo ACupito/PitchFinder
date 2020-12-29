@@ -44,4 +44,10 @@ public interface TorneoService {
      */
     List<Torneo> getAllTornei();
 
+    /**
+     * This method call doCheckTorneo.
+     * @see com.pitchfinder.torneo.dao.TorneoDAOImpl#doCheckTorneo(Date, Date, int)
+     * @return boolean : true -> there are other tournaments / false -> empty at the time
+     */
+    boolean checkScheduledTorneo(Date dataInizio, Date dataFine, int IdCampo);
 }
