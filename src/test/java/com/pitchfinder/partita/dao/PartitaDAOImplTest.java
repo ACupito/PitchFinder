@@ -124,7 +124,7 @@ public class PartitaDAOImplTest {
     @Test
     public void doRemovePartitaTest(){
 
-        assertTrue(daoTest.doRemovePartita(deleteP.getIdCampo(),deleteP.getData(),
+        assertTrue(daoTest.doRemovePartite(deleteP.getIdCampo(),deleteP.getData(),
                 deleteP.getOrarioInizio(),deleteP.getOrarioFine()));
     }
 
@@ -134,7 +134,7 @@ public class PartitaDAOImplTest {
     @Test
     public void doRemovePartitaTestFailure(){
 
-        assertFalse(daoTest.doRemovePartita(deleteP.getIdCampo(),Date.valueOf("2021-2-10"),
+        assertFalse(daoTest.doRemovePartite(deleteP.getIdCampo(),Date.valueOf("2021-2-10"),
                 deleteP.getOrarioInizio(),deleteP.getOrarioFine()));
     }
 
