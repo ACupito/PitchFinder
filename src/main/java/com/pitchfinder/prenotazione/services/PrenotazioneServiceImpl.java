@@ -5,7 +5,7 @@ import com.pitchfinder.prenotazione.dao.PrenotazioneDAO;
 import com.pitchfinder.prenotazione.dao.PrenotazioneDAOImpl;
 import com.pitchfinder.prenotazione.entity.Prenotazione;
 
-class PrenotazioneServiceImpl implements PrenotazioneService {
+public class PrenotazioneServiceImpl implements PrenotazioneService {
     /**
      * Create Booking.
      * @param utenteEmail - utenteEmail.
