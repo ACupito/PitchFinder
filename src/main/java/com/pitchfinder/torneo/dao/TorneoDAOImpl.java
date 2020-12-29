@@ -3,10 +3,7 @@ package com.pitchfinder.torneo.dao;
 import com.pitchfinder.singleton.ConPool;
 import com.pitchfinder.torneo.entity.Torneo;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -107,6 +104,34 @@ public class TorneoDAOImpl implements TorneoDAO {
         } catch (SQLException s) {
             throw new RuntimeException(s);
         }
+    }
+
+    public boolean doCheckTorneo(Date dataInizio, Date dataFine, int IdCampo) {
+
+        try (Connection con = ConPool.getInstance().getConnection()) {
+            PreparedStatement ps = con.prepareStatement("select * from torneo where CampoIdentificativo = ? and "
+                    + "((DataInizio <= ? and DataFine > ?) or"
+                    + "(DataInizio < ? and DataFine >= ?))");
+
+            ps.setInt(1, IdCampo);
+            ps.setDate(2,dataInizio);
+            ps.setDate(3,dataInizio);
+            ps.setDate(4,dataFine);
+            ps.setDate(5,dataFine);
+
+            ResultSet rs = ps.executeQuery();
+
+            if (rs.next()) {
+                return true;
+            }
+
+            return false;
+
+        } catch (SQLException s) {
+            throw new RuntimeException(s);
+        }
+
+
     }
 
 }
