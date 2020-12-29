@@ -1,5 +1,7 @@
 package com.pitchfinder.squadra.services;
 
+import com.pitchfinder.autenticazione.dao.UtenteDAO;
+import com.pitchfinder.autenticazione.dao.UtenteDAOImpl;
 import com.pitchfinder.autenticazione.entity.Utente;
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -22,8 +24,15 @@ import java.sql.SQLException;
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public class SquadraServiceImplTest {
     SquadraService squadraService = new SquadraServiceImpl();
-
-
+    private Utente utente, utenteDue;
+    private UtenteDAO utenteDAO = new UtenteDAOImpl();
+    @BeforeAll
+    public void sava(){
+        utente = new Utente("mario96@gmail.com", "MarioNoi", "Mario", "Noi", "ciao",Date.valueOf("1996-12-03"));
+        utenteDAO.doSaveUtente(utente);
+        utenteDue = new Utente("manuzzi97@gmail.com","memex97","Emanuele","Mezzi","ciao",Date.valueOf("1998-12-10"));
+        utenteDAO.doSaveUtente(utenteDue);
+    }
     /**
      * Success, create a new Squadra!
      */
@@ -59,10 +68,12 @@ public class SquadraServiceImplTest {
                 "memex99", 20, 10,
                 12, dataInizio, dataFine, 1002);
         Utente utente = new Utente("manuzzi97@gmail.com","memex97","Emanuele","Mezzi","ciao", dataDiNascita);
-        Squadra squadra = new Squadra("Parma", torneo.getNome(), torneo.getDataInizio(), torneo.getCampoIdentificativo(), 10, "Insigne", utente.getEmail());
+        Squadra squadra = new Squadra("Parma", torneo.getNome(), torneo.getDataInizio(), torneo.getCampoIdentificativo(), 10, "Insigne", utenteDue.getEmail());
         SquadraDAO squadraDAO = new SquadraDAOImpl() ;
         squadraDAO.doRemoveSquadra(squadra);
 
+        utenteDAO.doRemoveUtente(utente);
+        utenteDAO.doRemoveUtente(utenteDue);
 
         try (Connection con = ConPool.getInstance().getConnection()) {
             PreparedStatement ps =

@@ -1,5 +1,8 @@
 package com.pitchfinder.squadra.dao;
 
+import com.pitchfinder.autenticazione.dao.UtenteDAO;
+import com.pitchfinder.autenticazione.dao.UtenteDAOImpl;
+import com.pitchfinder.autenticazione.entity.Utente;
 import com.pitchfinder.singleton.ConPool;
 import com.pitchfinder.squadra.entity.Squadra;
 import org.junit.jupiter.api.AfterAll;
@@ -17,9 +20,13 @@ import static org.junit.jupiter.api.Assertions.*;
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
  class SquadraDAOImplTest {
     SquadraDAO squadraDAO = new SquadraDAOImpl();
+    UtenteDAO utenteDAO = new UtenteDAOImpl();
+    private Utente utente ;
 
     @BeforeAll
     void before(){
+        utente = new Utente("mario96@gmail.com", "MarioNoi", "Mario", "Noi", "ciao",Date.valueOf("1996-12-03"));
+        utenteDAO.doSaveUtente(utente);
         Date dataInizio = new Date(2020-1900, 1-1, 8);
         Squadra squadra = new Squadra("Palermo", "serieA", dataInizio, 1002, 10, "Lucia", "mario96@gmail.com");
         squadraDAO.doSaveSquadra(squadra);
@@ -75,6 +82,7 @@ import static org.junit.jupiter.api.Assertions.*;
         Squadra squadra = new Squadra("Juventus", "serieA", dataInizio, 1002, 10, "Lucia", "mario96@gmail.com");
 
         squadraDAO.doRemoveSquadra(squadra);
+        utenteDAO.doRemoveUtente(utente);
 
         try (Connection con = ConPool.getInstance().getConnection()) {
             PreparedStatement ps =
