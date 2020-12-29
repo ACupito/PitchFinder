@@ -6,7 +6,6 @@ import com.pitchfinder.evento.entity.Evento;
 import com.pitchfinder.evento.services.EventoService;
 import com.pitchfinder.evento.services.EventoServiceImpl;
 
-
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
