@@ -1,8 +1,11 @@
 package com.pitchfinder.prenotazione.dao;
 
 
+import com.pitchfinder.autenticazione.dao.AdminDAO;
+import com.pitchfinder.autenticazione.dao.AdminDAOImpl;
 import com.pitchfinder.autenticazione.dao.UtenteDAO;
 import com.pitchfinder.autenticazione.dao.UtenteDAOImpl;
+import com.pitchfinder.autenticazione.entity.Admin;
 import com.pitchfinder.autenticazione.entity.Utente;
 import com.pitchfinder.evento.dao.EventoDAO;
 import com.pitchfinder.evento.dao.EventoDAOImpl;
@@ -16,8 +19,7 @@ import org.junit.jupiter.api.TestInstance;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import java.sql.Date;
-import java.sql.Time;
+import java.sql.*;
 
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
@@ -26,9 +28,11 @@ public class PrenotazioneDAOImplTest {
     private Evento evento;
     private EventoDAO eventoDAO = new EventoDAOImpl();
     private PrenotazioneDAO prenotazioneDAO = new PrenotazioneDAOImpl();
+    private Admin admin;
+
 
     /**
-     * Inserts the booking.
+     * Insert in db.
      */
     @BeforeAll
     public void save(){
@@ -39,15 +43,29 @@ public class PrenotazioneDAOImplTest {
         UtenteDAO utenteDAO = new UtenteDAOImpl();
         utenteDAO.doSaveUtente(utente);
 
+        /**Create an admin.*/
+        admin = new Admin("memex", "emanuele", "mezzi", "ciao");
+        try (Connection con = ConPool.getInstance().getConnection()) {
+            PreparedStatement ps = con.prepareStatement(
+                    "INSERT INTO Admin (Nome, Cognome, Username, Password) VALUES(?,?,?,?)");
+            ps.setString(1, admin.getNome());
+            ps.setString(2, admin.getCognome());
+            ps.setString(3, admin.getUsername());
+            ps.setString(4, admin.getPasswordHash());
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+
         /**Create a event.*/
         Date eventoData = new Date(2021-1900, 12-1, 18);
         Time oraInizio = new Time(13, 00, 00);
         Time oraFine = new Time(17, 00,00);
-        evento = new Evento("EventoTest", "path", oraInizio, oraFine, eventoData, "lucia", "Descrizione", 100,"memex99");
+        evento = new Evento("EventoTest", "path", oraInizio, oraFine, eventoData, "lucia", "Descrizione", 100,"memex");
         eventoDAO.doSaveEvento(evento);
 
         /**Create a booking.*/
-
         Prenotazione prenotazione = new Prenotazione(utente.getEmail(), evento.getName(), eventoData);
         prenotazioneDAO.doSavePrenotazione(prenotazione);
 
@@ -76,14 +94,12 @@ public class PrenotazioneDAOImplTest {
     @Test
     public void checkDoRemove() {
 
-
         Prenotazione prenotazione = new Prenotazione(utente.getEmail(), evento.getName(), evento.getDate());
-
         assertTrue(prenotazioneDAO.doRemovePrenotazione(prenotazione));
     }
 
     /**
-     * Deletes the booking created after doSave.
+     * Clean DB.
      */
     @AfterAll
     public void clean (){
@@ -99,8 +115,17 @@ public class PrenotazioneDAOImplTest {
         utenteDAO.doRemoveUtente(utenteDue);
         //remove event
         eventoDAO.doRemoveEvento(evento);
+
+        //remove admin
+        try (Connection con = ConPool.getInstance().getConnection()) {
+            PreparedStatement ps = con.prepareStatement(
+                    "DELETE FROM admin where Username = ?");
+            ps.setString(1, admin.getUsername());
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
     }
-
-
 
 }
