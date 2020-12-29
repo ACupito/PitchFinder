@@ -29,15 +29,15 @@ public class PrenotazioneEventoController extends HttpServlet {
         Evento evento = (Evento) session.getAttribute("evento");
 
         if (email == null) {
-            throw new IllegalArgumentException("Email non valida");
+            throw new IllegalArgumentException("Email non valida.");
         }
 
         if ((email.length() < 1) || (email.length() > 50)) {
-            throw new IllegalArgumentException("Lunghezza email non corretta");
+            throw new IllegalArgumentException("La prenotazione all’evento non va a buon fine la lunghezza dell’email non è valida.");
         }
-        System.out.println(email);
-        if (email.matches("^\\w+([\\.-]?\\w+)*@\\w+([\\.-]?\\w+)*(\\.\\w+)+$")) {
-            throw new IllegalArgumentException("Formato email non valido");
+
+        if (!email.matches("^\\w+([\\.-]?\\w+)*@\\w+([\\.-]?\\w+)*(\\.\\w+)+$")) {
+            throw new IllegalArgumentException("La prenotazione all’evento non va a buon fine il formato dell’email non è valido.");
         }
 
         if (evento == null) {
@@ -46,7 +46,7 @@ public class PrenotazioneEventoController extends HttpServlet {
 
         PrenotazioneService prenotazioneService = new PrenotazioneServiceImpl();
         prenotazioneService.createPrenotazione(email, evento);
-
+        resp.setContentType("La prenotazione all’evento va a buon fine.");
     }
 
     /**

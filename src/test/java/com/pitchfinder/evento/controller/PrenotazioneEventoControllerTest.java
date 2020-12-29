@@ -12,9 +12,11 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.TestInstance;
 import org.mockito.Mockito;
 
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.io.IOException;
 import java.sql.*;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -58,11 +60,14 @@ public class PrenotazioneEventoControllerTest {
         Mockito.doReturn(session).when(mockedRequest).getSession();
         Mockito.doReturn(evento).when(session).getAttribute("evento");
     }
+
+    /**
+     *Test case: the lenght of email isn't valid.
+     */
     @Test
     public void TC_1_2_1(){
-
         Mockito.when(mockedRequest.getParameter("email")).thenReturn("");
-        String message = "Lunghezza email non corretta";
+        String message = "La prenotazione all’evento non va a buon fine la lunghezza dell’email non è valida.";
 
         IllegalArgumentException exception;
         exception = assertThrows(IllegalArgumentException.class,
@@ -70,16 +75,46 @@ public class PrenotazioneEventoControllerTest {
         assertEquals(message, exception.getMessage());
     }
 
-    /**@Test
-    public void TC_1_2_2(){
-
-    }
-
+    /**
+     * Test case: The format of email isn't valid.
+     */
     @Test
-    public void TC_1_2_3(){
+    public void TC_1_2_2(){
+        Mockito.when(mockedRequest.getParameter("email")).thenReturn("c.Salvat!!@jwi.com");
+        String message = "La prenotazione all’evento non va a buon fine il formato dell’email non è valido.";
 
+        IllegalArgumentException exception;
+        exception = assertThrows(IllegalArgumentException.class,
+                () -> servlet.doGet(mockedRequest, mockedResponse));
+        assertEquals(message, exception.getMessage());
     }
-*/
+
+    /**
+     * Test case: the booking is correctly saved.
+     * @throws ServletException
+     * @throws IOException
+     */
+    @Test
+    public void TC_1_2_3() throws ServletException, IOException {
+        Mockito.when(mockedRequest.getParameter("email")).thenReturn("c.Salvato@gmail.com");
+        servlet.doPost(mockedRequest, mockedResponse);
+        Mockito.verify(mockedResponse).setContentType("La prenotazione all’evento va a buon fine.");
+    }
+
+    /**
+     * Test case: the email is null.
+     */
+    @Test
+    public void emailNULL(){
+        Mockito.when(mockedRequest.getParameter("email")).thenReturn(null);
+        String message = "Email non valida.";
+
+        IllegalArgumentException exception;
+        exception = assertThrows(IllegalArgumentException.class,
+                () -> servlet.doGet(mockedRequest, mockedResponse));
+        assertEquals(message, exception.getMessage());
+    }
+
     @AfterAll
     public void clean(){
         servlet = null;
@@ -95,6 +130,16 @@ public class PrenotazioneEventoControllerTest {
             PreparedStatement ps = con.prepareStatement(
                     "DELETE FROM admin where Username = ?");
             ps.setString(1, admin.getUsername());
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        //remove prenotazione
+        try (Connection con = ConPool.getInstance().getConnection()) {
+            PreparedStatement ps = con.prepareStatement(
+                    "DELETE FROM prenotazione where UtenteEmail = ?");
+            ps.setString(1, "c.Salvato@gmail.com");
             ps.executeUpdate();
         } catch (SQLException e) {
             throw new RuntimeException(e);
