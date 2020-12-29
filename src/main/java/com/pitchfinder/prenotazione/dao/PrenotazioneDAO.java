@@ -2,6 +2,8 @@ package com.pitchfinder.prenotazione.dao;
 
 import com.pitchfinder.prenotazione.entity.Prenotazione;
 
+import java.sql.Date;
+
 public interface PrenotazioneDAO {
     /**
      * If prenotazione is correctly SAVED in database return true else return false.
@@ -16,4 +18,13 @@ public interface PrenotazioneDAO {
      * @return boolean
      */
     boolean doRemovePrenotazione(Prenotazione prenotazione);
+
+    /**
+     * Do retrieve prenotazione.
+     * @param email - email.
+     * @param nomeEvento - nomeEvento.
+     * @param dataEvento - dataEvento.
+     * @return Prenotazione.
+     */
+    Prenotazione doRetrievePrenotazione(String email, String nomeEvento, Date dataEvento);
 }
