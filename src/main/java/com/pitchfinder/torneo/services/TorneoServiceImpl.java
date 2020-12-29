@@ -11,6 +11,7 @@ import com.pitchfinder.torneo.entity.Torneo;
 
 import java.sql.Date;
 import java.sql.Time;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
@@ -152,14 +153,35 @@ public class TorneoServiceImpl implements TorneoService {
                 String date = year+"-"+(month+1)+"-"+day; //create date
                 Date dateCurrent = Date.valueOf(date);
 
+                List<Partita> allPartite = partita.doRetrieveAll(); //all match
+                List<Partita> partiteOccupation = new ArrayList<>(); //all match for rollback
+                List<Date> dateOccupation = new ArrayList<>(); //date for rollback
+
                 if (campo.checkOccupazioneExistence(idCampo, dateCurrent, timeInizio, timeFine)) { //check match
+
+                    for (int i = 0; i < allPartite.size(); i++) {
+                        if (allPartite.get(i).getData().getTime() == dateCurrent.getTime()) {
+                            partiteOccupation.add(allPartite.get(i));
+                        }
+                    }
+
+                    dateOccupation.add(dateCurrent);
+
                     campo.doRemoveOccupazione(idCampo, dateCurrent, timeInizio, timeFine);
                     partita.doRemovePartite(idCampo,dateCurrent,timeInizio,timeFine);
                 }
 
                 try {
+
                     campo.doSaveOccupazione(idCampo,dateCurrent,timeInizio,timeFine,adminUsername);
+
                 } catch (RuntimeException e) {
+                    for (Date d : dateOccupation) {
+                        campo.doRemoveOccupazione(idCampo, d, timeInizio, timeFine);
+                    }
+                    for (Partita p : partiteOccupation) {
+                        partita.doSavePartita(p);
+                    }
                     return false;
                 }
 
