@@ -1,6 +1,8 @@
 package com.pitchfinder.partita.services;
 
 import com.pitchfinder.autenticazione.entity.Utente;
+import com.pitchfinder.campo.dao.CampoDAO;
+import com.pitchfinder.campo.dao.CampoDAOImpl;
 import com.pitchfinder.partita.dao.PartitaDAO;
 import com.pitchfinder.partita.dao.PartitaDAOImpl;
 import com.pitchfinder.partita.entity.Partita;
@@ -23,10 +25,14 @@ public class PartitaServiceImpl implements PartitaService {
     public Partita createPartita(int idCampo, Utente utente, Date date, Time start, Time end) {
         Partita match = new Partita(idCampo, utente.getEmail(), date, start, end);
         PartitaDAO daoPartita = new PartitaDAOImpl();
-        if (daoPartita.doSavePartita(match)) {
-            return match;
-        }
+        CampoDAO daoCampo = new CampoDAOImpl();
 
+        if (!daoCampo.checkOccupazioneExistence(idCampo, date, start, end)) {
+            if (daoPartita.doSavePartita(match)) {
+                return match;
+            }
+
+        }
         return null;
     }
 
