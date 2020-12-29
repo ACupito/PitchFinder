@@ -44,5 +44,5 @@ public interface PartitaDAO {
      * @param end end
      * @return boolean
      */
-     boolean doRemovePartita(int idCampo, Date data, Time start, Time end);
+     boolean doRemovePartite(int idCampo, Date data, Time start, Time end);
 }

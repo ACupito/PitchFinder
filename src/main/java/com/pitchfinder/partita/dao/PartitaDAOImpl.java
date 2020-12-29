@@ -137,14 +137,14 @@ public class PartitaDAOImpl implements PartitaDAO {
      * @return boolean
      */
     @Override
-    public boolean doRemovePartita(int idCampo, Date data, Time start, Time end) {
+    public boolean doRemovePartite(int idCampo, Date data, Time start, Time end) {
 
         try (Connection con = ConPool.getInstance().getConnection()) {
 
             String query = "DELETE FROM partita "
                     + "WHERE CampoIdentificativo = ? AND "
                     + "Data = ? AND "
-                    + "OrarioInizio = ? AND " + "OrarioFine = ? ";
+                    + "OrarioInizio >= ? AND " + "OrarioFine <= ? ";
             PreparedStatement ps =
                     con.prepareStatement(query);
             ps.setInt(1, idCampo);
