@@ -21,7 +21,7 @@ import java.util.List;
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public class PartitaDAOImplTest {
     private PartitaDAO daoTest;
-    private Partita pTest;
+    private Partita pTest, deleteP;
     @BeforeAll
     public void start(){
         daoTest = new PartitaDAOImpl();
@@ -55,6 +55,9 @@ public class PartitaDAOImplTest {
         }
         daoTest.doSaveGiocatore(pTest.getIdPartita(),"Pasquale","Gaeta");
 
+        deleteP = new Partita(1004,"test99@gmail.com",Date.valueOf("2021-1-21"),
+                Time.valueOf("16:00:00"),Time.valueOf("17:00:00"));
+        daoTest.doSavePartita(deleteP);
     }
 
     /**
@@ -109,10 +112,30 @@ public class PartitaDAOImplTest {
      * This method check correct behaviour of doRetrieveAllGiocatori
      */
     @Test
-    public void doRetrieveAllGiocatori(){
+    public void doRetrieveAllGiocatoriTest(){
         List<String> giocatori = daoTest.doRetrieveAllGiocatori(pTest.getIdPartita());
 
         assertNotNull(giocatori);
+    }
+
+    /**
+     * This method check correct behaviour of doRemovePartita
+     */
+    @Test
+    public void doRemovePartitaTest(){
+
+        assertTrue(daoTest.doRemovePartita(deleteP.getIdCampo(),deleteP.getData(),
+                deleteP.getOrarioInizio(),deleteP.getOrarioFine()));
+    }
+
+    /**
+     * This method check bad behaviour of doRemovePartita
+     */
+    @Test
+    public void doRemovePartitaTestFailure(){
+
+        assertFalse(daoTest.doRemovePartita(deleteP.getIdCampo(),Date.valueOf("2021-2-10"),
+                deleteP.getOrarioInizio(),deleteP.getOrarioFine()));
     }
 
     @AfterAll
@@ -168,6 +191,8 @@ public class PartitaDAOImplTest {
         Time end = new Time(18,00,00);
 
         daoCampo.doRemoveOccupazione(1003,date,start,end);
+        daoCampo.doRemoveOccupazione(deleteP.getIdCampo(),deleteP.getData(),
+                deleteP.getOrarioInizio(),deleteP.getOrarioFine());
 
 
     }
