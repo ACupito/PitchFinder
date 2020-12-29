@@ -2,6 +2,7 @@
 package com.pitchfinder.evento.controller;
 
 import com.pitchfinder.autenticazione.entity.Admin;
+import com.pitchfinder.evento.entity.Evento;
 import com.pitchfinder.evento.services.EventoService;
 import com.pitchfinder.evento.services.EventoServiceImpl;
 
@@ -20,10 +21,6 @@ public class EventoController extends HttpServlet {
     private static final int MAXLIMIT = 50;
     /** Maximum limit for image. */
     private static final int MAXLIMITIMAGE = 2;
-    /** Maximum limit for hours. */
-    private static final int MAXHOUR = 24;
-    /** Maximum limit for the minutes. */
-    private static final int MAXMINUTE = 60;
     /** Maximum limit for the Guest. */
     private static final int MAXGUESTLIMIT = 20;
     /** Maximum limit for the description. */
@@ -141,7 +138,7 @@ public class EventoController extends HttpServlet {
             if (postiDisponibili < MINLIMIT || postiDisponibili > MAXSITSLIMIT) {
                 throw new IllegalArgumentException("Errato: lunghezza non valida");
             }
-            es.createEvento(nome, "immagineStr", orarioInizio, orarioFine, dataEvento,
+            Evento creazione = es.createEvento(nome, "immagineStr", orarioInizio, orarioFine, dataEvento,
                             ospite, descrizione, postiDisponibili, admin.getUsername());
             response.setContentType("Creazione avvenuta");
         }
