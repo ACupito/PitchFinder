@@ -23,6 +23,15 @@ public class PartitaDAOImpl implements PartitaDAO {
     public boolean doSavePartita(Partita partita) {
 
         try (Connection con = ConPool.getInstance().getConnection()) {
+            PreparedStatement ps0 =
+                    con.prepareStatement("INSERT INTO Occupazione "
+                            + "(Data, OrarioInizio, OrarioFine, CampoIdentificativo) VALUES(?, ?, ?, ?)");
+            ps0.setDate(1, partita.getData());
+            ps0.setTime(2, partita.getOrarioInizio());
+            ps0.setTime(3, partita.getOrarioFine());
+            ps0.setInt(4, partita.getIdCampo());
+            ps0.executeUpdate();
+
             PreparedStatement ps =
                     con.prepareStatement("INSERT into partita(CampoIdentificativo, "
                             + "UtenteEmail, Data, OrarioInizio, OrarioFine)"
@@ -32,11 +41,7 @@ public class PartitaDAOImpl implements PartitaDAO {
             ps.setDate(3, partita.getData());
             ps.setTime(4, partita.getOrarioInizio());
             ps.setTime(5, partita.getOrarioFine());
-
-           if (ps.executeUpdate() != 1) {
-               return false;
-           }
-           return true;
+           return ps.executeUpdate() == 1;
 
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -86,10 +91,8 @@ public class PartitaDAOImpl implements PartitaDAO {
             ps.setString(2, cognome);
             ps.setInt(3, idPartita);
 
-            if (ps.executeUpdate() != 1) {
-                return false;
-            }
-            return true;
+            return ps.executeUpdate() == 1;
+
 
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -105,9 +108,11 @@ public class PartitaDAOImpl implements PartitaDAO {
     public List<String> doRetrieveAllGiocatori(int idPartita) {
         try (Connection con = ConPool.getInstance().getConnection()) {
 
-            String query = "SELECT Nome, Cognome FROM giocatore";
+            String query = "SELECT Nome, Cognome FROM giocatore WHERE PartitaIdentificativoPartita = ?";
             PreparedStatement ps =
                     con.prepareStatement(query);
+            ps.setInt(1, idPartita);
+
             ResultSet rs =  ps.executeQuery();
             List<String> giocatori = new ArrayList<String>();
             while (rs.next()) {
