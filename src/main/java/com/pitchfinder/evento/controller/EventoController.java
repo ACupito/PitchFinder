@@ -139,7 +139,12 @@ public class EventoController extends HttpServlet {
             }
             Evento creazione = es.createEvento(nome, "immagineStr", orarioInizio, orarioFine, dataEvento,
                             ospite, descrizione, postiDisponibili, admin.getUsername());
+            if (creazione == null) {
+                response.setContentType("Impossibile creare un evento");
+            }
+
             response.setContentType("Creazione avvenuta");
+
         }
     }
 }
