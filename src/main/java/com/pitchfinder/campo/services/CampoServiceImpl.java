@@ -10,7 +10,8 @@ import java.sql.Time;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CampoServiceImpl {
+public class CampoServiceImpl implements CampoService{
+
     /**
      * This methods manages the creation of the occupation.
      * @param idCampo       is the id of the pitch.
@@ -20,29 +21,32 @@ public class CampoServiceImpl {
      * @param usernameAdmin is the username of the admin.
      * @return boolean
      */
-    boolean createOccupazione(int idCampo, Date data, Time inizio, Time fine, String usernameAdmin) {
+    public boolean createOccupazione(int idCampo, Date data, Time inizio, Time fine, String usernameAdmin) {
 
         CampoDAOImpl c = new CampoDAOImpl();
+        PartitaDAOImpl pa = new PartitaDAOImpl();
+        List<Partita> listPartite = new ArrayList<Partita>();
+        /*Partita p = new Partita();
 
-        if (c.doSaveOccupazione(idCampo, data, inizio, fine, usernameAdmin)) {
-            if(c.checkOccupazioneExistence(idCampo, data, inizio, fine)){
 
-            PartitaDAOImpl pa = new PartitaDAOImpl();
-            List<Partita> listPartite = new ArrayList<Partita>();
-                Partita p = new Partita(0000, 0000, null, null, null, null);
+            if (c.checkOccupazioneExistence(idCampo, data, inizio, fine)) {
 
                 listPartite.addAll(pa.doRetrieveAll());
-                for(int i=0; i<=listPartite.size(); i++){
-                    p =listPartite.get(i);
-                    if(p.getOrarioInizio().getTime()>=inizio.getTime() || p.getOrarioFine().getTime()<=fine.getTime()) {
+
+                for (int i = 0; i <= listPartite.size(); i++) {
+                    p = listPartite.get(i);
+                    if (p.getOrarioInizio().getTime() >= inizio.getTime() || p.getOrarioFine().getTime() <= fine.getTime()) {
+                    pa.doRemovePartite(idCampo, data, inizio, fine);
+                    c.doRemoveOccupazione(idCampo, data, inizio, fine);
 
                     }
                 }
 
-        }
+        }*/
+        c.doSaveOccupazione(idCampo, data, inizio, fine, usernameAdmin);
             return true;
-        }
-            return false;
+
+
 
     }
 
@@ -54,12 +58,15 @@ public class CampoServiceImpl {
      * @param fine          is the end of the occupation.
      * @return boolean
      */
-    boolean deleteOccupazione(int idCampo, Date data, Time inizio, Time fine) {
+    public boolean deleteOccupazione(int idCampo, Date data, Time inizio, Time fine) {
         CampoDAOImpl c = new CampoDAOImpl();
-        if (c.doRemoveOccupazione(idCampo, data, inizio, fine)) {
+        PartitaDAOImpl pa = new PartitaDAOImpl();
+
+        c.doRemoveOccupazione(idCampo, data, inizio, fine);
+        pa.doRemovePartite(idCampo, data, inizio, fine);
             return true;
-        }
-        return false;
+
+
     }
 
     /**
@@ -70,7 +77,7 @@ public class CampoServiceImpl {
      * @param fine   is the end of the occupation.
      * @return boolean
      */
-    boolean controllaOccupazione(int id, Date data, Time inizio, Time fine) {
+    public boolean controllaOccupazione(int id, Date data, Time inizio, Time fine) {
         CampoDAOImpl c = new CampoDAOImpl();
         if (c.checkOccupazioneExistence(id, data, inizio, fine)) {
             return true;
@@ -87,7 +94,7 @@ public class CampoServiceImpl {
      * @param fine        is the end of the availability.
      * @return boolean
      */
-    boolean createDisponibilita(String emailUtente, int idCampo, Date data, Time inizio, Time fine) {
+    public boolean createDisponibilita(String emailUtente, int idCampo, Date data, Time inizio, Time fine) {
         CampoDAOImpl c = new CampoDAOImpl();
         if (c.doSaveDisponibilita(emailUtente, idCampo, data, inizio, fine)) {
             return true;
@@ -106,7 +113,7 @@ public class CampoServiceImpl {
      * @return List<Utente>
      */
 
-    List<Utente> showAllDisponibilita(int idCampo, Date data, Time inizio, Time fine) {
+    public List<Utente> showAllDisponibilita(int idCampo, Date data, Time inizio, Time fine) {
         CampoDAOImpl c = new CampoDAOImpl();
         AutenticazioneServiceImpl ut = new AutenticazioneServiceImpl();
         Utente u = new Utente();
