@@ -90,7 +90,7 @@ public class CampoDAOImpl implements CampoDAO {
         try (Connection con = ConPool.getInstance().getConnection()) {
             PreparedStatement ps =
                     con.prepareStatement("delete from Occupazione "
-                            + "where CampoIdentificativo=? and Data=? and OrarioInizio=? and OrarioFine=?");
+                            + "where CampoIdentificativo=? and Data=? and OrarioInizio>=? and OrarioFine<=?");
 
             ps.setInt(1, idCampo);
             ps.setDate(2, data);
@@ -118,7 +118,7 @@ public class CampoDAOImpl implements CampoDAO {
         try (Connection con = ConPool.getInstance().getConnection()) {
             PreparedStatement ps =
                     con.prepareStatement("SELECT CampoIdentificativo, Data, OrarioInizio, OrarioFine FROM Occupazione "
-                            + "WHERE CampoIdentificativo=? && Data=? && OrarioInizio=? && OrarioFine=?");
+                            + "WHERE CampoIdentificativo=? && Data=? && OrarioInizio>=? && OrarioFine<=?");
             ps.setInt(1, idCampo);
             ps.setDate(2, data);
             ps.setTime(3, inizio);
@@ -219,6 +219,33 @@ public class CampoDAOImpl implements CampoDAO {
                 d.add(rs.getString(1));
             }
             return d;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    /**
+     * take the UsernameAdmin from the Occupazione.
+     * @param idCampo is the id of the pitch.
+     * @param data is the date of the occupation.
+     * @param inizio is the start of the occupation.
+     * @param fine is the end of the occupation.
+     * @return
+     */
+    @Override
+    public String doRetriveAdminByOccupazione(int idCampo, Date data, Time inizio, Time fine) {
+
+        try (Connection con = ConPool.getInstance().getConnection()) {
+            PreparedStatement ps =
+                    con.prepareStatement("SELECT AdminUsername FROM Occupazione "
+                            + "WHERE CampoIdentificativo=? && Data=? && OrarioInizio=? && OrarioFine=?");
+            ps.setInt(1, idCampo);
+            ps.setDate(2, data);
+            ps.setTime(3, inizio);
+            ps.setTime(4, fine);
+            ResultSet rs = ps.executeQuery();
+
+            return rs.getString(1);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
