@@ -2,6 +2,9 @@ package com.pitchfinder.torneo.services;
 
 import com.pitchfinder.campo.dao.CampoDAO;
 import com.pitchfinder.campo.dao.CampoDAOImpl;
+import com.pitchfinder.partita.dao.PartitaDAO;
+import com.pitchfinder.partita.dao.PartitaDAOImpl;
+import com.pitchfinder.partita.entity.Partita;
 import com.pitchfinder.torneo.dao.TorneoDAO;
 import com.pitchfinder.torneo.dao.TorneoDAOImpl;
 import com.pitchfinder.torneo.entity.Torneo;
@@ -52,12 +55,14 @@ public class TorneoServiceImpl implements TorneoService {
                 maxSquadre, minPartecipanti, maxPartecipanti, dataInizio,
                 dateFine, idCampo);
 
-        boolean result = tdao.doSaveTorneo(torneo);
-
-
-        if (!result) {
-           throw new IllegalArgumentException("Creazione fallita");
+        if(!insertOccupazione(idCampo, dataInizio, dateFine, giornoPartite, usernameAdmin)) {
+            throw new IllegalArgumentException("Creazione fallita: Insert Occupazione fallita");
         }
+
+        if (!tdao.doSaveTorneo(torneo)) {
+           throw new IllegalArgumentException("Creazione fallita: Save Torneo fallito");
+        }
+
         return true;
     }
 
@@ -95,10 +100,29 @@ public class TorneoServiceImpl implements TorneoService {
 
     }
 
-    private void createOccupazione(int idCampo, Date startDate, Date endDate, String giornoPartite) {
+    /**
+     * This method call doCheckTorneo.
+     * @see com.pitchfinder.torneo.dao.TorneoDAOImpl#doCheckTorneo(Date, Date, int)
+     * @return boolean : true -> there are other tournaments / false -> empty at the time
+     */
+    @Override
+    public boolean checkScheduledTorneo(Date dataInizio, Date dataFine, int IdCampo) {
+
+        return tdao.doCheckTorneo(dataInizio,dataFine,IdCampo);
+    }
+
+    /**
+     * This method inserts the tuples for the occupation of the pitch in all the days
+     * in which the matches take place.
+     * @param idCampo pitch identifier
+     * @param startDate start date of the tournament
+     * @param endDate end date of the tournament
+     * @param giornoPartite match day of the tournament
+     */
+    private boolean insertOccupazione(int idCampo, Date startDate, Date endDate, String giornoPartite, String adminUsername) {
 
         CampoDAO campo = new CampoDAOImpl();
-
+        PartitaDAO partita = new PartitaDAOImpl();
         int dayNumber = 0;
         switch (giornoPartite) { //get day number
             case "Domenica": dayNumber = 1; break;
@@ -120,14 +144,23 @@ public class TorneoServiceImpl implements TorneoService {
 
         while (days > 0) { //get date form start date to end date of the tournament
             if (calendar.get(Calendar.DAY_OF_WEEK) == dayNumber) { //check if the date is a match day
+
                 int day = calendar.get(Calendar.DATE); //get day
                 int month = calendar.get(Calendar.MONTH); //get month
                 int year = calendar.get(Calendar.YEAR); //get year
+
                 String date = year+"-"+(month+1)+"-"+day; //create date
                 Date dateCurrent = Date.valueOf(date);
 
-                if (campo.checkOccupazioneExistence(idCampo, dateCurrent, timeInizio, timeFine)) {
+                if (campo.checkOccupazioneExistence(idCampo, dateCurrent, timeInizio, timeFine)) { //check match
                     campo.doRemoveOccupazione(idCampo, dateCurrent, timeInizio, timeFine);
+                    partita.doRemovePartite(idCampo,dateCurrent,timeInizio,timeFine);
+                }
+
+                try {
+                    campo.doSaveOccupazione(idCampo,dateCurrent,timeInizio,timeFine,adminUsername);
+                } catch (RuntimeException e) {
+                    return false;
                 }
 
             }
@@ -135,6 +168,7 @@ public class TorneoServiceImpl implements TorneoService {
             days--;
         }
 
+        return true;
 
     }
 }
