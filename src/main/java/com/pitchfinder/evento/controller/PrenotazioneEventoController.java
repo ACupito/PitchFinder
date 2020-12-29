@@ -21,19 +21,21 @@ public class PrenotazioneEventoController extends HttpServlet {
      */
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        HttpSession httpSession = req.getSession();
 
-        String email = req.getParameter("utenteEmail");
-        Evento evento = (Evento) httpSession.getAttribute("evento");
+        HttpSession session = req.getSession();
+
+        String email = req.getParameter("email");
+
+        Evento evento = (Evento) session.getAttribute("evento");
 
         if (email == null) {
             throw new IllegalArgumentException("Email non valida");
         }
 
-        if ((email. length() < 1) || (email.length() > 50)) {
+        if ((email.length() < 1) || (email.length() > 50)) {
             throw new IllegalArgumentException("Lunghezza email non corretta");
         }
-
+        System.out.println(email);
         if (email.matches("^\\w+([\\.-]?\\w+)*@\\w+([\\.-]?\\w+)*(\\.\\w+)+$")) {
             throw new IllegalArgumentException("Formato email non valido");
         }
@@ -56,6 +58,6 @@ public class PrenotazioneEventoController extends HttpServlet {
      */
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        super.doGet(req, resp);
+        doPost(req, resp);
     }
 }
