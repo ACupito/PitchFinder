@@ -10,7 +10,7 @@ import java.sql.Time;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CampoServiceImpl implements CampoService{
+public class CampoServiceImpl implements CampoService {
 
     /**
      * This methods manages the creation of the occupation.
@@ -26,14 +26,14 @@ public class CampoServiceImpl implements CampoService{
         CampoDAOImpl c = new CampoDAOImpl();
         PartitaDAOImpl pa = new PartitaDAOImpl();
         List<Partita> listPartite = new ArrayList<Partita>();
-        /*Partita p = new Partita();
+        Partita p = new Partita();
 
 
             if (c.checkOccupazioneExistence(idCampo, data, inizio, fine)) {
 
                 listPartite.addAll(pa.doRetrieveAll());
 
-                for (int i = 0; i <= listPartite.size(); i++) {
+                for (int i = 0; i < listPartite.size(); i++) {
                     p = listPartite.get(i);
                     if (p.getOrarioInizio().getTime() >= inizio.getTime() || p.getOrarioFine().getTime() <= fine.getTime()) {
                     pa.doRemovePartite(idCampo, data, inizio, fine);
@@ -42,7 +42,7 @@ public class CampoServiceImpl implements CampoService{
                     }
                 }
 
-        }*/
+        }
         c.doSaveOccupazione(idCampo, data, inizio, fine, usernameAdmin);
             return true;
 
@@ -96,11 +96,8 @@ public class CampoServiceImpl implements CampoService{
      */
     public boolean createDisponibilita(String emailUtente, int idCampo, Date data, Time inizio, Time fine) {
         CampoDAOImpl c = new CampoDAOImpl();
-        if (c.doSaveDisponibilita(emailUtente, idCampo, data, inizio, fine)) {
-            return true;
-        }
-
-        return false;
+        c.doSaveDisponibilita(emailUtente, idCampo, data, inizio, fine);
+         return true;
     }
 
     /**
