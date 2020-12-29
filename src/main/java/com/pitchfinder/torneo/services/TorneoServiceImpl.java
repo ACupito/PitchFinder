@@ -71,20 +71,27 @@ public class TorneoServiceImpl implements TorneoService {
      * This method allows to remove a tournament.
      * @param idCampo pitch identifier
      * @param nome nome of the tournament
-     * @param dataInizio dataInizio of the tournament
+     * @param dataInizio start date of the tournament
+     * @param dataFine end date of the tournament
+     * @param giornoPartite match day of the tournament
      * @return boolean -> true : created / false : failed creation
      */
+
     @Override
-    public boolean deleteTorneo(int idCampo, String nome, Date dataInizio) {
+    public boolean deleteTorneo(int idCampo, String nome, Date dataInizio, Date dataFine, String giornoPartite) {
 
         Torneo torneo = new Torneo();
         torneo.setCampoIdentificativo(idCampo);
         torneo.setNome(nome);
         torneo.setDataInizio(dataInizio);
+        torneo.setDataFine(dataFine);
+        torneo.setGiornoPartite(giornoPartite);
 
-        boolean result = tdao.doRemoveTorneo(torneo);
-        if (!result) {
+        if (!tdao.doRemoveTorneo(torneo)) {
             throw new IllegalArgumentException("Eliminazione fallita");
+        }
+        if (!deleteOccupazione(torneo.getCampoIdentificativo(), torneo.getDataInizio(), torneo.getDataFine(), torneo.getGiornoPartite())) {
+            throw new IllegalArgumentException("Eliminazione occupazione fallita");
         }
         return true;
     }
@@ -191,6 +198,64 @@ public class TorneoServiceImpl implements TorneoService {
         }
 
         return true;
+
+    }
+
+    /**
+     * This method delete the tournament elimination.
+     * @param idCampo pitch identifier
+     * @param startDate start date of the tournament
+     * @param endDate end date of the tournament
+     * @param giornoPartite match day of the tournament
+     * @return boolean : true -> successful | false -> failed
+     */
+    private boolean deleteOccupazione(int idCampo, Date startDate, Date endDate, String giornoPartite) {
+
+        CampoDAO campo = new CampoDAOImpl();
+
+        int dayNumber = 0;
+
+        switch (giornoPartite) { //get day number
+            case "Domenica": dayNumber = 1; break;
+            case "Lunedì": dayNumber = 2; break;
+            case "Martedì": dayNumber = 3; break;
+            case "Mercoledì": dayNumber = 4; break;
+            case "Giovedì": dayNumber = 5; break;
+            case "Venerdì": dayNumber = 6; break;
+            case "Sabato": dayNumber = 7; break;
+        }
+
+        //remaining days between start date and end date
+        long days = ((endDate.getTime() - startDate.getTime()) / (1000 * 60 * 60 * 24)) + 1;
+
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(startDate); //set time to start date of the tournament
+        Time timeInizio = Time.valueOf("00:00:00"); //start time of occupation
+        Time timeFine = Time.valueOf("23:59:59"); //end time of occupation
+
+        while (days > 0) { //get date form start date to end date of the tournament
+            if (calendar.get(Calendar.DAY_OF_WEEK) == dayNumber) { //check if the date is a match day
+
+                int day = calendar.get(Calendar.DATE); //get day
+                int month = calendar.get(Calendar.MONTH); //get month
+                int year = calendar.get(Calendar.YEAR); //get year
+
+                String date = year+"-"+(month+1)+"-"+day; //create date
+                Date dateCurrent = Date.valueOf(date);
+
+                try {
+                    campo.doRemoveOccupazione(idCampo, dateCurrent, timeInizio, timeFine);
+                } catch (RuntimeException e) {
+                    return false;
+                }
+
+            }
+            calendar.add(Calendar.DATE, 1); //advance in the days until the end date of the tournament
+            days--;
+        }
+
+        return true;
+
 
     }
 }

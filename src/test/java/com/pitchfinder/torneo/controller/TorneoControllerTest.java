@@ -571,7 +571,7 @@ class TorneoControllerTest {
         mockedResponse = null;
         session = null;
         TorneoService ts = new TorneoServiceImpl();
-        ts.deleteTorneo(ID_CAMPO, NOME, Date.valueOf(DATA_INIZIO));
+        ts.deleteTorneo(ID_CAMPO, NOME, Date.valueOf(DATA_INIZIO), Date.valueOf(DATA_FINE), GIORNO_PARTITE);
 
     }
 }

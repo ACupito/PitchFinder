@@ -33,10 +33,12 @@ public interface TorneoService {
      * This method allows to remove a tournament.
      * @param idCampo pitch identifier
      * @param nome nome of the tournament
-     * @param dataInizio dataInizio of the tournament
+     * @param dataInizio start date of the tournament
+     * @param dataFine end date of the tournament
+     * @param giornoPartite match day of the tournament
      * @return boolean -> true : created / false : failed creation
      */
-    boolean deleteTorneo(int idCampo, String nome, Date dataInizio);
+    boolean deleteTorneo(int idCampo, String nome, Date dataInizio, Date dataFine, String giornoPartite);
 
     /**
      * This method allows to get all tournaments.

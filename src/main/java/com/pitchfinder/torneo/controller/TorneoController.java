@@ -58,6 +58,12 @@ public class TorneoController extends HttpServlet {
             }
 
             String startDate = request.getParameter("dataInizio");
+            String endDate = request.getParameter("dataFine");
+
+            String giornoPartite = request.getParameter("giornoPartite");
+            if (giornoPartite == null) {
+                throw new IllegalArgumentException("Giorno partite non inserito");
+            }
 
             if (flag == 1) { //tournament creation
 
@@ -93,7 +99,6 @@ public class TorneoController extends HttpServlet {
                     throw new IllegalArgumentException("Formato data inizio non valido");
                 }
 
-                String endDate = request.getParameter("dataFine");
                 Date dataFine;
                 if (endDate == null) {
                     throw new IllegalArgumentException("Data fine non selezionata");
@@ -111,10 +116,6 @@ public class TorneoController extends HttpServlet {
                    throw new IllegalArgumentException("Tornei già schedulati in quel periodo");
                 }
 
-                String giornoPartite = request.getParameter("giornoPartite");
-                if (giornoPartite == null) {
-                    throw new IllegalArgumentException("Giorno partite non inserito");
-                }
                 if (giornoPartite.length() < 1 || giornoPartite.length() > 20) {
                     throw new IllegalArgumentException("Lunghezza giorno partite non valida");
                 }
@@ -181,7 +182,25 @@ public class TorneoController extends HttpServlet {
                     throw new IllegalArgumentException("Formato data inizio non valido");
                 }
 
-                boolean removeResult = ts.deleteTorneo(campo.getIdentificativo(), nome, dataInizio);
+                Date dataFine;
+                if (endDate == null) {
+                    throw new IllegalArgumentException("Data fine non selezionata");
+                }
+                try {
+                    dataFine = Date.valueOf(endDate);
+                } catch (IllegalArgumentException e) {
+                    throw new IllegalArgumentException("Formato data fine non valido");
+                }
+
+
+                if (giornoPartite.length() < 1 || giornoPartite.length() > 20) {
+                    throw new IllegalArgumentException("Lunghezza giorno partite non valida");
+                }
+                if (!giornoPartite.matches("^[ a-zA-Z\\u00C0-\\u00ff']+$")) {
+                    throw new IllegalArgumentException("Formato giorno partite non valido");
+                }
+
+                boolean removeResult = ts.deleteTorneo(campo.getIdentificativo(), nome, dataInizio, dataFine, giornoPartite);
                 if (removeResult) response.setContentType("Eliminazione avvenuta");
             } else if (flag == 3) { //get all tornei
 
