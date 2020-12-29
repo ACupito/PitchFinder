@@ -59,6 +59,9 @@ class PartitaServiceImplTest {
 
     }
 
+    /**
+     * method used for the testing of createPartita
+     */
     @Test
     void createPartitaTest() {
         Date date = new Date(2020-1900,0,7);
@@ -69,11 +72,18 @@ class PartitaServiceImplTest {
 
         assertNotNull(serviceTest.createPartita(1002,user,date,start,end));
     }
+
+    /**
+     * method used for the testing of showGiocatori
+     */
     @Test
     void showGiocatoriTest(){
         assertNotNull(serviceTest.showGiocatori(pTest));
     }
 
+    /**
+     * method used for the testing of createGiocatorePartita
+     */
     @Test
     void createGiocatorePartitaTest(){
         assertTrue(serviceTest.createGiocatorePartita(pTest.getIdPartita(), "Catello", "Ercolano"));
