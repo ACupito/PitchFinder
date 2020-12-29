@@ -6,6 +6,8 @@ import com.pitchfinder.autenticazione.services.AutenticazioneService;
 import com.pitchfinder.autenticazione.services.AutenticazioneServiceImpl;
 import com.pitchfinder.campo.dao.CampoDAOImpl;
 import com.pitchfinder.campo.entity.Campo;
+import com.pitchfinder.partita.dao.PartitaDAOImpl;
+import com.pitchfinder.partita.entity.Partita;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -65,6 +67,17 @@ public class CampoServiceImplTest {
 
         cdao.doSaveDisponibilita("mario111@gmail.com", ID_CAMPO, Date.valueOf(DATA), Time.valueOf(TEMPO_INIZIO.concat(":00")), Time.valueOf(TEMPO_FINE.concat(":00")));
         cs.createDisponibilita("mario129@gmail.com", ID_CAMPO, Date.valueOf(DATA), Time.valueOf(TEMPO_INIZIO.concat(":00")), Time.valueOf(TEMPO_FINE.concat(":00")));
+
+        Partita partita= new Partita(0011, 1002, "mario129@gmail.com", Date.valueOf("1999-11-11"), Time.valueOf("09:20".concat(":00")), Time.valueOf("10:20".concat(":00")));
+
+        PartitaDAOImpl pp1= new PartitaDAOImpl();
+        pp1.doSavePartita(partita);
+
+        Partita partita1= new Partita(0012, 1002, "mario111@gmail.com", Date.valueOf("1999-11-11"), Time.valueOf("10:30".concat(":00")), Time.valueOf("11:30".concat(":00")));
+
+        PartitaDAOImpl pp11= new PartitaDAOImpl();
+        pp11.doSavePartita(partita1);
+
     }
     /**
      * This method tests the method createOccupazione.
@@ -75,6 +88,17 @@ public class CampoServiceImplTest {
     void createOccupazioneTest() {
 
         assertTrue(cs.createOccupazione(ID_CAMPO, Date.valueOf(DATA), Time.valueOf(TEMPO_INIZIO.concat(":00")), Time.valueOf(TEMPO_FINE.concat(":00")), USERNAME_ADMIN));
+
+    }
+    /**
+     * This method tests the method createOccupazione.
+     * creates an Occupazione deleting first the Partita.
+     */
+
+    @Test
+    void createOccupazioneDeletePartitaFirstTest() {
+
+        assertTrue(cs.createOccupazione(ID_CAMPO, Date.valueOf("1999-11-11"), Time.valueOf("09:20".concat(":00")), Time.valueOf("11:30".concat(":00")), USERNAME_ADMIN));
 
     }
 
@@ -89,16 +113,7 @@ public class CampoServiceImplTest {
         assertTrue(cs.deleteOccupazione(ID_CAMPO,Date.valueOf("2010-10-10"), Time.valueOf("20:20".concat(":00")), Time.valueOf("21:00".concat(":00"))));
 
     }
-    /**
-     * This method tests the method deleteOccupazione.
-     * error in deletes an Occupazione.
-     */
-    @Test
-    void deleteOccupazioneTestError() {
 
-        assertFalse(cs.deleteOccupazione(10000,Date.valueOf("2010-10-10"), Time.valueOf("20:20".concat(":00")), Time.valueOf("21:00".concat(":00"))));
-
-    }
     /**
      * This method tests the method controllaOccupazione.
      * checks that the Occupazione exists.
@@ -153,6 +168,9 @@ public class CampoServiceImplTest {
         cdao.doRemoveDisponibilita(EMAIL, ID_CAMPO);
         AutenticazioneService as2 = new AutenticazioneServiceImpl();
         as2.removeUtente("Mariox129");
+        cs.deleteOccupazione(ID_CAMPO, Date.valueOf("1999-11-11"), Time.valueOf("09:20".concat(":00")), Time.valueOf("11:30".concat(":00")));
 
     }
-}
+
+    }
+
