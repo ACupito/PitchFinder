@@ -31,7 +31,6 @@ public class PartitaServiceImpl implements PartitaService {
             if (daoPartita.doSavePartita(match)) {
                 return match;
             }
-
         }
         return null;
     }

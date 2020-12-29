@@ -27,7 +27,7 @@ public class CreazionePartitaController extends HttpServlet {
 
         String idCampoStr = request.getParameter("idCampo");
         int idCampo;
-        Utente utente = (Utente) session.getAttribute("Utente");
+        Utente utente = (Utente) session.getAttribute("utente");
         String dateStr = request.getParameter("date");
         Date date;
         String startStr = request.getParameter("start");
@@ -52,7 +52,7 @@ public class CreazionePartitaController extends HttpServlet {
         try {
             date = Date.valueOf(dateStr);
             if (date.before(currentDate)) {
-                throw new IllegalArgumentException("Formato Data non valido");
+                throw new IllegalArgumentException("Formato a Data non valido");
             }
         } catch (IllegalArgumentException e) {
             throw new IllegalArgumentException("Formato Data non valido");
@@ -68,15 +68,15 @@ public class CreazionePartitaController extends HttpServlet {
         }
         end = Time.valueOf(endStr.concat(":00"));
 
-        if (end.before(start) || start.after(end)) {
+        if (end.before(start) || start.after(end) || endStr.equals(startStr)) {
             throw new IllegalArgumentException("Formato Orario partita non valido");
         }
         //Check maximum match time
         int startIntHr = Integer.parseInt(startStr.substring(0, 2));
-        int startIntMn = Integer.parseInt(startStr.substring(2));
+        int startIntMn = Integer.parseInt(startStr.substring(3));
 
-        int endIntHr = Integer.parseInt(startStr.substring(0, 2));
-        int endIntMn = Integer.parseInt(startStr.substring(2));
+        int endIntHr = Integer.parseInt(endStr.substring(0, 2));
+        int endIntMn = Integer.parseInt(endStr.substring(3));
 
         if (endIntHr - startIntHr >= 2) {
             if (endIntHr - startIntHr == 2 && startIntMn - endIntMn < 0) {
@@ -86,10 +86,10 @@ public class CreazionePartitaController extends HttpServlet {
             }
         }
 
-        if(service.createPartita(idCampo,utente,date,start,end)!= null){
-            //It's ok forward/send redirect to...
-        }else{
-            //Create Failed forward/send redirect to...
+        if (service.createPartita(idCampo, utente, date, start, end) != null) {
+            response.setContentType("Creazione avvenuta!");
+        } else {
+            response.setContentType("Impossibile creare una partita!");
         }
 
     }
