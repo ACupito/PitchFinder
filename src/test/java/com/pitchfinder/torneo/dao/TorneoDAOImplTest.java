@@ -1,6 +1,7 @@
 package com.pitchfinder.torneo.dao;
 
 import com.pitchfinder.torneo.entity.Torneo;
+import org.junit.Ignore;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -56,7 +57,7 @@ class TorneoDAOImplTest {
      * This method tests the method doSaveTorneo in case it fails.
      */
     @Test
-    void checkSaveTorneoTest1() {
+    void check_1() {
 
         t.setAdminUsername("");
         t.setNome("");
@@ -78,7 +79,7 @@ class TorneoDAOImplTest {
      * This method tests the method doSaveTorneo in case it successful.
      */
     @Test
-    void checkSaveTorneoTest2() {
+    void check_2() {
 
         t.setAdminUsername(USERNAME_ADMIN);
         t.setNome(NOME);
@@ -97,10 +98,37 @@ class TorneoDAOImplTest {
     }
 
     /**
+     * This method tests the method doCheckTorneo in case it fails.
+     */
+    @Test
+    void check_3() {
+
+        assertTrue(tdao.doCheckTorneo(Date.valueOf(DATA_INIZIO), Date.valueOf(DATA_FINE), ID_CAMPO));
+
+    }
+
+    /**
+     * This method tests the method doCheckTorneo in case it successful.
+     */
+    @Test
+    void check_4() {
+        assertFalse(tdao.doCheckTorneo(Date.valueOf("2021-01-01"), Date.valueOf("2021-01-05"), ID_CAMPO));
+    }
+
+    /**
+     * This method tests the method doRetrieveAllTornei.
+     */
+    @Test
+    void check_5() {
+        assertNotNull(tdao.doRetrieveAllTornei());
+    }
+
+
+    /**
      * This method tests the method doRemoveTorneo in case it fails.
      */
     @Test
-    void checkRemoveTorneoTest3() {
+    void check_6() {
 
         t.setAdminUsername("");
         t.setNome("");
@@ -123,7 +151,7 @@ class TorneoDAOImplTest {
      * This method tests the method doRemoveTorneo in case it successful.
      */
     @Test
-    void checkRemoveTorneoTest4() {
+    void check_7() {
 
         t.setAdminUsername(USERNAME_ADMIN);
         t.setNome(NOME);
@@ -141,13 +169,6 @@ class TorneoDAOImplTest {
 
     }
 
-    /**
-     * This method tests the method doRetrieveAllTornei.
-     */
-    @Test
-    void checkGetAllTornei5() {
-         assertNotNull(tdao.doRetrieveAllTornei());
-    }
 
 
     /**
