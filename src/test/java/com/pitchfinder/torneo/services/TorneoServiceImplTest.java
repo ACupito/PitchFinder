@@ -44,33 +44,53 @@ class TorneoServiceImplTest {
     }
 
     /**
-     * This method tests the method createTorneo in case it fails.
+     * This method tests the method createTorneo in case fails doSaveTorneo.
      */
-//    @Test
-//    void check_1() {
-//
-//        String usernameAdmin = "";
-//        int idCampo = 0;
-//        Date dataInizio = Date.valueOf(DATA_INIZIO);
-//        Date dataFine = Date.valueOf(DATA_FINE);
-//
-//        String message = "Creazione fallita";
-//
-//        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> tservice.createTorneo(usernameAdmin, idCampo, NOME, TIPO,
-//                STRUTTURA, MAX_SQUADRE, dataInizio, dataFine, MIN_PARTECIPANTI, MAX_PARTECIPANTI,
-//                GIORNO_PARTITE));
-//        assertEquals(message, exception.getMessage());
-//
-//    }
+    @Test
+    void check_1() {
+
+        String usernameAdmin = "memex99";
+        int idCampo = 1002;
+        Date dataInizio = Date.valueOf(DATA_INIZIO);
+        Date dataFine = Date.valueOf(DATA_FINE);
+
+        String message = "Creazione fallita: Save Torneo fallito";
+
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> tservice.createTorneo(usernameAdmin, idCampo, null, null,
+                 null, MAX_SQUADRE, dataInizio, dataFine, MIN_PARTECIPANTI, MAX_PARTECIPANTI,
+                GIORNO_PARTITE));
+        assertEquals(message, exception.getMessage());
+
+    }
+
+    /**
+     * This method tests the method createTorneo in case fails insertOccupazione.
+     */
+    @Test
+    void check_2() {
+
+        String usernameAdmin = "";
+        int idCampo = 1002;
+        Date dataInizio = Date.valueOf(DATA_INIZIO);
+        Date dataFine = Date.valueOf(DATA_FINE);
+
+        String message = "Creazione fallita: Insert Occupazione fallita";
+
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> tservice.createTorneo(usernameAdmin, idCampo, null, null,
+                null, MAX_SQUADRE, dataInizio, dataFine, MIN_PARTECIPANTI, MAX_PARTECIPANTI,
+                GIORNO_PARTITE));
+        assertEquals(message, exception.getMessage());
+
+    }
 
     /**
      * This method tests the method createTorneo in case it successful.
      */
     @Test
-    void check_2() {
+    void check_3() {
 
-        Date dataInizio = Date.valueOf("2021-01-01");
-        Date dataFine = Date.valueOf("2021-02-05");
+        Date dataInizio = Date.valueOf(DATA_INIZIO);
+        Date dataFine = Date.valueOf(DATA_FINE);
 
         //check if the method return true
         assertTrue(tservice.createTorneo(USERNAME_ADMIN, ID_CAMPO, NOME, TIPO,
@@ -83,7 +103,7 @@ class TorneoServiceImplTest {
      * This method tests the method getAllTornei.
      */
     @Test
-    void check_3() {
+    void check_4() {
 
         assertNotNull(tservice.getAllTornei());
 
@@ -92,30 +112,32 @@ class TorneoServiceImplTest {
     /**
      * This method tests the method deleteTorneo in case it fails.
      */
-//    @Test
-//    void check_4() {
-//
-//        int idCampo = 0;
-//        String nome = "";
-//        Date dataInizio = Date.valueOf(DATA_INIZIO);
-//
-//        String message = "Eliminazione fallita";
-//
-//        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> tservice.deleteTorneo(idCampo, nome, dataInizio));
-//        assertEquals(message, exception.getMessage());
-//
-//    }
-//
-//    /**
-//     * This method tests the method deleteTorneo in case it successful.
-//     */
-//    @Test
-//    void check_5() {
-//
-//        Date dataInizio = Date.valueOf(DATA_INIZIO);
-//        assertTrue(tservice.deleteTorneo(ID_CAMPO, NOME, dataInizio));
-//
-//    }
+    @Test
+    void check_5() {
+
+        int idCampo = 0;
+        String nome = "";
+        Date dataInizio = Date.valueOf(DATA_INIZIO);
+        Date dataFine = Date.valueOf(DATA_FINE);
+
+        String message = "Eliminazione fallita";
+
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> tservice.deleteTorneo(idCampo, nome, dataInizio, dataFine, GIORNO_PARTITE));
+        assertEquals(message, exception.getMessage());
+
+    }
+
+    /**
+     * This method tests the method deleteTorneo in case it successful.
+     */
+    @Test
+    void check_6() {
+
+        Date dataInizio = Date.valueOf(DATA_INIZIO);
+        Date dataFine = Date.valueOf(DATA_FINE);
+        assertTrue(tservice.deleteTorneo(ID_CAMPO, NOME, dataInizio, dataFine, GIORNO_PARTITE));
+
+    }
 
     /**
      * Cleanup the environment.
