@@ -19,6 +19,11 @@ public class Partita {
     private Time orarioFine;
 
     /**
+     * empty constructor for Partita.
+     */
+    public Partita() {
+    }
+    /**
      * Partita constructor.
      * @param idPartita idPartita
      * @param idCampo idCampo
