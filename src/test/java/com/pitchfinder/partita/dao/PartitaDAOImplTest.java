@@ -3,6 +3,8 @@ package com.pitchfinder.partita.dao;
 import com.pitchfinder.autenticazione.dao.UtenteDAO;
 import com.pitchfinder.autenticazione.dao.UtenteDAOImpl;
 import com.pitchfinder.autenticazione.entity.Utente;
+import com.pitchfinder.campo.dao.CampoDAO;
+import com.pitchfinder.campo.dao.CampoDAOImpl;
 import com.pitchfinder.partita.entity.Partita;
 import com.pitchfinder.singleton.ConPool;
 import org.junit.jupiter.api.AfterAll;
@@ -19,7 +21,7 @@ import java.util.List;
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public class PartitaDAOImplTest {
     private PartitaDAO daoTest;
-
+    private Partita pTest;
     @BeforeAll
     public void start(){
         daoTest = new PartitaDAOImpl();
@@ -35,8 +37,24 @@ public class PartitaDAOImplTest {
         Date dateOfBirth = new Date(1999-1900,11,28);
         userTest.setDataDiNascita(dateOfBirth);
 
-        daoTest.doSaveGiocatore(4,"Pasquale","Gaeta");
         daoUtente.doSaveUtente(userTest);
+
+        Date date = new Date(2021-1900,0,12);
+        Time start = new Time(16,00,00);
+        Time end = new Time(18,00,00);
+
+        pTest = new Partita(1003,"test99@gmail.com",
+                date,start,end);
+
+        daoTest.doSavePartita(pTest);
+        List<Partita> partite = daoTest.doRetrieveAll();
+        for (Partita p: partite) {
+            if(p.getEmailUtente().equals("test99@gmail.com")){
+                pTest = p;
+            }
+        }
+        daoTest.doSaveGiocatore(pTest.getIdPartita(),"Pasquale","Gaeta");
+
     }
 
     /**
@@ -48,10 +66,15 @@ public class PartitaDAOImplTest {
         Time start = new Time(16,00,00);
         Time end = new Time(18,00,00);
 
-        Partita pTest = new Partita(1002,"test99@gmail.com",
+        Partita pTestlocal = new Partita(1003,"test99@gmail.com",
                 date,start,end);
 
-        assertTrue(daoTest.doSavePartita(pTest));
+        assertTrue(daoTest.doSavePartita(pTestlocal));
+    }
+    @Test
+    public void checkdoSavePartitaFailure() {
+
+        assertThrows( RuntimeException.class ,()->{ daoTest.doSavePartita(pTest);} );
     }
 
     /**
@@ -70,7 +93,16 @@ public class PartitaDAOImplTest {
     @Test
     public void checkdoSaveGiocatore(){
 
-        assertTrue(daoTest.doSaveGiocatore(4,"Andrea","Rossi"));
+        assertTrue(daoTest.doSaveGiocatore(pTest.getIdPartita(),"Andrea","Rossi"));
+    }
+
+    /**
+     * This method check throw  of doSaveGiocatore.
+     */
+    @Test
+    public void checkdoSaveGiocatoreFailure(){
+
+        assertThrows(RuntimeException.class,() ->{daoTest.doSaveGiocatore(-973,"Andrea","Rossi");});
     }
 
     /**
@@ -78,11 +110,10 @@ public class PartitaDAOImplTest {
      */
     @Test
     public void doRetrieveAllGiocatori(){
-        List<String> giocatori = daoTest.doRetrieveAllGiocatori(4);
+        List<String> giocatori = daoTest.doRetrieveAllGiocatori(pTest.getIdPartita());
 
         assertNotNull(giocatori);
     }
-
 
     @AfterAll
     public void clean(){
@@ -91,9 +122,10 @@ public class PartitaDAOImplTest {
         try (Connection con = ConPool.getInstance().getConnection()) {
 
             String query = "DELETE FROM giocatore "
-                    + "WHERE PartitaIdentificativoPartita = 4";
+                    + "WHERE PartitaIdentificativoPartita = ?";
             PreparedStatement ps =
                     con.prepareStatement(query);
+            ps.setInt(1,pTest.getIdPartita());
             ps.executeUpdate();
 
         } catch (SQLException e) {
@@ -125,6 +157,18 @@ public class PartitaDAOImplTest {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+
+        //Delete occupazione used for the testing
+        CampoDAO daoCampo = new CampoDAOImpl();
+        daoCampo.doRemoveOccupazione(pTest.getIdCampo(),pTest.getData(),
+                pTest.getOrarioInizio(),pTest.getOrarioFine());
+
+        Date date = new Date(2020-1900,11,28);
+        Time start = new Time(16,00,00);
+        Time end = new Time(18,00,00);
+
+        daoCampo.doRemoveOccupazione(1003,date,start,end);
+
 
     }
 }
