@@ -4,6 +4,7 @@ import com.pitchfinder.autenticazione.entity.Admin;
 import com.pitchfinder.evento.entity.Evento;
 import com.pitchfinder.evento.services.EventoService;
 import com.pitchfinder.evento.services.EventoServiceImpl;
+import com.pitchfinder.singleton.ConPool;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -13,8 +14,7 @@ import org.mockito.Mockito;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import java.sql.Date;
-import java.sql.Time;
+import java.sql.*;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -25,6 +25,7 @@ public class EventoControllerTest {
     private HttpServletRequest mockedRequest;
     private HttpServletResponse mockedResponse;
     private HttpSession session;
+    private Admin admin = new Admin();
 
     /**
      * Parameters declaration.
@@ -50,18 +51,30 @@ public class EventoControllerTest {
             mockedResponse = Mockito.mock(HttpServletResponse.class);
             session = Mockito.mock(HttpSession.class);
 
+
+
             //Admin creation for the session.
-            Admin admin = new Admin();
-            admin.setNome("Emanuele");
-            admin.setCognome("Mezzi");
-            admin.setUsername("memex99");
+            admin.setNome("Paolo");
+            admin.setCognome("DB");
+            admin.setUsername("testAdmin05");
             admin.setPassword("password");
 
-            //session setting.
-            Mockito.when(mockedRequest.getSession()).thenReturn(session);
-            Mockito.when(mockedRequest.getSession().getAttribute("admin")).thenReturn(admin);
+            try (Connection con = ConPool.getInstance().getConnection()) {
+                PreparedStatement ps = con.prepareStatement(
+                        "INSERT INTO Admin (Nome, Cognome, Username, Password) VALUES(?,?,?,?)");
+                ps.setString(1, admin.getNome());
+                ps.setString(2, admin.getCognome());
+                ps.setString(3, admin.getUsername());
+                ps.setString(4, admin.getPasswordHash());
+                ps.executeUpdate();
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+                //session setting.
+                Mockito.when(mockedRequest.getSession()).thenReturn(session);
+                Mockito.when(mockedRequest.getSession().getAttribute("admin")).thenReturn(admin);
 
-        }
+    }
 
     /**
      * Evento's name is empity.
@@ -464,8 +477,25 @@ public class EventoControllerTest {
         evento.setGuest(OSPITE);
         evento.setDescription(DESCRIZIONE);
         evento.setAvailableSits(Integer.parseInt(POSTI_DISPONIBILI));
-        evento.setAdmin("memex99");
+        evento.setAdmin(admin.getUsername());
         es.removeEvento(evento);
+
+        admin.setNome("Paolo");
+        admin.setCognome("DB");
+        admin.setUsername("testAdmin05");
+        admin.setPassword("password");
+
+        try (Connection con = ConPool.getInstance().getConnection()) {
+            PreparedStatement ps =
+                    con.prepareStatement("delete from Admin where username=? && password=?");
+
+            ps.setString(1, admin.getUsername());
+            ps.setString(2, admin.getPasswordHash());
+
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
 
     }
 }
