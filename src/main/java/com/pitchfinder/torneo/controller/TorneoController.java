@@ -104,6 +104,10 @@ public class TorneoController extends HttpServlet {
                     throw new IllegalArgumentException("Formato data fine non valido");
                 }
 
+                if (dataInizio.getTime() > dataFine.getTime()) {
+                   throw new IllegalArgumentException("Data inizio successiva alla data di fine");
+                }
+
                 String giornoPartite = request.getParameter("giornoPartite");
                 if (giornoPartite == null) {
                     throw new IllegalArgumentException("Giorno partite non inserito");
