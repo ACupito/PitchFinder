@@ -2,6 +2,8 @@ package com.pitchfinder.partita.dao;
 
 import com.pitchfinder.partita.entity.Partita;
 
+import java.sql.Date;
+import java.sql.Time;
 import java.util.List;
 
 public interface PartitaDAO {
@@ -33,4 +35,14 @@ public interface PartitaDAO {
      * @return List<String>
      */
      List<String> doRetrieveAllGiocatori(int idPartita);
+
+    /**
+     * This method delete a match.
+     * @param idCampo idCampo
+     * @param data data
+     * @param start start
+     * @param end end
+     * @return boolean
+     */
+     boolean doRemovePartita(int idCampo, Date data, Time start, Time end);
 }

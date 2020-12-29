@@ -4,9 +4,11 @@ import com.pitchfinder.partita.entity.Partita;
 import com.pitchfinder.singleton.ConPool;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Time;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -89,9 +91,9 @@ public class PartitaDAOImpl implements PartitaDAO {
             ps.setString(1, nome);
             ps.setString(2, cognome);
             ps.setInt(3, idPartita);
+            ps.executeUpdate();
 
-            return ps.executeUpdate() == 1;
-
+            return  true;
 
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -121,6 +123,39 @@ public class PartitaDAOImpl implements PartitaDAO {
                 giocatori.add(cognome);
             }
             return giocatori;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    /**
+     * This method delete a match.
+     * @param idCampo idCampo
+     * @param data data
+     * @param start start
+     * @param end end
+     * @return boolean
+     */
+    @Override
+    public boolean doRemovePartita(int idCampo, Date data, Time start, Time end) {
+
+        try (Connection con = ConPool.getInstance().getConnection()) {
+
+            String query = "DELETE FROM partita "
+                    + "WHERE CampoIdentificativo = ? AND "
+                    + "Data = ? AND "
+                    + "OrarioInizio = ? AND " + "OrarioFine = ? ";
+            PreparedStatement ps =
+                    con.prepareStatement(query);
+            ps.setInt(1, idCampo);
+            ps.setDate(2, data);
+            ps.setTime(3, start);
+            ps.setTime(4, end);
+
+            if (ps.executeUpdate() != 1) {
+                return  false;
+            }
+            return true;
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
