@@ -107,6 +107,9 @@ public class TorneoController extends HttpServlet {
                 if (dataInizio.getTime() > dataFine.getTime()) {
                    throw new IllegalArgumentException("Data inizio successiva alla data di fine");
                 }
+                if (!ts.checkScheduledTorneo(dataInizio, dataFine, campo.getIdentificativo())) {
+                   throw new IllegalArgumentException("Tornei già schedulati in quel periodo");
+                }
 
                 String giornoPartite = request.getParameter("giornoPartite");
                 if (giornoPartite == null) {
