@@ -45,11 +45,7 @@ public class PartitaServiceImpl implements PartitaService {
         PartitaDAO dao = new PartitaDAOImpl();
         List<String> giocatori = dao.doRetrieveAllGiocatori(partita.getIdPartita());
 
-        if (giocatori != null) {
-            return giocatori;
-        }
-
-        return null;
+        return giocatori;
     }
 
     /**
@@ -63,10 +59,9 @@ public class PartitaServiceImpl implements PartitaService {
     @Override
     public boolean createGiocatorePartita(int idPartita, String nome, String cognome) {
         PartitaDAO dao = new PartitaDAOImpl();
-        if (dao.doSaveGiocatore(idPartita, nome, cognome)) {
-            return true;
-        }
-        return  false;
+        dao.doSaveGiocatore(idPartita, nome, cognome);
+        return true;
+
     }
 
 
