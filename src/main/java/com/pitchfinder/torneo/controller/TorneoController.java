@@ -109,10 +109,7 @@ public class TorneoController extends HttpServlet {
                     throw new IllegalArgumentException("Formato data fine non valido");
                 }
 
-                if (dataInizio.getTime() > dataFine.getTime()) {
-                   throw new IllegalArgumentException("Data inizio successiva alla data di fine");
-                }
-                if (!ts.checkScheduledTorneo(dataInizio, dataFine, campo.getIdentificativo())) {
+                if (ts.checkScheduledTorneo(dataInizio, dataFine, campo.getIdentificativo())) {
                    throw new IllegalArgumentException("Tornei già schedulati in quel periodo");
                 }
 
@@ -206,6 +203,21 @@ public class TorneoController extends HttpServlet {
 
                 List<Torneo> tornei = ts.getAllTornei();
                 request.setAttribute("tornei", tornei);
+
+            } else if (flag == 4) { //get a specific tournament
+
+                Date dataInizio;
+                if (startDate == null) {
+                    throw new IllegalArgumentException("Data inizio non selezionata");
+                }
+                try {
+                    dataInizio = Date.valueOf(startDate);
+                } catch (IllegalArgumentException e) {
+                    throw new IllegalArgumentException("Formato data inizio non valido");
+                }
+
+                Torneo t = ts.getTorneo(nome, dataInizio, campo.getIdentificativo());
+                request.setAttribute("torneo", t);
 
             }
         }
