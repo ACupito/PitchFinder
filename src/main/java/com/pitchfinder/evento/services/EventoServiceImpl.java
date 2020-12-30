@@ -43,10 +43,8 @@ public class EventoServiceImpl implements EventoService {
                                    postiDisponibili,
                                    adminUsername);
         EventoDAOImpl eventoDAO = new EventoDAOImpl();
-        if (eventoDAO.doSaveEvento(evento)) {
-            return evento;
-        }
-        return null;
+        eventoDAO.doSaveEvento(evento);
+        return evento;
     }
 
     /**
