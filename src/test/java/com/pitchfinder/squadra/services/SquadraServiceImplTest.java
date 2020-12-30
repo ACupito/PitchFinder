@@ -9,6 +9,8 @@ import com.pitchfinder.singleton.ConPool;
 import com.pitchfinder.squadra.dao.SquadraDAO;
 import com.pitchfinder.squadra.dao.SquadraDAOImpl;
 import com.pitchfinder.squadra.entity.Squadra;
+import com.pitchfinder.torneo.dao.TorneoDAO;
+import com.pitchfinder.torneo.dao.TorneoDAOImpl;
 import com.pitchfinder.torneo.entity.Torneo;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
@@ -28,6 +30,7 @@ public class SquadraServiceImplTest {
     private UtenteDAO utenteDAO = new UtenteDAOImpl();
     private Torneo torneo ;
     private Squadra squadra;
+    private TorneoDAO  torneoDAO = new TorneoDAOImpl();
 
     @BeforeAll
     public void save(){
@@ -39,6 +42,7 @@ public class SquadraServiceImplTest {
         Date dataInizio = new Date(2020-1900, 1-1, 8);
         Date dataFine = new Date(2022-1900, 12-1, 11);
         torneo = new Torneo("serieA", "tipo", "gironi", "lunedi", "memex99", 20, 10, 12, dataInizio, dataFine, 1002);
+        torneoDAO.doSaveTorneo(torneo);
 
         Date dataInizioSquadra = new Date(2020-1900, 1-1, 8);
         squadra = new Squadra("Padova", "serieA", dataInizio, 1002, 10, "Squillante", "mario96@gmail.com");
@@ -75,7 +79,17 @@ public class SquadraServiceImplTest {
         //remove users
         utenteDAO.doRemoveUtente(utente);
         utenteDAO.doRemoveUtente(utenteDue);
+        try (Connection con = ConPool.getConnection()) {
+            PreparedStatement ps = con.prepareStatement("delete from Torneo where Nome = ? and DataInizio = ? and CampoIdentificativo = ?");
 
+            ps.setString(1, torneo.getNome());
+            ps.setDate(2, torneo.getDataInizio());
+            ps.setInt(3, torneo.getCampoIdentificativo());
+
+            ps.executeUpdate();
+        } catch (SQLException s) {
+            s.printStackTrace();
+        }
 
         try (Connection con = ConPool.getInstance().getConnection()) {
             PreparedStatement ps =
