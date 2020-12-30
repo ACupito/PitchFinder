@@ -93,6 +93,16 @@
                 <groupId>org.jacoco</groupId>
                 <artifactId>jacoco-maven-plugin</artifactId>
                 <version>0.8.6</version>
+                <configuration>
+                    <excludes>
+                        <exclude>com/pitchfinder/autenticazione/entity/**/*</exclude>
+                        <exclude>com/pitchfinder/evento/entity/**/*</exclude>
+                        <exclude>com/pitchfinder/prenotazione/entity/**/*</exclude>
+                        <exclude>com/pitchfinder/partita/entity/**/*</exclude>
+                        <exclude>com/pitchfinder/squadra/entity/**/*</exclude>
+                        <exclude>com/pitchfinder/torneo/entity/**/*</exclude>
+                    </excludes>
+                </configuration>
                 <executions>
                     <execution>
                         <goals>
