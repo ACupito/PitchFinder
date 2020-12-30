@@ -13,6 +13,7 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 
+import java.net.MalformedURLException;
 import java.sql.*;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -45,7 +46,7 @@ public class PrenotazioneServiceImplTest {
     }
 
     @Test
-    public void checkCreatePrenotazione() throws EmailException {
+    public void checkCreatePrenotazione() throws EmailException, MalformedURLException {
         Date data = new Date(2021-1900, 12-1, 18);
         Time inizio = new Time(13,00,00);
         Time fine = new Time(15, 00, 00);

@@ -4,6 +4,8 @@ import com.pitchfinder.evento.entity.Evento;
 import com.pitchfinder.prenotazione.entity.Prenotazione;
 import org.apache.commons.mail.EmailException;
 
+import java.net.MalformedURLException;
+
 public interface PrenotazioneService {
     /**
      * Create booking.
@@ -11,7 +13,7 @@ public interface PrenotazioneService {
      * @param evento - evento.
      * @return Prenotazione
      */
-    Prenotazione createPrenotazione(String utenteEmail, Evento evento) throws EmailException;
+    Prenotazione createPrenotazione(String utenteEmail, Evento evento) throws EmailException, MalformedURLException;
 
     /**
      * Return NumeroPrenotazione.
