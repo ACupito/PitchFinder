@@ -153,10 +153,11 @@ public class TorneoDAOImpl implements TorneoDAO {
 
             ResultSet rs = ps.executeQuery();
 
-            Torneo t = new Torneo();
+            Torneo t = null;
 
             while (rs.next()) {
 
+                t = new Torneo();
                 t.setNome(rs.getString(1));
                 t.setDataInizio(rs.getDate(2));
                 t.setCampoIdentificativo(rs.getInt(3));
