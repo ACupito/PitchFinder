@@ -13,15 +13,15 @@ public class AutenticazioneServiceImpl implements AutenticazioneService {
 
     /**
      * This methods manages the user login.
-     * @param email is the user email
+     * @param username is the user username
      * @param password is the user password
      * @return utente
      */
-    public Utente loginUtente(final String email, final String password) {
+    public Utente loginUtente(String username, String password) {
 
         Utente u = new Utente();
 
-        u.setEmail(email);
+        u.setUsername(username);
         u.setPassword(password);
 
         UtenteDAO ud = new UtenteDAOImpl();
@@ -35,7 +35,7 @@ public class AutenticazioneServiceImpl implements AutenticazioneService {
      * @param password is the admin password
      * @return admin
      */
-    public Admin loginAdmin(final String username, final String password) {
+    public Admin loginAdmin(String username, String password) {
 
         Admin u = new Admin();
 
@@ -57,12 +57,9 @@ public class AutenticazioneServiceImpl implements AutenticazioneService {
      * @param dataDiNascita is the user date of birth
      * @return boolean
      */
-    public boolean registraUtente(final String email,
-                                  final String username,
-                                  final String nome,
-                                  final String cognome,
-                                  final String password,
-                                  final Date dataDiNascita) {
+    public boolean registraUtente(String email, String username,
+                                  String nome, String cognome,
+                                  String password, Date dataDiNascita) {
 
         Utente u = new Utente();
         u.setEmail(email);
@@ -75,5 +72,33 @@ public class AutenticazioneServiceImpl implements AutenticazioneService {
         UtenteDAO ud = new UtenteDAOImpl();
 
         return ud.doSaveUtente(u);
+    }
+
+    /**
+     * @param email is the user email
+     * @return utente
+     */
+    public Utente prelevaUtenteByEmail(String email) {
+
+        Utente u = new Utente();
+        u.setEmail(email);
+
+        UtenteDAO ud = new UtenteDAOImpl();
+
+        return ud.doRetrieveUtenteByEmail(u);
+    }
+
+    /**
+     * @param username is the user username
+     * @return boolean
+     */
+    public boolean removeUtente(String username) {
+
+        Utente u = new Utente();
+        u.setUsername(username);
+
+        UtenteDAO ud = new UtenteDAOImpl();
+
+        return ud.doRemoveUtente(u);
     }
 }
