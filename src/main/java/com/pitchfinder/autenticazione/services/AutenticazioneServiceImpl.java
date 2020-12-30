@@ -85,9 +85,9 @@ public class AutenticazioneServiceImpl implements AutenticazioneService {
 
         if (ud.doSaveUtente(u)) {
             return true;
-        } else {
-            return false;
         }
+
+        return false;
     }
 
     /**
@@ -123,8 +123,8 @@ public class AutenticazioneServiceImpl implements AutenticazioneService {
 
         if (ud.doRemoveUtente(u)) {
             return true;
-        } else {
-            return false;
         }
+
+        return false;
     }
 }
