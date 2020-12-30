@@ -26,7 +26,13 @@ public class AutenticazioneServiceImpl implements AutenticazioneService {
 
         UtenteDAO ud = new UtenteDAOImpl();
 
-        return ud.checkUtente(u);
+        Utente u1 = ud.checkUtente(u);
+
+        if (u1 != null) {
+            return u1;
+        } else {
+            return null;
+        }
     }
 
     /**
@@ -44,7 +50,13 @@ public class AutenticazioneServiceImpl implements AutenticazioneService {
 
         AdminDAO ud = new AdminDAOImpl();
 
-        return ud.checkAdmin(u);
+        Admin a = ud.checkAdmin(u);
+
+        if (a != null) {
+            return a;
+        } else {
+            return null;
+        }
     }
 
     /**
@@ -71,7 +83,11 @@ public class AutenticazioneServiceImpl implements AutenticazioneService {
 
         UtenteDAO ud = new UtenteDAOImpl();
 
-        return ud.doSaveUtente(u);
+        if (ud.doSaveUtente(u)) {
+            return true;
+        }
+
+        return false;
     }
 
     /**
@@ -85,7 +101,13 @@ public class AutenticazioneServiceImpl implements AutenticazioneService {
 
         UtenteDAO ud = new UtenteDAOImpl();
 
-        return ud.doRetrieveUtenteByEmail(u);
+        Utente u1 = ud.doRetrieveUtenteByEmail(u);
+
+        if (u1 != null) {
+            return u1;
+        } else {
+            return null;
+        }
     }
 
     /**
@@ -99,6 +121,10 @@ public class AutenticazioneServiceImpl implements AutenticazioneService {
 
         UtenteDAO ud = new UtenteDAOImpl();
 
-        return ud.doRemoveUtente(u);
+        if (ud.doRemoveUtente(u)) {
+            return true;
+        }
+
+        return false;
     }
 }
