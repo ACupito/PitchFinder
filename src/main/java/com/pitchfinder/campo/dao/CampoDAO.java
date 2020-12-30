@@ -70,4 +70,6 @@ public interface CampoDAO {
      * @return List<String>
      */
     List<String> doRetriveEmailByDisponibilita(int idCampo, Date data, Time inizio, Time fine);
+
+
 }

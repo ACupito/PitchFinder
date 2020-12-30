@@ -71,6 +71,15 @@ public class CampoDAOImplTest {
         assertNotNull(cdao.doRetriveCampo(1002));
     }
     /**
+     * This method tests the method doRetriveCampo.
+     * not get the Campo.
+     */
+    @Test
+    void doRetriveCampoTestNull(){
+        assertNull(cdao.doRetriveCampo(1000));
+    }
+
+    /**
      * This method tests the method doSaveOccupazione.
      * saves the Occupazione.
      */
@@ -79,6 +88,18 @@ public class CampoDAOImplTest {
     void doSaveOccupazioneTest() {
 
         assertTrue(cdao.doSaveOccupazione(ID_CAMPO, Date.valueOf(DATA), Time.valueOf(TEMPO_INIZIO.concat(":00")), Time.valueOf(TEMPO_FINE.concat(":00")), USERNAME_ADMIN));
+
+    }
+
+    /**
+     * This method tests the method doSaveOccupazione.
+     * error in saves the Occupazione.
+     */
+
+    @Test
+    void doSaveOccupazioneTestError() {
+
+        assertThrows(RuntimeException.class ,() -> {cdao.doSaveOccupazione(ID_CAMPO,Date.valueOf("2010-10-10") , Time.valueOf("20:20".concat(":00")), Time.valueOf("21:00".concat(":00")), USERNAME_ADMIN);});
 
     }
     /**
@@ -93,6 +114,16 @@ public class CampoDAOImplTest {
     }
 
     /**
+     * This method tests the method doRemoveOccupazione.
+     * deletes the Occupazione.
+     */
+    @Test
+    void doRemoveOccupazioneTestError() {
+
+        assertThrows(RuntimeException.class ,() -> {cdao.doRemoveOccupazione(00000000,Date.valueOf("00-10-10"), Time.valueOf("20:20".concat(":00")), Time.valueOf("21:00".concat(":00")));});
+
+    }
+    /**
      * This method tests the method checkOccupazioneExistence.
      * checks that the Occupazione exists.
      */
@@ -104,8 +135,30 @@ public class CampoDAOImplTest {
 
     }
     /**
+     * This method tests the method checkOccupazioneExistence.
+     * checks that the Occupazione exists.
+     */
+
+    @Test
+    void checkOccupazioneExistenceTestFalse() {
+
+        assertFalse(cdao.checkOccupazioneExistence(1000, Date.valueOf(DATA), Time.valueOf(TEMPO_INIZIO.concat(":00")), Time.valueOf(TEMPO_FINE.concat(":00"))));
+
+    }
+    /**
      * This method tests the method doSaveDisponibilita.
      * saves the Disponibilita.
+     */
+
+    @Test
+    void doSaveDisponibilitaTestError() {
+
+        assertThrows(RuntimeException.class ,() -> {cdao.doSaveDisponibilita(EMAIL, ID_CAMPO, Date.valueOf(DATA), Time.valueOf(TEMPO_INIZIO.concat(":00")), Time.valueOf(TEMPO_FINE.concat(":00")));});
+
+    }
+    /**
+     * This method tests the method doSaveDisponibilita.
+     * error in saves the Disponibilita.
      */
 
     @Test
