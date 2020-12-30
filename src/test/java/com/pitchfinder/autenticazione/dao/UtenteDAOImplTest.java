@@ -184,6 +184,7 @@ public class UtenteDAOImplTest {
 
     /**
      * Method to test the deletion
+     * First case: the user is deleted
      */
     @Test
     void doRemoveUtenteTest1() {
@@ -194,6 +195,21 @@ public class UtenteDAOImplTest {
 
         UtenteDAO ud = new UtenteDAOImpl();
         assertTrue(ud.doRemoveUtente(b));
+    }
+
+    /**
+     * Method to test the deletion
+     * Second case: the user is not deleted
+     */
+    @Test
+    void doRemoveUtenteTest2() {
+
+        Date d = new Date(1999 - 1900, 10, 4);
+        Utente b = new Utente("mariox129@gmail.com", "Mariox95",
+                "Mario", "Rossi", "esse3", d);
+
+        UtenteDAO ud = new UtenteDAOImpl();
+        assertFalse(ud.doRemoveUtente(b));
     }
 
     @AfterAll
