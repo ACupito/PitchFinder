@@ -4,10 +4,10 @@ import com.pitchfinder.evento.entity.Evento;
 import com.pitchfinder.prenotazione.dao.PrenotazioneDAO;
 import com.pitchfinder.prenotazione.dao.PrenotazioneDAOImpl;
 import com.pitchfinder.prenotazione.entity.Prenotazione;
-import org.apache.commons.mail.*;
-
-import java.net.MalformedURLException;
-import java.net.URL;
+import org.apache.commons.mail.DefaultAuthenticator;
+import org.apache.commons.mail.Email;
+import org.apache.commons.mail.EmailException;
+import org.apache.commons.mail.SimpleEmail;
 
 
 public class PrenotazioneServiceImpl implements PrenotazioneService  {
