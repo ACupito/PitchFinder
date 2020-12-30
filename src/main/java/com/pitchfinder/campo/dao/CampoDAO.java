@@ -9,58 +9,67 @@ import java.util.List;
 public interface CampoDAO {
     /**
      *
-     * @param id
+     * @param id is the id of the pitch.
      * @return Campo
      */
-    Campo getCampo(int id);
+    Campo doRetriveCampo(int id);
 
     /**
-     *
-     * @param idCampo
-     * @param data
-     * @param inizio
-     * @param fine
-     * @param usernameAdmin
+     * @param idCampo is the id of the pitch.
+     * @param data is the date of the occupation.
+     * @param inizio is the start of the occupation.
+     * @param fine is the end of the occupation.
+     * @param usernameAdmin is the admin username.
      * @return boolean
      */
     boolean doSaveOccupazione(int idCampo, Date data, Time inizio, Time fine, String usernameAdmin);
 
     /**
      *
-     * @param idCampo
-     * @param data
-     * @param inizio
-     * @param fine
+     * @param idCampo is the id of the pitch.
+     * @param data is the date of the occupation.
+     * @param inizio is the start of the occupation.
+     * @param fine is the end of the occupation.
      * @return boolean
      */
     boolean doRemoveOccupazione(int idCampo, Date data, Time inizio, Time fine);
 
     /**
+     * @param idCampo is the id of the pitch.
+     * @param data is the date of the occupation.
+     * @param inizio is the start of the occupation.
+     * @param fine is the end of the occupation.
+     * @return boolean
+     */
+    boolean checkOccupazioneExistence(int idCampo, Date data, Time inizio, Time fine);
+    /**
      *
-     * @param emailUtente
-     * @param idCampo
-     * @param data
-     * @param inizio
-     * @param fine
+     * @param emailUtente is the email of the user.
+     * @param idCampo is the id of the pitch.
+     * @param data is the date of the availability.
+     * @param inizio is the start of the availability.
+     * @param fine is the end of the availability.
      * @return boolean
      */
     boolean doSaveDisponibilita(String emailUtente, int idCampo, Date data, Time inizio, Time fine);
 
     /**
      *
-     * @param emailUtente
-     * @param idCampo
+     * @param emailUtente is the email of the user.
+     * @param idCampo is the id of the pitch.
      * @return boolean
      */
     boolean doRemoveDisponibilita(String emailUtente,  int idCampo);
 
     /**
      *
-     * @param idCampo
-     * @param data
-     * @param inizio
-     * @param fine
+     * @param idCampo is the id of the pitch.
+     * @param data is the date of the availability.
+     * @param inizio is the start of the availability.
+     * @param fine is the end of the availability.
      * @return List<String>
      */
     List<String> doRetriveEmailByDisponibilita(int idCampo, Date data, Time inizio, Time fine);
+
+
 }
