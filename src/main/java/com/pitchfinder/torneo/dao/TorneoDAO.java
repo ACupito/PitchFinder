@@ -40,4 +40,11 @@ public interface TorneoDAO {
      * @return boolean : true -> there are other tournaments / false -> empty at the time
      */
     boolean doCheckTorneo(Date dataInizio, Date dataFine, int IdCampo);
+
+    /**
+     * This method allows to get a tournament
+     * from the database.
+     * @return Torneo item.
+     */
+    Torneo doRetrieveTorneo(String nome, Date dataInizio, int IdCampo);
 }
