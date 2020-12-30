@@ -92,6 +92,8 @@ public class TorneoServiceImpl implements TorneoService {
             throw new IllegalArgumentException("Eliminazione fallita");
         }
         if (!deleteOccupazione(torneo.getCampoIdentificativo(), torneo.getDataInizio(), torneo.getDataFine(), torneo.getGiornoPartite())) {
+            Torneo t = tdao.doRetrieveTorneo(torneo.getNome(), torneo.getDataInizio(), torneo.getCampoIdentificativo());
+            tdao.doSaveTorneo(t);
             throw new IllegalArgumentException("Eliminazione occupazione fallita");
         }
         return true;
@@ -104,8 +106,7 @@ public class TorneoServiceImpl implements TorneoService {
     @Override
     public List<Torneo> getAllTornei() {
 
-        List<Torneo> tornei = tdao.doRetrieveAllTornei();
-        return tornei;
+        return tdao.doRetrieveAllTornei();
 
     }
 
@@ -174,9 +175,9 @@ public class TorneoServiceImpl implements TorneoService {
 
                 if (campo.checkOccupazioneExistence(idCampo, dateCurrent, timeInizio, timeFine)) { //check match
 
-                    for (int i = 0; i < allPartite.size(); i++) {
-                        if (allPartite.get(i).getData().getTime() == dateCurrent.getTime()) {
-                            partiteOccupation.add(allPartite.get(i));
+                    for (Partita value : allPartite) {
+                        if (value.getData().getTime() == dateCurrent.getTime()) {
+                            partiteOccupation.add(value);
                         }
                     }
 
