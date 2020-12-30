@@ -13,8 +13,8 @@ public class Campo {
 
     /**
      *
-     * @param identificativo
-     * @param sport
+     * @param identificativo is the id of the pitch.
+     * @param sport is the sport of the pitch.
      */
     public Campo(int identificativo, String sport) {
         this.identificativo = identificativo;
@@ -37,7 +37,7 @@ public class Campo {
 
     /**
      *set identificativo.
-     * @param identificativo
+     * @param identificativo is the id of the pitch.
      */
     public void setIdentificativo(int identificativo) {
         this.identificativo = identificativo;
@@ -53,7 +53,7 @@ public class Campo {
 
     /**
      * set sport.
-     * @param sport
+     * @param sport is the sport of the pitch.
      */
     public void setSport(String sport) {
         this.sport = sport;
