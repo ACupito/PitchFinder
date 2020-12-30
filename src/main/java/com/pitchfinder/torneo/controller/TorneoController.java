@@ -202,9 +202,18 @@ public class TorneoController extends HttpServlet {
             } else if (flag == 3) { //get all tornei
 
                 List<Torneo> tornei = ts.getAllTornei();
-                request.setAttribute("tornei", tornei);
+                if (tornei != null) {
+                response.setContentType("Tornei presenti");
+                }
 
             } else if (flag == 4) { //get a specific tournament
+
+                if (nome.length() < 1 || nome.length() > 50) {
+                    throw new IllegalArgumentException("Lunghezza nome non valida");
+                }
+                if (!nome.matches("^[ a-zA-Z\\u00C0-\\u00ff']+$")) {
+                    throw new IllegalArgumentException("Formato nome non valido");
+                }
 
                 Date dataInizio;
                 if (startDate == null) {
@@ -216,8 +225,8 @@ public class TorneoController extends HttpServlet {
                     throw new IllegalArgumentException("Formato data inizio non valido");
                 }
 
-                Torneo t = ts.getTorneo(nome, dataInizio, campo.getIdentificativo());
-                request.setAttribute("torneo", t);
+                    Torneo t = ts.getTorneo(nome, dataInizio, campo.getIdentificativo());
+                    response.setContentType("Torneo ottenuto");
 
             }
         }

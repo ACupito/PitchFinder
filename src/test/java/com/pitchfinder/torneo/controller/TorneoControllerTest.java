@@ -2,6 +2,9 @@ package com.pitchfinder.torneo.controller;
 
 import com.pitchfinder.autenticazione.entity.Admin;
 import com.pitchfinder.campo.entity.Campo;
+import com.pitchfinder.torneo.dao.TorneoDAO;
+import com.pitchfinder.torneo.dao.TorneoDAOImpl;
+import com.pitchfinder.torneo.entity.Torneo;
 import com.pitchfinder.torneo.services.TorneoService;
 import com.pitchfinder.torneo.services.TorneoServiceImpl;
 import org.junit.jupiter.api.AfterAll;
@@ -75,6 +78,13 @@ class TorneoControllerTest {
         Mockito.when(mockedRequest.getSession()).thenReturn(session);
         Mockito.when(mockedRequest.getSession().getAttribute("admin")).thenReturn(admin);
         Mockito.when(mockedRequest.getSession().getAttribute("campo")).thenReturn(campo);
+
+        //creation instance for tests remove tournament.
+        Torneo t = new Torneo("Champions", TIPO, STRUTTURA, "Sabato", "memex99", Integer.parseInt(MAX_SQUADRE),
+                Integer.parseInt(MIN_PARTECIPANTI), Integer.parseInt(MAX_PARTECIPANTI),
+                Date.valueOf("2022-10-10"), Date.valueOf("2022-10-30"), ID_CAMPO);
+        TorneoDAO tdao = new TorneoDAOImpl();
+        tdao.doSaveTorneo(t);
 
     }
 
@@ -559,6 +569,246 @@ class TorneoControllerTest {
         Mockito.verify(mockedResponse).setContentType("Creazione avvenuta");
 
     }
+
+    @Test
+    void CheckTest_19() {
+
+        Mockito.when(mockedRequest.getParameter("flag")).thenReturn("4");
+
+        Mockito.when(mockedRequest.getParameter("nome")).thenReturn("");
+        Mockito.when(mockedRequest.getParameter("dataInizio")).thenReturn(DATA_INIZIO);
+
+        String message = "Lunghezza nome non valida";
+
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () ->
+                servlet.doPost(mockedRequest, mockedResponse));
+        assertEquals(message, exception.getMessage());
+
+    }
+
+    @Test
+    void CheckTest_20() {
+
+        Mockito.when(mockedRequest.getParameter("flag")).thenReturn("4");
+
+        Mockito.when(mockedRequest.getParameter("nome")).thenReturn("<<Jss>>??");
+        Mockito.when(mockedRequest.getParameter("dataInizio")).thenReturn(DATA_INIZIO);
+
+        String message = "Formato nome non valido";
+
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () ->
+                servlet.doPost(mockedRequest, mockedResponse));
+        assertEquals(message, exception.getMessage());
+
+    }
+
+    @Test
+    void CheckTest_21() {
+
+        Mockito.when(mockedRequest.getParameter("flag")).thenReturn("4");
+
+        Mockito.when(mockedRequest.getParameter("nome")).thenReturn("Champions");
+        Mockito.when(mockedRequest.getParameter("dataInizio")).thenReturn(null);
+
+        String message = "Data inizio non selezionata";
+
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () ->
+                servlet.doPost(mockedRequest, mockedResponse));
+        assertEquals(message, exception.getMessage());
+
+    }
+
+    @Test
+    void CheckTest_22() {
+
+        Mockito.when(mockedRequest.getParameter("flag")).thenReturn("4");
+
+        Mockito.when(mockedRequest.getParameter("nome")).thenReturn("Champions");
+        Mockito.when(mockedRequest.getParameter("dataInizio")).thenReturn("5/13/1980");
+
+        String message = "Formato data inizio non valido";
+
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () ->
+                servlet.doPost(mockedRequest, mockedResponse));
+        assertEquals(message, exception.getMessage());
+
+    }
+
+    @Test
+    void CheckTest_23() {
+
+        Mockito.when(mockedRequest.getParameter("flag")).thenReturn("4");
+
+        Mockito.when(mockedRequest.getParameter("nome")).thenReturn("Champions");
+        Mockito.when(mockedRequest.getParameter("dataInizio")).thenReturn("2022-10-10");
+        Mockito.when(mockedRequest.getParameter("dataFine")).thenReturn("2022-10-30");
+        Mockito.when(mockedRequest.getParameter("giornoPartite")).thenReturn("Sabato");
+
+        servlet.doGet(mockedRequest, mockedResponse);
+        Mockito.verify(mockedResponse).setContentType("Torneo ottenuto");
+
+    }
+
+
+    @Test
+    void CheckTest_24() {
+
+        Mockito.when(mockedRequest.getParameter("flag")).thenReturn("2");
+
+        Mockito.when(mockedRequest.getParameter("nome")).thenReturn("");
+        Mockito.when(mockedRequest.getParameter("dataInizio")).thenReturn(DATA_INIZIO);
+        Mockito.when(mockedRequest.getParameter("dataFine")).thenReturn(DATA_FINE);
+        Mockito.when(mockedRequest.getParameter("giornoPartite")).thenReturn(GIORNO_PARTITE);
+
+        String message = "Lunghezza nome non valida";
+
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () ->
+                servlet.doPost(mockedRequest, mockedResponse));
+        assertEquals(message, exception.getMessage());
+
+    }
+
+    @Test
+    void CheckTest_25() {
+
+        Mockito.when(mockedRequest.getParameter("flag")).thenReturn("2");
+
+        Mockito.when(mockedRequest.getParameter("nome")).thenReturn("<<Jss>>??");
+        Mockito.when(mockedRequest.getParameter("dataInizio")).thenReturn(DATA_INIZIO);
+        Mockito.when(mockedRequest.getParameter("dataFine")).thenReturn(DATA_FINE);
+        Mockito.when(mockedRequest.getParameter("giornoPartite")).thenReturn(GIORNO_PARTITE);
+
+        String message = "Formato nome non valido";
+
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () ->
+                servlet.doPost(mockedRequest, mockedResponse));
+        assertEquals(message, exception.getMessage());
+
+    }
+
+    @Test
+    void CheckTest_26() {
+
+        Mockito.when(mockedRequest.getParameter("flag")).thenReturn("2");
+
+        Mockito.when(mockedRequest.getParameter("nome")).thenReturn("Champions");
+        Mockito.when(mockedRequest.getParameter("dataInizio")).thenReturn(null);
+        Mockito.when(mockedRequest.getParameter("dataFine")).thenReturn(DATA_FINE);
+        Mockito.when(mockedRequest.getParameter("giornoPartite")).thenReturn(GIORNO_PARTITE);
+
+        String message = "Data inizio non selezionata";
+
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () ->
+                servlet.doPost(mockedRequest, mockedResponse));
+        assertEquals(message, exception.getMessage());
+
+    }
+
+    @Test
+    void CheckTest_27() {
+
+        Mockito.when(mockedRequest.getParameter("flag")).thenReturn("2");
+
+        Mockito.when(mockedRequest.getParameter("nome")).thenReturn("Champions");
+        Mockito.when(mockedRequest.getParameter("dataInizio")).thenReturn("5/13/1980");
+        Mockito.when(mockedRequest.getParameter("dataFine")).thenReturn(DATA_FINE);
+        Mockito.when(mockedRequest.getParameter("giornoPartite")).thenReturn(GIORNO_PARTITE);
+
+        String message = "Formato data inizio non valido";
+
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () ->
+                servlet.doPost(mockedRequest, mockedResponse));
+        assertEquals(message, exception.getMessage());
+
+    }
+
+    @Test
+    void CheckTest_28() {
+
+        Mockito.when(mockedRequest.getParameter("flag")).thenReturn("2");
+
+        Mockito.when(mockedRequest.getParameter("nome")).thenReturn("Champions");
+        Mockito.when(mockedRequest.getParameter("dataInizio")).thenReturn("2022-10-10");
+        Mockito.when(mockedRequest.getParameter("dataFine")).thenReturn(null);
+        Mockito.when(mockedRequest.getParameter("giornoPartite")).thenReturn(GIORNO_PARTITE);
+
+        String message = "Data fine non selezionata";
+
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () ->
+                servlet.doPost(mockedRequest, mockedResponse));
+        assertEquals(message, exception.getMessage());
+
+    }
+
+    @Test
+    void CheckTest_29() {
+
+        Mockito.when(mockedRequest.getParameter("flag")).thenReturn("2");
+
+        Mockito.when(mockedRequest.getParameter("nome")).thenReturn("Champions");
+        Mockito.when(mockedRequest.getParameter("dataInizio")).thenReturn("2022-10-10");
+        Mockito.when(mockedRequest.getParameter("dataFine")).thenReturn("10/13/1980");
+        Mockito.when(mockedRequest.getParameter("giornoPartite")).thenReturn(GIORNO_PARTITE);
+
+        String message = "Formato data fine non valido";
+
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () ->
+                servlet.doPost(mockedRequest, mockedResponse));
+        assertEquals(message, exception.getMessage());
+
+    }
+
+    @Test
+    void CheckTest_30() {
+
+        Mockito.when(mockedRequest.getParameter("flag")).thenReturn("2");
+
+        Mockito.when(mockedRequest.getParameter("nome")).thenReturn("Champions");
+        Mockito.when(mockedRequest.getParameter("dataInizio")).thenReturn("2022-10-10");
+        Mockito.when(mockedRequest.getParameter("dataFine")).thenReturn("2022-10-30");
+        Mockito.when(mockedRequest.getParameter("giornoPartite")).thenReturn("");
+
+        String message = "Lunghezza giorno partite non valida";
+
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () ->
+                servlet.doPost(mockedRequest, mockedResponse));
+        assertEquals(message, exception.getMessage());
+
+    }
+
+    @Test
+    void CheckTest_31() {
+
+        Mockito.when(mockedRequest.getParameter("flag")).thenReturn("2");
+
+        Mockito.when(mockedRequest.getParameter("nome")).thenReturn("Champions");
+        Mockito.when(mockedRequest.getParameter("dataInizio")).thenReturn("2022-10-10");
+        Mockito.when(mockedRequest.getParameter("dataFine")).thenReturn("2022-10-30");
+        Mockito.when(mockedRequest.getParameter("giornoPartite")).thenReturn("<<??Sab?<>");
+
+        String message = "Formato giorno partite non valido";
+
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () ->
+                servlet.doPost(mockedRequest, mockedResponse));
+        assertEquals(message, exception.getMessage());
+
+    }
+
+    @Test
+    void CheckTest_32() {
+
+        Mockito.when(mockedRequest.getParameter("flag")).thenReturn("2");
+
+        Mockito.when(mockedRequest.getParameter("nome")).thenReturn("Champions");
+        Mockito.when(mockedRequest.getParameter("dataInizio")).thenReturn("2022-10-10");
+        Mockito.when(mockedRequest.getParameter("dataFine")).thenReturn("2022-10-30");
+        Mockito.when(mockedRequest.getParameter("giornoPartite")).thenReturn("Sabato");
+
+        servlet.doGet(mockedRequest, mockedResponse);
+        Mockito.verify(mockedResponse).setContentType("Eliminazione avvenuta");
+
+    }
+
 
     /**
      * Cleanup the environment.
