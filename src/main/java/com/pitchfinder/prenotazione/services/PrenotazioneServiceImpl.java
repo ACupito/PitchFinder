@@ -4,13 +4,13 @@ import com.pitchfinder.evento.entity.Evento;
 import com.pitchfinder.prenotazione.dao.PrenotazioneDAO;
 import com.pitchfinder.prenotazione.dao.PrenotazioneDAOImpl;
 import com.pitchfinder.prenotazione.entity.Prenotazione;
-import org.apache.commons.mail.DefaultAuthenticator;
-import org.apache.commons.mail.Email;
-import org.apache.commons.mail.EmailException;
-import org.apache.commons.mail.SimpleEmail;
+import org.apache.commons.mail.*;
+
+import java.net.MalformedURLException;
+import java.net.URL;
 
 
-public class PrenotazioneServiceImpl implements PrenotazioneService {
+public class PrenotazioneServiceImpl implements PrenotazioneService  {
     /**
      * Create Booking.
      * @param utenteEmail - utenteEmail.
@@ -31,7 +31,7 @@ public class PrenotazioneServiceImpl implements PrenotazioneService {
             return null;
         }
 
-        destinatario = "e.mezzi@studenti.unisa.it";
+        destinatario = "pitchfinder@gmail.com";
         mittente = "pitchfinder@gmail.com";
         oggetto = "Prenotazione";
 
@@ -53,6 +53,7 @@ public class PrenotazioneServiceImpl implements PrenotazioneService {
 
         return prenotazione;
     }
+
 
     /**
      * Return NumeroPrenotazione.
