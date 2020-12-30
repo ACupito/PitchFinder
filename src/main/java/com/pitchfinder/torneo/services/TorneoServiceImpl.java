@@ -61,6 +61,7 @@ public class TorneoServiceImpl implements TorneoService {
         }
 
         if (!tdao.doSaveTorneo(torneo)) {
+            deleteOccupazione(idCampo, dataInizio, dateFine, giornoPartite);
            throw new IllegalArgumentException("Creazione fallita: Save Torneo fallito");
         }
 
@@ -116,7 +117,24 @@ public class TorneoServiceImpl implements TorneoService {
     @Override
     public boolean checkScheduledTorneo(Date dataInizio, Date dataFine, int IdCampo) {
 
-        return tdao.doCheckTorneo(dataInizio,dataFine,IdCampo);
+         return tdao.doCheckTorneo(dataInizio,dataFine,IdCampo);
+
+    }
+
+    /**
+     * This method allows to get a tournament.
+     * @param nome name of the tournament
+     * @param dataInizio start date of the tournament
+     * @param IdCampo pitch identifier
+     * @return Torneo item
+     */
+    public Torneo getTorneo(String nome, Date dataInizio, int IdCampo) {
+
+        Torneo t = tdao.doRetrieveTorneo(nome, dataInizio, IdCampo);
+        if (t == null) {
+            throw new IllegalArgumentException("Get Torneo fallito");
+        }
+        else return t;
     }
 
     /**
@@ -131,17 +149,7 @@ public class TorneoServiceImpl implements TorneoService {
 
         CampoDAO campo = new CampoDAOImpl();
         PartitaDAO partita = new PartitaDAOImpl();
-        int dayNumber = 0;
-        switch (giornoPartite) { //get day number
-            case "Domenica": dayNumber = 1; break;
-            case "Lunedì": dayNumber = 2; break;
-            case "Martedì": dayNumber = 3; break;
-            case "Mercoledì": dayNumber = 4; break;
-            case "Giovedì": dayNumber = 5; break;
-            case "Venerdì": dayNumber = 6; break;
-            case "Sabato": dayNumber = 7; break;
-        }
-
+        int dayNumber = getNumberDay(giornoPartite);
         //remaining days between start date and end date
         long days = ((endDate.getTime() - startDate.getTime()) / (1000 * 60 * 60 * 24)) + 1;
 
@@ -182,7 +190,7 @@ public class TorneoServiceImpl implements TorneoService {
 
                     campo.doSaveOccupazione(idCampo,dateCurrent,timeInizio,timeFine,adminUsername);
 
-                } catch (RuntimeException e) {
+                } catch (RuntimeException e) { //rollback
                     for (Date d : dateOccupation) {
                         campo.doRemoveOccupazione(idCampo, d, timeInizio, timeFine);
                     }
@@ -202,7 +210,7 @@ public class TorneoServiceImpl implements TorneoService {
     }
 
     /**
-     * This method delete the tournament elimination.
+     * This method eliminates occupation after the tournament is eliminated.
      * @param idCampo pitch identifier
      * @param startDate start date of the tournament
      * @param endDate end date of the tournament
@@ -213,18 +221,7 @@ public class TorneoServiceImpl implements TorneoService {
 
         CampoDAO campo = new CampoDAOImpl();
 
-        int dayNumber = 0;
-
-        switch (giornoPartite) { //get day number
-            case "Domenica": dayNumber = 1; break;
-            case "Lunedì": dayNumber = 2; break;
-            case "Martedì": dayNumber = 3; break;
-            case "Mercoledì": dayNumber = 4; break;
-            case "Giovedì": dayNumber = 5; break;
-            case "Venerdì": dayNumber = 6; break;
-            case "Sabato": dayNumber = 7; break;
-        }
-
+        int dayNumber = getNumberDay(giornoPartite);
         //remaining days between start date and end date
         long days = ((endDate.getTime() - startDate.getTime()) / (1000 * 60 * 60 * 24)) + 1;
 
@@ -256,6 +253,18 @@ public class TorneoServiceImpl implements TorneoService {
 
         return true;
 
+    }
 
+    private int getNumberDay(String giornoPartite) {
+        switch (giornoPartite) { //get day number
+            case "Domenica": return  1;
+            case "Lunedì": return 2;
+            case "Martedì": return  3;
+            case "Mercoledì": return 4;
+            case "Giovedì": return 5;
+            case "Venerdì": return 6;
+            case "Sabato": return 7;
+        }
+        return 0;
     }
 }
