@@ -123,12 +123,20 @@ class TorneoDAOImplTest {
         assertNotNull(tdao.doRetrieveAllTornei());
     }
 
+    /**
+     * This method tests the method doRetrieveTorneo.
+     */
+    @Test
+    void check_6() {
+        assertNotNull(tdao.doRetrieveTorneo(NOME,Date.valueOf(DATA_INIZIO),ID_CAMPO));
+    }
+
 
     /**
      * This method tests the method doRemoveTorneo in case it fails.
      */
     @Test
-    void check_6() {
+    void check_7() {
 
         t.setAdminUsername("");
         t.setNome("");
@@ -151,7 +159,7 @@ class TorneoDAOImplTest {
      * This method tests the method doRemoveTorneo in case it successful.
      */
     @Test
-    void check_7() {
+    void check_8() {
 
         t.setAdminUsername(USERNAME_ADMIN);
         t.setNome(NOME);
