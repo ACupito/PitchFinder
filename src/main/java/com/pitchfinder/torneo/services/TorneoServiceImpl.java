@@ -118,8 +118,11 @@ public class TorneoServiceImpl implements TorneoService {
     @Override
     public boolean checkScheduledTorneo(Date dataInizio, Date dataFine, int IdCampo) {
 
-         return tdao.doCheckTorneo(dataInizio,dataFine,IdCampo);
-
+         boolean result =  tdao.doCheckTorneo(dataInizio,dataFine,IdCampo);
+        if (result) {
+           return true;
+        }
+        return false;
     }
 
     /**
