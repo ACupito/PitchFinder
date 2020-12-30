@@ -47,5 +47,4 @@ public interface AutenticazioneService {
      * @return boolean
      */
     boolean removeUtente(String username);
-
 }
