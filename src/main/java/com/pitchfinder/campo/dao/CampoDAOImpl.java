@@ -29,14 +29,15 @@ public class CampoDAOImpl implements CampoDAO {
 
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
-                Campo u = new Campo();
+                Campo u;
+                u = new Campo();
                 u.setIdentificativo(rs.getInt(1));
                 u.setSport(rs.getString(2));
                 return u;
 
             }
 
-            return null;
+         return null;
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -66,16 +67,14 @@ public class CampoDAOImpl implements CampoDAO {
             ps.setInt(4, idCampo);
             ps.setString(5, usernameAdmin);
 
-            if (ps.executeUpdate() != 1) {
-                throw new RuntimeException("INSERT error.");
-            }
+            return ps.executeUpdate() == 1;
 
 
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
 
-        return true;
+
     }
 
     /**
@@ -91,22 +90,20 @@ public class CampoDAOImpl implements CampoDAO {
         try (Connection con = ConPool.getInstance().getConnection()) {
             PreparedStatement ps =
                     con.prepareStatement("delete from Occupazione "
-                            + "where CampoIdentificativo=? and Data=? and OrarioInizio=? and OrarioFine=?");
+                            + "where CampoIdentificativo=? and Data=? and OrarioInizio>=? and OrarioFine<=?");
 
             ps.setInt(1, idCampo);
             ps.setDate(2, data);
             ps.setTime(3, inizio);
             ps.setTime(4, fine);
 
-            if (ps.executeUpdate() == 1) {
-                return true;
-            }
+            return ps.executeUpdate() == 1;
 
         } catch (SQLException e) {
             throw new RuntimeException(e);
+
         }
 
-        return true;
     }
 
     /**
@@ -121,7 +118,7 @@ public class CampoDAOImpl implements CampoDAO {
         try (Connection con = ConPool.getInstance().getConnection()) {
             PreparedStatement ps =
                     con.prepareStatement("SELECT CampoIdentificativo, Data, OrarioInizio, OrarioFine FROM Occupazione "
-                            + "WHERE CampoIdentificativo=? && Data=? && OrarioInizio=? && OrarioFine=?");
+                            + "WHERE CampoIdentificativo=? && Data=? && OrarioInizio>=? && OrarioFine<=?");
             ps.setInt(1, idCampo);
             ps.setDate(2, data);
             ps.setTime(3, inizio);
@@ -133,12 +130,12 @@ public class CampoDAOImpl implements CampoDAO {
 
                 return true;
             }
-
-        } catch (SQLException e) {
             return false;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
         }
 
-        return false;
+
     }
 
 
@@ -163,16 +160,13 @@ public class CampoDAOImpl implements CampoDAO {
             ps.setTime(5, fine);
 
 
-            if (ps.executeUpdate() != 1) {
-                throw new RuntimeException("INSERT error.");
-            }
-
+            return ps.executeUpdate() == 1;
 
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
 
-        return true;
+
     }
 
     /**
@@ -191,15 +185,12 @@ public class CampoDAOImpl implements CampoDAO {
             ps.setString(1, emailUtente);
             ps.setInt(2, idCampo);
 
-            if (ps.executeUpdate() == 1) {
-                return true;
-            }
-
+            return ps.executeUpdate() == 1;
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
 
-        return false;
+
     }
 
     /**
