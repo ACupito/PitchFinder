@@ -139,6 +139,9 @@ class TorneoServiceImplTest {
                 ID_CAMPO));
     }
 
+    /**
+     * This method tests the method getTorneo in case it fails.
+     */
     @Test
     void check_7() {
         String message = "Get Torneo fallito";
@@ -148,6 +151,9 @@ class TorneoServiceImplTest {
         assertEquals(message, exception.getMessage());
     }
 
+    /**
+     * This method tests the method getTorneo in case it successful.
+     */
     @Test
     void check_8() {
         assertNotNull(tservice.getTorneo(NOME, Date.valueOf(DATA_INIZIO), ID_CAMPO));
