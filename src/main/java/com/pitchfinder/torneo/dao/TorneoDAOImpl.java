@@ -24,7 +24,7 @@ public class TorneoDAOImpl implements TorneoDAO {
     @Override
     public boolean doSaveTorneo(final Torneo torneo) {
 
-        try (Connection con = ConPool.getInstance().getConnection()) {
+        try (Connection con = ConPool.getConnection()) {
             PreparedStatement ps = con.prepareStatement("insert into Torneo(Nome, DataInizio,"
                     + "CampoIdentificativo, AdminUsername, Tipo, Struttura, NumeroSquadre, DataFine,"
                     + "MinNumeroPartecipantiSquadra, MaxNumeroPartecipantiSquadra, GiornoPartite)"
@@ -55,7 +55,7 @@ public class TorneoDAOImpl implements TorneoDAO {
      */
     @Override
     public boolean doRemoveTorneo(Torneo torneo) {
-        try (Connection con = ConPool.getInstance().getConnection()) {
+        try (Connection con = ConPool.getConnection()) {
             PreparedStatement ps = con.prepareStatement("delete from Torneo where Nome = ? and DataInizio = ? and CampoIdentificativo = ?");
 
             ps.setString(1, torneo.getNome());
@@ -75,7 +75,7 @@ public class TorneoDAOImpl implements TorneoDAO {
      */
     public List<Torneo> doRetrieveAllTornei() {
 
-        try (Connection con = ConPool.getInstance().getConnection()) {
+        try (Connection con = ConPool.getConnection()) {
             PreparedStatement ps = con.prepareStatement("select * from torneo");
             ResultSet rs = ps.executeQuery();
 
@@ -115,7 +115,7 @@ public class TorneoDAOImpl implements TorneoDAO {
      */
     public boolean doCheckTorneo(Date dataInizio, Date dataFine, int IdCampo) {
 
-        try (Connection con = ConPool.getInstance().getConnection()) {
+        try (Connection con = ConPool.getConnection()) {
             PreparedStatement ps = con.prepareStatement("select * from torneo where CampoIdentificativo = ? and "
                     + "((DataInizio <= ? and DataFine > ?) or"
                     + "(DataInizio < ? and DataFine >= ?))");
@@ -134,7 +134,50 @@ public class TorneoDAOImpl implements TorneoDAO {
             throw new RuntimeException(s);
         }
 
+    }
+
+    /**
+     * This method allows to get a tournament
+     * from the database.
+     * @return Torneo item.
+     */
+    public Torneo doRetrieveTorneo(String nome, Date dataInizio, int IdCampo) {
+
+        try (Connection con = ConPool.getConnection()) {
+            PreparedStatement ps = con.prepareStatement("select * from torneo "
+            + "where Nome = ? and DataInizio = ? and CampoIdentificativo = ?");
+
+            ps.setString(1, nome);
+            ps.setDate(2, dataInizio);
+            ps.setInt(3, IdCampo);
+
+            ResultSet rs = ps.executeQuery();
+
+            Torneo t = new Torneo();
+
+            while (rs.next()) {
+
+                t.setNome(rs.getString(1));
+                t.setDataInizio(rs.getDate(2));
+                t.setCampoIdentificativo(rs.getInt(3));
+                t.setAdminUsername(rs.getString(4));
+                t.setTipo(rs.getString(5));
+                t.setStruttura(rs.getString(6));
+                t.setNumeroSquadre(rs.getInt(7));
+                t.setDataFine(rs.getDate(8));
+                t.setMinNumeroPartecipantiPerSquadra(rs.getInt(9));
+                t.setMaxNumeroPartecipantiPerSquadra(rs.getInt(10));
+                t.setGiornoPartite(rs.getString(11));
+
+            }
+
+            return t;
+
+        } catch (SQLException s) {
+            return null;
+        }
 
     }
+
 
 }
