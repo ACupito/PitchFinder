@@ -62,7 +62,7 @@ class TorneoServiceImplTest {
 
         IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> tservice.createTorneo(usernameAdmin, idCampo, null, null,
                  null, MAX_SQUADRE, dataInizio, dataFine, MIN_PARTECIPANTI, MAX_PARTECIPANTI,
-                GIORNO_PARTITE));
+                "Mercoledì"));
         assertEquals(message, exception.getMessage());
 
     }
@@ -82,7 +82,7 @@ class TorneoServiceImplTest {
 
         IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> tservice.createTorneo(usernameAdmin, idCampo, null, null,
                 null, MAX_SQUADRE, dataInizio, dataFine, MIN_PARTECIPANTI, MAX_PARTECIPANTI,
-                GIORNO_PARTITE));
+                "Martedì"));
         assertEquals(message, exception.getMessage());
 
     }
