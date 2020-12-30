@@ -1,11 +1,15 @@
 package com.pitchfinder.torneo.services;
 
+import com.pitchfinder.partita.dao.PartitaDAO;
+import com.pitchfinder.partita.dao.PartitaDAOImpl;
+import com.pitchfinder.partita.entity.Partita;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 
 import java.sql.Date;
+import java.sql.Time;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -89,6 +93,12 @@ class TorneoServiceImplTest {
     @Test
     void check_3() {
 
+        //creation of a match to test the correct occupation entry, eliminating the scheduled match
+        PartitaDAO partitaDAO = new PartitaDAOImpl();
+        Partita p = new Partita(1000, ID_CAMPO, "manuzzi99@gmail.com", Date.valueOf("2020-12-28"),
+                Time.valueOf("17:00:00"), Time.valueOf("18:00:00"));
+        partitaDAO.doSavePartita(p);
+
         Date dataInizio = Date.valueOf(DATA_INIZIO);
         Date dataFine = Date.valueOf(DATA_FINE);
 
@@ -110,10 +120,44 @@ class TorneoServiceImplTest {
     }
 
     /**
-     * This method tests the method deleteTorneo in case it fails.
+     * This method tests checkScheduledTorneo in case there are any tournaments on that date.
      */
     @Test
     void check_5() {
+
+        assertTrue(tservice.checkScheduledTorneo(Date.valueOf(DATA_INIZIO), Date.valueOf(DATA_FINE),
+                ID_CAMPO));
+
+    }
+
+    /**
+     * This method tests checkScheduledTorneo in case there are no tournaments on that date.
+     */
+    @Test
+    void check_6() {
+        assertFalse(tservice.checkScheduledTorneo(Date.valueOf("2021-12-20"), Date.valueOf("2021-12-25"),
+                ID_CAMPO));
+    }
+
+    @Test
+    void check_7() {
+        String message = "Get Torneo fallito";
+
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> tservice.getTorneo(null, Date.valueOf(DATA_INIZIO),
+                0));
+        assertEquals(message, exception.getMessage());
+    }
+
+    @Test
+    void check_8() {
+        assertNotNull(tservice.getTorneo(NOME, Date.valueOf(DATA_INIZIO), ID_CAMPO));
+    }
+
+    /**
+     * This method tests the method deleteTorneo in case it fails.
+     */
+    @Test
+    void check_9() {
 
         int idCampo = 0;
         String nome = "";
@@ -131,7 +175,7 @@ class TorneoServiceImplTest {
      * This method tests the method deleteTorneo in case it successful.
      */
     @Test
-    void check_6() {
+    void check_10() {
 
         Date dataInizio = Date.valueOf(DATA_INIZIO);
         Date dataFine = Date.valueOf(DATA_FINE);
