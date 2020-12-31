@@ -202,9 +202,8 @@ public class TorneoController extends HttpServlet {
             } else if (flag == 3) { //get all tornei
 
                 List<Torneo> tornei = ts.getAllTornei();
-                if (tornei != null) {
-                response.setContentType("Tornei presenti");
-                }
+                response.setContentType("Tornei ottenuti");
+                request.setAttribute("tornei", tornei);
 
             } else if (flag == 4) { //get a specific tournament
 
@@ -227,6 +226,7 @@ public class TorneoController extends HttpServlet {
 
                     Torneo t = ts.getTorneo(nome, dataInizio, campo.getIdentificativo());
                     response.setContentType("Torneo ottenuto");
+                    request.setAttribute("torneo", t);
 
             }
         }
