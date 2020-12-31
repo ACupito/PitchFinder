@@ -110,10 +110,42 @@ class TorneoServiceImplTest {
     }
 
     /**
-     * This method tests the method getAllTornei.
+     * This method tests the method createTorneo on different match days.
      */
     @Test
     void check_4() {
+
+        Date dataInizio = Date.valueOf("2025-03-20");
+        Date dataFine = Date.valueOf("2025-03-30");
+
+        //check if the method return true
+        assertTrue(tservice.createTorneo(USERNAME_ADMIN, ID_CAMPO, NOME, TIPO,
+                STRUTTURA, MAX_SQUADRE, dataInizio, dataFine, MIN_PARTECIPANTI, MAX_PARTECIPANTI,
+                "Venerdì"));
+
+    }
+
+    /**
+     * This method tests the method createTorneo on different match days.
+     */
+    @Test
+    void check_5() {
+
+        Date dataInizio = Date.valueOf("2026-03-20");
+        Date dataFine = Date.valueOf("2026-03-30");
+
+        //check if the method return true
+        assertTrue(tservice.createTorneo(USERNAME_ADMIN, ID_CAMPO, NOME, TIPO,
+                STRUTTURA, MAX_SQUADRE, dataInizio, dataFine, MIN_PARTECIPANTI, MAX_PARTECIPANTI,
+                "Giovedì"));
+
+    }
+
+    /**
+     * This method tests the method getAllTornei.
+     */
+    @Test
+    void check_6() {
 
         assertNotNull(tservice.getAllTornei());
 
@@ -123,7 +155,7 @@ class TorneoServiceImplTest {
      * This method tests checkScheduledTorneo in case there are any tournaments on that date.
      */
     @Test
-    void check_5() {
+    void check_7() {
 
         assertTrue(tservice.checkScheduledTorneo(Date.valueOf(DATA_INIZIO), Date.valueOf(DATA_FINE),
                 ID_CAMPO));
@@ -134,7 +166,7 @@ class TorneoServiceImplTest {
      * This method tests checkScheduledTorneo in case there are no tournaments on that date.
      */
     @Test
-    void check_6() {
+    void check_8() {
         assertFalse(tservice.checkScheduledTorneo(Date.valueOf("2021-12-20"), Date.valueOf("2021-12-25"),
                 ID_CAMPO));
     }
@@ -143,7 +175,7 @@ class TorneoServiceImplTest {
      * This method tests the method getTorneo in case it fails.
      */
     @Test
-    void check_7() {
+    void check_9() {
         String message = "Get Torneo fallito";
 
         IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> tservice.getTorneo(null, Date.valueOf(DATA_INIZIO),
@@ -155,7 +187,7 @@ class TorneoServiceImplTest {
      * This method tests the method getTorneo in case it successful.
      */
     @Test
-    void check_8() {
+    void check_10() {
         assertNotNull(tservice.getTorneo(NOME, Date.valueOf(DATA_INIZIO), ID_CAMPO));
     }
 
@@ -163,7 +195,7 @@ class TorneoServiceImplTest {
      * This method tests the method deleteTorneo in case it fails.
      */
     @Test
-    void check_9() {
+    void check_11() {
 
         int idCampo = 0;
         String nome = "";
@@ -181,7 +213,7 @@ class TorneoServiceImplTest {
      * This method tests the method deleteTorneo in case it successful.
      */
     @Test
-    void check_10() {
+    void check_12() {
 
         Date dataInizio = Date.valueOf(DATA_INIZIO);
         Date dataFine = Date.valueOf(DATA_FINE);
@@ -194,6 +226,14 @@ class TorneoServiceImplTest {
      */
     @AfterAll
     void tearDown() {
+
+        Date dataInizio = Date.valueOf("2025-03-20");
+        Date dataFine = Date.valueOf("2025-03-30");
+        tservice.deleteTorneo(ID_CAMPO, NOME, dataInizio, dataFine, "Venerdì");
+
+        dataInizio = Date.valueOf("2026-03-20");
+        dataFine = Date.valueOf("2026-03-30");
+        tservice.deleteTorneo(ID_CAMPO, NOME, dataInizio, dataFine, "Giovedì");
 
         tservice = null;
 

@@ -573,6 +573,15 @@ class TorneoControllerTest {
     @Test
     void CheckTest_19() {
 
+        Mockito.when(mockedRequest.getParameter("flag")).thenReturn("3");
+
+        servlet.doGet(mockedRequest, mockedResponse);
+        Mockito.verify(mockedResponse).setContentType("Tornei ottenuti");
+    }
+
+    @Test
+    void CheckTest_20() {
+
         Mockito.when(mockedRequest.getParameter("flag")).thenReturn("4");
 
         Mockito.when(mockedRequest.getParameter("nome")).thenReturn("");
@@ -587,7 +596,7 @@ class TorneoControllerTest {
     }
 
     @Test
-    void CheckTest_20() {
+    void CheckTest_21() {
 
         Mockito.when(mockedRequest.getParameter("flag")).thenReturn("4");
 
@@ -603,7 +612,7 @@ class TorneoControllerTest {
     }
 
     @Test
-    void CheckTest_21() {
+    void CheckTest_22() {
 
         Mockito.when(mockedRequest.getParameter("flag")).thenReturn("4");
 
@@ -619,7 +628,7 @@ class TorneoControllerTest {
     }
 
     @Test
-    void CheckTest_22() {
+    void CheckTest_23() {
 
         Mockito.when(mockedRequest.getParameter("flag")).thenReturn("4");
 
@@ -635,7 +644,7 @@ class TorneoControllerTest {
     }
 
     @Test
-    void CheckTest_23() {
+    void CheckTest_24() {
 
         Mockito.when(mockedRequest.getParameter("flag")).thenReturn("4");
 
@@ -651,7 +660,7 @@ class TorneoControllerTest {
 
 
     @Test
-    void CheckTest_24() {
+    void CheckTest_25() {
 
         Mockito.when(mockedRequest.getParameter("flag")).thenReturn("2");
 
@@ -669,7 +678,7 @@ class TorneoControllerTest {
     }
 
     @Test
-    void CheckTest_25() {
+    void CheckTest_26() {
 
         Mockito.when(mockedRequest.getParameter("flag")).thenReturn("2");
 
@@ -687,7 +696,7 @@ class TorneoControllerTest {
     }
 
     @Test
-    void CheckTest_26() {
+    void CheckTest_27() {
 
         Mockito.when(mockedRequest.getParameter("flag")).thenReturn("2");
 
@@ -705,7 +714,7 @@ class TorneoControllerTest {
     }
 
     @Test
-    void CheckTest_27() {
+    void CheckTest_28() {
 
         Mockito.when(mockedRequest.getParameter("flag")).thenReturn("2");
 
@@ -723,7 +732,7 @@ class TorneoControllerTest {
     }
 
     @Test
-    void CheckTest_28() {
+    void CheckTest_29() {
 
         Mockito.when(mockedRequest.getParameter("flag")).thenReturn("2");
 
@@ -741,7 +750,7 @@ class TorneoControllerTest {
     }
 
     @Test
-    void CheckTest_29() {
+    void CheckTest_30() {
 
         Mockito.when(mockedRequest.getParameter("flag")).thenReturn("2");
 
@@ -759,7 +768,7 @@ class TorneoControllerTest {
     }
 
     @Test
-    void CheckTest_30() {
+    void CheckTest_31() {
 
         Mockito.when(mockedRequest.getParameter("flag")).thenReturn("2");
 
@@ -777,7 +786,7 @@ class TorneoControllerTest {
     }
 
     @Test
-    void CheckTest_31() {
+    void CheckTest_32() {
 
         Mockito.when(mockedRequest.getParameter("flag")).thenReturn("2");
 
@@ -795,7 +804,7 @@ class TorneoControllerTest {
     }
 
     @Test
-    void CheckTest_32() {
+    void CheckTest_33() {
 
         Mockito.when(mockedRequest.getParameter("flag")).thenReturn("2");
 
