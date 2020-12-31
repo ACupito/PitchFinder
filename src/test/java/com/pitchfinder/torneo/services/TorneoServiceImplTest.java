@@ -137,7 +137,7 @@ class TorneoServiceImplTest {
         //check if the method return true
         assertTrue(tservice.createTorneo(USERNAME_ADMIN, ID_CAMPO, NOME, TIPO,
                 STRUTTURA, MAX_SQUADRE, dataInizio, dataFine, MIN_PARTECIPANTI, MAX_PARTECIPANTI,
-                "Giovedì"));
+                "Domenica"));
 
     }
 
@@ -233,7 +233,7 @@ class TorneoServiceImplTest {
 
         dataInizio = Date.valueOf("2026-03-20");
         dataFine = Date.valueOf("2026-03-30");
-        tservice.deleteTorneo(ID_CAMPO, NOME, dataInizio, dataFine, "Giovedì");
+        tservice.deleteTorneo(ID_CAMPO, NOME, dataInizio, dataFine, "Domenica");
 
         tservice = null;
 
