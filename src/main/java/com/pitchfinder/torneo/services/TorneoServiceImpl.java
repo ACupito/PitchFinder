@@ -259,9 +259,14 @@ public class TorneoServiceImpl implements TorneoService {
 
     }
 
+    /**
+     * This method allows to get a day number.
+     * @param giornoPartite match day of the tournament
+     * @return int : number
+     */
     private int getNumberDay(String giornoPartite) {
-        switch (giornoPartite) { //get day number
-            case "Domenica": return  1;
+        switch (giornoPartite) { //get a day number
+            case "Domenica" : return  1;
             case "Lunedì": return 2;
             case "Martedì": return  3;
             case "Mercoledì": return 4;
