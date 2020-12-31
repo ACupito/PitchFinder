@@ -36,15 +36,23 @@ public interface TorneoDAO {
     List<Torneo> doRetrieveAllTornei();
 
     /**
-     * This mehod allows to check if other tournaments have been scheduled in the same period
+     * This mehod allows to check if other tournaments have been scheduled in the same period.
+     * @param dataInizio start date of the tournament
+     * @param dataFine end date of the tournament
+     * @param idCampo pitch identifier
      * @return boolean : true -> there are other tournaments / false -> empty at the time
      */
-    boolean doCheckTorneo(Date dataInizio, Date dataFine, int IdCampo);
+    boolean doCheckTorneo(Date dataInizio, Date dataFine, int idCampo);
+
 
     /**
      * This method allows to get a tournament
      * from the database.
-     * @return Torneo item.
+     * @param nome name of the tournament
+     * @param dataInizio start date of the tournament
+     * @param idCampo end date of the tournament
+     * @return Torneo item
      */
-    Torneo doRetrieveTorneo(String nome, Date dataInizio, int IdCampo);
+    Torneo doRetrieveTorneo(String nome, Date dataInizio, int idCampo);
+
 }

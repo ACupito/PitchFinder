@@ -3,7 +3,11 @@ package com.pitchfinder.torneo.dao;
 import com.pitchfinder.singleton.ConPool;
 import com.pitchfinder.torneo.entity.Torneo;
 
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.Date;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -107,24 +111,24 @@ public class TorneoDAOImpl implements TorneoDAO {
     }
 
     /**
-     * This mehod allows to check if other tournaments have been scheduled in the same period
+     * This mehod allows to check if other tournaments have been scheduled in the same period.
      * @param dataInizio start data of the tournament
      * @param dataFine end data of the tournament
-     * @param IdCampo pitch identifier
+     * @param idCampo pitch identifier
      * @return boolean : true -> there are other tournaments / false -> empty at the time
      */
-    public boolean doCheckTorneo(Date dataInizio, Date dataFine, int IdCampo) {
+    public boolean doCheckTorneo(Date dataInizio, Date dataFine, int idCampo) {
 
         try (Connection con = ConPool.getConnection()) {
             PreparedStatement ps = con.prepareStatement("select * from torneo where CampoIdentificativo = ? and "
                     + "((DataInizio <= ? and DataFine > ?) or"
                     + "(DataInizio < ? and DataFine >= ?))");
 
-            ps.setInt(1, IdCampo);
-            ps.setDate(2,dataInizio);
-            ps.setDate(3,dataInizio);
-            ps.setDate(4,dataFine);
-            ps.setDate(5,dataFine);
+            ps.setInt(1, idCampo);
+            ps.setDate(2, dataInizio);
+            ps.setDate(3, dataInizio);
+            ps.setDate(4, dataFine);
+            ps.setDate(5, dataFine);
 
             ResultSet rs = ps.executeQuery();
 
@@ -139,9 +143,12 @@ public class TorneoDAOImpl implements TorneoDAO {
     /**
      * This method allows to get a tournament
      * from the database.
-     * @return Torneo item.
+     * @param nome name of the tournament
+     * @param dataInizio start date of the tournament
+     * @param idCampo end date of the tournament
+     * @return Torneo item
      */
-    public Torneo doRetrieveTorneo(String nome, Date dataInizio, int IdCampo) {
+    public Torneo doRetrieveTorneo(String nome, Date dataInizio, int idCampo) {
 
         try (Connection con = ConPool.getConnection()) {
             PreparedStatement ps = con.prepareStatement("select * from torneo "
@@ -149,7 +156,7 @@ public class TorneoDAOImpl implements TorneoDAO {
 
             ps.setString(1, nome);
             ps.setDate(2, dataInizio);
-            ps.setInt(3, IdCampo);
+            ps.setInt(3, idCampo);
 
             ResultSet rs = ps.executeQuery();
 
