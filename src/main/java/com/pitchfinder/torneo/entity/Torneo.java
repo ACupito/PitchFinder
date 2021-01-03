@@ -1,7 +1,6 @@
 package com.pitchfinder.torneo.entity;
 
-import java.util.Date;
-import java.util.Objects;
+import java.sql.Date;
 
 /**
  * This class manages the Torneo entity.
@@ -241,8 +240,8 @@ public class Torneo {
      * This method returns the start date of the tournament.
      * @return DataInizio : java.sql.Date
      */
-    public java.sql.Date getDataInizio() {
-        return (java.sql.Date) dataInizio;
+    public Date getDataInizio() {
+        return dataInizio;
     }
 
     /**
@@ -257,8 +256,8 @@ public class Torneo {
      * This method returns the end date of the tournament.
      * @return DataFine : Date
      */
-    public java.sql.Date getDataFine() {
-        return (java.sql.Date) dataFine;
+    public Date getDataFine() {
+        return dataFine;
     }
 
     /**
@@ -284,49 +283,5 @@ public class Torneo {
     public void setCampoIdentificativo(
             final int pitchId) {
         this.campoIdentificativo = pitchId;
-    }
-
-    /**
-     * This method checks if the instance of a class
-     * is equal to another instance of the same.
-     * @param o instance of a class
-     * @return boolean
-     */
-    @Override
-    public boolean equals(final Object o) {
-
-        if (this == o) {
-            return true;
-        }
-
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
-
-        Torneo torneo = (Torneo) o;
-        return numeroSquadre == torneo.numeroSquadre
-                && minNumeroPartecipantiPerSquadra
-                == torneo.minNumeroPartecipantiPerSquadra
-                && maxNumeroPartecipantiPerSquadra
-                == torneo.maxNumeroPartecipantiPerSquadra
-                && campoIdentificativo == torneo.campoIdentificativo
-                && Objects.equals(nome, torneo.nome)
-                && Objects.equals(tipo, torneo.tipo)
-                && Objects.equals(struttura, torneo.struttura)
-                && Objects.equals(giornoPartite, torneo.giornoPartite)
-                && Objects.equals(adminUsername, torneo.adminUsername)
-                && Objects.equals(dataInizio, torneo.dataInizio)
-                && Objects.equals(dataFine, torneo.dataFine);
-    }
-
-    /**
-     * @return int
-     */
-    @Override
-    public int hashCode() {
-        return Objects.hash(nome, tipo, struttura, giornoPartite,
-                adminUsername, numeroSquadre, minNumeroPartecipantiPerSquadra,
-                maxNumeroPartecipantiPerSquadra, dataInizio, dataFine,
-                campoIdentificativo);
     }
 }
