@@ -22,7 +22,7 @@ class AutenticazioneControllerTest extends Mockito {
     private final String username = "Mariox99";
     private final String nome = "Mario";
     private final String cognome = "Rossi";
-    private final String password = "PitchFinder57";
+    private final String password = "PitchFinder_57";
     private final String data = "1999-6-08";
 
     IllegalArgumentException exception = null;
@@ -184,7 +184,7 @@ class AutenticazioneControllerTest extends Mockito {
 
         Mockito.when(mockedRequest.getParameter("flag")).thenReturn("1");
         Mockito.when(mockedRequest.getParameter("email")).thenReturn(email);
-        Mockito.when(mockedRequest.getParameter("username")).thenReturn("@Mariox99");
+        Mockito.when(mockedRequest.getParameter("username")).thenReturn("AdminMariox99");
         Mockito.when(mockedRequest.getParameter("nome")).thenReturn(nome);
         Mockito.when(mockedRequest.getParameter("cognome")).thenReturn(cognome);
         Mockito.when(mockedRequest.getParameter("password")).thenReturn(password);
