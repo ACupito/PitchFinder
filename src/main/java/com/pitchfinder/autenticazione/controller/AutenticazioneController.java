@@ -5,12 +5,14 @@ import com.pitchfinder.autenticazione.entity.Utente;
 import com.pitchfinder.autenticazione.services.AutenticazioneService;
 import com.pitchfinder.autenticazione.services.AutenticazioneServiceImpl;
 
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.sql.Date;
 
 
+@WebServlet("/autentication")
 public class AutenticazioneController extends HttpServlet {
 
     /**
@@ -79,7 +81,7 @@ public class AutenticazioneController extends HttpServlet {
                         + "rispetta la lunghezza corretta");
             }
 
-            if (!username.matches("(?!^[0-9]*$)(?!^[a-zA-Z]*$)^([a-zA-Z0-9]{1,50})$")
+            if (!username.matches("^((?!.*[\\s])(?=.*[A-Z])(?=.*\\d).{1,50})")
                     || username.substring(0, 5).equalsIgnoreCase("admin")) {
                 throw new IllegalArgumentException("La registrazione non va a buon "
                         + "fine perché la username inserita "
@@ -98,6 +100,7 @@ public class AutenticazioneController extends HttpServlet {
                         + "buon fine perché il nome inserito non "
                         + "rispetta il formato richiesto");
             }
+
             if (cognome.length() < MINLIMIT || cognome.length() > MAXLIMIT) {
                 throw new IllegalArgumentException("La registrazione non "
                         + "va a buon fine perché il cognome "
