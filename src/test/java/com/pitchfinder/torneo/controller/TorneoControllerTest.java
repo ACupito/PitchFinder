@@ -570,6 +570,9 @@ class TorneoControllerTest {
 
     }
 
+    /**
+     * This method tests the method for obtaining all tournaments.
+     */
     @Test
     void CheckTest_19() {
 
@@ -579,6 +582,9 @@ class TorneoControllerTest {
         Mockito.verify(mockedResponse).setContentType("Tornei ottenuti");
     }
 
+    /**
+     * This method tests the method of obtaining a tournament -> Lunghezza nome non valida.
+     */
     @Test
     void CheckTest_20() {
 
@@ -595,6 +601,9 @@ class TorneoControllerTest {
 
     }
 
+    /**
+     * This method tests the method of obtaining a tournament -> Formato nome non valido.
+     */
     @Test
     void CheckTest_21() {
 
@@ -611,6 +620,9 @@ class TorneoControllerTest {
 
     }
 
+    /**
+     * This method tests the method of obtaining a tournament -> Data inizio non selezionata.
+     */
     @Test
     void CheckTest_22() {
 
@@ -627,6 +639,9 @@ class TorneoControllerTest {
 
     }
 
+    /**
+     * This method tests the method of obtaining a tournament -> Formato data inizio non valida.
+     */
     @Test
     void CheckTest_23() {
 
@@ -643,6 +658,9 @@ class TorneoControllerTest {
 
     }
 
+    /**
+     * This method tests the method of obtaining a tournament -> Corretto.
+     */
     @Test
     void CheckTest_24() {
 
@@ -658,7 +676,9 @@ class TorneoControllerTest {
 
     }
 
-
+    /**
+     * This method tests the method for removing a tournament -> Lunghezza nome non valida.
+     */
     @Test
     void CheckTest_25() {
 
@@ -677,6 +697,9 @@ class TorneoControllerTest {
 
     }
 
+    /**
+     * This method tests the method for removing a tournament -> Formato nome non valido.
+     */
     @Test
     void CheckTest_26() {
 
@@ -695,6 +718,9 @@ class TorneoControllerTest {
 
     }
 
+    /**
+     * This method tests the method for removing a tournament -> Data inizio non selezionata.
+     */
     @Test
     void CheckTest_27() {
 
@@ -713,6 +739,9 @@ class TorneoControllerTest {
 
     }
 
+    /**
+     * This method tests the method for removing a tournament -> Formato data inizio non valido.
+     */
     @Test
     void CheckTest_28() {
 
@@ -731,6 +760,9 @@ class TorneoControllerTest {
 
     }
 
+    /**
+     * This method tests the method for removing a tournament -> Data fine non selezionata.
+     */
     @Test
     void CheckTest_29() {
 
@@ -749,6 +781,9 @@ class TorneoControllerTest {
 
     }
 
+    /**
+     * This method tests the method for removing a tournament -> Formato data fine non valido.
+     */
     @Test
     void CheckTest_30() {
 
@@ -767,6 +802,9 @@ class TorneoControllerTest {
 
     }
 
+    /**
+     * This method tests the method for removing a tournament -> Lunghezza giorno partite non valida.
+     */
     @Test
     void CheckTest_31() {
 
@@ -785,6 +823,9 @@ class TorneoControllerTest {
 
     }
 
+    /**
+     * This method tests the method for removing a tournament -> Formato giorno partite non valido.
+     */
     @Test
     void CheckTest_32() {
 
@@ -803,6 +844,9 @@ class TorneoControllerTest {
 
     }
 
+    /**
+     * This method tests the method for removing a tournament -> Corretto.
+     */
     @Test
     void CheckTest_33() {
 
