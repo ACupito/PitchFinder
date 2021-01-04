@@ -1,6 +1,7 @@
 package com.pitchfinder.partita.controller;
 
 import com.pitchfinder.autenticazione.entity.Utente;
+import com.pitchfinder.partita.entity.Partita;
 import com.pitchfinder.partita.services.PartitaService;
 import com.pitchfinder.partita.services.PartitaServiceImpl;
 
@@ -13,6 +14,7 @@ import java.io.IOException;
 import java.sql.Date;
 import java.sql.Time;
 import java.util.ArrayList;
+import java.util.List;
 
 public class CreazionePartitaController extends HttpServlet {
     /**
@@ -98,6 +100,9 @@ public class CreazionePartitaController extends HttpServlet {
 
         try {
             maxGiocatori = Integer.parseInt(maxGiocatoriStr);
+            if (maxGiocatori > 3) { //Giocatori massimi per una partita di tennis
+                throw new IllegalArgumentException("Numero massimo giocatori non valido");
+            }
         } catch (NumberFormatException e) {
             throw  new IllegalArgumentException("Numero massimo giocatori non valido");
         }
@@ -114,7 +119,7 @@ public class CreazionePartitaController extends HttpServlet {
                 throw  new IllegalArgumentException("Nome giocatore non valido");
             }
 
-            if (!currentName.matches("^[a-zA-Z\\s]+$") || currentName.length()>12
+            if (!currentName.matches("^[a-zA-Z\\s]+$") || currentName.length() > 12
                 || currentName.length() < 2) {
                 throw new IllegalArgumentException("Nome giocatore non valido");
             }
@@ -125,7 +130,7 @@ public class CreazionePartitaController extends HttpServlet {
                 throw  new IllegalArgumentException("Cognome giocatore non valido");
             }
 
-            if (!currentSurname.matches("^[a-zA-Z\\s]+$") || currentSurname.length()>12
+            if (!currentSurname.matches("^[a-zA-Z\\s]+$") || currentSurname.length() > 12
                     || currentSurname.length() < 2) {
                 throw new IllegalArgumentException("Cognome giocatore non valido");
             }
@@ -134,7 +139,27 @@ public class CreazionePartitaController extends HttpServlet {
 
 
         if (service.createPartita(idCampo, utente, date, start, end) != null) {
+             if (!nomi.isEmpty()) {
+                 // Prendo la partita creata
+                 List<Partita> partite = service.showPartite();
+                 Partita nuova = new Partita();
+
+                 for (Partita partita: partite) {
+                     if (partita.getEmailUtente().equals(utente.getEmail())
+                             && partita.getData().equals(date) && partita.getOrarioInizio().equals(start)
+                             && partita.getOrarioFine().equals(end) && partita.getIdCampo() == idCampo) {
+                         nuova = partita;
+                     }
+                 }
+
+                 //Aggiungo i giocatori
+                 for (int i = 0; i < nomi.size(); i++) {
+                     service.createGiocatorePartita(nuova.getIdPartita(),
+                             nomi.get(i), cognomi.get(i));
+                 }
+             }
             response.setContentType("Creazione avvenuta!");
+
         } else {
             response.setContentType("Impossibile creare una partita!");
         }
