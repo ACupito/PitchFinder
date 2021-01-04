@@ -12,6 +12,7 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.sql.Date;
 import java.sql.Time;
+import java.util.ArrayList;
 
 public class CreazionePartitaController extends HttpServlet {
     /**
@@ -34,6 +35,9 @@ public class CreazionePartitaController extends HttpServlet {
         Time start;
         String endStr = request.getParameter("end");
         Time end;
+
+        String maxGiocatoriStr = request.getParameter("maxGiocatori");
+        int maxGiocatori;
 
         if (utente == null) {
             throw  new IllegalArgumentException("Utente non valido");
@@ -78,6 +82,7 @@ public class CreazionePartitaController extends HttpServlet {
         int endIntHr = Integer.parseInt(endStr.substring(0, 2));
         int endIntMn = Integer.parseInt(endStr.substring(3));
 
+
         if (endIntHr - startIntHr >= 2) {
             if (endIntHr - startIntHr == 2 && startIntMn - endIntMn < 0) {
                 throw new IllegalArgumentException("Durata partita troppo lunga");
@@ -85,6 +90,48 @@ public class CreazionePartitaController extends HttpServlet {
                 throw new IllegalArgumentException("Durata partita troppo lunga");
             }
         }
+
+        //Controllo sul numero dei giocatori
+        if (maxGiocatoriStr.equals("") || maxGiocatoriStr == null) {
+            throw  new IllegalArgumentException("Numero massimo giocatori non valido");
+        }
+
+        try {
+            maxGiocatori = Integer.parseInt(maxGiocatoriStr);
+        } catch (NumberFormatException e) {
+            throw  new IllegalArgumentException("Numero massimo giocatori non valido");
+        }
+
+        //Inizia il controllo sui giocatori
+        ArrayList<String> nomi = new ArrayList<>();
+        ArrayList<String> cognomi = new ArrayList<>();
+        String nameStr = "nameG";
+        String surnameStr = "surnameG";
+
+        for (int i = 0; i < maxGiocatori; i++) {
+            String currentName = request.getParameter(nameStr + i);
+            if (currentName.equals("") || currentName == null) {
+                throw  new IllegalArgumentException("Nome giocatore non valido");
+            }
+
+            if (!currentName.matches("^[a-zA-Z\\s]+$") || currentName.length()>12
+                || currentName.length() < 2) {
+                throw new IllegalArgumentException("Nome giocatore non valido");
+            }
+            nomi.add(currentName);
+
+            String currentSurname = request.getParameter(surnameStr + i);
+            if (currentSurname.equals("") || currentSurname == null) {
+                throw  new IllegalArgumentException("Cognome giocatore non valido");
+            }
+
+            if (!currentSurname.matches("^[a-zA-Z\\s]+$") || currentSurname.length()>12
+                    || currentSurname.length() < 2) {
+                throw new IllegalArgumentException("Cognome giocatore non valido");
+            }
+            cognomi.add(currentSurname);
+        }
+
 
         if (service.createPartita(idCampo, utente, date, start, end) != null) {
             response.setContentType("Creazione avvenuta!");
