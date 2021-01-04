@@ -1,11 +1,14 @@
 package com.pitchfinder.evento.services;
 
+import com.pitchfinder.autenticazione.entity.Admin;
+import com.pitchfinder.campo.entity.Campo;
 import com.pitchfinder.evento.entity.Evento;
+import com.pitchfinder.singleton.ConPool;
+import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
-import java.sql.Date;
-import java.sql.Time;
+import java.sql.*;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -15,9 +18,7 @@ import static org.junit.jupiter.api.Assertions.*;
  */
 public class EventoServiceImplTest {
 
-    /**
-     *  This is an instance of TorneoService.
-     */
+    /** This is an instance of TorneoService. */
     private static EventoService eService;
 
     /**
@@ -25,7 +26,25 @@ public class EventoServiceImplTest {
      */
     @BeforeAll
     public static void setUp() {
+
         eService = new EventoServiceImpl();
+        Admin admin = new Admin();
+        admin.setNome("Paolo");
+        admin.setCognome("DB");
+        admin.setUsername("testAdmin05");
+        admin.setPassword("password");
+
+        try (Connection con = ConPool.getInstance().getConnection()) {
+            PreparedStatement ps = con.prepareStatement(
+                    "INSERT INTO Admin (Nome, Cognome, Username, Password) VALUES(?,?,?,?)");
+            ps.setString(1, admin.getNome());
+            ps.setString(2, admin.getCognome());
+            ps.setString(3, admin.getUsername());
+            ps.setString(4, admin.getPasswordHash());
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     /**
@@ -42,7 +61,7 @@ public class EventoServiceImplTest {
         Time orarioFine = new Time(16,0,0);
         Date data = new Date(2020 - 1900, 12 - 1, 31 );
         int postiDisponibili = 150;
-        String adminUsername = "memex99";
+        String adminUsername = "testAdmin05";
 
         //check if the method return true
         assertNotNull(eService.createEvento(nome, immagineStr,orarioInizio, orarioFine,
@@ -84,7 +103,7 @@ public class EventoServiceImplTest {
         Time orarioFine = new Time(16,0,0);
         Date data = new Date(2020 - 1900, 12 - 1, 31 );
         int postiDisponibili = 150;
-        String adminUsername = "memex99";
+        String adminUsername = "testAdmin05";
 
         Evento evento = new Evento();
         evento.setName(nome);
@@ -114,7 +133,7 @@ public class EventoServiceImplTest {
         Time orarioFine = new Time(16,0,0);
         Date data = new Date(2020 - 1900, 12 - 1, 31 );
         int postiDisponibili = 150;
-        String adminUsername = "memex99";
+        String adminUsername = "testAdmin05";
 
         Evento evento = new Evento();
         evento.setName(nome);
@@ -128,6 +147,29 @@ public class EventoServiceImplTest {
         evento.setAdmin(adminUsername);
 
         assertTrue(eService.removeEvento(evento));
+    }
+
+    @AfterAll
+    public static void cleanUp(){
+
+        Admin admin = new Admin();
+        admin.setNome("Paolo");
+        admin.setCognome("DB");
+        admin.setUsername("testAdmin05");
+        admin.setPassword("password");
+
+        try (Connection con = ConPool.getInstance().getConnection()) {
+            PreparedStatement ps =
+                    con.prepareStatement("delete from Admin where username=? && password=?");
+
+            ps.setString(1, admin.getUsername());
+            ps.setString(2, admin.getPasswordHash());
+
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
     }
 
 

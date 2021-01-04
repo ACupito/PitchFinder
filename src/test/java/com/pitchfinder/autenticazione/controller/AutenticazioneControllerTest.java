@@ -383,6 +383,7 @@ class AutenticazioneControllerTest extends Mockito {
                     servlet.doPost(mockedRequest, mockedResponse);
                 });
 
+
         assertEquals(message, exception.getMessage());
     }
 

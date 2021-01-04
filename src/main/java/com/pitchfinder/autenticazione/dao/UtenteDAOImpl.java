@@ -179,7 +179,13 @@ public class UtenteDAOImpl implements UtenteDAO {
 
             ps.setString(INDEX1, u.getUsername());
 
-            return ps.executeUpdate() == 1;
+            int existence = checkUtenteExistence(u);
+
+            ps.executeUpdate();
+
+            int existence1 = checkUtenteExistence(u);
+
+            return existence == 1 && existence1 == 0;
 
         } catch (SQLException e) {
 
