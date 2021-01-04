@@ -112,8 +112,9 @@ public class CreazionePartitaController extends HttpServlet {
         ArrayList<String> cognomi = new ArrayList<>();
         String nameStr = "nameG";
         String surnameStr = "surnameG";
+        // Anche il for in js partirà da 1
 
-        for (int i = 0; i < maxGiocatori; i++) {
+        for (int i = 1; i < maxGiocatori; i++) {
             String currentName = request.getParameter(nameStr + i);
             if (currentName.equals("") || currentName == null) {
                 throw  new IllegalArgumentException("Nome giocatore non valido");

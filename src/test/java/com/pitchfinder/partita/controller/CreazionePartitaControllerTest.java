@@ -1,14 +1,12 @@
 package com.pitchfinder.partita.controller;
 
-import com.pitchfinder.autenticazione.dao.AdminDAO;
-import com.pitchfinder.autenticazione.dao.AdminDAOImpl;
+
 import com.pitchfinder.autenticazione.dao.UtenteDAO;
 import com.pitchfinder.autenticazione.dao.UtenteDAOImpl;
 import com.pitchfinder.autenticazione.entity.Admin;
 import com.pitchfinder.autenticazione.entity.Utente;
 import com.pitchfinder.campo.dao.CampoDAO;
 import com.pitchfinder.campo.dao.CampoDAOImpl;
-import com.pitchfinder.evento.controller.EventoController;
 import com.pitchfinder.singleton.ConPool;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
@@ -40,6 +38,10 @@ public class CreazionePartitaControllerTest{
     private static final String ORARIO_INIZIO = "15:30";
     private static final String ORARIO_FINE = "16:30";
     private static final String DATA = "2021-11-15";
+    private static final String MAXGIOCATORI = "1";
+    private static final String PLAYER_NAME = "Pippo";
+    private static final String PLAYER_SURNAME = "Baudo";
+
     @BeforeAll
     void start(){
         //Servlet, mockedRequest, mockedResponse and Session instantiation.
@@ -91,6 +93,9 @@ public class CreazionePartitaControllerTest{
         Mockito.when(mockedRequest.getParameter("data")).thenReturn(DATA);
         Mockito.when(mockedRequest.getParameter("start")).thenReturn(ORARIO_INIZIO);
         Mockito.when(mockedRequest.getParameter("end")).thenReturn(ORARIO_FINE);
+        Mockito.when(mockedRequest.getParameter("maxGiocatori")).thenReturn(MAXGIOCATORI);
+        Mockito.when(mockedRequest.getParameter("nameG1")).thenReturn(PLAYER_NAME);
+        Mockito.when(mockedRequest.getParameter("surnameG1")).thenReturn(PLAYER_SURNAME);
 
         Mockito.when(mockedRequest.getSession().getAttribute("utente")).thenReturn(null);
 
@@ -113,6 +118,9 @@ public class CreazionePartitaControllerTest{
         Mockito.when(mockedRequest.getParameter("date")).thenReturn(DATA);
         Mockito.when(mockedRequest.getParameter("start")).thenReturn(ORARIO_INIZIO);
         Mockito.when(mockedRequest.getParameter("end")).thenReturn(ORARIO_FINE);
+        Mockito.when(mockedRequest.getParameter("maxGiocatori")).thenReturn(MAXGIOCATORI);
+        Mockito.when(mockedRequest.getParameter("nameG1")).thenReturn(PLAYER_NAME);
+        Mockito.when(mockedRequest.getParameter("surnameG1")).thenReturn(PLAYER_SURNAME);
 
         String message = "Campo non valido";
 
@@ -131,6 +139,9 @@ public class CreazionePartitaControllerTest{
         Mockito.when(mockedRequest.getParameter("date")).thenReturn(DATA);
         Mockito.when(mockedRequest.getParameter("start")).thenReturn(ORARIO_INIZIO);
         Mockito.when(mockedRequest.getParameter("end")).thenReturn(ORARIO_FINE);
+        Mockito.when(mockedRequest.getParameter("maxGiocatori")).thenReturn(MAXGIOCATORI);
+        Mockito.when(mockedRequest.getParameter("nameG1")).thenReturn(PLAYER_NAME);
+        Mockito.when(mockedRequest.getParameter("surnameG1")).thenReturn(PLAYER_SURNAME);
 
         String message = "Campo non valido";
 
@@ -149,6 +160,9 @@ public class CreazionePartitaControllerTest{
         Mockito.when(mockedRequest.getParameter("date")).thenReturn("10-10-10");
         Mockito.when(mockedRequest.getParameter("start")).thenReturn(ORARIO_INIZIO);
         Mockito.when(mockedRequest.getParameter("end")).thenReturn(ORARIO_FINE);
+        Mockito.when(mockedRequest.getParameter("maxGiocatori")).thenReturn(MAXGIOCATORI);
+        Mockito.when(mockedRequest.getParameter("nameG1")).thenReturn(PLAYER_NAME);
+        Mockito.when(mockedRequest.getParameter("surnameG1")).thenReturn(PLAYER_SURNAME);
 
         String message = "Formato Data non valido";
 
@@ -167,6 +181,9 @@ public class CreazionePartitaControllerTest{
         Mockito.when(mockedRequest.getParameter("date")).thenReturn("2010-10-10");
         Mockito.when(mockedRequest.getParameter("start")).thenReturn(ORARIO_INIZIO);
         Mockito.when(mockedRequest.getParameter("end")).thenReturn(ORARIO_FINE);
+        Mockito.when(mockedRequest.getParameter("maxGiocatori")).thenReturn(MAXGIOCATORI);
+        Mockito.when(mockedRequest.getParameter("nameG1")).thenReturn(PLAYER_NAME);
+        Mockito.when(mockedRequest.getParameter("surnameG1")).thenReturn(PLAYER_SURNAME);
 
         String message = "Formato Data non valido";
 
@@ -185,6 +202,9 @@ public class CreazionePartitaControllerTest{
         Mockito.when(mockedRequest.getParameter("date")).thenReturn(DATA);
         Mockito.when(mockedRequest.getParameter("start")).thenReturn("25:72");
         Mockito.when(mockedRequest.getParameter("end")).thenReturn(ORARIO_FINE);
+        Mockito.when(mockedRequest.getParameter("maxGiocatori")).thenReturn(MAXGIOCATORI);
+        Mockito.when(mockedRequest.getParameter("nameG1")).thenReturn(PLAYER_NAME);
+        Mockito.when(mockedRequest.getParameter("surnameG1")).thenReturn(PLAYER_SURNAME);
 
         String message = "Formato Orario di Inizio non valido";
 
@@ -202,6 +222,9 @@ public class CreazionePartitaControllerTest{
         Mockito.when(mockedRequest.getParameter("date")).thenReturn(DATA);
         Mockito.when(mockedRequest.getParameter("start")).thenReturn(ORARIO_INIZIO);
         Mockito.when(mockedRequest.getParameter("end")).thenReturn("25:72");
+        Mockito.when(mockedRequest.getParameter("maxGiocatori")).thenReturn(MAXGIOCATORI);
+        Mockito.when(mockedRequest.getParameter("nameG1")).thenReturn(PLAYER_NAME);
+        Mockito.when(mockedRequest.getParameter("surnameG1")).thenReturn(PLAYER_SURNAME);
 
         String message = "Formato Orario di Fine non valido";
 
@@ -220,6 +243,9 @@ public class CreazionePartitaControllerTest{
         Mockito.when(mockedRequest.getParameter("date")).thenReturn(DATA);
         Mockito.when(mockedRequest.getParameter("start")).thenReturn(ORARIO_INIZIO);
         Mockito.when(mockedRequest.getParameter("end")).thenReturn("15:00");
+        Mockito.when(mockedRequest.getParameter("maxGiocatori")).thenReturn(MAXGIOCATORI);
+        Mockito.when(mockedRequest.getParameter("nameG1")).thenReturn(PLAYER_NAME);
+        Mockito.when(mockedRequest.getParameter("surnameG1")).thenReturn(PLAYER_SURNAME);
 
         String message = "Formato Orario partita non valido";
 
@@ -238,6 +264,9 @@ public class CreazionePartitaControllerTest{
         Mockito.when(mockedRequest.getParameter("date")).thenReturn(DATA);
         Mockito.when(mockedRequest.getParameter("start")).thenReturn(ORARIO_INIZIO);
         Mockito.when(mockedRequest.getParameter("end")).thenReturn("19:00");
+        Mockito.when(mockedRequest.getParameter("maxGiocatori")).thenReturn(MAXGIOCATORI);
+        Mockito.when(mockedRequest.getParameter("nameG1")).thenReturn(PLAYER_NAME);
+        Mockito.when(mockedRequest.getParameter("surnameG1")).thenReturn(PLAYER_SURNAME);
 
         String message = "Durata partita troppo lunga";
 
@@ -256,6 +285,9 @@ public class CreazionePartitaControllerTest{
         Mockito.when(mockedRequest.getParameter("date")).thenReturn(DATA);
         Mockito.when(mockedRequest.getParameter("start")).thenReturn(ORARIO_INIZIO);
         Mockito.when(mockedRequest.getParameter("end")).thenReturn("17:40");
+        Mockito.when(mockedRequest.getParameter("maxGiocatori")).thenReturn(MAXGIOCATORI);
+        Mockito.when(mockedRequest.getParameter("nameG1")).thenReturn(PLAYER_NAME);
+        Mockito.when(mockedRequest.getParameter("surnameG1")).thenReturn(PLAYER_SURNAME);
 
         String message = "Durata partita troppo lunga";
 
@@ -274,6 +306,9 @@ public class CreazionePartitaControllerTest{
         Mockito.when(mockedRequest.getParameter("date")).thenReturn(DATA);
         Mockito.when(mockedRequest.getParameter("start")).thenReturn(ORARIO_INIZIO);
         Mockito.when(mockedRequest.getParameter("end")).thenReturn(ORARIO_FINE);
+        Mockito.when(mockedRequest.getParameter("maxGiocatori")).thenReturn(MAXGIOCATORI);
+        Mockito.when(mockedRequest.getParameter("nameG1")).thenReturn(PLAYER_NAME);
+        Mockito.when(mockedRequest.getParameter("surnameG1")).thenReturn(PLAYER_SURNAME);
 
         servlet.doPost(mockedRequest, mockedResponse);
         Mockito.verify(mockedResponse).setContentType("Creazione avvenuta!");
@@ -287,6 +322,9 @@ public class CreazionePartitaControllerTest{
         Mockito.when(mockedRequest.getParameter("date")).thenReturn(DATA);
         Mockito.when(mockedRequest.getParameter("start")).thenReturn(ORARIO_INIZIO);
         Mockito.when(mockedRequest.getParameter("end")).thenReturn(ORARIO_FINE);
+        Mockito.when(mockedRequest.getParameter("maxGiocatori")).thenReturn(MAXGIOCATORI);
+        Mockito.when(mockedRequest.getParameter("nameG1")).thenReturn(PLAYER_NAME);
+        Mockito.when(mockedRequest.getParameter("surnameG1")).thenReturn(PLAYER_SURNAME);
 
 
         daoCampo.doSaveOccupazione(1003,
