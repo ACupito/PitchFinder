@@ -6,6 +6,7 @@ import com.pitchfinder.evento.entity.Evento;
 import com.pitchfinder.evento.services.EventoService;
 import com.pitchfinder.evento.services.EventoServiceImpl;
 
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -13,6 +14,7 @@ import java.io.File;
 import java.sql.Date;
 import java.sql.Time;
 
+@WebServlet("/EventoAdminController")
 public class EventoAdminController extends HttpServlet {
 
     /** Minimum limit for name. */
