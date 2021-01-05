@@ -2,20 +2,16 @@
 package com.pitchfinder.evento.controller;
 
 import com.pitchfinder.autenticazione.entity.Admin;
-import com.pitchfinder.evento.dao.EventoDAO;
-import com.pitchfinder.evento.dao.EventoDAOImpl;
 import com.pitchfinder.evento.entity.Evento;
 import com.pitchfinder.evento.services.EventoService;
 import com.pitchfinder.evento.services.EventoServiceImpl;
 
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.File;
 import java.sql.Date;
 import java.sql.Time;
-import java.util.ArrayList;
 
 public class EventoAdminController extends HttpServlet {
 
