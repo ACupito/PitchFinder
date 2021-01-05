@@ -2,18 +2,23 @@
 package com.pitchfinder.evento.controller;
 
 import com.pitchfinder.autenticazione.entity.Admin;
+import com.pitchfinder.evento.dao.EventoDAO;
+import com.pitchfinder.evento.dao.EventoDAOImpl;
 import com.pitchfinder.evento.entity.Evento;
 import com.pitchfinder.evento.services.EventoService;
 import com.pitchfinder.evento.services.EventoServiceImpl;
 
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.File;
 import java.sql.Date;
 import java.sql.Time;
+import java.util.ArrayList;
 
-public class EventoController extends HttpServlet {
+public class EventoAdminController extends HttpServlet {
+
     /** Minimum limit for name. */
     private static final int MINLIMIT = 1;
     /** Maximum limit for name. */
@@ -26,6 +31,7 @@ public class EventoController extends HttpServlet {
     private static final int MAXDESCRIPTIONLIMIT = 500;
     /** Maximum limit for the description. */
     private static final int MAXSITSLIMIT = 300;
+
     /**
      * doPost() method.
      * @param request is the servlet request.

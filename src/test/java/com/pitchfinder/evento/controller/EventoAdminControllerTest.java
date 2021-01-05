@@ -19,9 +19,9 @@ import java.sql.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
-public class EventoControllerTest {
+public class EventoAdminControllerTest {
 
-    private EventoController servlet;
+    private EventoAdminController servlet;
     private HttpServletRequest mockedRequest;
     private HttpServletResponse mockedResponse;
     private HttpSession session;
@@ -46,7 +46,7 @@ public class EventoControllerTest {
         void setUp() {
 
             //Servlet, mockedRequest, mockedResponse and Session instantiation.
-            servlet = new EventoController();
+            servlet = new EventoAdminController();
             mockedRequest = Mockito.mock(HttpServletRequest.class);
             mockedResponse = Mockito.mock(HttpServletResponse.class);
             session = Mockito.mock(HttpSession.class);
