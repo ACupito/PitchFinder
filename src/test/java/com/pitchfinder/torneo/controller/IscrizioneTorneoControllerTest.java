@@ -530,6 +530,60 @@ public class IscrizioneTorneoControllerTest {
         assertEquals(message, exception.getMessage());
     }
 
+    @Test
+    public void utenteNonValido(){
+        Mockito.when(mockedRequest.getParameter("conferma")).thenReturn("conferma");
+        Mockito.doReturn(null).when(session).getAttribute("utente");
+
+        Mockito.when(mockedRequest.getParameter("nomeSquadra")).thenReturn("nomeSquadra");
+        Mockito.when(mockedRequest.getParameter("numeroGiocatori")).thenReturn("2");
+        //Player
+        Mockito.when(mockedRequest.getParameter("nomePlayer1")).thenReturn("pippo");
+        Mockito.when(mockedRequest.getParameter("cognomePlayer1")).thenReturn("nxn!");
+        Mockito.when(mockedRequest.getParameter("nomePlayer2")).thenReturn("Lucio");
+        Mockito.when(mockedRequest.getParameter("cognomePlayer2")).thenReturn("Sinto");
+
+        Mockito.when(mockedRequest.getParameter("nomeCapitano")).thenReturn("null");
+        Mockito.when(mockedRequest.getParameter("cognomeCapitano")).thenReturn("ciao");
+
+
+
+        String message = "Utente non valido";
+
+        IllegalArgumentException exception;
+        exception = assertThrows(IllegalArgumentException.class,
+                () -> servlet.doGet(mockedRequest, mockedResponse));
+        assertEquals(message, exception.getMessage());
+        Mockito.doReturn(utente).when(session).getAttribute("utente");
+    }
+
+    @Test
+    public void torneoNonValido(){
+        Mockito.when(mockedRequest.getParameter("conferma")).thenReturn("conferma");
+        Mockito.doReturn(null).when(session).getAttribute("torneo");
+
+        Mockito.when(mockedRequest.getParameter("nomeSquadra")).thenReturn("nomeSquadra");
+        Mockito.when(mockedRequest.getParameter("numeroGiocatori")).thenReturn("2");
+        //Player
+        Mockito.when(mockedRequest.getParameter("nomePlayer1")).thenReturn("pippo");
+        Mockito.when(mockedRequest.getParameter("cognomePlayer1")).thenReturn("nxn!");
+        Mockito.when(mockedRequest.getParameter("nomePlayer2")).thenReturn("Lucio");
+        Mockito.when(mockedRequest.getParameter("cognomePlayer2")).thenReturn("Sinto");
+
+        Mockito.when(mockedRequest.getParameter("nomeCapitano")).thenReturn("null");
+        Mockito.when(mockedRequest.getParameter("cognomeCapitano")).thenReturn("ciao");
+
+
+
+        String message = "Torneo non valido";
+
+        IllegalArgumentException exception;
+        exception = assertThrows(IllegalArgumentException.class,
+                () -> servlet.doGet(mockedRequest, mockedResponse));
+        assertEquals(message, exception.getMessage());
+        Mockito.doReturn(torneo).when(session).getAttribute("torneo");
+    }
+
     @AfterAll
     public void clean(){
         servlet = null;
