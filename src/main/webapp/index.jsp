@@ -90,11 +90,13 @@
                 <p class="text-muted">Creare  una partita.</p>
             </div>
             <div class="col-md-4">
+                <a href="EventoController">
                         <span class="fa-stack fa-4x">
                             <i class="fas fa-circle fa-stack-2x text-primary"></i>
                             <i class="fas fa-users fa-stack-1x fa-inverse"></i>
                         </span>
                 <h4 class="my-3">Eventi</h4>
+                </a>
                 <p class="text-muted">Visualizzare gli eventi organizzati dalla Polisportiva con possibilità di prenotarsi.
                 </p>
             </div>
