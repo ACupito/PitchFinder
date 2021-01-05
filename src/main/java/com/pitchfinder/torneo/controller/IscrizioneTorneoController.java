@@ -40,14 +40,14 @@ public class IscrizioneTorneoController extends HttpServlet {
             String capitano; //variabile da passare al metodo createSquadra
 
             if (nomeSquadra == null) {
-                throw new IllegalArgumentException("Torneo non valido");
+                throw new IllegalArgumentException("Nome squadra non valido");
             }
             //check name's team
             if (nomeSquadra.length() < 1 || nomeSquadra.length() > 50) {
                 throw new IllegalArgumentException("Lunghezza nome squadra non valida");
             }
 
-            if (nomeSquadra.matches("^[a-zA-Z_ ]*$")) {
+            if (!nomeSquadra.matches("^[a-zA-Z_ ]*$")) {
                 throw new IllegalArgumentException("Formato nome squadra non valido");
             }
 
@@ -56,9 +56,18 @@ public class IscrizioneTorneoController extends HttpServlet {
                 throw new IllegalArgumentException("Torneo non valido");
             }
 
+            //Check utente
+            if (utente == null){
+                throw new IllegalArgumentException("Utente non valido");
+            }
+
             //check number of players
             if (numeroGiocatori == null) {
                 throw new IllegalArgumentException("Numero dei giocatori non valido");
+            }
+
+            if (numeroGiocatori.length() < 1 || numeroGiocatori.length() > 2) {
+                throw new IllegalArgumentException("Lunghezza numero dei giocatori non valida");
             }
 
             try {
@@ -67,33 +76,41 @@ public class IscrizioneTorneoController extends HttpServlet {
                 throw new IllegalArgumentException("Formato numero giocatori non valido");
             }
 
+
             if (nGiocatori < torneo.getMinNumeroPartecipantiPerSquadra() || nGiocatori > torneo.getMaxNumeroPartecipantiPerSquadra()) {
                 throw new IllegalArgumentException("Il numero dei giocatori no rispetta le direttive del torneo");
             }
 
-            //check capitano
+
+
+            //check nome e cognome
             if (nomeCapitano == null) {
                 throw new IllegalArgumentException("Nome capitano non valido");
+            }
+
+            if (nomeCapitano.length() < 1 || nomeCapitano.length() > 10) {
+                throw new IllegalArgumentException("Lunghezza nome capitano non valido");
             }
 
             if (cognomeCapitano == null) {
                 throw new IllegalArgumentException("Cognome capitano non valido");
             }
 
+            if (cognomeCapitano.length() < 1 || cognomeCapitano.length() > 20) {
+                throw new IllegalArgumentException("Lunghezza cognome capitano non valida");
+            }
+
+            if (!cognomeCapitano.matches("^[a-zA-Z_ ]*$")) {
+                throw new IllegalArgumentException("Formato cognome capitano non valido");
+            }
+
+            if (!nomeCapitano.matches("^[a-zA-Z_ ]*$")) {
+                throw new IllegalArgumentException("Formato nome capitano non valido");
+            }
+
+            //capitano
             capitano = nomeCapitano + "" + cognomeCapitano;
 
-            if (capitano.length() < 1 || capitano.length() > 30) {
-                throw new IllegalArgumentException("Lunghezza cognome e nome capitano non valida");
-            }
-
-            if (capitano.matches("^[a-zA-Z_ ]*$")) {
-                throw new IllegalArgumentException("Formato cognome e nome capitano non valido");
-            }
-
-            //check user
-            if (utente == null) {
-                throw new IllegalArgumentException("Formato cognome e nome capitano non valido");
-            }
 
             //check giocatori
             List<String> giocatori = new ArrayList<>();
@@ -102,23 +119,27 @@ public class IscrizioneTorneoController extends HttpServlet {
                 String nomePlayer = "nomePlayer" + (i + 1);
                 String cognomePlayer = "cognomePlayer" + (i + 1);
 
-                if (req.getParameter(nomePlayer) == null || req.getParameter(cognomePlayer) == null) {
-                    throw new IllegalArgumentException("Nome e cognome giocatore non valido");
+                if (req.getParameter(nomePlayer) == null) {
+                    throw new IllegalArgumentException("Nome giocatore non valido");
                 }
 
-                if (req.getParameter(nomePlayer).length() < 2 || req.getParameter(nomePlayer).length() > 12) {
+                if (req.getParameter(cognomePlayer) == null) {
+                    throw new IllegalArgumentException("Cognome giocatore non valido");
+                }
+
+                if (req.getParameter(nomePlayer).length() < 1 || req.getParameter(nomePlayer).length() > 10) {
                     throw new IllegalArgumentException("Lunghezza nome giocatore non valida");
                 }
 
-                if (req.getParameter(cognomePlayer).length() < 2 || req.getParameter(cognomePlayer).length() > 12) {
+                if (req.getParameter(cognomePlayer).length() < 1 || req.getParameter(cognomePlayer).length() > 10) {
                     throw new IllegalArgumentException("Lunghezza cognome giocatore non valida");
                 }
 
-                if (req.getParameter(nomePlayer).matches("^[a-zA-Z\\\\s]+$")) {
+                if (!req.getParameter(nomePlayer).matches("^[a-zA-Z\\\\s]+$")) {
                     throw new IllegalArgumentException("Formato Nome giocatore non valido");
                 }
 
-                if (req.getParameter(cognomePlayer).matches("^[a-zA-Z\\\\s]+$")) {
+                if (!req.getParameter(cognomePlayer).matches("^[a-zA-Z\\\\s]+$")) {
                     throw new IllegalArgumentException("Formato cognome giocatore non valido");
                 }
 
