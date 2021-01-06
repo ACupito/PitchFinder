@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.sql.Date;
 import java.util.ArrayList;
 
 @WebServlet("/EventoDetailsController")
@@ -34,6 +35,12 @@ public class EventoDetailsController extends HttpServlet {
     public void doGet(final HttpServletRequest request,
                       final HttpServletResponse response) throws ServletException, IOException {
 
+        Evento evento;
+        EventoService service = new EventoServiceImpl();
+        String nome = request.getParameter("eventName");
+        Date data = Date.valueOf(request.getParameter("eventDate"));
+        evento = service.getEvento(nome,data);
+        request.setAttribute("eventoDetails",evento);
         RequestDispatcher dispatcher =
                 request.getRequestDispatcher("eventoDetails.jsp");
         dispatcher.forward(request, response);
