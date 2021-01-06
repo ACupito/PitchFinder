@@ -1,14 +1,11 @@
 package com.pitchfinder.partita.controller;
 
-import com.pitchfinder.autenticazione.dao.AdminDAO;
-import com.pitchfinder.autenticazione.dao.AdminDAOImpl;
 import com.pitchfinder.autenticazione.dao.UtenteDAO;
 import com.pitchfinder.autenticazione.dao.UtenteDAOImpl;
 import com.pitchfinder.autenticazione.entity.Admin;
 import com.pitchfinder.autenticazione.entity.Utente;
 import com.pitchfinder.campo.dao.CampoDAO;
 import com.pitchfinder.campo.dao.CampoDAOImpl;
-import com.pitchfinder.evento.controller.EventoController;
 import com.pitchfinder.singleton.ConPool;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;

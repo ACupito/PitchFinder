@@ -74,12 +74,8 @@
     <div class="container">
         <div class="row text-center">
             <%
-
                 Evento evento;
-                EventoService service = new EventoServiceImpl();
-                String nome = request.getParameter("eventName");
-                Date data = Date.valueOf(request.getParameter("eventDate"));
-                evento = service.getEvento(nome,data);
+                evento = (Evento) request.getAttribute("eventoDetails");
                 if(evento.getName() != null ){ %>
 
             <div class="col-md-4">
