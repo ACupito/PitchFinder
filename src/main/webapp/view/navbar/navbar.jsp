@@ -22,11 +22,11 @@
                                 <div class="form-group">
                                     <button type="submit" class="btn btn-primary btn-block">Login</button>
                                 </div>
+                            </form>
+                            <form action="autentication" method="get">
                                 <div class="form-group">
+                                    <input type="hidden" value="-1" name="flag">
                                     <button type="submit" class="btn btn-primary btn-block">Registrazione</button>
-                                </div>
-                                <div class="form-group text-center">
-                                    <small><a href="#" data-toggle="modal" data-target="#modalPassword">Password dimenticata?</a></small>
                                 </div>
                             </form>
                         </li>
