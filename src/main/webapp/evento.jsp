@@ -76,14 +76,13 @@
                 if(eventi.isEmpty()){ %>
 
             <div class="col-md-4">
-                <a href="EventoDetailsController">
                                 <span class="fa-stack fa-4x">
                                     <i class="fas fa-circle fa-stack-2x text-primary"></i>
                                     <i class="fas fa-users fa-stack-1x fa-inverse"></i>
                                 </span>
                 <p class="text-muted">Non ci sono eventi disponibili.</p>
-                </a>
             </div>
+
 
             <%}else{
                     for (Evento evento: eventi) {%>
@@ -94,9 +93,13 @@
                                     <i class="fas fa-calendar-check fa-stack-1x fa-inverse"></i>
                                 </span>
                 <h4 class="my-3"><%= evento.getName()%></h4>
-            </div>
-            </button>
 
+                <form method="post" action="EventoDetailsController">
+                    <input type="hidden" class="eventDate" name="eventDate" value="<%=evento.getDate()%>">
+                    <input type="hidden" class="eventName" name="eventName" value="<%=evento.getName()%>">
+                    <input type="submit" class="eventDetailsButton" name="eventDetailsButton" value="Visualizza">
+                </form>
+            </div>
                 <%}%>
             <%}%>
         </div>
