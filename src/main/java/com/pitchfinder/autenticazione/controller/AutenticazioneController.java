@@ -62,6 +62,13 @@ public class AutenticazioneController extends HttpServlet {
         String messaggio = "";
         int flag = Integer.parseInt(request.getParameter("flag"));
 
+        if (flag == -1) {
+
+            dispatcher = getServletContext().getRequestDispatcher("/view/autenticazione/registrazione.jsp");
+            dispatcher.forward(request, response);
+        }
+
+
         if (flag == 1) {
             String email = request.getParameter("email");
             String username = request.getParameter("username");

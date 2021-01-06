@@ -5,10 +5,12 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css"
           rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1"
           crossorigin="anonymous">
-    <link rel="stylesheet" type="text/css" href="css/global.css">
+    <link rel="stylesheet" type="text/css" href="../../css/global.css">
 </head>
 
 <body>
+
+<%@ include file="../navbar/navbar.jsp"%>
 <section class="container-fluid bg">
     <section class="row justify-content-center">
         <section class="col-12 col-sm-6 col-md-3">
