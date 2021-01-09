@@ -174,11 +174,13 @@ public class AutenticazioneController extends HttpServlet {
 
                 response.setContentType("La registrazione è avvenuta correttamente");
                 request.setAttribute("messaggio", messaggio);
-                dispatcher = request.getServletContext().getRequestDispatcher("avvenutaRegistrazione.jsp");
+                dispatcher = request.getServletContext().getRequestDispatcher("/view/autenticazione/avvenutaRegistrazione.jsp");
                 dispatcher.forward(request, response);
             }
 
         } else if (flag == 2) {
+
+            System.out.println("Sei nel login");
 
             String username = request.getParameter("username");
             String password = request.getParameter("password");
@@ -202,18 +204,22 @@ public class AutenticazioneController extends HttpServlet {
 
                 if (a != null) {
                     request.setAttribute("admin", a);
-                    dispatcher = getServletContext().getRequestDispatcher("admin.jsp");
+                    dispatcher = getServletContext().getRequestDispatcher("/view/autenticazione/admin.jsp");
                     dispatcher.forward(request, response);
                 }
 
             } else {
 
+                System.out.println("Sei nel login utente");
+
                 Utente u = as.loginUtente(username, password);
                 if (u != null) {
 
+                    System.out.println("Sei entrato");
+
                     response.setContentType("Il login è avvenuto correttamente");
                     request.setAttribute("utente", u);
-                    dispatcher = request.getServletContext().getRequestDispatcher("utente.jsp");
+                    dispatcher = request.getServletContext().getRequestDispatcher("/view/autenticazione/utente.jsp");
                     dispatcher.forward(request, response);
                 }
             }
