@@ -12,5 +12,7 @@
 </head>
 <body>
 
+<p> registrazione avvenuta con successo </p>
+
 </body>
 </html>
