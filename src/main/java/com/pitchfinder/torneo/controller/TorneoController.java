@@ -7,7 +7,9 @@ import com.pitchfinder.torneo.services.TorneoService;
 import com.pitchfinder.torneo.services.TorneoServiceImpl;
 
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -15,6 +17,7 @@ import java.io.IOException;
 import java.sql.Date;
 import java.util.List;
 
+@WebServlet("/torneoServlet")
 public class TorneoController extends HttpServlet {
 
     /**
@@ -47,23 +50,61 @@ public class TorneoController extends HttpServlet {
         TorneoService ts = new TorneoServiceImpl();
 
         int flag = Integer.parseInt(request.getParameter("flag"));
+
         Admin admin = (Admin) request.getSession().getAttribute("admin"); //get admin from the session
         Campo campo = (Campo) request.getSession().getAttribute("campo"); //get campo from the session
 
-        if (admin != null && campo != null) {
+        if (flag == 3) { //get all tornei
 
-            String nome = request.getParameter("nome");
-            if (nome == null) {
-                throw new IllegalArgumentException("Nome non inserito");
+            List<Torneo> tornei = ts.getAllTornei();
+            response.setContentType("Tornei ottenuti");
+            request.setAttribute("tornei", tornei);
+            RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/view/torneo/visualizzaTornei.jsp");
+            try {
+                dispatcher.forward(request, response);
+            } catch (ServletException | IOException e) {
+                e.printStackTrace();
+            }
+        }
+
+        String nome = request.getParameter("nome");
+        if (nome == null) {
+            throw new IllegalArgumentException("Nome non inserito");
+        }
+
+        String startDate = request.getParameter("dataInizio");
+        String endDate = request.getParameter("dataFine");
+
+        String giornoPartite = request.getParameter("giornoPartite");
+        if (giornoPartite == null) {
+            throw new IllegalArgumentException("Giorno partite non inserito");
+        }
+
+
+        if (flag == 4) { //get a specific tournament
+
+            if (nome.length() < 1 || nome.length() > 50) {
+                throw new IllegalArgumentException("Lunghezza nome non valida");
+            }
+            if (!nome.matches("^[ a-zA-Z\\u00C0-\\u00ff']+$")) {
+                throw new IllegalArgumentException("Formato nome non valido");
             }
 
-            String startDate = request.getParameter("dataInizio");
-            String endDate = request.getParameter("dataFine");
-
-            String giornoPartite = request.getParameter("giornoPartite");
-            if (giornoPartite == null) {
-                throw new IllegalArgumentException("Giorno partite non inserito");
+            Date dataInizio;
+            if (startDate == null) {
+                throw new IllegalArgumentException("Data inizio non selezionata");
             }
+            try {
+                dataInizio = Date.valueOf(startDate);
+            } catch (IllegalArgumentException e) {
+                throw new IllegalArgumentException("Formato data inizio non valido");
+            }
+
+            Torneo t = ts.getTorneo(nome, dataInizio, campo.getIdentificativo());
+            response.setContentType("Torneo ottenuto");
+            request.setAttribute("torneo", t);
+
+        } else if (admin != null && campo != null) {
 
             if (flag == 1) { //tournament creation
 
@@ -199,35 +240,6 @@ public class TorneoController extends HttpServlet {
 
                 boolean removeResult = ts.deleteTorneo(campo.getIdentificativo(), nome, dataInizio, dataFine, giornoPartite);
                 if (removeResult) response.setContentType("Eliminazione avvenuta");
-            } else if (flag == 3) { //get all tornei
-
-                List<Torneo> tornei = ts.getAllTornei();
-                response.setContentType("Tornei ottenuti");
-                request.setAttribute("tornei", tornei);
-
-            } else if (flag == 4) { //get a specific tournament
-
-                if (nome.length() < 1 || nome.length() > 50) {
-                    throw new IllegalArgumentException("Lunghezza nome non valida");
-                }
-                if (!nome.matches("^[ a-zA-Z\\u00C0-\\u00ff']+$")) {
-                    throw new IllegalArgumentException("Formato nome non valido");
-                }
-
-                Date dataInizio;
-                if (startDate == null) {
-                    throw new IllegalArgumentException("Data inizio non selezionata");
-                }
-                try {
-                    dataInizio = Date.valueOf(startDate);
-                } catch (IllegalArgumentException e) {
-                    throw new IllegalArgumentException("Formato data inizio non valido");
-                }
-
-                    Torneo t = ts.getTorneo(nome, dataInizio, campo.getIdentificativo());
-                    response.setContentType("Torneo ottenuto");
-                    request.setAttribute("torneo", t);
-
             }
         }
     }
