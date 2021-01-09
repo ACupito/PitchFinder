@@ -37,24 +37,34 @@
         <div class="row text-center">
             <div class="col-md-4">
                         <span class="fa-stack fa-4x">
+                            <form action="torneoServlet" method="get">
+                            <button>
+                                <input type="hidden" name="flag" value="3">
                             <i class="fas fa-circle fa-stack-2x text-primary"></i>
                             <i class="fas fa-trophy fa-stack-1x fa-inverse"></i>
+                                </button>
+                            </form>
                         </span>
                 <h4 class="my-3">Tornei</h4>
                 <p class="text-muted">Visaulizzare i tornei organizzati dalla Polisportiva con possibilità di iscriversi.</p>
             </div>
             <div class="col-md-4">
                         <span class="fa-stack fa-4x">
+                            <button>
                             <i class="fas fa-circle fa-stack-2x text-primary"></i>
                             <i class="fas fa-running fa-stack-1x fa-inverse"></i>
+                                </button>
+
                         </span>
                 <h4 class="my-3">Creazione partita</h4>
                 <p class="text-muted">Creare  una partita.</p>
             </div>
             <div class="col-md-4">
                         <span class="fa-stack fa-4x">
+                            <button>
                             <i class="fas fa-circle fa-stack-2x text-primary"></i>
                             <i class="fas fa-users fa-stack-1x fa-inverse"></i>
+                            </button>
                         </span>
                 <h4 class="my-3">Eventi</h4>
                 <p class="text-muted">Visualizzare gli eventi organizzati dalla Polisportiva con possibilità di prenotarsi.
@@ -62,8 +72,10 @@
             </div>
             <div class="col-md-4">
                         <span class="fa-stack fa-4x">
+                            <button>
                             <i class="fas fa-circle fa-stack-2x text-primary"></i>
                             <i class="fas fa-calendar-check fa-stack-1x fa-inverse"></i>
+                            </button>
                         </span>
                 <h4 class="my-3">Indicare disponibilità</h4>
                 <p class="text-muted">Possibilità di rendersi disponibile per un campo in una determinata data e orario.</p>
