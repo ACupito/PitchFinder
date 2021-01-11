@@ -43,12 +43,14 @@
                 <h4 class="my-3">Tornei</h4>
                 <p class="text-muted">Visaulizzare i tornei organizzati dalla Polisportiva con possibilità di iscriversi.</p>
             </div>
-            <div class="col-md-4">
+                <div class="col-md-4">
+                    <a href="Partita">
                         <span class="fa-stack fa-4x">
                             <i class="fas fa-circle fa-stack-2x text-primary"></i>
                             <i class="fas fa-running fa-stack-1x fa-inverse"></i>
                         </span>
-                <h4 class="my-3">Creazione partita</h4>
+                    <h4 class="my-3">Creazione partita</h4>
+                    </a>
                 <p class="text-muted">Creare  una partita.</p>
             </div>
             <div class="col-md-4">
