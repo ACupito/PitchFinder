@@ -40,7 +40,7 @@ public class EventoController  extends HttpServlet {
         request.getServletContext().setAttribute("eventiContext", eventi);
 
         RequestDispatcher dispatcher =
-                request.getRequestDispatcher("evento.jsp");
+                request.getRequestDispatcher("/view/evento/evento.jsp");
         dispatcher.forward(request, response);
     }
 }
