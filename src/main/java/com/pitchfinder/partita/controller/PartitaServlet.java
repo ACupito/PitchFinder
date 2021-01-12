@@ -10,12 +10,24 @@ import java.io.IOException;
 
 @WebServlet("/Partita")
 public class PartitaServlet extends HttpServlet {
-    @Override
+    /**
+     *  doPost method.
+     * @param req request
+     * @param resp response
+     * @throws ServletException
+     * @throws IOException
+     */
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         this.doGet(req,resp);
     }
 
-    @Override
+    /**
+     *  doPost method.
+     * @param req request
+     * @param resp response
+     * @throws ServletException
+     * @throws IOException
+     */
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         RequestDispatcher dispatcher =
                 req.getRequestDispatcher("/view/partita/matchCreation.jsp");
