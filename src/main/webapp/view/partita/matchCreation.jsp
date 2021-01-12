@@ -22,9 +22,9 @@
     <link href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic" rel="stylesheet" type="text/css" />
     <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700" rel="stylesheet" type="text/css" />
     <!-- Core theme CSS (includes Bootstrap)-->
-    <link href="./css/navbar/style_navbar.css" rel="stylesheet" />
+    <link href="css/navbar/style_navbar.css" rel="stylesheet" />
 
-    <link href="./css/partita/style_matchCreation.css" rel="stylesheet" />
+    <link href="css/partita/style_matchCreation.css" rel="stylesheet" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script language="JavaScript" type="text/javascript" src="./js/partita/js_matchCreation.js"></script>
 </head>
