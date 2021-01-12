@@ -146,6 +146,17 @@ public class TorneoServiceImpl implements TorneoService {
     }
 
     /**
+     * Number of teams registered in the tournament.
+     * @param torneo - torneo.
+     * @return int
+     */
+    @Override
+    public int nIscritti(Torneo torneo) {
+        int nIscritti = tdao.doRetrieveNIscritti(torneo);
+        return nIscritti;
+    }
+
+    /**
      * This method inserts the tuples for the occupation of the pitch in all the days
      * in which the matches take place.
      * @param idCampo pitch identifier
