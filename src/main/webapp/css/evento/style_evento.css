@@ -99,6 +99,7 @@ body{
     width: 4rem;
     height: 4rem;
     border-radius: 50%;
+    margin-left: 20px;
 }
 
 .widget-49 .widget-49-title-wrapper .widget-49-date-primary .widget-49-date-day {
@@ -347,7 +348,8 @@ body{
 }
 
 .widget-49 .widget-49-meeting-action {
-    text-align: right;
+    text-align: center;
+    margin-bottom: 20px;
 }
 
 .widget-49 .widget-49-meeting-action a {
