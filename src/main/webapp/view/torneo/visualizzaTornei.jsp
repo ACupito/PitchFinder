@@ -21,21 +21,27 @@
     <link href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic" rel="stylesheet" type="text/css" />
     <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700" rel="stylesheet" type="text/css" />
     <!-- Core theme CSS (includes Bootstrap)-->
-    <link href="../../css/navbar/style_navbar.css" rel="stylesheet" type="text/css"/>
-    
+    <link href="css/navbar/style_navbar.css" rel="stylesheet" type="text/css"/>
+
 </head>
 
 <body>
 <!-- NAVIGATION -->
 <%@include file="../navbar/navbar.jsp"%>
-<p>POASOSDOOSDPASODOPSAPODSAOPDPPSADPISADNKPJAShd fuvfiyoinoudyi8eyhrnve</p>
+<ul>
+<c:forEach items="${tornei}" var="torneo">
+
+        <li>${torneo.nome}</li>
+
+</c:forEach>
+</ul>
 <!-- Bootstrap core JS-->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"></script>
 <!-- Third party plugin JS-->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
 <!-- Core theme JS-->
-<script src="../../js/homepage/js_homepage.js"></script>
+<script src="js/homepage/js_homepage.js"></script>
 
 
 
