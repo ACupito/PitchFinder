@@ -112,7 +112,7 @@ public class IscrizioneTorneoController extends HttpServlet {
 
             //controllo squadre iscritte al torneo
             TorneoService torneoService = new TorneoServiceImpl();
-            if (torneoService.nIscritti(torneo) >= torneo.getNumeroSquadre()){
+            if (torneoService.nIscritti(torneo) >= torneo.getNumeroSquadre()) {
                 throw new IllegalArgumentException("Non è possibile iscriversi, troppe squadre iscritte");
             }
 
