@@ -70,7 +70,7 @@ public class PrenotazioneEventoController extends HttpServlet {
                     req.getRequestDispatcher("/view/evento/prenotazioneEvento.jsp");
             dispatcher.forward(req, resp);
 
-        }else if(req.getParameter("Indietro")!=null){
+        } else if (req.getParameter("Indietro") != null) {
             RequestDispatcher dispatcher =
                     req.getRequestDispatcher("/view/evento/evento.jsp");
             dispatcher.forward(req, resp);

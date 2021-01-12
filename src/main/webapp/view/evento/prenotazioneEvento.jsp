@@ -124,11 +124,12 @@
 <!-- Core theme JS-->
 <script src="../../js/homepage/js_homepage.js"></script>
     <%String ok=(String) request.getAttribute("prenotazione");
-    if(ok!=null){request.setAttribute("prenotazione",null);
-        %>  <script>
-    alert("Prenotazione effettuata con successo!");
-</script>
-<%
-        }%>
+    if (ok != null) {
+        request.setAttribute("prenotazione",null);
+        %>
+        <script>
+            alert("Prenotazione effettuata con successo!");
+        </script>
+    <%}%>
 </body>
 </html>
