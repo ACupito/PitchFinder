@@ -5,12 +5,17 @@ import com.pitchfinder.autenticazione.entity.Utente;
 import com.pitchfinder.autenticazione.services.AutenticazioneService;
 import com.pitchfinder.autenticazione.services.AutenticazioneServiceImpl;
 
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.sql.Date;
 
 
+@WebServlet("/autentication")
 public class AutenticazioneController extends HttpServlet {
 
     /**
@@ -37,7 +42,7 @@ public class AutenticazioneController extends HttpServlet {
      */
 
     public void doPost(HttpServletRequest request,
-                       HttpServletResponse response) {
+                       HttpServletResponse response) throws ServletException, IOException{
 
         doGet(request, response);
     }
@@ -47,10 +52,22 @@ public class AutenticazioneController extends HttpServlet {
      * @param request is the servlet request
      * @param response is the servlet response
      */
-    public void doGet(HttpServletRequest request, HttpServletResponse response) {
+    public void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+
+        RequestDispatcher dispatcher;
+
         AutenticazioneService as = new AutenticazioneServiceImpl();
 
+        String messaggio = "";
         int flag = Integer.parseInt(request.getParameter("flag"));
+
+        if (flag == -1) {
+
+            dispatcher = getServletContext().getRequestDispatcher("/view/autenticazione/registrazione.jsp");
+            dispatcher.forward(request, response);
+        }
+
 
         if (flag == 1) {
             String email = request.getParameter("email");
@@ -61,115 +78,149 @@ public class AutenticazioneController extends HttpServlet {
             String strData = request.getParameter("data");
 
             if (email.length() < MINLIMIT || email.length() > MAXLIMIT) {
-                throw new IllegalArgumentException("La registrazione "
-                        + "non va a buon fine perché l’email inserita non "
-                        + "rispetta la lunghezza corretta");
+                messaggio = "La registrazione non va a buon fine perchè l'email inserita " +
+                        "non rispetta la lunghezza corretta";
+                throw new IllegalArgumentException(messaggio);
             }
+
             if (!email.matches("^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]"
                     + "{0,61}[a-zA-Z0-9])?(?:\\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$")) {
-                throw new IllegalArgumentException("La registrazione non va a buon "
+                messaggio = "La registrazione non va a buon "
                         + "fine perché l’email inserita "
-                        + "non rispetta il formato richiesto");
+                        + "non rispetta il formato richiesto";
+                throw new IllegalArgumentException(messaggio);
             }
+
             if (username.length() < MINLIMIT || username.length() > MAXLIMIT) {
-                throw new IllegalArgumentException("La registrazione "
+                messaggio = "La registrazione "
                         + "non va a buon fine perché la username non "
-                        + "rispetta la lunghezza corretta");
+                        + "rispetta la lunghezza corretta";
+                throw new IllegalArgumentException(messaggio);
             }
-            if (!username.matches("(?!^[0-9]*$)(?!^[a-zA-Z]*$)^([a-zA-Z0-9]{6,15})$")
-                    || username.matches("@[A-Za-z]+")) {
-                throw new IllegalArgumentException("La registrazione non va a buon "
+
+            if (!username.matches("^((?!.*[\\s])(?=.*[A-Z])(?=.*\\d).{1,50})")
+                    || username.substring(0, 5).equalsIgnoreCase("admin")) {
+                messaggio = "La registrazione non va a buon "
                         + "fine perché la username inserita "
-                        + "non rispetta il formato richiesto");
+                        + "non rispetta il formato richiesto";
+                throw new IllegalArgumentException(messaggio);
             }
+
             if (nome.length() < MINLIMIT || nome.length() > MAXLIMIT) {
-                throw new IllegalArgumentException("La registrazione "
+                messaggio = "La registrazione "
                         + "non va a buon fine "
                         + "perché il nome inserito non "
-                        + "rispetta la lunghezza corretta");
+                        + "rispetta la lunghezza corretta";
+                throw new IllegalArgumentException(messaggio);
             }
+
             if (!nome.matches("^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$")) {
-                throw new IllegalArgumentException("La registrazione non va a "
+                messaggio = "La registrazione non va a "
                         + "buon fine perché il nome inserito non "
-                        + "rispetta il formato richiesto");
+                        + "rispetta il formato richiesto";
+                throw new IllegalArgumentException(messaggio);
             }
+
             if (cognome.length() < MINLIMIT || cognome.length() > MAXLIMIT) {
-                throw new IllegalArgumentException("La registrazione non "
+                messaggio = "La registrazione non "
                         + "va a buon fine perché il cognome "
                         + "inserito non rispetta "
-                        + "la lunghezza corretta");
+                        + "la lunghezza corretta";
+                throw new IllegalArgumentException(messaggio);
             }
+
             if (!cognome.matches("^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$")) {
-                throw new IllegalArgumentException("La registrazione non va a "
+                messaggio = "La registrazione non va a "
                         + "buon fine perché il cognome inserito "
-                        + "non rispetta il formato richiesto");
+                        + "non rispetta il formato richiesto";
+                throw new IllegalArgumentException(messaggio);
             }
+
             if (password.length() < MINLIMIT || password.length() > MAXLIMIT) {
-                throw new IllegalArgumentException("La registrazione "
+                messaggio = "La registrazione "
                         + "non va a buon fine perché la password "
                         + "inserita non rispetta la "
-                        + "lunghezza corretta");
+                        + "lunghezza corretta";
+                throw new IllegalArgumentException(messaggio);
             }
-            if (!password.matches("(?!^[0-9]*$)(?!^[a-zA-Z]*$)^([a-zA-Z0-9]{6,15})$")) {
-                throw new IllegalArgumentException("La registrazione non "
+
+            if (!password.matches("^((?!.*[\\s])(?=.*[A-Z])(?=.*\\d).{1,50})")) {
+                messaggio = "La registrazione non "
                         + "va a buon fine perché la password inserita"
-                        + " non rispetta il formato richiesto");
+                        + " non rispetta il formato richiesto";
+                throw new IllegalArgumentException(messaggio);
             }
+
             if (strData == null) {
-                throw new IllegalArgumentException("La registrazione "
+                messaggio = "La registrazione "
                         + "non va a buon fine perché "
-                        + "la data di nascita non è stata selezionata");
+                        + "la data di nascita non è stata selezionata";
+                throw new IllegalArgumentException(messaggio);
             }
 
             Date data;
+
             try {
                 data = Date.valueOf(strData);
             } catch (IllegalArgumentException e) {
-                throw new IllegalArgumentException("La registrazione non va a buon fine "
+                messaggio = "La registrazione non va a buon fine "
                         + "perché la data di nascita "
-                        + "non rispetta il formato richiesto");
+                        + "non rispetta il formato richiesto";
+                throw new IllegalArgumentException(messaggio);
             }
 
             boolean reg = as.registraUtente(email, username, nome, cognome, password, data);
             if (reg) {
+
                 response.setContentType("La registrazione è avvenuta correttamente");
+                request.setAttribute("messaggio", messaggio);
+                dispatcher = request.getServletContext().getRequestDispatcher("/view/autenticazione/avvenutaRegistrazione.jsp");
+                dispatcher.forward(request, response);
             }
 
         } else if (flag == 2) {
+
+            System.out.println("Sei nel login");
+
             String username = request.getParameter("username");
             String password = request.getParameter("password");
 
             if (username.length() < MINLIMIT || username.length() > MAXLIMIT) {
-                throw new IllegalArgumentException("Il login non va a buon fine "
+                messaggio = "Il login non va a buon fine "
                         + "perché la username non rispetta la "
-                        + "lunghezza corretta");
+                        + "lunghezza corretta";
+                throw new IllegalArgumentException(messaggio);
             }
 
-            if (!username.matches("(?!^[0-9]*$)(?!^[a-zA-Z]*$)^([a-zA-Z0-9]{6,15})$")) {
-                throw new IllegalArgumentException("Il login non va a buon fine "
-                        + "perché il formato della username non è corretto");
+            if (!username.matches("(?!^[0-9]*$)(?!^[a-zA-Z]*$)^([a-zA-Z0-9]{1,50})$")) {
+                messaggio = "Il login non va a buon fine "
+                        + "perché il formato della username non è corretto";
+                throw new IllegalArgumentException(messaggio);
             }
 
-            if (password.length() < MINLIMIT || password.length() > MAXLIMIT) {
-                throw new IllegalArgumentException("La registrazione "
-                        + "non va a buon fine perché la password "
-                        + "inserita non rispetta la "
-                        + "lunghezza corretta");
-            }
+            if (username.substring(0, 5).equalsIgnoreCase("admin")) {
 
-            if (!password.matches("(?!^[0-9]*$)(?!^[a-zA-Z]*$)^([a-zA-Z0-9]{6,15})$")) {
-                throw new IllegalArgumentException("La registrazione non "
-                        + "va a buon fine perché la password inserita"
-                        + " non rispetta il formato richiesto");
-            }
-
-            if (username.matches("@[A-Za-z]+")) {
                 Admin a = as.loginAdmin(username, password);
 
+                if (a != null) {
+                    request.setAttribute("admin", a);
+                    dispatcher = getServletContext().getRequestDispatcher("/view/autenticazione/admin.jsp");
+                    dispatcher.forward(request, response);
+                }
+
             } else {
+
+                System.out.println("Sei nel login utente");
+
                 Utente u = as.loginUtente(username, password);
                 if (u != null) {
+
+                    System.out.println("Sei entrato");
+
                     response.setContentType("Il login è avvenuto correttamente");
+                    request.setAttribute("utente", u);
+                    dispatcher = request.getServletContext().getRequestDispatcher("/view/autenticazione/utente.jsp");
+                    dispatcher.forward(request, response);
                 }
             }
         }
