@@ -12,7 +12,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.Date;
-import java.util.ArrayList;
 
 @WebServlet("/EventoDetailsController")
 public class EventoDetailsController extends HttpServlet {
@@ -39,8 +38,8 @@ public class EventoDetailsController extends HttpServlet {
         EventoService service = new EventoServiceImpl();
         String nome = request.getParameter("eventName");
         Date data = Date.valueOf(request.getParameter("eventDate"));
-        evento = service.getEvento(nome,data);
-        request.setAttribute("eventoDetails",evento);
+        evento = service.getEvento(nome, data);
+        request.setAttribute("eventoDetails", evento);
         RequestDispatcher dispatcher =
                 request.getRequestDispatcher("/view/evento/eventoDetails.jsp");
         dispatcher.forward(request, response);
