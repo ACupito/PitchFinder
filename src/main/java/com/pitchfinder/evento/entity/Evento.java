@@ -142,19 +142,19 @@ public class Evento {
      */
     public String getStringDay(int day) {
         switch (day) {
-            case 0:
-                return "Lun";
             case 1:
-                return "Mar";
+                return "Lun";
             case 2:
-                return "Mer";
+                return "Mar";
             case 3:
-                return "Gio";
+                return "Mer";
             case 4:
-                return "Ven";
+                return "Gio";
             case 5:
-                return "Sab";
+                return "Ven";
             case 6:
+                return "Sab";
+            case 7:
                 return "Dom";
             default:
                 return "";
