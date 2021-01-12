@@ -15,7 +15,6 @@ function maxDate(){
     var mm = String(currentDate.getMonth() + 1).padStart(2, '0'); //January is 0!
     var yyyy = currentDate.getFullYear();
     currentDate = yyyy + '-' + mm + '-' + dd;
-    alert(currentDate);
 
     var maxDate = new Date(currentDate.getFullYear()+1,currentDate.getMonth(),currentDate.getDate());
     $('#creation-data').attr("max",maxDate);
