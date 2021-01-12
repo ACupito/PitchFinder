@@ -55,4 +55,10 @@ public interface TorneoDAO {
      */
     Torneo doRetrieveTorneo(String nome, Date dataInizio, int idCampo);
 
+    /**
+     * Number of teams registered in the tournament.
+     * @param torneo - Torneo.
+     * @return int
+     */
+    int doRetrieveNIscritti(Torneo torneo);
 }
