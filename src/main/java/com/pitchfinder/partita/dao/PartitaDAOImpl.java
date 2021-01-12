@@ -129,7 +129,7 @@ public class PartitaDAOImpl implements PartitaDAO {
     }
 
     /**
-     * This method delete a match.
+     * This method delete all matches in the range.
      * @param idCampo idCampo
      * @param data data
      * @param start start
