@@ -23,6 +23,8 @@
     <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700" rel="stylesheet" type="text/css" />
     <!-- Core theme CSS (includes Bootstrap)-->
     <link href="./css/homepage/style_homepage.css" rel="stylesheet" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script language="JavaScript" type="text/javascript" src="./js/partita/js_matchCreation.js"></script>
 </head>
 <body id="page-top">
 <!-- Navigation-->
@@ -35,8 +37,23 @@
     </div>
 </header>
 <section class="page-section" id="match-section">
-    <form>
-
+    <form action="Creation-Servlet" method="post" id="form-creation" onsubmit="return validateForm()">
+        <fieldset>
+            <legend> Creazione Partita </legend>
+            <input type="hidden" class="code" name="idCampo" value="1002">
+            <label for="creation-data">Data partita:</label>
+            <input type="date" id="creation-data" name="date" required onblur="validateDate()"><br>
+            <label for="creation-timestr">Oario Inizio:</label>
+            <input type="time" id="creation-timestr" name="start" min="09:00" max="23:00" required onblur="validateStart()"><br>
+            <label for="creation-timeend">Oario Fine:</label>
+            <input type="time" id="creation-timeend" name="end" min="09:00" max="23:00" required onblur="validateEnd()"><br>
+            <label for="creation-player">Numero giocatori:</label>
+            <input type="number" id="creation-player" name="maxGiocatori" min="1" max="3" value="1" required onblur="validateNPlayer()"><br>
+            <label for="nome">Nome:</label>
+            <input type="text" id="nome" name="nameG1" required onkeyup="validateName()" >
+            <label for="cognome"> Cognome: </label>
+            <input type="text" id="cognome" name="surnameG1" required onkeyup="validateSurname()" ><br>
+        </fieldset>
     </form>
 </section>
 </body>
