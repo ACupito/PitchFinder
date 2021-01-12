@@ -6,6 +6,7 @@ import com.pitchfinder.partita.services.PartitaService;
 import com.pitchfinder.partita.services.PartitaServiceImpl;
 
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -16,6 +17,7 @@ import java.sql.Time;
 import java.util.ArrayList;
 import java.util.List;
 
+@WebServlet("/Creation-Servlet")
 public class CreazionePartitaController extends HttpServlet {
     /**
      *  doPost method.
