@@ -18,7 +18,7 @@ public class PartitaServlet extends HttpServlet {
      * @throws IOException
      */
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        this.doGet(req,resp);
+        this.doGet(req, resp);
     }
 
     /**
