@@ -1266,12 +1266,17 @@ input[type=button].btn-block {
 .dropdown#dropdownMenu1:hover {
     background-color: white;
 }
+@media (min-width: 50px) {
+    #mainNav {
+        background-color: #212529;
+    }
+}
 @media (min-width: 992px) {
     #mainNav {
         padding-top: 1.5rem;
         padding-bottom: 1.5rem;
         border: none;
-        background-color: transparent;
+        background-color: #212529;
         transition: padding-top 0.3s ease-in-out, padding-bottom 0.3s ease-in-out;
     }
     #mainNav .navbar-brand {
