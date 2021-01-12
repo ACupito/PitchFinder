@@ -64,4 +64,11 @@ public interface TorneoService {
      * @return Torneo item
      */
     Torneo getTorneo(String nome, Date dataInizio, int idCampo);
+
+    /**
+     * Number of teams registered in the tournament.
+     * @param torneo - torneo.
+     * @return int
+     */
+    int nIscritti(Torneo torneo);
 }
