@@ -12,21 +12,22 @@
                     <button type="button" id="dropdownMenu1" data-toggle="dropdown" class="btn nav-link">LOGIN<span class="caret"></span></button>
                     <ul class="dropdown-menu dropdown-menu-right mt-2">
                         <li class="px-3 py-2">
-                            <form class="form" role="form">
+                            <form class="form" role="form" action="autentication" method="post">
+                                <input type="hidden" value="2" name="flag">
                                 <div class="form-group">
-                                    <input id="emailInput" placeholder="Email" class="form-control form-control-sm" type="text" required="">
+                                    <input id="username" placeholder="Username" class="form-control form-control-sm" type="text" name="username">
                                 </div>
                                 <div class="form-group">
-                                    <input id="passwordInput" placeholder="Password" class="form-control form-control-sm" type="text" required="">
+                                    <input id="password" placeholder="Password" class="form-control form-control-sm" type="text" name="password">
                                 </div>
                                 <div class="form-group">
                                     <button type="submit" class="btn btn-primary btn-block">Login</button>
                                 </div>
+                            </form>
+                            <form action="autentication" method="get">
                                 <div class="form-group">
+                                    <input type="hidden" value="-1" name="flag">
                                     <button type="submit" class="btn btn-primary btn-block">Registrazione</button>
-                                </div>
-                                <div class="form-group text-center">
-                                    <small><a href="#" data-toggle="modal" data-target="#modalPassword">Password dimenticata?</a></small>
                                 </div>
                             </form>
                         </li>
