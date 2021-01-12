@@ -64,11 +64,14 @@ public class PrenotazioneEventoController extends HttpServlet {
             req.setAttribute("evento", evento);
             //Se la prenotazione va a buon fine setto questo attributo che mi servirà per creare l'alert nella jsp
             req.setAttribute("prenotazione", "ok");
-            resp.setContentType("La prenotazione all’evento va a buon fine.");
 
+            resp.setContentType("La prenotazione all’evento va a buon fine.");
+            System.out.println("ciao");
             RequestDispatcher dispatcher =
                     req.getRequestDispatcher("/view/evento/prenotazioneEvento.jsp");
             dispatcher.forward(req, resp);
+
+
 
         } else if (req.getParameter("Indietro") != null) {
             RequestDispatcher dispatcher =
