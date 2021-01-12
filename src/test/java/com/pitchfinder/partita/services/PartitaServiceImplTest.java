@@ -113,14 +113,6 @@ class PartitaServiceImplTest {
     }
 
     /**
-     * method used for the testing of showGiocatori
-     */
-    @Test
-    void showGiocatoriTest(){
-        assertNotNull(serviceTest.showGiocatori(pTest));
-    }
-
-    /**
      * method used for the testing of createGiocatorePartita
      */
     @Test
