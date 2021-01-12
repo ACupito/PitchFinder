@@ -36,6 +36,19 @@ public class PartitaServiceImpl implements PartitaService {
     }
 
     /**
+     * This method is used to show all the matches.
+     *
+     * @return List<Partita>
+     */
+    @Override
+    public List<Partita> showPartite() {
+        PartitaDAO dao = new PartitaDAOImpl();
+        List<Partita> partite = dao.doRetrieveAll();
+        return partite;
+    }
+
+
+    /**
      * This method is used to view the players participating in a match.
      * @param partita Partita
      * @return List<String>

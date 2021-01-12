@@ -1,8 +1,17 @@
 package com.pitchfinder.torneo.services;
 
+import com.pitchfinder.autenticazione.dao.UtenteDAO;
+import com.pitchfinder.autenticazione.dao.UtenteDAOImpl;
+import com.pitchfinder.autenticazione.entity.Utente;
 import com.pitchfinder.partita.dao.PartitaDAO;
 import com.pitchfinder.partita.dao.PartitaDAOImpl;
 import com.pitchfinder.partita.entity.Partita;
+import com.pitchfinder.squadra.dao.SquadraDAO;
+import com.pitchfinder.squadra.dao.SquadraDAOImpl;
+import com.pitchfinder.squadra.entity.Squadra;
+import com.pitchfinder.torneo.dao.TorneoDAO;
+import com.pitchfinder.torneo.dao.TorneoDAOImpl;
+import com.pitchfinder.torneo.entity.Torneo;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -39,12 +48,26 @@ class TorneoServiceImplTest {
     private static final String DATA_INIZIO = "2020-12-24";
     private static final String DATA_FINE = "2020-12-31";
 
+    private SquadraDAO sdao;
+    private Squadra s;
+    private Squadra s1;
+    private UtenteDAO udao;
+    private TorneoDAO tdao;
+    private Utente u;
+    private Torneo t;
     /**
      * This method setup the enviroment.
      */
     @BeforeAll
     public void setUp() {
         tservice = new TorneoServiceImpl();
+        sdao = new SquadraDAOImpl();
+        udao = new UtenteDAOImpl();
+        tdao = new TorneoDAOImpl();
+        t = new Torneo("torneo","gironi", "dt", "lunedi", "memex99", 10, 5,12, Date.valueOf("2020-12-11"),Date.valueOf("2021-10-12"), 1002);
+        tdao.doSaveTorneo(t);
+        u = new Utente("we@gmail.com", "test", "test", "test", "tr", Date.valueOf("2020-10-12"));
+        udao.doSaveUtente(u);
     }
 
     /**
@@ -221,6 +244,17 @@ class TorneoServiceImplTest {
 
     }
 
+    @Test
+    void nIscritti() {
+
+        s = new Squadra("juve", t.getNome(), t.getDataInizio(), t.getCampoIdentificativo(),2,"lucia","we@gmail.com");
+        sdao.doSaveSquadra(s);
+        s1 = new Squadra("ve", t.getNome(), t.getDataInizio(), t.getCampoIdentificativo(),2,"lucia","we@gmail.com");
+        sdao.doSaveSquadra(s1);
+        assertEquals(2,tservice.nIscritti(t));
+
+    }
+
     /**
      * Cleanup the environment.
      */
@@ -236,6 +270,12 @@ class TorneoServiceImplTest {
         tservice.deleteTorneo(ID_CAMPO, NOME, dataInizio, dataFine, "Domenica");
 
         tservice = null;
+
+        sdao.doRemoveSquadra(s);
+        sdao.doRemoveSquadra(s1);
+        udao.doRemoveUtente(u);
+        tdao.doRemoveTorneo(t);
+
 
     }
 
