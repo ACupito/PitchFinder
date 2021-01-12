@@ -42,7 +42,7 @@ public class AutenticazioneController extends HttpServlet {
      */
 
     public void doPost(HttpServletRequest request,
-                       HttpServletResponse response) throws ServletException, IOException{
+                       HttpServletResponse response) throws ServletException, IOException {
 
         doGet(request, response);
     }
@@ -71,15 +71,15 @@ public class AutenticazioneController extends HttpServlet {
 
         if (flag == 1) {
             String email = request.getParameter("email");
-            String username = request.getParameter("username");
+            String username = request.getParameter("username_");
             String nome = request.getParameter("nome");
             String cognome = request.getParameter("cognome");
-            String password = request.getParameter("password");
+            String password = request.getParameter("password_");
             String strData = request.getParameter("data");
 
             if (email.length() < MINLIMIT || email.length() > MAXLIMIT) {
-                messaggio = "La registrazione non va a buon fine perchè l'email inserita " +
-                        "non rispetta la lunghezza corretta";
+                messaggio = "La registrazione non va a buon fine perchè l'email inserita "
+                        + "non rispetta la lunghezza corretta";
                 throw new IllegalArgumentException(messaggio);
             }
 
@@ -192,7 +192,7 @@ public class AutenticazioneController extends HttpServlet {
                 throw new IllegalArgumentException(messaggio);
             }
 
-            if (!username.matches("(?!^[0-9]*$)(?!^[a-zA-Z]*$)^([a-zA-Z0-9]{1,50})$")) {
+            if (!username.matches("^((?!.*[\\s])(?=.*[A-Z])(?=.*\\d).{1,50})")) {
                 messaggio = "Il login non va a buon fine "
                         + "perché il formato della username non è corretto";
                 throw new IllegalArgumentException(messaggio);
