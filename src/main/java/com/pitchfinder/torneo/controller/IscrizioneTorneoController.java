@@ -5,6 +5,8 @@ import com.pitchfinder.squadra.entity.Squadra;
 import com.pitchfinder.squadra.services.SquadraService;
 import com.pitchfinder.squadra.services.SquadraServiceImpl;
 import com.pitchfinder.torneo.entity.Torneo;
+import com.pitchfinder.torneo.services.TorneoService;
+import com.pitchfinder.torneo.services.TorneoServiceImpl;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -57,7 +59,7 @@ public class IscrizioneTorneoController extends HttpServlet {
             }
 
             //Check utente
-            if (utente == null){
+            if (utente == null) {
                 throw new IllegalArgumentException("Utente non valido");
             }
 
@@ -106,6 +108,12 @@ public class IscrizioneTorneoController extends HttpServlet {
 
             if (!nomeCapitano.matches("^[a-zA-Z_ ]*$")) {
                 throw new IllegalArgumentException("Formato nome capitano non valido");
+            }
+
+            //controllo squadre iscritte al torneo
+            TorneoService torneoService = new TorneoServiceImpl();
+            if (torneoService.nIscritti(torneo) >= torneo.getNumeroSquadre()){
+                throw new IllegalArgumentException("Non è possibile iscriversi, troppe squadre iscritte");
             }
 
             //capitano

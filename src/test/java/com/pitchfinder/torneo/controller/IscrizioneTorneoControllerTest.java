@@ -3,6 +3,9 @@ package com.pitchfinder.torneo.controller;
 import com.pitchfinder.autenticazione.dao.UtenteDAO;
 import com.pitchfinder.autenticazione.dao.UtenteDAOImpl;
 import com.pitchfinder.autenticazione.entity.Utente;
+import com.pitchfinder.squadra.dao.SquadraDAO;
+import com.pitchfinder.squadra.dao.SquadraDAOImpl;
+import com.pitchfinder.squadra.entity.Squadra;
 import com.pitchfinder.torneo.dao.TorneoDAO;
 import com.pitchfinder.torneo.dao.TorneoDAOImpl;
 import com.pitchfinder.torneo.entity.Torneo;
@@ -31,8 +34,11 @@ public class IscrizioneTorneoControllerTest {
     private HttpSession session;
     private Utente utente;
     private Torneo torneo;
+    private Squadra s;
+    private Squadra s1;
     private TorneoDAO torneoDAO = new TorneoDAOImpl();
     private UtenteDAO utenteDAO = new UtenteDAOImpl();
+    private SquadraDAO squadraDAO = new SquadraDAOImpl();
 
     @BeforeAll
     public void start(){
@@ -48,6 +54,12 @@ public class IscrizioneTorneoControllerTest {
         //Create User
         utente = new Utente("manuzzi97@gmail.com","memex97","Emanuele","Mezzi","ciao",Date.valueOf("1998-12-10"));
         utenteDAO.doSaveUtente(utente);
+
+        //Create teams
+        s = new Squadra("juve", torneo.getNome(), torneo.getDataInizio(), torneo.getCampoIdentificativo(),2,"lucia",utente.getEmail());
+        squadraDAO.doSaveSquadra(s);
+        s1 = new Squadra("ve", torneo.getNome(), torneo.getDataInizio(), torneo.getCampoIdentificativo(),2,"lucia", utente.getEmail());
+        squadraDAO.doSaveSquadra(s1);
 
         Mockito.doReturn(session).when(mockedRequest).getSession();
         Mockito.doReturn(torneo).when(session).getAttribute("torneo");
@@ -584,6 +596,7 @@ public class IscrizioneTorneoControllerTest {
         Mockito.doReturn(torneo).when(session).getAttribute("torneo");
     }
 
+
     @AfterAll
     public void clean(){
         servlet = null;
@@ -591,9 +604,13 @@ public class IscrizioneTorneoControllerTest {
         mockedResponse = null;
         session = null;
 
-        //remove evento
+        //remove torneo
         torneoDAO.doRemoveTorneo(torneo);
+        //remove utente
         utenteDAO.doRemoveUtente(utente);
+        //remove squadre
+        squadraDAO.doRemoveSquadra(s);
+        squadraDAO.doRemoveSquadra(s1);
 
 
     }

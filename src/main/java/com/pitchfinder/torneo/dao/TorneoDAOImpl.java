@@ -19,9 +19,9 @@ import java.util.List;
 public class TorneoDAOImpl implements TorneoDAO {
 
     /**
-     *
      * This method makes the Torneo object persist
      * in the database.
+     *
      * @param torneo object
      * @return boolean -> true: execute success / false: execute failed
      */
@@ -55,6 +55,7 @@ public class TorneoDAOImpl implements TorneoDAO {
     /**
      * This method remove Torneo object
      * from database.
+     *
      * @param torneo object
      * @return boolean -> true: execute success / false: execute failed
      */
@@ -76,6 +77,7 @@ public class TorneoDAOImpl implements TorneoDAO {
     /**
      * This method allows to get all the tournaments
      * from the database.
+     *
      * @return A List of Torneo items.
      */
     public List<Torneo> doRetrieveAllTornei() {
@@ -113,9 +115,10 @@ public class TorneoDAOImpl implements TorneoDAO {
 
     /**
      * This mehod allows to check if other tournaments have been scheduled in the same period.
+     *
      * @param dataInizio start data of the tournament
-     * @param dataFine end data of the tournament
-     * @param idCampo pitch identifier
+     * @param dataFine   end data of the tournament
+     * @param idCampo    pitch identifier
      * @return boolean : true -> there are other tournaments / false -> empty at the time
      */
     public boolean doCheckTorneo(Date dataInizio, Date dataFine, int idCampo) {
@@ -144,16 +147,17 @@ public class TorneoDAOImpl implements TorneoDAO {
     /**
      * This method allows to get a tournament
      * from the database.
-     * @param nome name of the tournament
+     *
+     * @param nome       name of the tournament
      * @param dataInizio start date of the tournament
-     * @param idCampo end date of the tournament
+     * @param idCampo    end date of the tournament
      * @return Torneo item
      */
     public Torneo doRetrieveTorneo(String nome, Date dataInizio, int idCampo) {
 
         try (Connection con = ConPool.getConnection()) {
             PreparedStatement ps = con.prepareStatement("select * from torneo "
-            + "where Nome = ? and DataInizio = ? and CampoIdentificativo = ?");
+                    + "where Nome = ? and DataInizio = ? and CampoIdentificativo = ?");
 
             ps.setString(1, nome);
             ps.setDate(2, dataInizio);
@@ -188,5 +192,31 @@ public class TorneoDAOImpl implements TorneoDAO {
 
     }
 
+    /**
+     * doRetrieveNIscritti.
+     * @param torneo - Torneo.
+     * @return int
+     */
+    @Override
+    public int doRetrieveNIscritti(Torneo torneo) {
+        try (Connection con = ConPool.getConnection()) {
+            PreparedStatement ps = con.prepareStatement("select count(Nome) from squadra "
+                    + "where TorneoNome = ? and TorneoDataInizio = ? and TorneoCampoIdentificativo = ?");
+            ps.setString(1, torneo.getNome());
+            ps.setDate(2, torneo.getDataInizio());
+            ps.setInt(3, torneo.getCampoIdentificativo());
+
+            ResultSet rs = ps.executeQuery();
+            int n = 0;
+            if (rs.next()) {
+                n = rs.getInt(1);
+            }
+
+            return n;
+
+        } catch (SQLException throwables) {
+            return 0;
+        }
+    }
 
 }
