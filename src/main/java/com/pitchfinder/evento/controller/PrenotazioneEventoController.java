@@ -66,7 +66,6 @@ public class PrenotazioneEventoController extends HttpServlet {
             req.setAttribute("prenotazione", "ok");
 
             resp.setContentType("La prenotazione all’evento va a buon fine.");
-            System.out.println("ciao");
             RequestDispatcher dispatcher =
                     req.getRequestDispatcher("/view/evento/prenotazioneEvento.jsp");
             dispatcher.forward(req, resp);
