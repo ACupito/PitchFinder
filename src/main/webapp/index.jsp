@@ -21,10 +21,30 @@
 <!-- Navigation-->
 <%@ include file="view/navbar/navbar.jsp"%>
 <!-- Masthead-->
-<header class="masthead">
-    <div class="container">
-        <div class="masthead-subheading">Benvenuto!</div>
-        <div class="masthead-heading text-uppercase">It's Nice To Meet You</div>
+<header class="mastheadCarousel">
+    <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <img class="d-block w-100" src="images/homepage/homeTennis.jpg" alt="First slide">
+            </div>
+            <div class="carousel-item">
+                <img class="d-block w-100" src="images/homepage/basketHome.jpg" alt="Second slide">
+            </div>
+            <div class="carousel-item">
+                <img class="d-block w-100" src="images/homepage/calcioHome.jpg" alt="Third slide">
+            </div>
+            <div class="carousel-item">
+                <img class="d-block w-100" src="images/homepage/pallavoloHome.jpg" alt="Third slide">
+            </div>
+        </div>
+        <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+        </a>
+        <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+        </a>
     </div>
 </header>
 <!-- Services-->
@@ -37,8 +57,13 @@
         <div class="row text-center">
             <div class="col-md-4">
                         <span class="fa-stack fa-4x">
+                            <form action="torneoServlet" method="get">
+                            <button>
+                                <input type="hidden" name="flag" value="3">
                             <i class="fas fa-circle fa-stack-2x text-primary"></i>
                             <i class="fas fa-trophy fa-stack-1x fa-inverse"></i>
+                                </button>
+                            </form>
                         </span>
                 <h4 class="my-3">Tornei</h4>
                 <p class="text-muted">Visaulizzare i tornei organizzati dalla Polisportiva con possibilità di iscriversi.</p>
