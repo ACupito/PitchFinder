@@ -21,6 +21,17 @@
     <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700" rel="stylesheet" type="text/css" />
     <!-- Core theme CSS (includes Bootstrap)-->
     <link href="css/homepage/style_homepage.css" rel="stylesheet" />
+    <style>
+        input[type=button], input[type=submit], input[type=reset] {
+            background-color: #4CAF50;
+            border: none;
+            color: white;
+            padding: 16px 32px;
+            text-decoration: none;
+            margin: 4px 2px;
+            cursor: pointer;
+        }
+    </style>
 </head>
 <body id="page-top">
 <!-- Navigation-->
@@ -41,20 +52,45 @@
                 if(evento.getName() != null ){ %>
 
             <div class="col-md-4">
-                                <span class="fa-stack fa-4x">
-                                    <i class="fas fa-circle fa-stack-2x text-primary"></i>
-                                    <i class="fas fa-users fa-stack-1x fa-inverse"></i>
-                                </span>
-                <p class="text-muted"><%= evento.getName()%></p>
-                <p class="text-muted"><%= evento.getDate()%></p>
-                <p class="text-muted"><%= evento.getAvailableSits()%></p>
-                <p class="text-muted"><%= evento.getAdmin()%></p>
-                <p class="text-muted"><%= evento.getDescription()%></p>
-                <p class="text-muted"><%= evento.getEndHour()%></p>
-                <p class="text-muted"><%= evento.getGuest()%></p>
-                <p class="text-muted"><%= evento.getStartHour()%></p>
-                <p class="text-muted"><%= evento.getImage()%></p>
 
+                <img style="border-radius: 50%;" width="128px" height="128px" src="<%= evento.getImage().replace("src/main/webapp/","")%>"/>
+
+            </div>
+            <div class="col-md-4">
+                <h2><%= evento.getName()%></h2>
+                <ul>
+                    <li>
+                        <strong>L'evento verrà svolto il giorno:</strong>
+                        <%= evento.getDate()%>
+                    </li>
+                    <li>
+                        <strong>Posti disponibili::</strong>
+                        <%= evento.getAvailableSits()%>
+                    </li>
+                    <li>
+                        <strong>Inizio:</strong>
+                        <%= evento.getStartHour()%>
+                    </li>
+                    <li>
+                        <strong>Fine:</strong>
+                        <%= evento.getEndHour()%>
+                    </li>
+                    <li>
+                        <strong>Il nostro ospite:</strong>
+                        <%= evento.getGuest()%>
+                    </li>
+                    <li>
+                        <strong>Descrizione:</strong>
+                        <%= evento.getDescription()%>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-md-4">
+                <form method="post" action="Prenotazione"> <!-- Prenotazione va sostituita con la servlet di Lucia -->
+                    <input type="hidden" class="eventDate" name="eventDate" value="<%=evento.getDate()%>">
+                    <input type="hidden" class="eventName" name="eventName" value="<%=evento.getName()%>">
+                    <input type="submit" class="eventDetailsButton" name="eventDetailsButton" value="Prenotati!">
+                </form>
             </div>
 
             <%}%>
