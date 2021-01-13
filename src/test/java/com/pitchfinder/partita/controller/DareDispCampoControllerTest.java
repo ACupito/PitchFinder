@@ -33,7 +33,7 @@ public class DareDispCampoControllerTest {
     private static final String ORARIO_INIZIO = "15:30";
     private static final String ORARIO_FINE = "16:30";
     private static final String DATA = "2021-11-15";
-    private static final String email = "manuzzi99@gmail.com";
+    private static final String email = "manuzzisadad99@gmail.com";
 
     @BeforeAll
     void start() {
