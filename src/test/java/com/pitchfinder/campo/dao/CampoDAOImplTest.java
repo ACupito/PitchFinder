@@ -31,7 +31,7 @@ public class CampoDAOImplTest {
     private static final String DATA = "2020-10-10";
     private static final String TEMPO_INIZIO = "10:00";
     private static final String TEMPO_FINE = "11:00";
-    private static final String EMAIL = "manuzzi99@gmail.com";
+    private static final String EMAIL = "manuzzi99ewqe@gmail.com";
 
     /**
      * This is an instance of Campo entity.
