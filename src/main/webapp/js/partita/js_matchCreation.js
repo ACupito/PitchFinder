@@ -204,24 +204,17 @@ function validateForm(){
     if(isDateValid && isTimeValid && isPlayerNumberValid && isNameValid && isSurnameValid){
         document.getElementById("creation-player").setAttribute("value",nPlayer+numberOfCheckedItems);
         var checkPlayer = document.getElementsByName("players");
-        var nplayerFInal = nPlayer+1;
-
+        var nplayerFInal = nPlayer;
         document.getElementById("creation-player").removeAttribute("disabled");
         document.getElementById("creation-player").value = parseInt(nPlayer) + parseInt(numberOfCheckedItems);
         if(nplayerFInal<3){
             for(var valor of checkPlayer.values()){
-                alert("sto nel for");
                 if(valor.checked){ //Updating textbox for players name & surname
-                    alert("sto nell'if");
-                    var nomiFinal;
-                        alert(valor.value);
-                        var splitted= valor.value.split(",");
-                        nomiFinal.push(splitted[0]);
-                        nomiFinal.push(splitted[1]);
-                    document.getElementById("nameG"+nplayerFInal).value = nomiFinal[0];
-                    document.getElementById("surnameG"+nplayerFInal).value = nomiFinal[1];
+                    nplayerFInal++;
+                    var splitted= valor.value.split(",");
+                    document.getElementById("nameG"+nplayerFInal).value = splitted[0];
+                    document.getElementById("surnameG"+nplayerFInal).value = splitted[1];
                 }
-                nplayerFInal++;
             }
         }
         return true;
@@ -266,6 +259,7 @@ function showAvailability(){
         inviare += "," +document.getElementById("creation-timestr").value;
         inviare += "," +document.getElementById("creation-timeend").value;
         validateTime();
+        validateNPlayer();
 
         if(isTimeValid && isDateValid){
             var xmlHttpReq = new XMLHttpRequest();
@@ -314,7 +308,7 @@ function showAvailability(){
             xmlHttpReq.send();
 
         }else{
-            alert(isTimeValid+""+isDateValid+"Inserire correttamente data e/o orari");
+            alert("Inserire correttamente data e/o orari");
         }
     }else{
         alert("Impossibile aggiungere altri giocatori");
