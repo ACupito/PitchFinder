@@ -1,7 +1,6 @@
 package com.pitchfinder.torneo.controller;
 
 import com.pitchfinder.autenticazione.entity.Admin;
-import com.pitchfinder.campo.entity.Campo;
 import com.pitchfinder.torneo.dao.TorneoDAO;
 import com.pitchfinder.torneo.dao.TorneoDAOImpl;
 import com.pitchfinder.torneo.entity.Torneo;
@@ -14,10 +13,14 @@ import org.junit.jupiter.api.TestInstance;
 import org.mockito.Mockito;
 
 
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletContext;
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import java.io.IOException;
 import java.sql.Date;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -33,7 +36,8 @@ class TorneoControllerTest {
     private HttpServletRequest mockedRequest;
     private HttpServletResponse mockedResponse;
     private HttpSession session;
-
+    private ServletContext mockedServletContext;
+    private RequestDispatcher mockedDispatcher;
 
     /**
      * Parameters declaration.
@@ -61,6 +65,8 @@ class TorneoControllerTest {
         mockedRequest = Mockito.mock(HttpServletRequest.class);
         mockedResponse = Mockito.mock(HttpServletResponse.class);
         session = Mockito.mock(HttpSession.class);
+        mockedServletContext = Mockito.mock(ServletContext.class);
+        mockedDispatcher = Mockito.mock(RequestDispatcher.class);
 
         //Admin creation for the session.
         Admin admin = new Admin();
@@ -69,15 +75,13 @@ class TorneoControllerTest {
         admin.setUsername("memex99");
         admin.setPassword("password");
 
-        //Campo creation for the session.
-        Campo campo = new Campo();
-        campo.setIdentificativo(ID_CAMPO);
-        campo.setSport(SPORT);
 
         //session setting.
         Mockito.when(mockedRequest.getSession()).thenReturn(session);
         Mockito.when(mockedRequest.getSession().getAttribute("admin")).thenReturn(admin);
-        Mockito.when(mockedRequest.getSession().getAttribute("campo")).thenReturn(campo);
+
+        //idCampo setting.
+        Mockito.when(mockedRequest.getParameter("idCampo")).thenReturn(String.valueOf(ID_CAMPO));
 
         //creation instance for tests remove tournament.
         Torneo t = new Torneo("Champions", TIPO, STRUTTURA, "Sabato", "memex99", Integer.parseInt(MAX_SQUADRE),
@@ -550,7 +554,7 @@ class TorneoControllerTest {
      * Test case: TC_21_18 -> Dati corretti - Creazione torneo avvenuta.
      */
     @Test
-    void TC_21_18() {
+    void TC_21_18() throws ServletException, IOException {
 
         Mockito.when(mockedRequest.getParameter("flag")).thenReturn("1");
 
@@ -574,12 +578,16 @@ class TorneoControllerTest {
      * This method tests the method for obtaining all tournaments.
      */
     @Test
-    void CheckTest_19() {
+    void CheckTest_19() throws ServletException, IOException {
 
         Mockito.when(mockedRequest.getParameter("flag")).thenReturn("3");
 
+        Mockito.doReturn(mockedServletContext).when(mockedRequest).getServletContext();
+        Mockito.doReturn(mockedDispatcher).when(mockedServletContext).getRequestDispatcher("/view/torneo/visualizzaTornei.jsp");
+
         servlet.doGet(mockedRequest, mockedResponse);
         Mockito.verify(mockedResponse).setContentType("Tornei ottenuti");
+
     }
 
     /**
@@ -662,7 +670,7 @@ class TorneoControllerTest {
      * This method tests the method of obtaining a tournament -> Corretto.
      */
     @Test
-    void CheckTest_24() {
+    void CheckTest_24() throws ServletException, IOException {
 
         Mockito.when(mockedRequest.getParameter("flag")).thenReturn("4");
 
@@ -848,7 +856,7 @@ class TorneoControllerTest {
      * This method tests the method for removing a tournament -> Corretto.
      */
     @Test
-    void CheckTest_33() {
+    void CheckTest_33() throws ServletException, IOException {
 
         Mockito.when(mockedRequest.getParameter("flag")).thenReturn("2");
 
