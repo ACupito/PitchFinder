@@ -21,7 +21,7 @@
                                     <input id="password" placeholder="Password" class="form-control form-control-sm" type="text" name="password">
                                 </div>
                                 <div class="form-group">
-                                    <button type="submit" class="btn btn-primary btn-block">Login</button>
+                                    <button type="submit" class="btn btn-primary btn-block" id="login" disabled>Login</button>
                                 </div>
                             </form>
                             <form action="autentication" method="get">
@@ -52,7 +52,6 @@
                     </ul>
                 </li>
             </ul>
-
         </div>
     </div>
 </nav>

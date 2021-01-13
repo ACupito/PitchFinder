@@ -354,6 +354,7 @@
 <script src="assets/mail/contact_me.js"></script>
 <!-- Core theme JS-->
 <script src="./js/homepage/js_homepage.js"></script>
+<script src="./js/homepage/check_login.js"></script>
 
 </body>
 </html>
