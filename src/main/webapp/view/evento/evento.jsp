@@ -1,5 +1,6 @@
 <%@ page import="com.pitchfinder.evento.entity.Evento" %>
 <%@ page import="java.util.ArrayList" %>
+<%@ page import="java.sql.Date" %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 <html>
@@ -48,6 +49,7 @@
 <div class="container">
     <div class="row">
         <%
+            Date current = new Date(System.currentTimeMillis());
             ArrayList<Evento> eventi= new ArrayList<Evento>();
             eventi = (ArrayList<Evento>) application.getAttribute("eventiContext");
             if(eventi.isEmpty()){ %>
@@ -60,7 +62,8 @@
         </div>
 
         <%}else{
-            for (Evento evento: eventi) {%>
+            for (Evento evento: eventi) {
+                if(current.before(evento.getDate())) {%>
 
             <div class="col-lg-4">
               <div class="card card-margin">
@@ -86,12 +89,12 @@
 
                         </div>
                         <ol class="widget-49-meeting-points">
-                            <li class="widget-49-meeting-item"><span><Strong>Posti Disponibili</Strong> - <%= evento.getAvailableSits()%></span></li>
+                            <li class="widget-49-meeting-item"><span><Strong>Posti Totali</Strong> - <%= evento.getAvailableSits()%></span></li>
                             <li class="widget-49-meeting-item"><span><strong>Il nostro ospite</strong> - <%= evento.getGuest()%></span></li>
                             <li class="widget-49-meeting-item"><span><strong>Descrizione:</strong> - <%= evento.getDescription()%></span></li>
                         </ol>
                         <div class="widget-49-meeting-action">
-                            <form method="post" action="Prenotazione"> <!-- Prenotazione va sostituita con la servlet di Lucia -->
+                            <form method="post" action="Prenotazione">
                                 <input type="hidden" class="eventDate" name="eventDate" value="<%=evento.getDate()%>">
                                 <input type="hidden" class="eventName" name="eventName" value="<%=evento.getName()%>">
                                 <input type="submit" class="btn btn-sm btn-flash-border-primary" name="eventDetailsButton" value="Prenotati!">
@@ -101,8 +104,9 @@
                 </div>
              </div>
             </div>
+             <%}%>
             <%}%>
-        <%}%>
+         <%}%>
     </div>
 </div>
 <!-- Footer-->
