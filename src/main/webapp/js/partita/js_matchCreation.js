@@ -248,6 +248,7 @@ function showAvailability(){
             alert(isTimeValid+""+isDateValid+"Inserire correttamente data e/o orari");
         }
     }else{
+        alert("Impossibile aggiungere altri giocatori");
         return;
     }
 }
