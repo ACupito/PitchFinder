@@ -72,6 +72,7 @@
                         </div>
                         <div class="widget-49-meeting-action">
                             <form action="torneoServlet" method="get">
+                                <input type="hidden" name="flag" value="4">
                                 <input type="hidden" name="idCampo" value="1002">
                                 <input type="hidden" name="nome" value="<%= t.getNome()%>">
                                 <input type="hidden" name="dataInizio" value="<%= t.getDataInizio()%>">
