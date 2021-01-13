@@ -193,13 +193,11 @@ function addPlayer(){
             if(checkboxes[i].checked)
                 numberOfCheckedItems++;
         }
-        if(numberOfCheckedItems > )
+        /*if(numberOfCheckedItems > )
         {
             alert("Impossibile selezionare altri");
             return false;
-        }
-    }
-
+        } */
 }
 
 function showAvailability(){
