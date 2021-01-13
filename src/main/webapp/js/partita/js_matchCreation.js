@@ -179,28 +179,68 @@ function validateForm(){
     if(isDateValid && isTimeValid && isPlayerNumberValid && isNameValid && isSurnameValid){
         return true;
     }else{
-        alert("Data:"+ isDateValid+"Time:"+isTimeValid+"PlayerN"+isPlayerNumberValid+"NOMI"+isNameValid+"COGNOMI"+isSurnameValid);
+        return false;
+    }
+}
+function addPlayer(){
+    var checkboxes = document.getElementsByName("players");
+    var numberOfCheckedItems = 0;
+    for(var i = 0; i < checkboxes.length; i++)
+    {
+        if(checkboxes[i].checked)
+            numberOfCheckedItems++;
+    }
+    if(numberOfCheckedItems > 2)
+    {
+        alert("You can't select more than two favorite pets!");
         return false;
     }
 }
 
 function showAvailability(){
-    var inviare = document.getElementById("creation-data");
-    inviare += "," +document.getElementById("creation-timestr");
-    inviare += "," +document.getElementById("creation-timeend");
+    var inviare = document.getElementById("creation-data").value;
+    inviare += "," +document.getElementById("creation-timestr").value;
+    inviare += "," +document.getElementById("creation-timeend").value;
+    validateTime();
+
     if(isTimeValid && isDateValid){
         var xmlHttpReq = new XMLHttpRequest();
-
+        var data;
+        var nomi;
+        var cognomi;
         xmlHttpReq.onreadystatechange = function() {
             if (this.readyState == 4 && this.status == 200) {
-                alert("ECCOME"+this.response);
+                data = JSON.parse(this.response);
+                nomi = data.nomi.toString().split(',');
+                cognomi = data.cognomi.toString().split(',');
+                alert("Nomi:"+nomi +"\n Cognomi"+cognomi);
+
+                var father = document.getElementById("form-Availability");
+                for(i=0;i<=nomi.length-1;i++){
+                    var child = document.createElement("input");
+
+                    child.setAttribute("type", "checkbox");
+                    child.setAttribute("value", nomi[i] +","+cognomi[i]);
+                    child.setAttribute("id","player"+i);
+                    child.setAttribute("name","players");
+                    father.appendChild(child);
+                    var label = document.createElement("label");
+                    label.setAttribute("for","player"+i);
+                    var testoLabel = document.createTextNode(nomi[i] +","+cognomi[i]);
+                    label.appendChild(testoLabel);
+
+                    father.appendChild(label);
+                    var br = document.createElement("br");
+                    father.appendChild(br);
+                    document.getElementById("player"+i).addEventListener("click", addPlayer)
+                }
             }
         }
-        xmlHttpReq.open("GET", "/AvailabilityAj?dataTime="+encodeURIComponent(inviare) , true);
+        xmlHttpReq.open("GET", "AvailabilityAj?dataTime="+encodeURIComponent(inviare) , true);
         xmlHttpReq.send();
 
     }else{
-        alert("Inserire correttamente data e/o orari");
+        alert(isTimeValid+""+isDateValid+"Inserire correttamente data e/o orari");
     }
 
 
