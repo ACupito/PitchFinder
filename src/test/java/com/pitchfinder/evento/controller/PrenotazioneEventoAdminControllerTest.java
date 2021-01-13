@@ -112,7 +112,9 @@ public class PrenotazioneEventoAdminControllerTest {
         Mockito.when(mockedRequest.getParameter("eventName")).thenReturn("NomeEvento");
         Mockito.when(mockedRequest.getParameter("email")).thenReturn("c.Salvato@gmail.com");
         Mockito.doReturn(mockedServletContext).when(mockedRequest).getServletContext();
-        Mockito.doReturn(mockedDispatcher).when(mockedServletContext).getRequestDispatcher("/view/evento/prenotazioneEvento");
+        Mockito.doReturn(mockedDispatcher).when(mockedServletContext).getRequestDispatcher("/view/evento/prenotazioneEvento.jsp");
+
+        servlet.doPost(mockedRequest, mockedResponse);
         Mockito.verify(mockedResponse).setContentType("La prenotazione all’evento va a buon fine.");
 
     }
