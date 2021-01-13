@@ -99,7 +99,7 @@ public class TorneoController extends HttpServlet {
             response.setContentType("Torneo ottenuto");
 
             session.setAttribute("torneo", t);
-            request.setAttribute("torneo", t);
+            request.getServletContext().setAttribute("torneo", t);
             RequestDispatcher dispatcher = request.getServletContext().getRequestDispatcher("/view/torneo/dettagliTorneo.jsp");
             dispatcher.forward(request, response);
         }
