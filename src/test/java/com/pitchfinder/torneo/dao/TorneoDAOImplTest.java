@@ -1,5 +1,11 @@
 package com.pitchfinder.torneo.dao;
 
+import com.pitchfinder.autenticazione.dao.UtenteDAO;
+import com.pitchfinder.autenticazione.dao.UtenteDAOImpl;
+import com.pitchfinder.autenticazione.entity.Utente;
+import com.pitchfinder.squadra.dao.SquadraDAO;
+import com.pitchfinder.squadra.dao.SquadraDAOImpl;
+import com.pitchfinder.squadra.entity.Squadra;
 import com.pitchfinder.torneo.entity.Torneo;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
@@ -22,6 +28,16 @@ class TorneoDAOImplTest {
     private TorneoDAO tdao;
 
     /**
+     *  This is an instance of SquadraDAO.
+     */
+    private SquadraDAO sdao;
+
+    /**
+     *  This is an instance of SquadraDAO.
+     */
+    private UtenteDAO udao = new UtenteDAOImpl();
+
+    /**
      * Parameters declaration.
      */
     private static final String USERNAME_ADMIN = "memex99";
@@ -42,13 +58,24 @@ class TorneoDAOImplTest {
     private Torneo t;
 
     /**
+     * This is an instance of Squadra entity.
+     */
+    private Squadra s;
+    private Squadra s1;
+
+    /**
+     * This is an instance of Utente entity.
+     */
+    private Utente u;
+    /**
      * This method set up the enviroment.
      */
     @BeforeAll
     public void setUp() {
-
         tdao = new TorneoDAOImpl();
+        sdao = new SquadraDAOImpl();
         t = new Torneo();
+        u = new Utente();
 
     }
 
@@ -184,6 +211,30 @@ class TorneoDAOImplTest {
 
     }
 
+    @Test
+    void countIscritti() {
+
+        t.setAdminUsername("memex99");
+        t.setNome("Torneo");
+        t.setCampoIdentificativo(1002);
+        t.setTipo(TIPO);
+        t.setStruttura(STRUTTURA);
+        t.setNumeroSquadre(MAX_SQUADRE);
+        t.setMinNumeroPartecipantiPerSquadra(MIN_PARTECIPANTI);
+        t.setMaxNumeroPartecipantiPerSquadra(MAX_PARTECIPANTI);
+        t.setGiornoPartite(GIORNO_PARTITE);
+        t.setDataInizio(Date.valueOf(DATA_INIZIO));
+        t.setDataFine(Date.valueOf(DATA_FINE));
+        tdao.doSaveTorneo(t);
+        u = new Utente("ciao@gmail.com", "test", "test", "test","test", Date.valueOf("1998-10-12"));
+        udao.doSaveUtente(u);
+        s = new Squadra("juve", t.getNome(), t.getDataInizio(), t.getCampoIdentificativo(),2,"lucia","ciao@gmail.com");
+        sdao.doSaveSquadra(s);
+        s1 = new Squadra("ve", t.getNome(), t.getDataInizio(), t.getCampoIdentificativo(),2,"lucia","ciao@gmail.com");
+        sdao.doSaveSquadra(s1);
+        assertEquals(2,tdao.doRetrieveNIscritti(t));
+
+    }
 
 
     /**
@@ -191,8 +242,12 @@ class TorneoDAOImplTest {
      */
     @AfterAll
     void tearDown() {
+        tdao.doRemoveTorneo(t);
         tdao = null;
         t = null;
+        udao.doRemoveUtente(u);
+        sdao.doRemoveSquadra(s);
+        sdao.doRemoveSquadra(s1);
     }
 
 }
