@@ -20,6 +20,13 @@ public interface PartitaService {
     Partita createPartita(int idCampo, Utente utente, Date date, Time start, Time end);
 
     /**
+     * This method is used to show all the matches.
+     *
+     * @return List<Partita>
+     */
+    List<Partita> showPartite();
+
+    /**
      * This method is used to view the players participating in a match.
      * @param partita Partita
      * @return List<String>
