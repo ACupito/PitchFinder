@@ -21,13 +21,31 @@
                                     <input id="password" placeholder="Password" class="form-control form-control-sm" type="text" name="password">
                                 </div>
                                 <div class="form-group">
-                                    <button type="submit" class="btn btn-primary btn-block" id="login" disabled>Login</button>
+                                    <button type="submit" class="btn btn-primary btn-block">Login</button>
                                 </div>
                             </form>
                             <form action="autentication" method="get">
                                 <div class="form-group">
                                     <input type="hidden" value="-1" name="flag">
                                     <button type="submit" class="btn btn-primary btn-block">Registrazione</button>
+                                </div>
+                            </form>
+                        </li>
+                    </ul>
+                </li>
+                <li class="dropdown order-1 nav-item">
+                    <button type="button" id="dropdownMenu2" data-toggle="dropdown" class="btn nav-link"><i class="fas fa-user-alt"></i><span class="caret"></span></button>
+                    <ul class="dropdown-menu dropdown-menu-right mt-2">
+                        <li class="px-3 py-2">
+                            <h4>BENVENUTO!</h4>
+                            <h5>Giorgio</h5>
+                            <form class="form" role="form" action="autentication" method="post">
+                                <input type="hidden" value="2" name="flag">
+                                <div class="form-group">
+                                    <button type="submit" class="btn btn-primary btn-block">Area personale</button>
+                                </div>
+                                <div class="form-group">
+                                    <button type="submit" class="btn btn-primary btn-block">Logout</button>
                                 </div>
                             </form>
                         </li>
