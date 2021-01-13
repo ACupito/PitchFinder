@@ -202,9 +202,10 @@ function validateForm(){
     }
 
     if(isDateValid && isTimeValid && isPlayerNumberValid && isNameValid && isSurnameValid){
-        document.getElementById("creation-player").setAttribute("value",nPlayer+numberOfCheckedItems);
+        document.getElementById("creation-player").removeAttribute("disabled");
+        $("creation-player").val(nPlayer+numberOfCheckedItems);
         var checkPlayer = document.getElementsByName("players");
-        var nplayerFInal = nPlayer;
+        var nplayerFInal = nPlayer+numberOfCheckedItems;
         if(nplayerFInal<3){
             for(var i=0;i<checkPlayer.length;i++){
                 if(checkPlayer[i].checked){ //Updating textbox for players name & surname
@@ -215,6 +216,8 @@ function validateForm(){
                 nplayerFInal++;
             }
         }
+        alert("somma"+$("#creation-player").val());
+        alert("nplayer"+nPlayer+"checked"+numberOfCheckedItems);
         return true;
     }else{
         return false;

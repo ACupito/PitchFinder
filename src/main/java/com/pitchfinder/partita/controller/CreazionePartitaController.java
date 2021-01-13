@@ -44,7 +44,7 @@ public class CreazionePartitaController extends HttpServlet {
                 Time end;
 
                 String maxGiocatoriStr = request.getParameter("maxGiocatori");
-                int maxGiocatori;
+                int maxGiocatori = 0;
 
                 if (utente == null) {
                     throw new IllegalArgumentException("Utente non valido");
@@ -100,7 +100,7 @@ public class CreazionePartitaController extends HttpServlet {
 
                 //Controllo sul numero dei giocatori
                 if (maxGiocatoriStr == null || maxGiocatoriStr.equals("")) {
-                    throw new IllegalArgumentException("Numero massimo giocatori non valido");
+                    throw new IllegalArgumentException("Numero massimo giocatori non valido"+maxGiocatoriStr);
                 }
 
                 try {
@@ -109,7 +109,7 @@ public class CreazionePartitaController extends HttpServlet {
                         throw new IllegalArgumentException("Numero massimo giocatori non valido");
                     }
                 } catch (NumberFormatException e) {
-                    throw new IllegalArgumentException("Numero massimo giocatori non valido");
+                    throw new IllegalArgumentException("Numero massimo giocatori non valido"+maxGiocatori);
                 }
 
                 //Inizia il controllo sui giocatori
@@ -157,7 +157,7 @@ public class CreazionePartitaController extends HttpServlet {
                                 nuova = partita;
                             }
                         }
-
+                        System.out.println(nuova.toString());
                         //Aggiungo i giocatori
                         for (int i = 0; i < nomi.size(); i++) {
                             service.createGiocatorePartita(nuova.getIdPartita(),
