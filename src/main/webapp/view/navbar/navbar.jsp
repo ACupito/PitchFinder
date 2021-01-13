@@ -7,7 +7,7 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav text-uppercase ml-auto">
-                <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#services">HOME</a></li>
+                <li class="nav-item"><a class="nav-link js-scroll-trigger" href="home">HOME</a></li>
                 <li class="dropdown order-1 nav-item">
                     <button type="button" id="dropdownMenu1" data-toggle="dropdown" class="btn nav-link">LOGIN<span class="caret"></span></button>
                     <ul class="dropdown-menu dropdown-menu-right mt-2">
@@ -18,7 +18,7 @@
                                     <input id="username" placeholder="Username" class="form-control form-control-sm" type="text" name="username">
                                 </div>
                                 <div class="form-group">
-                                    <input id="password" placeholder="Password" class="form-control form-control-sm" type="text" name="password">
+                                    <input id="password" placeholder="Password" class="form-control form-control-sm" type="password" name="password">
                                 </div>
                                 <div class="form-group">
                                     <button type="submit" class="btn btn-primary btn-block" id="login" disabled>Login</button>
@@ -34,16 +34,22 @@
                     </ul>
                 </li>
                 <li class="dropdown order-1 nav-item">
-                    <button type="button" id="dropdownMenu2" data-toggle="dropdown" class="btn nav-link"><i class="fas fa-user-alt"></i><span class="caret"></span></button>
+                    <button type="button" id="dropdownMenu2" data-toggle="dropdown" class="btn nav-link">
+                        <i class="fas fa-user-alt"></i>
+                        <span class="caret"></span>
+                    </button>
                     <ul class="dropdown-menu dropdown-menu-right mt-2">
                         <li class="px-3 py-2">
                             <h4>BENVENUTO!</h4>
-                            <h5>Giorgio</h5>
+                            <h5>${utente.nome}</h5>
                             <form class="form" role="form" action="autentication" method="post">
-                                <input type="hidden" value="2" name="flag">
+                                <input type="hidden" value="3" name="flag">
                                 <div class="form-group">
                                     <button type="submit" class="btn btn-primary btn-block">Area personale</button>
                                 </div>
+                            </form>
+                            <form class="form" role="form" action="autentication" method="post">
+                                <input type="hidden" value="4" name="flag">
                                 <div class="form-group">
                                     <button type="submit" class="btn btn-primary btn-block">Logout</button>
                                 </div>

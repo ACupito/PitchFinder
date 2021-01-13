@@ -60,6 +60,8 @@ class AutenticazioneControllerTest extends Mockito {
         Mockito.when(mockedRequest.getParameter("username")).thenReturn("");
         Mockito.when(mockedRequest.getParameter("password")).thenReturn(password);
 
+        Mockito.doReturn(mockedSession).when(mockedRequest).getSession(true);
+
         String message = "Il login non va a buon fine " +
                 "perché la username non rispetta la " +
                 "lunghezza corretta";
@@ -79,6 +81,8 @@ class AutenticazioneControllerTest extends Mockito {
         Mockito.when(mockedRequest.getParameter("username")).thenReturn("Mariox 99");
         Mockito.when(mockedRequest.getParameter("password")).thenReturn(password);
 
+        Mockito.doReturn(mockedSession).when(mockedRequest).getSession(true);
+
         String message = "Il login non va a buon fine " +
                 "perché il formato della username non è corretto";
 
@@ -96,6 +100,8 @@ class AutenticazioneControllerTest extends Mockito {
         Mockito.when(mockedRequest.getParameter("flag")).thenReturn("2");
         Mockito.when(mockedRequest.getParameter("username")).thenReturn("Mariox8890");
         Mockito.when(mockedRequest.getParameter("password")).thenReturn("PitchFind57");
+
+        Mockito.doReturn(mockedSession).when(mockedRequest).getSession(true);
 
         Mockito.doReturn(mockedServletContext).when(mockedRequest).getServletContext();
         Mockito.doReturn(mockedDispatcher).when(mockedServletContext).getRequestDispatcher("/view/autenticazione/loginResult.jsp");
