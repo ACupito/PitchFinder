@@ -204,21 +204,26 @@ function validateForm(){
     if(isDateValid && isTimeValid && isPlayerNumberValid && isNameValid && isSurnameValid){
         document.getElementById("creation-player").setAttribute("value",nPlayer+numberOfCheckedItems);
         var checkPlayer = document.getElementsByName("players");
-        var nplayerFInal = nPlayer;
+        var nplayerFInal = nPlayer+1;
 
         document.getElementById("creation-player").removeAttribute("disabled");
         document.getElementById("creation-player").value = parseInt(nPlayer) + parseInt(numberOfCheckedItems);
         if(nplayerFInal<3){
-            for(var i=0;i<checkPlayer.length;i++){
-                if(checkPlayer[i].checked){ //Updating textbox for players name & surname
-                    var nomiFinal = checkPlayer.toString().split(',');
-                    document.getElementById("nameG"+nplayerFInal).setAttribute("value",nomiFinal[0]);
-                    document.getElementById("surnameG"+nplayerFInal).setAttribute("value",nomiFinal[1]);
+            for(var valor of checkPlayer.values()){
+                alert("sto nel for");
+                if(valor.checked){ //Updating textbox for players name & surname
+                    alert("sto nell'if");
+                    var nomiFinal;
+                        alert(valor.value);
+                        var splitted= valor.value.split(",");
+                        nomiFinal.push(splitted[0]);
+                        nomiFinal.push(splitted[1]);
+                    document.getElementById("nameG"+nplayerFInal).value = nomiFinal[0];
+                    document.getElementById("surnameG"+nplayerFInal).value = nomiFinal[1];
                 }
                 nplayerFInal++;
             }
         }
-        alert("somma"+$("#creation-player").val());
         return true;
     }else{
         return false;
