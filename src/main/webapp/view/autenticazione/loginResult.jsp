@@ -24,5 +24,8 @@
     </div>
 </div>
 
+<script src="./js/homepage/js_homepage.js"></script>
+<script src = "./js/homepage/check_login.js"></script>
+
 </body>
 </html>
