@@ -1,5 +1,6 @@
 <%@ page import="com.pitchfinder.evento.entity.Evento" %>
 <%@ page import="java.util.ArrayList" %>
+<%@ page import="com.pitchfinder.autenticazione.entity.Utente" %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 <html>
@@ -49,7 +50,9 @@
     <div class="row">
 
 
-           <% Evento evento= (Evento) request.getAttribute("evento");%>
+           <% Evento evento= (Evento) request.getAttribute("evento");
+              Utente utente = (Utente) request.getAttribute("utente");
+           %>
 
 
         <div class="col-lg-4">
@@ -85,7 +88,12 @@
                                 <input type="hidden" class="eventDate" name="eventDate" value="<%=evento.getDate()%>">
                                 <input type="hidden" class="eventName" name="eventName" value="<%=evento.getName()%>">
                                 <ln class="widget-49-meeting-item"><span><strong>Email:</strong></span> </ln>
-                                <input type="email"  name="email" ><br>
+                                <%if (utente == null)
+                                  {%>
+                                    <input type="email"  name="email" ><br>
+                                <%} else {%>
+                                    <input type="email"  name="email" value="${utente.email}" ><br>
+                                <%}%>
                                 <input type="submit" class="btn btn-sm btn-flash-border-primary" id="conferma" name="Conferma" value="Prenotati!">
                                     <input type="submit" class="btn btn-sm btn-flash-border-primary" name="Indietro" value="Indietro">
                             </form>

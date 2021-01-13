@@ -1,5 +1,6 @@
 package com.pitchfinder.evento.controller;
 
+import com.pitchfinder.autenticazione.entity.Utente;
 import com.pitchfinder.evento.entity.Evento;
 import com.pitchfinder.evento.services.EventoService;
 import com.pitchfinder.evento.services.EventoServiceImpl;
@@ -40,6 +41,11 @@ public class Prenotazione extends HttpServlet {
         String nomeEvento = req.getParameter("eventName");
         String dataEvento = req.getParameter("eventDate");
         Date dateEvento = Date.valueOf(dataEvento);
+        Utente utente = (Utente) req.getSession().getAttribute("utente");
+
+        if (utente != null) {
+            req.setAttribute("utente", utente);
+        }
 
         EventoService eventoService = new EventoServiceImpl();
         Evento evento = eventoService.getEvento(nomeEvento, dateEvento);
