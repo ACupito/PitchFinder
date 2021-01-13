@@ -10,6 +10,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.ServletContext;
+import javax.servlet.http.HttpSession;
 
 import java.io.IOException;
 import java.sql.Date;
@@ -33,6 +34,7 @@ class AutenticazioneControllerTest extends Mockito {
     private HttpServletResponse mockedResponse;
     private ServletContext mockedServletContext;
     private RequestDispatcher mockedDispatcher;
+    private HttpSession mockedSession;
 
     @BeforeAll
     void setUp() throws ServletException {
@@ -42,8 +44,7 @@ class AutenticazioneControllerTest extends Mockito {
         mockedResponse = Mockito.mock(HttpServletResponse.class);
         mockedServletContext = Mockito.mock(ServletContext.class);
         mockedDispatcher = Mockito.mock(RequestDispatcher.class);
-
-
+        mockedSession = Mockito.mock(HttpSession.class);
 
         AutenticazioneService as = new AutenticazioneServiceImpl();
 
@@ -90,21 +91,16 @@ class AutenticazioneControllerTest extends Mockito {
     }
 
     @Test
-    void TC_4_1_3() {
+    void TC_4_1_3() throws ServletException, IOException {
 
         Mockito.when(mockedRequest.getParameter("flag")).thenReturn("2");
         Mockito.when(mockedRequest.getParameter("username")).thenReturn("Mariox8890");
         Mockito.when(mockedRequest.getParameter("password")).thenReturn("PitchFind57");
 
-        String message = "Il login non va a buon " +
-                "fine perché la password inserita non è corretta";
+        Mockito.doReturn(mockedServletContext).when(mockedRequest).getServletContext();
+        Mockito.doReturn(mockedDispatcher).when(mockedServletContext).getRequestDispatcher("/view/autenticazione/loginResult.jsp");
 
-        exception = assertThrows(
-                IllegalArgumentException.class, () -> {
-                    servlet.doPost(mockedRequest, mockedResponse);
-                });
-
-        assertEquals(message, exception.getMessage());
+        servlet.doPost(mockedRequest, mockedResponse);
     }
 
     @Test
@@ -114,6 +110,7 @@ class AutenticazioneControllerTest extends Mockito {
         Mockito.when(mockedRequest.getParameter("username")).thenReturn("Mariox8890");
         Mockito.when(mockedRequest.getParameter("password")).thenReturn("PitchFinder57");
 
+        Mockito.doReturn(mockedSession).when(mockedRequest).getSession(true);
         Mockito.doReturn(mockedServletContext).when(mockedRequest).getServletContext();
         Mockito.doReturn(mockedDispatcher).when(mockedServletContext).getRequestDispatcher("/view/autenticazione/utente.jsp");
 
