@@ -11,6 +11,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.sql.Date;
 
@@ -56,6 +57,7 @@ public class AutenticazioneController extends HttpServlet {
             throws ServletException, IOException {
 
         RequestDispatcher dispatcher;
+        HttpSession session = request.getSession(true);
 
         AutenticazioneService as = new AutenticazioneServiceImpl();
 
@@ -172,6 +174,8 @@ public class AutenticazioneController extends HttpServlet {
             boolean reg = as.registraUtente(email, username, nome, cognome, password, data);
             if (reg) {
 
+                messaggio = "La registrazione è avvenuta con successo";
+
                 response.setContentType("La registrazione è avvenuta correttamente");
                 request.setAttribute("messaggio", messaggio);
                 dispatcher = request.getServletContext().getRequestDispatcher("/view/autenticazione/avvenutaRegistrazione.jsp");
@@ -179,8 +183,6 @@ public class AutenticazioneController extends HttpServlet {
             }
 
         } else if (flag == 2) {
-
-            System.out.println("Sei nel login");
 
             String username = request.getParameter("username");
             String password = request.getParameter("password");
@@ -200,26 +202,42 @@ public class AutenticazioneController extends HttpServlet {
 
             if (username.substring(0, 5).equalsIgnoreCase("admin")) {
 
-                Admin a = as.loginAdmin(username, password);
+                try {
 
-                if (a != null) {
-                    request.setAttribute("admin", a);
-                    dispatcher = getServletContext().getRequestDispatcher("/view/autenticazione/admin.jsp");
+                    Admin a = as.loginAdmin(username, password);
+                    if (a != null) {
+                        session.setAttribute("admin", a);
+                        dispatcher = getServletContext().getRequestDispatcher("/view/autenticazione/admin.jsp");
+                        dispatcher.forward(request, response);
+                    }
+
+                } catch (IllegalArgumentException e) {
+
+                    messaggio = "Login non avvenuto perchè la password è scorretta";
+                    request.setAttribute("messaggio", messaggio);
+                    dispatcher = request.getServletContext().getRequestDispatcher("/view/autenticazione/loginResult.jsp");
                     dispatcher.forward(request, response);
                 }
 
             } else {
 
-                System.out.println("Sei nel login utente");
+                try {
 
-                Utente u = as.loginUtente(username, password);
-                if (u != null) {
+                    Utente u = as.loginUtente(username, password);
 
-                    System.out.println("Sei entrato");
+                    if (u != null) {
 
-                    response.setContentType("Il login è avvenuto correttamente");
-                    request.setAttribute("utente", u);
-                    dispatcher = request.getServletContext().getRequestDispatcher("/view/autenticazione/utente.jsp");
+                        response.setContentType("Il login è avvenuto correttamente");
+                        session.setAttribute("utente", u);
+                        dispatcher = request.getServletContext().getRequestDispatcher("/view/autenticazione/utente.jsp");
+                        dispatcher.forward(request, response);
+                    }
+
+                } catch (IllegalArgumentException e) {
+
+                    messaggio = "Login non avvenuto perchè la password è scorretta";
+                    request.setAttribute("messaggio", messaggio);
+                    dispatcher = request.getServletContext().getRequestDispatcher("/view/autenticazione/loginResult.jsp");
                     dispatcher.forward(request, response);
                 }
             }
