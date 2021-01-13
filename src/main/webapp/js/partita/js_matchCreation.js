@@ -4,7 +4,8 @@ var isTimeValid=false;
 var isNameValid=false;
 var isSurnameValid=false;
 var isPlayerNumberValid=false;
-var nPlayer;
+var numberOfCheckedItems = 0;
+var nPlayer=0;
 var hhStr;
 var mmStr;
 var hhEnd;
@@ -32,11 +33,25 @@ function maxDate(){
 }
 //Data validation
 function valiDate(){
+    var father = document.getElementById("form-Availability");
+    if(father.hasChildNodes()){
+        for(j=0;j<father.childElementCount;j++){
+            father.removeChild(father.lastChild)
+            j--;
+        }
+    }
     $("#creation-label-data").css("color","#4CAF50");
     isDateValid=true;
 }
 //Start validation
 function validateStart(){
+    var father = document.getElementById("form-Availability");
+    if(father.hasChildNodes()){
+        for(j=0;j<father.childElementCount;j++){
+            father.removeChild(father.lastChild)
+            j--;
+        }
+    }
     $("#creation-label-str").css("color","#4CAF50");
     hhStr = $("creation-timestr").val().substring(0,2);
     mmStr = $("creation-timestr").val().substring(3);
@@ -44,6 +59,13 @@ function validateStart(){
 
 //End validation
 function validateEnd(){
+    var father = document.getElementById("form-Availability");
+    if(father.hasChildNodes()){
+        for(j=0;j<father.childElementCount;j++){
+            father.removeChild(father.lastChild)
+            j--;
+        }
+    }
     $("#creation-label-end").css("color","#4CAF50");
     hhEnd = $("creation-timestr").val().substring(0,2);
     mmEnd = $("creation-timestr").val().substring(3);
@@ -134,11 +156,11 @@ function validateSurname3() {
 }
 //Number of player validation
 function validateNPlayer(){
+
     if($("#creation-player").val().match("^[0-3]$")){
         $("#creation-label-player").css("color","#4CAF50");
         isPlayerNumberValid=true;
         nPlayer = $("#creation-player").val();
-
         if(nPlayer==3) {
             document.getElementById("div-Availability").style.display='none';
         }
@@ -180,24 +202,52 @@ function validateForm(){
     }
 
     if(isDateValid && isTimeValid && isPlayerNumberValid && isNameValid && isSurnameValid){
+        document.getElementById("creation-player").setAttribute("value",nPlayer+numberOfCheckedItems);
+        var checkPlayer = document.getElementsByName("players");
+        var nplayerFInal = nPlayer;
+        if(nplayerFInal<3){
+            for(var i=0;i<checkPlayer.length;i++){
+                if(checkPlayer[i].checked){ //Updating textbox for players name & surname
+                    var nomiFinal = checkPlayer.toString().split(',');
+                    document.getElementById("nameG"+nplayerFInal).setAttribute("value",nomiFinal[0]);
+                    document.getElementById("surnameG"+nplayerFInal).setAttribute("value",nomiFinal[1]);
+                }
+                nplayerFInal++;
+            }
+        }
         return true;
     }else{
         return false;
     }
 }
 function addPlayer(){
-        var checkboxes = document.getElementsByName("players");
-        var numberOfCheckedItems = 0;
-        for(var i = 0; i < checkboxes.length; i++)
-        {
-            if(checkboxes[i].checked)
-                numberOfCheckedItems++;
+    var legalCheck = 3 - nPlayer;
+    var checkboxes = document.getElementsByName("players");
+    numberOfCheckedItems = 0;
+
+    for(var i = 0; i < checkboxes.length; i++) {
+        if(checkboxes[i].checked){
+            document.getElementById("creation-player").setAttribute("disabled","true");
+            numberOfCheckedItems++;
         }
-        /*if(numberOfCheckedItems > )
-        {
-            alert("Impossibile selezionare altri");
-            return false;
-        } */
+    }
+    if(numberOfCheckedItems==0){
+        document.getElementById("creation-player").removeAttribute("disabled");
+    }
+    if(numberOfCheckedItems==legalCheck) {
+        for(var i = 0; i < checkboxes.length; i++) {
+            if(document.getElementById("player"+i).checked){
+            }else{
+                document.getElementById("player"+i).disabled = true;
+            }
+        }
+    }else{
+        for(var i = 0; i < checkboxes.length; i++) {
+            document.getElementById("player"+i).disabled = false;
+        }
+    }
+
+
 }
 
 function showAvailability(){
@@ -221,6 +271,17 @@ function showAvailability(){
                     alert("Nomi:"+nomi +"\n Cognomi"+cognomi);
 
                     var father = document.getElementById("form-Availability");
+                    if(father.hasChildNodes()){
+                        for(j=0;j<father.childElementCount;j++){
+                            father.removeChild(father.lastChild)
+                            j--;
+                        }
+                    }
+                    var title = document.createElement("h4");
+                    var titleText = document.createTextNode("Lista dei giocatori disponibili per questa partita");
+                    title.appendChild(titleText);
+                    father.appendChild(title);
+
                     for(i=0;i<=nomi.length-1;i++){
                         var child = document.createElement("input");
 
