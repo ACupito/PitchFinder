@@ -61,6 +61,12 @@ public class PrenotazioneEventoController extends HttpServlet {
                 e.printStackTrace();
             }
 
+            //count postiDisponibili
+            int nPrenotati = eventoService.findNumeroPartecipantiByEvento(evento);
+            int postiDisponibili = evento.getAvailableSits() - nPrenotati;
+
+            req.setAttribute("postiDisponibili", postiDisponibili);
+            //event
             req.setAttribute("evento", evento);
             //Se la prenotazione va a buon fine setto questo attributo che mi servirà per creare l'alert nella jsp
             req.setAttribute("prenotazione", "ok");
