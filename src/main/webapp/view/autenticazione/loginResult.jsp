@@ -1,8 +1,8 @@
 <%--
   Created by IntelliJ IDEA.
   User: memex_99
-  Date: 04/01/2021
-  Time: 10:16
+  Date: 12/01/2021
+  Time: 21:51
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -12,12 +12,12 @@
 </head>
 <body>
 
-<div>
-    <p>${utente.email}</p>
-    <p>${utente.username}</p>
-    <p>${utente.nome}</p>
-    <p>${utente.cognome}</p>
-    <p>${utente.dataDiNascita}</p>
+<%@ include file="../navbar/navbar.jsp"%>
+
+<div class="principal">
+    <div class="message">
+        <span class="text"><i class="fas fas">${messaggio}</i></span>
+    </div>
 </div>
 
 </body>

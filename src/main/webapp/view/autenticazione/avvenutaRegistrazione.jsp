@@ -9,14 +9,20 @@
 <html>
 <head>
     <title>Title</title>
-    <link rel="stylesheet" type="text/css" href="./css/user_profile/style_user_profile.css">
     <link rel="stylesheet" type="text/css" href="./css/navbar/style_navbar.css">
+    <link rel="stylesheet" type="text/css" href="./css/navbar/style_registration_result.css">
+    <link href = "https://fonts.googleapis.com/css?family=Poppins" rel = "stylesheet">
+    <script src = "https://kit.fontawesome.com/a076d05399.js"></script>
 </head>
 <body>
 
 <%@ include file="../navbar/navbar.jsp"%>
 
-<p> registrazione avvenuta con successo </p>
+<div class="principal">
+    <div class="message">
+        <span class="text"><i class="fas fas">${messaggio}</i></span>
+    </div>
+</div>
 
 </body>
 </html>
