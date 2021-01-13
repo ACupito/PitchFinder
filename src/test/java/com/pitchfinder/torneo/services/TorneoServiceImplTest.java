@@ -84,7 +84,7 @@ class TorneoServiceImplTest {
         String message = "Creazione fallita: Save Torneo fallito";
 
         IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> tservice.createTorneo(usernameAdmin, idCampo, null, null,
-                 null, MAX_SQUADRE, dataInizio, dataFine, MIN_PARTECIPANTI, MAX_PARTECIPANTI,
+                null, MAX_SQUADRE, dataInizio, dataFine, MIN_PARTECIPANTI, MAX_PARTECIPANTI,
                 "Mercoledì"));
         assertEquals(message, exception.getMessage());
 
