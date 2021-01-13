@@ -202,10 +202,12 @@ function validateForm(){
     }
 
     if(isDateValid && isTimeValid && isPlayerNumberValid && isNameValid && isSurnameValid){
-        document.getElementById("creation-player").removeAttribute("disabled");
-        $("creation-player").val(nPlayer+numberOfCheckedItems);
+        document.getElementById("creation-player").setAttribute("value",nPlayer+numberOfCheckedItems);
         var checkPlayer = document.getElementsByName("players");
-        var nplayerFInal = nPlayer+numberOfCheckedItems;
+        var nplayerFInal = nPlayer;
+
+        document.getElementById("creation-player").removeAttribute("disabled");
+        document.getElementById("creation-player").value = parseInt(nPlayer) + parseInt(numberOfCheckedItems);
         if(nplayerFInal<3){
             for(var i=0;i<checkPlayer.length;i++){
                 if(checkPlayer[i].checked){ //Updating textbox for players name & surname
@@ -217,7 +219,6 @@ function validateForm(){
             }
         }
         alert("somma"+$("#creation-player").val());
-        alert("nplayer"+nPlayer+"checked"+numberOfCheckedItems);
         return true;
     }else{
         return false;
@@ -271,7 +272,6 @@ function showAvailability(){
                     data = JSON.parse(this.response);
                     nomi = data.nomi.toString().split(',');
                     cognomi = data.cognomi.toString().split(',');
-                    alert("Nomi:"+nomi +"\n Cognomi"+cognomi);
 
                     var father = document.getElementById("form-Availability");
                     if(father.hasChildNodes()){
