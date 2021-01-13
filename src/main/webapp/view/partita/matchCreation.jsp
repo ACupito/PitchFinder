@@ -67,11 +67,10 @@
             <label for="surnameG3" id="creation-label-surnameG3" style="display: none"> Cognome: </label>
             <input type="text" id="surnameG3" name="surnameG3" class="objSurname" style="display: none"  onkeyup="validateSurname3()" ><br>
             <div id="div-Availability">
-                <form id="form-Availability">
-
-                </form>
+                <div id="form-Availability">
+                </div>
             </div>
-            <% if(session.getAttribute("utente")!=null){ %>
+            <% if(/*session.getAttribute("utente")!=null */true){ %>
             <input type="submit" id="creation-submit" name="btnMatchCreation" value="Conferma">
             <input type="button" id="creation-availability" name="btnAvailability" value="Inserisci disponibili" onclick="showAvailability()">
             <%}else{ %>
