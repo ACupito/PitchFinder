@@ -10,6 +10,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.ServletContext;
+import javax.servlet.http.HttpSession;
 
 import java.io.IOException;
 import java.sql.Date;
@@ -33,6 +34,7 @@ class AutenticazioneControllerTest extends Mockito {
     private HttpServletResponse mockedResponse;
     private ServletContext mockedServletContext;
     private RequestDispatcher mockedDispatcher;
+    private HttpSession mockedSession;
 
     @BeforeAll
     void setUp() throws ServletException {
@@ -42,8 +44,7 @@ class AutenticazioneControllerTest extends Mockito {
         mockedResponse = Mockito.mock(HttpServletResponse.class);
         mockedServletContext = Mockito.mock(ServletContext.class);
         mockedDispatcher = Mockito.mock(RequestDispatcher.class);
-
-
+        mockedSession = Mockito.mock(HttpSession.class);
 
         AutenticazioneService as = new AutenticazioneServiceImpl();
 
@@ -90,21 +91,16 @@ class AutenticazioneControllerTest extends Mockito {
     }
 
     @Test
-    void TC_4_1_3() {
+    void TC_4_1_3() throws ServletException, IOException {
 
         Mockito.when(mockedRequest.getParameter("flag")).thenReturn("2");
         Mockito.when(mockedRequest.getParameter("username")).thenReturn("Mariox8890");
         Mockito.when(mockedRequest.getParameter("password")).thenReturn("PitchFind57");
 
-        String message = "Il login non va a buon " +
-                "fine perché la password inserita non è corretta";
+        Mockito.doReturn(mockedServletContext).when(mockedRequest).getServletContext();
+        Mockito.doReturn(mockedDispatcher).when(mockedServletContext).getRequestDispatcher("/view/autenticazione/loginResult.jsp");
 
-        exception = assertThrows(
-                IllegalArgumentException.class, () -> {
-                    servlet.doPost(mockedRequest, mockedResponse);
-                });
-
-        assertEquals(message, exception.getMessage());
+        servlet.doPost(mockedRequest, mockedResponse);
     }
 
     @Test
@@ -114,6 +110,7 @@ class AutenticazioneControllerTest extends Mockito {
         Mockito.when(mockedRequest.getParameter("username")).thenReturn("Mariox8890");
         Mockito.when(mockedRequest.getParameter("password")).thenReturn("PitchFinder57");
 
+        Mockito.doReturn(mockedSession).when(mockedRequest).getSession(true);
         Mockito.doReturn(mockedServletContext).when(mockedRequest).getServletContext();
         Mockito.doReturn(mockedDispatcher).when(mockedServletContext).getRequestDispatcher("/view/autenticazione/utente.jsp");
 
@@ -127,10 +124,10 @@ class AutenticazioneControllerTest extends Mockito {
 
         Mockito.when(mockedRequest.getParameter("flag")).thenReturn("1");
         Mockito.when(mockedRequest.getParameter("email")).thenReturn("");
-        Mockito.when(mockedRequest.getParameter("username")).thenReturn(username);
+        Mockito.when(mockedRequest.getParameter("username_")).thenReturn(username);
         Mockito.when(mockedRequest.getParameter("nome")).thenReturn(nome);
         Mockito.when(mockedRequest.getParameter("cognome")).thenReturn(cognome);
-        Mockito.when(mockedRequest.getParameter("password")).thenReturn(password);
+        Mockito.when(mockedRequest.getParameter("password_")).thenReturn(password);
         Mockito.when(mockedRequest.getParameter("data")).thenReturn(data);
 
         String message = "La registrazione " +
@@ -150,10 +147,10 @@ class AutenticazioneControllerTest extends Mockito {
 
         Mockito.when(mockedRequest.getParameter("flag")).thenReturn("1");
         Mockito.when(mockedRequest.getParameter("email")).thenReturn("mario99 @gmail.com");
-        Mockito.when(mockedRequest.getParameter("username")).thenReturn(username);
+        Mockito.when(mockedRequest.getParameter("username_")).thenReturn(username);
         Mockito.when(mockedRequest.getParameter("nome")).thenReturn(nome);
         Mockito.when(mockedRequest.getParameter("cognome")).thenReturn(cognome);
-        Mockito.when(mockedRequest.getParameter("password")).thenReturn(password);
+        Mockito.when(mockedRequest.getParameter("password_")).thenReturn(password);
         Mockito.when(mockedRequest.getParameter("data")).thenReturn(data);
 
         String message = "La registrazione non va a buon " +
@@ -173,10 +170,10 @@ class AutenticazioneControllerTest extends Mockito {
 
         Mockito.when(mockedRequest.getParameter("flag")).thenReturn("1");
         Mockito.when(mockedRequest.getParameter("email")).thenReturn(email);
-        Mockito.when(mockedRequest.getParameter("username")).thenReturn("");
+        Mockito.when(mockedRequest.getParameter("username_")).thenReturn("");
         Mockito.when(mockedRequest.getParameter("nome")).thenReturn(nome);
         Mockito.when(mockedRequest.getParameter("cognome")).thenReturn(cognome);
-        Mockito.when(mockedRequest.getParameter("password")).thenReturn(password);
+        Mockito.when(mockedRequest.getParameter("password_")).thenReturn(password);
         Mockito.when(mockedRequest.getParameter("data")).thenReturn(data);
 
         String message = "La registrazione non va " +
@@ -196,10 +193,10 @@ class AutenticazioneControllerTest extends Mockito {
 
         Mockito.when(mockedRequest.getParameter("flag")).thenReturn("1");
         Mockito.when(mockedRequest.getParameter("email")).thenReturn(email);
-        Mockito.when(mockedRequest.getParameter("username")).thenReturn("AdminMariox99");
+        Mockito.when(mockedRequest.getParameter("username_")).thenReturn("AdminMariox99");
         Mockito.when(mockedRequest.getParameter("nome")).thenReturn(nome);
         Mockito.when(mockedRequest.getParameter("cognome")).thenReturn(cognome);
-        Mockito.when(mockedRequest.getParameter("password")).thenReturn(password);
+        Mockito.when(mockedRequest.getParameter("password_")).thenReturn(password);
         Mockito.when(mockedRequest.getParameter("data")).thenReturn(data);
 
         String message = "La registrazione non va a buon fine " +
@@ -219,10 +216,10 @@ class AutenticazioneControllerTest extends Mockito {
 
         Mockito.when(mockedRequest.getParameter("flag")).thenReturn("1");
         Mockito.when(mockedRequest.getParameter("email")).thenReturn(email);
-        Mockito.when(mockedRequest.getParameter("username")).thenReturn(username);
+        Mockito.when(mockedRequest.getParameter("username_")).thenReturn(username);
         Mockito.when(mockedRequest.getParameter("nome")).thenReturn("");
         Mockito.when(mockedRequest.getParameter("cognome")).thenReturn(cognome);
-        Mockito.when(mockedRequest.getParameter("password")).thenReturn(password);
+        Mockito.when(mockedRequest.getParameter("password_")).thenReturn(password);
         Mockito.when(mockedRequest.getParameter("data")).thenReturn(data);
 
         String message = "La registrazione non va a buon fine " +
@@ -242,10 +239,10 @@ class AutenticazioneControllerTest extends Mockito {
 
         Mockito.when(mockedRequest.getParameter("flag")).thenReturn("1");
         Mockito.when(mockedRequest.getParameter("email")).thenReturn(email);
-        Mockito.when(mockedRequest.getParameter("username")).thenReturn(username);
+        Mockito.when(mockedRequest.getParameter("username_")).thenReturn(username);
         Mockito.when(mockedRequest.getParameter("nome")).thenReturn("Mario99");
         Mockito.when(mockedRequest.getParameter("cognome")).thenReturn(cognome);
-        Mockito.when(mockedRequest.getParameter("password")).thenReturn(password);
+        Mockito.when(mockedRequest.getParameter("password_")).thenReturn(password);
         Mockito.when(mockedRequest.getParameter("data")).thenReturn(data);
 
         String message = "La registrazione non va a buon fine " +
@@ -265,10 +262,10 @@ class AutenticazioneControllerTest extends Mockito {
 
         Mockito.when(mockedRequest.getParameter("flag")).thenReturn("1");
         Mockito.when(mockedRequest.getParameter("email")).thenReturn(email);
-        Mockito.when(mockedRequest.getParameter("username")).thenReturn(username);
+        Mockito.when(mockedRequest.getParameter("username_")).thenReturn(username);
         Mockito.when(mockedRequest.getParameter("nome")).thenReturn(nome);
         Mockito.when(mockedRequest.getParameter("cognome")).thenReturn("");
-        Mockito.when(mockedRequest.getParameter("password")).thenReturn(password);
+        Mockito.when(mockedRequest.getParameter("password_")).thenReturn(password);
         Mockito.when(mockedRequest.getParameter("data")).thenReturn(data);
 
         String message = "La registrazione non va a buon fine " +
@@ -288,10 +285,10 @@ class AutenticazioneControllerTest extends Mockito {
 
         Mockito.when(mockedRequest.getParameter("flag")).thenReturn("1");
         Mockito.when(mockedRequest.getParameter("email")).thenReturn(email);
-        Mockito.when(mockedRequest.getParameter("username")).thenReturn(username);
+        Mockito.when(mockedRequest.getParameter("username_")).thenReturn(username);
         Mockito.when(mockedRequest.getParameter("nome")).thenReturn(nome);
         Mockito.when(mockedRequest.getParameter("cognome")).thenReturn("Rossi99");
-        Mockito.when(mockedRequest.getParameter("password")).thenReturn(password);
+        Mockito.when(mockedRequest.getParameter("password_")).thenReturn(password);
         Mockito.when(mockedRequest.getParameter("data")).thenReturn(data);
 
         String message = "La registrazione non va a buon " +
@@ -311,10 +308,10 @@ class AutenticazioneControllerTest extends Mockito {
 
         Mockito.when(mockedRequest.getParameter("flag")).thenReturn("1");
         Mockito.when(mockedRequest.getParameter("email")).thenReturn(email);
-        Mockito.when(mockedRequest.getParameter("username")).thenReturn(username);
+        Mockito.when(mockedRequest.getParameter("username_")).thenReturn(username);
         Mockito.when(mockedRequest.getParameter("nome")).thenReturn(nome);
         Mockito.when(mockedRequest.getParameter("cognome")).thenReturn(cognome);
-        Mockito.when(mockedRequest.getParameter("password")).thenReturn("");
+        Mockito.when(mockedRequest.getParameter("password_")).thenReturn("");
         Mockito.when(mockedRequest.getParameter("data")).thenReturn(data);
 
         String message = "La registrazione non va a buon fine " +
@@ -334,10 +331,10 @@ class AutenticazioneControllerTest extends Mockito {
 
         Mockito.when(mockedRequest.getParameter("flag")).thenReturn("1");
         Mockito.when(mockedRequest.getParameter("email")).thenReturn(email);
-        Mockito.when(mockedRequest.getParameter("username")).thenReturn(username);
+        Mockito.when(mockedRequest.getParameter("username_")).thenReturn(username);
         Mockito.when(mockedRequest.getParameter("nome")).thenReturn(nome);
         Mockito.when(mockedRequest.getParameter("cognome")).thenReturn(cognome);
-        Mockito.when(mockedRequest.getParameter("password")).thenReturn("PitchFinder 57");
+        Mockito.when(mockedRequest.getParameter("password_")).thenReturn("PitchFinder 57");
         Mockito.when(mockedRequest.getParameter("data")).thenReturn(data);
 
         String message = "La registrazione non va a buon fine "
@@ -357,10 +354,10 @@ class AutenticazioneControllerTest extends Mockito {
 
         Mockito.when(mockedRequest.getParameter("flag")).thenReturn("1");
         Mockito.when(mockedRequest.getParameter("email")).thenReturn(email);
-        Mockito.when(mockedRequest.getParameter("username")).thenReturn(username);
+        Mockito.when(mockedRequest.getParameter("username_")).thenReturn(username);
         Mockito.when(mockedRequest.getParameter("nome")).thenReturn(nome);
         Mockito.when(mockedRequest.getParameter("cognome")).thenReturn(cognome);
-        Mockito.when(mockedRequest.getParameter("password")).thenReturn(password);
+        Mockito.when(mockedRequest.getParameter("password_")).thenReturn(password);
         Mockito.when(mockedRequest.getParameter("data")).thenReturn(null);
 
         String message = "La registrazione non va a buon fine perché " +
@@ -380,10 +377,10 @@ class AutenticazioneControllerTest extends Mockito {
 
         Mockito.when(mockedRequest.getParameter("flag")).thenReturn("1");
         Mockito.when(mockedRequest.getParameter("email")).thenReturn(email);
-        Mockito.when(mockedRequest.getParameter("username")).thenReturn(username);
+        Mockito.when(mockedRequest.getParameter("username_")).thenReturn(username);
         Mockito.when(mockedRequest.getParameter("nome")).thenReturn(nome);
         Mockito.when(mockedRequest.getParameter("cognome")).thenReturn(cognome);
-        Mockito.when(mockedRequest.getParameter("password")).thenReturn(password);
+        Mockito.when(mockedRequest.getParameter("password_")).thenReturn(password);
         Mockito.when(mockedRequest.getParameter("data")).thenReturn("1999-13-31");
 
         String message = "La registrazione non va a buon fine " +
@@ -404,10 +401,10 @@ class AutenticazioneControllerTest extends Mockito {
 
         Mockito.when(mockedRequest.getParameter("flag")).thenReturn("1");
         Mockito.when(mockedRequest.getParameter("email")).thenReturn(email);
-        Mockito.when(mockedRequest.getParameter("username")).thenReturn(username);
+        Mockito.when(mockedRequest.getParameter("username_")).thenReturn(username);
         Mockito.when(mockedRequest.getParameter("nome")).thenReturn(nome);
         Mockito.when(mockedRequest.getParameter("cognome")).thenReturn(cognome);
-        Mockito.when(mockedRequest.getParameter("password")).thenReturn(password);
+        Mockito.when(mockedRequest.getParameter("password_")).thenReturn(password);
         Mockito.when(mockedRequest.getParameter("data")).thenReturn(data);
 
         Mockito.doReturn(mockedServletContext).when(mockedRequest).getServletContext();

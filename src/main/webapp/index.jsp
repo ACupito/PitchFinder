@@ -21,10 +21,30 @@
 <!-- Navigation-->
 <%@ include file="view/navbar/navbar.jsp"%>
 <!-- Masthead-->
-<header class="masthead">
-    <div class="container">
-        <div class="masthead-subheading">Benvenuto!</div>
-        <div class="masthead-heading text-uppercase">It's Nice To Meet You</div>
+<header class="mastheadCarousel">
+    <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <img class="d-block w-100" src="images/homepage/homeTennis.jpg" alt="First slide">
+            </div>
+            <div class="carousel-item">
+                <img class="d-block w-100" src="images/homepage/basketHome.jpg" alt="Second slide">
+            </div>
+            <div class="carousel-item">
+                <img class="d-block w-100" src="images/homepage/calcioHome.jpg" alt="Third slide">
+            </div>
+            <div class="carousel-item">
+                <img class="d-block w-100" src="images/homepage/pallavoloHome.jpg" alt="Third slide">
+            </div>
+        </div>
+        <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+        </a>
+        <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+        </a>
     </div>
 </header>
 <!-- Services-->
@@ -340,6 +360,7 @@
 <script src="assets/mail/contact_me.js"></script>
 <!-- Core theme JS-->
 <script src="./js/homepage/js_homepage.js"></script>
+<script src="./js/homepage/check_login.js"></script>
 
 </body>
 </html>

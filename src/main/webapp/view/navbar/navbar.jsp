@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
     <div class="container">
-        <a class="navbar-brand js-scroll-trigger" href="#page-top"></a>
+        <a class="navbar-brand js-scroll-trigger" href="#page-top"><img src="images/Logo/logo_c08.png" alt="" /> </a>
         <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
             Menu
             <i class="fas fa-bars ml-1"></i>
@@ -21,7 +21,7 @@
                                     <input id="password" placeholder="Password" class="form-control form-control-sm" type="text" name="password">
                                 </div>
                                 <div class="form-group">
-                                    <button type="submit" class="btn btn-primary btn-block">Login</button>
+                                    <button type="submit" class="btn btn-primary btn-block" id="login" disabled>Login</button>
                                 </div>
                             </form>
                             <form action="autentication" method="get">
@@ -33,8 +33,25 @@
                         </li>
                     </ul>
                 </li>
+                <li class="dropdown order-1 nav-item">
+                    <button type="button" id="dropdownMenu2" data-toggle="dropdown" class="btn nav-link"><i class="fas fa-user-alt"></i><span class="caret"></span></button>
+                    <ul class="dropdown-menu dropdown-menu-right mt-2">
+                        <li class="px-3 py-2">
+                            <h4>BENVENUTO!</h4>
+                            <h5>Giorgio</h5>
+                            <form class="form" role="form" action="autentication" method="post">
+                                <input type="hidden" value="2" name="flag">
+                                <div class="form-group">
+                                    <button type="submit" class="btn btn-primary btn-block">Area personale</button>
+                                </div>
+                                <div class="form-group">
+                                    <button type="submit" class="btn btn-primary btn-block">Logout</button>
+                                </div>
+                            </form>
+                        </li>
+                    </ul>
+                </li>
             </ul>
-
         </div>
     </div>
 </nav>
