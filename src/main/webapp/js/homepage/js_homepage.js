@@ -5,6 +5,8 @@
     */
 (function ($) {
 
+
+
     "use strict"; // Start of use strict
 
     // Smooth scrolling using jQuery easing
@@ -54,5 +56,11 @@
     navbarCollapse();
     // Collapse the navbar when page is scrolled
     $(window).scroll(navbarCollapse);
+
+    $('.carousel').carousel({
+        interval: 2000
+    })
+
+
 })(jQuery); // End of use strict
 
