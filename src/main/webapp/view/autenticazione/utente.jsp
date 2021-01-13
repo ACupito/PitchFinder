@@ -9,35 +9,42 @@
 <html>
 <head>
     <title>Title</title>
-    <link rel="stylesheet" type="text/css" href="../../css/user_profile/style_user_profile.css">
-    <link rel="stylesheet" type="text/css" href="../../css/homepage/style_homepage.css">
+    <link rel="stylesheet" type="text/css" href="./css/user_profile/style_user_profile.css">
+    <link rel="stylesheet" type="text/css" href="./css/navbar/style_navbar.css">
 </head>
 <body>
 
 <%@ include file="../navbar/navbar.jsp"%>
 
 <div class="row1">
-    <fieldset>
-        <legend> Dati dell'utente: </legend>
-        <label class="label">
-            <span> ${utente.email} </span><br>
-        </label>
-        <label class="label">
-            <span> ${utente.username} </span><br>
-        </label>
-        <label class="label">
-            <span> ${utente.nome} </span><br>
-        </label>
+    <div class="row2">
+        <div>
+            <label class="label">
+                <span> ${utente.email} </span><br>
+            </label>
+            <label class="label">
+                <span> ${utente.username} </span><br>
+            </label>
+            <label class="label">
+                <span> ${utente.nome} </span><br>
+            </label>
+            <label class="label">
+                <span> ${utente.cognome} </span><br>
+            </label>
 
-        <label class="label">
-            <span> ${utente.cognome} </span><br>
-        </label>
-
-        <label class="label">
-            <span> ${utente.dataDiNascita} </span><br>
-        </label>
-    </fieldset>
+            <label class="label">
+                <span> ${utente.dataDiNascita} </span><br>
+            </label>
+        </div>
+    </div>
 </div>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"></script>
+<!-- Third party plugin JS-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
+<script src="./js/homepage/js_homepage.js"></script>
 
 </body>
 </html>

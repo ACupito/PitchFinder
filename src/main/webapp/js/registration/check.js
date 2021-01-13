@@ -1,5 +1,5 @@
-var borderOK = '1px solid green';
-var borderError = '1px solid red';
+var borderOK = '2px solid green';
+var borderError = '2px solid red';
 var emailOk = false;
 var usernameOk = false;
 var nomeOk = false;
@@ -31,9 +31,9 @@ $(document).ready(function() {
         cambiaStatoRegistrami();
     });
 
-    $("#username").on("input", function() {
+    $("#username_").on("input", function() {
 
-        var input = $("#username");
+        var input = $("#username_");
         var username = input.val();
 
         if (username.length >= 1
@@ -41,12 +41,12 @@ $(document).ready(function() {
             && username.match(/^((?!.*[\s])(?=.*[A-Z])(?=.*\d).{1,50})/)
             && username.substring(0, 5).toLowerCase().localeCompare("admin") != 0) {
 
-            $("#username").css("border-bottom", borderOK);
+            $("#username_").css("border-bottom", borderOK);
             usernameOk = true;
 
         } else {
 
-            $("#username").css("border-bottom", borderError);
+            $("#username_").css("border-bottom", borderError);
             usernameOk = false;
         }
 
@@ -96,21 +96,21 @@ $(document).ready(function() {
 
     });
 
-    $("#password").on("input", function() {
+    $("#password_").on("input", function() {
 
-        var input = $("#password");
+        var input = $("#password_");
         var password = input.val();
 
         if (password.length >= 1
             && password.length <= 50
             && password.match(/^((?!.*[\s])(?=.*[A-Z])(?=.*\d).{1,50})/)) {
 
-            $("#password").css("border-bottom", borderOK);
+            $("#password_").css("border-bottom", borderOK);
             passwordOk = true;
 
         } else {
 
-            $("#password").css("border-bottom", borderError);
+            $("#password_").css("border-bottom", borderError);
             passwordOk = false;
         }
 
