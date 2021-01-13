@@ -48,7 +48,8 @@ body{
 }
 
 .card-margin {
-    margin-bottom: 1.875rem;
+    margin-bottom: 0.937rem;
+    margin-top: 0.937rem;
 }
 
 .card {
