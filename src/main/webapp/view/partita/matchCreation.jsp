@@ -66,9 +66,14 @@
             <input type="text" id="nameG3" name="nameG3" class="objName" style="display: none"  onkeyup="validateName3()" >
             <label for="surnameG3" id="creation-label-surnameG3" style="display: none"> Cognome: </label>
             <input type="text" id="surnameG3" name="surnameG3" class="objSurname" style="display: none"  onkeyup="validateSurname3()" ><br>
+            <div id="div-Availability">
+                <form id="form-Availability">
+
+                </form>
+            </div>
             <% if(session.getAttribute("utente")!=null){ %>
             <input type="submit" id="creation-submit" name="btnMatchCreation" value="Conferma">
-            <input type="button" id="creation-availability" name="btnAvailability" value="Inserisci disponibili">
+            <input type="button" id="creation-availability" name="btnAvailability" value="Inserisci disponibili" onclick="showAvailability()">
             <%}else{ %>
             <label  id="creation-error" name="creation-error"> Effettuare il login per prenotare una partita!</label>
             <script>
