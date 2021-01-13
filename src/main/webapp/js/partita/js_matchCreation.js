@@ -184,6 +184,29 @@ function validateForm(){
     }
 }
 
+function showAvailability(){
+    var inviare = document.getElementById("creation-data");
+    inviare += "," +document.getElementById("creation-timestr");
+    inviare += "," +document.getElementById("creation-timeend");
+    if(isTimeValid && isDateValid){
+        var xmlHttpReq = new XMLHttpRequest();
+
+        xmlHttpReq.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                alert("ECCOME"+this.response);
+            }
+        }
+        xmlHttpReq.open("GET", "/AvailabilityAj?dataTime="+encodeURIComponent(inviare) , true);
+        xmlHttpReq.send();
+
+    }else{
+        alert("Inserire correttamente data e/o orari");
+    }
+
+
+
+}
+
 $(document).ready( function(){
         minDate()
         maxDate();
