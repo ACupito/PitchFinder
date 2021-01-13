@@ -1226,8 +1226,7 @@ input[type=button].btn-block {
 }
 
 #mainNav {
-    padding-top: 1rem;
-    padding-bottom: 1rem;
+
     background-color: #212529;
 }
 #mainNav .navbar-toggler {
@@ -1266,6 +1265,14 @@ input[type=button].btn-block {
 .dropdown#dropdownMenu1:hover {
     background-color: white;
 }
+
+#mainNav .navbar-nav .dropdown#dropdownMenu2 {
+    outline: none;
+}
+.dropdown#dropdownMenu2:hover {
+    background-color: white;
+}
+
 @media (min-width: 50px) {
     #mainNav {
         background-color: #212529;
@@ -1273,8 +1280,7 @@ input[type=button].btn-block {
 }
 @media (min-width: 992px) {
     #mainNav {
-        padding-top: 1.5rem;
-        padding-bottom: 1.5rem;
+
         border: none;
         background-color: #212529;
         transition: padding-top 0.3s ease-in-out, padding-bottom 0.3s ease-in-out;
@@ -1284,13 +1290,12 @@ input[type=button].btn-block {
         transition: font-size 0.3s ease-in-out;
     }
     #mainNav .navbar-brand img {
-        height: 2rem;
+        height: 60px;
         transition: height 0.3s ease-in-out;
     }
     #mainNav.navbar-shrink {
         color: #079e3e;
-        padding-top: 1rem;
-        padding-bottom: 1rem;
+
         background-color: #212529;
     }
     #mainNav.navbar-shrink .navbar-brand {
@@ -1298,7 +1303,7 @@ input[type=button].btn-block {
     }
     #mainNav.navbar-shrink .navbar-brand svg,
     #mainNav.navbar-shrink .navbar-brand img {
-        height: 1.5rem;
+        height: 60px;
     }
     #mainNav .navbar-nav .nav-item {
         margin-right: 1rem;
