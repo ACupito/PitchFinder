@@ -9,6 +9,10 @@
 <html>
 <head>
     <title>Title</title>
+    <link rel="stylesheet" type="text/css" href="./css/navbar/style_navbar.css">
+    <link rel="stylesheet" type="text/css" href="./css/user_profile/login_failed.css">
+    <link href = "https://fonts.googleapis.com/css?family=Poppins" rel = "stylesheet">
+    <script src = "https://kit.fontawesome.com/a076d05399.js"></script>
 </head>
 <body>
 
