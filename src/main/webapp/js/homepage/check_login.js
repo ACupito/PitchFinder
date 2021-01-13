@@ -11,8 +11,7 @@ $(document).ready(function() {
 
         if (username.length >= 1
             && username.length <= 50
-            && username.match(/^((?!.*[\s])(?=.*[A-Z])(?=.*\d).{1,50})/)
-            && username.substring(0, 5).toLowerCase().localeCompare("admin") != 0) {
+            && username.match(/^((?!.*[\s])(?=.*[A-Z])(?=.*\d).{1,50})/)) {
 
             $("#username").css("border-bottom", borderOK);
             usernameOk = true;

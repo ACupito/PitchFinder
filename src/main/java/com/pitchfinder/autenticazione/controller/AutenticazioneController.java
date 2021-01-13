@@ -61,8 +61,11 @@ public class AutenticazioneController extends HttpServlet {
 
         AutenticazioneService as = new AutenticazioneServiceImpl();
 
-        String messaggio = "";
+        String messaggio;
         int flag = Integer.parseInt(request.getParameter("flag"));
+
+        Admin aCheck;
+        Utente uCheck;
 
         if (flag == -1) {
 
@@ -70,8 +73,13 @@ public class AutenticazioneController extends HttpServlet {
             dispatcher.forward(request, response);
         }
 
-
         if (flag == 1) {
+
+            uCheck = (Utente)session.getAttribute("utente");
+
+            if (uCheck != null)
+                throw new IllegalArgumentException("Sei loggato, non puoi registrati !");
+
             String email = request.getParameter("email");
             String username = request.getParameter("username_");
             String nome = request.getParameter("nome");
@@ -184,6 +192,12 @@ public class AutenticazioneController extends HttpServlet {
 
         } else if (flag == 2) {
 
+            aCheck = (Admin)session.getAttribute("admin");
+            uCheck = (Utente)session.getAttribute("utente");
+
+            if (aCheck != null || uCheck != null)
+                throw new IllegalArgumentException("Sei già loggato");
+
             String username = request.getParameter("username");
             String password = request.getParameter("password");
 
@@ -241,6 +255,17 @@ public class AutenticazioneController extends HttpServlet {
                     dispatcher.forward(request, response);
                 }
             }
+
+        } else if (flag == 3) {
+
+            dispatcher = request.getServletContext().getRequestDispatcher("/view/autenticazione/utente.jsp");
+            dispatcher.forward(request, response);
+
+        } else if (flag == 4) {
+
+            session.setAttribute("utente", null);
+            dispatcher = request.getServletContext().getRequestDispatcher("/index.jsp");
+            dispatcher.forward(request, response);
         }
     }
 }
