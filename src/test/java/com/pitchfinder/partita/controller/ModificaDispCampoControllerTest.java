@@ -187,7 +187,7 @@ public class ModificaDispCampoControllerTest {
         Mockito.when(mockedRequest.getParameter("fine")).thenReturn(ORARIO_FINE);
         Mockito.when(mockedRequest.getParameter("idcampo")).thenReturn(ID_CAMPO);
 
-        servlet.doPost(mockedRequest, mockedResponse);
+        servlet.doGet(mockedRequest, mockedResponse);
         Mockito.verify(mockedResponse).setContentType("La modifica va a buon fine");
 
     }

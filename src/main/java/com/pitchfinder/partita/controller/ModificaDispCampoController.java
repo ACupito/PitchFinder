@@ -73,5 +73,4 @@ public class ModificaDispCampoController extends HttpServlet {
     public void doGet(final HttpServletRequest request, final HttpServletResponse response) {
         this.doPost(request, response);
     }
-
 }
