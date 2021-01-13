@@ -76,7 +76,7 @@
 
                         </div>
                         <ol class="widget-49-meeting-points">
-                            <li class="widget-49-meeting-item"><span><Strong>Posti Disponibili</Strong> - <%= evento.getAvailableSits()%></span></li>
+                            <li class="widget-49-meeting-item"><span><Strong>Posti Disponibili</Strong> - ${postiDisponibili}</span></li>
                             <li class="widget-49-meeting-item"><span><strong>Il nostro ospite</strong> - <%= evento.getGuest()%></span></li>
                             <li class="widget-49-meeting-item"><span><strong>Descrizione:</strong> - <%= evento.getDescription()%></span></li>
                         </ol>
@@ -86,7 +86,7 @@
                                 <input type="hidden" class="eventName" name="eventName" value="<%=evento.getName()%>">
                                 <ln class="widget-49-meeting-item"><span><strong>Email:</strong></span> </ln>
                                 <input type="email"  name="email" ><br>
-                                <input type="submit" class="btn btn-sm btn-flash-border-primary" name="Conferma" value="Prenotati!">
+                                <input type="submit" class="btn btn-sm btn-flash-border-primary" id="conferma" name="Conferma" value="Prenotati!">
                                     <input type="submit" class="btn btn-sm btn-flash-border-primary" name="Indietro" value="Indietro">
                             </form>
                         </div>
@@ -123,6 +123,7 @@
 <script src="assets/mail/contact_me.js"></script>
 <!-- Core theme JS-->
 <script src="../../js/homepage/js_homepage.js"></script>
+<!--Script for alert-->
     <%String ok=(String) request.getAttribute("prenotazione");
     if (ok != null) {
         request.setAttribute("prenotazione",null);
@@ -131,5 +132,7 @@
             alert("Prenotazione effettuata con successo!");
         </script>
     <%}%>
+
+
 </body>
 </html>

@@ -44,6 +44,10 @@ public class Prenotazione extends HttpServlet {
         EventoService eventoService = new EventoServiceImpl();
         Evento evento = eventoService.getEvento(nomeEvento, dateEvento);
 
+        int nPrenotati = eventoService.findNumeroPartecipantiByEvento(evento);
+        int postiDisponibili = evento.getAvailableSits() - nPrenotati;
+
+        req.setAttribute("postiDisponibili", postiDisponibili);
         req.setAttribute("evento", evento);
 
         RequestDispatcher dispatcher =
