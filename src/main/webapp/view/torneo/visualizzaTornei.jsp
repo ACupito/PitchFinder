@@ -1,4 +1,6 @@
-<%--
+<%@ page import="java.sql.Date" %>
+<%@ page import="com.pitchfinder.torneo.entity.Torneo" %>
+<%@ page import="java.util.ArrayList" %><%--
   Created by IntelliJ IDEA.
   User: Pollax
   Date: 09/01/2021
@@ -36,50 +38,54 @@
     </div>
 </header>
 
-<%--<ul>--%>
-<%--<c:forEach items="${tornei}" var="torneo">--%>
-
-<%--        <li>${torneo.nome}</li>--%>
-
-<%--</c:forEach>--%>
-<%--</ul>--%>
-
-
 <div class="containerCards">
     <div class="row">
 
+        <%
+            Date current = new Date(System.currentTimeMillis());
+            ArrayList<Torneo> tornei = new ArrayList<Torneo>();
+            tornei = (ArrayList<Torneo>) application.getAttribute("tornei");
+            if(tornei.isEmpty()){ %>
+            <h4>NON CI SONO TORNEI DISPONIBILI</h4>
 
-        <div class="col-lg-4">
+        <%}else{
+            for (Torneo t: tornei) {
+                if(current.before(t.getDataFine())) {
+        %>
+
+     <div class="col-lg-4">
             <div class="card card-margin">
                 <div class="card-header no-border">
-                    <h5 class="card-title">MOM</h5>
+                    <h5 class="card-title">Torneo - Tennis</h5>
                 </div>
                 <div class="card-body pt-0">
                     <div class="widget-49">
                         <div class="widget-49-title-wrapper">
                             <div class="widget-49-date-primary">
-                                <span class="widget-49-date-day">09</span>
-                                <span class="widget-49-date-month">apr</span>
+                                <span class="widget-49-date-day"><%= t.getStringDay(t.getDataInizio().getDay())%></span>
+                                <span class="widget-49-date-month"><%= t.getStringMonth(t.getDataInizio().getMonth())%></span>
                             </div>
                             <div class="widget-49-meeting-info">
-                                <span class="widget-49-pro-title">PRO-08235 DeskOpe. Website</span>
-                                <span class="widget-49-meeting-time">12:00 to 13.30 Hrs</span>
+                                <span class="widget-49-pro-title"><%= t.getNome()%></span>
+                                <span class="widget-49-meeting-time">Dal giorno <%= t.getDataInizio()%> al <%= t.getDataFine()%></span>
                             </div>
                         </div>
-                        <ol class="widget-49-meeting-points">
-                            <li class="widget-49-meeting-item"><span>Expand module is removed</span></li>
-                            <li class="widget-49-meeting-item"><span>Data migration is in scope</span></li>
-                            <li class="widget-49-meeting-item"><span>Session timeout increase to 30 minutes</span></li>
-                        </ol>
                         <div class="widget-49-meeting-action">
-                            <a href="#" class="btn-display btn-sm btn-flash-border-primary">INFO <i class="fas fa-arrow-right"></i></a>
+                            <form action="torneoServlet" method="get">
+                                <input type="hidden" name="idCampo" value="1002">
+                                <input type="hidden" name="nome" value="<%= t.getNome()%>">
+                                <input type="hidden" name="dataInizio" value="<%= t.getDataInizio()%>">
+                                <button class="btn-display btn-sm btn-flash-border-primary">INFO <i class="fas fa-arrow-right"></i></button>
+                            </form>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
 
-
+        <%}%>
+        <%}%>
+        <%}%>
 
 
     </div>

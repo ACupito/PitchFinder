@@ -118,7 +118,7 @@ class TorneoServiceImplTest {
 
         //creation of a match to test the correct occupation entry, eliminating the scheduled match
         PartitaDAO partitaDAO = new PartitaDAOImpl();
-        Partita p = new Partita(1000, ID_CAMPO, "manuzzi99@gmail.com", Date.valueOf("2020-12-28"),
+        Partita p = new Partita(1000, ID_CAMPO, "we@gmail.com", Date.valueOf("2020-12-28"),
                 Time.valueOf("17:00:00"), Time.valueOf("18:00:00"));
         partitaDAO.doSavePartita(p);
 

@@ -87,10 +87,9 @@ public class TorneoDAOImpl implements TorneoDAO {
             ResultSet rs = ps.executeQuery();
 
             List<Torneo> tornei = new ArrayList<>();
-            Torneo t = new Torneo();
 
             while (rs.next()) {
-
+                Torneo t = new Torneo();
                 t.setNome(rs.getString(1));
                 t.setDataInizio(rs.getDate(2));
                 t.setCampoIdentificativo(rs.getInt(3));
@@ -105,7 +104,6 @@ public class TorneoDAOImpl implements TorneoDAO {
                 tornei.add(t);
 
             }
-
             return tornei;
 
         } catch (SQLException s) {
