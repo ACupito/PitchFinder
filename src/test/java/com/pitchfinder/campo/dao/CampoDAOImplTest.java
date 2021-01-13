@@ -31,7 +31,7 @@ public class CampoDAOImplTest {
     private static final String DATA = "2020-10-10";
     private static final String TEMPO_INIZIO = "10:00";
     private static final String TEMPO_FINE = "11:00";
-    private static final String EMAIL = "manuzzi99@gmail.com";
+    private static final String EMAIL = "manuzzi99ewqe@gmail.com";
 
     /**
      * This is an instance of Campo entity.
@@ -58,6 +58,11 @@ public class CampoDAOImplTest {
 
         as2.registraUtente("mario111@gmail.com", "Mariox111",
                 "Mario", "Rossi", "esse3", d);
+
+        AutenticazioneService as3 = new AutenticazioneServiceImpl();
+
+        as3.registraUtente(EMAIL, "Mar232323",
+                "Mari", "Ros", "es23", d);
 
         cdao.doSaveDisponibilita("mario129@gmail.com", ID_CAMPO, Date.valueOf("2010-10-10"), Time.valueOf("20:20".concat(":00")), Time.valueOf("21:00".concat(":00")));
         cdao.doSaveDisponibilita("mario111@gmail.com", ID_CAMPO, Date.valueOf(DATA), Time.valueOf(TEMPO_INIZIO.concat(":00")), Time.valueOf(TEMPO_FINE.concat(":00")));
@@ -201,7 +206,9 @@ public class CampoDAOImplTest {
         cdao.doRemoveDisponibilita("mario111@gmail.com", ID_CAMPO);
         AutenticazioneService as1 = new AutenticazioneServiceImpl();
         AutenticazioneService as2 = new AutenticazioneServiceImpl();
+        AutenticazioneService as3 = new AutenticazioneServiceImpl();
         as1.removeUtente("Mariox129");
         as2.removeUtente("Mariox111");
+        as3.removeUtente("Mar232323");
     }
 }
