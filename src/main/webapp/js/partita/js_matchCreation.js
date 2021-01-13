@@ -139,6 +139,9 @@ function validateNPlayer(){
         isPlayerNumberValid=true;
         nPlayer = $("#creation-player").val();
 
+        if(nPlayer==3) {
+            document.getElementById("div-Availability").style.display='none';
+        }
         for(let j=1; j<4;j++){
             if(j<=nPlayer){
                 document.getElementById("nameG"+j).style.display='inline';
@@ -183,68 +186,72 @@ function validateForm(){
     }
 }
 function addPlayer(){
-    var checkboxes = document.getElementsByName("players");
-    var numberOfCheckedItems = 0;
-    for(var i = 0; i < checkboxes.length; i++)
-    {
-        if(checkboxes[i].checked)
-            numberOfCheckedItems++;
+        var checkboxes = document.getElementsByName("players");
+        var numberOfCheckedItems = 0;
+        for(var i = 0; i < checkboxes.length; i++)
+        {
+            if(checkboxes[i].checked)
+                numberOfCheckedItems++;
+        }
+        if(numberOfCheckedItems > )
+        {
+            alert("Impossibile selezionare altri");
+            return false;
+        }
     }
-    if(numberOfCheckedItems > 2)
-    {
-        alert("You can't select more than two favorite pets!");
-        return false;
-    }
+
 }
 
 function showAvailability(){
-    var inviare = document.getElementById("creation-data").value;
-    inviare += "," +document.getElementById("creation-timestr").value;
-    inviare += "," +document.getElementById("creation-timeend").value;
-    validateTime();
+    if(!(nPlayer==3)){
+        document.getElementById("div-Availability").style.display='block';
+        var inviare = document.getElementById("creation-data").value;
+        inviare += "," +document.getElementById("creation-timestr").value;
+        inviare += "," +document.getElementById("creation-timeend").value;
+        validateTime();
 
-    if(isTimeValid && isDateValid){
-        var xmlHttpReq = new XMLHttpRequest();
-        var data;
-        var nomi;
-        var cognomi;
-        xmlHttpReq.onreadystatechange = function() {
-            if (this.readyState == 4 && this.status == 200) {
-                data = JSON.parse(this.response);
-                nomi = data.nomi.toString().split(',');
-                cognomi = data.cognomi.toString().split(',');
-                alert("Nomi:"+nomi +"\n Cognomi"+cognomi);
+        if(isTimeValid && isDateValid){
+            var xmlHttpReq = new XMLHttpRequest();
+            var data;
+            var nomi;
+            var cognomi;
+            xmlHttpReq.onreadystatechange = function() {
+                if (this.readyState == 4 && this.status == 200) {
+                    data = JSON.parse(this.response);
+                    nomi = data.nomi.toString().split(',');
+                    cognomi = data.cognomi.toString().split(',');
+                    alert("Nomi:"+nomi +"\n Cognomi"+cognomi);
 
-                var father = document.getElementById("form-Availability");
-                for(i=0;i<=nomi.length-1;i++){
-                    var child = document.createElement("input");
+                    var father = document.getElementById("form-Availability");
+                    for(i=0;i<=nomi.length-1;i++){
+                        var child = document.createElement("input");
 
-                    child.setAttribute("type", "checkbox");
-                    child.setAttribute("value", nomi[i] +","+cognomi[i]);
-                    child.setAttribute("id","player"+i);
-                    child.setAttribute("name","players");
-                    father.appendChild(child);
-                    var label = document.createElement("label");
-                    label.setAttribute("for","player"+i);
-                    var testoLabel = document.createTextNode(nomi[i] +","+cognomi[i]);
-                    label.appendChild(testoLabel);
+                        child.setAttribute("type", "checkbox");
+                        child.setAttribute("value", nomi[i] +","+cognomi[i]);
+                        child.setAttribute("id","player"+i);
+                        child.setAttribute("name","players");
+                        father.appendChild(child);
+                        var label = document.createElement("label");
+                        label.setAttribute("for","player"+i);
+                        var testoLabel = document.createTextNode(nomi[i] +","+cognomi[i]);
+                        label.appendChild(testoLabel);
 
-                    father.appendChild(label);
-                    var br = document.createElement("br");
-                    father.appendChild(br);
-                    document.getElementById("player"+i).addEventListener("click", addPlayer)
+                        father.appendChild(label);
+                        var br = document.createElement("br");
+                        father.appendChild(br);
+                        document.getElementById("player"+i).addEventListener("click", addPlayer)
+                    }
                 }
             }
+            xmlHttpReq.open("GET", "AvailabilityAj?dataTime="+encodeURIComponent(inviare) , true);
+            xmlHttpReq.send();
+
+        }else{
+            alert(isTimeValid+""+isDateValid+"Inserire correttamente data e/o orari");
         }
-        xmlHttpReq.open("GET", "AvailabilityAj?dataTime="+encodeURIComponent(inviare) , true);
-        xmlHttpReq.send();
-
     }else{
-        alert(isTimeValid+""+isDateValid+"Inserire correttamente data e/o orari");
+        return;
     }
-
-
-
 }
 
 $(document).ready( function(){
