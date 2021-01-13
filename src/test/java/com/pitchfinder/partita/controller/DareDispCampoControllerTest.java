@@ -1,6 +1,8 @@
 package com.pitchfinder.partita.controller;
 import com.pitchfinder.autenticazione.entity.Admin;
 import com.pitchfinder.autenticazione.entity.Utente;
+import com.pitchfinder.autenticazione.services.AutenticazioneService;
+import com.pitchfinder.autenticazione.services.AutenticazioneServiceImpl;
 import com.pitchfinder.campo.dao.CampoDAO;
 import com.pitchfinder.campo.dao.CampoDAOImpl;
 import org.junit.jupiter.api.AfterAll;
@@ -40,7 +42,10 @@ public class DareDispCampoControllerTest {
         mockedRequest = Mockito.mock(HttpServletRequest.class);
         mockedResponse = Mockito.mock(HttpServletResponse.class);
         session = Mockito.mock(HttpSession.class);
-
+        AutenticazioneService as3 = new AutenticazioneServiceImpl();
+        Date d = new Date(1999 - 1900, 10, 4);
+        as3.registraUtente(email, "Mar232323",
+                "Mari", "Ros", "es23", d);
 
         //session setting.
         Mockito.when(mockedRequest.getSession()).thenReturn(session);
@@ -53,7 +58,8 @@ public class DareDispCampoControllerTest {
         mockedResponse = null;
         session = null;
 
-
+        AutenticazioneService as3 = new AutenticazioneServiceImpl();
+        as3.removeUtente("Mar232323");
         //Remove Disponibilita
         daoCampo.doRemoveDisponibilita(email, Integer.parseInt(ID_CAMPO));
 
