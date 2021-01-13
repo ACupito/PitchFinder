@@ -1,6 +1,9 @@
+<%@ page import="com.pitchfinder.autenticazione.entity.Utente" %>
+<%Utente utente1 = (Utente)session.getAttribute("utente");%>
+
 <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
     <div class="container">
-        <a class="navbar-brand js-scroll-trigger" href="#page-top"><img src="images/Logo/logo_c08.png" alt="" /> </a>
+        <a class="navbar-brand js-scroll-trigger" href="home"><img src="images/Logo/logo_c08.png" alt="" /> </a>
         <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
             Menu
             <i class="fas fa-bars ml-1"></i>
@@ -8,6 +11,7 @@
         <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav text-uppercase ml-auto">
                 <li class="nav-item"><a class="nav-link js-scroll-trigger" href="home">HOME</a></li>
+                <%if (utente1 == null) {%>
                 <li class="dropdown order-1 nav-item">
                     <button type="button" id="dropdownMenu1" data-toggle="dropdown" class="btn nav-link">LOGIN<span class="caret"></span></button>
                     <ul class="dropdown-menu dropdown-menu-right mt-2">
@@ -33,6 +37,7 @@
                         </li>
                     </ul>
                 </li>
+                <%} else {%>
                 <li class="dropdown order-1 nav-item">
                     <button type="button" id="dropdownMenu2" data-toggle="dropdown" class="btn nav-link">
                         <i class="fas fa-user-alt"></i>
@@ -57,6 +62,7 @@
                         </li>
                     </ul>
                 </li>
+                <%}%>
             </ul>
         </div>
     </div>
