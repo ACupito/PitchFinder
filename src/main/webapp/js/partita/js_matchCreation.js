@@ -67,8 +67,8 @@ function validateEnd(){
         }
     }
     $("#creation-label-end").css("color","#4CAF50");
-    hhEnd = $("creation-timestr").val().substring(0,2);
-    mmEnd = $("creation-timestr").val().substring(3);
+    hhEnd = $("creation-timeend").val().substring(0,2);
+    mmEnd = $("creation-timeend").val().substring(3);
 }
 //Time validation legal time for a match
 function validateTime(){
@@ -85,14 +85,24 @@ function validateTime(){
             $("#creation-label-str").css("color","#4CAF50");
             $("#creation-label-end").css("color","#4CAF50");
             isTimeValid=true;
+            alert("aootrue1");
         }
+    }else if(hhEnd - hhStr < 1){
+        alert("aoooo");
+        $("#creation-label-str").css("color","#FF0000");
+        $("#creation-label-end").css("color","#FF0000");
+        isTimeValid=false;
     }else{
+        alert("aootrue");
         $("#creation-label-str").css("color","#4CAF50");
         $("#creation-label-end").css("color","#4CAF50");
         isTimeValid=true;
     }
 }
-
+function clickTimeValidate(){
+    validateEnd();
+    validateTime();
+}
 function validateName1(){
 
     if( $("#nameG1").val().match("^[a-zA-Z\\s]+$") &&  $("#nameG1").val().length > 2 && $("#nameG1").val().length<12){
@@ -271,7 +281,6 @@ function showAvailability(){
                     data = JSON.parse(this.response);
                     nomi = data.nomi.toString().split(',');
                     cognomi = data.cognomi.toString().split(',');
-
                     var father = document.getElementById("form-Availability");
                     if(father.hasChildNodes()){
                         for(j=0;j<father.childElementCount;j++){
@@ -279,28 +288,35 @@ function showAvailability(){
                             j--;
                         }
                     }
-                    var title = document.createElement("h4");
-                    var titleText = document.createTextNode("Lista dei giocatori disponibili per questa partita");
-                    title.appendChild(titleText);
-                    father.appendChild(title);
+                    if(nomi[0].length<=2 || cognomi[0].length<=2){
+                        var title = document.createElement("h4");
+                        var titleText = document.createTextNode("Non ci sono giocatori disponibili per la data e fascia oraria selezionata");
+                        title.appendChild(titleText);
+                        father.appendChild(title);
+                    }else{
+                        var title = document.createElement("h4");
+                        var titleText = document.createTextNode("Lista dei giocatori disponibili per questa partita");
+                        title.appendChild(titleText);
+                        father.appendChild(title);
 
-                    for(i=0;i<=nomi.length-1;i++){
-                        var child = document.createElement("input");
+                        for(i=0;i<=nomi.length-1;i++){
+                            var child = document.createElement("input");
 
-                        child.setAttribute("type", "checkbox");
-                        child.setAttribute("value", nomi[i] +","+cognomi[i]);
-                        child.setAttribute("id","player"+i);
-                        child.setAttribute("name","players");
-                        father.appendChild(child);
-                        var label = document.createElement("label");
-                        label.setAttribute("for","player"+i);
-                        var testoLabel = document.createTextNode(nomi[i] +","+cognomi[i]);
-                        label.appendChild(testoLabel);
+                            child.setAttribute("type", "checkbox");
+                            child.setAttribute("value", nomi[i] +","+cognomi[i]);
+                            child.setAttribute("id","player"+i);
+                            child.setAttribute("name","players");
+                            father.appendChild(child);
+                            var label = document.createElement("label");
+                            label.setAttribute("for","player"+i);
+                            var testoLabel = document.createTextNode(nomi[i] +","+cognomi[i]);
+                            label.appendChild(testoLabel);
 
-                        father.appendChild(label);
-                        var br = document.createElement("br");
-                        father.appendChild(br);
-                        document.getElementById("player"+i).addEventListener("click", addPlayer)
+                            father.appendChild(label);
+                            var br = document.createElement("br");
+                            father.appendChild(br);
+                            document.getElementById("player"+i).addEventListener("click", addPlayer)
+                        }
                     }
                 }
             }
