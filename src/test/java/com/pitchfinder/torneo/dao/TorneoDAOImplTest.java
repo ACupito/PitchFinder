@@ -55,7 +55,7 @@ class TorneoDAOImplTest {
     /**
      * This is an instance of Torneo entity.
      */
-    private Torneo t;
+    private Torneo t, tcount;
 
     /**
      * This is an instance of Squadra entity.
@@ -76,7 +76,7 @@ class TorneoDAOImplTest {
         sdao = new SquadraDAOImpl();
         t = new Torneo();
         u = new Utente();
-
+        tcount = new Torneo();
     }
 
     /**
@@ -214,25 +214,25 @@ class TorneoDAOImplTest {
     @Test
     void countIscritti() {
 
-        t.setAdminUsername("memex99");
-        t.setNome("Torneo");
-        t.setCampoIdentificativo(1002);
-        t.setTipo(TIPO);
-        t.setStruttura(STRUTTURA);
-        t.setNumeroSquadre(MAX_SQUADRE);
-        t.setMinNumeroPartecipantiPerSquadra(MIN_PARTECIPANTI);
-        t.setMaxNumeroPartecipantiPerSquadra(MAX_PARTECIPANTI);
-        t.setGiornoPartite(GIORNO_PARTITE);
-        t.setDataInizio(Date.valueOf(DATA_INIZIO));
-        t.setDataFine(Date.valueOf(DATA_FINE));
-        tdao.doSaveTorneo(t);
+        tcount.setAdminUsername("memex99");
+        tcount.setNome("Torneo");
+        tcount.setCampoIdentificativo(1002);
+        tcount.setTipo(TIPO);
+        tcount.setStruttura(STRUTTURA);
+        tcount.setNumeroSquadre(MAX_SQUADRE);
+        tcount.setMinNumeroPartecipantiPerSquadra(MIN_PARTECIPANTI);
+        tcount.setMaxNumeroPartecipantiPerSquadra(MAX_PARTECIPANTI);
+        tcount.setGiornoPartite(GIORNO_PARTITE);
+        tcount.setDataInizio(Date.valueOf(DATA_INIZIO));
+        tcount.setDataFine(Date.valueOf(DATA_FINE));
+        tdao.doSaveTorneo(tcount);
         u = new Utente("ciao@gmail.com", "test", "test", "test","test", Date.valueOf("1998-10-12"));
         udao.doSaveUtente(u);
-        s = new Squadra("juve", t.getNome(), t.getDataInizio(), t.getCampoIdentificativo(),2,"lucia","ciao@gmail.com");
+        s = new Squadra("juve", tcount.getNome(), tcount.getDataInizio(), tcount.getCampoIdentificativo(),2,"lucia","ciao@gmail.com");
         sdao.doSaveSquadra(s);
-        s1 = new Squadra("ve", t.getNome(), t.getDataInizio(), t.getCampoIdentificativo(),2,"lucia","ciao@gmail.com");
+        s1 = new Squadra("ve", tcount.getNome(), tcount.getDataInizio(), tcount.getCampoIdentificativo(),2,"lucia","ciao@gmail.com");
         sdao.doSaveSquadra(s1);
-        assertEquals(2,tdao.doRetrieveNIscritti(t));
+        assertEquals(2,tdao.doRetrieveNIscritti(tcount));
 
     }
 
@@ -243,8 +243,10 @@ class TorneoDAOImplTest {
     @AfterAll
     void tearDown() {
         tdao.doRemoveTorneo(t);
+        tdao.doRemoveTorneo(tcount);
         tdao = null;
         t = null;
+        tcount = null;
         udao.doRemoveUtente(u);
         sdao.doRemoveSquadra(s);
         sdao.doRemoveSquadra(s1);

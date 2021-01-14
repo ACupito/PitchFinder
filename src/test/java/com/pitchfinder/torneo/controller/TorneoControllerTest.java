@@ -679,6 +679,9 @@ class TorneoControllerTest {
         Mockito.when(mockedRequest.getParameter("dataFine")).thenReturn("2022-10-30");
         Mockito.when(mockedRequest.getParameter("giornoPartite")).thenReturn("Sabato");
 
+        Mockito.doReturn(mockedServletContext).when(mockedRequest).getServletContext();
+        Mockito.doReturn(mockedDispatcher).when(mockedServletContext).getRequestDispatcher("/view/torneo/dettagliTorneo.jsp");
+
         servlet.doGet(mockedRequest, mockedResponse);
         Mockito.verify(mockedResponse).setContentType("Torneo ottenuto");
 
