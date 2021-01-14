@@ -40,15 +40,19 @@
 
 </head>
 <!------ Include the above in your HEAD tag ---------->
-<!-- Navigation-->
-<%@ include file="../navbar/navbar.jsp"%>
+
+
 
 <body>
+<!-- Navigation-->
+<%@ include file="../navbar/navbar.jsp"%>
 
 <div class="wrapper">
     <div class="inner">
         <form action="DareDispCampoController">
+
             <h3>Modifica la tua disponibilità per un campo</h3>
+            <h5>è necessario aver fatto il login per proseguire nella conferma</h5>
             <div class="form-row">
                 <div class="form-wrapper">
                     <label for="data">Data</label>
@@ -78,19 +82,20 @@
                     <i class="zmdi zmdi-chevron-down"></i>
                 </div>
             </div>
-            <div class="checkbox">
-                <label>
-                    <input type="checkbox"> No one rejects, dislikes, or avoids pleasure itself.
-                    <span class="checkmark"></span>
-                </label>
-            </div>
-            <button type="submit" name="Conferma" value="Conferma" data-text="Conferma">
+            <% if(session.getAttribute("utente")!=null){ %>
+            <button type="submit" name="Conferma" value="Conferma" data-text="Conferma" id="Conferma">
                 <span>Conferma</span>
             </button>
 
-            <button type="submit" name="Annulla" value="Annulla" data-text="Annulla">
+            <button type="submit" name="Annulla" value="Annulla" data-text="Annulla" id="Annulla">
                 <span>Annulla</span>
             </button>
+            <%}else{ %>
+            <label  id="creation-error" name="creation-error"> Effettuare il login per modificare la disponibilità!</label>
+            <script>
+                setTimeout(() => {alert("Effettuare il login per modificare la disponibilità!");}, 2000)
+            </script>
+            <%} %>
         </form>
     </div>
 </div>
