@@ -1,7 +1,6 @@
 package com.pitchfinder.torneo.controller;
 
-import com.mysql.cj.Session;
-import com.pitchfinder.autenticazione.entity.Admin;
+
 import com.pitchfinder.autenticazione.entity.Utente;
 import com.pitchfinder.torneo.entity.Torneo;
 import com.pitchfinder.torneo.services.TorneoService;

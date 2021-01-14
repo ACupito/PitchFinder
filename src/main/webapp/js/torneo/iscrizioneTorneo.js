@@ -23,8 +23,7 @@ function Caselle(){
     var nomeCapitanoOk = false;
     var cognomeOk = false;
     var nGiocatori = false;
-    var nomiGiocatori = false;
-    var cognomiGiocatori = false;
+
 
     function validaNGiocatori() {
         var input = document.forms['iscrizione']['nGiocatori'];
@@ -37,10 +36,6 @@ function Caselle(){
         }
         cambiaStatoIscrizione();
     }
-    function  validaPlayers(){
-
-    }
-
 
     function validaNome() {
         var input = document.forms['iscrizione']['nomeSquadra'];
@@ -83,7 +78,7 @@ function validaCognomeCapitano() {
 
 
 function cambiaStatoIscrizione() {
-        if  (nomeOk&&cognomeOk&&nomeCapitanoOk&&nGiocatori()) {
+        if  (nomeOk&&cognomeOk&&nomeCapitanoOk&&nGiocatori) {
             document.getElementById('conferma').disabled = false;
         } else {
             document.getElementById('conferma').disabled = true;
