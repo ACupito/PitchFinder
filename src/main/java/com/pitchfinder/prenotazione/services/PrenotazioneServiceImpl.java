@@ -31,7 +31,7 @@ public class PrenotazioneServiceImpl implements PrenotazioneService  {
             return null;
         }
 
-        destinatario = "pitchfinder@gmail.com";
+        destinatario = utenteEmail;
         mittente = "pitchfinder@gmail.com";
         oggetto = "Prenotazione";
 
