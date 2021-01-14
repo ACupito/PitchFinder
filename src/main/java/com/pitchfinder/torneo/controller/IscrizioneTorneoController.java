@@ -8,7 +8,9 @@ import com.pitchfinder.torneo.entity.Torneo;
 import com.pitchfinder.torneo.services.TorneoService;
 import com.pitchfinder.torneo.services.TorneoServiceImpl;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -16,7 +18,7 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-
+@WebServlet("/IscrizioneTorneoController")
 public class IscrizioneTorneoController extends HttpServlet {
 
     /**
@@ -168,6 +170,7 @@ public class IscrizioneTorneoController extends HttpServlet {
             }
 
             resp.setContentType("Iscrizione avvenuta con successo");
+
 
         } else {
             resp.setContentType("Indietro");

@@ -22,7 +22,7 @@
 
         <div class="row">
             <div class="card-header" style = "background: #fff;">
-
+                <input type="hidden" name="nomeTorneo" value="<%=torneo.getNome()%>">
                 <h5 class="title">
                     <%=torneo.getNome()%>
                 </h5>
@@ -37,6 +37,7 @@
 
             <div class = "card-body">
                 <div class="row">
+                    <input type="hidden" name="campo" value="<%=torneo.getCampoIdentificativo()%>">
                     <div class="col-md-12">
                         <label>Tipo torneo</label>
                     </div>
@@ -68,6 +69,7 @@
                         <label>Dal</label>
                     </div>
                     <div class="col-md-12">
+                        <input type="hidden" name="dataTorneo" value="<%=torneo.getDataInizio()%>">
                         <p><%= torneo.getDataInizio()%></p>
                     </div>
                 </div>
@@ -123,7 +125,7 @@
                     <input type="hidden" name="flag" value="3">
                      <button class="btn-primary button-indietro">Indietro</button>
                 </form>
-                <form action="" method="">
+                <form action="Iscrizione" method="get">
                 <button class="btn-primary button-iscrivi">Iscrivi</button>
                 </form>
             </div>
