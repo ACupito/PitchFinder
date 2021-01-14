@@ -26,17 +26,14 @@
 
     <link href="css/navbar/style_navbar.css" rel="stylesheet" type="text/css"/>
     <link href="css/torneo/style_visualizzaTornei.css" rel="stylesheet" type="text/css" />
+<%--    <link href="css/footer/style_footer.css" rel="stylesheet" type="text/css"/>--%>
+
 </head>
 
 <body>
 <!-- NAVIGATION -->
 <%@include file="../navbar/navbar.jsp"%>
 
-<header class="masthead">
-    <div class="container">
-
-    </div>
-</header>
 
 <div class="containerCards">
     <div class="row">
@@ -62,7 +59,7 @@
                     <div class="widget-49">
                         <div class="widget-49-title-wrapper">
                             <div class="widget-49-date-primary">
-                                <span class="widget-49-date-day"><%= t.getStringDay(t.getDataInizio().getDay())%></span>
+                                <span class="widget-49-date-day"><%= t.getStringDay(t.getDataInizio())%></span>
                                 <span class="widget-49-date-month"><%= t.getStringMonth(t.getDataInizio().getMonth())%></span>
                             </div>
                             <div class="widget-49-meeting-info">
@@ -72,6 +69,7 @@
                         </div>
                         <div class="widget-49-meeting-action">
                             <form action="torneoServlet" method="get">
+                                <input type="hidden" name="flag" value="4">
                                 <input type="hidden" name="idCampo" value="1002">
                                 <input type="hidden" name="nome" value="<%= t.getNome()%>">
                                 <input type="hidden" name="dataInizio" value="<%= t.getDataInizio()%>">
@@ -92,15 +90,19 @@
 </div>
 
 
+
+
+
+
+
+
+</body>
 <!-- Bootstrap core JS-->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"></script>
 <!-- Third party plugin JS-->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
-<!-- Core theme JS-->
 <script src="js/homepage/js_homepage.js"></script>
+<script src = "js/homepage/check_login.js"></script>
 
-
-
-</body>
 </html>
