@@ -5,6 +5,7 @@ import com.pitchfinder.partita.entity.Partita;
 import com.pitchfinder.partita.services.PartitaService;
 import com.pitchfinder.partita.services.PartitaServiceImpl;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -164,14 +165,17 @@ public class CreazionePartitaController extends HttpServlet {
                         }
                     }
                     response.setContentType("Creazione avvenuta!");
-                    //tornare ad un'altra pagina
+                    request.setAttribute("esito", "1");
+
+                    RequestDispatcher dispatcher =
+                            request.getServletContext().getRequestDispatcher("/view/partita/matchCreation.jsp");
+                    dispatcher.forward(request, response);
+
                 } else {
-                    response.setContentType("Impossibile creare una partita!");
-                    //tornare alla pagina partite
+                    throw new IllegalArgumentException("Impossibile creare una partita!");
                 }
             } else {
-                response.setContentType("Operazione annullata");
-                //tornare alla pagina partite
+                throw new IllegalArgumentException("Operazione annullata!");
             }
         }
 
