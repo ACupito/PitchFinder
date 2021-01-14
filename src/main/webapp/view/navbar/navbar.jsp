@@ -1,6 +1,11 @@
 <%@ page import="com.pitchfinder.autenticazione.entity.Utente" %>
 <%Utente utente1 = (Utente)session.getAttribute("utente");%>
 <script src="https://use.fontawesome.com/releases/v5.15.1/js/all.js" crossorigin="anonymous"></script>
+
+<!-- Core theme JS-->
+<script src="js/homepage/js_homepage.js"></script>
+<script src = "js/homepage/check_login.js"></script>
+
 <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
     <div class="container">
         <a class="navbar-brand js-scroll-trigger" href="home"><img src="images/Logo/logo_c08.png" alt="" /> </a>

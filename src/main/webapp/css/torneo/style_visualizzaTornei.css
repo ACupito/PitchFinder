@@ -1,6 +1,6 @@
-body{
-    background: #F4F7FD;
 
+body{
+    background: -webkit-linear-gradient(left, #CBCBCB, #CBCBCB);
 }
 
 header.masthead {
@@ -159,6 +159,7 @@ header.masthead {
     display: flex;
     flex-direction: column;
     margin-left: 1rem;
+    margin-right: 1rem;
 }
 
 .widget-49 .widget-49-title-wrapper .widget-49-meeting-info .widget-49-pro-title {

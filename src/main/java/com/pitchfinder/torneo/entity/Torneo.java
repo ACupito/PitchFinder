@@ -1,6 +1,7 @@
 package com.pitchfinder.torneo.entity;
 
 import java.sql.Date;
+import java.util.Calendar;
 
 /**
  * This class manages the Torneo entity.
@@ -323,27 +324,14 @@ public class Torneo {
 
     /**
      * Used for the event.jsp.
-     * @param day string
+     * @param data date
      * @return String
      */
-    public String getStringDay(int day) {
-        switch (day) {
-            case 1:
-                return "Lun";
-            case 2:
-                return "Mar";
-            case 3:
-                return "Mer";
-            case 4:
-                return "Gio";
-            case 5:
-                return "Ven";
-            case 6:
-                return "Sab";
-            case 7:
-                return "Dom";
-            default:
-                return "";
-        }
+    public String getStringDay(Date data) {
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(data);
+        int day = cal.get(Calendar.DAY_OF_MONTH);
+        return String.valueOf(day);
     }
+
 }
