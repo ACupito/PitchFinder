@@ -38,7 +38,7 @@ public class IscrizioneTorneoController extends HttpServlet {
             String nomeTorneo = req.getParameter("nomeTorneo");
             int campoTorneo = Integer.parseInt(req.getParameter("campoTorneo"));
             Date dataTorneo = Date.valueOf(req.getParameter("dataTorneo"));
-            Torneo torneo = torneoService.getTorneo(nomeTorneo,dataTorneo,campoTorneo);
+            Torneo torneo = torneoService.getTorneo(nomeTorneo, dataTorneo, campoTorneo);
 
             HttpSession session = req.getSession();
             Utente utente = (Utente) session.getAttribute("utente");
