@@ -14,6 +14,8 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 import org.mockito.Mockito;
 
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -29,6 +31,8 @@ public class CreazionePartitaControllerTest{
     private CreazionePartitaController servlet;
     private HttpServletRequest mockedRequest;
     private HttpServletResponse mockedResponse;
+    private ServletContext mockedServletContext;
+    private RequestDispatcher mockedDispatcher;
     private HttpSession session;
     private UtenteDAO utenteTest;
     private CampoDAO daoCampo = new CampoDAOImpl();
@@ -45,10 +49,12 @@ public class CreazionePartitaControllerTest{
 
     @BeforeAll
     void start(){
-        //Servlet, mockedRequest, mockedResponse and Session instantiation.
+        //Servlet, mockedRequest, mockedResponse and Session instantiation ecc...
         servlet = new CreazionePartitaController();
         mockedRequest = Mockito.mock(HttpServletRequest.class);
         mockedResponse = Mockito.mock(HttpServletResponse.class);
+        mockedServletContext = Mockito.mock(ServletContext.class);
+        mockedDispatcher = Mockito.mock(RequestDispatcher.class);
         session = Mockito.mock(HttpSession.class);
 
         //User creation for testing
@@ -652,6 +658,9 @@ public class CreazionePartitaControllerTest{
         Mockito.when(mockedRequest.getParameter("nameG1")).thenReturn(PLAYER_NAME);
         Mockito.when(mockedRequest.getParameter("surnameG1")).thenReturn(PLAYER_SURNAME);
 
+        Mockito.doReturn(mockedServletContext).when(mockedRequest).getServletContext();
+        Mockito.doReturn(mockedDispatcher).when(mockedServletContext).getRequestDispatcher("/view/partita/matchCreation.jsp");
+
         servlet.doPost(mockedRequest, mockedResponse);
         Mockito.verify(mockedResponse).setContentType("Creazione avvenuta!");
     }
@@ -675,19 +684,30 @@ public class CreazionePartitaControllerTest{
                 Date.valueOf(DATA), Time.valueOf(ORARIO_INIZIO.concat(":00")),
                 Time.valueOf(ORARIO_FINE.concat(":00")),"eugenio123");
 
-        servlet.doGet(mockedRequest, mockedResponse);
-        Mockito.verify(mockedResponse).setContentType("Impossibile creare una partita!");
+        String message = "Impossibile creare una partita!";
+
+        IllegalArgumentException exception;
+
+        exception = assertThrows(IllegalArgumentException.class,
+                () -> servlet.doGet(mockedRequest, mockedResponse));
+        assertEquals(message, exception.getMessage());
+
     }
 
     /**
-     * Selected "Annulla" button
+     * Selected button.equals("Conferma") == null
      */
     @Test
     void TC_cancelButton() throws ServletException, IOException {
         Mockito.when(mockedRequest.getParameter("btnMatchCreation")).thenReturn("Annulla");
 
-        servlet.doPost(mockedRequest, mockedResponse);
-        Mockito.verify(mockedResponse).setContentType("Operazione annullata");
+        String message = "Operazione annullata!";
+
+        IllegalArgumentException exception;
+
+        exception = assertThrows(IllegalArgumentException.class,
+                () -> servlet.doGet(mockedRequest, mockedResponse));
+        assertEquals(message, exception.getMessage());
     }
 
 
