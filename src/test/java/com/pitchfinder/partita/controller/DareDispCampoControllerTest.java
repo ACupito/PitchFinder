@@ -10,11 +10,14 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 import org.mockito.Mockito;
+
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 
+import java.io.IOException;
 import java.sql.Date;
 import java.sql.Time;
 
@@ -182,8 +185,8 @@ public class DareDispCampoControllerTest {
     /**
      * Disponibilita's creation is valid.
      */
-    /*@Test
-    void TC_31_5() {
+    @Test
+    void TC_31_5() throws ServletException, IOException {
         Mockito.when(mockedRequest.getParameter("data")).thenReturn(DATA);
         Mockito.when(mockedRequest.getParameter("inizio")).thenReturn(ORARIO_INIZIO);
         Mockito.when(mockedRequest.getParameter("fine")).thenReturn(ORARIO_FINE);
@@ -192,7 +195,7 @@ public class DareDispCampoControllerTest {
         servlet.doGet(mockedRequest, mockedResponse);
         Mockito.verify(mockedResponse).setContentType("La creazione va a buon fine");
 
-    }*/
+    }
 
 
 }
