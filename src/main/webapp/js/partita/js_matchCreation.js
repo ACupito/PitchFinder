@@ -53,8 +53,8 @@ function validateStart(){
         }
     }
     $("#creation-label-str").css("color","#4CAF50");
-    hhStr = $("creation-timestr").val().substring(0,2);
-    mmStr = $("creation-timestr").val().substring(3);
+    hhStr = document.getElementById("creation-timestr").value.substring(0,2);
+    mmStr = document.getElementById("creation-timestr").value.substring(0,2);
 }
 
 //End validation
@@ -67,8 +67,8 @@ function validateEnd(){
         }
     }
     $("#creation-label-end").css("color","#4CAF50");
-    hhEnd = $("creation-timeend").val().substring(0,2);
-    mmEnd = $("creation-timeend").val().substring(3);
+    hhEnd = document.getElementById("creation-timeend").value.substring(0,2);
+    mmEnd = document.getElementById("creation-timeend").value.substring(3);
 }
 //Time validation legal time for a match
 function validateTime(){
@@ -85,15 +85,12 @@ function validateTime(){
             $("#creation-label-str").css("color","#4CAF50");
             $("#creation-label-end").css("color","#4CAF50");
             isTimeValid=true;
-            alert("aootrue1");
         }
     }else if(hhEnd - hhStr < 1){
-        alert("aoooo");
         $("#creation-label-str").css("color","#FF0000");
         $("#creation-label-end").css("color","#FF0000");
         isTimeValid=false;
     }else{
-        alert("aootrue");
         $("#creation-label-str").css("color","#4CAF50");
         $("#creation-label-end").css("color","#4CAF50");
         isTimeValid=true;
