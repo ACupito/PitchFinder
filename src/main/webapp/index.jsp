@@ -69,19 +69,27 @@
                 <h4 class="my-3">Tornei</h4>
                 <p class="text-muted">Visaulizzare i tornei organizzati dalla Polisportiva con possibilità di iscriversi.</p>
             </div>
-            <div class="col-md-4">
+                <div class="col-md-4">
+                    <form action="Partita" method="get">
                         <span class="fa-stack fa-4x">
-                            <i class="fas fa-circle fa-stack-2x text-primary"></i>
-                            <i class="fas fa-running fa-stack-1x fa-inverse"></i>
+                            <button>
+                                <i class="fas fa-circle fa-stack-2x text-primary"></i>
+                                <i class="fas fa-running fa-stack-1x fa-inverse"></i>
+                            </button>
                         </span>
-                <h4 class="my-3">Creazione partita</h4>
+                    </form>
+                    <h4 class="my-3">Creazione partita</h4>
                 <p class="text-muted">Creare  una partita.</p>
             </div>
             <div class="col-md-4">
-                        <span class="fa-stack fa-4x">
+                <span class="fa-stack fa-4x">
+                    <form action="EventoController" method="get">
+                        <button>
                             <i class="fas fa-circle fa-stack-2x text-primary"></i>
-                            <i class="fas fa-users fa-stack-1x fa-inverse"></i>
-                        </span>
+                            <i class="fas fa-trophy fa-stack-1x fa-inverse"></i>
+                        </button>
+                    </form>
+                </span>
                 <h4 class="my-3">Eventi</h4>
                 <p class="text-muted">Visualizzare gli eventi organizzati dalla Polisportiva con possibilità di prenotarsi.
                 </p>
