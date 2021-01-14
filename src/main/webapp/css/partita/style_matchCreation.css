@@ -10,18 +10,17 @@
     z-index: 1;
     background: #FFFFFF;
     opacity: 0.94;
-    max-width: 360px;
+    max-width: 460px;
     margin: 0 auto 100px;
     padding: 45px;
     text-align: center;
     box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
     border-radius: 25px;
 }
-#field-creation{
-    border-radius: 20px;
-}
-#field-creation legend{
-    margin: 0 auto;
+.register-form{
+    max-width: 460px;
+    margin:0;
+    padding: 0;
 }
 .form input {
     font-family: "Roboto", sans-serif;
