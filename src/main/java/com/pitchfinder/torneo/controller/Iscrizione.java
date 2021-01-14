@@ -1,5 +1,8 @@
 package com.pitchfinder.torneo.controller;
 
+import com.mysql.cj.Session;
+import com.pitchfinder.autenticazione.entity.Admin;
+import com.pitchfinder.autenticazione.entity.Utente;
 import com.pitchfinder.torneo.entity.Torneo;
 import com.pitchfinder.torneo.services.TorneoService;
 import com.pitchfinder.torneo.services.TorneoServiceImpl;
@@ -22,18 +25,29 @@ public class Iscrizione extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-       String nomeTorneo = req.getParameter("nomeTorneo");
-       int campo = Integer.parseInt(req.getParameter("campo"));
-       Date dataTorneo = Date.valueOf(req.getParameter("dataTorneo"));
 
-        TorneoService torneoService = new TorneoServiceImpl();
-        Torneo torneo = torneoService.getTorneo(nomeTorneo, dataTorneo, campo);
-        req.setAttribute("torneo", torneo);
+        Utente utente = (Utente) req.getSession().getAttribute("utente");
 
-        RequestDispatcher dispatcher =
-                req.getServletContext().getRequestDispatcher("/view/torneo/iscrizioneTorneo.jsp");
-        dispatcher.forward(req, resp);
+        if (utente != null) {
 
+            String nomeTorneo = req.getParameter("nomeTorneo");
+            int campo = Integer.parseInt(req.getParameter("campo"));
+            Date dataTorneo = Date.valueOf(req.getParameter("dataTorneo"));
 
+            TorneoService torneoService = new TorneoServiceImpl();
+            Torneo torneo = torneoService.getTorneo(nomeTorneo, dataTorneo, campo);
+            req.setAttribute("torneo", torneo);
+
+            RequestDispatcher dispatcher =
+                    req.getServletContext().getRequestDispatcher("/view/torneo/iscrizioneTorneo.jsp");
+            dispatcher.forward(req, resp);
+
+        }
+        else {
+            req.setAttribute("nonRegistrato", "no");
+            RequestDispatcher dispatcher =
+                    req.getServletContext().getRequestDispatcher("/view/torneo/dettagliTorneo.jsp");
+            dispatcher.forward(req, resp);
+        }
     }
 }

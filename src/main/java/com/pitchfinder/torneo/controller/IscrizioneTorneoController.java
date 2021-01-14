@@ -126,8 +126,8 @@ public class IscrizioneTorneoController extends HttpServlet {
             List<String> giocatori = new ArrayList<>();
 
             for (int i = 0; i < nGiocatori; i++) {
-                String nomePlayer = "nomePlayer" + (i + 1);
-                String cognomePlayer = "cognomePlayer" + (i + 1);
+                String nomePlayer = "nomePlayer" + (i);
+                String cognomePlayer = "cognomePlayer" + (i);
 
                 if (req.getParameter(nomePlayer) == null) {
                     throw new IllegalArgumentException("Nome giocatore non valido");
@@ -170,10 +170,16 @@ public class IscrizioneTorneoController extends HttpServlet {
             }
 
             resp.setContentType("Iscrizione avvenuta con successo");
+            req.setAttribute("IscrizioneOk", "ok");
 
-
+            RequestDispatcher dispatcher =
+                    req.getServletContext().getRequestDispatcher("/view/torneo/dettagliTorneo.jsp");
+            dispatcher.forward(req, resp);
         } else {
             resp.setContentType("Indietro");
+            RequestDispatcher dispatcher =
+                    req.getServletContext().getRequestDispatcher("/view/torneo/dettagliTorneo.jsp");
+            dispatcher.forward(req, resp);
         }
     }
 
