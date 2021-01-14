@@ -14,21 +14,28 @@
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
     <link href="css/torneo/style_dettagliTorneo.css" rel="stylesheet">
     <link href="css/navbar/style_navbar.css" rel="stylesheet">
+
     <link href="css/footer/style_footer.css" rel="stylesheet" type="text/css"/>
 
+
+
+    <script language="JavaScript" type="text/javascript" src="./js/torneo/iscrizioneTorneo.js"></script>
 </head>
 <body>
 
 <%@include file="../navbar/navbar.jsp"%>
 
 <% Torneo torneo = (Torneo) request.getAttribute("torneo"); %>
-
 <div class="container emp-profile">
-    <form action="IscrizioneTorneoController" method="get">
+    <form action="IscrizioneTorneoController" id="iscrizione" name="iscrizione" method="get">
+        <input type="hidden" name="nomeTorneo" value="<%=torneo.getNome()%>">
+        <input type="hidden" name="dataTorneo" value="<%=torneo.getDataInizio()%>">
+        <input type="hidden" name="campoTorneo" value="<%=torneo.getCampoIdentificativo()%>">
     <div class="row">
-        <div class="card-header" style = "background: #fff;">
+        <div class="card-header" style = "background: #ffffff;">
 
             <h5 class="title">
                 <%=torneo.getNome()%>-Iscrizione Squadra
@@ -43,12 +50,12 @@
     <div class="row">
 
         <div class = "card-body">
-            <div class="row">
+            <div class="row" >
                 <div class="col-md-12">
-                    <label>Nome Squadra</label>
+                    <label id="nSquadra" data-placement="top"   data-toggle="tooltip" title="Inserire stringhe senza caratteri speciali">Nome Squadra</label>
                 </div>
                 <div class="col-md-12">
-                    <input type="text"  id="nomeSquadra" name="nomeSquadra">
+                    <input type="text" data-placement="top"   data-toggle="tooltip" title="Inserire stringhe senza caratteri speciali" onkeyup="validaNome()"  id="nomeSquadra" name="nomeSquadra">
                 </div>
             </div>
         </div>
@@ -56,11 +63,11 @@
 
             <div class="row">
                 <div class="col-md-12">
-                    <label>Numero Giocatori:</label>
+                    <label id="numeroGiocatori"data-placement="top"   data-toggle="tooltip" title="Inserire un valore corretto">Numero Giocatori:</label>
                 </div>
                 <div class="col-md-12">
                     <input type="hidden" id="maxP" value="<%=torneo.getMaxNumeroPartecipantiPerSquadra()%>">
-                    <p><input type="number" name="numeroGiocatori" onclick="Caselle()" id="nGiocatori" min="<%=torneo.getMinNumeroPartecipantiPerSquadra()%>" max="<%=torneo.getMaxNumeroPartecipantiPerSquadra()%>"></p>
+                    <p><input type="number" id="nGiocatori" onchange="validaNGiocatori()" name="nGiocatori" onclick="Caselle()"  min="<%=torneo.getMinNumeroPartecipantiPerSquadra()%>" max="<%=torneo.getMaxNumeroPartecipantiPerSquadra()%>"></p>
                 </div>
             </div>
         </div>
@@ -74,56 +81,52 @@
             </div>
 
         </div>
-        <div class="card-body" >
-            <div class="row">
+<div class="col-md-12" style="height:150px;border:1px solid grey; max-width:80%; margin-left:12%;overflow-y: scroll">
+        <div class="card-body"  >
+            <div class="row" id="divGiocatori" style="max-width: 50%">
                 <div class="col-md-12">
-                    <label>Nome</label>
+                    <label id="nomeG" data-placement="top"   data-toggle="tooltip" title="Inserire stringhe senza caratteri speciali">Nome</label>
                 </div>
-
                 <% for(int i = 0; i < torneo.getMaxNumeroPartecipantiPerSquadra();i++){%>
-                <div class="col-md-12" style="padding-top:10px">
-                    <input type="text" style="display: none" name="nomePlayer<%=i%>"id="nome<%=i%>">
+                <div class="col-md-12"style="width:50%;padding-top:10px">
+                    <input type="text"  data-placement="top"   data-toggle="tooltip" title="Inserire stringhe senza caratteri speciali" style="display: none" name="nomePlayer<%=i%>"id="nome<%=i%>">
                 </div>
                 <%}%>
             </div>
             <div class="row">
                 <div class="col-md-12">
-                    <label>Cognome</label>
+                    <label id="cognomeG" data-placement="top"   data-toggle="tooltip" title="Inserire stringhe senza caratteri speciali">Cognome</label>
                     <% for(int i = 0; i < torneo.getMaxNumeroPartecipantiPerSquadra();i++){%>
-                        <div class="col-md-12" style="padding-top: 10px">
-                            <input type="text" style="display: none" name="cognomePlayer<%=i%>" id="cognome<%=i%>">
+                        <div class="col-md-12" style="width:50%;padding-top: 10px">
+                            <input type="text"  data-placement="top"   data-toggle="tooltip" title="Inserire stringhe senza caratteri speciali" style="display: none" name="cognomePlayer<%=i%>" id="cognome<%=i%>">
                         </div>
                     <%}%>
                 </div>
             </div>
         </div>
+</div>
         <div class="card-body">
-            <div class="row">
-                <div class="col-md-12">
-                    <label>Capitano</label>
-                </div>
-            </div>
-            <div class="row">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <label data-placement="top"   data-toggle="tooltip" title="Inserire stringhe senza caratteri speciali" id="nomeCapitano">Nome Capitano</label>
+                        </div>
+                        <div class="col-md-12">
+                           <input type="text" onkeyup="validaNomeCapitano()"  name="nomeCapitano">
+                        </div>
+                    </div>
         </div>
-                <div class = "card-body">
+        <div class="card-body">
                     <div class="row">
                         <div class="col-md-12">
-                            <label>Nome</label>
+                            <label id="cognomeCapitano" data-placement="top"   data-toggle="tooltip" title="Inserire stringhe senza caratteri speciali">Cognome Capitano</label>
                         </div>
                         <div class="col-md-12">
-                           <input type="text" name="nomeCapitano">
+                            <input type="text"  onkeyup="validaCognomeCapitano()"  name="cognomeCapitano">
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col-md-12">
-                            <label>Cognome</label>
-                        </div>
-                        <div class="col-md-12">
-                            <input type="text" name="cognomeCapitano">
-                        </div>
-                    </div>
+        </div>
 
-                </div>
+
 
             </div>
         <div class="card-body buttons">
@@ -135,10 +138,9 @@
                 <input type="hidden" name="nomeTorneo" value="<%=torneo.getNome()%>">
                 <input type="hidden" name="campo" value="<%=torneo.getCampoIdentificativo()%>">
                 <input type="hidden" name="dataTorneo" value="<%=torneo.getDataInizio()%>">
-                <button type="submit" name="conferma" class="btn-primary button-indietro" value="conferma">Iscrivi</button>
+                <button type="submit" name="conferma" id="conferma" class="btn-primary button-indietro" value="conferma">Iscrivi</button>
 
         </div>
-    </div>
     </form>
 </div>
 
@@ -146,21 +148,7 @@
 <%@include file="../footer/footer.jsp"%>
 
 </body>
-<script>
-    function Caselle(){
-        var n = document.getElementById("nGiocatori").value;
-        var nMax = document.getElementById("maxP").value;
-        for(var i = 0; i < n; i++){
-            document.getElementById("nome"+i).style.display="block";
-            document.getElementById("cognome"+i).style.display="block";
-         }
-        if(n<nMax){
-        for(var j=n; j<nMax;j++){
-            document.getElementById("nome"+j).style.display="none";
-            document.getElementById("cognome"+j).style.display="none";
-        }}
-    }
-</script>
+
 <!-- Bootstrap core JS-->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"></script>

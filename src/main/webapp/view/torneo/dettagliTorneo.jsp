@@ -144,17 +144,20 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"></script>
 <!-- Third party plugin JS-->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
+<!--alert for user not registered-->
 <% if(request.getAttribute("nonRegistrato")!= null){
-    request.setAttribute("nonRegistrato", null);%>
-<script>
-    alert("Per iscriverti a un torneo devi aver dovuto effettuare il login, se non sei iscritto REGISTRATI ora a PitchFinder!")
-</script>
+        request.setAttribute("nonRegistrato", null);%>
+        <script>
+            alert("Per iscriverti a un torneo devi aver dovuto effettuare il login, se non sei iscritto REGISTRATI ora a PitchFinder!")
+        </script>
 <%}%>
+
+<!--alert for user not registered-->
 <% if(request.getAttribute("IscrizioneOk")!= null){
-    request.setAttribute("IscrizioneOk", null);%>
-<script>
-    alert("Iscrizione avvenuta con Successo!")
-</script>
+         request.setAttribute("IscrizioneOk", null);%>
+        <script>
+            alert("Iscrizione avvenuta con Successo!")
+        </script>
 <%}%>
 </html>
 

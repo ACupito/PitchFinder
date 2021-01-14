@@ -18,11 +18,25 @@ import java.sql.Date;
 
 @WebServlet("/Iscrizione")
 public class Iscrizione extends HttpServlet {
+    /**
+     * DoGet.
+     * @param req - req.
+     * @param resp - resp.
+     * @throws ServletException -Servlet Exception.
+     * @throws IOException - IOException.
+     */
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         doPost(req, resp);
     }
 
+    /**
+     * DoPost.
+     * @param req - req.
+     * @param resp - resp.
+     * @throws ServletException - ServletException.
+     * @throws IOException - IOException.
+     */
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
@@ -42,8 +56,7 @@ public class Iscrizione extends HttpServlet {
                     req.getServletContext().getRequestDispatcher("/view/torneo/iscrizioneTorneo.jsp");
             dispatcher.forward(req, resp);
 
-        }
-        else {
+        } else {
             req.setAttribute("nonRegistrato", "no");
             RequestDispatcher dispatcher =
                     req.getServletContext().getRequestDispatcher("/view/torneo/dettagliTorneo.jsp");

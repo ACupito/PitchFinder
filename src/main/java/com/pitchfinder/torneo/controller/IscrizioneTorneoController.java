@@ -16,6 +16,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 @WebServlet("/IscrizioneTorneoController")
@@ -33,11 +34,16 @@ public class IscrizioneTorneoController extends HttpServlet {
         //Controll of button
         if (req.getParameter("conferma") != null) {
 
+            TorneoService torneoService = new TorneoServiceImpl();
+            String nomeTorneo = req.getParameter("nomeTorneo");
+            int campoTorneo = Integer.parseInt(req.getParameter("campoTorneo"));
+            Date dataTorneo = Date.valueOf(req.getParameter("dataTorneo"));
+            Torneo torneo = torneoService.getTorneo(nomeTorneo,dataTorneo,campoTorneo);
+
             HttpSession session = req.getSession();
-            Torneo torneo = (Torneo) session.getAttribute("torneo");
             Utente utente = (Utente) session.getAttribute("utente");
             String nomeSquadra = req.getParameter("nomeSquadra");
-            String numeroGiocatori = req.getParameter("numeroGiocatori");
+            String numeroGiocatori = req.getParameter("nGiocatori");
             int nGiocatori;
             String nomeCapitano = req.getParameter("nomeCapitano");
             String cognomeCapitano = req.getParameter("cognomeCapitano");
@@ -55,10 +61,6 @@ public class IscrizioneTorneoController extends HttpServlet {
                 throw new IllegalArgumentException("Formato nome squadra non valido");
             }
 
-            //Check torneo
-            if (torneo == null) {
-                throw new IllegalArgumentException("Torneo non valido");
-            }
 
             //Check utente
             if (utente == null) {
@@ -113,7 +115,6 @@ public class IscrizioneTorneoController extends HttpServlet {
             }
 
             //controllo squadre iscritte al torneo
-            TorneoService torneoService = new TorneoServiceImpl();
             if (torneoService.nIscritti(torneo) >= torneo.getNumeroSquadre()) {
                 throw new IllegalArgumentException("Non è possibile iscriversi, troppe squadre iscritte");
             }
