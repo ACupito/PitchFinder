@@ -52,7 +52,7 @@
         <div class = "card-body">
             <div class="row" >
                 <div class="col-md-12">
-                    <label id="nSquadra" data-placement="top"   data-toggle="tooltip" title="Inserire stringhe senza caratteri speciali">Nome Squadra</label>
+                    <label id="nSquadra">Nome Squadra</label>
                 </div>
                 <div class="col-md-12">
                     <input  id="nomeSquadra" name="nomeSquadra" type="text" style="max-width: max-content" data-placement="top" class="form-control"  data-toggle="tooltip" title="Inserire stringhe senza caratteri speciali lunga al massimo 50 caratteri" onkeyup="validaNome()" >
@@ -63,12 +63,12 @@
 
             <div class="row">
                 <div class="col-md-12">
-                    <label id="numeroGiocatori"data-placement="top"   data-toggle="tooltip" >Numero Giocatori</label>
+                    <label id="numeroGiocatori">Numero Giocatori</label>
                 </div>
                 <div class="col-md-12">
                     <input type="hidden" id="minP" name="minP" value="<%=torneo.getMinNumeroPartecipantiPerSquadra()%>">
                     <input type="hidden" id="maxP" name="maxP" value="<%=torneo.getMaxNumeroPartecipantiPerSquadra()%>">
-                    <p><input type="number" id="nGiocatori" onchange="validaNGiocatori()" style="max-width: max-content" class="form-control"  name="nGiocatori" onclick="Caselle()"  min="<%=torneo.getMinNumeroPartecipantiPerSquadra()%>" max="<%=torneo.getMaxNumeroPartecipantiPerSquadra()%>"></p>
+                    <p><input type="number" id="nGiocatori" data-placement="top" class="form-control"  data-toggle="tooltip" title="Inserire numero compreso tra <%=torneo.getMinNumeroPartecipantiPerSquadra()%> e <%=torneo.getMaxNumeroPartecipantiPerSquadra()%>" onchange="validaNGiocatori()" style="max-width: max-content" class="form-control"  name="nGiocatori" onclick="Caselle()"  min="<%=torneo.getMinNumeroPartecipantiPerSquadra()%>" max="<%=torneo.getMaxNumeroPartecipantiPerSquadra()%>"></p>
                 </div>
             </div>
         </div>
@@ -86,7 +86,7 @@
         <div class="card-body"  >
             <div class="row" id="divGiocatori" style="max-width: 50%">
                 <div class="col-md-12">
-                    <label id="nomeG" data-placement="top"   data-toggle="tooltip" title="Inserire stringhe senza caratteri speciali e senza numeri lunghezza massima 10">Nome</label>
+                    <label id="nomeG" data-placement="top"   data-toggle="tooltip" title="Inserire stringa senza caratteri speciali, senza numeri e di lunghezza massima 10">Nome</label>
                 </div>
                 <% for(int i = 0; i < torneo.getMaxNumeroPartecipantiPerSquadra();i++){%>
                 <div class="col-md-12" style="width:50%;padding-top:10px">
@@ -155,5 +155,9 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"></script>
 <!-- Third party plugin JS-->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
-
+<script>
+    $(document).ready(function(){
+        $('[data-toggle="tooltip"]').tooltip();
+    });
+</script>
 </html>
