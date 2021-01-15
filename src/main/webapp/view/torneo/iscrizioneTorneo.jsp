@@ -38,9 +38,9 @@
         <div class="card-header" style = "background: #ffffff;">
 
             <h5 class="title">
-                <%=torneo.getNome()%>-Iscrizione Squadra
+                <%=torneo.getNome()%>-<span style="color:#079e3e">Iscrizione Squadra</span>
             </h5>
-            <h6>
+            <h6 style="color: #079e3e">
                 Tennis
             </h6>
 
@@ -63,7 +63,7 @@
 
             <div class="row">
                 <div class="col-md-12">
-                    <label id="numeroGiocatori"data-placement="top"   data-toggle="tooltip" >Numero Giocatori:</label>
+                    <label id="numeroGiocatori"data-placement="top"   data-toggle="tooltip" >Numero Giocatori</label>
                 </div>
                 <div class="col-md-12">
                     <input type="hidden" id="minP" name="minP" value="<%=torneo.getMinNumeroPartecipantiPerSquadra()%>">
@@ -82,7 +82,7 @@
             </div>
 
         </div>
-<div class="col-md-12" style="height:150px;border:1px solid grey; max-width:80%; margin-left:12%;overflow-y: scroll">
+<div class="col-md-12" style="height:150px;border:1px solid grey; max-width:80%;overflow-x: hidden; margin-left:12%;overflow-y: scroll">
         <div class="card-body"  >
             <div class="row" id="divGiocatori" style="max-width: 50%">
                 <div class="col-md-12">

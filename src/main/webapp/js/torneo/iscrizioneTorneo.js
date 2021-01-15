@@ -117,9 +117,6 @@ function validaCognomeCapitano() {
     cambiaStatoIscrizione();
 }
 
-
-
-
 function cambiaStatoIscrizione() {
         if  (nomeOk&&cognomeOk&&nomeCapitanoOk&&nGiocatoriOk&&giocatoriOk) {
             document.getElementById('conferma').disabled = false;
