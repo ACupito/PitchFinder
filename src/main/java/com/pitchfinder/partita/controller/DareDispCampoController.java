@@ -19,8 +19,10 @@ public class DareDispCampoController extends HttpServlet {
 
     /**
      * doPost() method.
-     * @param request is the servlet request.
+     * @param request  is the servlet request.
      * @param response is the servlet response.
+     * @throws ServletException
+     * @throws IOException
      */
     public void doPost(final HttpServletRequest request,
                        final HttpServletResponse response) throws ServletException, IOException {
@@ -28,7 +30,7 @@ public class DareDispCampoController extends HttpServlet {
         Utente utente= (Utente) request.getSession().getAttribute("utente");
 
 
-        if(request.getParameter("Conferma")!=null && utente!=null) {
+        if(request.getParameter("Conferma")!=null) {
             CampoService camp = new CampoServiceImpl();
             String campo = request.getParameter("idcampo");
             int idcampo = Integer.parseInt(campo);
@@ -47,7 +49,6 @@ public class DareDispCampoController extends HttpServlet {
 
             try {
                 data = Date.valueOf(dataStr);
-
             } catch (IllegalArgumentException e) {
                 throw new IllegalArgumentException("La modifica fallisce perché la data non rispetta il formato");
             }
@@ -70,23 +71,17 @@ public class DareDispCampoController extends HttpServlet {
             camp.createDisponibilita(email, idcampo, data, inizio, fine);
             response.setContentType("La creazione va a buon fine");
             RequestDispatcher dispatcher =
-                    request.getRequestDispatcher("/view/disponibilitaCampo/dareDisponibilita.jsp");
+                    request.getServletContext().getRequestDispatcher("/view/disponibilitaCampo/dareDisponibilita.jsp");
                 dispatcher.forward(request, response);
-
         }
-        else if(request.getParameter("Annulla")!=null){
-            RequestDispatcher dispatcher =
-                    request.getRequestDispatcher("/view/disponibilitaCampo/dareDisponibilita.jsp");
-                dispatcher.forward(request, response);
-
-        }
-
     }
-    /**
-     * doGet method.
-     * @param request request
-     * @param response response
 
+    /**
+     * doGet() method.
+     * @param request  is the servlet request.
+     * @param response is the servlet response.
+     * @throws ServletException
+     * @throws IOException
      */
     public void doGet(final HttpServletRequest request, final HttpServletResponse response) throws ServletException, IOException {
         doPost(request, response);
