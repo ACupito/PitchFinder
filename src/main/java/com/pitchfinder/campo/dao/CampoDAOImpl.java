@@ -173,6 +173,7 @@ public class CampoDAOImpl implements CampoDAO {
      * delete a Disponibilita from Database.
      * @param emailUtente is the email of the user.
      * @param idCampo is the id of the pitch.
+     * @param data is the data of the Disponibilita.
      * @return boolean
      */
 
