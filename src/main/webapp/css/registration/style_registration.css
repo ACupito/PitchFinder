@@ -29,3 +29,18 @@ input {
 
   text-align: center;
 }
+
+#data {
+
+  border-bottom: 3px solid red;
+}
+
+#div_data {
+
+  color: red;
+}
+
+.form-group {
+
+  margin-top: 15px;
+}
