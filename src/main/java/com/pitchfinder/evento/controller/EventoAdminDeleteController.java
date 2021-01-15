@@ -72,12 +72,9 @@ public class EventoAdminDeleteController extends HttpServlet {
             if (dateStr.equals("")) {
                 throw new IllegalArgumentException("Errato: data non selezionata");
             }
-            Date myDate = new Date(System.currentTimeMillis());
+
             try {
                 dataEvento = Date.valueOf(dateStr); /* The Event's date (Date). */
-                if (dataEvento.before(myDate)) {
-                    throw new IllegalArgumentException("Errato: formato non valido");
-                }
             } catch (IllegalArgumentException e) {
                 throw new IllegalArgumentException("Errato: formato non valido");
             }
