@@ -131,9 +131,6 @@
 
 </div>
 
-
-<%@include file="../footer/footer.jsp"%>
-
 </body>
 
 <!-- Bootstrap core JS-->
