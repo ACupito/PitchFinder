@@ -6,11 +6,13 @@ import com.pitchfinder.evento.entity.Evento;
 import com.pitchfinder.evento.services.EventoService;
 import com.pitchfinder.evento.services.EventoServiceImpl;
 
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.File;
+import java.io.IOException;
 import java.sql.Date;
 import java.sql.Time;
 
@@ -36,18 +38,9 @@ public class EventoAdminController extends HttpServlet {
      * @param response is the servlet response.
      */
     public void doPost(final HttpServletRequest request,
-                       final HttpServletResponse response) {
-        doGet(request, response);
-    }
-
-    /**
-     * doGet() method.
-     * @param request is the servlet request.
-     * @param response is the servlet response.
-     */
-    public void doGet(final HttpServletRequest request,
-                      final HttpServletResponse response) {
+                       final HttpServletResponse response) throws ServletException, IOException {
         Admin admin = (Admin) request.getSession().getAttribute("admin"); //get admin from the session
+        RequestDispatcher dispatcher;
 
         if (admin != null) {
             /* The EventoService object. */
@@ -74,24 +67,11 @@ public class EventoAdminController extends HttpServlet {
             if (nome.length() < MINLIMIT || nome.length() > MAXLIMIT) {
                 throw new IllegalArgumentException("Errato: lunghezza nome non valida");
             }
-            if (!nome.matches("^[ a-zA-Z\u00C0-\u00ff']+$")) {
+            if (!nome.matches("^[a-zA-Z0-9\u00C0-\u00ff'\\s]+$")) {
                 throw new IllegalArgumentException("Errato: formato non valido");
             }
-            if (!immagine.equals("")) {
-                if (!immagine.matches(".*\\.(jpg|png)$")) {
-                    throw new IllegalArgumentException("Errato: Formato non valido");
-                }
-                File file = new File(immagine);
-                // Get length of file in bytes
-                long fileSizeInBytes = file.length();
-                // Convert the bytes to Kilobytes (1 KB = 1024 Bytes)
-                long fileSizeInKB = fileSizeInBytes / 1024;
-                // Convert the KB to MegaBytes (1 MB = 1024 KBytes)
-                long fileSizeInMB = fileSizeInKB / 1024;
-                if (fileSizeInMB > MAXLIMITIMAGE) {
-                    throw new IllegalArgumentException("Errato: dimensione non valida");
-                }
-            }
+
+
             if (orarioInizioStr.matches("")) {
                 throw new IllegalArgumentException("Errato: orario non selezionato");
             }
@@ -128,7 +108,7 @@ public class EventoAdminController extends HttpServlet {
             if (descrizione.length() < MINLIMIT || descrizione.length() > MAXDESCRIPTIONLIMIT) {
                 throw new IllegalArgumentException("Errato: lunghezza non valida");
             }
-            if (!descrizione.matches("^[ a-zA-Zu00C0u00ff'\\.\\,\\s\\&\\è\\ù\\à\\+\\ò\\-\\:\\;\\È\\?\\!]+$")) {
+            if (!descrizione.matches("^[ a-zA-Z\\u00C0-\\u00ff'\\.\\,\\s\\&\\+\\ò\\-\\:\\;\\?\\!]+$")) {
                 throw new IllegalArgumentException("Errato: formato non valido");
             }
             if (postiDisponibiliStr.equals("")) {
@@ -141,14 +121,46 @@ public class EventoAdminController extends HttpServlet {
             if (postiDisponibili < MINLIMIT || postiDisponibili > MAXSITSLIMIT) {
                 throw new IllegalArgumentException("Errato: lunghezza non valida");
             }
-            Evento creazione = es.createEvento(nome, "immagineStr", orarioInizio, orarioFine, dataEvento,
-                            ospite, descrizione, postiDisponibili, admin.getUsername());
+            String image = "default";
+            if (immagine != null) {
+                if (immagine.matches("[0-9]$")) {
+                    switch (Integer.parseInt(immagine)) {
+                        case 1 :
+                            image = "images/events/image1.jpg";
+                            break;
+                        case 2 :
+                            image = "images/events/image2.jpg";
+                            break;
+                        case 3 :
+                            image = "images/events/image3.jpg";
+                            break;
+                        default :
+                            image = "default";
+                    }
+                }
+            }
+            Evento creazione = es.createEvento(nome, image, orarioInizio, orarioFine, dataEvento,
+                    ospite, descrizione, postiDisponibili, admin.getUsername());
             if (creazione == null) {
                 response.setContentType("Impossibile creare un evento");
             }
 
             response.setContentType("Creazione avvenuta");
+            RequestDispatcher requestDispatcher = request.getServletContext().getRequestDispatcher("/autentication?flag=5");
+            requestDispatcher.forward(request, response);
 
         }
+    }
+
+
+
+    /**
+     * doGet() method.
+     * @param request is the servlet request.
+     * @param response is the servlet response.
+     */
+    public void doGet(final HttpServletRequest request,
+                      final HttpServletResponse response) throws ServletException, IOException {
+        doPost(request, response);
     }
 }
