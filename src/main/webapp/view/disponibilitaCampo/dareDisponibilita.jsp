@@ -70,9 +70,7 @@
                     <label for="idcampo">Sport</label>
                     <select name="idcampo" id="idcampo" class="form-control">
                         <option value="1002">Tennis</option>
-                        <option value="1003">Calcio</option>
-                        <option value="1004">Basket</option>
-                        <option value="1005">Pallavolo</option>
+
                     </select>
                     <i class="zmdi zmdi-chevron-down"></i>
                 </div>
