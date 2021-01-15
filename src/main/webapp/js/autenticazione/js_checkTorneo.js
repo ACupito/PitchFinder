@@ -146,14 +146,14 @@ function validateAllDate() {
     var endDate = new Date(data_fine);
     var days =  ((endDate.getTime() - startDate.getTime()) / (1000 * 3600 * 24));
     if(days < 0) {
-        $("#valid_dataInizio").css("color","#FF0000");
-        $("#valid_dataInizio").text("La data di inizio è successiva alla data di fine!");
-        $("#valid_dataFine").css("color","#FF0000");
-        $("#valid_dataFine").text("La data di inizio è successiva alla data di fine!");
+        $("#valid_AllSquadre").css("color","#FF0000");
+        $("#valid_AllSquadre").text("La data di inizio è successiva alla data di fine!");
         isDataInizioValid = false;
         isDataFineValid=false;
     }
     else {
+        $("#valid_AllSquadre").css("color","#000000");
+        $("#valid_AllSquadre").text("Inserisci una data di fine successiva alla data di inizio.");
         isDataInizioValid=true;
         isDataFineValid=true;
     }
@@ -161,9 +161,9 @@ function validateAllDate() {
 
 function validateButton() {
     if(isNomeValid && isMinPartecValid && isSquadreValid && isMaxPartecValid && isDataFineValid && isDataInizioValid) {
-        document.getElementById("creaButton").disabled = false;
+        return true;
     } else {
-        document.getElementById("creaButton").disabled = true;
+        return false;
     }
 }
 
