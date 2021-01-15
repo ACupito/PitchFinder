@@ -74,7 +74,7 @@ public class AutenticazioneController extends HttpServlet {
 
         String messaggio;
         int flag = Integer.parseInt(request.getParameter("flag"));
-
+        System.out.println(flag);
         Admin aCheck;
         Utente uCheck;
 
@@ -86,7 +86,7 @@ public class AutenticazioneController extends HttpServlet {
 
         if (flag == 1) {
 
-            uCheck = (Utente)session.getAttribute("utente");
+            uCheck = (Utente) session.getAttribute("utente");
 
             if (uCheck != null)
                 throw new IllegalArgumentException("Sei loggato, non puoi registrati !");
@@ -203,8 +203,8 @@ public class AutenticazioneController extends HttpServlet {
 
         } else if (flag == 2) {
 
-            aCheck = (Admin)session.getAttribute("admin");
-            uCheck = (Utente)session.getAttribute("utente");
+            aCheck = (Admin) session.getAttribute("admin");
+            uCheck = (Utente) session.getAttribute("utente");
 
             if (aCheck != null || uCheck != null)
                 throw new IllegalArgumentException("Sei già loggato");
@@ -289,7 +289,7 @@ public class AutenticazioneController extends HttpServlet {
             session.setAttribute("admin", null);
             dispatcher = request.getServletContext().getRequestDispatcher("/index.jsp");
             dispatcher.forward(request, response);
-        } else if(flag == 5) {
+        } else if (flag == 5) {
 
             TorneoService torneoService = new TorneoServiceImpl();
             List<Torneo> tornei = torneoService.getAllTornei();

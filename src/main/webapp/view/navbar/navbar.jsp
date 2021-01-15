@@ -23,6 +23,7 @@
                                 <div class="form-group">
                                     <input id="username" placeholder="Username" class="form-control form-control-sm" type="text" name="username">
                                 </div>
+                                <div id="div_username"></div>
                                 <div class="form-group">
                                     <input id="password" placeholder="Password" class="form-control form-control-sm" type="password" name="password">
                                 </div>
