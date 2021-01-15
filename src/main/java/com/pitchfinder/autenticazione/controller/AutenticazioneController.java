@@ -243,7 +243,7 @@ public class AutenticazioneController extends HttpServlet {
 
                         response.setContentType("Il login è avvenuto correttamente");
                         session.setAttribute("utente", u);
-                        dispatcher = request.getServletContext().getRequestDispatcher("/view/autenticazione/utente.jsp");
+                        dispatcher = request.getServletContext().getRequestDispatcher("/index.jsp");
                         dispatcher.forward(request, response);
                     }
 
