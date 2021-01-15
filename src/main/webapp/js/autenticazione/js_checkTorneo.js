@@ -4,6 +4,7 @@ var isMinPartecValid = false;
 var isMaxPartecValid = false;
 var isDataInizioValid = false;
 var isDataFineValid = false;
+var isAllDateValid = false;
 
 function validateName() {
     if( $("#uname").val().match("^[ a-zA-Z\u00C0-\u00ff']+$")) {
@@ -138,6 +139,26 @@ function validateDataFine() {
     }
 }
 
+function validateAllDate() {
+    var data_inizio = $("#data_inizio").val();
+    var startDate = new Date(data_inizio);
+    var data_fine = $("#data_fine").val();
+    var endDate = new Date(data_fine);
+    var days =  ((endDate.getTime() - startDate.getTime()) / (1000 * 3600 * 24));
+    if(days < 0) {
+        $("#valid_dataInizio").css("color","#FF0000");
+        $("#valid_dataInizio").text("La data di inizio è successiva alla data di fine!");
+        $("#valid_dataFine").css("color","#FF0000");
+        $("#valid_dataFine").text("La data di inizio è successiva alla data di fine!");
+        isDataInizioValid = false;
+        isDataFineValid=false;
+    }
+    else {
+        isDataInizioValid=true;
+        isDataFineValid=true;
+    }
+}
+
 function validateButton() {
     if(isNomeValid && isMinPartecValid && isSquadreValid && isMaxPartecValid && isDataFineValid && isDataInizioValid) {
         document.getElementById("creaButton").disabled = false;
@@ -145,6 +166,48 @@ function validateButton() {
         document.getElementById("creaButton").disabled = true;
     }
 }
+
+function activeGiornoPartite() {
+    var data_inizio = $("#data_inizio").val();
+    var startDate = new Date(data_inizio);
+    var data_fine = $("#data_fine").val();
+    var endDate = new Date(data_fine);
+
+    var weekday = new Array(7);
+    weekday[0] = "Domenica";
+    weekday[1] = "Lunedì";
+    weekday[2] = "Martedì";
+    weekday[3] = "Mercoledì";
+    weekday[4] = "Giovedì";
+    weekday[5] = "Venerdì";
+    weekday[6] = "Sabato";
+
+    var sel = document.getElementById('giornoPartite');
+
+    while(sel.options.length > 0) {
+        sel.remove(0);
+    }
+
+    var days =  ((endDate.getTime() - startDate.getTime()) / (1000 * 3600 * 24));
+
+    var giorno = weekday[startDate.getDay()];
+    var opt = document.createElement('option');
+    opt.appendChild(document.createTextNode(giorno));
+    opt.value = giorno;
+    sel.appendChild(opt);
+    if(days > 6) days = days - (days - 6);
+    while (days > 0) {
+        startDate.setDate(startDate.getDate() +1);
+        giorno = weekday[startDate.getDay()];
+        opt = document.createElement('option');
+        opt.appendChild(document.createTextNode(giorno));
+        opt.value = giorno;
+        sel.appendChild(opt);
+        days--;
+    }
+
+}
+
 
 $(document).ready( function(){
         minDateInizio()
