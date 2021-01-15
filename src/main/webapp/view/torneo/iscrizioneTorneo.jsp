@@ -55,7 +55,7 @@
                     <label id="nSquadra" data-placement="top"   data-toggle="tooltip" title="Inserire stringhe senza caratteri speciali">Nome Squadra</label>
                 </div>
                 <div class="col-md-12">
-                    <input type="text" data-placement="top"   data-toggle="tooltip" title="Inserire stringhe senza caratteri speciali" onkeyup="validaNome()"  id="nomeSquadra" name="nomeSquadra">
+                    <input  id="nomeSquadra" name="nomeSquadra" type="text" style="max-width: max-content" data-placement="top" class="form-control"  data-toggle="tooltip" title="Inserire stringhe senza caratteri speciali lunga al massimo 50 caratteri" onkeyup="validaNome()" >
                 </div>
             </div>
         </div>
@@ -63,11 +63,12 @@
 
             <div class="row">
                 <div class="col-md-12">
-                    <label id="numeroGiocatori"data-placement="top"   data-toggle="tooltip" title="Inserire un valore corretto">Numero Giocatori:</label>
+                    <label id="numeroGiocatori"data-placement="top"   data-toggle="tooltip" >Numero Giocatori:</label>
                 </div>
                 <div class="col-md-12">
-                    <input type="hidden" id="maxP" value="<%=torneo.getMaxNumeroPartecipantiPerSquadra()%>">
-                    <p><input type="number" id="nGiocatori" onchange="validaNGiocatori()" name="nGiocatori" onclick="Caselle()"  min="<%=torneo.getMinNumeroPartecipantiPerSquadra()%>" max="<%=torneo.getMaxNumeroPartecipantiPerSquadra()%>"></p>
+                    <input type="hidden" id="minP" name="minP" value="<%=torneo.getMinNumeroPartecipantiPerSquadra()%>">
+                    <input type="hidden" id="maxP" name="maxP" value="<%=torneo.getMaxNumeroPartecipantiPerSquadra()%>">
+                    <p><input type="number" id="nGiocatori" onchange="validaNGiocatori()" style="max-width: max-content" class="form-control"  name="nGiocatori" onclick="Caselle()"  min="<%=torneo.getMinNumeroPartecipantiPerSquadra()%>" max="<%=torneo.getMaxNumeroPartecipantiPerSquadra()%>"></p>
                 </div>
             </div>
         </div>
@@ -75,7 +76,7 @@
 
             <div class="row">
                 <div class="col-md-12">
-                    <label>Giocatori</label>
+                    <label id="nomecognome">Giocatori</label>
                 </div>
 
             </div>
@@ -85,20 +86,20 @@
         <div class="card-body"  >
             <div class="row" id="divGiocatori" style="max-width: 50%">
                 <div class="col-md-12">
-                    <label id="nomeG" data-placement="top"   data-toggle="tooltip" title="Inserire stringhe senza caratteri speciali">Nome</label>
+                    <label id="nomeG" data-placement="top"   data-toggle="tooltip" title="Inserire stringhe senza caratteri speciali e senza numeri lunghezza massima 10">Nome</label>
                 </div>
                 <% for(int i = 0; i < torneo.getMaxNumeroPartecipantiPerSquadra();i++){%>
-                <div class="col-md-12"style="width:50%;padding-top:10px">
-                    <input type="text"  data-placement="top"   data-toggle="tooltip" title="Inserire stringhe senza caratteri speciali" style="display: none" name="nomePlayer<%=i%>"id="nome<%=i%>">
+                <div class="col-md-12" style="width:50%;padding-top:10px">
+                    <input type="text" data-placement="top" onkeyup="validaGiocatori()"  data-toggle="tooltip" title="Inserire stringhe senza caratteri speciali e senza numeri lunghezza massima 10" style=" display: none" name="nome<%=i%>"id="nome<%=i%>">
                 </div>
                 <%}%>
             </div>
             <div class="row">
                 <div class="col-md-12">
-                    <label id="cognomeG" data-placement="top"   data-toggle="tooltip" title="Inserire stringhe senza caratteri speciali">Cognome</label>
+                    <label id="cognomeG" data-placement="top"   data-toggle="tooltip" title="Inserire stringhe senza caratteri e senza numeri lunghezza massima 20">Cognome</label>
                     <% for(int i = 0; i < torneo.getMaxNumeroPartecipantiPerSquadra();i++){%>
                         <div class="col-md-12" style="width:50%;padding-top: 10px">
-                            <input type="text"  data-placement="top"   data-toggle="tooltip" title="Inserire stringhe senza caratteri speciali" style="display: none" name="cognomePlayer<%=i%>" id="cognome<%=i%>">
+                            <input type="text"  data-placement="top"  onkeyup="validaGiocatori()" data-toggle="tooltip" title="Inserire stringhe senza caratteri speciali e senza numeri lunghezza massima 20" style="display: none" name="cognome<%=i%>" id="cognome<%=i%>">
                         </div>
                     <%}%>
                 </div>
@@ -108,20 +109,20 @@
         <div class="card-body">
                     <div class="row">
                         <div class="col-md-12">
-                            <label data-placement="top"   data-toggle="tooltip" title="Inserire stringhe senza caratteri speciali" id="nomeCapitano">Nome Capitano</label>
+                            <label data-placement="top"   data-toggle="tooltip" title="Inserire stringhe senza caratteri speciali e senza numeri lunghezza massima 10" id="nomeCapitano">Nome Capitano</label>
                         </div>
                         <div class="col-md-12">
-                           <input type="text" onkeyup="validaNomeCapitano()"  name="nomeCapitano">
+                           <input type="text" style="max-width:max-content" onkeyup="validaNomeCapitano()" class="form-control" name="nomeCapitano">
                         </div>
                     </div>
         </div>
         <div class="card-body">
                     <div class="row">
                         <div class="col-md-12">
-                            <label id="cognomeCapitano" data-placement="top"   data-toggle="tooltip" title="Inserire stringhe senza caratteri speciali">Cognome Capitano</label>
+                            <label id="cognomeCapitano" data-placement="top"   data-toggle="tooltip" title="Inserire stringhe senza caratteri speciali e senza numeri lunghezza massima 20">Cognome Capitano</label>
                         </div>
                         <div class="col-md-12">
-                            <input type="text"  onkeyup="validaCognomeCapitano()"  name="cognomeCapitano">
+                            <input type="text" style="max-width:max-content"  onkeyup="validaCognomeCapitano()" class="form-control" name="cognomeCapitano">
                         </div>
                     </div>
         </div>

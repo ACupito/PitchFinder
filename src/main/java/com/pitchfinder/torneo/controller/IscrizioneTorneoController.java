@@ -84,7 +84,7 @@ public class IscrizioneTorneoController extends HttpServlet {
 
 
             if (nGiocatori < torneo.getMinNumeroPartecipantiPerSquadra() || nGiocatori > torneo.getMaxNumeroPartecipantiPerSquadra()) {
-                throw new IllegalArgumentException("Il numero dei giocatori no rispetta le direttive del torneo");
+                throw new IllegalArgumentException("Il numero dei giocatori non rispetta le direttive del torneo");
             }
 
 
@@ -127,8 +127,8 @@ public class IscrizioneTorneoController extends HttpServlet {
             List<String> giocatori = new ArrayList<>();
 
             for (int i = 0; i < nGiocatori; i++) {
-                String nomePlayer = "nomePlayer" + (i);
-                String cognomePlayer = "cognomePlayer" + (i);
+                String nomePlayer = "nome" + (i);
+                String cognomePlayer = "cognome" + (i);
 
                 if (req.getParameter(nomePlayer) == null) {
                     throw new IllegalArgumentException("Nome giocatore non valido");
@@ -142,7 +142,7 @@ public class IscrizioneTorneoController extends HttpServlet {
                     throw new IllegalArgumentException("Lunghezza nome giocatore non valida");
                 }
 
-                if (req.getParameter(cognomePlayer).length() < 1 || req.getParameter(cognomePlayer).length() > 10) {
+                if (req.getParameter(cognomePlayer).length() < 1 || req.getParameter(cognomePlayer).length() > 20) {
                     throw new IllegalArgumentException("Lunghezza cognome giocatore non valida");
                 }
 
