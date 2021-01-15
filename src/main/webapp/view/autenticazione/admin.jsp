@@ -174,8 +174,8 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="creation-description-Evento" id="creation-label-description">Descrizione :</label><br>
-                                    <input id="creation-description-Evento" class="form-control" name="descrizione" required><br>
-                                    <div class="valid-feedback">Valido.</div>
+                                    <input id="creation-description-Evento" class="form-control" name="descrizione" required onkeyup="validateDescriptionEvento()"><br>
+                                    <div class="valid-feedback" id="description-evento-valid">Valido.</div>
                                     <div class="invalid-feedback">Inserisci una Descrizione valida.</div>
                                 </div>
 
