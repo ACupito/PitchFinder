@@ -52,7 +52,7 @@
 
 
 
-                <div class="card-body-admin" id="profiloAdmin" style="display: none">
+                <div class="card-body-admin" id="profiloAdmin">
                     <div class="row1">
                         <div class="col-md-12-admin">
                             <h4><span><i class="fas fa-cog"></i></span>Profilo</h4>
@@ -126,7 +126,7 @@
 
 
 
-                <div class="card-body-admincreaEvento" >
+                <div class="card-body-admincreaEvento" id="creaEvento" style="display: none">
                     <div class="row1">
                         <div class="colo-title-admin">
                             <h4><span><i class="fas fa-database"></i></span> Crezione Evento</h4>
@@ -180,7 +180,7 @@
                 </div>
 
 
-                <div class="card-body-adminmodificaCampo" style="display: none;"> <!-- div ordini presenti nel DB-->
+                <div class="card-body-adminmodificaCampo" id="modificaCampo" style="display: none;"> <!-- div ordini presenti nel DB-->
                     <div class="row1">
                         <div class="col-md-12-admin">
                             <h4><span><i class="fas fa-database"></i></span> Modifica disponibilità campo</h4>
@@ -196,7 +196,7 @@
                 </div>
 
 
-                <div class="card-body-adminallTorneo" style="display: none;">
+                <div class="card-body-adminallTorneo" id="allTorneo" style="display: none;">
                     <div class="row1">
                         <div class="colo-title-admin">
                             <h4><span><i class="fas fa-database"></i></span> Tornei creati</h4>
@@ -248,7 +248,7 @@
                 </div>
 
 
-                <div class="card-body-adminallEvento" style="display: none;">
+                <div class="card-body-adminallEvento" id="allEvento" style="display: none;">
                     <div class="row1">
                         <div class="colo-title-admin">
                             <h4><span><i class="fas fa-database"></i></span> Eventi creati</h4>
@@ -298,7 +298,7 @@
 
 
 
-                <div class="card-body-adminallPartite" style="display: none;">
+                <div class="card-body-adminallPartite" id="allPartite" style="display: none;">
                     <div class="row1">
                         <div class="colo-title-admin">
                             <h4><span><i class="fas fa-database"></i></span> Partite create</h4>
