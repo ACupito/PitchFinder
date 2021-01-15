@@ -14,7 +14,6 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.Date;
 import java.sql.Time;
-import java.util.ArrayList;
 
 @WebServlet("/EventoAdminDeleteController")
 public class EventoAdminDeleteController extends HttpServlet {
