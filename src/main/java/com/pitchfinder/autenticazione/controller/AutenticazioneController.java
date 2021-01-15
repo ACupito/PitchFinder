@@ -195,8 +195,16 @@ public class AutenticazioneController extends HttpServlet {
             aCheck = (Admin)session.getAttribute("admin");
             uCheck = (Utente)session.getAttribute("utente");
 
-            if (aCheck != null || uCheck != null)
-                throw new IllegalArgumentException("Sei già loggato");
+
+            if (aCheck != null) {
+                dispatcher = request.getServletContext().getRequestDispatcher("/view/autenticazione/admin.jsp");
+                dispatcher.forward(request, response);
+            }
+
+            if (uCheck != null) {
+                dispatcher = request.getServletContext().getRequestDispatcher("/index.jsp");
+                dispatcher.forward(request, response);
+            }
 
             String username = request.getParameter("username");
             String password = request.getParameter("password");
@@ -244,6 +252,13 @@ public class AutenticazioneController extends HttpServlet {
                         response.setContentType("Il login è avvenuto correttamente");
                         session.setAttribute("utente", u);
                         dispatcher = request.getServletContext().getRequestDispatcher("/index.jsp");
+                        dispatcher.forward(request, response);
+
+                    } else {
+
+                        messaggio = "Login non avvenuto perchè la username non esiste";
+                        request.setAttribute("messaggio", messaggio);
+                        dispatcher = request.getServletContext().getRequestDispatcher("/view/autenticazione/loginResult.jsp");
                         dispatcher.forward(request, response);
                     }
 
