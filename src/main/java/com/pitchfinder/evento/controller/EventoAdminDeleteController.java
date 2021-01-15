@@ -16,7 +16,7 @@ import java.sql.Date;
 import java.sql.Time;
 import java.util.ArrayList;
 
-@WebServlet("/EventoAdminController")
+@WebServlet("/EventoAdminDeleteController")
 public class EventoAdminDeleteController extends HttpServlet {
 
     /** Minimum limit for name. */
