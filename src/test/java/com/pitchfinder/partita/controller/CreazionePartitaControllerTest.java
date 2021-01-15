@@ -695,7 +695,7 @@ public class CreazionePartitaControllerTest{
     }
 
     /**
-     * Selected button.equals("Conferma") == null
+     * Selected button.equals("Conferma") <- FAIL
      */
     @Test
     void TC_cancelButton() throws ServletException, IOException {
