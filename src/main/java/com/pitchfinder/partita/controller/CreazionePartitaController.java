@@ -5,7 +5,9 @@ import com.pitchfinder.partita.entity.Partita;
 import com.pitchfinder.partita.services.PartitaService;
 import com.pitchfinder.partita.services.PartitaServiceImpl;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -16,6 +18,7 @@ import java.sql.Time;
 import java.util.ArrayList;
 import java.util.List;
 
+@WebServlet("/Creation-Servlet")
 public class CreazionePartitaController extends HttpServlet {
     /**
      *  doPost method.
@@ -42,7 +45,7 @@ public class CreazionePartitaController extends HttpServlet {
                 Time end;
 
                 String maxGiocatoriStr = request.getParameter("maxGiocatori");
-                int maxGiocatori;
+                int maxGiocatori = 0;
 
                 if (utente == null) {
                     throw new IllegalArgumentException("Utente non valido");
@@ -123,7 +126,7 @@ public class CreazionePartitaController extends HttpServlet {
                         throw new IllegalArgumentException("Nome giocatore non valido");
                     }
 
-                    if (!currentName.matches("^[a-zA-Z\\s]+$") || currentName.length() > 12
+                    if (!currentName.matches("^[a-zA-Z\\s]+$") || currentName.length() > 16
                             || currentName.length() < 2) {
                         throw new IllegalArgumentException("Nome giocatore non valido");
                     }
@@ -134,7 +137,7 @@ public class CreazionePartitaController extends HttpServlet {
                         throw new IllegalArgumentException("Cognome giocatore non valido");
                     }
 
-                    if (!currentSurname.matches("^[a-zA-Z\\s]+$") || currentSurname.length() > 12
+                    if (!currentSurname.matches("^[a-zA-Z\\s]+$") || currentSurname.length() > 16
                             || currentSurname.length() < 2) {
                         throw new IllegalArgumentException("Cognome giocatore non valido");
                     }
@@ -155,7 +158,6 @@ public class CreazionePartitaController extends HttpServlet {
                                 nuova = partita;
                             }
                         }
-
                         //Aggiungo i giocatori
                         for (int i = 0; i < nomi.size(); i++) {
                             service.createGiocatorePartita(nuova.getIdPartita(),
@@ -163,14 +165,17 @@ public class CreazionePartitaController extends HttpServlet {
                         }
                     }
                     response.setContentType("Creazione avvenuta!");
-                    //tornare ad un'altra pagina
+                    request.setAttribute("esito", "1");
+
+                    RequestDispatcher dispatcher =
+                            request.getServletContext().getRequestDispatcher("/view/partita/matchCreation.jsp");
+                    dispatcher.forward(request, response);
+
                 } else {
-                    response.setContentType("Impossibile creare una partita!");
-                    //tornare alla pagina partite
+                    throw new IllegalArgumentException("Impossibile creare una partita!");
                 }
             } else {
-                response.setContentType("Operazione annullata");
-                //tornare alla pagina partite
+                throw new IllegalArgumentException("Operazione annullata!");
             }
         }
 

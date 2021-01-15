@@ -55,10 +55,7 @@ public class PrenotazioneServiceImplTest {
     @Test
     public void checkCreatePrenotazione() throws EmailException, MalformedURLException {
 
-
-
         PrenotazioneService prenotazioneService = new PrenotazioneServiceImpl();
-
         assertNotNull(prenotazioneService.createPrenotazione("AndreSquillante@gmail.com", evento));
 
     }
@@ -88,7 +85,7 @@ public class PrenotazioneServiceImplTest {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-      eventoDAO.doRemoveEvento(evento);
+        eventoDAO.doRemoveEvento(evento);
 
 
     }
