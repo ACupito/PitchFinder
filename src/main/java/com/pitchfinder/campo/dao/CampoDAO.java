@@ -59,7 +59,7 @@ public interface CampoDAO {
      * @param idCampo is the id of the pitch.
      * @return boolean
      */
-    boolean doRemoveDisponibilita(String emailUtente,  int idCampo);
+    boolean doRemoveDisponibilita(String emailUtente,  int idCampo, Date data);
 
     /**
      *

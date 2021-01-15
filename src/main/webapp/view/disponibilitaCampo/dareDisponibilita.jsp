@@ -87,9 +87,6 @@
                 <span>Conferma</span>
             </button>
 
-            <button type="submit" name="Annulla" value="Annulla" data-text="Annulla" id="Annulla">
-                <span>Annulla</span>
-            </button>
             <%}else{ %>
             <label  id="creation-error" name="creation-error"> Effettuare il login per modificare la disponibilità!</label>
             <script>

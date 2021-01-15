@@ -9,6 +9,9 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 import org.mockito.Mockito;
+
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -26,6 +29,8 @@ public class ModificaDispCampoControllerTest {
     private HttpServletRequest mockedRequest;
     private HttpServletResponse mockedResponse;
     private HttpSession session;
+    private ServletContext mockedServletContext;
+    private RequestDispatcher mockedDispatcher;
     private CampoDAO daoCampo = new CampoDAOImpl();
     private static final String ID_CAMPO = "1002";
     private static final String ORARIO_INIZIO = "15:30";
