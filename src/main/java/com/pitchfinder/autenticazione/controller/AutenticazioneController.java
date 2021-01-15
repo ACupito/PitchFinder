@@ -88,8 +88,10 @@ public class AutenticazioneController extends HttpServlet {
 
             uCheck = (Utente) session.getAttribute("utente");
 
-            if (uCheck != null)
+            if (uCheck != null) {
                 throw new IllegalArgumentException("Sei loggato, non puoi registrati !");
+            }
+
 
             String email = request.getParameter("email");
             String username = request.getParameter("username_");
@@ -206,8 +208,10 @@ public class AutenticazioneController extends HttpServlet {
             aCheck = (Admin) session.getAttribute("admin");
             uCheck = (Utente) session.getAttribute("utente");
 
-            if (aCheck != null || uCheck != null)
+            if (aCheck != null || uCheck != null) {
                 throw new IllegalArgumentException("Sei già loggato");
+            }
+
 
             String username = request.getParameter("username");
             String password = request.getParameter("password");
