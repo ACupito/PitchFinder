@@ -1,7 +1,5 @@
 package com.pitchfinder.autenticazione.controller;
 
-import com.pitchfinder.autenticazione.services.AutenticazioneService;
-import com.pitchfinder.autenticazione.services.AutenticazioneServiceImpl;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
