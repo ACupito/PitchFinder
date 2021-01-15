@@ -14,7 +14,7 @@
     <meta name="description" content="" />
     <meta name="author" content="" />
     <title>PitchFinder</title>
-
+    <link rel="icon" type="image/x-icon" href="assets/img/favicon.ico" />
     <!-- Font Awesome icons (free version)-->
     <script src="https://use.fontawesome.com/releases/v5.15.1/js/all.js" crossorigin="anonymous"></script>
     <!-- Google fonts-->
@@ -22,7 +22,8 @@
     <link href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic" rel="stylesheet" type="text/css" />
     <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700" rel="stylesheet" type="text/css" />
     <!-- Core theme CSS (includes Bootstrap)-->
-    <link href="css/homepage/style_homepage.css" rel="stylesheet" />
+    <link href="css/navbar/style_navbar.css" rel="stylesheet" type="text/css"/>
+    <link href="css/footer/style_footer.css" rel="stylesheet">
     <link href="css/disponibilita/disponibilita.css" rel="stylesheet" />
 
     <title>RegistrationForm_v9 by Colorlib</title>
@@ -46,7 +47,7 @@
         <form action="DareDispCampoController">
 
             <h3>Modifica la tua disponibilità per un campo</h3>
-            <h5>è necessario aver fatto il login per proseguire nella conferma</h5>
+
             <div class="form-row">
                 <div class="form-wrapper">
                     <label for="data">Data</label>
@@ -90,9 +91,24 @@
         </form>
     </div>
 </div>
+<!-- Footer-->
+<footer class="footer py-4">
+    <%@include file="../footer/footer.jsp"%>
+</footer>
+<!-- Bootstrap core JS-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"></script>
+<!-- Third party plugin JS-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
+<!-- Contact form JS-->
+<script src="assets/mail/jqBootstrapValidation.js"></script>
+<script src="assets/mail/contact_me.js"></script>
+<!-- Core theme JS-->
+<script src="js/homepage/js_homepage.js"></script>
+<script src = "js/homepage/check_login.js"></script>
+
 
 <script src="js/jquery-3.3.1.min.js"></script>
-
 <!-- DATE-PICKER -->
 <script src="js/disponibilita/datepicker.js"></script>
 <script src="js/disponibilita/datepicker.en.js"></script>
