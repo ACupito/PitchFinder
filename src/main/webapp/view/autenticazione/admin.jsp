@@ -1,4 +1,8 @@
-<%--
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="com.pitchfinder.torneo.entity.Torneo" %>
+<%@ page import="java.util.List" %>
+<%@ page import="com.pitchfinder.partita.entity.Partita" %>
+<%@ page import="com.pitchfinder.evento.entity.Evento" %><%--
   Created by IntelliJ IDEA.
   User: memex_99
   Date: 04/01/2021
@@ -13,6 +17,14 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 <body>
+<%
+    List<Torneo> tornei = new ArrayList<>();
+    List<Evento> eventi = new ArrayList<>();
+    List<Partita> partite = new ArrayList<>();
+    tornei = (List<Torneo>) application.getAttribute("tornei");
+    eventi = (List<Evento>) application.getAttribute("eventi");
+    partite = (List<Partita>) application.getAttribute("partite");
+%>
 
 <div class="hero">
     <div class="row">
@@ -54,7 +66,8 @@
                                     <p>${admin.cognome}</p>
                                     <br>
                                     <br>
-                                    <form action = "" method = "get">
+                                    <form action = "autentication" method = "get">
+                                        <input type="hidden" name="flag" value="4">
                                         <input name="submit_esci" type="submit" class="btn_impostazioni" id = "log_out"
                                                value="Logout"> <!-- button per uscire dall'area dell'amministratore-->
                                     </form>
@@ -140,28 +153,26 @@
 
                                 <thead>
                                 <tr>
-                                    <th scope="col">IdUtente</th>
                                     <th scope="col">Nome</th>
-                                    <th scope="col">Cognome</th>
+                                    <th scope="col">Data Inizio</th>
+                                    <th scope="col">Data Fine</th>
                                     <th scope="col"></th>
                                 </tr>
                                 </thead>
 
                                 <tbody id="tbody_torneo">
-                                <c:forEach items="${sessionScope.listaClienti}" var = "cliente">
-                                    <tr id = "${cliente.id}">
-                                        <th scope = "row"> ${cliente.id} </th>
-                                        <td data-title = "Nome"> ${cliente.nome} </td>
-                                        <td data-title = "Cognome"> ${cliente.cognome} </td>
+                                <% for(Torneo t : tornei) {%>
+                                    <tr id = "<%= t.getDataInizio()%>">
+                                        <th scope = "row"> <%= t.getNome()%> </th>
+                                        <td data-title = "Data Inizio"> <%= t.getDataInizio()%> </td>
+                                        <td data-title = "Data Fine"> <%= t.getDataFine()%> </td>
                                         <td data-title = "Remove">
-                                            <button class = "remove" name = "${cliente.id}"
-                                                    onclick = "rimuoviCliente(name)">  <!-- button per rimuovere utente dal DB-->
+                                            <button class = "remove" name = "<%= t.getDataInizio()%>">
                                                 Remove
                                             </button>
                                         </td>
                                     </tr>
-                                </c:forEach>
-
+                                <%}%>
 
                                 </tbody>
                             </table>
@@ -184,28 +195,28 @@
 
                                 <thead>
                                 <tr>
-                                    <th scope="col">IdUtente</th>
                                     <th scope="col">Nome</th>
-                                    <th scope="col">Cognome</th>
+                                    <th scope="col">Data</th>
+                                    <th scope="col">Ospite</th>
+                                    <th scope="col">Orario</th>
                                     <th scope="col"></th>
                                 </tr>
                                 </thead>
 
                                 <tbody id="tbody_evento">
-                                <c:forEach items="${sessionScope.listaClienti}" var = "cliente">
-                                    <tr id = "${cliente.id}">
-                                        <th scope = "row"> ${cliente.id} </th>
-                                        <td data-title = "Nome"> ${cliente.nome} </td>
-                                        <td data-title = "Cognome"> ${cliente.cognome} </td>
+                                <% for (Evento e : eventi) { %>
+                                    <tr>
+                                        <th scope = "row"> <%= e.getName()%> </th>
+                                        <td data-title = "Data"> <%= e.getDate()%> </td>
+                                        <td data-title = "Ospite"> <%= e.getGuest()%> </td>
+                                        <td data-title = "Orario"> <%= e.getStartHour()%> - <%= e.getEndHour()%> </td>
                                         <td data-title = "Remove">
-                                            <button class = "remove" name = "${cliente.id}"
-                                                    onclick = "rimuoviCliente(name)">  <!-- button per rimuovere utente dal DB-->
+                                            <button class = "remove" name = "">
                                                 Remove
                                             </button>
                                         </td>
                                     </tr>
-                                </c:forEach>
-
+                                <%}%>
 
                                 </tbody>
                             </table>
@@ -239,6 +250,7 @@
                                 <tbody id="tbody_partite">
                                 <c:forEach items="${sessionScope.listaClienti}" var = "cliente">
                                     <tr id = "${cliente.id}">
+<%--                                        //questo corrisponde alla colonna IdUtente--%>
                                         <th scope = "row"> ${cliente.id} </th>
                                         <td data-title = "Nome"> ${cliente.nome} </td>
                                         <td data-title = "Cognome"> ${cliente.cognome} </td>
