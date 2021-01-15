@@ -177,7 +177,7 @@
                                     <div id="valid_maxParteci">Il numero massimo di partecipanti deve essere maggiore di 5 e minore di 12.</div>
                                 </div>
 
-                                <button type="submit" class="btn btn-primary" id="creaTorneo">Crea torneo</button>
+                                <button type="submit" class="btn btn-primary" id="createTorneo">Crea torneo</button>
                             </form>
 
                         </div>
