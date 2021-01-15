@@ -65,7 +65,7 @@ public class EventoAdminDeleteController extends HttpServlet {
             if (nome.length() < MINLIMIT || nome.length() > MAXLIMIT) {
                 throw new IllegalArgumentException("Errato: lunghezza nome non valida");
             }
-            if (!nome.matches("^[ a-zA-Z\u00C0-\u00ff']+$")) {
+            if (!nome.matches("^[a-zA-Z0-9\u00C0-\u00ff'\\s]+$")) {
                 throw new IllegalArgumentException("Errato: formato non valido");
             }
 
@@ -86,6 +86,7 @@ public class EventoAdminDeleteController extends HttpServlet {
                     new Time(14, 0, 0), dataEvento, "temp", "temp",
                     0, admin.getUsername());
 
+            es.removeEvento(temp);
             response.setContentType("Eliminazione avvenuta");
             RequestDispatcher requestDispatcher = request.getServletContext().getRequestDispatcher("/autentication?flag=5");
             requestDispatcher.forward(request, response);
