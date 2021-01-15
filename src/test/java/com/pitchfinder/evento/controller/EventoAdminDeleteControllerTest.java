@@ -143,7 +143,7 @@ public class EventoAdminDeleteControllerTest {
     @Test
     void TC_11_19(){
         Mockito.when(mockedRequest.getParameter("nome")).thenReturn(NOME);
-        Mockito.when(mockedRequest.getParameter("data")).thenReturn("2019-12-22");
+        Mockito.when(mockedRequest.getParameter("data")).thenReturn("asd-12-22");
 
         String message = "Errato: formato non valido";
 
