@@ -12,11 +12,13 @@ import org.mockito.Mockito;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 
+import java.io.IOException;
 import java.sql.Date;
 import java.sql.Time;
 
@@ -44,6 +46,8 @@ public class ModificaDispCampoControllerTest {
         mockedRequest = Mockito.mock(HttpServletRequest.class);
         mockedResponse = Mockito.mock(HttpServletResponse.class);
         session = Mockito.mock(HttpSession.class);
+        mockedServletContext = Mockito.mock(ServletContext.class);
+        mockedDispatcher = Mockito.mock(RequestDispatcher.class);
         Admin admin = new Admin();
         admin.setNome("Emanuele");
         admin.setCognome("Mezzi");
@@ -60,7 +64,8 @@ public class ModificaDispCampoControllerTest {
         mockedRequest = null;
         mockedResponse = null;
         session = null;
-
+        mockedDispatcher=null;
+        mockedServletContext=null;
 
         //Remove Occupazione
         daoCampo.doRemoveOccupazione(Integer.parseInt(ID_CAMPO),
@@ -73,6 +78,7 @@ public class ModificaDispCampoControllerTest {
      */
     @Test
     void TC_52_1() {
+        Mockito.when(mockedRequest.getParameter("Occupa")).thenReturn("Occupa");
         Mockito.when(mockedRequest.getParameter("data")).thenReturn("");
         Mockito.when(mockedRequest.getParameter("inizio")).thenReturn(ORARIO_INIZIO);
         Mockito.when(mockedRequest.getParameter("fine")).thenReturn(ORARIO_FINE);
@@ -92,6 +98,7 @@ public class ModificaDispCampoControllerTest {
      */
     @Test
     void TC_52_2() {
+        Mockito.when(mockedRequest.getParameter("Occupa")).thenReturn("Occupa");
         Mockito.when(mockedRequest.getParameter("data")).thenReturn("sadaf");
         Mockito.when(mockedRequest.getParameter("inizio")).thenReturn(ORARIO_INIZIO);
         Mockito.when(mockedRequest.getParameter("fine")).thenReturn(ORARIO_FINE);
@@ -111,6 +118,7 @@ public class ModificaDispCampoControllerTest {
      */
     @Test
     void TC_52_3() {
+        Mockito.when(mockedRequest.getParameter("Occupa")).thenReturn("Occupa");
         Mockito.when(mockedRequest.getParameter("data")).thenReturn(DATA);
         Mockito.when(mockedRequest.getParameter("inizio")).thenReturn("");
         Mockito.when(mockedRequest.getParameter("fine")).thenReturn(ORARIO_FINE);
@@ -130,6 +138,7 @@ public class ModificaDispCampoControllerTest {
      */
     @Test
     void TC_52_4() {
+        Mockito.when(mockedRequest.getParameter("Occupa")).thenReturn("Occupa");
         Mockito.when(mockedRequest.getParameter("data")).thenReturn(DATA);
         Mockito.when(mockedRequest.getParameter("inizio")).thenReturn("12:000:0000");
         Mockito.when(mockedRequest.getParameter("fine")).thenReturn(ORARIO_FINE);
@@ -149,6 +158,7 @@ public class ModificaDispCampoControllerTest {
      */
     @Test
     void TC_52_5() {
+        Mockito.when(mockedRequest.getParameter("Occupa")).thenReturn("Occupa");
         Mockito.when(mockedRequest.getParameter("data")).thenReturn(DATA);
         Mockito.when(mockedRequest.getParameter("inizio")).thenReturn(ORARIO_INIZIO);
         Mockito.when(mockedRequest.getParameter("fine")).thenReturn("");
@@ -168,6 +178,7 @@ public class ModificaDispCampoControllerTest {
      */
     @Test
     void TC_52_6() {
+        Mockito.when(mockedRequest.getParameter("Occupa")).thenReturn("Occupa");
         Mockito.when(mockedRequest.getParameter("data")).thenReturn(DATA);
         Mockito.when(mockedRequest.getParameter("inizio")).thenReturn(ORARIO_INIZIO);
         Mockito.when(mockedRequest.getParameter("fine")).thenReturn("shdajkska");
@@ -186,14 +197,29 @@ public class ModificaDispCampoControllerTest {
      * Occupazione's creation is valid.
      */
     @Test
-    void TC_52_7() {
+    void TC_52_7Occupa() throws ServletException, IOException {
+        Mockito.when(mockedRequest.getParameter("Occupa")).thenReturn("Occupa");
         Mockito.when(mockedRequest.getParameter("data")).thenReturn(DATA);
         Mockito.when(mockedRequest.getParameter("inizio")).thenReturn(ORARIO_INIZIO);
         Mockito.when(mockedRequest.getParameter("fine")).thenReturn(ORARIO_FINE);
         Mockito.when(mockedRequest.getParameter("idcampo")).thenReturn(ID_CAMPO);
-
+        Mockito.doReturn(mockedServletContext).when(mockedRequest).getServletContext();
+        Mockito.doReturn(mockedDispatcher).when(mockedServletContext).getRequestDispatcher("/autentication?flag=5");
         servlet.doGet(mockedRequest, mockedResponse);
         Mockito.verify(mockedResponse).setContentType("La modifica va a buon fine");
+
+    }
+    @Test
+    void TC_52_7Libera() throws ServletException, IOException {
+        Mockito.when(mockedRequest.getParameter("Libera")).thenReturn("Libera");
+        Mockito.when(mockedRequest.getParameter("data")).thenReturn(DATA);
+        Mockito.when(mockedRequest.getParameter("inizio")).thenReturn(ORARIO_INIZIO);
+        Mockito.when(mockedRequest.getParameter("fine")).thenReturn(ORARIO_FINE);
+        Mockito.when(mockedRequest.getParameter("idcampo")).thenReturn(ID_CAMPO);
+        Mockito.doReturn(mockedServletContext).when(mockedRequest).getServletContext();
+        Mockito.doReturn(mockedDispatcher).when(mockedServletContext).getRequestDispatcher("/autentication?flag=5");
+        servlet.doGet(mockedRequest, mockedResponse);
+        Mockito.verify(mockedResponse).setContentType("La liberazione va a buon fine");
 
     }
 }

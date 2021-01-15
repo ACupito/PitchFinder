@@ -188,8 +188,48 @@
                         </div>
                     </div>
                     <div class="row1" id="ModificaDispCampo">
-
                         <!--Div per la creazione-->
+                        <div class="wrapper">
+                            <div class="inner">
+                                <form action="ModificaDispCampoController">
+
+                                    <div class="form-row">
+                                        <div class="form-wrapper">
+                                            <label for="data">Data</label>
+                                            <span class="lnr lnr-calendar-full"></span>
+                                            <input type="date" class="form-control datepicker-here" name="data" id="data">
+                                        </div>
+                                        <div class="form-wrapper">
+                                            <label for="inizio">Orario Inizio</label>
+                                            <span class="lnr lnr-calendar-full"></span>
+                                            <input type="time" class="form-control datepicker-here" name="inizio" id="inizio">
+                                        </div>
+                                        <div class="form-wrapper">
+                                            <label for="fine">Orario Fine</label>
+                                            <span class="lnr lnr-calendar-full"></span>
+                                            <input type="time" class="form-control datepicker-here" name="fine" id="fine">
+                                        </div>
+                                    </div>
+                                    <div class="form-row last">
+                                        <div class="form-wrapper">
+                                            <label for="idcampo">Sport</label>
+                                            <select name="idcampo" id="idcampo" class="form-control">
+                                                <option value="1002">Tennis</option>
+                                            </select>
+                                            <i class="zmdi zmdi-chevron-down"></i>
+                                        </div>
+                                    </div>
+                                    <button type="submit" name="Occupa" value="Occupa" data-text="Occupa" id="Occupa">
+                                        <span>Occupa</span>
+                                    </button>
+
+                                    <button type="submit" name="Libera" value="Libera" data-text="Libera" id="Libera">
+                                        <span>Libera</span>
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+
 
 
                     </div>
