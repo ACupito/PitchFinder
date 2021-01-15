@@ -118,7 +118,7 @@ class AutenticazioneControllerTest extends Mockito {
 
         Mockito.doReturn(mockedSession).when(mockedRequest).getSession(true);
         Mockito.doReturn(mockedServletContext).when(mockedRequest).getServletContext();
-        Mockito.doReturn(mockedDispatcher).when(mockedServletContext).getRequestDispatcher("/view/autenticazione/utente.jsp");
+        Mockito.doReturn(mockedDispatcher).when(mockedServletContext).getRequestDispatcher("/index.jsp");
 
         servlet.doPost(mockedRequest, mockedResponse);
 
