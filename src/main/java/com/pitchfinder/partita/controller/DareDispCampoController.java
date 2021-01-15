@@ -27,15 +27,15 @@ public class DareDispCampoController extends HttpServlet {
     public void doPost(final HttpServletRequest request,
                        final HttpServletResponse response) throws ServletException, IOException {
 
-        Utente utente= (Utente) request.getSession().getAttribute("utente");
+        Utente utente = (Utente) request.getSession().getAttribute("utente");
 
 
-        if(request.getParameter("Conferma")!=null) {
+        if (request.getParameter("Conferma") != null) {
             CampoService camp = new CampoServiceImpl();
             String campo = request.getParameter("idcampo");
             int idcampo = Integer.parseInt(campo);
 
-            String email= utente.getEmail();
+            String email = utente.getEmail();
             String dataStr = request.getParameter("data");
             Date data;
             String inizioStr = request.getParameter("inizio");
@@ -72,10 +72,9 @@ public class DareDispCampoController extends HttpServlet {
             response.setContentType("La creazione va a buon fine");
             RequestDispatcher dispatcher =
                     request.getServletContext().getRequestDispatcher("/view/disponibilitaCampo/dareDisponibilita.jsp");
-                dispatcher.forward(request, response);
+            dispatcher.forward(request, response);
         }
     }
-
     /**
      * doGet() method.
      * @param request  is the servlet request.

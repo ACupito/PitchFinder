@@ -57,6 +57,7 @@ public interface CampoDAO {
      *
      * @param emailUtente is the email of the user.
      * @param idCampo is the id of the pitch.
+     * @param data is the data of the Disponibilita.
      * @return boolean
      */
     boolean doRemoveDisponibilita(String emailUtente,  int idCampo, Date data);
