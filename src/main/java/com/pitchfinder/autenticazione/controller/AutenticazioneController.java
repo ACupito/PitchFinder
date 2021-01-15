@@ -4,6 +4,16 @@ import com.pitchfinder.autenticazione.entity.Admin;
 import com.pitchfinder.autenticazione.entity.Utente;
 import com.pitchfinder.autenticazione.services.AutenticazioneService;
 import com.pitchfinder.autenticazione.services.AutenticazioneServiceImpl;
+import com.pitchfinder.evento.entity.Evento;
+import com.pitchfinder.evento.services.EventoService;
+import com.pitchfinder.evento.services.EventoServiceImpl;
+import com.pitchfinder.partita.entity.Partita;
+import com.pitchfinder.partita.services.PartitaService;
+import com.pitchfinder.partita.services.PartitaServiceImpl;
+import com.pitchfinder.torneo.entity.Torneo;
+import com.pitchfinder.torneo.services.TorneoService;
+import com.pitchfinder.torneo.services.TorneoServiceImpl;
+
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -14,6 +24,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.sql.Date;
+import java.util.List;
 
 
 @WebServlet("/autentication")
@@ -221,6 +232,17 @@ public class AutenticazioneController extends HttpServlet {
                     Admin a = as.loginAdmin(username, password);
                     if (a != null) {
                         session.setAttribute("admin", a);
+
+                        TorneoService torneoService = new TorneoServiceImpl();
+                        List<Torneo> tornei = torneoService.getAllTornei();
+                        EventoService eventoService = new EventoServiceImpl();
+                        List<Evento> eventi = eventoService.getAllEventi();
+                        PartitaService partitaService = new PartitaServiceImpl();
+                        List<Partita> partite = partitaService.showPartite();
+                        request.getServletContext().setAttribute("tornei", tornei);
+                        request.getServletContext().setAttribute("eventi", eventi);
+                        request.getServletContext().setAttribute("partite", partite);
+
                         dispatcher = getServletContext().getRequestDispatcher("/view/autenticazione/admin.jsp");
                         dispatcher.forward(request, response);
                     }
@@ -264,8 +286,24 @@ public class AutenticazioneController extends HttpServlet {
         } else if (flag == 4) {
 
             session.setAttribute("utente", null);
+            session.setAttribute("admin", null);
             dispatcher = request.getServletContext().getRequestDispatcher("/index.jsp");
             dispatcher.forward(request, response);
+        } else if(flag == 5) {
+
+            TorneoService torneoService = new TorneoServiceImpl();
+            List<Torneo> tornei = torneoService.getAllTornei();
+            EventoService eventoService = new EventoServiceImpl();
+            List<Evento> eventi = eventoService.getAllEventi();
+            PartitaService partitaService = new PartitaServiceImpl();
+            List<Partita> partite = partitaService.showPartite();
+            request.getServletContext().setAttribute("tornei", tornei);
+            request.getServletContext().setAttribute("eventi", eventi);
+            request.getServletContext().setAttribute("partite", partite);
+
+            dispatcher = getServletContext().getRequestDispatcher("/view/autenticazione/admin.jsp");
+            dispatcher.forward(request, response);
+
         }
     }
 }
