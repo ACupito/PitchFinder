@@ -1,5 +1,4 @@
 package com.pitchfinder.partita.controller;
-import com.pitchfinder.autenticazione.entity.Admin;
 import com.pitchfinder.autenticazione.entity.Utente;
 import com.pitchfinder.autenticazione.services.AutenticazioneService;
 import com.pitchfinder.autenticazione.services.AutenticazioneServiceImpl;
@@ -21,7 +20,7 @@ import javax.servlet.http.HttpSession;
 
 import java.io.IOException;
 import java.sql.Date;
-import java.sql.Time;
+
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -35,7 +34,7 @@ public class DareDispCampoControllerTest {
     private HttpSession session;
     private ServletContext mockedServletContext;
     private RequestDispatcher mockedDispatcher;
-    private CampoDAO daoCampo = new CampoDAOImpl();
+    private final CampoDAO daoCampo = new CampoDAOImpl();
     private static final String ID_CAMPO = "1002";
     private static final String ORARIO_INIZIO = "15:30";
     private static final String ORARIO_FINE = "16:30";
