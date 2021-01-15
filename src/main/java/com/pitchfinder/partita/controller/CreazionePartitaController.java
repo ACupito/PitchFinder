@@ -126,7 +126,7 @@ public class CreazionePartitaController extends HttpServlet {
                         throw new IllegalArgumentException("Nome giocatore non valido");
                     }
 
-                    if (!currentName.matches("^[a-zA-Z\\s]+$") || currentName.length() > 12
+                    if (!currentName.matches("^[a-zA-Z\\s]+$") || currentName.length() > 16
                             || currentName.length() < 2) {
                         throw new IllegalArgumentException("Nome giocatore non valido");
                     }
@@ -137,7 +137,7 @@ public class CreazionePartitaController extends HttpServlet {
                         throw new IllegalArgumentException("Cognome giocatore non valido");
                     }
 
-                    if (!currentSurname.matches("^[a-zA-Z\\s]+$") || currentSurname.length() > 12
+                    if (!currentSurname.matches("^[a-zA-Z\\s]+$") || currentSurname.length() > 16
                             || currentSurname.length() < 2) {
                         throw new IllegalArgumentException("Cognome giocatore non valido");
                     }
