@@ -221,9 +221,14 @@
                                         <td data-title = "Ospite"> <%= e.getGuest()%> </td>
                                         <td data-title = "Orario"> <%= e.getStartHour()%> - <%= e.getEndHour()%> </td>
                                         <td data-title = "Remove">
-                                            <button class = "remove" name = "">
-                                                Remove
-                                            </button>
+                                            <form action="EventoAdminDeleteController" method="get">
+                                                <input type="hidden" name="nome" value="<%= e.getName()%>">
+                                                <input type="hidden" name="data" value="<%= e.getDate()%>">
+                                                <button class = "remove">
+                                                    Remove
+                                                </button>
+
+                                            </form>
                                         </td>
                                     </tr>
                                 <%}%>
