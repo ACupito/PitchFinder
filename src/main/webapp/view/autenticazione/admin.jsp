@@ -15,6 +15,10 @@
     <title>PitchFinder</title>
     <link href="css/admin_profile/style_adminProfile.css" rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </head>
 <body>
 <%
@@ -27,36 +31,36 @@
 %>
 
 <div class="hero">
-    <div class="row">
+    <div class="rowFirst">
 
-        <div class="col3">
-            <div class="list-group">
-                <a href="#" class="list-group-item" id="profilo">Profilo</a>
-                <a href="#" class="list-group-item" id="crea_torneo">Crea Torneo</a>
-                <a href="#" class="list-group-item" id="crea_evento">Crea Evento</a>
-                <a href="#" class="list-group-item" id="modifica_campo">Modifica Campo</a>
-                <a href="#" class="list-group-item" id="all_tornei">Visualizza Torneo</a>
-                <a href="#" class="list-group-item" id="all_evento">Visualizza Evento</a>
-                <a href="#" class="list-group-item" id="all_partite">Visualizza Partite</a>
+        <div class="col3-admin">
+            <div class="list-group-admin">
+                <a href="#" class="list-group-item-admin" id="profilo">Profilo</a>
+                <a href="#" class="list-group-item-admin" id="crea_torneo">Crea Torneo</a>
+                <a href="#" class="list-group-item-admin" id="crea_evento">Crea Evento</a>
+                <a href="#" class="list-group-item-admin" id="modifica_campo">Modifica Campo</a>
+                <a href="#" class="list-group-item-admin" id="all_tornei">Visualizza Torneo</a>
+                <a href="#" class="list-group-item-admin" id="all_evento">Visualizza Evento</a>
+                <a href="#" class="list-group-item-admin" id="all_partite">Visualizza Partite</a>
             </div>
         </div>
 
 
 
-        <div class="col9">
-            <div class="card">
+        <div class="col9-admin">
+            <div class="card-body">
 
 
 
-                <div class="card-body" id="profiloAdmin">
+                <div class="card-body-admin" id="profiloAdmin">
                     <div class="row1">
-                        <div class="col-md-12">
+                        <div class="col-md-12-admin">
                             <h4><span><i class="fas fa-cog"></i></span>Profilo</h4>
                             <hr>
                         </div>
                     </div>
                     <div class="row1">
-                        <div class="col-md-12">
+                        <div class="col-md-12-admin">
 
                             <div class="data">
                                 <div class="offset-4 col-8">
@@ -86,18 +90,35 @@
 
 
 
-                <div class="card-body" id="creaTorneo" style="display: none"> <!-- div utenti presenti nel DB-->
+                <div class="card-body-admin" id="creaTorneo" style="display:none"> <!-- div utenti presenti nel DB-->
                     <div class="row1">
-                        <div class="colo_title">
+                        <div class="colo-title-admin">
                             <h4><span><i class="fas fa-database"></i></span> Creazione Torneo</h4>
                             <hr>
                         </div>
                     </div>
                     <div class="row1">
 
-                        <!--Div per la creazione-->
+                        <div class="container">
+                            <form action="/action_page.php" class="was-validated">
+                                <div class="form-group">
+                                    <label for="uname">Username:</label>
+                                    <input type="text" class="form-control" id="uname" placeholder="Enter username" name="uname" required>
+                                    <div class="valid-feedback">Valid.</div>
+                                    <div class="invalid-feedback">Please fill out this field.</div>
+                                </div>
 
+                                <div class="form-group form-check">
+                                    <label class="form-check-label">
+                                        <input class="form-check-input" type="checkbox" name="remember" required> I agree on blabla.
+                                        <div class="valid-feedback">Valid.</div>
+                                        <div class="invalid-feedback">Check this checkbox to continue.</div>
+                                    </label>
+                                </div>
+                                <button type="submit" class="btn btn-primary">Submit</button>
+                            </form>
 
+                        </div>
 
 
                     </div>
@@ -105,9 +126,9 @@
 
 
 
-                <div class="card-body" id="creaEvento" style="display: none;">
+                <div class="card-body-admincreaEvento" id="creaEvento" style="display: none">
                     <div class="row1">
-                        <div class="colo_title">
+                        <div class="colo-title-admin">
                             <h4><span><i class="fas fa-database"></i></span> Crezione Evento</h4>
                             <hr>
                         </div>
@@ -116,7 +137,7 @@
                         <div class="eventCreation">
                             <form action="EventoAdminController" method="post" id="form-creation" onsubmit="return validateName()">
                                 <fieldset id="field-creation">
-                                    <legend> Creazione Evento </legend>
+
 
                                     <label for="creation-name" id="creation-label-name">Nome dell'evento:</label>
                                     <input type="text" id="creation-name" name="nome" required onkeyup="validateName()"><br>
@@ -159,9 +180,9 @@
                 </div>
 
 
-                <div class="card-body" id="modificaCampo" style="display: none;"> <!-- div ordini presenti nel DB-->
+                <div class="card-body-adminmodificaCampo" id="modificaCampo" style="display: none;"> <!-- div ordini presenti nel DB-->
                     <div class="row1">
-                        <div class="col-md-12">
+                        <div class="col-md-12-admin">
                             <h4><span><i class="fas fa-database"></i></span> Modifica disponibilità campo</h4>
                             <hr>
                         </div>
@@ -175,9 +196,9 @@
                 </div>
 
 
-                <div class="card-body" id="allTorneo" style="display: none;">
+                <div class="card-body-adminallTorneo" id="allTorneo" style="display: none;">
                     <div class="row1">
-                        <div class="colo_title">
+                        <div class="colo-title-admin">
                             <h4><span><i class="fas fa-database"></i></span> Tornei creati</h4>
                             <hr>
                         </div>
@@ -197,26 +218,26 @@
 
                                 <tbody id="tbody_torneo">
                                 <% for(Torneo t : tornei) {%>
-                                    <tr id = "<%= t.getDataInizio()%>">
-                                        <th scope = "row"> <%= t.getNome()%> </th>
-                                        <td data-title = "Data Inizio"> <%= t.getDataInizio()%> </td>
-                                        <td data-title = "Data Fine"> <%= t.getDataFine()%> </td>
-                                        <td data-title = "Remove">
-                                            <form action="torneoServlet" method="get">
-                                                <input type="hidden" name="flag" value="2">
-                                                <input type="hidden" name="idCampo" value="1002">
-                                                <input type="hidden" name="nome" value="<%= t.getNome()%>">
-                                                <input type="hidden" name="dataInizio" value="<%= t.getDataInizio()%>">
-                                                <input type="hidden" name="dataFine" value="<%= t.getDataFine()%>">
-                                                <input type="hidden" name="giornoPartite" value="<%= t.getGiornoPartite()%>">
-                                                <button class = "remove" name = "<%= t.getDataInizio()%>">
-                                                    Remove
-                                                </button>
+                                <tr id = "<%= t.getDataInizio()%>">
+                                    <th scope = "row"> <%= t.getNome()%> </th>
+                                    <td data-title = "Data Inizio"> <%= t.getDataInizio()%> </td>
+                                    <td data-title = "Data Fine"> <%= t.getDataFine()%> </td>
+                                    <td data-title = "Remove">
+                                        <form action="torneoServlet" method="get">
+                                            <input type="hidden" name="flag" value="2">
+                                            <input type="hidden" name="idCampo" value="1002">
+                                            <input type="hidden" name="nome" value="<%= t.getNome()%>">
+                                            <input type="hidden" name="dataInizio" value="<%= t.getDataInizio()%>">
+                                            <input type="hidden" name="dataFine" value="<%= t.getDataFine()%>">
+                                            <input type="hidden" name="giornoPartite" value="<%= t.getGiornoPartite()%>">
+                                            <button class = "remove" name = "<%= t.getDataInizio()%>">
+                                                Remove
+                                            </button>
 
-                                            </form>
+                                        </form>
 
-                                        </td>
-                                    </tr>
+                                    </td>
+                                </tr>
                                 <%}%>
 
                                 </tbody>
@@ -227,9 +248,9 @@
                 </div>
 
 
-                <div class="card-body" id="allEvento" style="display: none;">
+                <div class="card-body-adminallEvento" id="allEvento" style="display: none;">
                     <div class="row1">
-                        <div class="colo_title">
+                        <div class="colo-title-admin">
                             <h4><span><i class="fas fa-database"></i></span> Eventi creati</h4>
                             <hr>
                         </div>
@@ -250,22 +271,22 @@
 
                                 <tbody id="tbody_evento">
                                 <% for (Evento e : eventi) { %>
-                                    <tr>
-                                        <th scope = "row"> <%= e.getName()%> </th>
-                                        <td data-title = "Data"> <%= e.getDate()%> </td>
-                                        <td data-title = "Ospite"> <%= e.getGuest()%> </td>
-                                        <td data-title = "Orario"> <%= e.getStartHour()%> - <%= e.getEndHour()%> </td>
-                                        <td data-title = "Remove">
-                                            <form action="EventoAdminDeleteController" method="get">
-                                                <input type="hidden" name="nome" value="<%= e.getName()%>">
-                                                <input type="hidden" name="data" value="<%= e.getDate()%>">
-                                                <button class = "remove">
-                                                    Remove
-                                                </button>
+                                <tr>
+                                    <th scope = "row"> <%= e.getName()%> </th>
+                                    <td data-title = "Data"> <%= e.getDate()%> </td>
+                                    <td data-title = "Ospite"> <%= e.getGuest()%> </td>
+                                    <td data-title = "Orario"> <%= e.getStartHour()%> - <%= e.getEndHour()%> </td>
+                                    <td data-title = "Remove">
+                                        <form action="EventoAdminDeleteController" method="get">
+                                            <input type="hidden" name="nome" value="<%= e.getName()%>">
+                                            <input type="hidden" name="data" value="<%= e.getDate()%>">
+                                            <button class = "remove">
+                                                Remove
+                                            </button>
 
-                                            </form>
-                                        </td>
-                                    </tr>
+                                        </form>
+                                    </td>
+                                </tr>
                                 <%}%>
 
                                 </tbody>
@@ -277,9 +298,9 @@
 
 
 
-                <div class="card-body" id="allPartite" style="display: none;">
+                <div class="card-body-adminallPartite" id="allPartite" style="display: none;">
                     <div class="row1">
-                        <div class="colo_title">
+                        <div class="colo-title-admin">
                             <h4><span><i class="fas fa-database"></i></span> Partite create</h4>
                             <hr>
                         </div>
@@ -300,7 +321,7 @@
                                 <tbody id="tbody_partite">
                                 <c:forEach items="${sessionScope.listaClienti}" var = "cliente">
                                     <tr id = "${cliente.id}">
-<%--                                        //questo corrisponde alla colonna IdUtente--%>
+
                                         <th scope = "row"> ${cliente.id} </th>
                                         <td data-title = "Nome"> ${cliente.nome} </td>
                                         <td data-title = "Cognome"> ${cliente.cognome} </td>
