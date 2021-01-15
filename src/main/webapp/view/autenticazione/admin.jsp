@@ -134,15 +134,15 @@
                                     <textarea rows="4" cols="50" id="creation-description" name="descrizione" form="form-creation"> </textarea><br>
                                     <input type="radio" id="image1" name="immagine" value="1">
                                     <label for="image1">
-                                        <img src="images/events/event-slider.jpg" alt="Trulli" width="120" height="70">
+                                        <img src="images/events/image1.jpg" alt="Trulli" width="120" height="70">
                                     </label><br>
                                     <input type="radio" id="image2" name="immagine" value="2">
                                     <label for="image2">
-                                        <img src="images/events/hdPicture.jpg" alt="asd" width="120" height="70">
+                                        <img src="images/events/image2.jpg" alt="asd" width="120" height="70">
                                     </label><br>
                                     <input type="radio" id="image3" name="immagine" value="3">
                                     <label for="image3">
-                                        <img src="images/events/imageTest.jpg" alt="dsa" width="120" height="70">
+                                        <img src="images/events/image3.jpg" alt="dsa" width="120" height="70">
                                     </label><br>
                                     <input type="radio" id="default" name="immagine" value="default">
                                     <label for="default">

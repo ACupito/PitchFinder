@@ -126,13 +126,13 @@ public class EventoAdminController extends HttpServlet {
                 if (immagine.matches("[0-9]$")) {
                     switch (Integer.parseInt(immagine)) {
                         case 1 :
-                            image = "images/events/event-slider.jpg";
+                            image = "images/events/image1.jpg";
                             break;
                         case 2 :
-                            image = "images/events/hdPicture.jpg";
+                            image = "images/events/image2.jpg";
                             break;
                         case 3 :
-                            image = "images/events/imageTest.jpg";
+                            image = "images/events/image3.jpg";
                             break;
                         default :
                             image = "default";
