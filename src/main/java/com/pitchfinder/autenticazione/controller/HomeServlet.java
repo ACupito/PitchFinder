@@ -1,5 +1,8 @@
 package com.pitchfinder.autenticazione.controller;
 
+import com.pitchfinder.autenticazione.services.AutenticazioneService;
+import com.pitchfinder.autenticazione.services.AutenticazioneServiceImpl;
+
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -22,7 +25,6 @@ public class HomeServlet extends HttpServlet {
             throws ServletException, IOException {
 
         RequestDispatcher dispatcher;
-
         dispatcher = request.getServletContext().getRequestDispatcher("/index.jsp");
         dispatcher.forward(request, response);
     }
