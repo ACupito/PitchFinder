@@ -31,6 +31,21 @@ function maxDate(){
 
     $('#creation-data').attr("max",currentDate);
 }
+function minMaxTime(){
+    $('input.timepicker').timepicker({
+        timeFormat: 'HH:mm:ss',
+        minTime: '09:00:00', //
+        maxTime: '22:00:00',
+        interval: 60 // 60 minutes
+    });
+
+    $("#creation-timeend").timepicker({
+        timeFormat: 'HH:mm:ss',
+        minTime: '10:00:00',
+        maxTime: '23:00:00',
+        interval: 60 // 60 minutes
+    });
+}
 //Data validation
 function valiDate(){
     if(!document.getElementById("creation-data").value.match("^(.*[-])[0-9]*$")){
@@ -150,63 +165,124 @@ function clickTimeValidate(){
 }
 function validateName1(){
 
-    if( $("#nameG1").val().match("^[a-zA-Z\\s]+$") &&  $("#nameG1").val().length > 2 && $("#nameG1").val().length<12){
-        $("#creation-label-nameG1").css({"color":"#4CAF50"});
-        isNameValid=true;
+    if( $("#nameG1").val().match("^[a-zA-Z\\s]+$")){
+        if($("#nameG1").val().length < 1 || $("#nameG1").val().length>16) {
+            $("#creation-label-nameG1").css({"color": "#FF0000"});
+            $("#small-nameG1").text("La lunghezza del giocatore non è valida");
+            $("#small-nameG1").css("color", "#FF0000");
+            isNameValid = false;
+        }else{
+            $("#creation-label-nameG1").css({"color":"#4CAF50"});
+            $("#small-nameG1").text("Nome Valido");
+            $("#small-nameG1").css("color","#4CAF50");
+            isNameValid=true;
+        }
     }else{
         $("#creation-label-nameG1").css({"color":"#FF0000"});
+        $("#small-nameG1").text("Il formato del giocatore non è valido. ");
+        $("#small-nameG1").css("color","#FF0000");
         isNameValid=false;
     }
 }
 function validateName2(){
-
-    if( $("#nameG2").val().match("^[a-zA-Z\\s]+$") &&  $("#nameG2").val().length > 2 && $("#nameG2").val().length<12){
-        $("#creation-label-nameG2").css({"color":"#4CAF50"});
-        isNameValid=true;
+    if( $("#nameG2").val().match("^[a-zA-Z\\s]+$")){
+        if($("#nameG2").val().length < 1 || $("#nameG2").val().length>16) {
+            $("#creation-label-nameG2").css({"color": "#FF0000"});
+            $("#small-nameG2").text("La lunghezza del giocatore non è valida");
+            $("#small-nameG2").css("color", "#FF0000");
+            isNameValid = false;
+        }else{
+            $("#creation-label-nameG2").css({"color":"#4CAF50"});
+            $("#small-nameG2").text("Nome Valido");
+            $("#small-nameG2").css("color","#4CAF50");
+            isNameValid=true;
+        }
     }else{
         $("#creation-label-nameG2").css({"color":"#FF0000"});
+        $("#small-nameG2").text("Il formato del giocatore non è valido. ");
+        $("#small-nameG2").css("color","#FF0000");
         isNameValid=false;
     }
 }
 function validateName3(){
-
-    if( $("#nameG3").val().match("^[a-zA-Z\\s]+$") &&  $("#nameG3").val().length > 2 && $("#nameG3").val().length<12){
-        $("#creation-label-nameG3").css({"color":"#4CAF50"});
-        isNameValid=true;
+    if( $("#nameG3").val().match("^[a-zA-Z\\s]+$")){
+        if($("#nameG3").val().length < 1 || $("#nameG3").val().length>16) {
+            $("#creation-label-nameG3").css({"color": "#FF0000"});
+            $("#small-nameG3").text("La lunghezza del giocatore non è valida");
+            $("#small-nameG3").css("color", "#FF0000");
+            isNameValid = false;
+        }else{
+            $("#creation-label-nameG3").css({"color":"#4CAF50"});
+            $("#small-nameG3").text("Nome Valido");
+            $("#small-nameG3").css("color","#4CAF50");
+            isNameValid=true;
+        }
     }else{
         $("#creation-label-nameG3").css({"color":"#FF0000"});
+        $("#small-nameG3").text("Il formato del giocatore non è valido. ");
+        $("#small-nameG3").css("color","#FF0000");
         isNameValid=false;
     }
 }
 //Surname validation
 function validateSurname1() {
-
-    if(  $("#surnameG1").val().match("^[a-zA-Z\\s]+$") &&  $("#surnameG1").val().length >2 &&   $("#surnameG1").val().length<12){
-        $("#creation-label-surnameG1").css("color","#4CAF50");
-        isSurnameValid=true;
+    if( $("#surnameG1").val().match("^[a-zA-Z\\s]+$")){
+        if($("#surnameG1").val().length < 1 || $("#surnameG1").val().length>16) {
+            $("#creation-label-surnameG1").css({"color": "#FF0000"});
+            $("#small-surnameG1").text("La lunghezza del giocatore non è valida");
+            $("#small-surnameG1").css("color", "#FF0000");
+            isNameValid = false;
+        }else{
+            $("#creation-label-surnameG1").css({"color":"#4CAF50"});
+            $("#small-surnameG1").text("Nome Valido");
+            $("#small-surnameG1").css("color","#4CAF50");
+            isNameValid=true;
+        }
     }else{
-        $("#creation-label-surnameG1").css("color","#FF0000");
-        isSurnameValid=false;
+        $("#creation-label-surnameG1").css({"color":"#FF0000"});
+        $("#small-surnameG1").text("Il formato del giocatore non è valido. ");
+        $("#small-surnameG1").css("color","#FF0000");
+        isNameValid=false;
     }
 }
 function validateSurname2() {
-
-    if(  $("#surnameG2").val().match("^[a-zA-Z\\s]+$") &&  $("#surnameG2").val().length >2 &&   $("#surnameG2").val().length<12){
-        $("#creation-label-surnameG2").css("color","#4CAF50");
-        isSurnameValid=true;
+    if( $("#surnameG2").val().match("^[a-zA-Z\\s]+$")){
+        if($("#surnameG2").val().length < 1 || $("#surnameG2").val().length>16) {
+            $("#creation-label-surnameG2").css({"color": "#FF0000"});
+            $("#small-surnameG2").text("La lunghezza del giocatore non è valida");
+            $("#small-surnameG2").css("color", "#FF0000");
+            isNameValid = false;
+        }else{
+            $("#creation-label-surnameG2").css({"color":"#4CAF50"});
+            $("#small-surnameG2").text("Nome Valido");
+            $("#small-surnameG2").css("color","#4CAF50");
+            isNameValid=true;
+        }
     }else{
-        $("#creation-label-surnameG2").css("color","#FF0000");
-        isSurnameValid=false;
+        $("#creation-label-surnameG2").css({"color":"#FF0000"});
+        $("#small-surnameG2").text("Il formato del giocatore non è valido. ");
+        $("#small-surnameG2").css("color","#FF0000");
+        isNameValid=false;
     }
 }
 function validateSurname3() {
-
-    if(  $("#surnameG3").val().match("^[a-zA-Z\\s]+$") &&  $("#surnameG3").val().length >2 &&   $("#surnameG3").val().length<12){
-        $("#creation-label-surnameG3").css("color","#4CAF50");
-        isSurnameValid=true;
+    if( $("#surnameG3").val().match("^[a-zA-Z\\s]+$")){
+        if($("#surnameG3").val().length < 1 || $("#surnameG3").val().length>16) {
+            $("#creation-label-surnameG3").css({"color": "#FF0000"});
+            $("#small-surnameG3").text("La lunghezza del giocatore non è valida");
+            $("#small-surnameG3").css("color", "#FF0000");
+            isNameValid = false;
+        }else{
+            $("#creation-label-surnameG3").css({"color":"#4CAF50"});
+            $("#small-surnameG3").text("Nome Valido");
+            $("#small-surnameG3").css("color","#4CAF50");
+            isNameValid=true;
+        }
     }else{
-        $("#creation-label-surnameG3").css("color","#FF0000");
-        isSurnameValid=false;
+        $("#creation-label-surnameG3").css({"color":"#FF0000"});
+        $("#small-surnameG3").text("Il formato del giocatore non è valido. ");
+        $("#small-surnameG3").css("color","#FF0000");
+        isNameValid=false;
     }
 }
 //Number of player validation
@@ -214,6 +290,7 @@ function validateNPlayer(){
     var valoreN = $("#creation-player").val();
     if(parseInt(valoreN) < 0 || parseInt(valoreN) > 3){
         $("#creation-label-player").css("color","#FF0000");
+        $("#small-creation-player").text(" Valore di Numero Giocatori non valido. ");
         $("#small-creation-player").css("color","#FF0000");
         isPlayerNumberValid=false;
         for(let j=1; j<4; j++){
@@ -226,6 +303,7 @@ function validateNPlayer(){
         }
     }else if($("#creation-player").val().match("^[0-3]$")){
         $("#creation-label-player").css("color","#4CAF50");
+        $("#small-creation-player").text("Formato di Numero Giocatori valido. ");
         $("#small-creation-player").css("color","#4CAF50");
         isPlayerNumberValid=true;
         nPlayer = $("#creation-player").val();
@@ -256,6 +334,7 @@ function validateNPlayer(){
 
     }else{
         $("#creation-label-player").css("color","#FF0000");
+        $("#small-creation-player").text("Formato di Numero Giocatori non valido. ");
         $("#small-creation-player").css("color","#FF0000");
         isPlayerNumberValid=false;
         for(let j=1; j<4; j++){
@@ -400,5 +479,6 @@ function showAvailability(){
 $(document).ready( function(){
         minDate()
         maxDate();
+        minMaxTime();
     }
 );
