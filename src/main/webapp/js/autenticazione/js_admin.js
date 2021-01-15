@@ -68,9 +68,8 @@
 
 /**** EVENT Javascript *****/
 var isDateValidEvento=false;
-var isTimeValid=false;
-var isNameValid=false;
-var isSurnameValid=false;
+var isNameValidEvento=false;
+var isGuestValidEvento=false;
 var isPlayerNumberValid=false;
 var numberOfCheckedItems = 0;
 var nPlayer=0;
@@ -79,11 +78,28 @@ var mmStrEvento;
 var hhEndEvento;
 var mmEndEvento;
 
-    /** Name Evento **/
-    //fill
+    /** validate Nome **/
+    function validateNameEvento(){
+
+        if( $("#creation-name-Evento").val().match("^[a-zA-Z0-9\u00C0-\u00ff'\\s]+$")){
+            if($("#creation-name-Evento").val().length < 1 || $("#creation-name-Evento").val().length>50) {
+                $("#name-evento-valid").text("La lunghezza non è valida");
+                $("#name-evento-valid").css("color", "#FF0000");
+                isNameValidEvento = false;
+            }else{
+                $("#name-evento-valid").text("Nome Valido");
+                $("#name-evento-valid").css("color","#4CAF50");
+                isNameValidEvento=true;
+            }
+        }else{
+            $("#name-evento-valid").text("Il formato del giocatore non è valido. ");
+            $("#name-evento-valid").css("color","#FF0000");
+            isNameValidEvento=false;
+        }
+    }
 
 
-    /** Date Evento **/
+    /** Validate Data **/
     /** min Date **/
     function minDateEvento() {
         var currentDate = new Date();
@@ -107,17 +123,36 @@ var mmEndEvento;
     /** valiDateEvento **/
     function valiDateEvento(){
         if(document.getElementById("creation-data-Evento").value.match("^[0-9]{4}\\-[0-9]{2}\\-[0-9]{2}$")){
-            $("#creation-label-data-Evento").css("color","#4CAF50");
             $("#date-evento-valid").text("La data è valida, rispetta il formato");
             $("#date-evento-valid").css("color","#4CAF50");
             isDateValidEvento=true;
         }else{
-            $("#creation-label-data-Evento").css("color","#FF0000");
             $("#date-evento-valid").text("La data non rispetta il formato");
             $("#date-evento-valid").css("color","#FF0000");
             isDateValidEvento=false;
         }
     }
+
+    /** validateOspite **/
+    function validateGuestEvento(){
+
+        if( $("#creation-name-Evento").val().match("^[a-zA-Z0-9\u00C0-\u00ff'\\s]+$")){
+            if($("#creation-guest-Evento").val().length < 1 || $("#creation-guest-Evento").val().length>50) {
+                $("#guest-evento-valid").text("La lunghezza non è valida");
+                $("#guest-evento-valid").css("color", "#FF0000");
+                isGuestValidEvento = false;
+            }else{
+                $("#guest-evento-valid").text("Nome Valido");
+                $("#guest-evento-valid").css("color","#4CAF50");
+                isGuestValidEvento=true;
+            }
+        }else{
+            $("#guest-evento-valid").text("Il formato del giocatore non è valido. ");
+            $("#guest-evento-valid").css("color","#FF0000");
+            isGuestValidEvento=false;
+        }
+    }
+
 
 function validateEvento(){
 
@@ -129,8 +164,3 @@ function validateEvento(){
     });
 
 /**** END EVENT Javascript *****/
-
-/**** MATCH Javascript *****/
-
-
-/**** END MATCH Javascript *****/

@@ -138,8 +138,8 @@
                             <form action="EventoAdminController" class="was-validated" method="post" id="form-creation" onsubmit="return validateEvento()">
                                 <div class="form-group">
                                     <label for="creation-name-Evento" id="creation-label-name-Evento">Nome dell'evento:</label>
-                                    <input type="text" class="form-control" id="creation-name-Evento" placeholder="Inserisci il nome dell'evento" name="nome" required><br>
-                                    <div class="valid-feedback">Valido.</div>
+                                    <input type="text" class="form-control" id="creation-name-Evento" placeholder="Inserisci il nome dell'evento" name="nome" required onkeyup="validateNameEvento()"><br>
+                                    <div class="valid-feedback" id="name-evento-valid">Valido.</div>
                                     <div class="invalid-feedback">Inserisci un nome.</div>
                                 </div>
                                 <div class="form-group">
@@ -168,8 +168,8 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="creation-guest-Evento" id="creation-label-guest">Nome Ospite:</label>
-                                    <input type="text" id="creation-guest-Evento" class="form-control" name="ospite" required><br>
-                                    <div class="valid-feedback">Valido.</div>
+                                    <input type="text" id="creation-guest-Evento" class="form-control" name="ospite" required onkeyup="validateGuestEvento()"><br>
+                                    <div class="valid-feedback" id="guest-evento-valid">Valido.</div>
                                     <div class="invalid-feedback">Inserisci un ospite valido.</div>
                                 </div>
                                 <div class="form-group">
