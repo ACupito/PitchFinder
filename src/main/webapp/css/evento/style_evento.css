@@ -25,6 +25,9 @@ header.masthead .masthead-heading {
 }
 
 @media (min-width: 768px) {
+    .container .row{
+        min-height : 1000px;
+    }
     header.masthead {
         padding-top: 17rem;
         padding-bottom: 12.5rem;
