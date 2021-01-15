@@ -112,6 +112,7 @@ $(document).ready(function() {
 
             $("#password_").css("border-bottom", borderError);
             passwordOk = false;
+            setTimeout(function(){ alert("Password con formato errato"); }, 2000);
         }
 
         cambiaStatoRegistrami();

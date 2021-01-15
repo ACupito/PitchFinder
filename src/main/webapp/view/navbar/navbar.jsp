@@ -21,7 +21,7 @@
                     <button type="button" id="dropdownMenu1" data-toggle="dropdown" class="btn nav-link">LOGIN<span class="caret"></span></button>
                     <ul class="dropdown-menu dropdown-menu-right mt-2">
                         <li class="px-3 py-2">
-                            <form class="form" role="form" action="autentication" method="post">
+                            <form  class="form" role="form" action="autentication" method="post">
                                 <input type="hidden" value="2" name="flag">
                                 <div class="form-group">
                                     <input id="username" placeholder="Username" class="form-control form-control-sm" type="text" name="username">
