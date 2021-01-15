@@ -100,22 +100,83 @@
                     <div class="row1">
 
                         <div class="container">
-                            <form action="/action_page.php" class="was-validated">
+                            <form action="torneoServlet">
+                                <input type="hidden" name="flag" value="1">
+                                <input type="hidden" name="idCampo" value="1002">
                                 <div class="form-group">
-                                    <label for="uname">Username:</label>
-                                    <input type="text" class="form-control" id="uname" placeholder="Enter username" name="uname" required>
+                                    <label for="uname">Nome:</label>
+                                    <input type="text" class="form-control" id="uname" name="nome" onblur="validateName()" onchange="validateButton()" required>
+                                    <div id="valid_nome">Il nome non può superare 50 caratteri.</div>
+
+                                </div>
+                                <div class="form-group">
+                                    <label for="data_inizio">Data Inizio:</label>
+                                    <input type="date" class="form-control" id="data_inizio" name="dataInizio" required onkeydown="return false" onchange="activeDataFine()" onblur="validateDataInizio()">
+                                    <div id="valid_dataInizio">Inserisci una data di inizio.</div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="data_fine">Data Fine:</label>
+                                    <input type="date" class="form-control" id="data_fine" name="dataFine" required onkeydown="return false" onclick="minDateFine(); maxDateFine()" disabled onblur="validateDataFine()" onchange="validateButton()">
+                                    <div id="valid_dataFine">Inserisci una data di fine.</div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="giornoPartite">Giorno Partite:</label>
+                                    <select name="giornoPartite" id="giornoPartite">
+                                        <option value="Lunedì">Lunedì</option>
+                                        <option value="Martedì">Martedì</option>
+                                        <option value="Mercoledì">Mercoledì</option>
+                                        <option value="Giovedì">Giovedì</option>
+                                        <option value="Venerdì">Venerdì</option>
+                                        <option value="Sabato">Sabato</option>
+                                        <option value="Domenica">Domenica</option>
+                                    </select>
                                     <div class="valid-feedback">Valid.</div>
                                     <div class="invalid-feedback">Please fill out this field.</div>
                                 </div>
-
-                                <div class="form-group form-check">
-                                    <label class="form-check-label">
-                                        <input class="form-check-input" type="checkbox" name="remember" required> I agree on blabla.
-                                        <div class="valid-feedback">Valid.</div>
-                                        <div class="invalid-feedback">Check this checkbox to continue.</div>
-                                    </label>
+                                <div class="form-group">
+                                    <label for="sport">Sport:</label>
+                                    <select name="sport" id="sport">
+                                        <option value="Tennis">Tennis</option>
+                                    </select>
+                                    <div class="valid-feedback">Valid.</div>
+                                    <div class="invalid-feedback">Please fill out this field.</div>
                                 </div>
-                                <button type="submit" class="btn btn-primary">Submit</button>
+                                <div class="form-group">
+                                    <label for="tipo">Tipo:</label>
+                                    <select name="tipo" id="tipo">
+                                        <option value="Gironi">Gironi</option>
+                                        <option value="Eliminazione diretta">Eliminazione diretta</option>
+                                        <option value="Gironi + Eliminazione diretta">Gironi + Eliminazione diretta</option>
+                                    </select>
+                                    <div class="valid-feedback">Valid.</div>
+                                    <div class="invalid-feedback">Please fill out this field.</div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="struttura">Struttura:</label>
+                                    <select name="struttura" id="struttura">
+                                        <option value="Partite singole">Partite singole</option>
+                                        <option value="Partite doppie">Partite doppie</option>
+                                    </select>
+                                    <div class="valid-feedback">Valid.</div>
+                                    <div class="invalid-feedback">Please fill out this field.</div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="maxSquadre">Numero squadre torneo:</label>
+                                    <input type="number" class="form-control" id="maxSquadre" name="maxSquadre" min="1" max="20" required onblur="validateSquadre()" onchange="validateButton()">
+                                    <div id="valid_squadra">Il numero delle squadre deve essere maggiore di 1 e minore di 20.</div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="minPartecipanti">Numero minimo di partecipanti per squadra:</label>
+                                    <input type="number" class="form-control" id="minPartecipanti" name="minPartecipanti" min="1" max="5" required onblur="validateMinPartecipanti()" onchange="validateButton()">
+                                    <div id="valid_minParteci">Il numero minimo di partecipanti deve essere maggiore di 1 e minore di 5.</div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="maxPartecipanti">Numero massimo di partecipanti per squadra:</label>
+                                    <input type="number" class="form-control" id="maxPartecipanti" name="maxPartecipanti" min="5" max="12" required onblur="validateMaxPartecipanti()" onchange="validateButton()">
+                                    <div id="valid_maxParteci">Il numero massimo di partecipanti deve essere maggiore di 5 e minore di 12.</div>
+                                </div>
+
+                                <button type="submit" class="btn btn-primary" id="creaButton" disabled>Crea</button>
                             </form>
 
                         </div>
@@ -350,6 +411,6 @@
 
 
 <script src="js/autenticazione/js_admin.js"></script>
-
+<script src="js/autenticazione/js_checkTorneo.js"></script>
 </body>
 </html>
