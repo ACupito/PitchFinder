@@ -86,6 +86,20 @@
             <artifactId>bootstrap</artifactId>
             <version>4.5.3</version>
         </dependency>
+
+        <!-- https://mvnrepository.com/artifact/com.googlecode.json-simple/json-simple -->
+        <dependency>
+            <groupId>com.googlecode.json-simple</groupId>
+            <artifactId>json-simple</artifactId>
+            <version>1.1.1</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/org.webjars/jquery -->
+        <dependency>
+            <groupId>org.webjars</groupId>
+            <artifactId>jquery</artifactId>
+            <version>3.5.1</version>
+        </dependency>
+
     </dependencies>
 
     <build>
@@ -108,7 +122,7 @@
                         <exclude>com/pitchfinder/squadra/entity/**/*</exclude>
                         <exclude>com/pitchfinder/torneo/entity/**/*</exclude>
                         <exclude>com/pitchfinder/campo/entity/**/*</exclude>
-
+                        <exclude>com/pitchfinder/evento/controller/EventoController/*</exclude>
                     </excludes>
                 </configuration>
                 <executions>

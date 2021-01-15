@@ -8,7 +8,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Title</title>
+    <title>Login Fallito</title>
     <link rel="stylesheet" type="text/css" href="./css/navbar/style_navbar.css">
     <link rel="stylesheet" type="text/css" href="./css/user_profile/login_failed.css">
     <link href = "https://fonts.googleapis.com/css?family=Poppins" rel = "stylesheet">
@@ -18,11 +18,17 @@
 
 <%@ include file="../navbar/navbar.jsp"%>
 
-<div class="principal">
-    <div class="message">
-        <span class="text"><i class="fas fas">${messaggio}</i></span>
-    </div>
+<div class="card">
+    <h1>${messaggio}</h1>
 </div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"></script>
+<!-- Third party plugin JS-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
+<!-- Contact form JS-->
+<script src="assets/mail/jqBootstrapValidation.js"></script>
+<script src="assets/mail/contact_me.js"></script>
 
 <script src="./js/homepage/js_homepage.js"></script>
 <script src = "./js/homepage/check_login.js"></script>

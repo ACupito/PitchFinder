@@ -1,5 +1,5 @@
-var borderOK = '2px solid green';
-var borderError = '2px solid red';
+var borderOK = '3px solid green';
+var borderError = '3px solid red';
 var usernameOk = false;
 
 $(document).ready(function() {
@@ -9,17 +9,28 @@ $(document).ready(function() {
         var input = $("#username");
         var username = input.val();
 
+        if (username.length < 1 || username.length > 50) {
+            $("#username").css("border-bottom", borderError);
+            usernameOk = false;
+            $("#div_username").text("La username inserita non rispetta la lunghezza corretta");
+            $("#div_username").css("color", "red");
+        }
+
+        if (!username.match(/^((?!.*[\s])(?=.*[A-Z])(?=.*\d).{1,50})/)) {
+            $("#username").css("border-bottom", borderError);
+            usernameOk = false;
+            $("#div_username").text("La username inserita non rispetta il formato corretto");
+            $("#div_username").css("color", "red");
+        }
+
         if (username.length >= 1
             && username.length <= 50
             && username.match(/^((?!.*[\s])(?=.*[A-Z])(?=.*\d).{1,50})/)) {
 
             $("#username").css("border-bottom", borderOK);
             usernameOk = true;
-
-        } else {
-
-            $("#username").css("border-bottom", borderError);
-            usernameOk = false;
+            $("#div_username").text("La username rispetta formato e lunghezza corretti");
+            $("#div_username").css("color", "green");
         }
 
         cambiaStatoLogin();

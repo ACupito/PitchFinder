@@ -1,0 +1,385 @@
+*{
+    margin: 0;
+    padding: 0;
+    font-family: 'Poppins', sans-serif;
+}
+
+
+body{
+    font-family: 'Poppins', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    letter-spacing: 0;
+
+}
+
+a {
+    text-decoration: none;
+}
+
+.footer-distributed{
+    margin-top: 230px;
+}
+
+/* Stile div contenente tutti i div */
+.hero{
+
+    width: 80%;
+    margin: 100px 10%;
+}
+
+/* Con flex direction: row gli elementi si dipongono a riga con column a colonna */
+.rowFirst{
+    display: flex;
+    flex-direction: row;
+}
+.elements {
+    max-width: 300px;
+    border-style: solid;
+}
+
+.data {
+    max-height: 500px;
+    overflow-y: scroll;
+}
+
+
+.col3-admin{
+    position: relative;
+    width:230px;
+    margin-left: 0;
+}
+
+/* Stile per insieme dei button sulla sx */
+
+.list-group-admin {
+
+    display: flex;
+    flex-direction: column;
+}
+
+.list-group-item-admin{
+
+    font-family: 'Poppins', sans-serif;
+
+    font-weight: 400;
+    color: black;
+    border: solid 1px rgba(0,0,0,0.15);
+    padding-top: 10px;
+    padding-left: 10px;
+    padding-bottom: 25px;
+    height: 40px;
+}
+.list-group-item-admin:hover{
+    background-color: rgba(0,0,0,0.15);
+}
+
+/* first-child: primo elemento del gruppo */
+.list-group-item-admin:first-child{
+    border-top-left-radius:.25rem;
+    border-top-right-radius:.25rem;
+}
+
+/* last-child: utimo elemento del gruppo */
+.list-group-item-admin:last-child{
+    border-bottom-left-radius:.25rem;
+    border-bottom-right-radius:.25rem;
+}
+
+/* in col9 abbiamo il div dove vengono scambiati le cose che l'amminstratore può visualizzare */
+.col9-admin{
+
+    border: solid 1px rgba(0,0,0,0.15);
+    border-radius: .25rem;
+    padding: 25px;
+    width:100%;
+    margin-left: 50px;
+}
+
+h4{
+    font-family: 'Poppins', sans-serif;
+    margin-bottom:.5rem;
+    font-weight:500; /*spessore del font*/
+    line-height:1.2;
+    font-size:1.5rem;
+    color:inherit; /*una proprietà deve ereditare il suo valore dal suo elemento padre*/
+}
+
+/* card-body-admini singoli div */
+.card-body-admin{
+    font-family: 'Poppins', sans-serif;
+    font-weight: 400;
+    position: relative;
+    width: 100%;
+    height: auto;
+}
+
+/* data */
+body{
+
+    color: rgba(94,93,82,1);
+}
+
+.responsive-table{
+    margin-top: 5px;
+    width: 100%;
+    margin-bottom: 24px;
+    border-spacing: 0;
+}
+
+.responsive-table thead {
+    position: absolute;
+    clip: rect(1px 1px 1px 1px); /* La clipproprietà consente di specificare un rettangolo per ritagliare un elemento assolutamente posizionato. Il rettangolo è specificato come quattro coordinate, tutte dall'angolo in alto a sinistra dell'elemento da ritagliare. */
+    padding: 0;
+    border: 0;
+    height: 1px;
+    width: 1px;
+    overflow: hidden;
+}
+
+
+.responsive-table th {
+
+    background-color: black;
+    font-weight: normal;
+    text-align: center;
+    color: white;
+}
+
+/* th:first-of-type: il primo elemento del th viene spostato a sinistra */
+.responsive-table th:first-of-type {
+
+    text-align: left;
+}
+
+/* white-space: normal diversi valori per lo spazio bianco */
+.responsive-table tbody, tr, th, td {
+
+    display: block;
+    padding: 0;
+    text-align: left;
+    white-space: normal;
+}
+
+
+
+.responsive-table th, td {
+    padding: 8px;
+    vertical-align: middle; /*posizionato rispetto all'elemento più in basso*/
+}
+
+.responsive-table tbody tr {
+    margin-bottom: 16px;
+}
+
+/* tr:last-of-type ultimo elemento del tr */
+.responsive-table tbody tr:last-of-type {
+    margin-bottom: 0;
+}
+
+/* th[scope="row"] seleziona tutti i th con scope = "row" */
+.responsive-table th[scope="row"] {
+    background-color: black;
+    color: white;
+}
+
+.responsive-table td {
+
+    text-align: right;
+}
+
+.responsive-table td[data-type=currency] {
+
+    text-align: right;
+}
+
+/*
+    Data-title dà il titolo alla cella, cambio titolo della cella principale (in responsive), quindi in td troveremo il
+    titolo del primo th in una riga
+*/
+.responsive-table td[data-title]:before {
+
+    content: attr(data-title); /*cambiare il contenuto del titolo della cella*/
+    float: left; /*specifica dove gli elementi devono fluttuare*/
+    font-size: 12.8px;
+    color: black;
+}
+
+/* Stile button della pagina */
+.btn_impostazioni{
+
+    font-family: 'Poppins', sans-serif;
+    width: 200px;
+    margin-left: 35%;
+    margin-right: 25%;
+    margin-top: 10px;
+    padding: 10px;
+    border: none;
+    border-radius: 30px;
+    background-color: black;
+    color: white;
+    font-size: 15px;
+    font-weight: bold;
+    outline: none; /*linea di bordo quando viene cliccato il bottone*/
+}
+#ordini_row{
+
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+
+#cerca{
+
+    font-family: 'Poppins', sans-serif;
+    width: 120px;
+    padding: 3px;
+    border: none;
+    border-radius: 30px;
+    background-color: black;
+    color: white;
+    font-size: 15px;
+    font-weight: bold;
+    outline: none; /*linea di bordo quando viene cliccato il bottone*/
+}
+
+.remove{
+
+    font-family: 'Poppins', sans-serif;
+    width: 70px;
+    padding: 5px;
+    border: none;
+    border-radius: 30px;
+    background-color: black;
+    color: white;
+    font-size: 10px;
+    font-weight: bold;
+    outline: none; /*linea di bordo quando viene cliccato il bottone*/
+}
+
+#cerca:hover, .btn_impostazioni:hover{
+
+    cursor: pointer;
+    background: #daa520;
+}
+
+.remove:hover{
+
+    cursor: pointer;
+    background: red;
+}
+
+/* Media query */
+@media (min-width: 480px){
+
+    .responsive-table th, td{
+        padding: 12px 8px;
+    }
+
+    .responsive-table tbody th[scope="row"]{
+        border-left: 1px solid  black;
+        border-bottom: 1px solid  black;
+    }
+
+    /* Questo serve per aumentare il font */
+    .responsive-table tbody td[data-title]:before{
+        font-size: 14px;
+    }
+}
+
+@media (min-width: 768px){
+    .responsive-table {
+        font-size: 14px;
+    }
+    .responsive-table thead{
+        position: relative;
+        clip: auto;
+        height: auto;
+        width: auto;
+        overflow: auto;
+    }
+    .responsive-table tr{
+        display: table-row; /*Lascia che l'elemento si comporti come un elemento <tr>*/
+    }
+
+    .responsive-table th, td{
+        display: table-cell; /*Lascia che l'elemento si comporti come un elemento <td>*/
+        padding: 8px;
+    }
+
+    .responsive-table tbody {
+        display: table-row-group; /*Lascia che l'elemento si comporti come un elemento <tbody>*/
+    }
+
+    .responsive-table tbody tr {
+
+        display: table-row; /*Lascia che l'elemento si comporti come un elemento <tr>*/
+        border-width: 1px;
+    }
+
+    /* prende le righe pari */
+    .responsive-table tbody tr:nth-of-type(even){
+        background-color: rgba(94,93,82,.1);
+    }
+
+    .responsive-table th[scope="row"]{
+        background-color: transparent;
+        color: black;
+        text-align: left;
+    }
+
+    .responsive-table td {
+
+        border-left: 1px solid black;
+        border-bottom: 1px solid black;
+        text-align: center;
+    }
+
+    .responsive-table td:last-of-type{
+
+        border-right: 1px solid  black;
+    }
+
+    .responsive-table td[data-title]:before{
+        content: none;
+    }
+}
+
+
+@media (min-width: 992px){
+    .responsive-table {
+        font-size: 16px;
+    }
+    .responsive-table th,td{
+        padding: 12px 8px;
+    }
+}
+
+@media(min-width: 1200px){
+    .responsive-table th,td{
+        padding: 12px;
+    }
+}
+
+
+@media (max-width: 900px) {
+    .rowFirst {
+        flex-direction: column;
+    }
+
+    .col3-admin {
+        width: 80%;
+        margin-left: 10%;
+        margin-right: 10%;
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    .col9-admin {
+        margin-left: 0;
+    }
+
+    .btn_impostazioni {
+        margin-left: 20%;
+    }
+}
