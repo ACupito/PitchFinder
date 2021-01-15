@@ -167,9 +167,19 @@
                                         <td data-title = "Data Inizio"> <%= t.getDataInizio()%> </td>
                                         <td data-title = "Data Fine"> <%= t.getDataFine()%> </td>
                                         <td data-title = "Remove">
-                                            <button class = "remove" name = "<%= t.getDataInizio()%>">
-                                                Remove
-                                            </button>
+                                            <form action="torneoServlet" method="get">
+                                                <input type="hidden" name="flag" value="2">
+                                                <input type="hidden" name="idCampo" value="1002">
+                                                <input type="hidden" name="nome" value="<%= t.getNome()%>">
+                                                <input type="hidden" name="dataInizio" value="<%= t.getDataInizio()%>">
+                                                <input type="hidden" name="dataFine" value="<%= t.getDataFine()%>">
+                                                <input type="hidden" name="giornoPartite" value="<%= t.getGiornoPartite()%>">
+                                                <button class = "remove" name = "<%= t.getDataInizio()%>">
+                                                    Remove
+                                                </button>
+
+                                            </form>
+
                                         </td>
                                     </tr>
                                 <%}%>
