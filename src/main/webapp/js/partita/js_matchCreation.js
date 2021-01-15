@@ -33,6 +33,22 @@ function maxDate(){
 }
 //Data validation
 function valiDate(){
+    if(!document.getElementById("creation-data").value.match("^(.*[-])[0-9]*$")){
+        $("#creation-label-data").css("color","#FF0000");
+        $("#small-creation-data").text("La data non è selezionata");
+        $("#small-creation-data").css("color","#FF0000");
+        isDateValid=false;
+    }else if(document.getElementById("creation-data").value.match("^[0-9]{4}\\-[0-9]{2}\\-[0-9]{2}$")){
+        $("#creation-label-data").css("color","#4CAF50");
+        $("#small-creation-data").text("La data è valida, rispetta il formato");
+        $("#small-creation-data").css("color","#4CAF50");
+        isDateValid=true;
+    }else{
+        $("#creation-label-data").css("color","#FF0000");
+        $("#small-creation-data").text("La data non rispetta il formato");
+        $("#small-creation-data").css("color","#FF0000");
+        isDateValid=false;
+    }
     var father = document.getElementById("form-Availability");
     if(father.hasChildNodes()){
         for(j=0;j<father.childElementCount;j++){
@@ -40,8 +56,6 @@ function valiDate(){
             j--;
         }
     }
-    $("#creation-label-data").css("color","#4CAF50");
-    isDateValid=true;
 }
 //Start validation
 function validateStart(){
@@ -52,9 +66,21 @@ function validateStart(){
             j--;
         }
     }
-    $("#creation-label-str").css("color","#4CAF50");
-    hhStr = document.getElementById("creation-timestr").value.substring(0,2);
-    mmStr = document.getElementById("creation-timestr").value.substring(0,2);
+    if(document.getElementById("creation-timestr").value.match("^[0-2]{1}[0-9]{1}\\:[0-6]{1}[0-9]{1}$")){
+        $("#creation-label-str").css("color","#4CAF50");
+        hhStr = document.getElementById("creation-timestr").value.substring(0,2);
+        mmStr = document.getElementById("creation-timestr").value.substring(3);
+        $("#small-creation-timestr").text("Orario di inizio valido, rispetta il formato");
+        $("#small-creation-timestr").css("color","#4CAF50");
+    }else{
+        $("#creation-label-str").css("color","#4CAF50");
+        hhStr = document.getElementById("creation-timestr").value.substring(0,2);
+        mmStr = document.getElementById("creation-timestr").value.substring(3);
+        $("#small-creation-timestr").text("L'orario di inizio non rispetta il formato");
+        $("#small-creation-timestr").css("color","#4CAF50");
+    }
+
+
 }
 
 //End validation
@@ -69,6 +95,8 @@ function validateEnd(){
     $("#creation-label-end").css("color","#4CAF50");
     hhEnd = document.getElementById("creation-timeend").value.substring(0,2);
     mmEnd = document.getElementById("creation-timeend").value.substring(3);
+    $("#small-creation-timeend").text("Orario di fine valido, rispetta il formato");
+    $("#small-creation-timeend").css("color","#4CAF50");
 }
 //Time validation legal time for a match
 function validateTime(){
@@ -76,23 +104,43 @@ function validateTime(){
         if (hhEnd - hhStr == 2 && mmStr - mmEnd < 0) {
             $("#creation-label-str").css("color","#FF0000");
             $("#creation-label-end").css("color","#FF0000");
+            $("#small-creation-timestr").text("Orari non validi, max 2 ore");
+            $("#small-creation-timestr").css("color","#FF0000");
+            $("#small-creation-timeend").text("Orari non validi, max 2 ore");
+            $("#small-creation-timeend").css("color","#FF0000");
             isTimeValid=false;
-        } else if (hhEnd - hhStr > 2) {
+        }else if (hhEnd - hhStr > 2) {
             $("#creation-label-str").css("color","#FF0000");
             $("#creation-label-end").css("color","#FF0000");
+            $("#small-creation-timestr").text("Orari non validi, max 2 ore");
+            $("#small-creation-timestr").css("color","#FF0000");
+            $("#small-creation-timeend").text("Orari non validi, max 2 ore");
+            $("#small-creation-timeend").css("color","#FF0000");
             isTimeValid=false;
         }else{
             $("#creation-label-str").css("color","#4CAF50");
             $("#creation-label-end").css("color","#4CAF50");
+            $("#small-creation-timestr").text("Orario di inizio valido, rispetta il formato");
+            $("#small-creation-timestr").css("color","#4CAF50");
+            $("#small-creation-timeend").text("Orario di fine valido, rispetta il formato");
+            $("#small-creation-timeend").css("color","#4CAF50");
             isTimeValid=true;
         }
     }else if(hhEnd - hhStr < 1){
         $("#creation-label-str").css("color","#FF0000");
         $("#creation-label-end").css("color","#FF0000");
+        $("#small-creation-timestr").text("Orari non validi, min 1 ora");
+        $("#small-creation-timestr").css("color","#FF0000");
+        $("#small-creation-timeend").text("Orari non validi, min 1 ora");
+        $("#small-creation-timeend").css("color","#FF0000");
         isTimeValid=false;
     }else{
         $("#creation-label-str").css("color","#4CAF50");
         $("#creation-label-end").css("color","#4CAF50");
+        $("#small-creation-timestr").text("Orario di inizio valido, rispetta il formato");
+        $("#small-creation-timestr").css("color","#4CAF50");
+        $("#small-creation-timeend").text("Orario di fine valido, rispetta il formato");
+        $("#small-creation-timeend").css("color","#4CAF50");
         isTimeValid=true;
     }
 }
@@ -163,9 +211,22 @@ function validateSurname3() {
 }
 //Number of player validation
 function validateNPlayer(){
-
-    if($("#creation-player").val().match("^[0-3]$")){
+    var valoreN = $("#creation-player").val();
+    if(parseInt(valoreN) < 0 || parseInt(valoreN) > 3){
+        $("#creation-label-player").css("color","#FF0000");
+        $("#small-creation-player").css("color","#FF0000");
+        isPlayerNumberValid=false;
+        for(let j=1; j<4; j++){
+            document.getElementById("nameG"+j).style.display='none';
+            document.getElementById("creation-label-nameG"+j).style.display='none';
+            document.getElementById("small-nameG"+j).style.display='none';
+            document.getElementById("surnameG"+j).style.display='none';
+            document.getElementById("creation-label-surnameG"+j).style.display='none';
+            document.getElementById("small-surnameG"+j).style.display='none';
+        }
+    }else if($("#creation-player").val().match("^[0-3]$")){
         $("#creation-label-player").css("color","#4CAF50");
+        $("#small-creation-player").css("color","#4CAF50");
         isPlayerNumberValid=true;
         nPlayer = $("#creation-player").val();
         if(nPlayer==3) {
@@ -177,26 +238,33 @@ function validateNPlayer(){
                 $("#nameG"+j).prop('required',true);
                 $("#surnameG"+j).prop('required',true);
                 document.getElementById("creation-label-nameG"+j).style.display='inline';
+                document.getElementById("small-nameG"+j).style.display='inline';
                 document.getElementById("surnameG"+j).style.display='inline';
                 document.getElementById("creation-label-surnameG"+j).style.display='inline';
+                document.getElementById("small-surnameG"+j).style.display='inline';
             }else{
                 $("#nameG"+j).prop('required',false);
                 $("#surnameG"+j).prop('required',false);
                 document.getElementById("nameG"+j).style.display='none';
                 document.getElementById("creation-label-nameG"+j).style.display='none';
+                document.getElementById("small-nameG"+j).style.display='none';
                 document.getElementById("surnameG"+j).style.display='none';
                 document.getElementById("creation-label-surnameG"+j).style.display='none';
+                document.getElementById("small-surnameG"+j).style.display='none';
             }
         }
 
     }else{
         $("#creation-label-player").css("color","#FF0000");
+        $("#small-creation-player").css("color","#FF0000");
         isPlayerNumberValid=false;
         for(let j=1; j<4; j++){
             document.getElementById("nameG"+j).style.display='none';
             document.getElementById("creation-label-nameG"+j).style.display='none';
+            document.getElementById("small-nameG"+j).style.display='none';
             document.getElementById("surnameG"+j).style.display='none';
             document.getElementById("creation-label-surnameG"+j).style.display='none';
+            document.getElementById("small-surnameG"+j).style.display='none';
         }
     }
 }
