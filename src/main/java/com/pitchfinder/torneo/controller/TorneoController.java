@@ -49,7 +49,7 @@ public class TorneoController extends HttpServlet {
 
         TorneoService ts = new TorneoServiceImpl();
         HttpSession session = request.getSession();
-        if(session == null){
+        if (session == null) {
             session = request.getSession(true);
         }
         int flag = Integer.parseInt(request.getParameter("flag"));
@@ -205,7 +205,11 @@ public class TorneoController extends HttpServlet {
 
                 if (creationResult) { //creation occurred
                     response.setContentType("Creazione avvenuta");
+                    RequestDispatcher requestDispatcher = request.getServletContext().getRequestDispatcher("/autentication?flag=5");
+                    requestDispatcher.forward(request, response);
                 }
+
+
 
             } else if (flag == 2) { //tournament elimination
                 // when remove button clicked.
@@ -247,6 +251,9 @@ public class TorneoController extends HttpServlet {
 
                 boolean removeResult = ts.deleteTorneo(campo, nome, dataInizio, dataFine, giornoPartite);
                 if (removeResult) response.setContentType("Eliminazione avvenuta");
+
+                RequestDispatcher requestDispatcher = request.getServletContext().getRequestDispatcher("/autentication?flag=5");
+                requestDispatcher.forward(request, response);
             }
         }
     }
