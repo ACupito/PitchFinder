@@ -100,12 +100,12 @@
                     <div class="row1">
 
                         <div class="container">
-                            <form action="torneoServlet">
+                            <form action="torneoServlet" method="get" onsubmit="return validateButton()">
                                 <input type="hidden" name="flag" value="1">
                                 <input type="hidden" name="idCampo" value="1002">
                                 <div class="form-group">
                                     <label for="uname">Nome:</label>
-                                    <input type="text" class="form-control" id="uname" name="nome" onblur="validateName(); validateButton()" onchange="validateButton()" required>
+                                    <input type="text" class="form-control" id="uname" name="nome" onblur="validateName()" required>
                                     <div id="valid_nome">Il nome non può superare 50 caratteri.</div>
 
                                 </div>
@@ -116,8 +116,9 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="data_fine">Data Fine:</label>
-                                    <input type="date" class="form-control" id="data_fine" name="dataFine" required onkeydown="return false" onclick="minDateFine(); maxDateFine()" disabled onblur="validateDataFine(); validateAllDate()" onchange=" activeGiornoPartite(); validateButton()">
+                                    <input type="date" class="form-control" id="data_fine" name="dataFine" required onkeydown="return false" onclick="minDateFine(); maxDateFine()" disabled onblur="validateDataFine(); validateAllDate()" onchange=" activeGiornoPartite()">
                                     <div id="valid_dataFine">Inserisci una data di fine.</div>
+                                    <div id="valid_AllSquadre">Inserisci una data di fine successiva alla data di inizio.</div>
                                 </div>
                                 <div class="form-group">
                                     <label for="giornoPartite">Giorno Partite:</label>
@@ -162,21 +163,21 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="maxSquadre">Numero squadre torneo:</label>
-                                    <input type="number" class="form-control" id="maxSquadre" name="maxSquadre" min="1" max="20" required onblur="validateSquadre(); validateButton()" onchange="validateButton()">
+                                    <input type="number" class="form-control" id="maxSquadre" name="maxSquadre" min="1" max="20" required onblur="validateSquadre()">
                                     <div id="valid_squadra">Il numero delle squadre deve essere maggiore di 1 e minore di 20.</div>
                                 </div>
                                 <div class="form-group">
                                     <label for="minPartecipanti">Numero minimo di partecipanti per squadra:</label>
-                                    <input type="number" class="form-control" id="minPartecipanti" name="minPartecipanti" min="1" max="5" required onblur="validateMinPartecipanti(); validateButton()" onchange="validateButton()">
+                                    <input type="number" class="form-control" id="minPartecipanti" name="minPartecipanti" min="1" max="5" required onblur="validateMinPartecipanti()">
                                     <div id="valid_minParteci">Il numero minimo di partecipanti deve essere maggiore di 1 e minore di 5.</div>
                                 </div>
                                 <div class="form-group">
                                     <label for="maxPartecipanti">Numero massimo di partecipanti per squadra:</label>
-                                    <input type="number" class="form-control" id="maxPartecipanti" name="maxPartecipanti" min="5" max="12" required onblur="validateMaxPartecipanti(); validateButton()" onchange="validateButton()">
+                                    <input type="number" class="form-control" id="maxPartecipanti" name="maxPartecipanti" min="5" max="12" required onblur="validateMaxPartecipanti()">
                                     <div id="valid_maxParteci">Il numero massimo di partecipanti deve essere maggiore di 5 e minore di 12.</div>
                                 </div>
 
-                                <button type="submit" class="btn btn-primary" id="creaButton" disabled>Crea</button>
+                                <button type="submit" class="btn btn-primary" id="creaTorneo">Crea torneo</button>
                             </form>
 
                         </div>
