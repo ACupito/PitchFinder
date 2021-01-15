@@ -6,7 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <html>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8" %>
 
 <head>
     <meta charset="utf-8" />
@@ -14,7 +14,7 @@
     <meta name="description" content="" />
     <meta name="author" content="" />
     <title>PitchFinder</title>
-    <link rel="icon" type="image/x-icon" href="assets/img/favicon.ico" />
+
     <!-- Font Awesome icons (free version)-->
     <script src="https://use.fontawesome.com/releases/v5.15.1/js/all.js" crossorigin="anonymous"></script>
     <!-- Google fonts-->
@@ -27,12 +27,6 @@
 
     <title>RegistrationForm_v9 by Colorlib</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <!-- LINEARICONS -->
-    <!--<link rel="stylesheet" href="fonts/linearicons/style.css">-->
-
-    <!-- MATERIAL DESIGN ICONIC FONT -->
-    <!-- <link rel="stylesheet" href="/material-design-iconic-font.min.css">-->
 
     <!-- DATE-PICKER -->
     <link rel="stylesheet" href="css/disponibilita/datepicker.min.css">
@@ -88,7 +82,7 @@
             </button>
 
             <%}else{ %>
-            <label  id="creation-error" name="creation-error"> Effettuare il login per modificare la disponibilità!</label>
+            <label  id="creation-error"> Effettuare il login per modificare la disponibilità!</label>
             <script>
                 setTimeout(() => {alert("Effettuare il login per modificare la disponibilità!");}, 2000)
             </script>
