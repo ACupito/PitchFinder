@@ -162,7 +162,7 @@ public class EventoAdminDeleteControllerTest {
         Mockito.when(mockedRequest.getParameter("data")).thenReturn(DATA);
 
         Mockito.doReturn(mockedServletContext).when(mockedRequest).getServletContext();
-        Mockito.doReturn(mockedDispatcher).when(mockedServletContext).getRequestDispatcher("/view/autenticazione/admin.jsp");
+        Mockito.doReturn(mockedDispatcher).when(mockedServletContext).getRequestDispatcher("/autentication?flag=5");
 
         servlet.doPost(mockedRequest, mockedResponse);
         Mockito.verify(mockedResponse).setContentType("Eliminazione avvenuta");

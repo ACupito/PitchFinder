@@ -108,7 +108,7 @@ public class EventoAdminController extends HttpServlet {
             if (descrizione.length() < MINLIMIT || descrizione.length() > MAXDESCRIPTIONLIMIT) {
                 throw new IllegalArgumentException("Errato: lunghezza non valida");
             }
-            if (!descrizione.matches("^[ a-zA-Zu00C0u00ff'\\.\\,\\s\\&\\è\\ù\\à\\+\\ò\\-\\:\\;\\È\\?\\!]+$")) {
+            if (!descrizione.matches("^[ a-zA-Z\\u00C0-\\u00ff'\\.\\,\\s\\&\\+\\ò\\-\\:\\;\\?\\!]+$")) {
                 throw new IllegalArgumentException("Errato: formato non valido");
             }
             if (postiDisponibiliStr.equals("")) {
@@ -146,8 +146,8 @@ public class EventoAdminController extends HttpServlet {
             }
 
             response.setContentType("Creazione avvenuta");
-            dispatcher = request.getServletContext().getRequestDispatcher("/view/autenticazione/admin.jsp");
-            dispatcher.forward(request, response);
+            RequestDispatcher requestDispatcher = request.getServletContext().getRequestDispatcher("/autentication?flag=5");
+            requestDispatcher.forward(request, response);
 
         }
     }
