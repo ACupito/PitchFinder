@@ -41,10 +41,10 @@
                 <input type="date" id="creation-data" name="date" onkeydown="return false" onblur="valiDate()"><br>
                 <small id="small-creation-data"> Inserire una data valida(DD/MM/YYYY)</small><br>
                 <label for="creation-timestr" id="creation-label-str">Orario Inizio:</label>
-                <input type="text" id="creation-timestr" class="timepicker" name="start" minTime="09:00" maxTime="23:00" required onblur="validateStart()"><br>
+                <input type="text" id="creation-timestr" class="timepicker" name="start" minTime="09:00" maxTime="23:00"  size="5" required onkeydown="return false" onmousemove="validateStart()" ><br>
                 <small id="small-creation-timestr"> Inserire un orario di inizio valido(HH:MM)</small><br>
                 <label for="creation-timeend" id="creation-label-end">Orario Fine:</label>
-                <input type="text" id="creation-timeend" class="timepicker" name="end" minTime="09:00" maxTime="23:00" required onblur="clickTimeValidate()"><br>
+                <input type="text" id="creation-timeend" class="timepicker" name="end" minTime="09:00" maxTime="23:00"  size="5" required onkeydown="return false" onmousemove="clickTimeValidate()"><br>
                 <small id="small-creation-timeend"> Inserire un orario di fine valido(HH:MM), max 2 ore di partita</small><br>
                 <label for="creation-player" id="creation-label-player">Numero giocatori:</label>
                 <input type="number" id="creation-player" name="maxGiocatori" min="0" max="3" value="0" required onchange="validateNPlayer()"><br>

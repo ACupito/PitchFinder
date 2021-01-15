@@ -348,7 +348,9 @@ function validateNPlayer(){
 }
 
 function validateForm(){
-    validateTime();
+    validateStart();
+    clickTimeValidate();
+
     if(nPlayer==0){
         isSurnameValid=true;
         isNameValid=true;
