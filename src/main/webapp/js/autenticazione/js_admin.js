@@ -71,12 +71,6 @@ var isDateValidEvento=false;
 var isNameValidEvento=false;
 var isGuestValidEvento=false;
 var isDescriptionValidEvento=false;
-var numberOfCheckedItems = 0;
-var nPlayer=0;
-var hhStrEvento;
-var mmStrEvento;
-var hhEndEvento;
-var mmEndEvento;
 
     /** validate Nome **/
     function validateNameEvento(){
@@ -175,6 +169,13 @@ var mmEndEvento;
 
 
 function validateEvento(){
+
+        if(isDateValidEvento && isNameValidEvento && isGuestValidEvento && isDescriptionValidEvento){
+            return true;
+        }
+        else {
+            return false;
+        }
 
 }
 
