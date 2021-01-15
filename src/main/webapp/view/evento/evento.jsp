@@ -20,6 +20,7 @@
     <!-- Core theme CSS (includes Bootstrap)-->
     <link href="css/evento/style_evento.css" rel="stylesheet" type="text/css"/>
     <link href="css/navbar/style_navbar.css" rel="stylesheet" type="text/css"/>
+    <link href="css/footer/style_footer.css" rel="stylesheet">
     <style>
         input[type=button], input[type=submit], input[type=reset] {
             background-color: #4CAF50;
@@ -111,20 +112,7 @@
 </div>
 <!-- Footer-->
 <footer class="footer py-4">
-    <div class="container">
-        <div class="row align-items-center">
-            <div class="col-lg-4 text-lg-left">Copyright © PitchFinder 2020</div>
-            <div class="col-lg-4 my-3 my-lg-0">
-                <a class="btn btn-dark btn-social mx-2" href="#!"><i class="fab fa-twitter"></i></a>
-                <a class="btn btn-dark btn-social mx-2" href="#!"><i class="fab fa-facebook-f"></i></a>
-                <a class="btn btn-dark btn-social mx-2" href="#!"><i class="fab fa-linkedin-in"></i></a>
-            </div>
-            <div class="col-lg-4 text-lg-right">
-                <a class="mr-3" href="#!">Privacy Policy</a>
-                <a href="#!">Terms of Use</a>
-            </div>
-        </div>
-    </div>
+    <%@include file="../footer/footer.jsp"%>
 </footer>
 <!-- Bootstrap core JS-->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -135,7 +123,8 @@
 <script src="assets/mail/jqBootstrapValidation.js"></script>
 <script src="assets/mail/contact_me.js"></script>
 <!-- Core theme JS-->
-<script src="../../js/homepage/js_homepage.js"></script>
+<script src="js/homepage/js_homepage.js"></script>
+<script src = "js/homepage/check_login.js"></script>
 
 </body>
 </html>
