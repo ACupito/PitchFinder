@@ -126,6 +126,23 @@ class AutenticazioneControllerTest extends Mockito {
     }
 
     @Test
+    void TC_4_1_4_1() throws ServletException, IOException {
+
+        Mockito.when(mockedRequest.getParameter("flag")).thenReturn("2");
+        Mockito.when(mockedRequest.getParameter("username")).thenReturn("AdminEmanuele99");
+        Mockito.when(mockedRequest.getParameter("password")).thenReturn("Esse3");
+
+        Mockito.doReturn(mockedSession).when(mockedRequest).getSession(true);
+        Mockito.doReturn(mockedServletContext).when(mockedRequest).getServletContext();
+        Mockito.doReturn(mockedDispatcher).when(mockedServletContext).getRequestDispatcher("/view/autenticazione/admin.jsp");
+
+        servlet.doPost(mockedRequest, mockedResponse);
+
+        Mockito.verify(mockedResponse).setContentType("Il login admin è avvenuto correttamente");
+
+    }
+
+    @Test
     void TC_4_2_1() {
 
         Mockito.when(mockedRequest.getParameter("flag")).thenReturn("1");
