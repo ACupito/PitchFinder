@@ -68,7 +68,7 @@
                 <div class="form-group">
                     <label class="label_class" for="data"> Data di nascita </label>
                     <input type="date" class="form-control" id="data" name="data" min="1950-01-01" max="2010-01-01"
-                           value="2010-01-01" oninput="validaData()">
+                           value="yyyy-mm-dd" oninput="validaData()">
                 </div>
                 <div id = "div_data" class="message"> Data di nascita non selezionata </div>
 

@@ -1,4 +1,3 @@
-/* Stile pagina */
 *{
     margin: 0;
     padding: 0;
@@ -30,9 +29,13 @@ a {
 }
 
 /* Con flex direction: row gli elementi si dipongono a riga con column a colonna */
-.row{
+.rowFirst{
     display: flex;
     flex-direction: row;
+}
+.elements {
+    max-width: 300px;
+    border-style: solid;
 }
 
 .data {
@@ -40,7 +43,8 @@ a {
     overflow-y: scroll;
 }
 
-.col3{
+
+.col3-admin{
     position: relative;
     width:230px;
     margin-left: 0;
@@ -48,13 +52,13 @@ a {
 
 /* Stile per insieme dei button sulla sx */
 
-.list-group {
+.list-group-admin {
 
     display: flex;
     flex-direction: column;
 }
 
-.list-group-item{
+.list-group-item-admin{
 
     font-family: 'Poppins', sans-serif;
 
@@ -66,24 +70,24 @@ a {
     padding-bottom: 25px;
     height: 40px;
 }
-.list-group-item:hover{
+.list-group-item-admin:hover{
     background-color: rgba(0,0,0,0.15);
 }
 
 /* first-child: primo elemento del gruppo */
-.list-group-item:first-child{
+.list-group-item-admin:first-child{
     border-top-left-radius:.25rem;
     border-top-right-radius:.25rem;
 }
 
 /* last-child: utimo elemento del gruppo */
-.list-group-item:last-child{
+.list-group-item-admin:last-child{
     border-bottom-left-radius:.25rem;
     border-bottom-right-radius:.25rem;
 }
 
 /* in col9 abbiamo il div dove vengono scambiati le cose che l'amminstratore può visualizzare */
-.col9{
+.col9-admin{
 
     border: solid 1px rgba(0,0,0,0.15);
     border-radius: .25rem;
@@ -101,8 +105,8 @@ h4{
     color:inherit; /*una proprietà deve ereditare il suo valore dal suo elemento padre*/
 }
 
-/* card-body sono i singoli div */
-.card-body{
+/* card-body-admini singoli div */
+.card-body-admin{
     font-family: 'Poppins', sans-serif;
     font-weight: 400;
     position: relative;
@@ -223,15 +227,7 @@ body{
     margin-top: 10px;
     margin-bottom: 10px;
 }
-input[type="text"] {
 
-    width: 30%;
-    height: 30px;
-    padding: 5px 10px;
-    margin-bottom: 10px;
-    border: 1px solid #dadada;
-    color: #888;
-}
 
 #cerca{
 
@@ -367,11 +363,11 @@ input[type="text"] {
 
 
 @media (max-width: 900px) {
-    .row {
+    .rowFirst {
         flex-direction: column;
     }
 
-    .col3 {
+    .col3-admin {
         width: 80%;
         margin-left: 10%;
         margin-right: 10%;
@@ -379,7 +375,7 @@ input[type="text"] {
         margin-bottom: 20px;
     }
 
-    .col9 {
+    .col9-admin {
         margin-left: 0;
     }
 

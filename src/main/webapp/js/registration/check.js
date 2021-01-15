@@ -179,6 +179,8 @@ $(document).ready(function() {
         var input = $("#data");
         var data = input.val();
 
+
+
         if (!data.match(/^[0-9]{4}\-[0-9]{2}\-[0-9]{2}/)) {
 
             $("#data").css("border-bottom", borderError);
