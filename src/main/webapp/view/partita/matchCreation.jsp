@@ -26,6 +26,7 @@
 
     <link href="css/partita/style_matchCreation.css" rel="stylesheet" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.css">
     <script language="JavaScript" type="text/javascript" src="./js/partita/js_matchCreation.js"></script>
 </head>
 <body id="page-top">
@@ -40,10 +41,10 @@
                 <input type="date" id="creation-data" name="date" onkeydown="return false" onblur="valiDate()"><br>
                 <small id="small-creation-data"> Inserire una data valida(DD/MM/YYYY)</small><br>
                 <label for="creation-timestr" id="creation-label-str">Orario Inizio:</label>
-                <input type="time" id="creation-timestr" name="start" minTime="09:00" maxTime="22:00" required onblur="validateStart()"><br>
+                <input type="text" id="creation-timestr" class="timepicker" name="start" minTime="09:00" maxTime="23:00" required onblur="validateStart()"><br>
                 <small id="small-creation-timestr"> Inserire un orario di inizio valido(HH:MM)</small><br>
                 <label for="creation-timeend" id="creation-label-end">Orario Fine:</label>
-                <input type="time" id="creation-timeend" name="end" minTime="10:00" maxTime="23:00" required onblur="clickTimeValidate()"><br>
+                <input type="text" id="creation-timeend" class="timepicker" name="end" minTime="09:00" maxTime="23:00" required onblur="clickTimeValidate()"><br>
                 <small id="small-creation-timeend"> Inserire un orario di fine valido(HH:MM), max 2 ore di partita</small><br>
                 <label for="creation-player" id="creation-label-player">Numero giocatori:</label>
                 <input type="number" id="creation-player" name="maxGiocatori" min="0" max="3" value="0" required onchange="validateNPlayer()"><br>
@@ -100,6 +101,7 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"></script>
 <!-- Third party plugin JS-->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.js"></script>
 <!-- Core theme JS-->
 <script src="js/homepage/js_homepage.js"></script>
 <script src = "js/homepage/check_login.js"></script>

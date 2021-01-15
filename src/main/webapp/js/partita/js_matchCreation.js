@@ -32,19 +32,18 @@ function maxDate(){
     $('#creation-data').attr("max",currentDate);
 }
 function minMaxTime(){
-    $('input.timepicker').timepicker({
-        timeFormat: 'HH:mm:ss',
-        minTime: '09:00:00', //
-        maxTime: '22:00:00',
-        interval: 60 // 60 minutes
+    $('.timepicker').timepicker({
+        timeFormat: 'HH:mm',
+        minTime: '09:00', //
+        maxTime: '23:00',
+        startTime: '09:00',
+        interval: 60, // 60 minutes
+        dynamic: true,
+        dropdown: true,
+        scrollbar: true,
+
     });
 
-    $("#creation-timeend").timepicker({
-        timeFormat: 'HH:mm:ss',
-        minTime: '10:00:00',
-        maxTime: '23:00:00',
-        interval: 60 // 60 minutes
-    });
 }
 //Data validation
 function valiDate(){
