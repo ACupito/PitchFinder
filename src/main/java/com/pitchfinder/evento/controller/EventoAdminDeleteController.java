@@ -82,16 +82,13 @@ public class EventoAdminDeleteController extends HttpServlet {
                 throw new IllegalArgumentException("Errato: formato non valido");
             }
 
-            Evento temp = new Evento(nome, "default", new Time(12, 00, 00),
-                    new Time(14, 00, 00), dataEvento, "temp", "temp",
+            Evento temp = new Evento(nome, "default", new Time(12, 0, 0),
+                    new Time(14, 0, 0), dataEvento, "temp", "temp",
                     0, admin.getUsername());
-            if (temp == null) {
-                response.setContentType("Impossibile eliminare l'evento");
-            }
 
             response.setContentType("Eliminazione avvenuta");
-            dispatcher = request.getServletContext().getRequestDispatcher("/view/autenticazione/admin.jsp");
-            dispatcher.forward(request, response);
+            RequestDispatcher requestDispatcher = request.getServletContext().getRequestDispatcher("/autentication?flag=5");
+            requestDispatcher.forward(request, response);
         }
     }
 
