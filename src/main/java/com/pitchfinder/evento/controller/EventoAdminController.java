@@ -67,7 +67,7 @@ public class EventoAdminController extends HttpServlet {
             if (nome.length() < MINLIMIT || nome.length() > MAXLIMIT) {
                 throw new IllegalArgumentException("Errato: lunghezza nome non valida");
             }
-            if (!nome.matches("^[ a-zA-Z\u00C0-\u00ff'\\s]+$")) {
+            if (!nome.matches("^[a-zA-Z0-9\u00C0-\u00ff'\\s]+$")) {
                 throw new IllegalArgumentException("Errato: formato non valido");
             }
 
