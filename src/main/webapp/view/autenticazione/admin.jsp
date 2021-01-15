@@ -134,47 +134,80 @@
                         </div>
                     </div>
                     <div class="row1">
-                        <div class="eventCreation">
-                            <form action="EventoAdminController" method="post" id="form-creation" onsubmit="return validateName()">
-                                <fieldset id="field-creation">
-
-
+                        <div class="container">
+                            <form action="EventoAdminController" class="was-validated" method="post" id="form-creation" onsubmit="return validateName()">
+                                <div class="form-group">
                                     <label for="creation-name" id="creation-label-name">Nome dell'evento:</label>
-                                    <input type="text" id="creation-name" name="nome" required onkeyup="validateName()"><br>
+                                    <input type="text" class="form-control" id="creation-name" placeholder="Inserisci il nome dell'evento" name="nome" required><br>
+                                    <div class="valid-feedback">Valido.</div>
+                                    <div class="invalid-feedback">Inserisci un nome valido.</div>
+                                </div>
+                                <div class="form-group">
                                     <label for="creation-data" id="creation-label-data">Data evento:</label>
-                                    <input type="date" id="creation-data" name="data" required onblur="valiDate()"><br>
+                                    <input type="date" id="creation-data" class="form-control" name="data" required onblur="valiDate()"><br>
+                                    <div class="valid-feedback">Valido.</div>
+                                    <div class="invalid-feedback">Inserisci una data valida.</div>
+                                </div>
+                                <div class="form-group">
                                     <label for="creation-timestr" id="creation-label-str">Oario Inizio:</label>
-                                    <input type="time" id="creation-timestr" name="orarioInizio" min="09:00" max="23:00"><br>
+                                    <input type="time" id="creation-timestr" class="form-control" name="orarioInizio" min="09:00" max="23:00"><br>
+                                    <div class="valid-feedback">Valido.</div>
+                                    <div class="invalid-feedback">Inserisci un orario di inizio valido.</div>
+                                </div>
+                                <div class="form-group">
                                     <label for="creation-timeend" id="creation-label-end">Oario Fine:</label>
-                                    <input type="time" id="creation-timeend" name="orarioFine" min="09:00" max="23:00"><br>
+                                    <input type="time" id="creation-timeend" class="form-control" name="orarioFine" min="09:00" max="23:00"><br>
+                                    <div class="valid-feedback">Valido.</div>
+                                    <div class="invalid-feedback">Inserisci un orario di fine valido.</div>
+                                </div>
+                                <div class="form-group">
                                     <label for="creation-player" id="creation-label-player">Posti disponibili:</label>
-                                    <input type="number" id="creation-player" name="postiDisponibili" min="0" max="250" value="0"><br>
+                                    <input type="number" id="creation-player" class="form-control" name="postiDisponibili" min="0" max="250" value="0" required><br>
+                                    <div class="valid-feedback">Valido.</div>
+                                    <div class="invalid-feedback">Inserisci posti disponibili validi.</div>
+                                </div>
+                                <div class="form-group">
                                     <label for="creation-guest" id="creation-label-guest">Nome Ospite:</label>
-                                    <input type="text" id="creation-guest" name="ospite" required><br>
+                                    <input type="text" id="creation-guest" class="form-control" name="ospite" required><br>
+                                    <div class="valid-feedback">Valido.</div>
+                                    <div class="invalid-feedback">Inserisci un ospite valido.</div>
+                                </div>
+                                <div class="form-group">
                                     <label for="creation-description" id="creation-label-description">Descrizione :</label><br>
-                                    <textarea rows="4" cols="50" id="creation-description" name="descrizione" form="form-creation"> </textarea><br>
-                                    <input type="radio" id="image1" name="immagine" value="1">
-                                    <label for="image1">
-                                        <img src="images/events/image1.jpg" alt="Trulli" width="120" height="70">
-                                    </label><br>
-                                    <input type="radio" id="image2" name="immagine" value="2">
-                                    <label for="image2">
-                                        <img src="images/events/image2.jpg" alt="asd" width="120" height="70">
-                                    </label><br>
-                                    <input type="radio" id="image3" name="immagine" value="3">
-                                    <label for="image3">
-                                        <img src="images/events/image3.jpg" alt="dsa" width="120" height="70">
-                                    </label><br>
-                                    <input type="radio" id="default" name="immagine" value="default">
-                                    <label for="default">
-                                        senza Immagine
-                                    </label><br>
+                                    <textarea rows="4" cols="50" id="creation-description" class="form-control" name="descrizione" form="form-creation" required> </textarea><br>
+                                    <div class="valid-feedback">Valido.</div>
+                                    <div class="invalid-feedback">Inserisci una Descrizione valida.</div>
+                                </div>
 
-                                    <input type="submit" name="submit" id="submit" value="Crea Evento">
-
-                                </fieldset>
+                                <p> Inserisci un'immagine per l'evento</p>
+                                <div class="form-group form-check radioEvent">
+                                    <label class="form-check-label">
+                                        <div class="form-group form-check">
+                                            <input type="radio" class="form-check-input" id="image1" name="immagine" value="1">
+                                            <label for="image1">
+                                                <img src="images/events/image1.jpg" alt="Trulli" width="120" height="70">
+                                            </label>
+                                        </div>
+                                        <div class="form-group form-check">
+                                        <input type="radio" class="form-check-input" id="image2" name="immagine" value="2">
+                                        <label for="image2">
+                                            <img src="images/events/image2.jpg" alt="asd" width="120" height="70">
+                                        </label>
+                                        </div>
+                                        <div class="form-group form-check">
+                                        <input type="radio" class="form-check-input" id="image3" name="immagine" value="3">
+                                        <label for="image3">
+                                            <img src="images/events/image3.jpg" alt="dsa" width="120" height="70">
+                                        </label>
+                                        </div>
+                                        <div class="form-group form-check">
+                                        <input type="radio" class="form-check-input" id="default" name="immagine" value="default">
+                                        <label for="default">senza Immagine</label><br>
+                                        </div>
+                                    </label>
+                                </div>
+                                <button type="submit" class="btn btn-primary" name="submit" id="submit">Crea Evento</button>
                             </form>
-
                         </div>
                     </div>
                 </div>
