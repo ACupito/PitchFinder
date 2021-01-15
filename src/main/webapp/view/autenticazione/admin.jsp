@@ -307,7 +307,7 @@
                     </div>
                     <div class="row1">
                         <div class="data">
-                            <table class="responsive-table" style="width: 100%">
+                            <table class="responsive-table" style="width: 90%">
 
                                 <thead>
                                 <tr>
@@ -330,8 +330,8 @@
                                         <td data-title = "Orario Inizio"> <%=partita.getOrarioInizio()%></td>
                                         <td data-title = "Orario Fine"><%=partita.getOrarioFine()%>  </td>
                                         <td data-title = "Show">
-                                            <button class = "remove" name = "<%=partita.getIdPartita() %>> "
-                                                    onclick = "showPlayer(name)" >  <!-- button per visualizzare-->
+                                            <button class = "remove" name = "<%=partita.getIdPartita()%>"
+                                                    onclick = "showPlayer(name)">  <!-- button per visualizzare-->
                                                 Giocatori
                                             </button>
                                         </td>
@@ -340,7 +340,8 @@
                                 </tbody>
                             </table>
                             <!--- players table --->
-
+                            <div class="data" id="players-table">
+                            </div>
                             <!--- players table --->
                         </div>
                     </div>
@@ -354,6 +355,7 @@
 
 
 <script src="js/autenticazione/js_admin.js"></script>
+<script src="js/autenticazione/js_admin_showMatch.js"></script>
 
 </body>
 </html>
