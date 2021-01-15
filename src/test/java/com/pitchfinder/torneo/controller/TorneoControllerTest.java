@@ -569,6 +569,9 @@ class TorneoControllerTest {
         Mockito.when(mockedRequest.getParameter("minPartecipanti")).thenReturn(MIN_PARTECIPANTI);
         Mockito.when(mockedRequest.getParameter("maxPartecipanti")).thenReturn(MAX_PARTECIPANTI);
 
+        Mockito.doReturn(mockedServletContext).when(mockedRequest).getServletContext();
+        Mockito.doReturn(mockedDispatcher).when(mockedServletContext).getRequestDispatcher("/autentication?flag=5");
+
         servlet.doGet(mockedRequest, mockedResponse);
         Mockito.verify(mockedResponse).setContentType("Creazione avvenuta");
 
@@ -867,6 +870,10 @@ class TorneoControllerTest {
         Mockito.when(mockedRequest.getParameter("dataInizio")).thenReturn("2022-10-10");
         Mockito.when(mockedRequest.getParameter("dataFine")).thenReturn("2022-10-30");
         Mockito.when(mockedRequest.getParameter("giornoPartite")).thenReturn("Sabato");
+
+        Mockito.doReturn(mockedServletContext).when(mockedRequest).getServletContext();
+        Mockito.doReturn(mockedDispatcher).when(mockedServletContext).getRequestDispatcher("/autentication?flag=5");
+
 
         servlet.doGet(mockedRequest, mockedResponse);
         Mockito.verify(mockedResponse).setContentType("Eliminazione avvenuta");

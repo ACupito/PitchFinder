@@ -2,9 +2,6 @@
 <%Utente utente1 = (Utente)session.getAttribute("utente");%>
 <script src="https://use.fontawesome.com/releases/v5.15.1/js/all.js" crossorigin="anonymous"></script>
 
-<!-- Core theme JS-->
-<script src="js/homepage/js_homepage.js"></script>
-<script src = "js/homepage/check_login.js"></script>
 
 <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
     <div class="container">
@@ -21,11 +18,12 @@
                     <button type="button" id="dropdownMenu1" data-toggle="dropdown" class="btn nav-link">LOGIN<span class="caret"></span></button>
                     <ul class="dropdown-menu dropdown-menu-right mt-2">
                         <li class="px-3 py-2">
-                            <form class="form" role="form" action="autentication" method="post">
+                            <form  class="form" role="form" action="autentication" method="post">
                                 <input type="hidden" value="2" name="flag">
                                 <div class="form-group">
                                     <input id="username" placeholder="Username" class="form-control form-control-sm" type="text" name="username">
                                 </div>
+                                <div id="div_username"></div>
                                 <div class="form-group">
                                     <input id="password" placeholder="Password" class="form-control form-control-sm" type="password" name="password">
                                 </div>

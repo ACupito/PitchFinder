@@ -1,0 +1,69 @@
+
+
+    $(document).ready(function(){
+    $("#profilo").click(function(){
+        $("#profiloAdmin").show();
+        $("#creaTorneo").hide();
+        $("#creaEvento").hide();
+        $("#modificaCampo").hide();
+        $("#allTorneo").hide();
+        $("#allEvento").hide();
+        $("#allPartite").hide();
+    });
+    $("#crea_torneo").click(function(){
+    $("#profiloAdmin").hide();
+    $("#creaTorneo").show();
+    $("#creaEvento").hide();
+    $("#modificaCampo").hide();
+    $("#allTorneo").hide();
+    $("#allEvento").hide();
+    $("#allPartite").hide();
+});
+    $("#crea_evento").click(function(){
+    $("#profiloAdmin").hide();
+    $("#creaTorneo").hide();
+    $("#creaEvento").show();
+    $("#modificaCampo").hide();
+    $("#allTorneo").hide();
+    $("#allEvento").hide();
+    $("#allPartite").hide();
+});
+    $("#modifica_campo").click(function(){
+    $("#profiloAdmin").hide();
+    $("#creaTorneo").hide();
+    $("#creaEvento").hide();
+    $("#modificaCampo").show();
+    $("#allTorneo").hide();
+    $("#allEvento").hide();
+    $("#allPartite").hide();
+});
+    $("#all_tornei").click(function(){
+    $("#profiloAdmin").hide();
+    $("#creaTorneo").hide();
+    $("#creaEvento").hide();
+    $("#modificaCampo").hide();
+    $("#allTorneo").show();
+    $("#allEvento").hide();
+    $("#allPartite").hide();
+});
+    $("#all_evento").click(function(){
+    $("#profiloAdmin").hide();
+    $("#creaTorneo").hide();
+    $("#creaEvento").hide();
+    $("#modificaCampo").hide();
+    $("#allTorneo").hide();
+    $("#allEvento").show();
+    $("#allPartite").hide();
+});
+    $("#all_partite").click(function(){
+    $("#profiloAdmin").hide();
+    $("#creaTorneo").hide();
+    $("#creaEvento").hide();
+    $("#modificaCampo").hide();
+    $("#allTorneo").hide();
+    $("#allEvento").hide();
+    $("#allPartite").show();
+});
+});
+
+
