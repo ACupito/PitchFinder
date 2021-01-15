@@ -113,13 +113,48 @@
                         </div>
                     </div>
                     <div class="row1">
+                        <div class="eventCreation">
+                            <form action="EventoAdminController" method="post" id="form-creation" onsubmit="return validateName()">
+                                <fieldset id="field-creation">
+                                    <legend> Creazione Evento </legend>
 
+                                    <label for="creation-name" id="creation-label-name">Nome dell'evento:</label>
+                                    <input type="text" id="creation-name" name="nome" required onkeyup="validateName()"><br>
+                                    <label for="creation-data" id="creation-label-data">Data evento:</label>
+                                    <input type="date" id="creation-data" name="data" required onblur="valiDate()"><br>
+                                    <label for="creation-timestr" id="creation-label-str">Oario Inizio:</label>
+                                    <input type="time" id="creation-timestr" name="orarioInizio" min="09:00" max="23:00"><br>
+                                    <label for="creation-timeend" id="creation-label-end">Oario Fine:</label>
+                                    <input type="time" id="creation-timeend" name="orarioFine" min="09:00" max="23:00"><br>
+                                    <label for="creation-player" id="creation-label-player">Posti disponibili:</label>
+                                    <input type="number" id="creation-player" name="postiDisponibili" min="0" max="250" value="0"><br>
+                                    <label for="creation-guest" id="creation-label-guest">Nome Ospite:</label>
+                                    <input type="text" id="creation-guest" name="ospite" required><br>
+                                    <label for="creation-description" id="creation-label-description">Descrizione :</label><br>
+                                    <textarea rows="4" cols="50" id="creation-description" name="descrizione" form="form-creation"> </textarea><br>
+                                    <input type="radio" id="image1" name="immagine" value="1">
+                                    <label for="image1">
+                                        <img src="images/events/event-slider.jpg" alt="Trulli" width="120" height="70">
+                                    </label><br>
+                                    <input type="radio" id="image2" name="immagine" value="2">
+                                    <label for="image2">
+                                        <img src="images/events/hdPicture.jpg" alt="asd" width="120" height="70">
+                                    </label><br>
+                                    <input type="radio" id="image3" name="immagine" value="3">
+                                    <label for="image3">
+                                        <img src="images/events/imageTest.jpg" alt="dsa" width="120" height="70">
+                                    </label><br>
+                                    <input type="radio" id="default" name="immagine" value="default">
+                                    <label for="default">
+                                        senza Immagine
+                                    </label><br>
 
-                        <!--Div per la creazione-->
+                                    <input type="submit" name="submit" id="submit" value="Crea Evento">
 
+                                </fieldset>
+                            </form>
 
-
-
+                        </div>
                     </div>
                 </div>
 
