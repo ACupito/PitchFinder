@@ -70,7 +70,7 @@
 var isDateValidEvento=false;
 var isNameValidEvento=false;
 var isGuestValidEvento=false;
-var isPlayerNumberValid=false;
+var isDescriptionValidEvento=false;
 var numberOfCheckedItems = 0;
 var nPlayer=0;
 var hhStrEvento;
@@ -133,11 +133,11 @@ var mmEndEvento;
         }
     }
 
-    /** validateOspite **/
+    /** validate Ospite **/
     function validateGuestEvento(){
 
-        if( $("#creation-name-Evento").val().match("^[a-zA-Z0-9\u00C0-\u00ff'\\s]+$")){
-            if($("#creation-guest-Evento").val().length < 1 || $("#creation-guest-Evento").val().length>50) {
+        if( $("#creation-guest-Evento").val().match("^[a-zA-Z0-9\u00C0-\u00ff'\\s]+$")){
+            if($("#creation-guest-Evento").val().length < 1 || $("#creation-guest-Evento").val().length>20) {
                 $("#guest-evento-valid").text("La lunghezza non è valida");
                 $("#guest-evento-valid").css("color", "#FF0000");
                 isGuestValidEvento = false;
@@ -147,9 +147,29 @@ var mmEndEvento;
                 isGuestValidEvento=true;
             }
         }else{
-            $("#guest-evento-valid").text("Il formato del giocatore non è valido. ");
+            $("#guest-evento-valid").text("Il formato dell'ospite non è valido. ");
             $("#guest-evento-valid").css("color","#FF0000");
             isGuestValidEvento=false;
+        }
+    }
+
+    /** validate Descrizione **/
+    function validateDescriptionEvento(){
+
+        if( $("#creation-description-Evento").val().match("^[ a-zA-Z\\u00C0-\\u00ff'\\.\\,\\s\\&\\+\\ò\\-\\:\\;\\?\\!]+$")){
+            if($("#creation-description-Evento").val().length < 1 || $("#creation-description-Evento").val().length>500) {
+                $("#description-evento-valid").text("La lunghezza non è valida");
+                $("#description-evento-valid").css("color", "#FF0000");
+                isDescriptionValidEvento = false;
+            }else{
+                $("#description-evento-valid").text("Descrizione Valida");
+                $("#description-evento-valid").css("color","#4CAF50");
+                isDescriptionValidEvento=true;
+            }
+        }else{
+            $("#description-evento-valid").text("Il formato della descrizione non è valida.");
+            $("#description-evento-valid").css("color","#FF0000");
+            isDescriptionValidEvento=false;
         }
     }
 
