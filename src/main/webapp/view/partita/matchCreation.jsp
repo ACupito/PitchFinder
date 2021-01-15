@@ -38,27 +38,38 @@
                 <input type="hidden" class="code" name="idCampo" value="1002">
                 <label for="creation-data" id="creation-label-data">Data partita:</label>
                 <input type="date" id="creation-data" name="date" required onblur="valiDate()"><br>
+                <small id="small-creation-data"> Inserire una data valida(DD/MM/YYYY)</small><br>
                 <label for="creation-timestr" id="creation-label-str">Orario Inizio:</label>
                 <input type="time" id="creation-timestr" name="start" min="09:00" max="23:00" required onblur="validateStart()"><br>
+                <small id="small-creation-timestr"> Inserire un orario di inizio valido(HH:MM)</small><br>
                 <label for="creation-timeend" id="creation-label-end">Orario Fine:</label>
                 <input type="time" id="creation-timeend" name="end" min="09:00" max="23:00" required onblur="clickTimeValidate()"><br>
+                <small id="small-creation-timeend"> Inserire un orario di fine valido(HH:MM), max 2 ore di partita</small><br>
                 <label for="creation-player" id="creation-label-player">Numero giocatori:</label>
                 <input type="number" id="creation-player" name="maxGiocatori" min="0" max="3" value="0" required onchange="validateNPlayer()"><br>
+                <small id="small-creation-player"> Inserire un numero di giocatori da invitare,(max 3 totali)</small><br>
 
                 <label for="nameG1" id="creation-label-nameG1" style="display: none">Nome:</label>
                 <input type="text" id="nameG1" name="nameG1" style="display: none" class="objName" onkeyup="validateName1()" >
+                <small id="small-nameG1" style="display: none"> Inserire nome del giocatore (lunghezza nome minima compresa tra 2 e 12)</small><br>
                 <label for="surnameG1" id="creation-label-surnameG1" style="display: none"> Cognome: </label>
-                <input type="text" id="surnameG1" name="surnameG1" style="display: none" class="objSurname" onkeyup="validateSurname1()" ><br>
+                <input type="text" id="surnameG1" name="surnameG1" style="display: none" class="objSurname" onkeyup="validateSurname1()" >
+                <small id="small-surnameG1" style="display: none"> Inserire cognome del giocatore (lunghezza nome minima compresa tra 2 e 12)</small><br>
 
                 <label for="nameG2" id="creation-label-nameG2" style="display: none">Nome:</label>
                 <input type="text" id="nameG2" name="nameG2" class="objName" style="display: none"  onkeyup="validateName2()" >
+                <small id="small-nameG2" style="display: none"> Inserire nome del giocatore (lunghezza nome minima compresa tra 2 e 12)</small><br>
                 <label for="surnameG2" id="creation-label-surnameG2" style="display: none"> Cognome: </label>
-                <input type="text" id="surnameG2" name="surnameG2" class="objSurname" style="display: none" onkeyup="validateSurname2()" ><br>
+                <input type="text" id="surnameG2" name="surnameG2" class="objSurname" style="display: none" onkeyup="validateSurname2()" >
+                <small id="small-surnameG2" style="display: none"> Inserire cognome del giocatore (lunghezza nome minima compresa tra 2 e 12)</small><br>
 
                 <label for="nameG3" id="creation-label-nameG3" style="display: none">Nome:</label>
                 <input type="text" id="nameG3" name="nameG3" class="objName" style="display: none"  onkeyup="validateName3()" >
+                <small id="small-nameG3" style="display: none"> Inserire nome del giocatore (lunghezza nome minima compresa tra 2 e 12)</small><br>
                 <label for="surnameG3" id="creation-label-surnameG3" style="display: none"> Cognome: </label>
-                <input type="text" id="surnameG3" name="surnameG3" class="objSurname" style="display: none"  onkeyup="validateSurname3()" ><br>
+                <input type="text" id="surnameG3" name="surnameG3" class="objSurname" style="display: none"  onkeyup="validateSurname3()" >
+                <small id="small-surnameG3" style="display: none"> Inserire cognome del giocatore (lunghezza nome minima compresa tra 2 e 12)</small><br>
+
                 <div id="div-Availability" style="display: none">
                     <div id="form-Availability"></div>
                 </div>
