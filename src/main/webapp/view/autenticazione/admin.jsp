@@ -135,46 +135,46 @@
                     </div>
                     <div class="row1">
                         <div class="container">
-                            <form action="EventoAdminController" class="was-validated" method="post" id="form-creation" onsubmit="return validateName()">
+                            <form action="EventoAdminController" class="was-validated" method="post" id="form-creation" onsubmit="return validateEvento()">
                                 <div class="form-group">
-                                    <label for="creation-name" id="creation-label-name">Nome dell'evento:</label>
-                                    <input type="text" class="form-control" id="creation-name" placeholder="Inserisci il nome dell'evento" name="nome" required><br>
+                                    <label for="creation-name-Evento" id="creation-label-name-Evento">Nome dell'evento:</label>
+                                    <input type="text" class="form-control" id="creation-name-Evento" placeholder="Inserisci il nome dell'evento" name="nome" required><br>
                                     <div class="valid-feedback">Valido.</div>
-                                    <div class="invalid-feedback">Inserisci un nome valido.</div>
+                                    <div class="invalid-feedback">Inserisci un nome.</div>
                                 </div>
                                 <div class="form-group">
-                                    <label for="creation-data" id="creation-label-data">Data evento:</label>
-                                    <input type="date" id="creation-data" class="form-control" name="data" required onblur="valiDate()"><br>
-                                    <div class="valid-feedback">Valido.</div>
-                                    <div class="invalid-feedback">Inserisci una data valida.</div>
+                                    <label for="creation-data-Evento" id="creation-label-data-Evento">Data evento:</label>
+                                    <input type="date" id="creation-data-Evento" class="form-control" name="data" required onblur="valiDateEvento()"><br>
+                                    <div class="valid-feedback" id="date-evento-valid">Valido.</div>
+                                    <div class="invalid-feedback">Inserisci una data.</div>
                                 </div>
                                 <div class="form-group">
-                                    <label for="creation-timestr" id="creation-label-str">Oario Inizio:</label>
-                                    <input type="time" id="creation-timestr" class="form-control" name="orarioInizio" min="09:00" max="23:00"><br>
-                                    <div class="valid-feedback">Valido.</div>
-                                    <div class="invalid-feedback">Inserisci un orario di inizio valido.</div>
+                                    <label for="creation-timestr-Evento" id="creation-label-str-Evento">Oario Inizio:</label>
+                                    <input type="time" id="creation-timestr-Evento" class="form-control" name="orarioInizio" min="09:00" max="23:00" onmousemove="validateStartEvento()" required><br>
+                                    <div class="valid-feedback" id="time-evento-str-valid">Valido.</div>
+                                    <div class="invalid-feedback">Inserisci un orario di inizio.</div>
                                 </div>
                                 <div class="form-group">
-                                    <label for="creation-timeend" id="creation-label-end">Oario Fine:</label>
-                                    <input type="time" id="creation-timeend" class="form-control" name="orarioFine" min="09:00" max="23:00"><br>
-                                    <div class="valid-feedback">Valido.</div>
-                                    <div class="invalid-feedback">Inserisci un orario di fine valido.</div>
+                                    <label for="creation-timeend-Evento" id="creation-label-end-Evento">Oario Fine:</label>
+                                    <input type="time" id="creation-timeend-Evento" class="form-control" name="orarioFine" min="09:00" max="23:00" required><br>
+                                    <div class="valid-feedback" id="time-evento-end-valid">Valido.</div>
+                                    <div class="invalid-feedback">Inserisci un orario di fine.</div>
                                 </div>
                                 <div class="form-group">
-                                    <label for="creation-player" id="creation-label-player">Posti disponibili:</label>
-                                    <input type="number" id="creation-player" class="form-control" name="postiDisponibili" min="0" max="250" value="0" required><br>
+                                    <label for="creation-player-Evento" id="creation-label-player">Posti disponibili:</label>
+                                    <input type="number" id="creation-player-Evento" class="form-control" name="postiDisponibili" min="1" max="300" value="250" required><br>
                                     <div class="valid-feedback">Valido.</div>
                                     <div class="invalid-feedback">Inserisci posti disponibili validi.</div>
                                 </div>
                                 <div class="form-group">
-                                    <label for="creation-guest" id="creation-label-guest">Nome Ospite:</label>
-                                    <input type="text" id="creation-guest" class="form-control" name="ospite" required><br>
+                                    <label for="creation-guest-Evento" id="creation-label-guest">Nome Ospite:</label>
+                                    <input type="text" id="creation-guest-Evento" class="form-control" name="ospite" required><br>
                                     <div class="valid-feedback">Valido.</div>
                                     <div class="invalid-feedback">Inserisci un ospite valido.</div>
                                 </div>
                                 <div class="form-group">
-                                    <label for="creation-description" id="creation-label-description">Descrizione :</label><br>
-                                    <textarea rows="4" cols="50" id="creation-description" class="form-control" name="descrizione" form="form-creation" required> </textarea><br>
+                                    <label for="creation-description-Evento" id="creation-label-description">Descrizione :</label><br>
+                                    <input id="creation-description-Evento" class="form-control" name="descrizione" required><br>
                                     <div class="valid-feedback">Valido.</div>
                                     <div class="invalid-feedback">Inserisci una Descrizione valida.</div>
                                 </div>
