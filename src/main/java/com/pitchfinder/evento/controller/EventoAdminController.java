@@ -23,8 +23,6 @@ public class EventoAdminController extends HttpServlet {
     private static final int MINLIMIT = 1;
     /** Maximum limit for name. */
     private static final int MAXLIMIT = 50;
-    /** Maximum limit for image. */
-    private static final int MAXLIMITIMAGE = 2;
     /** Maximum limit for the Guest. */
     private static final int MAXGUESTLIMIT = 20;
     /** Maximum limit for the description. */
