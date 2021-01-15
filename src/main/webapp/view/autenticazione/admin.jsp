@@ -311,33 +311,37 @@
 
                                 <thead>
                                 <tr>
-                                    <th scope="col">IdUtente</th>
-                                    <th scope="col">Nome</th>
-                                    <th scope="col">Cognome</th>
-                                    <th scope="col"></th>
+                                    <th scope="col">IdCampo</th>
+                                    <th scope="col">UtenteEmail</th>
+                                    <th scope="col">Data</th>
+                                    <th scope="col">Orario Inizio</th>
+                                    <th scope="col">Orario Fine</th>
+                                    <th scope="col">Show</th>
                                 </tr>
                                 </thead>
 
                                 <tbody id="tbody_partite">
-                                <c:forEach items="${sessionScope.listaClienti}" var = "cliente">
-                                    <tr id = "${cliente.id}">
 
-                                        <th scope = "row"> ${cliente.id} </th>
-                                        <td data-title = "Nome"> ${cliente.nome} </td>
-                                        <td data-title = "Cognome"> ${cliente.cognome} </td>
-                                        <td data-title = "Remove">
-                                            <button class = "remove" name = "${cliente.id}"
-                                                    onclick = "rimuoviCliente(name)">  <!-- button per rimuovere utente dal DB-->
-                                                Remove
+                                    <% for(Partita partita : partite) { %>
+                                    <tr>
+                                        <th scope = "row"> <%=partita.getIdCampo() %></th>
+                                        <td data-title = "UtenteEmail"> <%= partita.getEmailUtente()%> </td>
+                                        <td data-title = "Data"> <%=partita.getData() %></td>
+                                        <td data-title = "Orario Inizio"> <%=partita.getOrarioInizio()%></td>
+                                        <td data-title = "Orario Fine"><%=partita.getOrarioFine()%>  </td>
+                                        <td data-title = "Show">
+                                            <button class = "remove" name = "<%=partita.getIdPartita() %>> "
+                                                    onclick = "showPlayer(name)" >  <!-- button per visualizzare-->
+                                                Giocatori
                                             </button>
                                         </td>
                                     </tr>
-                                </c:forEach>
-
-
+                                   <% }%>
                                 </tbody>
                             </table>
+                            <!--- players table --->
 
+                            <!--- players table --->
                         </div>
                     </div>
                 </div>
