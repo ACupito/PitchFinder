@@ -247,7 +247,7 @@ input[type="text"] {
     outline: none; /*linea di bordo quando viene cliccato il bottone*/
 }
 
-#remove{
+.remove{
 
     font-family: 'Poppins', sans-serif;
     width: 70px;
@@ -267,7 +267,7 @@ input[type="text"] {
     background: #daa520;
 }
 
-#remove:hover{
+.remove:hover{
 
     cursor: pointer;
     background: red;

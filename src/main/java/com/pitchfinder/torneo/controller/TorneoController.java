@@ -207,6 +207,10 @@ public class TorneoController extends HttpServlet {
                     response.setContentType("Creazione avvenuta");
                 }
 
+
+                request.setAttribute("flag", 5);
+                RequestDispatcher requestDispatcher = request.getServletContext().getRequestDispatcher("/autentication");
+                requestDispatcher.forward(request, response);
             } else if (flag == 2) { //tournament elimination
                 // when remove button clicked.
 

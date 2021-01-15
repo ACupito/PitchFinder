@@ -10,6 +10,7 @@
 <head>
     <title>PitchFinder</title>
     <link href="css/admin_profile/style_adminProfile.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 <body>
 
@@ -23,7 +24,7 @@
                 <a href="#" class="list-group-item" id="crea_evento">Crea Evento</a>
                 <a href="#" class="list-group-item" id="modifica_campo">Modifica Campo</a>
                 <a href="#" class="list-group-item" id="all_tornei">Visualizza Torneo</a>
-                <a href="#" class="list-group-item" id="all_evento">Visualizza Everto</a>
+                <a href="#" class="list-group-item" id="all_evento">Visualizza Evento</a>
                 <a href="#" class="list-group-item" id="all_partite">Visualizza Partite</a>
             </div>
         </div>
@@ -146,14 +147,14 @@
                                 </tr>
                                 </thead>
 
-                                <tbody id="tbody_utenti">
+                                <tbody id="tbody_torneo">
                                 <c:forEach items="${sessionScope.listaClienti}" var = "cliente">
                                     <tr id = "${cliente.id}">
                                         <th scope = "row"> ${cliente.id} </th>
                                         <td data-title = "Nome"> ${cliente.nome} </td>
                                         <td data-title = "Cognome"> ${cliente.cognome} </td>
                                         <td data-title = "Remove">
-                                            <button id = "remove" name = "${cliente.id}"
+                                            <button class = "remove" name = "${cliente.id}"
                                                     onclick = "rimuoviCliente(name)">  <!-- button per rimuovere utente dal DB-->
                                                 Remove
                                             </button>
@@ -179,24 +180,36 @@
                     </div>
                     <div class="row1">
                         <div class="data">
-                            <table class="responsive-table" id="table_evento" style="width: 100%">
+                            <table class="responsive-table" style="width: 100%">
+
                                 <thead>
                                 <tr>
+                                    <th scope="col">IdUtente</th>
                                     <th scope="col">Nome</th>
-                                    <th scope="col">Marca</th>
-                                    <th scope="col">Prezzo</th>
+                                    <th scope="col">Cognome</th>
+                                    <th scope="col"></th>
                                 </tr>
                                 </thead>
-                                <tbody>
-                                <c:forEach items="${sessionScope.listaAuto}" var = "auto">
-                                    <tr id = "${auto.nome}_${auto.casaAuto}">
-                                        <th scope="row"> ${auto.nome} </th>
-                                        <td data-title="Marca"> ${auto.casaAuto} </td>
-                                        <td data-title="Prezzo"> ${auto.prezzo} </td>
+
+                                <tbody id="tbody_evento">
+                                <c:forEach items="${sessionScope.listaClienti}" var = "cliente">
+                                    <tr id = "${cliente.id}">
+                                        <th scope = "row"> ${cliente.id} </th>
+                                        <td data-title = "Nome"> ${cliente.nome} </td>
+                                        <td data-title = "Cognome"> ${cliente.cognome} </td>
+                                        <td data-title = "Remove">
+                                            <button class = "remove" name = "${cliente.id}"
+                                                    onclick = "rimuoviCliente(name)">  <!-- button per rimuovere utente dal DB-->
+                                                Remove
+                                            </button>
+                                        </td>
                                     </tr>
                                 </c:forEach>
+
+
                                 </tbody>
                             </table>
+
                         </div>
                     </div>
                 </div>
@@ -212,24 +225,36 @@
                     </div>
                     <div class="row1">
                         <div class="data">
-                            <table class="responsive-table" id="table_partite" style="width: 100%">
+                            <table class="responsive-table" style="width: 100%">
+
                                 <thead>
                                 <tr>
+                                    <th scope="col">IdUtente</th>
                                     <th scope="col">Nome</th>
-                                    <th scope="col">Marca</th>
-                                    <th scope="col">Prezzo</th>
+                                    <th scope="col">Cognome</th>
+                                    <th scope="col"></th>
                                 </tr>
                                 </thead>
-                                <tbody>
-                                <c:forEach items="${sessionScope.listaAuto}" var = "auto">
-                                    <tr id = "${auto.nome}_${auto.casaAuto}">
-                                        <th scope="row"> ${auto.nome} </th>
-                                        <td data-title="Marca"> ${auto.casaAuto} </td>
-                                        <td data-title="Prezzo"> ${auto.prezzo} </td>
+
+                                <tbody id="tbody_partite">
+                                <c:forEach items="${sessionScope.listaClienti}" var = "cliente">
+                                    <tr id = "${cliente.id}">
+                                        <th scope = "row"> ${cliente.id} </th>
+                                        <td data-title = "Nome"> ${cliente.nome} </td>
+                                        <td data-title = "Cognome"> ${cliente.cognome} </td>
+                                        <td data-title = "Remove">
+                                            <button class = "remove" name = "${cliente.id}"
+                                                    onclick = "rimuoviCliente(name)">  <!-- button per rimuovere utente dal DB-->
+                                                Remove
+                                            </button>
+                                        </td>
                                     </tr>
                                 </c:forEach>
+
+
                                 </tbody>
                             </table>
+
                         </div>
                     </div>
                 </div>
@@ -240,7 +265,8 @@
     </div>
 </div>
 
-<script src="js/autenticazione/js_admin.js"/>
+
+<script src="js/autenticazione/js_admin.js"></script>
 
 </body>
 </html>
