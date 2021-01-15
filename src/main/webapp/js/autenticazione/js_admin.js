@@ -66,10 +66,6 @@
 });
 });
 
-/**** TOURNAMENT Javascript *****/
-
-/**** END TOURNAMENT Javascript *****/
-
 /**** EVENT Javascript *****/
 var isDateValidEvento=false;
 var isTimeValid=false;
