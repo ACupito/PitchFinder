@@ -32,7 +32,7 @@ public class IscrizioneTorneoController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         //Controll of button
-        if (req.getParameter("conferma") != null) {
+        if (req.getParameter("conferma").equals("conferma")) {
 
             TorneoService torneoService = new TorneoServiceImpl();
             String nomeTorneo = req.getParameter("nomeTorneo");
@@ -177,10 +177,10 @@ public class IscrizioneTorneoController extends HttpServlet {
                     req.getServletContext().getRequestDispatcher("/view/torneo/dettagliTorneo.jsp");
             dispatcher.forward(req, resp);
         } else {
-            resp.setContentType("Indietro");
+            if (req.getParameter("Indietro") != null){
             RequestDispatcher dispatcher =
                     req.getServletContext().getRequestDispatcher("/view/torneo/dettagliTorneo.jsp");
-            dispatcher.forward(req, resp);
+            dispatcher.forward(req, resp);}
         }
     }
 
