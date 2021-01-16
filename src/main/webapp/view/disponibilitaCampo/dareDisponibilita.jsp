@@ -26,11 +26,10 @@
     <link href="css/footer/style_footer.css" rel="stylesheet">
     <link href="css/disponibilita/disponibilita.css" rel="stylesheet" />
 
-    <title>RegistrationForm_v9 by Colorlib</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script language="JavaScript" type="text/javascript" src="js/disponibilita/js_availability.js"></script>
 
-    <!-- DATE-PICKER -->
-    <link rel="stylesheet" href="css/disponibilita/datepicker.min.css">
+
 
 
 </head>
@@ -51,18 +50,24 @@
             <div class="form-row">
                 <div class="form-wrapper">
                     <label for="data">Data</label>
-                    <span class="lnr lnr-calendar-full"></span>
-                    <input type="date" class="form-control datepicker-here" name="data" id="data">
+
+                    <input type="date" class="form-control datepicker-here" name="data" id="data" onkeydown="return false" onblur="valiDate()"><br>
+                    <small id="small-creation-data"> Inserire una data valida(DD/MM/YYYY)</small><br>
+
                 </div>
                 <div class="form-wrapper">
                     <label for="inizio">Orario Inizio</label>
-                    <span class="lnr lnr-calendar-full"></span>
-                    <input type="time" class="form-control datepicker-here" name="inizio" id="inizio">
+
+                    <input type="text" class="timepicker" name="inizio" id="inizio" minTime="09:00" maxTime="23:00"  size="5" required onkeydown="return false" onmousemove="validateStart()" >
+                    <small id="small-creation-timestr"> Inserire un orario di inizio valido(HH:MM)</small><br>
+
                 </div>
                 <div class="form-wrapper">
                     <label for="fine">Orario Fine</label>
-                    <span class="lnr lnr-calendar-full"></span>
-                    <input type="time" class="form-control datepicker-here" name="fine" id="fine">
+
+                    <input type="text" name="fine" id="fine" class="timepicker"minTime="09:00" maxTime="23:00"  size="5" required onkeydown="return false" onmousemove="clickTimeValidate()">
+                    <small id="small-creation-timeend"> Inserire un orario di fine valido(HH:MM)</small><br>
+
                 </div>
             </div>
             <div class="form-row last">
@@ -75,6 +80,8 @@
                     <i class="zmdi zmdi-chevron-down"></i>
                 </div>
             </div>
+
+
             <% if(session.getAttribute("utente")!=null){ %>
             <button type="submit" name="Conferma" value="Conferma" data-text="Conferma" id="Conferma">
                 <span>Conferma</span>
@@ -88,7 +95,17 @@
             <%} %>
         </form>
     </div>
+    <!--- Esito --->
+    <% String esito = (String) request.getAttribute("esito");
+        if(esito!= null){
+            if(esito.equals("1")){%>
+    <script>
+        alert("La creazione va a buon fine");
+    </script>
+    <% } %>
+    <%}%>
 </div>
+
 <!-- Footer-->
 <footer class="footer py-4">
     <%@include file="../footer/footer.jsp"%>
@@ -98,20 +115,10 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"></script>
 <!-- Third party plugin JS-->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
-<!-- Contact form JS-->
-<script src="assets/mail/jqBootstrapValidation.js"></script>
-<script src="assets/mail/contact_me.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.js"></script>
 <!-- Core theme JS-->
 <script src="js/homepage/js_homepage.js"></script>
 <script src = "js/homepage/check_login.js"></script>
 
-
-<script src="js/jquery-3.3.1.min.js"></script>
-<!-- DATE-PICKER -->
-<script src="js/disponibilita/datepicker.js"></script>
-<script src="js/disponibilita/datepicker.en.js"></script>
-
-<script src="js/disponibilita/main.js"></script>
-</body><!-- This templates was made by Colorlib (https://colorlib.com) -->
 </html>
 
