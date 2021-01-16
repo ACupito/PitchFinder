@@ -169,6 +169,10 @@ var isDescriptionValidEvento=false;
 
 
 function validateEvento(){
+        validateNameEvento();
+        valiDateEvento();
+        validateGuestEvento();
+        validateDescriptionEvento();
 
         if(isDateValidEvento && isNameValidEvento && isGuestValidEvento && isDescriptionValidEvento){
             return true;
