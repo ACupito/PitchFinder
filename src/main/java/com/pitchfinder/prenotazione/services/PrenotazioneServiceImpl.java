@@ -9,6 +9,8 @@ import org.apache.commons.mail.Email;
 import org.apache.commons.mail.EmailException;
 import org.apache.commons.mail.SimpleEmail;
 
+import java.sql.Date;
+
 
 public class PrenotazioneServiceImpl implements PrenotazioneService  {
     /**
@@ -51,6 +53,20 @@ public class PrenotazioneServiceImpl implements PrenotazioneService  {
         email.send();
 
 
+        return prenotazione;
+    }
+
+    /**
+     * Get BOOKING.
+     * @param email - email.
+     * @param eventoData - Date event.
+     * @param eventoNome - Name event.
+     * @return Prenotazione
+     */
+    @Override
+    public Prenotazione getPrenotazione(String email, Date eventoData, String eventoNome) {
+        PrenotazioneDAO prenotazioneDAO = new PrenotazioneDAOImpl();
+        Prenotazione prenotazione = prenotazioneDAO.doRetrievePrenotazione(email, eventoNome, eventoData);
         return prenotazione;
     }
 

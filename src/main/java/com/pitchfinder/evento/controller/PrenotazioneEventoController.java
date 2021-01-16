@@ -3,8 +3,6 @@ package com.pitchfinder.evento.controller;
 import com.pitchfinder.evento.entity.Evento;
 import com.pitchfinder.evento.services.EventoService;
 import com.pitchfinder.evento.services.EventoServiceImpl;
-import com.pitchfinder.prenotazione.dao.PrenotazioneDAO;
-import com.pitchfinder.prenotazione.dao.PrenotazioneDAOImpl;
 import com.pitchfinder.prenotazione.entity.Prenotazione;
 import com.pitchfinder.prenotazione.services.PrenotazioneService;
 import com.pitchfinder.prenotazione.services.PrenotazioneServiceImpl;
@@ -53,8 +51,8 @@ public class PrenotazioneEventoController extends HttpServlet {
                 throw new IllegalArgumentException("La prenotazione all’evento non va a buon fine il formato dell’email non è valido.");
             }
 
-            PrenotazioneDAO prenotazioneDAO = new PrenotazioneDAOImpl();
-            Prenotazione prenotazione = prenotazioneDAO.doRetrievePrenotazione(email, evento.getName(), evento.getDate());
+            PrenotazioneService prenotazioneService = new PrenotazioneServiceImpl();
+            Prenotazione prenotazione = prenotazioneService.getPrenotazione(email, evento.getDate(), evento.getName());
             if (prenotazione != null) {
                 throw new IllegalArgumentException("Già hai prenotato con questo account.");
             }
@@ -63,7 +61,6 @@ public class PrenotazioneEventoController extends HttpServlet {
                 throw new IllegalArgumentException("Evento non valido");
             }
 
-            PrenotazioneService prenotazioneService = new PrenotazioneServiceImpl();
             try {
                 prenotazioneService.createPrenotazione(email, evento);
             } catch (EmailException e) {
