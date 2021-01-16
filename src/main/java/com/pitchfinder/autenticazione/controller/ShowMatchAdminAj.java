@@ -45,8 +45,8 @@ public class ShowMatchAdminAj extends HttpServlet {
         Partita current = new Partita();
 
         List<Partita> partite = service.showPartite();
-        for (Partita partita: partite){
-            if (partita.getIdPartita()==idPartita) {
+        for (Partita partita: partite) {
+            if (partita.getIdPartita() == idPartita) {
                 current = partita;
                 break;
             }
@@ -57,16 +57,16 @@ public class ShowMatchAdminAj extends HttpServlet {
         JSONArray nomi = new JSONArray();
         JSONArray cognomi = new JSONArray();
 
-        for (int i = 0; i < giocatore.size(); i=i+2) {
+        for (int i = 0; i < giocatore.size(); i = i + 2) {
             nomi.add(giocatore.get(i));
-            cognomi.add(giocatore.get(i+1));
+            cognomi.add(giocatore.get(i + 1));
         }
 
         AutenticazioneService autService = new AutenticazioneServiceImpl();
         Utente user = autService.prelevaUtenteByEmail(current.getEmailUtente());
 
-        pacchetto.put("userName",user.getNome());
-        pacchetto.put("userSurname",user.getCognome());
+        pacchetto.put("userName", user.getNome());
+        pacchetto.put("userSurname", user.getCognome());
         pacchetto.put("nomi", nomi);
         pacchetto.put("cognomi", cognomi);
 
