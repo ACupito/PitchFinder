@@ -77,16 +77,16 @@ var isDescriptionValidEvento=false;
 
         if( $("#creation-name-Evento").val().match("^[a-zA-Z0-9\u00C0-\u00ff'\\s]+$")){
             if($("#creation-name-Evento").val().length < 1 || $("#creation-name-Evento").val().length>50) {
-                $("#name-evento-valid").text("La lunghezza non è valida");
+                $("#name-evento-valid").text("La lunghezza del nome non è valida");
                 $("#name-evento-valid").css("color", "#FF0000");
                 isNameValidEvento = false;
             }else{
-                $("#name-evento-valid").text("Nome Valido");
+                $("#name-evento-valid").text("Valido");
                 $("#name-evento-valid").css("color","#4CAF50");
                 isNameValidEvento=true;
             }
         }else{
-            $("#name-evento-valid").text("Il formato del nome non è valido. ");
+            $("#name-evento-valid").text("Il formato del nome non è valido");
             $("#name-evento-valid").css("color","#FF0000");
             isNameValidEvento=false;
         }
@@ -130,9 +130,9 @@ var isDescriptionValidEvento=false;
     /** validate Ospite **/
     function validateGuestEvento(){
 
-        if( $("#creation-guest-Evento").val().match("^[a-zA-Z0-9\u00C0-\u00ff'\\s]+$")){
+        if( $("#creation-guest-Evento").val().match("^[a-zA-Z0-9\u00C0-\u00ff']+$")){
             if($("#creation-guest-Evento").val().length < 1 || $("#creation-guest-Evento").val().length>20) {
-                $("#guest-evento-valid").text("La lunghezza non è valida");
+                $("#guest-evento-valid").text("La lunghezza del nome dell’ospite non è valida");
                 $("#guest-evento-valid").css("color", "#FF0000");
                 isGuestValidEvento = false;
             }else{
@@ -141,7 +141,7 @@ var isDescriptionValidEvento=false;
                 isGuestValidEvento=true;
             }
         }else{
-            $("#guest-evento-valid").text("Il formato dell'ospite non è valido. ");
+            $("#guest-evento-valid").text("Il formato dell'ospite non è valido");
             $("#guest-evento-valid").css("color","#FF0000");
             isGuestValidEvento=false;
         }
@@ -150,9 +150,9 @@ var isDescriptionValidEvento=false;
     /** validate Descrizione **/
     function validateDescriptionEvento(){
 
-        if( $("#creation-description-Evento").val().match("^[ a-zA-Z\\ù\\è\\.\\,\\s\\&\\+\\ò\\-\\:\\;\\?\\!\\à\\È\\']+$")){
+        if( $("#creation-description-Evento").val().match("^[ a-zA-z\u00C0-\u00ff\']+$")){
             if($("#creation-description-Evento").val().length < 1 || $("#creation-description-Evento").val().length>500) {
-                $("#description-evento-valid").text("La lunghezza non è valida");
+                $("#description-evento-valid").text("La lunghezza della descrizione non è valida");
                 $("#description-evento-valid").css("color", "#FF0000");
                 isDescriptionValidEvento = false;
             }else{
@@ -161,7 +161,7 @@ var isDescriptionValidEvento=false;
                 isDescriptionValidEvento=true;
             }
         }else{
-            $("#description-evento-valid").text("Il formato della descrizione non è valida.");
+            $("#description-evento-valid").text("Il formato della descrizione non è valido");
             $("#description-evento-valid").css("color","#FF0000");
             isDescriptionValidEvento=false;
         }
