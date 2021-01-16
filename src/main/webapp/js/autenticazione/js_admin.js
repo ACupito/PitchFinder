@@ -150,7 +150,7 @@ var isDescriptionValidEvento=false;
     /** validate Descrizione **/
     function validateDescriptionEvento(){
 
-        if( $("#creation-description-Evento").val().match("^[ a-zA-Z\\ù\\è\\.\\,\\s\\&\\+\\ò\\-\\:\\;\\?\\!\\à\\È\\']+$")){
+        if( $("#creation-description-Evento").val().match("^[ a-zA-z\\u00C0-\\u00ff\\']+$")){
             if($("#creation-description-Evento").val().length < 1 || $("#creation-description-Evento").val().length>500) {
                 $("#description-evento-valid").text("La lunghezza non è valida");
                 $("#description-evento-valid").css("color", "#FF0000");
