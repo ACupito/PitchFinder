@@ -212,7 +212,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="creation-timestr-Evento" id="creation-label-str-Evento">Oario Inizio:</label>
-                                    <input type="time" id="creation-timestr-Evento" class="form-control" name="orarioInizio" min="09:00" max="23:00" onmousemove="validateStartEvento()" required><br>
+                                    <input type="time" id="creation-timestr-Evento" class="form-control" name="orarioInizio" min="09:00" max="23:00" required><br>
                                     <div class="valid-feedback" id="time-evento-str-valid">Valido.</div>
                                     <div class="invalid-feedback">Inserisci un orario di inizio.</div>
                                 </div>
