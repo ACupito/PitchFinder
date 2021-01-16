@@ -64,62 +64,68 @@ public class EventoAdminController extends HttpServlet {
             /* The Event's available sits (String). */
             String postiDisponibiliStr = request.getParameter("postiDisponibili");
 
-            if (nome.length() < MINLIMIT || nome.length() > MAXLIMIT) {
-                throw new IllegalArgumentException("Errato: lunghezza nome non valida");
+            if (!(nome.length() > MINLIMIT && nome.length() < MAXLIMIT)) {
+                throw new IllegalArgumentException("La lunghezza del nome non è valida");
             }
             if (!nome.matches("^[a-zA-Z0-9\u00C0-\u00ff'\\s]+$")) {
-                throw new IllegalArgumentException("Errato: formato non valido");
+                throw new IllegalArgumentException("Il formato nel nome non è valido");
             }
 
 
             if (orarioInizioStr.matches("")) {
-                throw new IllegalArgumentException("Errato: orario non selezionato");
+                throw new IllegalArgumentException("Inserire l’orario di inizio");
             }
             if (!orarioInizioStr.matches("^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$")) {
-                throw new IllegalArgumentException("Errato: formato non valido");
+                throw new IllegalArgumentException("Il formato dell'orario di inizio non è valido");
             }
+
             /* The start time of the Event (Time). */
             Time orarioInizio = Time.valueOf(orarioInizioStr.concat(":00"));
+
+
             if (orarioFineStr.matches("")) {
-                throw new IllegalArgumentException("Errato: orario non selezionato");
+                throw new IllegalArgumentException("Inserire l’orario di fine");
             }
             if (!orarioFineStr.matches("^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$")) {
-                throw new IllegalArgumentException("Errato: formato non valido");
+                throw new IllegalArgumentException("Il formato dell'orario di fine non è valido");
             }
-            Time orarioFine = Time.valueOf(orarioFineStr.concat(":00")); /* The end time of the Event (Time). */
+
+            /* The end time of the Event (Time). */
+            Time orarioFine = Time.valueOf(orarioFineStr.concat(":00"));
+
             if (dateStr.equals("")) {
-                throw new IllegalArgumentException("Errato: data non selezionata");
+                throw new IllegalArgumentException("Inserire la data");
             }
             Date myDate = new Date(System.currentTimeMillis());
             try {
                 dataEvento = Date.valueOf(dateStr); /* The Event's date (Date). */
                 if (dataEvento.before(myDate)) {
-                    throw new IllegalArgumentException("Errato: formato non valido");
+                    throw new IllegalArgumentException("La data non rispetta il formato");
                 }
             } catch (IllegalArgumentException e) {
-                throw new IllegalArgumentException("Errato: formato non valido");
+                throw new IllegalArgumentException("La data non rispetta il formato");
             }
-            if (ospite.length() < MINLIMIT || ospite.length() > MAXGUESTLIMIT) {
-                throw new IllegalArgumentException("Errato: lunghezza non valida");
+            if (!(ospite.length() > MINLIMIT && ospite.length() < MAXGUESTLIMIT)) {
+                throw new IllegalArgumentException("La lunghezza del nome dell’ospite non è valida");
             }
             if (!ospite.matches("^[ a-zA-Z\\u00C0-\\u00ff']+")) {
-                throw new IllegalArgumentException("Errato: formato non valido");
+                throw new IllegalArgumentException("Il formato dell'ospite non è valido");
             }
-            if (descrizione.length() < MINLIMIT || descrizione.length() > MAXDESCRIPTIONLIMIT) {
-                throw new IllegalArgumentException("Errato: lunghezza non valida");
+            if (!(descrizione.length() > MINLIMIT && descrizione.length() < MAXDESCRIPTIONLIMIT)) {
+                throw new IllegalArgumentException("La lunghezza della descrizione non è valida");
             }
             if (!descrizione.matches("^[ a-zA-z\\u00C0-\\u00ff\\']+")) {
-                throw new IllegalArgumentException("Errato: formato non valido");
+                throw new IllegalArgumentException("Il formato della descrizione non è valido");
             }
             if (postiDisponibiliStr.equals("")) {
-                throw new IllegalArgumentException("Errato: lunghezza non valida");
+                throw new IllegalArgumentException("Il numero di posti disponibili non è valido");
             }
             if (!postiDisponibiliStr.matches("[0-9]+$")) {
-                throw new IllegalArgumentException("Errato: formato non valido");
+                throw new IllegalArgumentException("Il formato dei posti disponibili non è valido");
             }
             int postiDisponibili = Integer.parseInt(postiDisponibiliStr); /* The Event's available sits (Integer). */
-            if (postiDisponibili < MINLIMIT || postiDisponibili > MAXSITSLIMIT) {
-                throw new IllegalArgumentException("Errato: lunghezza non valida");
+            if (!(postiDisponibili > MINLIMIT && postiDisponibili < MAXSITSLIMIT)) {
+                throw new IllegalArgumentException("Il numero di posti disponibili non è valido");
             }
             String image = "default";
             if (immagine != null) {
@@ -145,7 +151,7 @@ public class EventoAdminController extends HttpServlet {
                 response.setContentType("Impossibile creare un evento");
             }
 
-            response.setContentType("Creazione avvenuta");
+            response.setContentType("La creazione dell’evento è andata a buon fine");
             RequestDispatcher requestDispatcher = request.getServletContext().getRequestDispatcher("/autentication?flag=5");
             requestDispatcher.forward(request, response);
 

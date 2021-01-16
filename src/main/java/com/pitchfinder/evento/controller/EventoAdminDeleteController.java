@@ -62,21 +62,22 @@ public class EventoAdminDeleteController extends HttpServlet {
             /* The Event's date (Date)*/
             Date dataEvento;
 
-            if (nome.length() < MINLIMIT || nome.length() > MAXLIMIT) {
-                throw new IllegalArgumentException("Errato: lunghezza nome non valida");
+            if (!(nome.length() > MINLIMIT && nome.length() < MAXLIMIT)) {
+                throw new IllegalArgumentException("La lunghezza del nome non è valida");
             }
             if (!nome.matches("^[a-zA-Z0-9\u00C0-\u00ff'\\s]+$")) {
-                throw new IllegalArgumentException("Errato: formato non valido");
+                throw new IllegalArgumentException("Il formato nel nome non è valido");
             }
 
             if (dateStr.equals("")) {
-                throw new IllegalArgumentException("Errato: data non selezionata");
+                throw new IllegalArgumentException("Inserire la data");
             }
 
             try {
-                dataEvento = Date.valueOf(dateStr); /* The Event's date (Date). */
+                /* The Event's date (Date). */
+                dataEvento = Date.valueOf(dateStr);
             } catch (IllegalArgumentException e) {
-                throw new IllegalArgumentException("Errato: formato non valido");
+                throw new IllegalArgumentException("La data non rispetta il formato");
             }
 
             Evento temp = new Evento(nome, "default", new Time(12, 0, 0),
