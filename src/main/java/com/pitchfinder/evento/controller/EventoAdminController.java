@@ -106,7 +106,8 @@ public class EventoAdminController extends HttpServlet {
             if (descrizione.length() < MINLIMIT || descrizione.length() > MAXDESCRIPTIONLIMIT) {
                 throw new IllegalArgumentException("Errato: lunghezza non valida");
             }
-            if (!descrizione.matches("^[ a-zA-Z\\\\ù\\\\è\\\\.\\\\,\\\\s\\\\&\\\\+\\\\ò\\\\-\\\\:\\\\;\\\\?\\\\!\\\\à\\\\È\\\\']+$")) {
+            immagine.replace("+"," ");
+            if (!descrizione.matches("^[ a-zA-Z\\ù\\è\\.\\,\\s\\&\\+\\ò\\-\\:\\;\\?\\!\\à\\È\\']+$")) {
                 throw new IllegalArgumentException("Errato: formato non valido");
             }
             if (postiDisponibiliStr.equals("")) {
