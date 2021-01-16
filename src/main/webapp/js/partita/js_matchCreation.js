@@ -348,6 +348,8 @@ function validateNPlayer(){
 }
 
 function validateForm(){
+    valiDate();
+    validateNPlayer();
     validateStart();
     clickTimeValidate();
 
