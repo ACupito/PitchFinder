@@ -68,7 +68,7 @@
                             %>
                             <script>
                                 $(document).ready( function(){
-                                    alert(document.getElementById("flagMessage").value);
+                                    setTimeout(() => {alert(document.getElementById("flagMessage").value);}, 500)
                                     }
                                 );
                             </script>
