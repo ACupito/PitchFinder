@@ -94,6 +94,7 @@
                                         </td>
                                         <td>
                                             <i id="alert" style="display: none; position: relative" data-placement="top" data-toggle="tooltip" title="Example: Mario99@gmail.com" class="fas fa-fw fa-exclamation-circle mr-3 align-self-center"></i>
+                                            <i id="alertRip" style="display: none; position: relative" data-placement="top" data-toggle="tooltip" title="Hai già effettuato una prenotazione a questo evento con questa email!" class="fas fa-fw fa-exclamation-circle mr-3 align-self-center"></i>
                                         </td>
                                     </tr>
                                 </table>
@@ -102,8 +103,7 @@
                                 <%if (utente == null) {%>
                                 <input type="email" id="email" onkeyup="validaEmail()" name="email"><br>
                                 <%} else {%>
-                                <input type="email" id="email" onkeyup="validaEmail()" name="email"
-                                       value="${utente.email}"><br>
+                                <input type="email" id="email" onkeyup="validaEmail()" name="email" value="${utente.email}"><br>
                                 <%}%>
                                 <input type="submit" class="btn btn-sm btn-flash-border-primary" id="conferma"
                                        name="Conferma" value="Prenotati!">
@@ -149,19 +149,38 @@
 
     function validaEmail() {
         var input = document.getElementById("email");
-        if (input.value.length > 0
-            && input.value.match(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w+)+$/) && input.value.length < 50) {
-            document.getElementById("emailLabel").style.color = borderOk;
-            document.getElementById("alert").style.display = "none";
-            emailOk = true;
+        var nome = document.getElementById("eventName");
+        var data = document.getElementById("eventDate");
+        if (input.value.length > 0 && input.value.match(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w+)+$/) && input.value.length < 50) {
+            var xmlHttpReq = new XMLHttpRequest();
+            xmlHttpReq.onreadystatechange= function() {
+            if (this.readyState == 4 && this.status == 200 && this.responseText == '<ok/>') {
+                document.getElementById("emailLabel").style.color = borderOk;
+                document.getElementById("alert").style.display = "none";
+                document.getElementById("alertRip").style.display = "none";
+                emailOk = true;
+            } else {
+                document.getElementById("emailLabel").style.color = borderNo;
+                document.getElementById("alert").style.display = "none";
+                document.getElementById("alertRip").style.display = "block";
+                document.getElementById("alertRip").style.color = borderNo;
+                emailOk = false;
+
+            }
+            cambiaStatoIscrizione();
+            }
+            xmlHttpReq.open("GET", "ValidaEmail?email="
+                + encodeURIComponent(input.value)+"eventDate=" + encodeURIComponent(data.value)+"eventName"+ encodeURIComponent(nome.value), true);
+            xmlHttpReq.send();
+
         } else {
             document.getElementById("emailLabel").style.color = borderNo;
             document.getElementById("alert").style.display = "block";
             document.getElementById("alert").style.color = borderNo;
-
             emailOk = false;
+            cambiaStatoIscrizione();
         }
-        cambiaStatoIscrizione();
+
     }
 
     function cambiaStatoIscrizione() {
