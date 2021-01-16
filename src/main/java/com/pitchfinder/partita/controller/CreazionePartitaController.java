@@ -129,7 +129,7 @@ public class CreazionePartitaController extends HttpServlet {
                     if (!currentName.matches("^[a-zA-Z\\s]+$")) {
                         throw new IllegalArgumentException("Il formato del giocatore non è valido. ");
                     }
-                    if (currentName.length() > 16 || currentName.length() <= 1) {
+                    if (currentName.length() >= 16 || currentName.length() <= 1) {
                         throw new IllegalArgumentException("La lunghezza del giocatore non è valida. ");
                     }
                     nomi.add(currentName);
@@ -142,7 +142,7 @@ public class CreazionePartitaController extends HttpServlet {
                     if (!currentSurname.matches("^[a-zA-Z\\s]+$")) {
                         throw new IllegalArgumentException("Il formato del giocatore non è valido. ");
                     }
-                    if (currentSurname.length() > 16 || currentSurname.length() <= 1) {
+                    if (currentSurname.length() >= 16 || currentSurname.length() <= 1) {
                         throw new IllegalArgumentException("La lunghezza del giocatore non è valida. ");
                     }
                     cognomi.add(currentSurname);

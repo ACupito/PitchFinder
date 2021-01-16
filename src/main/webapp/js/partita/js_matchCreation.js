@@ -177,7 +177,7 @@ function clickTimeValidate(){
 function validateName1(){
 
     if( $("#nameG1").val().match("^[a-zA-Z\\s]+$")){
-        if($("#nameG1").val().length < 1 || $("#nameG1").val().length>16) {
+        if($("#nameG1").val().length <= 1 || $("#nameG1").val().length>=16) {
             $("#creation-label-nameG1").css({"color": "#FF0000"});
             $("#small-nameG1").text("La lunghezza del giocatore non è valida");
             $("#small-nameG1").css("color", "#FF0000");
@@ -197,7 +197,7 @@ function validateName1(){
 }
 function validateName2(){
     if( $("#nameG2").val().match("^[a-zA-Z\\s]+$")){
-        if($("#nameG2").val().length < 1 || $("#nameG2").val().length>16) {
+        if($("#nameG2").val().length <= 1 || $("#nameG2").val().length>=16) {
             $("#creation-label-nameG2").css({"color": "#FF0000"});
             $("#small-nameG2").text("La lunghezza del giocatore non è valida");
             $("#small-nameG2").css("color", "#FF0000");
@@ -217,7 +217,7 @@ function validateName2(){
 }
 function validateName3(){
     if( $("#nameG3").val().match("^[a-zA-Z\\s]+$")){
-        if($("#nameG3").val().length < 1 || $("#nameG3").val().length>16) {
+        if($("#nameG3").val().length <= 1 || $("#nameG3").val().length>=16) {
             $("#creation-label-nameG3").css({"color": "#FF0000"});
             $("#small-nameG3").text("La lunghezza del giocatore non è valida");
             $("#small-nameG3").css("color", "#FF0000");
@@ -238,7 +238,7 @@ function validateName3(){
 //Surname validation
 function validateSurname1() {
     if( $("#surnameG1").val().match("^[a-zA-Z\\s]+$")){
-        if($("#surnameG1").val().length < 1 || $("#surnameG1").val().length>16) {
+        if($("#surnameG1").val().length <= 1 || $("#surnameG1").val().length>=16) {
             $("#creation-label-surnameG1").css({"color": "#FF0000"});
             $("#small-surnameG1").text("La lunghezza del giocatore non è valida");
             $("#small-surnameG1").css("color", "#FF0000");
@@ -258,7 +258,7 @@ function validateSurname1() {
 }
 function validateSurname2() {
     if( $("#surnameG2").val().match("^[a-zA-Z\\s]+$")){
-        if($("#surnameG2").val().length < 1 || $("#surnameG2").val().length>16) {
+        if($("#surnameG2").val().length <= 1 || $("#surnameG2").val().length>=16) {
             $("#creation-label-surnameG2").css({"color": "#FF0000"});
             $("#small-surnameG2").text("La lunghezza del giocatore non è valida");
             $("#small-surnameG2").css("color", "#FF0000");
@@ -278,7 +278,7 @@ function validateSurname2() {
 }
 function validateSurname3() {
     if( $("#surnameG3").val().match("^[a-zA-Z\\s]+$")){
-        if($("#surnameG3").val().length < 1 || $("#surnameG3").val().length>16) {
+        if($("#surnameG3").val().length <= 1 || $("#surnameG3").val().length>=16) {
             $("#creation-label-surnameG3").css({"color": "#FF0000"});
             $("#small-surnameG3").text("La lunghezza del giocatore non è valida");
             $("#small-surnameG3").css("color", "#FF0000");
