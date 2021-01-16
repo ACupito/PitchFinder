@@ -33,9 +33,13 @@ function Caselle(){
         var min = document.forms['iscrizione']['minP'] ;
         if (input.value > 0 && input.value<99&&input.value>= min.value &&input.value <= max.value) {
             document.getElementById("numeroGiocatori").style.color = borderOk;
+            document.getElementById("alertNGiocatori").style.display = "none";
             nGiocatoriOk = true;
         } else {
             document.getElementById("numeroGiocatori").style.color = borderNo;
+            document.getElementById("alertNGiocatori").style.color = borderNo;
+            document.getElementById("alertNGiocatori").style.display = "block";
+
             nGiocatoriOk = false;
         }
         cambiaStatoIscrizione();
@@ -71,9 +75,12 @@ function Caselle(){
             if (cognome && nome) {
                 giocatoriOk = true;
                 document.getElementById('nomecognome').style.color = borderOk;
+                document.getElementById('alertNomeGiocatori').style.display = "none";
             } else {
                 giocatoriOk = false;
                 document.getElementById('nomecognome').style.color = borderNo;
+                document.getElementById('alertNomeGiocatori').style.color = borderNo;
+                document.getElementById('alertNomeGiocatori').style.display = "block";
             }
 
 
@@ -84,9 +91,12 @@ function Caselle(){
         var input = document.forms['iscrizione']['nomeSquadra'];
         if (input.value.match(/^[a-zA-Z_ ]*$/)&&input.value.length>0&&input.value.length<50) {
             document.getElementById("nSquadra").style.color = borderOk;
+            document.getElementById("alertNome").style.display = "none";
             nomeOk = true;
         } else {
             document.getElementById("nSquadra").style.color = borderNo;
+            document.getElementById("alertNome").style.display = "block";
+            document.getElementById("alertNome").style.color = borderNo;
             nomeOk = false;
         }
             cambiaStatoIscrizione();
@@ -96,9 +106,13 @@ function Caselle(){
         var input = document.forms['iscrizione']['nomeCapitano'];
             if (input.value.length > 0 && input.value.match(/^[a-zA-Z_ ]*$/)&&input.value.length < 10) {
                 document.getElementById("nomeCapitano").style.color = borderOk;
+                document.getElementById("alertNomeCapitano").style.display = "none";
                 nomeCapitanoOk = true;
+
              } else {
                 document.getElementById("nomeCapitano").style.color = borderNo;
+                document.getElementById("alertNomeCapitano").style.display = "block";
+                document.getElementById("alertNomeCapitano").style.color = borderNo;
                 nomeCapitanoOk = false;
             }
     cambiaStatoIscrizione();
@@ -109,18 +123,25 @@ function validaCognomeCapitano() {
     if (input.value.length > 0
         && input.value.match(/^[a-zA-Z_ ]*$/)&&input.value.length < 20  ) {
         document.getElementById("cognomeCapitano").style.color = borderOk;
+        document.getElementById("alertCognomeCapitano").style.display = "none";
+
         cognomeOk = true;
     } else {
         document.getElementById("cognomeCapitano").style.color = borderNo;
+        document.getElementById("alertCognomeCapitano").style.display = "block";
+        document.getElementById("alertCognomeCapitano").style.color = borderNo;
         cognomeOk = false;
     }
     cambiaStatoIscrizione();
 }
 
 function cambiaStatoIscrizione() {
+
+
         if  (nomeOk&&cognomeOk&&nomeCapitanoOk&&nGiocatoriOk&&giocatoriOk) {
             document.getElementById('conferma').disabled = false;
-        } else {
-            document.getElementById('conferma').disabled = true;
+            return true;
         }
-}
+            document.getElementById('conferma').disabled = true;
+            return false;
+        }
