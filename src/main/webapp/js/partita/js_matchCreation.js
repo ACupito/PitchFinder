@@ -38,7 +38,7 @@ function minMaxTime(){
         maxTime: '23:00',
         startTime: '09:00',
         interval: 60, // 60 minutes
-        dynamic: true,
+        dynamic: false,
         dropdown: true,
         scrollbar: true,
 
@@ -86,12 +86,13 @@ function validateStart(){
         mmStr = document.getElementById("creation-timestr").value.substring(3);
         $("#small-creation-timestr").text("Orario di inizio valido, rispetta il formato");
         $("#small-creation-timestr").css("color","#4CAF50");
+        return true;
     }else{
         $("#creation-label-str").css("color","#FF0000");
         $("#small-creation-timestr").text("L'orario di inizio non rispetta il formato");
         $("#small-creation-timestr").css("color","#FF0000");
+        return false;
     }
-
 }
 
 //End validation
@@ -103,16 +104,19 @@ function validateEnd(){
             j--;
         }
     }
+
     if(document.getElementById("creation-timeend").value.match("^[0-2]{1}[0-9]{1}\\:[0-6]{1}[0-9]{1}$")){
         $("#creation-label-end").css("color","#4CAF50");
         hhEnd = document.getElementById("creation-timeend").value.substring(0,2);
         mmEnd = document.getElementById("creation-timeend").value.substring(3);
         $("#small-creation-timeend").text("Orario di fine valido, rispetta il formato");
         $("#small-creation-timeend").css("color","#4CAF50");
+        return true;
     }else{
         $("#creation-label-end").css("color","#FF0000");
         $("#small-creation-timeend").text("Orario di fine non rispetta il formato");
         $("#small-creation-timeend").css("color","#FF0000");
+        return false;
     }
 
 }
@@ -164,11 +168,11 @@ function validateTime(){
     }
 }
 function clickTimeValidate(){
-    validateStart();
-    validateEnd();
-
-    validateTime();
-
+    start = validateStart();
+    end = validateEnd();
+    if( start && end){
+        validateTime();
+    }
 }
 function validateName1(){
 
