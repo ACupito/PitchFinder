@@ -87,13 +87,10 @@ function validateStart(){
         $("#small-creation-timestr").text("Orario di inizio valido, rispetta il formato");
         $("#small-creation-timestr").css("color","#4CAF50");
     }else{
-        $("#creation-label-str").css("color","#4CAF50");
-        hhStr = document.getElementById("creation-timestr").value.substring(0,2);
-        mmStr = document.getElementById("creation-timestr").value.substring(3);
+        $("#creation-label-str").css("color","#FF0000");
         $("#small-creation-timestr").text("L'orario di inizio non rispetta il formato");
-        $("#small-creation-timestr").css("color","#4CAF50");
+        $("#small-creation-timestr").css("color","#FF0000");
     }
-
 
 }
 
@@ -106,14 +103,22 @@ function validateEnd(){
             j--;
         }
     }
-    $("#creation-label-end").css("color","#4CAF50");
-    hhEnd = document.getElementById("creation-timeend").value.substring(0,2);
-    mmEnd = document.getElementById("creation-timeend").value.substring(3);
-    $("#small-creation-timeend").text("Orario di fine valido, rispetta il formato");
-    $("#small-creation-timeend").css("color","#4CAF50");
+    if(document.getElementById("creation-timeend").value.match("^[0-2]{1}[0-9]{1}\\:[0-6]{1}[0-9]{1}$")){
+        $("#creation-label-end").css("color","#4CAF50");
+        hhEnd = document.getElementById("creation-timeend").value.substring(0,2);
+        mmEnd = document.getElementById("creation-timeend").value.substring(3);
+        $("#small-creation-timeend").text("Orario di fine valido, rispetta il formato");
+        $("#small-creation-timeend").css("color","#4CAF50");
+    }else{
+        $("#creation-label-end").css("color","#FF0000");
+        $("#small-creation-timeend").text("Orario di fine non rispetta il formato");
+        $("#small-creation-timeend").css("color","#FF0000");
+    }
+
 }
 //Time validation legal time for a match
 function validateTime(){
+    //Regex su entrambi i campi
     if (hhEnd - hhStr >= 2) {
         if (hhEnd - hhStr == 2 && mmStr - mmEnd < 0) {
             $("#creation-label-str").css("color","#FF0000");
@@ -159,8 +164,11 @@ function validateTime(){
     }
 }
 function clickTimeValidate(){
+    validateStart();
     validateEnd();
+
     validateTime();
+
 }
 function validateName1(){
 
