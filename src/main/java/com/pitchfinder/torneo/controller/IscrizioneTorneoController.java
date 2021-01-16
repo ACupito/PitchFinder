@@ -177,10 +177,11 @@ public class IscrizioneTorneoController extends HttpServlet {
                     req.getServletContext().getRequestDispatcher("/view/torneo/dettagliTorneo.jsp");
             dispatcher.forward(req, resp);
         } else {
-            if (req.getParameter("Indietro") != null){
+            if (req.getParameter("Indietro") != null) {
             RequestDispatcher dispatcher =
                     req.getServletContext().getRequestDispatcher("/view/torneo/dettagliTorneo.jsp");
-            dispatcher.forward(req, resp);}
+            dispatcher.forward(req, resp);
+            }
         }
     }
 
