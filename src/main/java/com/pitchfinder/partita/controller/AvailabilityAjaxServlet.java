@@ -52,7 +52,6 @@ public class AvailabilityAjaxServlet extends HttpServlet {
         pacchetto.put("nomi", nomi);
         pacchetto.put("cognomi", cognomi);
 
-        //Files.write(Paths.get("response.json"), pacchetto.toJSONString().getBytes());
         resp.getWriter().print(pacchetto.toJSONString());
     }
 

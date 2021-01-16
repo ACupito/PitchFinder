@@ -66,194 +66,195 @@ public class TorneoController extends HttpServlet {
             RequestDispatcher dispatcher = request.getServletContext().getRequestDispatcher("/view/torneo/visualizzaTornei.jsp");
             dispatcher.forward(request, response);
 
-        }
+        } else {
 
-        int campo = Integer.parseInt(request.getParameter("idCampo"));
-        String nome = request.getParameter("nome");
-        String startDate = request.getParameter("dataInizio");
+            int campo = Integer.parseInt(request.getParameter("idCampo"));
+            String nome = request.getParameter("nome");
+            String startDate = request.getParameter("dataInizio");
 
-        if (nome == null) {
-            throw new IllegalArgumentException("Nome non inserito");
-        }
-
-        if (flag == 4) { //get a specific tournament
-
-            if (nome.length() < 1 || nome.length() > 50) {
-                throw new IllegalArgumentException("Lunghezza nome non valida");
-            }
-            if (!nome.matches("^[ a-zA-Z\\u00C0-\\u00ff']+$")) {
-                throw new IllegalArgumentException("Formato nome non valido");
+            if (nome == null) {
+                throw new IllegalArgumentException("Nome non inserito");
             }
 
-            Date dataInizio;
-            if (startDate == null) {
-                throw new IllegalArgumentException("Data inizio non selezionata");
-            }
-            try {
-                dataInizio = Date.valueOf(startDate);
-            } catch (IllegalArgumentException e) {
-                throw new IllegalArgumentException("Formato data inizio non valido");
-            }
-
-            Torneo t = ts.getTorneo(nome, dataInizio, campo);
-            response.setContentType("Torneo ottenuto");
-
-            session.setAttribute("torneo", t);
-            request.getServletContext().setAttribute("torneo", t);
-            RequestDispatcher dispatcher = request.getServletContext().getRequestDispatcher("/view/torneo/dettagliTorneo.jsp");
-            dispatcher.forward(request, response);
-        }
-
-        String endDate = request.getParameter("dataFine");
-
-        String giornoPartite = request.getParameter("giornoPartite");
-        if (giornoPartite == null) {
-            throw new IllegalArgumentException("Giorno partite non inserito");
-        }
-
-        if (admin != null) {
-
-            if (flag == 1) { //tournament creation
+            if (flag == 4) { //get a specific tournament
 
                 if (nome.length() < 1 || nome.length() > 50) {
-                    throw new IllegalArgumentException("Lunghezza nome non valida");
+                    throw new IllegalArgumentException("L'ottenimento del torneo fallisce a causa della lunghezza del nome.");
                 }
                 if (!nome.matches("^[ a-zA-Z\\u00C0-\\u00ff']+$")) {
-                    throw new IllegalArgumentException("Formato nome non valido");
-                }
-
-                String sport = request.getParameter("sport");
-                if (sport == null) {
-                    throw new IllegalArgumentException("Sport non selezionato");
-                }
-
-                String tipo = request.getParameter("tipo");
-                if (tipo == null) {
-                    throw new IllegalArgumentException("Tipo non selezionato");
-                }
-
-                String struttura = request.getParameter("struttura");
-                if (struttura == null) {
-                    throw new IllegalArgumentException("Struttura non selezionata");
+                    throw new IllegalArgumentException("L'ottenimento del torneo fallisce a causa del formato errato del nome.");
                 }
 
                 Date dataInizio;
                 if (startDate == null) {
-                    throw new IllegalArgumentException("Data inizio non selezionata");
+                    throw new IllegalArgumentException("L'ottenimento del torneo fallisce a causa del mancata selezione della data di inizio.");
                 }
                 try {
                     dataInizio = Date.valueOf(startDate);
                 } catch (IllegalArgumentException e) {
-                    throw new IllegalArgumentException("Formato data inizio non valido");
+                    throw new IllegalArgumentException("L'ottenimento del torneo fallisce a causa del formato errato della data di inizio.");
                 }
 
-                Date dataFine;
-                if (endDate == null) {
-                    throw new IllegalArgumentException("Data fine non selezionata");
-                }
-                try {
-                    dataFine = Date.valueOf(endDate);
-                } catch (IllegalArgumentException e) {
-                    throw new IllegalArgumentException("Formato data fine non valido");
+                Torneo t = ts.getTorneo(nome, dataInizio, campo);
+                response.setContentType("Torneo ottenuto");
+
+                session.setAttribute("torneo", t);
+                request.getServletContext().setAttribute("torneo", t);
+                RequestDispatcher dispatcher = request.getServletContext().getRequestDispatcher("/view/torneo/dettagliTorneo.jsp");
+                dispatcher.forward(request, response);
+            } else {
+
+                String endDate = request.getParameter("dataFine");
+
+                String giornoPartite = request.getParameter("giornoPartite");
+                if (giornoPartite == null) {
+                    throw new IllegalArgumentException("La creazione del torneo fallisce a causa della mancata selezione del Giorno partite.");
                 }
 
-                if (ts.checkScheduledTorneo(dataInizio, dataFine, campo)) {
-                   throw new IllegalArgumentException("Tornei già schedulati in quel periodo");
-                }
+                if (admin != null) {
 
-                if (giornoPartite.length() < 1 || giornoPartite.length() > 20) {
-                    throw new IllegalArgumentException("Lunghezza giorno partite non valida");
-                }
-                if (!giornoPartite.matches("^[ a-zA-Z\\u00C0-\\u00ff']+$")) {
-                    throw new IllegalArgumentException("Formato giorno partite non valido");
-                }
+                    if (flag == 1) { //tournament creation
 
-                int maxSquadre;
-                try {
-                    maxSquadre = Integer.parseInt(request.getParameter("maxSquadre"));
-                } catch (NumberFormatException e) {
-                    throw new IllegalArgumentException("Formato numero squadre non valido");
-                }
-                if (maxSquadre < 1 || maxSquadre > 20) {
-                    throw new IllegalArgumentException("Numero di squadre non valido");
-                }
+                        if (nome.length() < 1 || nome.length() > 50) {
+                            throw new IllegalArgumentException("La creazione del torneo fallisce a causa della lunghezza del nome.");
+                        }
+                        if (!nome.matches("^[ a-zA-Z\\u00C0-\\u00ff']+$")) {
+                            throw new IllegalArgumentException("La creazione del torneo fallisce a causa del formato errato del nome.");
+                        }
 
-                int minPartecipanti;
-                try {
-                    minPartecipanti = Integer.parseInt(request.getParameter("minPartecipanti"));
-                } catch (NumberFormatException e) {
-                    throw new IllegalArgumentException("Formato minimo partecipanti non valido");
-                }
-                if (minPartecipanti < 1 || minPartecipanti > 5) {
-                    throw new IllegalArgumentException("Numero minimo di partecipanti non valido");
-                }
+                        String sport = request.getParameter("sport");
+                        if (sport == null) {
+                            throw new IllegalArgumentException("La creazione del torneo fallisce per la mancata selezione di uno sport.");
+                        }
 
-                int maxPartecipanti;
-                try {
-                    maxPartecipanti = Integer.parseInt(request.getParameter("maxPartecipanti"));
-                } catch (NumberFormatException e) {
-                    throw new IllegalArgumentException("Numero massimo di partecipanti non valido");
+                        String tipo = request.getParameter("tipo");
+                        if (tipo == null) {
+                            throw new IllegalArgumentException("La creazione del torneo fallisce per la mancata selezione della tipologia.");
+                        }
+
+                        String struttura = request.getParameter("struttura");
+                        if (struttura == null) {
+                            throw new IllegalArgumentException("La creazione del torneo fallisce per la mancata selezione della struttura.");
+                        }
+
+                        Date dataInizio;
+                        if (startDate == null) {
+                            throw new IllegalArgumentException("La creazione del torneo fallisce per la mancata selezione della data di inizio.");
+                        }
+                        try {
+                            dataInizio = Date.valueOf(startDate);
+                        } catch (IllegalArgumentException e) {
+                            throw new IllegalArgumentException("La creazione del torneo fallisce a causa del formato errato della data di inizio.");
+                        }
+
+                        Date dataFine;
+                        if (endDate == null) {
+                            throw new IllegalArgumentException("La creazione del torneo fallisce per mancata selezione della data di fine.");
+                        }
+                        try {
+                            dataFine = Date.valueOf(endDate);
+                        } catch (IllegalArgumentException e) {
+                            throw new IllegalArgumentException("La creazione del torneo fallisce a causa del formato errato della data di fine.");
+                        }
+
+                        if (ts.checkScheduledTorneo(dataInizio, dataFine, campo)) {
+                            throw new IllegalArgumentException("Tornei già schedulati in quel periodo");
+                        }
+
+                        if (giornoPartite.length() < 1 || giornoPartite.length() > 20) {
+                            throw new IllegalArgumentException("La creazione del torneo fallisce a causa della lunghezza del Giorno Partite.");
+                        }
+                        if (!giornoPartite.matches("^[ a-zA-Z\\u00C0-\\u00ff']+$")) {
+                            throw new IllegalArgumentException("La creazione del torneo fallisce a causa del formato errato del Giorno partite.");
+                        }
+
+                        int maxSquadre;
+                        try {
+                            maxSquadre = Integer.parseInt(request.getParameter("maxSquadre"));
+                        } catch (NumberFormatException e) {
+                            throw new IllegalArgumentException("La creazione del torneo fallisce a causa del formato errato del Numero squadre.");
+                        }
+                        if (maxSquadre < 1 || maxSquadre > 20) {
+                            throw new IllegalArgumentException("La creazione del torneo fallisce a causa del valore errato del Numero squadre.");
+                        }
+
+                        int minPartecipanti;
+                        try {
+                            minPartecipanti = Integer.parseInt(request.getParameter("minPartecipanti"));
+                        } catch (NumberFormatException e) {
+                            throw new IllegalArgumentException("La creazione del torneo fallisce a causa del formato errato del Minimo Giocatori.");
+                        }
+                        if (minPartecipanti < 1 || minPartecipanti > 5) {
+                            throw new IllegalArgumentException("La creazione del torneo fallisce a causa del valore errato del Minimo Giocatori.");
+                        }
+
+                        int maxPartecipanti;
+                        try {
+                            maxPartecipanti = Integer.parseInt(request.getParameter("maxPartecipanti"));
+                        } catch (NumberFormatException e) {
+                            throw new IllegalArgumentException("La creazione del torneo fallisce a causa del formato errato del Massimo Giocatori.");
+                        }
+                        if (maxPartecipanti < 5 || maxPartecipanti > 12) {
+                            throw new IllegalArgumentException("La creazione del torneo fallisce a causa del valore errato del Massimo Giocatori.");
+                        }
+
+                        //creation tournament
+                        boolean creationResult = ts.createTorneo(admin.getUsername(), campo, nome, tipo,
+                                struttura, maxSquadre, dataInizio, dataFine, minPartecipanti, maxPartecipanti,
+                                giornoPartite);
+
+                        if (creationResult) { //creation occurred
+                            response.setContentType("La creazione del torneo è avvenuta correttamente.");
+                            RequestDispatcher requestDispatcher = request.getServletContext().getRequestDispatcher("/autentication?flag=5");
+                            requestDispatcher.forward(request, response);
+                        }
+
+                    } else if (flag == 2) { //tournament elimination
+                        // when remove button clicked.
+
+                        if (nome.length() < 1 || nome.length() > 50) {
+                            throw new IllegalArgumentException("L'eliminazione del torneo fallisce a causa della lunghezza del nome.");
+                        }
+                        if (!nome.matches("^[ a-zA-Z\\u00C0-\\u00ff']+$")) {
+                            throw new IllegalArgumentException("L'eliminazione del torneo fallisce a causa del formato errato del nome.");
+                        }
+
+                        Date dataInizio;
+                        if (startDate == null) {
+                            throw new IllegalArgumentException("L'eliminazione del torneo fallisce a causa della mancata selezione della data di inizio.");
+                        }
+                        try {
+                            dataInizio = Date.valueOf(startDate);
+                        } catch (IllegalArgumentException e) {
+                            throw new IllegalArgumentException("L'eliminazione del torneo fallisce a causa del formato errato della data di inizio.");
+                        }
+
+                        Date dataFine;
+                        if (endDate == null) {
+                            throw new IllegalArgumentException("L'eliminazione del torneo fallisce a causa della mancata selezione della data di fine.");
+                        }
+                        try {
+                            dataFine = Date.valueOf(endDate);
+                        } catch (IllegalArgumentException e) {
+                            throw new IllegalArgumentException("L'eliminazione del torneo fallisce a causa del formato errato della data di fine.");
+                        }
+
+
+                        if (giornoPartite.length() < 1 || giornoPartite.length() > 20) {
+                            throw new IllegalArgumentException("L'eliminazione del torneo fallisce a causa della lunghezza errata del giorno partite.");
+                        }
+                        if (!giornoPartite.matches("^[ a-zA-Z\\u00C0-\\u00ff']+$")) {
+                            throw new IllegalArgumentException("L'eliminazione del torneo fallisce a causa del formato errato del giorno partite.");
+                        }
+
+                        boolean removeResult = ts.deleteTorneo(campo, nome, dataInizio, dataFine, giornoPartite);
+                        if (removeResult) response.setContentType("Eliminazione del torneo avvenuta correttamente.");
+
+                        RequestDispatcher requestDispatcher = request.getServletContext().getRequestDispatcher("/autentication?flag=5");
+                        requestDispatcher.forward(request, response);
+                    }
+
                 }
-                if (maxPartecipanti < 5 || maxPartecipanti > 12) {
-                    throw new IllegalArgumentException("Numero massimo di partecipanti non valido");
-                }
-
-                //creation tournament
-                boolean creationResult = ts.createTorneo(admin.getUsername(), campo, nome, tipo,
-                        struttura, maxSquadre, dataInizio, dataFine, minPartecipanti, maxPartecipanti,
-                        giornoPartite);
-
-                if (creationResult) { //creation occurred
-                    response.setContentType("Creazione avvenuta");
-                    RequestDispatcher requestDispatcher = request.getServletContext().getRequestDispatcher("/autentication?flag=5");
-                    requestDispatcher.forward(request, response);
-                }
-
-
-
-            } else if (flag == 2) { //tournament elimination
-                // when remove button clicked.
-
-                if (nome.length() < 1 || nome.length() > 50) {
-                    throw new IllegalArgumentException("Lunghezza nome non valida");
-                }
-                if (!nome.matches("^[ a-zA-Z\\u00C0-\\u00ff']+$")) {
-                    throw new IllegalArgumentException("Formato nome non valido");
-                }
-
-                Date dataInizio;
-                if (startDate == null) {
-                    throw new IllegalArgumentException("Data inizio non selezionata");
-                }
-                try {
-                    dataInizio = Date.valueOf(startDate);
-                } catch (IllegalArgumentException e) {
-                    throw new IllegalArgumentException("Formato data inizio non valido");
-                }
-
-                Date dataFine;
-                if (endDate == null) {
-                    throw new IllegalArgumentException("Data fine non selezionata");
-                }
-                try {
-                    dataFine = Date.valueOf(endDate);
-                } catch (IllegalArgumentException e) {
-                    throw new IllegalArgumentException("Formato data fine non valido");
-                }
-
-
-                if (giornoPartite.length() < 1 || giornoPartite.length() > 20) {
-                    throw new IllegalArgumentException("Lunghezza giorno partite non valida");
-                }
-                if (!giornoPartite.matches("^[ a-zA-Z\\u00C0-\\u00ff']+$")) {
-                    throw new IllegalArgumentException("Formato giorno partite non valido");
-                }
-
-                boolean removeResult = ts.deleteTorneo(campo, nome, dataInizio, dataFine, giornoPartite);
-                if (removeResult) response.setContentType("Eliminazione avvenuta");
-
-                RequestDispatcher requestDispatcher = request.getServletContext().getRequestDispatcher("/autentication?flag=5");
-                requestDispatcher.forward(request, response);
             }
         }
     }
