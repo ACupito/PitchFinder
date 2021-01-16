@@ -86,7 +86,7 @@ public class EventoAdminDeleteController extends HttpServlet {
 
             es.removeEvento(temp);
             response.setContentType("Eliminazione avvenuta");
-            RequestDispatcher requestDispatcher = request.getServletContext().getRequestDispatcher("/autentication?flag=5");
+            RequestDispatcher requestDispatcher = request.getServletContext().getRequestDispatcher("/autentication?flag=5&result=1&message=Eliminazione avvenuta");
             requestDispatcher.forward(request, response);
         }
     }

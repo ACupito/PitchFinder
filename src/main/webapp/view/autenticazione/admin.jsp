@@ -62,6 +62,15 @@
                     <div class="row1">
                         <div class="col-md-12-admin">
 
+                            <%
+                                String result = (String) application.getAttribute("result");
+                                if(result != null && result.equals("1")){
+                            %>
+                            <script>
+                                alert("Ciao mamma" + ${message});
+                            </script>
+
+                        <% }%>
                             <div class="data">
                                 <div class="offset-4 col-8">
 
