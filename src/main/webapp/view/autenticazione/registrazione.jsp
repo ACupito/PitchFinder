@@ -32,7 +32,7 @@
 
                 <div class="form-group">
                     <label class="label_class" for="email">Email address</label>
-                    <input type="text" class="form-control" id="email" name="email" oninput="validaEmail()">
+                    <input type="text" class="form-control" id="email" name="email">
                 </div>
                 <div id = "div_email" class="message"> Inserisci la tua mail in modo che segua il formato
                     indicato: cicciarampa@gmail.com
@@ -40,7 +40,7 @@
 
                 <div class="form-group">
                     <label class="label_class" for="username_"> Username </label>
-                    <input type="text" class="form-control" id="username_" name="username_" oninput="validaUsername()">
+                    <input type="text" class="form-control" id="username_" name="username_">
                 </div>
                 <div id = "div_username_" class="message"> Inserisci la username che abbia almeno una lettera maiuscola
                     e un numero e che sia lunga massimo 50 caratteri
@@ -48,19 +48,19 @@
 
                 <div class="form-group">
                     <label class="label_class" for="nome"> Nome </label>
-                    <input type="text" class="form-control" id="nome" name="nome" oninput="validaNome()">
+                    <input type="text" class="form-control" id="nome" name="nome">
                 </div>
                 <div id = "div_nome" class="message"> Inserisci il tuo nome </div>
 
                 <div class="form-group">
                     <label class="label_class" for="cognome"> Cognome </label>
-                    <input type="text" class="form-control" id="cognome" name="cognome" oninput="validaCognome()">
+                    <input type="text" class="form-control" id="cognome" name="cognome">
                 </div>
                 <div id = "div_cognome" class="message"> Inserisci il tuo cognome </div>
 
                 <div class="form-group">
                     <label class="label_class" for="password_">Password</label>
-                    <input type="password" class="form-control" id="password_" name="password_" oninput="validaPassword()">
+                    <input type="password" class="form-control" id="password_" name="password_">
                 </div>
                 <div id = "div_password_" class="message"> Inserisci una password con almeno un
                     numero e una lettera maiuscola e che sia lunga massimo 50 caratteri </div>
@@ -68,7 +68,7 @@
                 <div class="form-group">
                     <label class="label_class" for="data"> Data di nascita </label>
                     <input type="date" class="form-control" id="data" name="data" min="1950-01-01" max="2010-01-01"
-                           value="yyyy-mm-dd" oninput="validaData()">
+                           value="yyyy-mm-dd" onkeydown="return false">
                 </div>
                 <div id = "div_data" class="message"> Data di nascita non selezionata </div>
 

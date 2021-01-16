@@ -92,7 +92,6 @@ public class AutenticazioneController extends HttpServlet {
                 throw new IllegalArgumentException("Sei loggato, non puoi registrati !");
             }
 
-
             String email = request.getParameter("email");
             String username = request.getParameter("username_");
             String nome = request.getParameter("nome");
@@ -208,77 +207,96 @@ public class AutenticazioneController extends HttpServlet {
             aCheck = (Admin) session.getAttribute("admin");
             uCheck = (Utente) session.getAttribute("utente");
 
-            if (aCheck != null || uCheck != null) {
-                throw new IllegalArgumentException("Sei già loggato");
-            }
+            if (aCheck != null) {
 
+                dispatcher = getServletContext().getRequestDispatcher("/view/autenticazione/admin.jsp");
+                dispatcher.forward(request, response);
 
-            String username = request.getParameter("username");
-            String password = request.getParameter("password");
+            } else if (uCheck != null) {
 
-            if (username.length() < MINLIMIT || username.length() > MAXLIMIT) {
-                messaggio = "Il login non va a buon fine "
-                        + "perché la username non rispetta la "
-                        + "lunghezza corretta";
-                throw new IllegalArgumentException(messaggio);
-            }
-
-            if (!username.matches("^((?!.*[\\s])(?=.*[A-Z])(?=.*\\d).{1,50})")) {
-                messaggio = "Il login non va a buon fine "
-                        + "perché il formato della username non è corretto";
-                throw new IllegalArgumentException(messaggio);
-            }
-
-            if (username.substring(0, 5).equalsIgnoreCase("admin")) {
-
-                try {
-
-                    Admin a = as.loginAdmin(username, password);
-                    if (a != null) {
-                        session.setAttribute("admin", a);
-
-                        TorneoService torneoService = new TorneoServiceImpl();
-                        List<Torneo> tornei = torneoService.getAllTornei();
-                        EventoService eventoService = new EventoServiceImpl();
-                        List<Evento> eventi = eventoService.getAllEventi();
-                        PartitaService partitaService = new PartitaServiceImpl();
-                        List<Partita> partite = partitaService.showPartite();
-                        request.getServletContext().setAttribute("tornei", tornei);
-                        request.getServletContext().setAttribute("eventi", eventi);
-                        request.getServletContext().setAttribute("partite", partite);
-
-                        dispatcher = getServletContext().getRequestDispatcher("/view/autenticazione/admin.jsp");
-                        dispatcher.forward(request, response);
-                    }
-
-                } catch (IllegalArgumentException e) {
-
-                    messaggio = "Login non avvenuto perchè la password è scorretta";
-                    request.setAttribute("messaggio", messaggio);
-                    dispatcher = request.getServletContext().getRequestDispatcher("/view/autenticazione/loginResult.jsp");
-                    dispatcher.forward(request, response);
-                }
+                dispatcher = request.getServletContext().getRequestDispatcher("/index.jsp");
+                dispatcher.forward(request, response);
 
             } else {
 
-                try {
+                String username = request.getParameter("username");
+                String password = request.getParameter("password");
 
-                    Utente u = as.loginUtente(username, password);
+                if (username.length() < MINLIMIT || username.length() > MAXLIMIT) {
+                    messaggio = "Il login non va a buon fine "
+                            + "perché la username non rispetta la "
+                            + "lunghezza corretta";
+                    throw new IllegalArgumentException(messaggio);
+                }
 
-                    if (u != null) {
+                if (!username.matches("^((?!.*[\\s])(?=.*[A-Z])(?=.*\\d).{1,50})")) {
+                    messaggio = "Il login non va a buon fine "
+                            + "perché il formato della username non è corretto";
+                    throw new IllegalArgumentException(messaggio);
+                }
 
-                        response.setContentType("Il login è avvenuto correttamente");
-                        session.setAttribute("utente", u);
-                        dispatcher = request.getServletContext().getRequestDispatcher("/index.jsp");
+                if (username.substring(0, 5).equalsIgnoreCase("admin")) {
+
+                    try {
+
+                        Admin a = as.loginAdmin(username, password);
+
+                        if (a != null) {
+
+                            session.setAttribute("admin", a);
+
+                            TorneoService torneoService = new TorneoServiceImpl();
+                            List<Torneo> tornei = torneoService.getAllTornei();
+                            EventoService eventoService = new EventoServiceImpl();
+                            List<Evento> eventi = eventoService.getAllEventi();
+                            PartitaService partitaService = new PartitaServiceImpl();
+                            List<Partita> partite = partitaService.showPartite();
+                            request.getServletContext().setAttribute("tornei", tornei);
+                            request.getServletContext().setAttribute("eventi", eventi);
+                            request.getServletContext().setAttribute("partite", partite);
+
+                            response.setContentType("Il login admin è avvenuto correttamente");
+
+                            dispatcher = request.getServletContext().getRequestDispatcher("/view/autenticazione/admin.jsp");
+                            dispatcher.forward(request, response);
+                        }
+
+                    } catch (IllegalArgumentException e) {
+
+                        messaggio = "Login non avvenuto perchè la password è scorretta";
+                        request.setAttribute("messaggio", messaggio);
+                        dispatcher = request.getServletContext().getRequestDispatcher("/view/autenticazione/loginResult.jsp");
                         dispatcher.forward(request, response);
                     }
 
-                } catch (IllegalArgumentException e) {
+                } else {
 
-                    messaggio = "Login non avvenuto perchè la password è scorretta";
-                    request.setAttribute("messaggio", messaggio);
-                    dispatcher = request.getServletContext().getRequestDispatcher("/view/autenticazione/loginResult.jsp");
-                    dispatcher.forward(request, response);
+                    try {
+
+                        Utente u = as.loginUtente(username, password);
+
+                        if (u != null) {
+
+                            response.setContentType("Il login è avvenuto correttamente");
+                            session.setAttribute("utente", u);
+                            dispatcher = request.getServletContext().getRequestDispatcher("/index.jsp");
+                            dispatcher.forward(request, response);
+
+                        } else {
+
+                            messaggio = "Login non avvenuto perchè la username non esiste";
+                            request.setAttribute("messaggio", messaggio);
+                            dispatcher = request.getServletContext().getRequestDispatcher("/view/autenticazione/loginResult.jsp");
+                            dispatcher.forward(request, response);
+                        }
+
+                    } catch (IllegalArgumentException e) {
+
+                        messaggio = "Login non avvenuto perchè la password è scorretta";
+                        request.setAttribute("messaggio", messaggio);
+                        dispatcher = request.getServletContext().getRequestDispatcher("/view/autenticazione/loginResult.jsp");
+                        dispatcher.forward(request, response);
+                    }
                 }
             }
 
@@ -293,6 +311,7 @@ public class AutenticazioneController extends HttpServlet {
             session.setAttribute("admin", null);
             dispatcher = request.getServletContext().getRequestDispatcher("/index.jsp");
             dispatcher.forward(request, response);
+
         } else if (flag == 5) {
 
             TorneoService torneoService = new TorneoServiceImpl();
@@ -307,7 +326,6 @@ public class AutenticazioneController extends HttpServlet {
 
             dispatcher = getServletContext().getRequestDispatcher("/view/autenticazione/admin.jsp");
             dispatcher.forward(request, response);
-
         }
     }
 }
