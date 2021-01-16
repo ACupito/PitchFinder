@@ -197,17 +197,21 @@
                                         <div class="form-wrapper">
                                             <label for="data">Data</label>
                                             <span class="lnr lnr-calendar-full"></span>
-                                            <input type="date" class="form-control datepicker-here" name="data" id="data">
+                                            <input type="date" class="form-control datepicker-here" name="data" id="data" onkeydown="return false" onblur="valiDate()"><br>
+                                            <small id="small-creation-data"> Inserire una data valida(DD/MM/YYYY)</small><br>
+
                                         </div>
                                         <div class="form-wrapper">
                                             <label for="inizio">Orario Inizio</label>
                                             <span class="lnr lnr-calendar-full"></span>
-                                            <input type="time" class="form-control datepicker-here" name="inizio" id="inizio">
+                                            <input type="time" class="form-control datepicker-here" class="timepicker" name="inizio" id="inizio" minTime="09:00" maxTime="23:00"  size="5" required onkeydown="return false" onmousemove="validateStart()" >
+                                            <small id="small-creation-timestr"> Inserire un orario di inizio valido(HH:MM)</small><br>
                                         </div>
                                         <div class="form-wrapper">
                                             <label for="fine">Orario Fine</label>
                                             <span class="lnr lnr-calendar-full"></span>
-                                            <input type="time" class="form-control datepicker-here" name="fine" id="fine">
+                                            <input type="time" class="form-control datepicker-here" name="fine" id="fine" class="timepicker"minTime="09:00" maxTime="23:00"  size="5" required onkeydown="return false" onmousemove="clickTimeValidate()">
+                                            <small id="small-creation-timeend"> Inserire un orario di fine valido(HH:MM)</small><br>
                                         </div>
                                     </div>
                                     <div class="form-row last">
@@ -219,6 +223,8 @@
                                             <i class="zmdi zmdi-chevron-down"></i>
                                         </div>
                                     </div>
+
+                                    <% if(session.getAttribute("admin")!=null){ %>
                                     <button type="submit" name="Occupa" value="Occupa" data-text="Occupa" id="Occupa">
                                         <span>Occupa</span>
                                     </button>
@@ -226,6 +232,7 @@
                                     <button type="submit" name="Libera" value="Libera" data-text="Libera" id="Libera">
                                         <span>Libera</span>
                                     </button>
+                                    <%} %>
                                 </form>
                             </div>
                         </div>
@@ -390,6 +397,7 @@
 
 
 <script src="js/autenticazione/js_admin.js"></script>
-
+<script src="js/occupazione/js_occupation.js"></script>
+</head>
 </body>
 </html>
