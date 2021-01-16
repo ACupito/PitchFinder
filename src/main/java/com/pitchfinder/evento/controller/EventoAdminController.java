@@ -41,6 +41,8 @@ public class EventoAdminController extends HttpServlet {
         RequestDispatcher dispatcher;
 
         if (admin != null) {
+            /* Important to encode characting. */
+            request.setCharacterEncoding("UTF-8");
             /* The EventoService object. */
             EventoService es = new EventoServiceImpl();
             /* The name of the Event (String). */
