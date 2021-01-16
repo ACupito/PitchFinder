@@ -61,13 +61,16 @@
                     </div>
                     <div class="row1">
                         <div class="col-md-12-admin">
-
+                            <input type="hidden" value="${message}" id="flagMessage">
                             <%
                                 String result = (String) application.getAttribute("result");
                                 if(result != null && result.equals("1")){
                             %>
                             <script>
-                                alert("Ciao mamma" + ${message});
+                                $(document).ready( function(){
+                                    alert(document.getElementById("flagMessage").value);
+                                    }
+                                );
                             </script>
 
                         <% }%>
