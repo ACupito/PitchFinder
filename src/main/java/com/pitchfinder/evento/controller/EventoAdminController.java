@@ -152,7 +152,7 @@ public class EventoAdminController extends HttpServlet {
             }
 
             response.setContentType("La creazione dell’evento è andata a buon fine");
-            RequestDispatcher requestDispatcher = request.getServletContext().getRequestDispatcher("/autentication?flag=5");
+            RequestDispatcher requestDispatcher = request.getServletContext().getRequestDispatcher("/autentication?flag=5&result=1&message=La creazione dell’evento è andata a buon fine");
             requestDispatcher.forward(request, response);
 
         }
