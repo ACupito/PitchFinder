@@ -177,10 +177,6 @@
 
             </div>
         <div class="card-body buttons">
-                <form action="torneoServlet" method="get">
-                    <input type="hidden" name="flag" value="3">
-                    <button class="btn-primary button-indietro" name="indietro">Indietro</button>
-                </form>
                 <input type="hidden" name="nomeTorneo" value="<%=torneo.getNome()%>">
                 <input type="hidden" name="campo" value="<%=torneo.getCampoIdentificativo()%>">
                 <input type="hidden" name="dataTorneo" value="<%=torneo.getDataInizio()%>">

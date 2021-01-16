@@ -48,13 +48,10 @@ public class TorneoController extends HttpServlet {
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         TorneoService ts = new TorneoServiceImpl();
-        HttpSession session = request.getSession();
-        if (session == null) {
-            session = request.getSession(true);
-        }
+
         int flag = Integer.parseInt(request.getParameter("flag"));
 
-        Admin admin = (Admin) request.getSession().getAttribute("admin"); //get admin from the session
+
 
 
 
@@ -67,6 +64,11 @@ public class TorneoController extends HttpServlet {
             dispatcher.forward(request, response);
 
         }
+        HttpSession session = request.getSession();
+        if (session == null) {
+            session = request.getSession(true);
+        }
+        Admin admin = (Admin) request.getSession().getAttribute("admin"); //get admin from the session
 
         int campo = Integer.parseInt(request.getParameter("idCampo"));
         String nome = request.getParameter("nome");
