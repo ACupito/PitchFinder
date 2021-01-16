@@ -90,7 +90,7 @@
         if(esito!= null){
             if(esito.equals("1")){%>
                 <script>
-                    alert("La prenotazione viene memorizzata con successo");
+                    setTimeout(() => {alert("La prenotazione viene memorizzata con successo");}, 2000)
                 </script>
         <% } %>
     <%}%>
