@@ -53,6 +53,8 @@
                 <span class="display-1 d-block">${requestScope['javax.servlet.error.status_code']}</span>
 
                 <div class="mb-4 lead"><%= exception.getMessage()%></div>
+
+
                 <a href="home" class="btn btn-link">Back to Home</a>
             </div>
         </div>
