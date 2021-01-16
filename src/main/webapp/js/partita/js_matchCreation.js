@@ -114,7 +114,7 @@ function validateEnd(){
         return true;
     }else{
         $("#creation-label-end").css("color","#FF0000");
-        $("#small-creation-timeend").text("Orario di fine non rispetta il formato");
+        $("#small-creation-timeend").text("L'orario di fine non rispetta il formato");
         $("#small-creation-timeend").css("color","#FF0000");
         return false;
     }
