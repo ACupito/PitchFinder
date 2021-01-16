@@ -74,7 +74,6 @@ public class AutenticazioneController extends HttpServlet {
 
         String messaggio;
         int flag = Integer.parseInt(request.getParameter("flag"));
-        System.out.println(flag);
         Admin aCheck;
         Utente uCheck;
 
