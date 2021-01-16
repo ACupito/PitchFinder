@@ -86,7 +86,7 @@ var isDescriptionValidEvento=false;
                 isNameValidEvento=true;
             }
         }else{
-            $("#name-evento-valid").text("Il formato del giocatore non è valido. ");
+            $("#name-evento-valid").text("Il formato del nome non è valido. ");
             $("#name-evento-valid").css("color","#FF0000");
             isNameValidEvento=false;
         }
@@ -150,7 +150,7 @@ var isDescriptionValidEvento=false;
     /** validate Descrizione **/
     function validateDescriptionEvento(){
 
-        if( $("#creation-description-Evento").val().match("^[ a-zA-Z\\u00C0-\\u00ff'\\.\\,\\s\\&\\+\\ò\\-\\:\\;\\?\\!]+$")){
+        if( $("#creation-description-Evento").val().match("^[ a-zA-Z\\ù\\è\\.\\,\\s\\&\\+\\ò\\-\\:\\;\\?\\!\\à\\È\\']+$")){
             if($("#creation-description-Evento").val().length < 1 || $("#creation-description-Evento").val().length>500) {
                 $("#description-evento-valid").text("La lunghezza non è valida");
                 $("#description-evento-valid").css("color", "#FF0000");
@@ -169,6 +169,10 @@ var isDescriptionValidEvento=false;
 
 
 function validateEvento(){
+        validateNameEvento();
+        valiDateEvento();
+        validateGuestEvento();
+        validateDescriptionEvento();
 
         if(isDateValidEvento && isNameValidEvento && isGuestValidEvento && isDescriptionValidEvento){
             return true;
