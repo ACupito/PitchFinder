@@ -94,7 +94,7 @@ public class EventoAdminDeleteControllerTest {
         Mockito.when(mockedRequest.getParameter("nome")).thenReturn("");
         Mockito.when(mockedRequest.getParameter("data")).thenReturn(DATA);
 
-        String message = "Errato: lunghezza nome non valida";
+        String message = "La lunghezza del nome non è valida";
 
         IllegalArgumentException exception;
         exception = assertThrows(IllegalArgumentException.class,
@@ -112,7 +112,7 @@ public class EventoAdminDeleteControllerTest {
         Mockito.when(mockedRequest.getParameter("nome")).thenReturn("Evento%%&&&£");
         Mockito.when(mockedRequest.getParameter("data")).thenReturn(DATA);
 
-        String message = "Errato: formato non valido";
+        String message = "Il formato nel nome non è valido";
 
         IllegalArgumentException exception;
         exception = assertThrows(IllegalArgumentException.class,
@@ -129,7 +129,7 @@ public class EventoAdminDeleteControllerTest {
         Mockito.when(mockedRequest.getParameter("nome")).thenReturn(NOME);
         Mockito.when(mockedRequest.getParameter("data")).thenReturn("");
 
-        String message = "Errato: data non selezionata";
+        String message = "Inserire la data";
 
         IllegalArgumentException exception;
         exception = assertThrows(IllegalArgumentException.class,
@@ -145,7 +145,7 @@ public class EventoAdminDeleteControllerTest {
         Mockito.when(mockedRequest.getParameter("nome")).thenReturn(NOME);
         Mockito.when(mockedRequest.getParameter("data")).thenReturn("asd-12-22");
 
-        String message = "Errato: formato non valido";
+        String message = "La data non rispetta il formato";
 
         IllegalArgumentException exception;
         exception = assertThrows(IllegalArgumentException.class,
