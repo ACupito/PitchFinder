@@ -108,7 +108,7 @@ function validateEnd(){
         for(j=0;j<father.childElementCount;j++){
             father.removeChild(father.lastChild)
             j--;
-        }asp
+        }
     }
 
     if(!document.getElementById("creation-timeend").value.match("^(.*[:])[0-9]*$")){
