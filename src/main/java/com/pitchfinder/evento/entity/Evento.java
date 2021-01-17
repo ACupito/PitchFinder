@@ -142,6 +142,8 @@ public class Evento {
      */
     public String getStringDay(int day) {
         switch (day) {
+            case 0:
+                return "Dom";
             case 1:
                 return "Lun";
             case 2:
@@ -154,8 +156,6 @@ public class Evento {
                 return "Ven";
             case 6:
                 return "Sab";
-            case 7:
-                return "Dom";
             default:
                 return "";
         }

@@ -164,8 +164,8 @@ public class CampoServiceImplTest {
     @AfterAll
     void tearDown() {
         cdao.doRemoveOccupazione(ID_CAMPO, Date.valueOf(DATA), Time.valueOf(TEMPO_INIZIO.concat(":00")), Time.valueOf(TEMPO_FINE.concat(":00")));
-        cdao.doRemoveDisponibilita("mario111@gmail.com", ID_CAMPO);
-        cdao.doRemoveDisponibilita(EMAIL, ID_CAMPO);
+        cdao.doRemoveDisponibilita("mario111@gmail.com", ID_CAMPO,Date.valueOf(DATA));
+        cdao.doRemoveDisponibilita(EMAIL, ID_CAMPO, Date.valueOf(DATA));
         AutenticazioneService as2 = new AutenticazioneServiceImpl();
         as2.removeUtente("Mariox129");
         cs.deleteOccupazione(ID_CAMPO, Date.valueOf("1999-11-11"), Time.valueOf("09:20".concat(":00")), Time.valueOf("11:30".concat(":00")));

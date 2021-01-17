@@ -175,7 +175,7 @@ public class CampoDAOImplTest {
     @Test
     void doRemoveDisponibilitaTest() {
 
-        assertTrue(cdao.doRemoveDisponibilita("mario129@gmail.com", ID_CAMPO));
+        assertTrue(cdao.doRemoveDisponibilita("mario129@gmail.com", ID_CAMPO,Date.valueOf("2010-10-10")));
 
     }
     /**
@@ -197,8 +197,8 @@ public class CampoDAOImplTest {
     void tearDown() {
         cdao.doRemoveOccupazione(ID_CAMPO, Date.valueOf(DATA), Time.valueOf(TEMPO_INIZIO.concat(":00")), Time.valueOf(TEMPO_FINE.concat(":00")));
 
-        cdao.doRemoveDisponibilita(EMAIL, ID_CAMPO);
-        cdao.doRemoveDisponibilita("mario111@gmail.com", ID_CAMPO);
+        cdao.doRemoveDisponibilita(EMAIL, ID_CAMPO,Date.valueOf(DATA));
+        cdao.doRemoveDisponibilita("mario111@gmail.com", ID_CAMPO,Date.valueOf(DATA));
         AutenticazioneService as1 = new AutenticazioneServiceImpl();
         AutenticazioneService as2 = new AutenticazioneServiceImpl();
         as1.removeUtente("Mariox129");

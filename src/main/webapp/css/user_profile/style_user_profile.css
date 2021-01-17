@@ -1,45 +1,43 @@
-.card {
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-    max-width: 500px;
-    text-align: center;
-    font-family: arial;
-    margin-top: 20%;
-    margin-left: 30%;
+body {
+
+    background: linear-gradient(hsla(0, 100%, 90%, 0.2), hsla(0, 100%, 90%, 0.2)), url("../../images/autenticazione/ball.jpg");
 }
 
-h1, h2 {
+.card {
+    background-color: white;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    max-width: 500px;
+    height: 500px;
+    text-align: center;
+    font-family: copperplate;
+    margin-top: 5%;
+    margin-bottom: 5%;
+    margin-left: 30%;
+    border: double 4px #cccc00;
+    border-radius: 800px;
+}
+
+
+h1 {
+    padding-top: 140px;
     color: #28a745;
 }
 
-h2 {
-
-    margin-top: 20%;
-}
 
 .title {
-    color: grey;
+    color: black;
     font-size: 18px;
 }
 
-button {
-    border: none;
-    outline: 0;
-    display: inline-block;
-    padding: 8px;
-    color: white;
-    background-color: #000;
-    text-align: center;
-    cursor: pointer;
-    width: 100%;
-    font-size: 18px;
-}
-
-a {
-    text-decoration: none;
-    font-size: 22px;
+p {
     color: black;
 }
 
-button:hover, a:hover {
-    opacity: 0.7;
+p:hover {
+    color: #28a745;
+    font-size: 25px;
 }
+
+
+
+
