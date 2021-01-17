@@ -74,3 +74,36 @@ function showPlayer(name) {
     xmlHttpReq.open("GET", "showAj?codice="+encodeURIComponent(name) , true);
     xmlHttpReq.send();
 }
+
+function filterMatch(){
+    var data;
+    if(document.getElementById("filter-date").value == null ||
+        !document.getElementById("filter-date").value.match("^(.*[-])[0-9]*$")){
+        data = "null";
+    }else{
+        data = document.getElementById("filter-date").value;
+    }
+
+    var time;
+    if(document.getElementById("filter-time").value == null ||
+        !document.getElementById("filter-time").value.match("^(.*[:])[0-9]*$")){
+        time = "null";
+    }else{
+        time = document.getElementById("filter-time").value;
+    }
+
+    alert(data +":"+time);
+
+    $(document).ready(function (){
+        $.getJSON("FilterJSON", {data: data,time: time}, function (data){
+            alert("we waju bell sta call back");
+            myFunction(data);
+        });
+    });
+
+}
+
+function myFunction(data){
+    alert("CIAO");
+    alert("prova:"+data[0].idPartita+":prova");
+}

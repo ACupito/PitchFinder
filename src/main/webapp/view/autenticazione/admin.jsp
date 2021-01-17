@@ -398,6 +398,9 @@
                         <div class="colo-title-admin">
                             <h4><span><i class="fas fa-database"></i></span> Partite create</h4>
                             <hr>
+                            <input type="date" id="filter-date" name="filter-date">
+                            <input type="time" id="filter-time" name="filter-time">
+                            <input type="button" id="filter-button" name="filter-button" value="Filtra" onclick="filterMatch()">
                         </div>
                     </div>
                     <div class="row1">
