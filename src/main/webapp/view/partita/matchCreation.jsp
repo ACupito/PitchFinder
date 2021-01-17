@@ -47,7 +47,7 @@
                 <small id="small-creation-timeend"> Inserire un orario di fine valido(HH:MM), max 2 ore di partita</small><br>
                 <label for="creation-player" id="creation-label-player">Numero giocatori:</label>
                 <input type="number" id="creation-player" name="maxGiocatori" min="0" max="3" value="0" required onchange="validateNPlayer()"><br>
-                <small id="small-creation-player"> Inserire un numero di giocatori da invitare,(max 3 totali)</small><br>
+                <small id="small-creation-player"> Inserire un numero di giocatori da invitare(max 3 totali)</small><br>
 
                 <label for="nameG1" id="creation-label-nameG1" style="display: none">Nome:</label>
                 <input type="text" id="nameG1" name="nameG1" style="display: none" class="objName" onkeyup="validateName1()" >
