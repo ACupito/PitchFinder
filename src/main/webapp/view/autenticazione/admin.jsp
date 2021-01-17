@@ -223,13 +223,13 @@
                                     <div class="invalid-feedback">Inserire la data</div>
                                 </div>
                                 <div class="form-group">
-                                    <label for="creation-timestr-Evento" id="creation-label-str-Evento">Oario Inizio:</label>
+                                    <label for="creation-timestr-Evento" id="creation-label-str-Evento">Orario Inizio:</label>
                                     <input type="time" id="creation-timestr-Evento" class="form-control" name="orarioInizio" min="09:00" max="23:00" required><br>
                                     <div class="valid-feedback" id="time-evento-str-valid">Valido</div>
                                     <div class="invalid-feedback">Inserire l’orario di inizio</div>
                                 </div>
                                 <div class="form-group">
-                                    <label for="creation-timeend-Evento" id="creation-label-end-Evento">Oario Fine:</label>
+                                    <label for="creation-timeend-Evento" id="creation-label-end-Evento">Orario Fine:</label>
                                     <input type="time" id="creation-timeend-Evento" class="form-control" name="orarioFine" min="09:00" max="23:00" required><br>
                                     <div class="valid-feedback" id="time-evento-end-valid">Valido</div>
                                     <div class="invalid-feedback">Inserisci l'orario di fine</div>
