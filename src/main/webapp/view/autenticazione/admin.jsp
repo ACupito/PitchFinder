@@ -233,28 +233,22 @@
                                     <div class="invalid-feedback">Inserire il nome dell’evento</div>
                                 </div>
                                 <div class="form-group">
-                                    <label for="creation-data-Evento" id="creation-label-data-Evento">Data evento:</label>
-                                    <input type="date" id="creation-data-Evento" class="form-control" name="data" required onblur="valiDateEvento()"><br>
-                                    <div class="valid-feedback" id="date-evento-valid">Valido</div>
-                                    <div class="invalid-feedback">Inserire la data</div>
-                                </div>
-                                <div class="form-group">
                                     <label for="creation-timestr-Evento" id="creation-label-str-Evento">Orario Inizio:</label>
-                                    <input type="time" id="creation-timestr-Evento" class="form-control" name="orarioInizio" min="09:00" max="23:00" required><br>
+                                    <input type="text" id="creation-timestr-Evento" class="form-control" name="orarioInizio" min="09:00" max="23:00" required><br>
                                     <div class="valid-feedback" id="time-evento-str-valid">Valido</div>
                                     <div class="invalid-feedback">Inserire l’orario di inizio</div>
                                 </div>
                                 <div class="form-group">
                                     <label for="creation-timeend-Evento" id="creation-label-end-Evento">Orario Fine:</label>
-                                    <input type="time" id="creation-timeend-Evento" class="form-control" name="orarioFine" min="09:00" max="23:00" required><br>
+                                    <input type="text" id="creation-timeend-Evento" class="form-control" name="orarioFine" min="09:00" max="23:00" required><br>
                                     <div class="valid-feedback" id="time-evento-end-valid">Valido</div>
                                     <div class="invalid-feedback">Inserisci l'orario di fine</div>
                                 </div>
                                 <div class="form-group">
-                                    <label for="creation-player-Evento" id="creation-label-player">Posti disponibili:</label>
-                                    <input type="number" id="creation-player-Evento" class="form-control" name="postiDisponibili" min="1" max="300" value="250" required><br>
-                                    <div class="valid-feedback">Valido</div>
-                                    <div class="invalid-feedback">Il numero di posti disponibili non è valido</div>
+                                    <label for="creation-data-Evento" id="creation-label-data-Evento">Data evento:</label>
+                                    <input type="text" id="creation-data-Evento" class="form-control" name="data" required onblur="valiDateEvento()"><br>
+                                    <div class="valid-feedback" id="date-evento-valid">Valido</div>
+                                    <div class="invalid-feedback">Inserire la data</div>
                                 </div>
                                 <div class="form-group">
                                     <label for="creation-guest-Evento" id="creation-label-guest">Nome Ospite:</label>
@@ -268,6 +262,16 @@
                                     <div class="valid-feedback" id="description-evento-valid">Valido</div>
                                     <div class="invalid-feedback">inserire la descrizione</div>
                                 </div>
+
+
+                                <div class="form-group">
+                                    <label for="creation-player-Evento" id="creation-label-player">Posti disponibili:</label>
+                                    <input type="text" id="creation-player-Evento" class="form-control" name="postiDisponibili" min="1" max="300" required><br>
+                                    <div class="valid-feedback">Valido</div>
+                                    <div class="invalid-feedback">Il numero di posti disponibili non è valido</div>
+                                </div>
+
+
 
                                 <p> Inserisci un'immagine per l'evento</p>
                                 <div class="form-group form-check radioEvent">
