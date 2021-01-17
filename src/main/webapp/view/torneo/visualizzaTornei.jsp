@@ -5,10 +5,6 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-    <meta name="description" content="" />
-    <meta name="author" content="" />
     <title>PitchFinder</title>
     <link rel="icon" type="image/x-icon" href="assets/img/favicon.ico" />
     <!-- Font Awesome icons (free version)-->
@@ -21,22 +17,22 @@
 
     <link href="css/navbar/style_navbar.css" rel="stylesheet" type="text/css"/>
     <link href="css/torneo/style_visualizzaTornei.css" rel="stylesheet" type="text/css" />
-<%--    <link href="css/footer/style_footer.css" rel="stylesheet" type="text/css"/>--%>
+
 
 </head>
 
 <body>
 <!-- NAVIGATION -->
 <%@include file="../navbar/navbar.jsp"%>
-
+<% Date current = new Date(System.currentTimeMillis());
+    ArrayList<Torneo> tornei = new ArrayList<Torneo>();
+    tornei = (ArrayList<Torneo>) application.getAttribute("tornei");%>
 
 <div class="containerCards">
     <div class="row">
 
         <%
-            Date current = new Date(System.currentTimeMillis());
-            ArrayList<Torneo> tornei = new ArrayList<Torneo>();
-            tornei = (ArrayList<Torneo>) application.getAttribute("tornei");
+
             if(tornei.isEmpty()){ %>
             <h4>NON CI SONO TORNEI DISPONIBILI</h4>
 
