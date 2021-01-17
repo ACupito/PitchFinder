@@ -9,10 +9,11 @@ var isSportValid = false;
 var isTipoValid = false;
 var isStrutturaValid = false;
 var isGiornoPartiteValid = false;
+var dayValid = new Array(7);
 
 function validateSport() {
     var sport = $("#sport").val();
-    if(sport.localeCompare("null")) {
+    if(sport.localeCompare("null") == 0) {
         $("#valid_sport").css("color", "#FF0000");
         $("#valid_sport").text("Lo sport non è stato selezionato!");
         isSportValid = false;
@@ -25,7 +26,7 @@ function validateSport() {
 
 function validateTipo() {
     var tipo = $("#tipo").val();
-    if(tipo.localeCompare("null")) {
+    if(tipo.localeCompare("null") == 0) {
         $("#valid_tipo").css("color", "#FF0000");
         $("#valid_tipo").text("Il tipo non è stato selezionato!");
         isTipoValid = false;
@@ -38,7 +39,7 @@ function validateTipo() {
 
 function validateStruttura() {
     var struttura = $("#struttura").val();
-    if(struttura.localeCompare("null")) {
+    if(struttura.localeCompare("null") == 0) {
         $("#valid_struttura").css("color", "#FF0000");
         $("#valid_struttura").text("La struttura non è stata selezionata!");
         isStrutturaValid = false;
@@ -51,15 +52,33 @@ function validateStruttura() {
 
 function validateGiornoPartite() {
     var giornoPartite = $("#giornoPartite").val();
-    if( giornoPartite.val().match("^[ a-zA-Z\u00C0-\u00ff']+$")) {
-        if(giornoPartite.localeCompare("null")) {
+    alert(giornoPartite);
+    var validate = false;
+    if(giornoPartite.match("^[ a-zA-Z\\u00C0-\\u00ff']+$")) {
+        switch (giornoPartite) {
+            case "Domenica": validate = true; break;
+            case "Lunedì": validate = true; break;
+            case "Martedì": validate = true; break;
+            case "Mercoledì": validate = true; break;
+            case "Giovedì": validate = true; break;
+            case "Venerdì": validate = true; break;
+            case "Sabato": validate = true; break;
+            default: validate = false; break;
+        }
+        if(!validate) {
             $("#valid_giornoPartite").css("color", "#FF0000");
-            $("#valid_giornoPartite").text("La lunghezza del giorno delle partite ed il formato sono validi!");
+            $("#valid_giornoPartite").text("Formato Errato! Giorno non valido! (Se è un giorno inserisci lettera maiuscola all'inizio)");
             isGiornoPartiteValid = false;
         } else {
-            $("#valid_giornoPartite").text("La lunghezza del giorno delle partite non è valida!");
-            $("#valid_giornoPartite").css("color", "#4CAF50");
-            isGiornoPartiteValid = true;
+            if(giornoPartite.length > 1 && giornoPartite.length < 20) {
+                $("#valid_giornoPartite").text("La lunghezza del giorno delle partite ed il formato sono validi.");
+                $("#valid_giornoPartite").css("color", "#4CAF50");
+                isGiornoPartiteValid = true;
+            } else {
+                $("#valid_giornoPartite").css("color", "#FF0000");
+                $("#valid_giornoPartite").text("La lunghezza del giorno delle partite non è valida!");
+                isGiornoPartiteValid = false;
+            }
         }
     } else {
         $("#valid_giornoPartite").css("color", "#FF0000");
@@ -238,6 +257,8 @@ function validateButton() {
 }
 
 function activeGiornoPartite() {
+    document.getElementById('giornoPartite').value = '';
+
     var data_inizio = $("#data_inizio").val();
     var startDate = new Date(data_inizio);
     var data_fine = $("#data_fine").val();
@@ -252,30 +273,29 @@ function activeGiornoPartite() {
     weekday[5] = "Venerdì";
     weekday[6] = "Sabato";
 
-    var sel = document.getElementById('giornoPartite');
+    // var sel = document.getElementById('daysPartite');
 
-    while(sel.options.length > 0) {
-        sel.remove(0);
-    }
+    // while(sel.options.length > 0) {
+    //     sel.remove(0);
+    // }
 
     var days =  ((endDate.getTime() - startDate.getTime()) / (1000 * 3600 * 24));
 
     var giorno = weekday[startDate.getDay()];
-    var opt = document.createElement('option');
-    opt.appendChild(document.createTextNode(giorno));
-    opt.value = giorno;
-    sel.appendChild(opt);
+    var datalist = null;
+    datalist += '<option value="' + giorno + '">' + giorno + '</option>'
+    // var opt = document.createElement('option');
+    // opt.appendChild(document.createTextNode(giorno));
+    // opt.value = giorno;
+    // sel.appendChild(opt);
     if(days > 6) days = days - (days - 6);
     while (days > 0) {
         startDate.setDate(startDate.getDate() +1);
         giorno = weekday[startDate.getDay()];
-        opt = document.createElement('option');
-        opt.appendChild(document.createTextNode(giorno));
-        opt.value = giorno;
-        sel.appendChild(opt);
+        datalist += '<option value="' + giorno + '">' + giorno + '</option>'
         days--;
     }
-
+    $("#daysPartite").html(datalist);
 }
 
 
