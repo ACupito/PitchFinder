@@ -17,8 +17,8 @@
 <%@ include file="../navbar/navbar.jsp"%>
 
 <div class="card">
-    <h1>${utente.nome}</h1>
-    <p class="title">${utente.username}</p>
+    <h1>${utente.username}</h1>
+    <p class="title">${utente.nome}</p>
     <p class="title">${utente.email}</p>
     <p class="title">${utente.dataDiNascita}</p>
 </div>
