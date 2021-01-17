@@ -85,8 +85,8 @@
 
                             <form method="post" name="prenotazione" id="prenotazione"
                                   onsubmit="return cambiaStatoIscrizione()" action="PrenotazioneEventoController">
-                                <input type="hidden" class="eventDate" name="eventDate" value="<%=evento.getDate()%>">
-                                <input type="hidden" class="eventName" name="eventName" value="<%=evento.getName()%>">
+                                <input type="hidden" class="eventDate" id="eventDate"name="eventDate" value="<%=evento.getDate()%>">
+                                <input type="hidden" class="eventName" id ="eventName"name="eventName" value="<%=evento.getName()%>">
                                 <table style=" margin-left: auto; margin-right: auto;">
                                     <tr>
                                         <td>
@@ -148,34 +148,39 @@
     var emailOk = false;
 
     function validaEmail() {
-        var input = document.getElementById("email");
-        var nome = document.getElementById("eventName");
-        var data = document.getElementById("eventDate");
-        if (input.value.length > 0 && input.value.match(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w+)+$/) && input.value.length < 50) {
+        var input = document.getElementById("email").value;
+        var nome = document.getElementById("eventName").value;
+        var data = document.getElementById("eventDate").value;
+        var invio = input;
+        invio +=  "," + nome ;
+        invio += "," + data;
+
+        if (input.length > 0 && input.match(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w+)+$/) && input.length < 50) {
             var xmlHttpReq = new XMLHttpRequest();
             xmlHttpReq.onreadystatechange= function() {
-            if (this.readyState == 4 && this.status == 200 && this.responseText == '<ok/>') {
-                document.getElementById("emailLabel").style.color = borderOk;
-                document.getElementById("alert").style.display = "none";
-                document.getElementById("alertRip").style.display = "none";
-                emailOk = true;
-            } else {
-                document.getElementById("emailLabel").style.color = borderNo;
-                document.getElementById("alert").style.display = "none";
-                document.getElementById("alertRip").style.display = "block";
-                document.getElementById("alertRip").style.color = borderNo;
-                emailOk = false;
+                if (this.readyState == 4 && this.status == 200 && this.responseText == '<ok/>') {
+                    document.getElementById("emailLabel").style.color = borderOk;
+                    document.getElementById("alert").style.display = "none";
+                    document.getElementById("alertRip").style.display = "none";
+                    emailOk = true;
+                } else {
+                    document.getElementById("emailLabel").style.color = borderNo;
+                    document.getElementById("alert").style.display = "none";
+                    document.getElementById("alertRip").style.display = "block";
+                    document.getElementById("alertRip").style.color = borderNo;
+                    emailOk = false;
 
+                }
+                cambiaStatoIscrizione();
             }
-            cambiaStatoIscrizione();
-            }
-            xmlHttpReq.open("GET", "ValidaEmail?email="
-                + encodeURIComponent(input.value)+"eventDate=" + encodeURIComponent(data.value)+"eventName"+ encodeURIComponent(nome.value), true);
+            xmlHttpReq.open("GET", "ValidaEmail?invio="
+                +encodeURIComponent(invio), true);
             xmlHttpReq.send();
-
-        } else {
+        }
+        else {
             document.getElementById("emailLabel").style.color = borderNo;
             document.getElementById("alert").style.display = "block";
+            document.getElementById("alertRip").style.display = "none";
             document.getElementById("alert").style.color = borderNo;
             emailOk = false;
             cambiaStatoIscrizione();
