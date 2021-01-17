@@ -359,3 +359,8 @@ body{
 .widget-49 .widget-49-meeting-action a {
     text-transform: uppercase;
 }
+
+#soldout{
+    background: red;
+    color: white;border-radius: 40px; padding: 5px; font-family: Arial;
+}
