@@ -73,7 +73,8 @@
                                 );
                             </script>
 
-                        <% }%>
+                        <% application.setAttribute("result","0");
+                                }%>
                             <div class="data">
                                 <div class="offset-4 col-8">
 
