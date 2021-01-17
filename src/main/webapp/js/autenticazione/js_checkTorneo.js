@@ -5,6 +5,70 @@ var isMaxPartecValid = false;
 var isDataInizioValid = false;
 var isDataFineValid = false;
 var isAllDateValid = false;
+var isSportValid = false;
+var isTipoValid = false;
+var isStrutturaValid = false;
+var isGiornoPartiteValid = false;
+
+function validateSport() {
+    var sport = $("#sport").val();
+    if(sport.localeCompare("null")) {
+        $("#valid_sport").css("color", "#FF0000");
+        $("#valid_sport").text("Lo sport non è stato selezionato!");
+        isSportValid = false;
+    } else {
+        $("#valid_sport").text("Lo sport è stato selezionato.");
+        $("#valid_sport").css("color", "#4CAF50");
+        isSportValid = true;
+    }
+}
+
+function validateTipo() {
+    var tipo = $("#tipo").val();
+    if(tipo.localeCompare("null")) {
+        $("#valid_tipo").css("color", "#FF0000");
+        $("#valid_tipo").text("Il tipo non è stato selezionato!");
+        isTipoValid = false;
+    } else {
+        $("#valid_tipo").text("Il tipo è stato selezionato.");
+        $("#valid_tipo").css("color", "#4CAF50");
+        isTipoValid = true;
+    }
+}
+
+function validateStruttura() {
+    var struttura = $("#struttura").val();
+    if(struttura.localeCompare("null")) {
+        $("#valid_struttura").css("color", "#FF0000");
+        $("#valid_struttura").text("La struttura non è stata selezionata!");
+        isStrutturaValid = false;
+    } else {
+        $("#valid_struttura").text("La struttura è stata selezionata.");
+        $("#valid_struttura").css("color", "#4CAF50");
+        isStrutturaValid = true;
+    }
+}
+
+function validateGiornoPartite() {
+    var giornoPartite = $("#giornoPartite").val();
+    if( giornoPartite.val().match("^[ a-zA-Z\u00C0-\u00ff']+$")) {
+        if(giornoPartite.localeCompare("null")) {
+            $("#valid_giornoPartite").css("color", "#FF0000");
+            $("#valid_giornoPartite").text("La lunghezza del giorno delle partite ed il formato sono validi!");
+            isGiornoPartiteValid = false;
+        } else {
+            $("#valid_giornoPartite").text("La lunghezza del giorno delle partite non è valida!");
+            $("#valid_giornoPartite").css("color", "#4CAF50");
+            isGiornoPartiteValid = true;
+        }
+    } else {
+        $("#valid_giornoPartite").css("color", "#FF0000");
+        $("#valid_giornoPartite").text("Il formato del giorno delle partite non è valido!");
+        isGiornoPartiteValid = false;
+    }
+
+}
+
 
 function validateName() {
     if( $("#uname").val().match("^[ a-zA-Z\u00C0-\u00ff']+$")) {
@@ -14,7 +78,7 @@ function validateName() {
             isNomeValid = true;
         } else {
             $("#valid_nome").css("color", "#FF0000");
-            $("#valid_nome").text("La lunghezza nome non è valida!");
+            $("#valid_nome").text("La lunghezza del nome non è valida!");
             isNomeValid = false;
         }
     } else {
@@ -27,7 +91,7 @@ function validateName() {
 function validateSquadre() {
 
             if (parseInt($("#maxSquadre").val()) >= 1 && parseInt($("#maxSquadre").val()) <= 20) {
-            $("#valid_squadra").text("Numero di squadre valido.");
+            $("#valid_squadra").text("Il numero delle squadre è valido.");
             $("#valid_squadra").css("color", "#4CAF50");
             isSquadreValid = true;
         } else {
@@ -160,7 +224,13 @@ function validateAllDate() {
 }
 
 function validateButton() {
-    if(isNomeValid && isMinPartecValid && isSquadreValid && isMaxPartecValid && isDataFineValid && isDataInizioValid) {
+    validateStruttura();
+    validateTipo();
+    validateSport();
+    validateGiornoPartite();
+
+    if(isNomeValid && isMinPartecValid && isSquadreValid && isMaxPartecValid && isDataFineValid && isDataInizioValid && isGiornoPartiteValid
+    && isStrutturaValid && isTipoValid && isSportValid) {
         return true;
     } else {
         return false;
