@@ -326,7 +326,6 @@ public class AutenticazioneController extends HttpServlet {
             request.getServletContext().setAttribute("result",result);
             String message = request.getParameter("message");
             request.getServletContext().setAttribute("message",message);
-            System.out.println("result" + result + "message" + message);
 
             dispatcher = getServletContext().getRequestDispatcher("/view/autenticazione/admin.jsp");
             dispatcher.forward(request, response);
