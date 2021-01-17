@@ -44,32 +44,32 @@ public class DareDispCampoController extends HttpServlet {
             Time fine;
 
             if (dataStr.equals("")) {
-                throw new IllegalArgumentException("La modifica fallisce perché la data non è selezionata");
+                throw new IllegalArgumentException("Non viene memorizzata la disponibilità poiché la data non è stata selezionata.");
             }
 
             try {
                 data = Date.valueOf(dataStr);
             } catch (IllegalArgumentException e) {
-                throw new IllegalArgumentException("La modifica fallisce perché la data non rispetta il formato");
+                throw new IllegalArgumentException("Non viene memorizzata la disponibilità poiché la data non rispetta il formato.");
             }
             if (inizioStr.matches("")) {
-                throw new IllegalArgumentException("La modifica fallisce perché l’orario di inizio non è stato selezionato");
+                throw new IllegalArgumentException("Non viene memorizzata la disponibilità poiché l’orario di inizio non è stato selezionato.");
             }
             if (!inizioStr.matches("^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$")) {
-                throw new IllegalArgumentException("La modifica fallisce perché l’orario di inizio non rispetta il formato");
+                throw new IllegalArgumentException("Non viene memorizzata la disponibilità poiché il formato dell’orario di inizio non è valido.");
             }
             inizio = Time.valueOf(inizioStr.concat(":00"));
 
             if (fineStr.matches("")) {
-                throw new IllegalArgumentException("La modifica fallisce perché l’orario di fine non è stato selezionato");
+                throw new IllegalArgumentException("Non viene memorizzata la disponibilità poiché l’orario di inizio non è stato selezionato.");
             }
             if (!fineStr.matches("^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$")) {
-                throw new IllegalArgumentException("La modifica fallisce perché l’orario di fine non rispetta il formato");
+                throw new IllegalArgumentException("Non viene memorizzata la disponibilità poiché il formato dell’orario di fine non è valido.");
             }
             fine = Time.valueOf(fineStr.concat(":00"));
 
             camp.createDisponibilita(email, idcampo, data, inizio, fine);
-            response.setContentType("La creazione va a buon fine");
+            response.setContentType("La disponibilità viene memorizzata con successo.");
             request.setAttribute("risultato", "1");
 
             RequestDispatcher dispatcher =
