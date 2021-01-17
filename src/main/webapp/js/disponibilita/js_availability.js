@@ -1,18 +1,13 @@
 //Validation var
 var isDateValid=false;
 var isTimeValid=false;
-var isNameValid=false;
-var isSurnameValid=false;
-var isPlayerNumberValid=false;
-var numberOfCheckedItems = 0;
-var nPlayer=0;
 var hhStr;
 var mmStr;
 var hhEnd;
 var mmEnd;
 
 //Setting min of #creation-data
-function minDate() {
+function minDateDisp() {
     var currentDate = new Date();
     var dd = String(currentDate.getDate()).padStart(2, '0');
     var mm = String(currentDate.getMonth() + 1).padStart(2, '0'); //January is 0!
@@ -22,7 +17,7 @@ function minDate() {
     $('#data').attr("min",currentDate);
 }
 //Setting max of #creation-data
-function maxDate(){
+function maxDateDisp(){
     var currentDate = new Date();
     var dd = String(currentDate.getDate()).padStart(2, '0');
     var mm = String(currentDate.getMonth() + 1).padStart(2, '0'); //January is 0!
@@ -31,7 +26,7 @@ function maxDate(){
 
     $('#data').attr("max",currentDate);
 }
-function minMaxTime() {
+function minMaxTimeDisp() {
     $('.timepicker').timepicker({
         timeFormat: 'HH:mm',
         minTime: '09:00', //
@@ -43,9 +38,10 @@ function minMaxTime() {
         scrollbar: true,
 
     });
+}
 
 //Data validation DONE
-    function valiDate() {
+    function valiDateDisp() {
         if (!document.getElementById("data").value.match("^(.*[-])[0-9]*$")) {
             $("#data").css("color", "#FF0000");
             $("#small-creation-data").text("La data non è selezionata");
@@ -62,24 +58,13 @@ function minMaxTime() {
             $("#small-creation-data").css("color", "#FF0000");
             isDateValid = false;
         }
-        var father = document.getElementById("form-Availability");
-        if (father.hasChildNodes()) {
-            for (j = 0; j < father.childElementCount; j++) {
-                father.removeChild(father.lastChild)
-                j--;
-            }
-        }
+
     }
 
     //Start validation
-    function validateStart() {
-        var father = document.getElementById("form-Availability");
-        if (father.hasChildNodes()) {
-            for (j = 0; j < father.childElementCount; j++) {
-                father.removeChild(father.lastChild)
-                j--;
-            }
-        }
+    function validateStartDisp() {
+
+
         if (document.getElementById("inizio").value.match("^[0-2]{1}[0-9]{1}\\:[0-6]{1}[0-9]{1}$")) {
             $("#inizio").css("color", "#4CAF50");
             hhStr = document.getElementById("inizio").value.substring(0, 2);
@@ -95,14 +80,8 @@ function minMaxTime() {
     }
 
 //End validation
-    function validateEnd() {
-        var father = document.getElementById("form-Availability");
-        if (father.hasChildNodes()) {
-            for (j = 0; j < father.childElementCount; j++) {
-                father.removeChild(father.lastChild)
-                j--;
-            }
-        }
+    function validateEndDisp() {
+
         if (document.getElementById("fine").value.match("^[0-2]{1}[0-9]{1}\\:[0-6]{1}[0-9]{1}$")) {
             $("#fine").css("color", "#4CAF50");
             hhEnd = document.getElementById("fine").value.substring(0, 2);
@@ -115,41 +94,68 @@ function minMaxTime() {
             $("#small-creation-timeend").css("color", "#FF0000");
         }
 
+
     }
 
 //Time validation legal time for a match
-    function validateTime() {
+    function validateTimeDisp() {
         //Regex su entrambi i campi
-        if (hhStr - hhEnd > 0) {
-            $("#inizio").css("color", "#FF0000");
-            $("#fine").css("color", "#FF0000");
-            $("#small-creation-timestr").css("color", "#FF0000");
-            $("#small-creation-timeend").text("Orario di inizio maggiore ad Orario di fine");
-            $("#small-creation-timeend").css("color", "#FF0000");
-            isTimeValid = false;
-        } else {
-            $("#inizio").css("color", "#4CAF50");
-            $("#fine").css("color", "#4CAF50");
-            $("#small-creation-timestr").text("Orario di inizio valido, rispetta il formato");
-            $("#small-creation-timestr").css("color", "#4CAF50");
-            $("#small-creation-timeend").text("Orario di fine valido, rispetta il formato");
-            $("#small-creation-timeend").css("color", "#4CAF50");
-            isTimeValid = true;
-        }
+
+        if(hhEnd - hhStr == 0 || hhEnd==null || hhStr==null){
+            $("#inizio").css("color","#FF0000");
+            $("#fine").css("color","#FF0000");
+            $("#small-creation-timestr").text("Orari non validi, min 1 ora");
+            $("#small-creation-timestr").css("color","#FF0000");
+            $("#small-creation-timeend").text("Orari non validi, min 1 ora");
+            $("#small-creation-timeend").css("color","#FF0000");
+            isTimeValid=false;
+        }else if (hhStr - hhEnd > 0) {
+                $("#inizio").css("color", "#FF0000");
+                $("#fine").css("color", "#FF0000");
+                $("#small-creation-timestr").css("color", "#FF0000");
+                $("#small-creation-timeend").text("Orario di inizio maggiore ad Orario di fine");
+                $("#small-creation-timeend").css("color", "#FF0000");
+                isTimeValid = false;
+            } else {
+                $("#inizio").css("color", "#4CAF50");
+                $("#fine").css("color", "#4CAF50");
+                $("#small-creation-timestr").text("Orario di inizio valido, rispetta il formato");
+                $("#small-creation-timestr").css("color", "#4CAF50");
+                $("#small-creation-timeend").text("Orario di fine valido, rispetta il formato");
+                $("#small-creation-timeend").css("color", "#4CAF50");
+                isTimeValid = true;
+            }
+    }
+
+function clickTimeValidateDispIn() {
+
+    validateStartDisp();
+    validateTimeDisp();
+
+}
+    function clickTimeValidateDispFi() {
+
+        validateStartDisp();
+        validateEndDisp();
+        validateTimeDisp();
 
     }
 
-    function clickTimeValidate() {
-        validateStart();
-        validateEnd();
-        validateTime();
+    function validateFormDisp(){
+        valiDateDisp();
+        clickTimeValidateDispFi();
 
+        if(isDateValid && isTimeValid){
+            return true;
+        }else{
+            return false;
+        }
     }
 
     $(document).ready(function () {
-            minDate()
-            maxDate();
-            minMaxTime();
+            minDateDisp()
+            maxDateDisp();
+            minMaxTimeDisp();
         }
     );
-}
+

@@ -12,6 +12,10 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <html>
 <head>
+
+
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.css">
+    <script language="JavaScript" type="text/javascript" src="js/occupazione/js_occupation.js"></script>
     <title>PitchFinder</title>
     <link href="css/admin_profile/style_adminProfile.css" rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -19,6 +23,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
 </head>
 <body>
 <%
@@ -290,24 +295,56 @@
 
                                     <div class="form-row">
                                         <div class="form-wrapper">
-                                            <label for="data">Data</label>
-                                            <span class="lnr lnr-calendar-full"></span>
-                                            <input type="date" class="form-control datepicker-here" name="data" id="data" onkeydown="return false" onblur="valiDate()"><br>
-                                            <small id="small-creation-data"> Inserire una data valida(DD/MM/YYYY)</small><br>
 
+                                            <table>
+                                                <tr>
+                                                    <td>
+                                                        <label for="data">Data</label>
+                                                    </td>
+                                                    <td>
+                                                        <input type="date" class="form-control datepicker-here" name="data" id="data" required><br>
+                                                    </td>
+                                                    <td>
+                                                        <small id="small-creation-data"> Inserire una data valida(DD/MM/YYYY)</small><br>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+
+                                                </tr>
+                                            </table>
                                         </div>
                                         <div class="form-wrapper">
-                                            <label for="inizio">Orario Inizio</label>
-                                            <span class="lnr lnr-calendar-full"></span>
-                                            <input type="time" class="form-control datepicker-here" class="timepicker" name="inizio" id="inizio" minTime="09:00" maxTime="23:00"  size="5" required onkeydown="return false" onmousemove="validateStart()" >
-                                            <small id="small-creation-timestr"> Inserire un orario di inizio valido(HH:MM)</small><br>
+                                            <table>
+                                                <tr>
+                                                    <td>
+                                                        <label for="inizio">Orario Inizio</label>
+                                                    </td>
+                                                    <td>
+                                                        <input type="time" name="inizio" id="inizio"  size="5" required><br>
+                                                    </td>
+                                                    <td>
+                                                        <small id="small-creation-timestr"> Inserire un orario di inizio valido(HH:MM)</small><br>
+
+                                                    </td>
+                                                </tr>
+                                            </table>
                                         </div>
                                         <div class="form-wrapper">
-                                            <label for="fine">Orario Fine</label>
-                                            <span class="lnr lnr-calendar-full"></span>
-                                            <input type="time" class="form-control datepicker-here" name="fine" id="fine" class="timepicker"minTime="09:00" maxTime="23:00"  size="5" required onkeydown="return false" onmousemove="clickTimeValidate()">
-                                            <small id="small-creation-timeend"> Inserire un orario di fine valido(HH:MM)</small><br>
-                                        </div>
+                                            <table>
+                                                <tr>
+                                                    <td>
+                                                        <label for="fine">Orario Fine</label>
+                                                    </td>
+                                                    <td>
+                                                        <input type="time"  name="fine" id="fine" size="5" required><br>
+
+                                                    </td>
+                                                    <td>
+                                                        <small id="small-creation-timeend"> Inserire un orario di fine valido(HH:MM)</small><br>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                             </div>
                                     </div>
                                     <div class="form-row last">
                                         <div class="form-wrapper">
@@ -315,25 +352,38 @@
                                             <select name="idcampo" id="idcampo" class="form-control">
                                                 <option value="1002">Tennis</option>
                                             </select>
-                                            <i class="zmdi zmdi-chevron-down"></i>
                                         </div>
                                     </div>
 
                                     <% if(session.getAttribute("admin")!=null){ %>
-                                    <button type="submit" name="Occupa" value="Occupa" data-text="Occupa" id="Occupa">
+                                    <button type="submit" name="Occupa" class="btn_impostazioni" value="Occupa" data-text="Occupa" id="Occupa">
                                         <span>Occupa</span>
                                     </button>
 
-                                    <button type="submit" name="Libera" value="Libera" data-text="Libera" id="Libera">
+                                    <button type="submit" name="Libera" class="btn_impostazioni" value="Libera" data-text="Libera" id="Libera">
                                         <span>Libera</span>
                                     </button>
                                     <%} %>
                                 </form>
                             </div>
+                            <!--- Esito --->
+                            <% String esito = (String) request.getAttribute("risultatoOccupa");
+                            String esito1= (String) request.getAttribute("risultatoLibera");
+                                if(esito!= null){
+                                    if(esito.equals("1")){
+                                        request.setAttribute("risultatoOccupa",null);}%>
+                                <script>
+                                alert("La modifica va a buon fine");
+                                </script>
+                            <%}else if (esito1!= null){
+                                            if(esito.equals("1")){
+                                                request.setAttribute("risultatoLibera",null);}%>
+                                <script>
+                                        alert("La liberazione va a buon fine");
+                                </script>
+                                <%}%>
+
                         </div>
-
-
-
                     </div>
                 </div>
 
@@ -499,7 +549,8 @@
 <script src="js/autenticazione/js_admin.js"></script>
 <script src="js/autenticazione/js_admin_showMatch.js"></script>
 <script src="js/autenticazione/js_checkTorneo.js"></script>
-<script src="js/occupazione/js_occupation.js"></script>
+
+
 </head>
 </body>
 </html>

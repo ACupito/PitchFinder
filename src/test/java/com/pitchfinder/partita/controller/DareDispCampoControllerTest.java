@@ -121,7 +121,7 @@ public class DareDispCampoControllerTest {
      * Disponibilita's inizio is empity.
      */
     @Test
-    void TC_31_3inizio() {
+    void TC_31_3() {
         Mockito.when(mockedRequest.getParameter("Conferma")).thenReturn("Conferma");
         Mockito.when(mockedRequest.getParameter("data")).thenReturn(DATA);
         Mockito.when(mockedRequest.getParameter("inizio")).thenReturn("");
@@ -141,7 +141,7 @@ public class DareDispCampoControllerTest {
      * Disponibilita's inizio is not valid.
      */
     @Test
-    void TC_31_4inizio() {
+    void TC_31_4() {
         Mockito.when(mockedRequest.getParameter("Conferma")).thenReturn("Conferma");
         Mockito.when(mockedRequest.getParameter("data")).thenReturn(DATA);
         Mockito.when(mockedRequest.getParameter("inizio")).thenReturn("12:aaa000:0000");
@@ -161,7 +161,7 @@ public class DareDispCampoControllerTest {
      * Disponibilita's fine is empity.
      */
     @Test
-    void TC_31_3fine() {
+    void TC_31_5() {
         Mockito.when(mockedRequest.getParameter("Conferma")).thenReturn("Conferma");
         Mockito.when(mockedRequest.getParameter("data")).thenReturn(DATA);
         Mockito.when(mockedRequest.getParameter("inizio")).thenReturn(ORARIO_INIZIO);
@@ -181,7 +181,7 @@ public class DareDispCampoControllerTest {
      * Disponibilita's fine is not valid.
      */
     @Test
-    void TC_31_4fine() {
+    void TC_31_6() {
         Mockito.when(mockedRequest.getParameter("Conferma")).thenReturn("Conferma");
         Mockito.when(mockedRequest.getParameter("data")).thenReturn(DATA);
         Mockito.when(mockedRequest.getParameter("inizio")).thenReturn(ORARIO_INIZIO);
@@ -201,7 +201,7 @@ public class DareDispCampoControllerTest {
      * Disponibilita's creation is valid.
      */
     @Test
-    void TC_31_5() throws ServletException, IOException {
+    void TC_31_7() throws ServletException, IOException {
         Mockito.when(mockedRequest.getParameter("Conferma")).thenReturn("Conferma");
         Mockito.when(mockedRequest.getParameter("data")).thenReturn(DATA);
         Mockito.when(mockedRequest.getParameter("inizio")).thenReturn(ORARIO_INIZIO);
