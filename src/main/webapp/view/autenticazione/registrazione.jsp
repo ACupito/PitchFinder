@@ -15,6 +15,7 @@
             crossorigin="anonymous">
     </script>
     <script src="./js/registration/check.js"></script>
+    <script src="./js/homepage/check_login.js"></script>
 
     <link rel="stylesheet" type="text/css" href="./css/navbar/style_navbar.css">
     <link rel="stylesheet" type="text/css" href="./css/registration/style_registration.css">
