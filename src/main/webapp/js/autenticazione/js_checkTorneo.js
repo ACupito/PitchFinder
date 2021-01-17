@@ -9,7 +9,7 @@ var isSportValid = false;
 var isTipoValid = false;
 var isStrutturaValid = false;
 var isGiornoPartiteValid = false;
-var dayValid = new Array(7);
+var dayValid = [];
 
 function validateSport() {
     var sport = $("#sport").val();
@@ -52,7 +52,6 @@ function validateStruttura() {
 
 function validateGiornoPartite() {
     var giornoPartite = $("#giornoPartite").val();
-    alert(giornoPartite);
     var validate = false;
     if(giornoPartite.match("^[ a-zA-Z\\u00C0-\\u00ff']+$")) {
         switch (giornoPartite) {
@@ -247,6 +246,7 @@ function validateButton() {
     validateTipo();
     validateSport();
     validateGiornoPartite();
+    validateDayInRangeDate();
 
     if(isNomeValid && isMinPartecValid && isSquadreValid && isMaxPartecValid && isDataFineValid && isDataInizioValid && isGiornoPartiteValid
     && isStrutturaValid && isTipoValid && isSportValid) {
@@ -273,31 +273,44 @@ function activeGiornoPartite() {
     weekday[5] = "Venerdì";
     weekday[6] = "Sabato";
 
-    // var sel = document.getElementById('daysPartite');
-
-    // while(sel.options.length > 0) {
-    //     sel.remove(0);
-    // }
-
+    while(dayValid.length > 0) {
+        dayValid.pop();
+    }
     var days =  ((endDate.getTime() - startDate.getTime()) / (1000 * 3600 * 24));
 
     var giorno = weekday[startDate.getDay()];
     var datalist = null;
-    datalist += '<option value="' + giorno + '">' + giorno + '</option>'
-    // var opt = document.createElement('option');
-    // opt.appendChild(document.createTextNode(giorno));
-    // opt.value = giorno;
-    // sel.appendChild(opt);
+    datalist += '<option value="' + giorno + '">' + giorno + '</option>';
+    dayValid.push(giorno);
+
     if(days > 6) days = days - (days - 6);
     while (days > 0) {
         startDate.setDate(startDate.getDate() +1);
         giorno = weekday[startDate.getDay()];
-        datalist += '<option value="' + giorno + '">' + giorno + '</option>'
+        datalist += '<option value="' + giorno + '">' + giorno + '</option>';
+        dayValid.push(giorno);
         days--;
     }
     $("#daysPartite").html(datalist);
 }
 
+function validateDayInRangeDate() {
+    var i = 0;
+    var validate = false;
+    var giorno = $("#giornoPartite").val();
+    alert("giorno" + giorno);
+    for(i = 0; i < dayValid.length; i++) {
+        if(giorno.localeCompare(dayValid[i]) == 0) {
+            validate = true;
+            break;
+        }
+    }
+    if(!validate) {
+        $("#valid_giornoPartite").css("color", "#FF0000");
+        $("#valid_giornoPartite").text("Giorno non valido nel periodo di tempo selezionato!");
+        isGiornoPartiteValid = false;
+    }
+}
 
 $(document).ready( function(){
         minDateInizio()
