@@ -75,7 +75,11 @@
                         </div>
                         <ol class="widget-49-meeting-points">
                             <li class="widget-49-meeting-item">
-                                <span><Strong>Posti Disponibili</Strong> - ${postiDisponibili}</span></li>
+                                <%int posti = (int) request.getAttribute("postiDisponibili");
+                                if(posti==0){%>
+                                   <span ><Strong>Posti Disponibili</Strong> - <span id="soldout">sold out</span></span></li>
+                               <% } else{%> <span><Strong>Posti Disponibili</Strong> - ${postiDisponibili}</span></li> <%}%>
+                            <input type="hidden" id="postiDisponibili" value="${postiDisponibili}">
                             <li class="widget-49-meeting-item">
                                 <span><strong>Il nostro ospite</strong> - <%= evento.getGuest()%></span></li>
                             <li class="widget-49-meeting-item">
@@ -138,7 +142,7 @@
         request.setAttribute("prenotazione", null);
 %>
 <script>
-    alert("Prenotazione effettuata con successo!");
+    alert("Prenotazione effettuata con successo! Riceverà un'email con il codice della prenotazione.");
 </script>
 <%}%>
 <!--Script for alert-->
@@ -201,6 +205,12 @@
     $(document).ready(function(){
         $('[data-toggle="tooltip"]').tooltip();
     });
+</script>
+<script>
+    if(document.getElementById("postiDisponibili").value==0){
+        document.getElementById("conferma").style.display="none";
+        alert("Non è possibile prenotarsi, non ci sono posti disponibili");
+    }
 </script>
 
 </body>
