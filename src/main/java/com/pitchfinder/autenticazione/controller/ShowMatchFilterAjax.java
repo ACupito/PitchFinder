@@ -66,12 +66,12 @@ public class ShowMatchFilterAjax extends HttpServlet {
 
         for (Partita game : nuove) {
             partita = new JSONObject();
-            partita.put("idPartita",String.valueOf(game.getIdPartita()));
-            partita.put("idCampo",String.valueOf(game.getIdCampo()));
-            partita.put("utenteEmail",game.getEmailUtente());
-            partita.put("date",game.getData().toString());
-            partita.put("orarioInizio",game.getOrarioInizio().toString());
-            partita.put("orarioFine",game.getOrarioFine().toString());
+            partita.put("idPartita", String.valueOf(game.getIdPartita()));
+            partita.put("idCampo", String.valueOf(game.getIdCampo()));
+            partita.put("utenteEmail", game.getEmailUtente());
+            partita.put("date", game.getData().toString());
+            partita.put("orarioInizio", game.getOrarioInizio().toString());
+            partita.put("orarioFine", game.getOrarioFine().toString());
 
             arrayPartite.add(partita);
         }
