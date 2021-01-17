@@ -22,11 +22,13 @@
     <link href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic" rel="stylesheet" type="text/css" />
     <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700" rel="stylesheet" type="text/css" />
     <!-- Core theme CSS (includes Bootstrap)-->
+
     <link href="css/navbar/style_navbar.css" rel="stylesheet" type="text/css"/>
     <link href="css/footer/style_footer.css" rel="stylesheet">
     <link href="css/disponibilita/disponibilita.css" rel="stylesheet" />
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.css">
     <script language="JavaScript" type="text/javascript" src="js/disponibilita/js_availability.js"></script>
 
 
@@ -43,7 +45,7 @@
 
 <div class="wrapper">
     <div class="inner">
-        <form action="DareDispCampoController">
+        <form action="DareDispCampoController" onsubmit="return validateFormDisp() ">
 
             <h3>Modifica la tua disponibilità per un campo</h3>
 
@@ -51,21 +53,21 @@
                 <div class="form-wrapper">
                     <label for="data">Data</label>
 
-                    <input type="date" class="form-control datepicker-here" name="data" id="data" onkeydown="return false" onblur="valiDate()"><br>
+                    <input type="date" class="form-control datepicker-here" name="data" id="data" onkeydown="return false" onblur="valiDateDisp()"><br>
                     <small id="small-creation-data"> Inserire una data valida(DD/MM/YYYY)</small><br>
 
                 </div>
                 <div class="form-wrapper">
                     <label for="inizio">Orario Inizio</label>
 
-                    <input type="text" class="timepicker" name="inizio" id="inizio" minTime="09:00" maxTime="23:00"  size="5" required onkeydown="return false" onmousemove="validateStart()" >
+                    <input type="text" class="timepicker" name="inizio" id="inizio" minTime="09:00" maxTime="23:00"  size="5" required onkeydown="return false" onmousemove="clickTimeValidateDispIn()"><br>
                     <small id="small-creation-timestr"> Inserire un orario di inizio valido(HH:MM)</small><br>
 
                 </div>
                 <div class="form-wrapper">
                     <label for="fine">Orario Fine</label>
 
-                    <input type="text" name="fine" id="fine" class="timepicker"minTime="09:00" maxTime="23:00"  size="5" required onkeydown="return false" onmousemove="clickTimeValidate()">
+                    <input type="text" name="fine" id="fine" class="timepicker" minTime="09:00" maxTime="23:00"  size="5" required onkeydown="return false" onmousemove="clickTimeValidateDispFi()"><br>
                     <small id="small-creation-timeend"> Inserire un orario di fine valido(HH:MM)</small><br>
 
                 </div>
@@ -77,7 +79,6 @@
                         <option value="1002">Tennis</option>
 
                     </select>
-                    <i class="zmdi zmdi-chevron-down"></i>
                 </div>
             </div>
 
@@ -96,9 +97,10 @@
         </form>
     </div>
     <!--- Esito --->
-    <% String esito = (String) request.getAttribute("esito");
+    <% String esito = (String) request.getAttribute("risultato");
         if(esito!= null){
-            if(esito.equals("1")){%>
+            if(esito.equals("1")){
+    request.setAttribute("risultato",null);%>
     <script>
         alert("La creazione va a buon fine");
     </script>

@@ -70,7 +70,7 @@ public class DareDispCampoController extends HttpServlet {
 
             camp.createDisponibilita(email, idcampo, data, inizio, fine);
             response.setContentType("La creazione va a buon fine");
-            request.setAttribute("esito", "1");
+            request.setAttribute("risultato", "1");
 
             RequestDispatcher dispatcher =
                     request.getServletContext().getRequestDispatcher("/view/disponibilitaCampo/dareDisponibilita.jsp");
