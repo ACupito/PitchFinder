@@ -91,12 +91,17 @@ function filterMatch(){
     }else{
         time = document.getElementById("filter-time").value;
     }
+    var father = document.getElementById("players-table");
 
-    alert(data +":"+time);
+    if(father.hasChildNodes()){
+        for(j=0;j<father.childElementCount;j++){
+            father.removeChild(father.lastChild)
+            j--;
+        }
+    }
 
     $(document).ready(function (){
         $.getJSON("FilterJSON", {data: data,time: time}, function (data){
-            alert("we waju bell sta call back");
             myFunction(data);
         });
     });
@@ -104,6 +109,22 @@ function filterMatch(){
 }
 
 function myFunction(data){
-    alert("CIAO");
-    alert("prova:"+data[0].idPartita+":prova");
+
+
+    var table = null;
+    for (var i = 0; i < data.length; i++) {
+        table += "<tr>" +
+            "<th scope = 'row'>" + data[i].idCampo + "</th>" +
+            "<td data-title = 'UtenteEmail'>" + data[i].utenteEmail+ "</td>" +
+            "<td data-title = 'Data'>" + data[i].date + "</td>" +
+            "<td data-title = 'Orario Inizio'>" + data[i].orarioInizio + "</td>" +
+            "<td data-title = 'Orario Fine'>" + data[i].orarioFine + "</td>" +
+            "<td data-title = 'Show'>" +
+            "<button class = 'remove' name = '" + data[i].idPartita +"' onclick = 'showPlayer(name)'>"
+            + "Giocatori" +
+            "</button>" +
+            "</td>" +
+            "</tr>";
+    }
+    $("#tbody_partite").html(table);
 }

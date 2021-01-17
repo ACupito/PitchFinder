@@ -400,7 +400,7 @@
                             <hr>
                             <input type="date" id="filter-date" name="filter-date">
                             <input type="time" id="filter-time" name="filter-time">
-                            <input type="button" id="filter-button" name="filter-button" value="Filtra" onclick="filterMatch()">
+                            <input type="button" class="remove" id="filter-button" name="filter-button" value="Filtra" onclick="filterMatch()">
                         </div>
                     </div>
                     <div class="row1">
