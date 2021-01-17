@@ -86,66 +86,14 @@ public class EventoAdminDeleteControllerTest {
     }
 
     /**
-     * Evento's name is empity.
-     */
-    @Test
-    void TC_11_16() {
-
-        Mockito.when(mockedRequest.getParameter("nome")).thenReturn("");
-        Mockito.when(mockedRequest.getParameter("data")).thenReturn(DATA);
-
-        String message = "La lunghezza del nome non è valida";
-
-        IllegalArgumentException exception;
-        exception = assertThrows(IllegalArgumentException.class,
-                () -> servlet.doGet(mockedRequest, mockedResponse));
-        assertEquals(message, exception.getMessage());
-
-    }
-
-    /**
-     * Evento's name is not valid.
-     */
-    @Test
-    void TC_11_17() {
-
-        Mockito.when(mockedRequest.getParameter("nome")).thenReturn("Evento%%&&&£");
-        Mockito.when(mockedRequest.getParameter("data")).thenReturn(DATA);
-
-        String message = "Il formato nel nome non è valido";
-
-        IllegalArgumentException exception;
-        exception = assertThrows(IllegalArgumentException.class,
-                () -> servlet.doGet(mockedRequest, mockedResponse));
-        assertEquals(message, exception.getMessage());
-
-    }
-
-    /**
-     * Evento's data is not empity.
-     */
-    @Test
-    void TC_11_18(){
-        Mockito.when(mockedRequest.getParameter("nome")).thenReturn(NOME);
-        Mockito.when(mockedRequest.getParameter("data")).thenReturn("");
-
-        String message = "Inserire la data";
-
-        IllegalArgumentException exception;
-        exception = assertThrows(IllegalArgumentException.class,
-                () -> servlet.doGet(mockedRequest, mockedResponse));
-        assertEquals(message, exception.getMessage());
-    }
-
-    /**
      * Evento's data is not valid.
      */
     @Test
-    void TC_11_19(){
+    void TC_11_16(){
         Mockito.when(mockedRequest.getParameter("nome")).thenReturn(NOME);
         Mockito.when(mockedRequest.getParameter("data")).thenReturn("asd-12-22");
 
-        String message = "La data non rispetta il formato";
+        String message = "Errore nell'eliminazione dell'evento, la data non viene trovata";
 
         IllegalArgumentException exception;
         exception = assertThrows(IllegalArgumentException.class,
@@ -157,12 +105,12 @@ public class EventoAdminDeleteControllerTest {
      * Everything is working fine! Good job.
      */
     @Test
-    void TC_11_20() throws ServletException, IOException {
+    void TC_11_17() throws ServletException, IOException {
         Mockito.when(mockedRequest.getParameter("nome")).thenReturn(NOME);
         Mockito.when(mockedRequest.getParameter("data")).thenReturn(DATA);
 
         Mockito.doReturn(mockedServletContext).when(mockedRequest).getServletContext();
-        Mockito.doReturn(mockedDispatcher).when(mockedServletContext).getRequestDispatcher("/autentication?flag=5");
+        Mockito.doReturn(mockedDispatcher).when(mockedServletContext).getRequestDispatcher("/autentication?flag=5&result=1&message=Eliminazione avvenuta");
 
         servlet.doPost(mockedRequest, mockedResponse);
         Mockito.verify(mockedResponse).setContentType("Eliminazione avvenuta");

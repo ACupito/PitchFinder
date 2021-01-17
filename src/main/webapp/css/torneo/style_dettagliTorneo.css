@@ -1,6 +1,6 @@
 
 body{
-    background: -webkit-linear-gradient(left, #CBCBCB, #CBCBCB);
+    background: -webkit-linear-gradient(left, #cbcbcb, #CBCBCB);
 }
 .emp-profile{
     padding: 3%;
@@ -70,7 +70,7 @@ body{
 
 
 .btn-primary, .button-indietro, .button-iscrivi {
-    color: #fff;
+    color: #ffffff;
     background-color: #079e3e;
     border-color: #079e3e;
 }
@@ -101,7 +101,7 @@ body{
 
 
 .card-header h5{
-    color: #333;
+    color: #333333;
 }
 .card-header h6{
     color: #0062cc;
