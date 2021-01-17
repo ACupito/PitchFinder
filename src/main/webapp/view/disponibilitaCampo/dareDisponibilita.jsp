@@ -25,7 +25,7 @@
 
     <link href="css/navbar/style_navbar.css" rel="stylesheet" type="text/css"/>
     <link href="css/footer/style_footer.css" rel="stylesheet">
-    <link href="css/disponibilita/disponibilita.css" rel="stylesheet" />
+    <link href="css/disponibilita/style-disponibilita.css" rel="stylesheet" />
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.css">
