@@ -99,83 +99,71 @@ public class AutenticazioneController extends HttpServlet {
             String strData = request.getParameter("data");
 
             if (email.length() < MINLIMIT || email.length() > MAXLIMIT) {
-                messaggio = "La registrazione non va a buon fine perchè l'email inserita "
+                messaggio = "L'email inserita "
                         + "non rispetta la lunghezza corretta";
                 throw new IllegalArgumentException(messaggio);
             }
 
             if (!email.matches("^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]"
                     + "{0,61}[a-zA-Z0-9])?(?:\\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$")) {
-                messaggio = "La registrazione non va a buon "
-                        + "fine perché l’email inserita "
+                messaggio = "L’email inserita "
                         + "non rispetta il formato richiesto";
                 throw new IllegalArgumentException(messaggio);
             }
 
             if (username.length() < MINLIMIT || username.length() > MAXLIMIT) {
-                messaggio = "La registrazione "
-                        + "non va a buon fine perché la username non "
+                messaggio = "La username non "
                         + "rispetta la lunghezza corretta";
                 throw new IllegalArgumentException(messaggio);
             }
 
             if (!username.matches("^((?!.*[\\s])(?=.*[A-Z])(?=.*\\d).{1,50})")
                     || username.substring(0, 5).equalsIgnoreCase("admin")) {
-                messaggio = "La registrazione non va a buon "
-                        + "fine perché la username inserita "
+                messaggio = "La username inserita "
                         + "non rispetta il formato richiesto";
                 throw new IllegalArgumentException(messaggio);
             }
 
             if (nome.length() < MINLIMIT || nome.length() > MAXLIMIT) {
-                messaggio = "La registrazione "
-                        + "non va a buon fine "
-                        + "perché il nome inserito non "
+                messaggio = "Il nome inserito non "
                         + "rispetta la lunghezza corretta";
                 throw new IllegalArgumentException(messaggio);
             }
 
             if (!nome.matches("^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$")) {
-                messaggio = "La registrazione non va a "
-                        + "buon fine perché il nome inserito non "
+                messaggio = "Il nome inserito non "
                         + "rispetta il formato richiesto";
                 throw new IllegalArgumentException(messaggio);
             }
 
             if (cognome.length() < MINLIMIT || cognome.length() > MAXLIMIT) {
-                messaggio = "La registrazione non "
-                        + "va a buon fine perché il cognome "
+                messaggio = "Il cognome "
                         + "inserito non rispetta "
                         + "la lunghezza corretta";
                 throw new IllegalArgumentException(messaggio);
             }
 
             if (!cognome.matches("^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$")) {
-                messaggio = "La registrazione non va a "
-                        + "buon fine perché il cognome inserito "
+                messaggio = "Il cognome inserito "
                         + "non rispetta il formato richiesto";
                 throw new IllegalArgumentException(messaggio);
             }
 
             if (password.length() < MINLIMIT || password.length() > MAXLIMIT) {
-                messaggio = "La registrazione "
-                        + "non va a buon fine perché la password "
+                messaggio = "La password "
                         + "inserita non rispetta la "
                         + "lunghezza corretta";
                 throw new IllegalArgumentException(messaggio);
             }
 
             if (!password.matches("^((?!.*[\\s])(?=.*[A-Z])(?=.*\\d).{1,50})")) {
-                messaggio = "La registrazione non "
-                        + "va a buon fine perché la password inserita"
+                messaggio = "La password inserita"
                         + " non rispetta il formato richiesto";
                 throw new IllegalArgumentException(messaggio);
             }
 
             if (strData == null) {
-                messaggio = "La registrazione "
-                        + "non va a buon fine perché "
-                        + "la data di nascita non è stata selezionata";
+                messaggio = "Data di nascita non selezionata";
                 throw new IllegalArgumentException(messaggio);
             }
 
@@ -184,9 +172,8 @@ public class AutenticazioneController extends HttpServlet {
             try {
                 data = Date.valueOf(strData);
             } catch (IllegalArgumentException e) {
-                messaggio = "La registrazione non va a buon fine "
-                        + "perché la data di nascita "
-                        + "non rispetta il formato richiesto";
+                messaggio = "La data di nascita "
+                        + "non rispetta il formato corretto";
                 throw new IllegalArgumentException(messaggio);
             }
 
@@ -195,7 +182,7 @@ public class AutenticazioneController extends HttpServlet {
 
                 messaggio = "La registrazione è avvenuta con successo";
 
-                response.setContentType("La registrazione è avvenuta correttamente");
+                response.setContentType("La registrazione è avvenuta con successo");
                 request.setAttribute("messaggio", messaggio);
                 dispatcher = request.getServletContext().getRequestDispatcher("/view/autenticazione/avvenutaRegistrazione.jsp");
                 dispatcher.forward(request, response);
@@ -222,15 +209,13 @@ public class AutenticazioneController extends HttpServlet {
                 String password = request.getParameter("password");
 
                 if (username.length() < MINLIMIT || username.length() > MAXLIMIT) {
-                    messaggio = "Il login non va a buon fine "
-                            + "perché la username non rispetta la "
+                    messaggio = "La username inserita non rispetta la "
                             + "lunghezza corretta";
                     throw new IllegalArgumentException(messaggio);
                 }
 
                 if (!username.matches("^((?!.*[\\s])(?=.*[A-Z])(?=.*\\d).{1,50})")) {
-                    messaggio = "Il login non va a buon fine "
-                            + "perché il formato della username non è corretto";
+                    messaggio = "La username inserita non rispetta il formato corretto";
                     throw new IllegalArgumentException(messaggio);
                 }
 
@@ -276,7 +261,7 @@ public class AutenticazioneController extends HttpServlet {
 
                         if (u != null) {
 
-                            response.setContentType("Il login è avvenuto correttamente");
+                            response.setContentType("Benvenuto");
                             session.setAttribute("utente", u);
                             dispatcher = request.getServletContext().getRequestDispatcher("/index.jsp");
                             dispatcher.forward(request, response);
