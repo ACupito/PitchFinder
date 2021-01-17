@@ -173,17 +173,19 @@ public class CampoDAOImpl implements CampoDAO {
      * delete a Disponibilita from Database.
      * @param emailUtente is the email of the user.
      * @param idCampo is the id of the pitch.
+     * @param data is the data of the Disponibilita.
      * @return boolean
      */
 
     @Override
-    public boolean doRemoveDisponibilita(String emailUtente, int idCampo) {
+    public boolean doRemoveDisponibilita(String emailUtente, int idCampo, Date data) {
         try (Connection con = ConPool.getInstance().getConnection()) {
             PreparedStatement ps =
-                    con.prepareStatement("delete from Disponibilita where UtenteEmail=? && CampoIdentificativo=? ");
+                    con.prepareStatement("delete from Disponibilita where UtenteEmail=? && CampoIdentificativo=? && Data=?");
 
             ps.setString(1, emailUtente);
             ps.setInt(2, idCampo);
+            ps.setDate(3, data);
 
             return ps.executeUpdate() == 1;
         } catch (SQLException e) {
