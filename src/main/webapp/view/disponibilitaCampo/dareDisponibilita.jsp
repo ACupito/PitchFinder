@@ -60,14 +60,14 @@
                 <div class="form-wrapper">
                     <label for="inizio">Orario Inizio</label>
 
-                    <input type="text" class="timepicker" name="inizio" id="inizio" minTime="09:00" maxTime="23:00"  size="5" required onkeydown="return false" onmousemove="clickTimeValidateDispIn()"><br>
+                    <input type="text" class="timepicker" name="inizio" id="inizio" minTime="09:00" maxTime="23:00" onkeydown="return false"  size="5" required  onmousemove="clickTimeValidateDispIn()"><br>
                     <small id="small-creation-timestr"> Inserire un orario di inizio valido(HH:MM)</small><br>
 
                 </div>
                 <div class="form-wrapper">
                     <label for="fine">Orario Fine</label>
 
-                    <input type="text" name="fine" id="fine" class="timepicker" minTime="09:00" maxTime="23:00"  size="5" required onkeydown="return false" onmousemove="clickTimeValidateDispFi()"><br>
+                    <input type="text" name="fine" id="fine" class="timepicker" minTime="09:00" maxTime="23:00"  size="5" onkeydown="return false" required  onmousemove="clickTimeValidateDispFi()"><br>
                     <small id="small-creation-timeend"> Inserire un orario di fine valido(HH:MM)</small><br>
 
                 </div>
@@ -100,12 +100,12 @@
     <% String esito = (String) request.getAttribute("risultato");
         if(esito!= null){
             if(esito.equals("1")){
-    request.setAttribute("risultato",null);%>
+    request.setAttribute("risultato",null); %>
     <script>
-        alert("La creazione va a buon fine");
+        alert("La disponibilità viene memorizzata con successo.");
     </script>
     <% } %>
-    <%}%>
+    <% }%>
 </div>
 
 <!-- Footer-->
