@@ -1,5 +1,5 @@
 <%@ page import="com.pitchfinder.torneo.entity.Torneo" %>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -123,13 +123,19 @@
                     <input type="hidden" name="flag" value="3">
                      <button class="btn-primary button-indietro">Indietro</button>
                 </form>
-                <form action="" method="">
-                <button class="btn-primary button-iscrivi">Iscrivi</button>
+                <form action="Iscrizione" method="get">
+                    <input type="hidden" name="nomeTorneo" value="<%=torneo.getNome()%>">
+                    <input type="hidden" name="campo" value="<%=torneo.getCampoIdentificativo()%>">
+                    <input type="hidden" name="dataTorneo" value="<%=torneo.getDataInizio()%>">
+                    <button class="btn-primary button-indietro" type="submit">Iscrivi</button>
                 </form>
             </div>
         </div>
 
 </div>
+
+
+
 
 </body>
 
@@ -138,6 +144,20 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"></script>
 <!-- Third party plugin JS-->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
+<!--alert for user not registered-->
+<% if(request.getAttribute("nonRegistrato")!= null){
+        request.setAttribute("nonRegistrato", null);%>
+        <script>
+            alert("Per iscriverti a un torneo devi aver dovuto effettuare il login, se non sei iscritto REGISTRATI ora a PitchFinder!")
+        </script>
+<%}%>
 
+<!--alert for user not registered-->
+<% if(request.getAttribute("IscrizioneOk")!= null){
+         request.setAttribute("IscrizioneOk", null);%>
+        <script>
+            alert("Iscrizione avvenuta con Successo!")
+        </script>
+<%}%>
 </html>
 

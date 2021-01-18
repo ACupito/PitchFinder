@@ -8,15 +8,18 @@ import com.pitchfinder.torneo.entity.Torneo;
 import com.pitchfinder.torneo.services.TorneoService;
 import com.pitchfinder.torneo.services.TorneoServiceImpl;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
-
+@WebServlet("/IscrizioneTorneoController")
 public class IscrizioneTorneoController extends HttpServlet {
 
     /**
@@ -29,13 +32,18 @@ public class IscrizioneTorneoController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         //Controll of button
-        if (req.getParameter("conferma") != null) {
+        if (req.getParameter("conferma").equals("conferma")) {
+
+            TorneoService torneoService = new TorneoServiceImpl();
+            String nomeTorneo = req.getParameter("nomeTorneo");
+            int campoTorneo = Integer.parseInt(req.getParameter("campoTorneo"));
+            Date dataTorneo = Date.valueOf(req.getParameter("dataTorneo"));
+            Torneo torneo = torneoService.getTorneo(nomeTorneo, dataTorneo, campoTorneo);
 
             HttpSession session = req.getSession();
-            Torneo torneo = (Torneo) session.getAttribute("torneo");
             Utente utente = (Utente) session.getAttribute("utente");
             String nomeSquadra = req.getParameter("nomeSquadra");
-            String numeroGiocatori = req.getParameter("numeroGiocatori");
+            String numeroGiocatori = req.getParameter("nGiocatori");
             int nGiocatori;
             String nomeCapitano = req.getParameter("nomeCapitano");
             String cognomeCapitano = req.getParameter("cognomeCapitano");
@@ -53,10 +61,6 @@ public class IscrizioneTorneoController extends HttpServlet {
                 throw new IllegalArgumentException("Formato nome squadra non valido");
             }
 
-            //Check torneo
-            if (torneo == null) {
-                throw new IllegalArgumentException("Torneo non valido");
-            }
 
             //Check utente
             if (utente == null) {
@@ -80,7 +84,7 @@ public class IscrizioneTorneoController extends HttpServlet {
 
 
             if (nGiocatori < torneo.getMinNumeroPartecipantiPerSquadra() || nGiocatori > torneo.getMaxNumeroPartecipantiPerSquadra()) {
-                throw new IllegalArgumentException("Il numero dei giocatori no rispetta le direttive del torneo");
+                throw new IllegalArgumentException("Il numero dei giocatori non rispetta le direttive del torneo");
             }
 
 
@@ -111,7 +115,6 @@ public class IscrizioneTorneoController extends HttpServlet {
             }
 
             //controllo squadre iscritte al torneo
-            TorneoService torneoService = new TorneoServiceImpl();
             if (torneoService.nIscritti(torneo) >= torneo.getNumeroSquadre()) {
                 throw new IllegalArgumentException("Non è possibile iscriversi, troppe squadre iscritte");
             }
@@ -124,8 +127,8 @@ public class IscrizioneTorneoController extends HttpServlet {
             List<String> giocatori = new ArrayList<>();
 
             for (int i = 0; i < nGiocatori; i++) {
-                String nomePlayer = "nomePlayer" + (i + 1);
-                String cognomePlayer = "cognomePlayer" + (i + 1);
+                String nomePlayer = "nome" + (i);
+                String cognomePlayer = "cognome" + (i);
 
                 if (req.getParameter(nomePlayer) == null) {
                     throw new IllegalArgumentException("Nome giocatore non valido");
@@ -139,7 +142,7 @@ public class IscrizioneTorneoController extends HttpServlet {
                     throw new IllegalArgumentException("Lunghezza nome giocatore non valida");
                 }
 
-                if (req.getParameter(cognomePlayer).length() < 1 || req.getParameter(cognomePlayer).length() > 10) {
+                if (req.getParameter(cognomePlayer).length() < 1 || req.getParameter(cognomePlayer).length() > 20) {
                     throw new IllegalArgumentException("Lunghezza cognome giocatore non valida");
                 }
 
@@ -168,9 +171,17 @@ public class IscrizioneTorneoController extends HttpServlet {
             }
 
             resp.setContentType("Iscrizione avvenuta con successo");
+            req.setAttribute("IscrizioneOk", "ok");
 
+            RequestDispatcher dispatcher =
+                    req.getServletContext().getRequestDispatcher("/view/torneo/dettagliTorneo.jsp");
+            dispatcher.forward(req, resp);
         } else {
-            resp.setContentType("Indietro");
+            if (req.getParameter("Indietro") != null) {
+            RequestDispatcher dispatcher =
+                    req.getServletContext().getRequestDispatcher("/view/torneo/dettagliTorneo.jsp");
+            dispatcher.forward(req, resp);
+            }
         }
     }
 
