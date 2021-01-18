@@ -60,7 +60,7 @@ public class TC_RF_CreareTorneo {
         driver.findElement(By.id("crea_torneo")).click();
         driver.findElement(By.id("uname")).click();
         driver.findElement(By.id("uname")).clear();
-        driver.findElement(By.id("uname")).sendKeys("''''");
+        driver.findElement(By.id("uname")).sendKeys("???");
         driver.findElement(By.xpath("//div[2]")).click();
         assertEquals("Il formato del nome non è valido!", driver.findElement(By.id("valid_nome")).getText());
     }
