@@ -227,7 +227,8 @@ public class TorneoController extends HttpServlet {
 
                         if (creationResult) { //creation occurred
                             response.setContentType("La creazione del torneo è avvenuta correttamente.");
-                            RequestDispatcher requestDispatcher = request.getServletContext().getRequestDispatcher("/autentication?flag=5&result=1&message=La creazione del torneo è avvenuta correttamente");
+                            RequestDispatcher requestDispatcher = request.getServletContext().getRequestDispatcher("/autentication?"
+                                    + "flag=5&result=1&message=La creazione del torneo è avvenuta correttamente");
                             requestDispatcher.forward(request, response);
                         }
 
@@ -280,7 +281,8 @@ public class TorneoController extends HttpServlet {
                         boolean removeResult = ts.deleteTorneo(campo, nome, dataInizio, dataFine, giornoPartite);
                         if (removeResult) response.setContentType("Eliminazione del torneo avvenuta correttamente.");
 
-                        RequestDispatcher requestDispatcher = request.getServletContext().getRequestDispatcher("/autentication?flag=5&result=1&message=Eliminazione del torneo avvenuta correttamente");
+                        RequestDispatcher requestDispatcher = request.getServletContext().getRequestDispatcher("/autentication?"
+                                + "flag=5&result=1&message=Eliminazione del torneo avvenuta correttamente");
                         requestDispatcher.forward(request, response);
                     }
 
