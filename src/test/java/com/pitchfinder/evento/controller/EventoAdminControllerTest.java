@@ -99,7 +99,7 @@ public class EventoAdminControllerTest {
         Mockito.when(mockedRequest.getParameter("data")).thenReturn(DATA);
         Mockito.when(mockedRequest.getParameter("postiDisponibili")).thenReturn(POSTI_DISPONIBILI);
 
-        String message = "Errato: lunghezza nome non valida";
+        String message = "La lunghezza del nome non è valida";
 
         IllegalArgumentException exception;
         exception = assertThrows(IllegalArgumentException.class,
@@ -123,7 +123,7 @@ public class EventoAdminControllerTest {
         Mockito.when(mockedRequest.getParameter("data")).thenReturn(DATA);
         Mockito.when(mockedRequest.getParameter("postiDisponibili")).thenReturn(POSTI_DISPONIBILI);
 
-        String message = "Errato: formato non valido";
+        String message = "Il formato nel nome non è valido";
 
         IllegalArgumentException exception;
         exception = assertThrows(IllegalArgumentException.class,
@@ -146,7 +146,7 @@ public class EventoAdminControllerTest {
         Mockito.when(mockedRequest.getParameter("data")).thenReturn(DATA);
         Mockito.when(mockedRequest.getParameter("postiDisponibili")).thenReturn(POSTI_DISPONIBILI);
 
-        String message = "Errato: orario non selezionato";
+        String message = "Inserire l’orario di inizio";
 
         IllegalArgumentException exception;
         exception = assertThrows(IllegalArgumentException.class,
@@ -164,12 +164,12 @@ public class EventoAdminControllerTest {
         Mockito.when(mockedRequest.getParameter("immagine")).thenReturn(IMMAGINE);
         Mockito.when(mockedRequest.getParameter("ospite")).thenReturn(OSPITE);
         Mockito.when(mockedRequest.getParameter("descrizione")).thenReturn(DESCRIZIONE);
-        Mockito.when(mockedRequest.getParameter("orarioInizio")).thenReturn("03:78");
+        Mockito.when(mockedRequest.getParameter("orarioInizio")).thenReturn("?!:78");
         Mockito.when(mockedRequest.getParameter("orarioFine")).thenReturn(ORARIO_FINE);
         Mockito.when(mockedRequest.getParameter("data")).thenReturn(DATA);
         Mockito.when(mockedRequest.getParameter("postiDisponibili")).thenReturn(POSTI_DISPONIBILI);
 
-        String message = "Errato: formato non valido";
+        String message = "Il formato dell'orario di inizio non è valido";
 
         IllegalArgumentException exception;
         exception = assertThrows(IllegalArgumentException.class,
@@ -192,7 +192,7 @@ public class EventoAdminControllerTest {
         Mockito.when(mockedRequest.getParameter("data")).thenReturn(DATA);
         Mockito.when(mockedRequest.getParameter("postiDisponibili")).thenReturn(POSTI_DISPONIBILI);
 
-        String message = "Errato: orario non selezionato";
+        String message = "Inserire l’orario di fine";
 
         IllegalArgumentException exception;
         exception = assertThrows(IllegalArgumentException.class,
@@ -211,11 +211,11 @@ public class EventoAdminControllerTest {
         Mockito.when(mockedRequest.getParameter("ospite")).thenReturn(OSPITE);
         Mockito.when(mockedRequest.getParameter("descrizione")).thenReturn(DESCRIZIONE);
         Mockito.when(mockedRequest.getParameter("orarioInizio")).thenReturn(ORARIO_INIZIO);
-        Mockito.when(mockedRequest.getParameter("orarioFine")).thenReturn("43:77");
+        Mockito.when(mockedRequest.getParameter("orarioFine")).thenReturn("40:'?");
         Mockito.when(mockedRequest.getParameter("data")).thenReturn(DATA);
         Mockito.when(mockedRequest.getParameter("postiDisponibili")).thenReturn(POSTI_DISPONIBILI);
 
-        String message = "Errato: formato non valido";
+        String message = "Il formato dell'orario di fine non è valido";
 
         IllegalArgumentException exception;
         exception = assertThrows(IllegalArgumentException.class,
@@ -238,7 +238,7 @@ public class EventoAdminControllerTest {
         Mockito.when(mockedRequest.getParameter("data")).thenReturn("");
         Mockito.when(mockedRequest.getParameter("postiDisponibili")).thenReturn(POSTI_DISPONIBILI);
 
-        String message = "Errato: data non selezionata";
+        String message = "Inserire la data";
 
         IllegalArgumentException exception;
         exception = assertThrows(IllegalArgumentException.class,
@@ -257,10 +257,10 @@ public class EventoAdminControllerTest {
         Mockito.when(mockedRequest.getParameter("descrizione")).thenReturn(DESCRIZIONE);
         Mockito.when(mockedRequest.getParameter("orarioInizio")).thenReturn(ORARIO_INIZIO);
         Mockito.when(mockedRequest.getParameter("orarioFine")).thenReturn(ORARIO_FINE);
-        Mockito.when(mockedRequest.getParameter("data")).thenReturn("2019-12-22");
+        Mockito.when(mockedRequest.getParameter("data")).thenReturn("Aw/s1/??");
         Mockito.when(mockedRequest.getParameter("postiDisponibili")).thenReturn(POSTI_DISPONIBILI);
 
-        String message = "Errato: formato non valido";
+        String message = "La data non rispetta il formato";
 
         IllegalArgumentException exception;
         exception = assertThrows(IllegalArgumentException.class,
@@ -282,7 +282,7 @@ public class EventoAdminControllerTest {
         Mockito.when(mockedRequest.getParameter("data")).thenReturn(DATA);
         Mockito.when(mockedRequest.getParameter("postiDisponibili")).thenReturn(POSTI_DISPONIBILI);
 
-        String message = "Errato: lunghezza non valida";
+        String message = "La lunghezza del nome dell’ospite non è valida";
 
         IllegalArgumentException exception;
         exception = assertThrows(IllegalArgumentException.class,
@@ -304,7 +304,7 @@ public class EventoAdminControllerTest {
         Mockito.when(mockedRequest.getParameter("data")).thenReturn(DATA);
         Mockito.when(mockedRequest.getParameter("postiDisponibili")).thenReturn(POSTI_DISPONIBILI);
 
-        String message = "Errato: formato non valido";
+        String message = "Il formato dell'ospite non è valido";
 
         IllegalArgumentException exception;
         exception = assertThrows(IllegalArgumentException.class,
@@ -326,7 +326,7 @@ public class EventoAdminControllerTest {
         Mockito.when(mockedRequest.getParameter("data")).thenReturn(DATA);
         Mockito.when(mockedRequest.getParameter("postiDisponibili")).thenReturn(POSTI_DISPONIBILI);
 
-        String message = "Errato: lunghezza non valida";
+        String message = "La lunghezza della descrizione non è valida";
 
         IllegalArgumentException exception;
         exception = assertThrows(IllegalArgumentException.class,
@@ -348,7 +348,7 @@ public class EventoAdminControllerTest {
         Mockito.when(mockedRequest.getParameter("data")).thenReturn(DATA);
         Mockito.when(mockedRequest.getParameter("postiDisponibili")).thenReturn(POSTI_DISPONIBILI);
 
-        String message = "Errato: formato non valido";
+        String message = "Il formato della descrizione non è valido";
 
         IllegalArgumentException exception;
         exception = assertThrows(IllegalArgumentException.class,
@@ -370,7 +370,7 @@ public class EventoAdminControllerTest {
         Mockito.when(mockedRequest.getParameter("data")).thenReturn(DATA);
         Mockito.when(mockedRequest.getParameter("postiDisponibili")).thenReturn("");
 
-        String message = "Errato: lunghezza non valida";
+        String message = "Il numero di posti disponibili non è valido";
 
         IllegalArgumentException exception;
         exception = assertThrows(IllegalArgumentException.class,
@@ -393,7 +393,7 @@ public class EventoAdminControllerTest {
         Mockito.when(mockedRequest.getParameter("data")).thenReturn(DATA);
         Mockito.when(mockedRequest.getParameter("postiDisponibili")).thenReturn("@");
 
-        String message = "Errato: formato non valido";
+        String message = "Il formato dei posti disponibili non è valido";
 
         IllegalArgumentException exception;
         exception = assertThrows(IllegalArgumentException.class,
@@ -416,10 +416,10 @@ public class EventoAdminControllerTest {
         Mockito.when(mockedRequest.getParameter("postiDisponibili")).thenReturn(POSTI_DISPONIBILI);
 
         Mockito.doReturn(mockedServletContext).when(mockedRequest).getServletContext();
-        Mockito.doReturn(mockedDispatcher).when(mockedServletContext).getRequestDispatcher("/autentication?flag=5");
+        Mockito.doReturn(mockedDispatcher).when(mockedServletContext).getRequestDispatcher("/autentication?flag=5&result=1&message=La creazione dell’evento è andata a buon fine");
 
         servlet.doPost(mockedRequest, mockedResponse);
-        Mockito.verify(mockedResponse).setContentType("Creazione avvenuta");
+        Mockito.verify(mockedResponse).setContentType("La creazione dell’evento è andata a buon fine");
 
 
     }

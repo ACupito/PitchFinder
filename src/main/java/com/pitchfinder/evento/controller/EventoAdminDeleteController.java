@@ -62,21 +62,11 @@ public class EventoAdminDeleteController extends HttpServlet {
             /* The Event's date (Date)*/
             Date dataEvento;
 
-            if (nome.length() < MINLIMIT || nome.length() > MAXLIMIT) {
-                throw new IllegalArgumentException("Errato: lunghezza nome non valida");
-            }
-            if (!nome.matches("^[a-zA-Z0-9\u00C0-\u00ff'\\s]+$")) {
-                throw new IllegalArgumentException("Errato: formato non valido");
-            }
-
-            if (dateStr.equals("")) {
-                throw new IllegalArgumentException("Errato: data non selezionata");
-            }
-
             try {
-                dataEvento = Date.valueOf(dateStr); /* The Event's date (Date). */
+                /* The Event's date (Date). */
+                dataEvento = Date.valueOf(dateStr);
             } catch (IllegalArgumentException e) {
-                throw new IllegalArgumentException("Errato: formato non valido");
+                throw new IllegalArgumentException("Errore nell'eliminazione dell'evento, la data non viene trovata");
             }
 
             Evento temp = new Evento(nome, "default", new Time(12, 0, 0),
@@ -85,7 +75,8 @@ public class EventoAdminDeleteController extends HttpServlet {
 
             es.removeEvento(temp);
             response.setContentType("Eliminazione avvenuta");
-            RequestDispatcher requestDispatcher = request.getServletContext().getRequestDispatcher("/autentication?flag=5");
+            RequestDispatcher requestDispatcher = request.getServletContext().getRequestDispatcher("/autentication?"
+                    + "flag=5&result=1&message=Eliminazione avvenuta");
             requestDispatcher.forward(request, response);
         }
     }
