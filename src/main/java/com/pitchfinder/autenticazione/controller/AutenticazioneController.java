@@ -112,7 +112,7 @@ public class AutenticazioneController extends HttpServlet {
             }
 
             if (username.length() < MINLIMIT || username.length() > MAXLIMIT) {
-                messaggio = "La username non "
+                messaggio = "La username inserita non "
                         + "rispetta la lunghezza corretta";
                 throw new IllegalArgumentException(messaggio);
             }
@@ -120,7 +120,7 @@ public class AutenticazioneController extends HttpServlet {
             if (!username.matches("^((?!.*[\\s])(?=.*[A-Z])(?=.*\\d).{1,50})")
                     || username.substring(0, 5).equalsIgnoreCase("admin")) {
                 messaggio = "La username inserita "
-                        + "non rispetta il formato richiesto";
+                        + "non rispetta il formato corretto";
                 throw new IllegalArgumentException(messaggio);
             }
 
@@ -261,7 +261,7 @@ public class AutenticazioneController extends HttpServlet {
 
                         if (u != null) {
 
-                            response.setContentType("Benvenuto");
+                            response.setContentType("Benvenuto!");
                             session.setAttribute("utente", u);
                             dispatcher = request.getServletContext().getRequestDispatcher("/index.jsp");
                             dispatcher.forward(request, response);

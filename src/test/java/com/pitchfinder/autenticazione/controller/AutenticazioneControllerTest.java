@@ -120,7 +120,7 @@ class AutenticazioneControllerTest extends Mockito {
 
         servlet.doPost(mockedRequest, mockedResponse);
 
-        Mockito.verify(mockedResponse).setContentType("Benvenuto");
+        Mockito.verify(mockedResponse).setContentType("Benvenuto!");
     }
 
     @Test
@@ -195,7 +195,7 @@ class AutenticazioneControllerTest extends Mockito {
         Mockito.when(mockedRequest.getParameter("password_")).thenReturn(password);
         Mockito.when(mockedRequest.getParameter("data")).thenReturn(data);
 
-        String message = "La username non " +
+        String message = "La username inserita non " +
                 "rispetta la lunghezza corretta";
 
         exception = assertThrows(
@@ -218,7 +218,7 @@ class AutenticazioneControllerTest extends Mockito {
         Mockito.when(mockedRequest.getParameter("data")).thenReturn(data);
 
         String message = "La username inserita " +
-                "non rispetta il formato richiesto";
+                "non rispetta il formato corretto";
 
         exception = assertThrows(
                 IllegalArgumentException.class, () -> {
