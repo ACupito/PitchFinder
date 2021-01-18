@@ -12,7 +12,9 @@ import org.junit.jupiter.api.AfterAll;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class TC_3_2_11 {
     private WebDriver driver;
@@ -61,7 +63,9 @@ public class TC_3_2_11 {
         driver.findElement(By.id("surnameG1")).sendKeys("Dello Buono");
         driver.findElement(By.id("creation-submit")).click();
 
-        //testare alert
+        assertEquals("La prenotazione viene memorizzata con successo",
+                closeAlertAndGetItsText());
+
 
 
     }
@@ -95,7 +99,8 @@ public class TC_3_2_11 {
 
     private String closeAlertAndGetItsText() {
         try {
-            Alert alert = driver.switchTo().alert();
+            WebDriverWait wait = new WebDriverWait(driver, 15);
+            Alert alert = wait.until(ExpectedConditions.alertIsPresent());
             String alertText = alert.getText();
             if (acceptNextAlert) {
                 alert.accept();
