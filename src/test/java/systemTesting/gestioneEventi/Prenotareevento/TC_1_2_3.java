@@ -1,4 +1,4 @@
-package systemTesting.gestioneSport.rf_prenotareUnCampo;
+package systemTesting.gestioneEventi.Prenotareevento;
 
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
@@ -10,13 +10,15 @@ import org.openqa.selenium.NoAlertPresentException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
+
+
 import java.util.NoSuchElementException;
 import java.util.concurrent.TimeUnit;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
-public class TC_3_2_1 {
+public class TC_1_2_3 {
     private WebDriver driver;
     private String baseUrl;
     private boolean acceptNextAlert = true;
@@ -24,22 +26,22 @@ public class TC_3_2_1 {
 
 
     @Test
-    public void testTC321() throws Exception {
+    public void testTC123() throws Exception {
         driver.get("http://localhost:8080/PitchFinder_war_exploded/");
-        driver.findElement(By.id("dropdownMenu1")).click();
-        driver.findElement(By.id("username")).click();
-        driver.findElement(By.id("username")).clear();
-        driver.findElement(By.id("username")).sendKeys("Meglio100");
-        driver.findElement(By.id("password")).click();
-        driver.findElement(By.id("password")).clear();
-        driver.findElement(By.id("password")).sendKeys("Esse3");
-        driver.findElement(By.id("login")).click();
-        driver.findElement(By.cssSelector("svg.svg-inline--fa.fa-running.fa-w-13.fa-stack-1x.fa-inverse")).click();
-        driver.findElement(By.id("creation-data")).click();
-        driver.findElement(By.id("form-creation")).click();
-        assertEquals("La data non è selezionata",
-                driver.findElement(By.id("small-creation-data")).getText());
+        driver.findElement(By.id("EventoButton")).click();
+        driver.findElement(By.name("eventDetailsButton")).click();
+        driver.findElement(By.id("email")).click();
+        driver.findElement(By.id("email")).clear();
+        driver.findElement(By.id("email")).sendKeys("c.Salvato@gmail.com");
+        // ERROR: Caught exception [ERROR: Unsupported command [mouseOver | id=alert | ]]
+        while(isAlertPresent());
+        assertEquals("Prenotazione effettuata con successo! Riceverà un'email con il codice della prenotazione.",
+                driver.findElement(By.id("Fine")).getAttribute("value"));
+
+
+        // ERROR: Caught exception [ERROR: Unsupported command [captureEntirePageScreenshot |  | ]]
     }
+
 
     @AfterAll
     public void tearDown() throws Exception {
@@ -90,7 +92,5 @@ public class TC_3_2_1 {
         driver = new ChromeDriver();
         baseUrl = "https://www.google.com/";
         driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
-
-
     }
 }
