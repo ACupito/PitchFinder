@@ -1,4 +1,4 @@
-package systemTesting.gestioneSport.rf_prenotareUnCampo;
+package systemTesting.gestioneEventi.Prenotareevento;
 
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
@@ -16,7 +16,7 @@ import java.util.concurrent.TimeUnit;
 import static org.junit.jupiter.api.Assertions.*;
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
-public class TC_3_2_1 {
+public class TC_1_2_2 {
     private WebDriver driver;
     private String baseUrl;
     private boolean acceptNextAlert = true;
@@ -24,22 +24,20 @@ public class TC_3_2_1 {
 
 
     @Test
-    public void testTC321() throws Exception {
+    public void testTC122() throws Exception {
         driver.get("http://localhost:8080/PitchFinder_war_exploded/");
-        driver.findElement(By.id("dropdownMenu1")).click();
-        driver.findElement(By.id("username")).click();
-        driver.findElement(By.id("username")).clear();
-        driver.findElement(By.id("username")).sendKeys("Meglio100");
-        driver.findElement(By.id("password")).click();
-        driver.findElement(By.id("password")).clear();
-        driver.findElement(By.id("password")).sendKeys("Esse3");
-        driver.findElement(By.id("login")).click();
-        driver.findElement(By.cssSelector("svg.svg-inline--fa.fa-running.fa-w-13.fa-stack-1x.fa-inverse")).click();
-        driver.findElement(By.id("creation-data")).click();
-        driver.findElement(By.id("form-creation")).click();
-        assertEquals("La data non è selezionata",
-                driver.findElement(By.id("small-creation-data")).getText());
+        driver.findElement(By.id("EventoButton")).click();
+        driver.findElement(By.name("eventDetailsButton")).click();
+        driver.findElement(By.id("email")).click();
+        driver.findElement(By.id("email")).clear();
+        driver.findElement(By.id("email")).sendKeys("c.Salvat!!@jwi.com");
+        // ERROR: Caught exception [ERROR: Unsupported command [mouseOver | id=alert | ]]
+        assertEquals("Formato non valido",
+                driver.findElement(By.id("alert")).getText());
+
+        // ERROR: Caught exception [ERROR: Unsupported command [captureEntirePageScreenshot |  | ]]
     }
+
 
     @AfterAll
     public void tearDown() throws Exception {
