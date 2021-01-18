@@ -182,7 +182,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="struttura">Struttura:</label>
-                                    <select name="struttura" id="struttura" onblur="validateStruttura()">
+                                    <select name="struttura" id="struttura" onchange="validateStruttura()" onblur="validateStruttura()">
                                         <option value="null" selected></option>
                                         <option value="Partite singole">Partite singole</option>
                                         <option value="Partite doppie">Partite doppie</option>
@@ -191,17 +191,17 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="maxSquadre">Numero squadre torneo:</label>
-                                    <input type="number" class="form-control" id="maxSquadre" name="maxSquadre" min="1" max="20" required onblur="validateSquadre()">
+                                    <input type="text" class="form-control" id="maxSquadre" name="maxSquadre" min="1" max="20" required oninput="validateSquadre()" onchange="validateSquadre()" onblur="validateSquadre()">
                                     <div id="valid_squadra">Il numero delle squadre deve essere maggiore di 1 e minore di 20.</div>
                                 </div>
                                 <div class="form-group">
                                     <label for="minPartecipanti">Numero minimo di partecipanti per squadra:</label>
-                                    <input type="number" class="form-control" id="minPartecipanti" name="minPartecipanti" min="1" max="5" required onblur="validateMinPartecipanti()">
+                                    <input type="text" class="form-control" id="minPartecipanti" name="minPartecipanti" min="1" max="5" required oninput="validateMinPartecipanti()" onchange="validateMinPartecipanti()" onblur="validateMinPartecipanti()">
                                     <div id="valid_minParteci">Il numero minimo di partecipanti deve essere maggiore di 1 e minore di 5.</div>
                                 </div>
                                 <div class="form-group">
                                     <label for="maxPartecipanti">Numero massimo di partecipanti per squadra:</label>
-                                    <input type="number" class="form-control" id="maxPartecipanti" name="maxPartecipanti" min="5" max="12" required onblur="validateMaxPartecipanti()">
+                                    <input type="text" class="form-control" id="maxPartecipanti" name="maxPartecipanti" min="5" max="12" required oninput="validateMaxPartecipanti()" onchange="validateMaxPartecipanti()" onblur="validateMaxPartecipanti()">
                                     <div id="valid_maxParteci">Il numero massimo di partecipanti deve essere maggiore di 5 e minore di 12.</div>
                                 </div>
 

@@ -126,42 +126,61 @@ function validateName() {
 }
 
 function validateSquadre() {
-
-            if (parseInt($("#maxSquadre").val()) >= 1 && parseInt($("#maxSquadre").val()) <= 20) {
-            $("#valid_squadra").text("Il numero delle squadre è valido.");
-            $("#valid_squadra").css("color", "#4CAF50");
-            isSquadreValid = true;
-        } else {
+        var value = $("#maxSquadre").val();
+        if(!value.match("^[0-9]")) {
             $("#valid_squadra").css("color", "#FF0000");
-            $("#valid_squadra").text("Numero di squadre non valido!");
+            $("#valid_squadra").text("Il formato del numero di squadre non è valido!");
             isSquadreValid = false;
+        } else {
+                if (parseInt(value) >= 1 && parseInt(value) <= 20) {
+                $("#valid_squadra").text("Il numero delle squadre è valido.");
+                $("#valid_squadra").css("color", "#4CAF50");
+                isSquadreValid = true;
+            } else {
+                $("#valid_squadra").css("color", "#FF0000");
+                $("#valid_squadra").text("Numero di squadre non valido!");
+                isSquadreValid = false;
+            }
         }
 }
 
 
 function validateMinPartecipanti() {
-
-    if (parseInt($("#minPartecipanti").val()) >= 1 && parseInt($("#minPartecipanti").val()) <= 5) {
-        $("#valid_minParteci").text("Numero minimo di partecipanti valido.");
-        $("#valid_minParteci").css("color", "#4CAF50");
-        isMinPartecValid = true;
-    } else {
+    var minPartecipanti = $("#minPartecipanti").val();
+    if(!minPartecipanti.match("^[0-9]")) {
         $("#valid_minParteci").css("color", "#FF0000");
-        $("#valid_minParteci").text("Numero minimo di partecipanti non valido!");
+        $("#valid_minParteci").text("Il formato del numero minimo di partecipanti non è valido!");
         isMinPartecValid = false;
+    } else {
+        if (parseInt(minPartecipanti) >= 1 && parseInt(minPartecipanti) <= 5) {
+            $("#valid_minParteci").text("Numero minimo di partecipanti valido.");
+            $("#valid_minParteci").css("color", "#4CAF50");
+            isMinPartecValid = true;
+        } else {
+            $("#valid_minParteci").css("color", "#FF0000");
+            $("#valid_minParteci").text("Numero minimo di partecipanti non valido!");
+            isMinPartecValid = false;
+        }
     }
 }
 
 function validateMaxPartecipanti() {
-
-    if (parseInt($("#maxPartecipanti").val()) >= 5 && parseInt($("#maxPartecipanti").val()) <= 12) {
-        $("#valid_maxParteci").text("Numero massimo di partecipanti valido.");
-        $("#valid_maxParteci").css("color", "#4CAF50");
-        isMaxPartecValid = true;
-    } else {
+    var maxPartecipanti = $("#maxPartecipanti").val();
+    if(!maxPartecipanti.match("^[0-9]")) {
         $("#valid_maxParteci").css("color", "#FF0000");
-        $("#valid_maxParteci").text("Numero massimo di partecipanti non valido!");
+        $("#valid_maxParteci").text("Il formato del numero massimo di partecipanti non è valido!");
         isMaxPartecValid = false;
+    }
+    else {
+        if (parseInt(maxPartecipanti) >= 5 && parseInt(maxPartecipanti) <= 12) {
+            $("#valid_maxParteci").text("Numero massimo di partecipanti valido.");
+            $("#valid_maxParteci").css("color", "#4CAF50");
+            isMaxPartecValid = true;
+        } else {
+            $("#valid_maxParteci").css("color", "#FF0000");
+            $("#valid_maxParteci").text("Numero massimo di partecipanti non valido!");
+            isMaxPartecValid = false;
+        }
     }
 }
 
