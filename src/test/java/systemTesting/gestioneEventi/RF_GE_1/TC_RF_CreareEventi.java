@@ -1,4 +1,4 @@
-package systemTesting.gestioneEventi.rf_creareUnEvento;
+Upackage systemTesting.gestioneEventi.RF_GE_1;
 
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
@@ -17,7 +17,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
-public class TC_RF_CreareUnEvento {
+public class TC_RF_CreareEventi {
     private WebDriver driver;
     private String baseUrl;
     private boolean acceptNextAlert = true;
