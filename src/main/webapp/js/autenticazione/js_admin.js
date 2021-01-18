@@ -146,12 +146,12 @@ var isSitsEvento=false;
     /** validateTimeEndEvento **/
     function validateTimeEndEvento(){
         if(document.getElementById("creation-timeend-Evento").value.match("^[0-9]{2}:[0-9]{2}$")){
-            $("#creation-timeend-Evento").text("L'orario di fine è valido, rispetta il formato");
-            $("#creation-timeend-Evento").css("color","#4CAF50");
+            $("#time-evento-end-valid").text("L'orario di fine è valido, rispetta il formato");
+            $("#time-evento-end-valid").css("color","#4CAF50");
             isTimeEndValidEvento=true;
         }else{
-            $("#creation-timeend-Evento").text("L'orario di fine non rispetta il formato");
-            $("#creation-timeend-Evento").css("color","#FF0000");
+            $("#time-evento-end-valid").text("L'orario di fine non rispetta il formato");
+            $("#time-evento-end-valid").css("color","#FF0000");
             isTimeEndValidEvento=false;
         }
     }
@@ -159,7 +159,7 @@ var isSitsEvento=false;
     /** validate Ospite **/
     function validateGuestEvento(){
 
-        if( $("#creation-guest-Evento").val().match("^[a-zA-Z0-9\u00C0-\u00ff']+")){
+        if( $("#creation-guest-Evento").val().match("^[ a-zA-z\u00C0-\u00ff\']+")){
             if($("#creation-guest-Evento").val().length < 1 || $("#creation-guest-Evento").val().length>20) {
                 $("#guest-evento-valid").text("La lunghezza del nome dell’ospite non è valida");
                 $("#guest-evento-valid").css("color", "#FF0000");
