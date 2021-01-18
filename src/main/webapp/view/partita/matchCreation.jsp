@@ -37,17 +37,17 @@
                 <h4 align="center"> Creazione Partita </h4>
                 <input type="hidden" class="code" name="idCampo" value="1002">
                 <label for="creation-data" id="creation-label-data">Data partita:</label>
-                <input type="date" id="creation-data" name="date" onkeydown="return false" onblur="valiDate()"><br>
+                <input type="date" id="creation-data" name="date"  onblur="valiDate()"><br>
                 <small id="small-creation-data"> Inserire una data valida(DD/MM/YYYY)</small><br>
                 <label for="creation-timestr" id="creation-label-str">Orario Inizio:</label>
-                <input type="text" id="creation-timestr" class="timepicker" name="start" minTime="09:00" maxTime="23:00"  size="5" required onkeydown="return false" onmousemove="validateStart()" ><br>
+                <input type="text" id="creation-timestr" class="timepicker" name="start" minTime="09:00" maxTime="23:00"  size="5" required  onmousemove="validateStart()" ><br>
                 <small id="small-creation-timestr"> Inserire un orario di inizio valido(HH:MM)</small><br>
                 <label for="creation-timeend" id="creation-label-end">Orario Fine:</label>
-                <input type="text" id="creation-timeend" class="timepicker" name="end" minTime="09:00" maxTime="23:00"  size="5" required onkeydown="return false" onmousemove="clickTimeValidate()"><br>
+                <input type="text" id="creation-timeend" class="timepicker" name="end" minTime="09:00" maxTime="23:00"  size="5" required  onmousemove="clickTimeValidate()"><br>
                 <small id="small-creation-timeend"> Inserire un orario di fine valido(HH:MM), max 2 ore di partita</small><br>
                 <label for="creation-player" id="creation-label-player">Numero giocatori:</label>
                 <input type="number" id="creation-player" name="maxGiocatori" min="0" max="3" value="0" required onchange="validateNPlayer()"><br>
-                <small id="small-creation-player"> Inserire un numero di giocatori da invitare,(max 3 totali)</small><br>
+                <small id="small-creation-player"> Inserire un numero di giocatori da invitare(max 3 totali)</small><br>
 
                 <label for="nameG1" id="creation-label-nameG1" style="display: none">Nome:</label>
                 <input type="text" id="nameG1" name="nameG1" style="display: none" class="objName" onkeyup="validateName1()" >
@@ -89,7 +89,7 @@
         if(esito!= null){
             if(esito.equals("1")){%>
                 <script>
-                    alert("La prenotazione viene memorizzata con successo");
+                    setTimeout(() => {alert("La prenotazione viene memorizzata con successo");}, 2000)
                 </script>
         <% } %>
     <%}%>

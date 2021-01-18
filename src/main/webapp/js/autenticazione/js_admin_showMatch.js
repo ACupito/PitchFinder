@@ -74,3 +74,57 @@ function showPlayer(name) {
     xmlHttpReq.open("GET", "showAj?codice="+encodeURIComponent(name) , true);
     xmlHttpReq.send();
 }
+
+function filterMatch(){
+    var data;
+    if(document.getElementById("filter-date").value == null ||
+        !document.getElementById("filter-date").value.match("^(.*[-])[0-9]*$")){
+        data = "null";
+    }else{
+        data = document.getElementById("filter-date").value;
+    }
+
+    var time;
+    if(document.getElementById("filter-time").value == null ||
+        !document.getElementById("filter-time").value.match("^(.*[:])[0-9]*$")){
+        time = "null";
+    }else{
+        time = document.getElementById("filter-time").value;
+    }
+    var father = document.getElementById("players-table");
+
+    if(father.hasChildNodes()){
+        for(j=0;j<father.childElementCount;j++){
+            father.removeChild(father.lastChild)
+            j--;
+        }
+    }
+
+    $(document).ready(function (){
+        $.getJSON("FilterJSON", {data: data,time: time}, function (data){
+            myFunction(data);
+        });
+    });
+
+}
+
+function myFunction(data){
+
+
+    var table = null;
+    for (var i = 0; i < data.length; i++) {
+        table += "<tr>" +
+            "<th scope = 'row'>" + data[i].idCampo + "</th>" +
+            "<td data-title = 'UtenteEmail'>" + data[i].utenteEmail+ "</td>" +
+            "<td data-title = 'Data'>" + data[i].date + "</td>" +
+            "<td data-title = 'Orario Inizio'>" + data[i].orarioInizio + "</td>" +
+            "<td data-title = 'Orario Fine'>" + data[i].orarioFine + "</td>" +
+            "<td data-title = 'Show'>" +
+            "<button class = 'remove' name = '" + data[i].idPartita +"' onclick = 'showPlayer(name)'>"
+            + "Giocatori" +
+            "</button>" +
+            "</td>" +
+            "</tr>";
+    }
+    $("#tbody_partite").html(table);
+}
