@@ -1,45 +1,23 @@
-package systemTesting.gestioneSport.rf_prenotareUnCampo;
+package systemTesting.gestioneSport.rf_indicareDisponibilita;
 
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
-import org.openqa.selenium.Alert;
-import org.openqa.selenium.By;
-import org.openqa.selenium.NoAlertPresentException;
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 
-import java.util.NoSuchElementException;
 import java.util.concurrent.TimeUnit;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.fail;
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
-public class TC_3_2_1 {
+public class TC_31_4 {
     private WebDriver driver;
     private String baseUrl;
     private boolean acceptNextAlert = true;
     private StringBuffer verificationErrors = new StringBuffer();
-
-
-    @Test
-    public void testTC321() throws Exception {
-        driver.get("http://localhost:8080/PitchFinder_war_exploded/");
-        driver.findElement(By.id("dropdownMenu1")).click();
-        driver.findElement(By.id("username")).click();
-        driver.findElement(By.id("username")).clear();
-        driver.findElement(By.id("username")).sendKeys("Meglio100");
-        driver.findElement(By.id("password")).click();
-        driver.findElement(By.id("password")).clear();
-        driver.findElement(By.id("password")).sendKeys("Esse3");
-        driver.findElement(By.id("login")).click();
-        driver.findElement(By.cssSelector("svg.svg-inline--fa.fa-running.fa-w-13.fa-stack-1x.fa-inverse")).click();
-        driver.findElement(By.id("creation-data")).click();
-        driver.findElement(By.id("form-creation")).click();
-        assertEquals("La data non è selezionata",
-                driver.findElement(By.id("small-creation-data")).getText());
-    }
 
     @AfterAll
     public void tearDown() throws Exception {
@@ -49,6 +27,41 @@ public class TC_3_2_1 {
             fail(verificationErrorString);
         }
     }
+
+    @BeforeAll
+    public void setUp() throws Exception {
+        System.setProperty("webdriver.chrome.driver", "src/test/java/systemTesting/katalonDriver/chromedriver.exe");
+        driver = new ChromeDriver();
+        baseUrl = "https://www.google.com/";
+        driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+
+
+    }
+
+    @Test
+    public void TC314() throws Exception {
+//formato non posso sbagliare
+        driver.get("http://localhost:8080/PitchFinder_war_exploded/");
+        driver.findElement(By.id("dropdownMenu1")).click();
+        driver.findElement(By.id("username")).click();
+        driver.findElement(By.id("username")).clear();
+        driver.findElement(By.id("username")).sendKeys("Meglio100");
+        driver.findElement(By.id("password")).click();
+        driver.findElement(By.id("password")).clear();
+        driver.findElement(By.id("password")).sendKeys("Esse3");
+        driver.findElement(By.id("login")).click();
+        driver.findElement(By.cssSelector("svg.svg-inline--fa.fa-calendar-check.fa-w-14.fa-stack-1x.fa-inverse > path")).click();
+        driver.findElement(By.id("inizio")).click();
+        driver.findElement(By.xpath("//form[@action='DareDispCampoController']")).click();
+        driver.get("http://localhost:8080/PitchFinder_war_exploded/DareDispCampoController?data=2021-01-29&inizio=09fsadfaf%3A00&fine=12%3A00&idcampo=1002&Conferma=Conferma");
+        try {
+            assertEquals("Non viene memorizzata la disponibilità poiché il formato dell’orario di inizio non è valido.",
+                    driver.findElement(By.id("error")).getText());
+        } catch (Error e) {
+            verificationErrors.append(e.toString());
+        }
+    }
+
 
     private boolean isElementPresent(By by) {
         try {
@@ -82,15 +95,5 @@ public class TC_3_2_1 {
             acceptNextAlert = true;
         }
     }
-
-
-    @BeforeAll
-    public void setUp() throws Exception {
-        System.setProperty("webdriver.chrome.driver","src/test/java/systemTesting/katalonDriver/chromedriver.exe");
-        driver = new ChromeDriver();
-        baseUrl = "https://www.google.com/";
-        driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
-
-
     }
-}
+

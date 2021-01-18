@@ -64,7 +64,7 @@ function minMaxTimeDisp() {
     //Start validation
     function validateStartDisp() {
 
-        if (!document.getElementById("inizio").value.match("^[0-2]{1}[0-9]{1}\\:[0-6]{1}[0-9]{1}$")) {
+        if (!document.getElementById("inizio").value.localeCompare("")) {
             $("#inizio").css("color", "#FF0000");
             $("#small-creation-timestr").text("Non viene memorizzata la disponibilità poiché l'orario di inizio non è stata selezionato.");
             $("#small-creation-timestr").css("color", "#FF0000");
@@ -85,7 +85,7 @@ function minMaxTimeDisp() {
 
 //End validation
     function validateEndDisp() {
-        if (!document.getElementById("fine").value.match("^[0-2]{1}[0-9]{1}\\:[0-6]{1}[0-9]{1}$")) {
+        if (!document.getElementById("fine").value.localeCompare("")) {
             $("#fine").css("color", "#FF0000");
             $("#small-creation-timeend").text("Non viene memorizzata la disponibilità poiché l'orario di fine non è stata selezionato.");
             $("#small-creation-timeend").css("color", "#FF0000");
