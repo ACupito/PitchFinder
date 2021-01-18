@@ -108,7 +108,7 @@
 
 
 
-                <div class="card-body-admin" id="creaTorneo" style="display:none"> <!-- div utenti presenti nel DB-->
+                <div class="card-body-admin" id="creaTorneo" style="display: none"> <!-- div utenti presenti nel DB-->
                     <div class="row1">
                         <div class="colo-title-admin">
                             <h4><span><i class="fas fa-database"></i></span> Creazione Torneo</h4>
@@ -123,24 +123,24 @@
                                 <input type="hidden" name="idCampo" value="1002">
                                 <div class="form-group">
                                     <label for="uname">Nome:</label>
-                                    <input type="text" class="form-control" id="uname" name="nome" onblur="validateName()" required>
+                                    <input type="text" class="form-control" id="uname" name="nome" oninput="validateName()" onblur="validateName()" required>
                                     <div id="valid_nome">Il nome non può superare 50 caratteri.</div>
 
                                 </div>
                                 <div class="form-group">
                                     <label for="data_inizio">Data Inizio:</label>
-                                    <input type="date" class="form-control" id="data_inizio" name="dataInizio" required onkeydown="return false" onchange="activeDataFine(); activeGiornoPartite()" onblur="validateDataInizio(); validateAllDate()">
+                                    <input type="date" class="form-control" id="data_inizio" name="dataInizio" required onchange="validateDataInizio(); activeDataFine(); activeGiornoPartite()" onblur="validateDataInizio(); validateAllDate()">
                                     <div id="valid_dataInizio">Inserisci una data di inizio.</div>
                                 </div>
                                 <div class="form-group">
                                     <label for="data_fine">Data Fine:</label>
-                                    <input type="date" class="form-control" id="data_fine" name="dataFine" required onkeydown="return false" onclick="minDateFine(); maxDateFine()" disabled onblur="validateDataFine(); validateAllDate()" onchange=" activeGiornoPartite()">
+                                    <input type="date" class="form-control" id="data_fine" name="dataFine" required onclick="minDateFine(); maxDateFine()" disabled  onchange="validateDataFine(); activeGiornoPartite()" onblur="validateDataFine(); validateAllDate()">
                                     <div id="valid_dataFine">Inserisci una data di fine.</div>
                                     <div id="valid_AllSquadre">Inserisci una data di fine successiva alla data di inizio.</div>
                                 </div>
                                 <div class="form-group">
                                     <label for="giornoPartite">Giorno Partite:</label>
-                                    <input type="text" list="daysPartite" name="giornoPartite" id="giornoPartite" onblur="validateGiornoPartite()"/>
+                                    <input type="text" list="daysPartite" name="giornoPartite" id="giornoPartite" oninput="validateGiornoPartite()" onblur="validateGiornoPartite()"/>
                                     <datalist id="daysPartite">
                                         <option value="Lunedì">Lunedì</option>
                                         <option value="Martedì">Martedì</option>
@@ -150,21 +150,12 @@
                                         <option value="Sabato">Sabato</option>
                                         <option value="Domenica">Domenica</option>
                                     </datalist>
-<%--                                    <select name="giornoPartite" id="giornoPartite" onblur="validateGiornoPartite()">--%>
-<%--                                        <option value="null" selected></option>--%>
-<%--                                        <option value="Lunedì">Lunedì</option>--%>
-<%--                                        <option value="Martedì">Martedì</option>--%>
-<%--                                        <option value="Mercoledì">Mercoledì</option>--%>
-<%--                                        <option value="Giovedì">Giovedì</option>--%>
-<%--                                        <option value="Venerdì">Venerdì</option>--%>
-<%--                                        <option value="Sabato">Sabato</option>--%>
-<%--                                        <option value="Domenica">Domenica</option>--%>
-<%--                                    </select>--%>
+
                                     <div id="valid_giornoPartite">Seleziona un giorno in cui si giocheranno le partite.</div>
                                 </div>
                                 <div class="form-group">
                                     <label for="sport">Sport:</label>
-                                    <select name="sport" id="sport" onblur="validateSport()">
+                                    <select name="sport" id="sport" onchange="validateSport()" onblur="validateSport()">
                                         <option value="null" selected></option>
                                         <option value="Tennis">Tennis</option>
                                     </select>
@@ -172,7 +163,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="tipo">Tipo:</label>
-                                    <select name="tipo" id="tipo" onblur="validateTipo()">
+                                    <select name="tipo" id="tipo" onchange="validateTipo()" onblur="validateTipo()">
                                         <option value="null" selected></option>
                                         <option value="Gironi">Gironi</option>
                                         <option value="Eliminazione diretta">Eliminazione diretta</option>
@@ -182,7 +173,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="struttura">Struttura:</label>
-                                    <select name="struttura" id="struttura" onblur="validateStruttura()">
+                                    <select name="struttura" id="struttura" onchange="validateStruttura()" onblur="validateStruttura()">
                                         <option value="null" selected></option>
                                         <option value="Partite singole">Partite singole</option>
                                         <option value="Partite doppie">Partite doppie</option>
@@ -191,17 +182,17 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="maxSquadre">Numero squadre torneo:</label>
-                                    <input type="number" class="form-control" id="maxSquadre" name="maxSquadre" min="1" max="20" required onblur="validateSquadre()">
+                                    <input type="text" class="form-control" id="maxSquadre" name="maxSquadre" min="1" max="20" required oninput="validateSquadre()" onchange="validateSquadre()" onblur="validateSquadre()">
                                     <div id="valid_squadra">Il numero delle squadre deve essere maggiore di 1 e minore di 20.</div>
                                 </div>
                                 <div class="form-group">
                                     <label for="minPartecipanti">Numero minimo di partecipanti per squadra:</label>
-                                    <input type="number" class="form-control" id="minPartecipanti" name="minPartecipanti" min="1" max="5" required onblur="validateMinPartecipanti()">
+                                    <input type="text" class="form-control" id="minPartecipanti" name="minPartecipanti" min="1" max="5" required oninput="validateMinPartecipanti()" onchange="validateMinPartecipanti()" onblur="validateMinPartecipanti()">
                                     <div id="valid_minParteci">Il numero minimo di partecipanti deve essere maggiore di 1 e minore di 5.</div>
                                 </div>
                                 <div class="form-group">
                                     <label for="maxPartecipanti">Numero massimo di partecipanti per squadra:</label>
-                                    <input type="number" class="form-control" id="maxPartecipanti" name="maxPartecipanti" min="5" max="12" required onblur="validateMaxPartecipanti()">
+                                    <input type="text" class="form-control" id="maxPartecipanti" name="maxPartecipanti" min="5" max="12" required oninput="validateMaxPartecipanti()" onchange="validateMaxPartecipanti()" onblur="validateMaxPartecipanti()">
                                     <div id="valid_maxParteci">Il numero massimo di partecipanti deve essere maggiore di 5 e minore di 12.</div>
                                 </div>
 
@@ -230,44 +221,48 @@
                                     <label for="creation-name-Evento" id="creation-label-name-Evento">Nome dell'evento:</label>
                                     <input type="text" class="form-control" id="creation-name-Evento" placeholder="Inserisci il nome dell'evento" name="nome" required onkeyup="validateNameEvento()"><br>
                                     <div class="valid-feedback" id="name-evento-valid">Valido</div>
-                                    <div class="invalid-feedback">Inserire il nome dell’evento</div>
+                                    <div class="invalid-feedback" id="name-evento-invalid">Inserire il nome dell’evento</div>
                                 </div>
                                 <div class="form-group">
-                                    <label for="creation-data-Evento" id="creation-label-data-Evento">Data evento:</label>
-                                    <input type="date" id="creation-data-Evento" class="form-control" name="data" required onblur="valiDateEvento()"><br>
-                                    <div class="valid-feedback" id="date-evento-valid">Valido</div>
-                                    <div class="invalid-feedback">Inserire la data</div>
-                                </div>
-                                <div class="form-group">
-                                    <label for="creation-timestr-Evento" id="creation-label-str-Evento">Orario Inizio:</label>
-                                    <input type="time" id="creation-timestr-Evento" class="form-control" name="orarioInizio" min="09:00" max="23:00" required><br>
+                                    <label for="creation-timestr-Evento" id="creation-label-str-Evento">Orario Inizio: (XX:YY)</label>
+                                    <input type="text" id="creation-timestr-Evento" class="form-control" name="orarioInizio" required onkeyup="validateTimeStrEvento()"><br>
                                     <div class="valid-feedback" id="time-evento-str-valid">Valido</div>
-                                    <div class="invalid-feedback">Inserire l’orario di inizio</div>
+                                    <div class="invalid-feedback" id="time-evento-str-invalid">Inserire l’orario di inizio</div>
                                 </div>
                                 <div class="form-group">
-                                    <label for="creation-timeend-Evento" id="creation-label-end-Evento">Orario Fine:</label>
-                                    <input type="time" id="creation-timeend-Evento" class="form-control" name="orarioFine" min="09:00" max="23:00" required><br>
+                                    <label for="creation-timeend-Evento" id="creation-label-end-Evento">Orario Fine: (XX:YY)</label>
+                                    <input type="text" id="creation-timeend-Evento" class="form-control" name="orarioFine" required onkeyup="validateTimeEndEvento()"><br>
                                     <div class="valid-feedback" id="time-evento-end-valid">Valido</div>
-                                    <div class="invalid-feedback">Inserisci l'orario di fine</div>
+                                    <div class="invalid-feedback" id="time-evento-end-invalid">Inserisci l’orario di fine</div>
                                 </div>
                                 <div class="form-group">
-                                    <label for="creation-player-Evento" id="creation-label-player">Posti disponibili:</label>
-                                    <input type="number" id="creation-player-Evento" class="form-control" name="postiDisponibili" min="1" max="300" value="250" required><br>
-                                    <div class="valid-feedback">Valido</div>
-                                    <div class="invalid-feedback">Il numero di posti disponibili non è valido</div>
+                                    <label for="creation-data-Evento" id="creation-label-data-Evento">Data evento: (AAAA-MM-GG)</label>
+                                    <input type="text" id="creation-data-Evento" class="form-control" name="data" required onkeyup="valiDateEvento()"><br>
+                                    <div class="valid-feedback" id="date-evento-valid">Valido</div>
+                                    <div class="invalid-feedback" id="date-evento-invalid">Inserire la data</div>
                                 </div>
                                 <div class="form-group">
                                     <label for="creation-guest-Evento" id="creation-label-guest">Nome Ospite:</label>
                                     <input type="text" id="creation-guest-Evento" class="form-control" name="ospite" required onkeyup="validateGuestEvento()"><br>
                                     <div class="valid-feedback" id="guest-evento-valid">Valido</div>
-                                    <div class="invalid-feedback">inserire l'ospite</div>
+                                    <div class="invalid-feedback" id="guest-evento-invalid">Inserire l'ospite</div>
                                 </div>
                                 <div class="form-group">
                                     <label for="creation-description-Evento" id="creation-label-description">Descrizione :</label><br>
                                     <input id="creation-description-Evento" class="form-control" name="descrizione" required onkeyup="validateDescriptionEvento()"><br>
                                     <div class="valid-feedback" id="description-evento-valid">Valido</div>
-                                    <div class="invalid-feedback">inserire la descrizione</div>
+                                    <div class="invalid-feedback" id="description-evento-invalid">Inserire la descrizione</div>
                                 </div>
+
+
+                                <div class="form-group">
+                                    <label for="creation-player-Evento" id="creation-label-player">Posti disponibili:</label>
+                                    <input type="text" id="creation-player-Evento" class="form-control" name="postiDisponibili" required onkeyup="validateSitsEvento()"><br>
+                                    <div class="valid-feedback" id="sits-evento-valid">Valido</div>
+                                    <div class="invalid-feedback" id="sits-evento-invalid">Il numero di posti disponibili non è valido</div>
+                                </div>
+
+
 
                                 <p> Inserisci un'immagine per l'evento</p>
                                 <div class="form-group form-check radioEvent">
