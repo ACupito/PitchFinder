@@ -71,6 +71,9 @@ var isDateValidEvento=false;
 var isNameValidEvento=false;
 var isGuestValidEvento=false;
 var isDescriptionValidEvento=false;
+var isTimeStrValidEvento=false;
+var isTimeEndValidEvento=false;
+var isSitsEvento=false;
 
     /** validate Nome **/
     function validateNameEvento(){
@@ -116,7 +119,7 @@ var isDescriptionValidEvento=false;
     }
     /** valiDateEvento **/
     function valiDateEvento(){
-        if(document.getElementById("creation-data-Evento").value.match("^[0-9]{4}\\-[0-9]{2}\\-[0-9]{2}$")){
+        if(document.getElementById("creation-data-Evento").value.match("^[0-9]{4}-[0-9]{2}-[0-9]{2}$")){
             $("#date-evento-valid").text("La data è valida, rispetta il formato");
             $("#date-evento-valid").css("color","#4CAF50");
             isDateValidEvento=true;
@@ -124,6 +127,32 @@ var isDescriptionValidEvento=false;
             $("#date-evento-valid").text("La data non rispetta il formato");
             $("#date-evento-valid").css("color","#FF0000");
             isDateValidEvento=false;
+        }
+    }
+
+    /** validateTimeStrEvento **/
+    function validateTimeStrEvento(){
+        if(document.getElementById("creation-timestr-Evento").value.match("^[0-9]{2}:[0-9]{2}$")){
+            $("#time-evento-str-valid").text("L'orario di inizio è valido, rispetta il formato");
+            $("#time-evento-str-valid").css("color","#4CAF50");
+            isTimeStrValidEvento=true;
+        }else{
+            $("#time-evento-str-valid").text("L'orario di inizio non rispetta il formato");
+            $("#time-evento-str-valid").css("color","#FF0000");
+            isTimeStrValidEvento=false;
+        }
+    }
+
+    /** validateTimeEndEvento **/
+    function validateTimeEndEvento(){
+        if(document.getElementById("creation-timeend-Evento").value.match("^[0-9]{2}:[0-9]{2}$")){
+            $("#creation-timeend-Evento").text("L'orario di fine è valido, rispetta il formato");
+            $("#creation-timeend-Evento").css("color","#4CAF50");
+            isTimeEndValidEvento=true;
+        }else{
+            $("#creation-timeend-Evento").text("L'orario di fine non rispetta il formato");
+            $("#creation-timeend-Evento").css("color","#FF0000");
+            isTimeEndValidEvento=false;
         }
     }
 
@@ -167,14 +196,31 @@ var isDescriptionValidEvento=false;
         }
     }
 
+    /** validateSitsEvento **/
+    function validateSitsEvento(){
+        if(document.getElementById("creation-player-Evento").value.match("^[0-9]+$")){
+            $("#sits-evento-valid").text("Il numero dei posti disponibili è valido, rispetta il formato");
+            $("#sits-evento-valid").css("color","#4CAF50");
+            isSitsEvento=true;
+        }else{
+            $("#sits-evento-valid").text("Il numero dei posti disponibili non rispetta il formato");
+            $("#sits-evento-valid").css("color","#FF0000");
+            isSitsEvento=false;
+        }
+    }
 
 function validateEvento(){
         validateNameEvento();
         valiDateEvento();
+        validateTimeStrEvento();
+        validateTimeEndEvento();
         validateGuestEvento();
         validateDescriptionEvento();
+        validateSitsEvento();
 
-        if(isDateValidEvento && isNameValidEvento && isGuestValidEvento && isDescriptionValidEvento){
+        if(isDateValidEvento && isNameValidEvento
+            && isGuestValidEvento && isDescriptionValidEvento
+            && isTimeStrValidEvento && isTimeEndValidEvento && isSitsEvento ){
             return true;
         }
         else {
