@@ -1,4 +1,4 @@
-Upackage systemTesting.gestioneEventi.RF_GE_1;
+package systemTesting.gestioneEventi.RF_GE_1;
 
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
