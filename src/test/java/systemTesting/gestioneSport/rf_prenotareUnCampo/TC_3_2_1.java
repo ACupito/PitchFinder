@@ -1,4 +1,4 @@
-package sistema;
+package systemTesting.gestioneSport.rf_prenotareUnCampo;
 
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
@@ -37,7 +37,7 @@ public class TC_3_2_1 {
         driver.findElement(By.cssSelector("svg.svg-inline--fa.fa-running.fa-w-13.fa-stack-1x.fa-inverse")).click();
         driver.findElement(By.id("creation-data")).click();
         driver.findElement(By.id("form-creation")).click();
-        assertEquals("La data non è ",
+        assertEquals("La data non è selezionata",
                 driver.findElement(By.id("small-creation-data")).getText());
     }
 
