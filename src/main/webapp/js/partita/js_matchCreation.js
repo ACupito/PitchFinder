@@ -80,7 +80,13 @@ function validateStart(){
             j--;
         }
     }
-    if(document.getElementById("creation-timestr").value.match("^[0-2]{1}[0-9]{1}\\:[0-6]{1}[0-9]{1}$")){
+
+    if(!document.getElementById("creation-timestr").value.match("^(.*[:])[0-9]*$")){
+        $("#creation-label-str").css("color","#FF0000");
+        $("#small-creation-timestr").text("L'orario di inizio non è selezionato ");
+        $("#small-creation-timestr").css("color","#FF0000");
+        return false;
+    }else if(document.getElementById("creation-timestr").value.match("^[0-2]{1}[0-9]{1}\\:[0-6]{1}[0-9]{1}$")){
         $("#creation-label-str").css("color","#4CAF50");
         hhStr = document.getElementById("creation-timestr").value.substring(0,2);
         mmStr = document.getElementById("creation-timestr").value.substring(3);
@@ -105,7 +111,12 @@ function validateEnd(){
         }
     }
 
-    if(document.getElementById("creation-timeend").value.match("^[0-2]{1}[0-9]{1}\\:[0-6]{1}[0-9]{1}$")){
+    if(!document.getElementById("creation-timeend").value.match("^(.*[:])[0-9]*$")){
+        $("#creation-label-end").css("color","#FF0000");
+        $("#small-creation-timeend").text("L'orario di fine non è selezionato");
+        $("#small-creation-timeend").css("color","#FF0000");
+        return false;
+    }else if(document.getElementById("creation-timeend").value.match("^[0-2]{1}[0-9]{1}\\:[0-6]{1}[0-9]{1}$")){
         $("#creation-label-end").css("color","#4CAF50");
         hhEnd = document.getElementById("creation-timeend").value.substring(0,2);
         mmEnd = document.getElementById("creation-timeend").value.substring(3);

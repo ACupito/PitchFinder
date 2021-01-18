@@ -140,7 +140,8 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="giornoPartite">Giorno Partite:</label>
-                                    <select name="giornoPartite" id="giornoPartite">
+                                    <input type="text" list="daysPartite" name="giornoPartite" id="giornoPartite" onblur="validateGiornoPartite()"/>
+                                    <datalist id="daysPartite">
                                         <option value="Lunedì">Lunedì</option>
                                         <option value="Martedì">Martedì</option>
                                         <option value="Mercoledì">Mercoledì</option>
@@ -148,36 +149,45 @@
                                         <option value="Venerdì">Venerdì</option>
                                         <option value="Sabato">Sabato</option>
                                         <option value="Domenica">Domenica</option>
-                                    </select>
-                                    <div class="valid-feedback">Valid.</div>
-                                    <div class="invalid-feedback">Please fill out this field.</div>
+                                    </datalist>
+<%--                                    <select name="giornoPartite" id="giornoPartite" onblur="validateGiornoPartite()">--%>
+<%--                                        <option value="null" selected></option>--%>
+<%--                                        <option value="Lunedì">Lunedì</option>--%>
+<%--                                        <option value="Martedì">Martedì</option>--%>
+<%--                                        <option value="Mercoledì">Mercoledì</option>--%>
+<%--                                        <option value="Giovedì">Giovedì</option>--%>
+<%--                                        <option value="Venerdì">Venerdì</option>--%>
+<%--                                        <option value="Sabato">Sabato</option>--%>
+<%--                                        <option value="Domenica">Domenica</option>--%>
+<%--                                    </select>--%>
+                                    <div id="valid_giornoPartite">Seleziona un giorno in cui si giocheranno le partite.</div>
                                 </div>
                                 <div class="form-group">
                                     <label for="sport">Sport:</label>
-                                    <select name="sport" id="sport">
+                                    <select name="sport" id="sport" onblur="validateSport()">
+                                        <option value="null" selected></option>
                                         <option value="Tennis">Tennis</option>
                                     </select>
-                                    <div class="valid-feedback">Valid.</div>
-                                    <div class="invalid-feedback">Please fill out this field.</div>
+                                    <div id="valid_sport">Seleziona uno sport del torneo.</div>
                                 </div>
                                 <div class="form-group">
                                     <label for="tipo">Tipo:</label>
-                                    <select name="tipo" id="tipo">
+                                    <select name="tipo" id="tipo" onblur="validateTipo()">
+                                        <option value="null" selected></option>
                                         <option value="Gironi">Gironi</option>
                                         <option value="Eliminazione diretta">Eliminazione diretta</option>
                                         <option value="Gironi + Eliminazione diretta">Gironi + Eliminazione diretta</option>
                                     </select>
-                                    <div class="valid-feedback">Valid.</div>
-                                    <div class="invalid-feedback">Please fill out this field.</div>
+                                    <div id="valid_tipo">Seleziona una tipologia del torneo.</div>
                                 </div>
                                 <div class="form-group">
                                     <label for="struttura">Struttura:</label>
-                                    <select name="struttura" id="struttura">
+                                    <select name="struttura" id="struttura" onblur="validateStruttura()">
+                                        <option value="null" selected></option>
                                         <option value="Partite singole">Partite singole</option>
                                         <option value="Partite doppie">Partite doppie</option>
                                     </select>
-                                    <div class="valid-feedback">Valid.</div>
-                                    <div class="invalid-feedback">Please fill out this field.</div>
+                                    <div id="valid_struttura">Seleziona una struttra del torneo.</div>
                                 </div>
                                 <div class="form-group">
                                     <label for="maxSquadre">Numero squadre torneo:</label>
@@ -508,6 +518,9 @@
                         <div class="colo-title-admin">
                             <h4><span><i class="fas fa-database"></i></span> Partite create</h4>
                             <hr>
+                            <input type="date" id="filter-date" name="filter-date">
+                            <input type="time" id="filter-time" name="filter-time">
+                            <input type="button" class="remove" id="filter-button" name="filter-button" value="Filtra" onclick="filterMatch()">
                         </div>
                     </div>
                     <div class="row1">
