@@ -51,7 +51,7 @@ public class TC_3_2_10 {
         driver.findElement(By.id("form-creation")).click();
         driver.findElement(By.id("nameG1")).click();
         driver.findElement(By.id("nameG1")).clear();
-        driver.findElement(By.id("nameG1")).sendKeys("P5olo");
+        driver.findElement(By.id("nameG1")).sendKeys("Paolo!!");
         assertEquals("Il formato del giocatore non è valido.",
                 driver.findElement(By.id("small-nameG1")).getText());
     }
