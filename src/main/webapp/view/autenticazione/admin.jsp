@@ -108,7 +108,7 @@
 
 
 
-                <div class="card-body-admin" id="creaTorneo" style="display:none"> <!-- div utenti presenti nel DB-->
+                <div class="card-body-admin" id="creaTorneo" style="display: none"> <!-- div utenti presenti nel DB-->
                     <div class="row1">
                         <div class="colo-title-admin">
                             <h4><span><i class="fas fa-database"></i></span> Creazione Torneo</h4>
@@ -129,12 +129,12 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="data_inizio">Data Inizio:</label>
-                                    <input type="date" class="form-control" id="data_inizio" name="dataInizio" required onkeydown="return false" onchange="activeDataFine(); activeGiornoPartite()" onblur="validateDataInizio(); validateAllDate()">
+                                    <input type="date" class="form-control" id="data_inizio" name="dataInizio" required onchange="activeDataFine(); activeGiornoPartite()" onblur="validateDataInizio(); validateAllDate()">
                                     <div id="valid_dataInizio">Inserisci una data di inizio.</div>
                                 </div>
                                 <div class="form-group">
                                     <label for="data_fine">Data Fine:</label>
-                                    <input type="date" class="form-control" id="data_fine" name="dataFine" required onkeydown="return false" onclick="minDateFine(); maxDateFine()" disabled onblur="validateDataFine(); validateAllDate()" onchange=" activeGiornoPartite()">
+                                    <input type="date" class="form-control" id="data_fine" name="dataFine" required onclick="minDateFine(); maxDateFine()" disabled onblur="validateDataFine(); validateAllDate()" onchange=" activeGiornoPartite()">
                                     <div id="valid_dataFine">Inserisci una data di fine.</div>
                                     <div id="valid_AllSquadre">Inserisci una data di fine successiva alla data di inizio.</div>
                                 </div>
