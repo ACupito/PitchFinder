@@ -358,6 +358,9 @@ public class TC_RF_CreareUnEvento {
         driver.findElement(By.id("creation-player-Evento")).clear();
         driver.findElement(By.id("creation-player-Evento")).sendKeys("150");
         driver.findElement(By.id("submit")).click();
+        while(isAlertPresent());
+        assertEquals("La creazione dell’evento è andata a buon fine",
+                driver.findElement(By.id("flagMessage")).getAttribute("value"));
     }
 
     @AfterAll
