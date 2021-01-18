@@ -34,7 +34,7 @@
 <div class="login-page" id="match-section">
     <div class="div-form" id="form1">
         <form class="register-form" action="Creation-Servlet" method="post" id="form-creation" onsubmit="return validateForm()">
-                <h4 align="center"> Creazione Partita </h4>
+                <h4 align="center"> Prenota un campo </h4>
                 <input type="hidden" class="code" name="idCampo" value="1002">
                 <label for="creation-data" id="creation-label-data">Data partita:</label>
                 <input type="text" id="creation-data" name="date"  onblur="valiDate()"><br>
