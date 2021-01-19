@@ -149,16 +149,16 @@ function validateMinPartecipanti() {
     var minPartecipanti = $("#minPartecipanti").val();
     if(!minPartecipanti.match("^[0-9]")) {
         $("#valid_minParteci").css("color", "#FF0000");
-        $("#valid_minParteci").text("Il formato del numero minimo di partecipanti non è valido!");
+        $("#valid_minParteci").text("Il formato del numero minimo di giocatori non è valido!");
         isMinPartecValid = false;
     } else {
         if (parseInt(minPartecipanti) >= 1 && parseInt(minPartecipanti) <= 5) {
-            $("#valid_minParteci").text("Numero minimo di partecipanti valido.");
+            $("#valid_minParteci").text("Numero minimo di giocatori valido.");
             $("#valid_minParteci").css("color", "#4CAF50");
             isMinPartecValid = true;
         } else {
             $("#valid_minParteci").css("color", "#FF0000");
-            $("#valid_minParteci").text("Numero minimo di partecipanti non valido!");
+            $("#valid_minParteci").text("Numero minimo di giocatori non valido!");
             isMinPartecValid = false;
         }
     }
@@ -168,17 +168,17 @@ function validateMaxPartecipanti() {
     var maxPartecipanti = $("#maxPartecipanti").val();
     if(!maxPartecipanti.match("^[0-9]")) {
         $("#valid_maxParteci").css("color", "#FF0000");
-        $("#valid_maxParteci").text("Il formato del numero massimo di partecipanti non è valido!");
+        $("#valid_maxParteci").text("Il formato del numero massimo di giocatori non è valido!");
         isMaxPartecValid = false;
     }
     else {
         if (parseInt(maxPartecipanti) >= 5 && parseInt(maxPartecipanti) <= 12) {
-            $("#valid_maxParteci").text("Numero massimo di partecipanti valido.");
+            $("#valid_maxParteci").text("Numero massimo di giocatori valido.");
             $("#valid_maxParteci").css("color", "#4CAF50");
             isMaxPartecValid = true;
         } else {
             $("#valid_maxParteci").css("color", "#FF0000");
-            $("#valid_maxParteci").text("Numero massimo di partecipanti non valido!");
+            $("#valid_maxParteci").text("Numero massimo di giocatori non valido!");
             isMaxPartecValid = false;
         }
     }
