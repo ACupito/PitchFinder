@@ -67,7 +67,7 @@
                             </form>
                         </span>
                 <h4 class="my-3">Tornei</h4>
-                <p class="text-muted">Visaulizzare i tornei organizzati dalla Polisportiva con possibilità di iscriversi.</p>
+                <p class="text-muted">Visualizzare i tornei organizzati dalla Polisportiva con possibilità di iscriversi.</p>
             </div>
                 <div class="col-md-4">
                     <form action="Partita" method="get">
@@ -78,8 +78,8 @@
                             </button>
                         </span>
                     </form>
-                    <h4 class="my-3">Creazione partita</h4>
-                <p class="text-muted">Creare  una partita.</p>
+                    <h4 class="my-3">Prenota un campo</h4>
+                <p class="text-muted">Prenotazione di un campo della polisportiva.</p>
             </div>
             <div class="col-md-4">
                 <span class="fa-stack fa-4x">
