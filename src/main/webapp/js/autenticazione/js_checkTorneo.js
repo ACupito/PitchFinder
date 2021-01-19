@@ -132,7 +132,7 @@ function validateSquadre() {
             $("#valid_squadra").text("Il formato del numero di squadre non è valido!");
             isSquadreValid = false;
         } else {
-                if (parseInt(value) >= 1 && parseInt(value) <= 20) {
+                if (parseInt(value) >= 2 && parseInt(value) <= 20) {
                 $("#valid_squadra").text("Il numero delle squadre è valido.");
                 $("#valid_squadra").css("color", "#4CAF50");
                 isSquadreValid = true;

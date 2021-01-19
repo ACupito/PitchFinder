@@ -191,7 +191,7 @@ public class TorneoController extends HttpServlet {
                             throw new IllegalArgumentException("La creazione del torneo fallisce a"
                                     + " causa del formato errato del Numero squadre.");
                         }
-                        if (maxSquadre < 1 || maxSquadre > 20) {
+                        if (maxSquadre < 2 || maxSquadre > 20) {
                             throw new IllegalArgumentException("La creazione del torneo fallisce a"
                                     + " causa del valore errato del Numero squadre.");
                         }
