@@ -71,16 +71,16 @@ public class IscrizioneTorneoController extends HttpServlet {
             if (numeroGiocatori == null) {
                 throw new IllegalArgumentException("Numero dei giocatori non valido");
             }
-
-            if (numeroGiocatori.length() < 1 || numeroGiocatori.length() > 2) {
-                throw new IllegalArgumentException("Lunghezza numero dei giocatori non valida");
-            }
-
             try {
                 nGiocatori = Integer.parseInt(numeroGiocatori);
             } catch (IllegalArgumentException e) {
                 throw new IllegalArgumentException("Formato numero giocatori non valido");
             }
+
+            if (numeroGiocatori.length() < 1 || numeroGiocatori.length() > 2) {
+                throw new IllegalArgumentException("Lunghezza numero dei giocatori non valida");
+            }
+
 
 
             if (nGiocatori < torneo.getMinNumeroPartecipantiPerSquadra() || nGiocatori > torneo.getMaxNumeroPartecipantiPerSquadra()) {
@@ -95,7 +95,7 @@ public class IscrizioneTorneoController extends HttpServlet {
             }
 
             if (nomeCapitano.length() < 1 || nomeCapitano.length() > 10) {
-                throw new IllegalArgumentException("Lunghezza nome capitano non valido");
+                throw new IllegalArgumentException("Lunghezza nome capitano non valida");
             }
 
             if (cognomeCapitano == null) {
