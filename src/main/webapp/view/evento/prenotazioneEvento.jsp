@@ -97,7 +97,8 @@
                                             <p id="emailLabel">Email</p>
                                         </td>
                                         <td>
-                                            <i id="alert" style="display: none; position: relative" data-placement="top" data-toggle="tooltip" title="Example: Mario99@gmail.com" class="fas fa-fw fa-exclamation-circle mr-3 align-self-center"></i>
+                                            <i id="alertLunghezza" title="Lunghezza non valida" style="display: none; position: relative" data-placement="top" data-toggle="tooltip"  class="fas fa-fw fa-exclamation-circle mr-3 align-self-center"></i>
+                                            <i id="alert" style="display: none; position: relative" data-placement="top" data-toggle="tooltip" title="Formato non valido" class="fas fa-fw fa-exclamation-circle mr-3 align-self-center"></i>
                                             <i id="alertRip" style="display: none; position: relative" data-placement="top" data-toggle="tooltip" title="Hai già effettuato una prenotazione a questo evento con questa email!" class="fas fa-fw fa-exclamation-circle mr-3 align-self-center"></i>
                                         </td>
                                     </tr>
@@ -112,6 +113,7 @@
                                 <input type="submit" class="btn btn-sm btn-flash-border-primary" id="conferma"
                                        name="Conferma" value="Prenotati!">
                             </form>
+                            <input type="hidden" id="Fine" value="Prenotazione effettuata con successo! Riceverà un'email con il codice della prenotazione.">
                         </div>
                     </div>
                 </div>
@@ -158,19 +160,28 @@
         var invio = input;
         invio +=  "," + nome ;
         invio += "," + data;
-
-        if (input.length > 0 && input.match(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w+)+$/) && input.length < 50) {
+        if(input.length<=0){
+            document.getElementById("alertLunghezza").style.display = "block";
+            document.getElementById("alertLunghezza").style.color = borderNo;
+            document.getElementById("alert").style.display = "none";
+            document.getElementById("alertRip").style.display = "none";
+            emailOk = false;
+            cambiaStatoIscrizione();
+        }
+        else if (input.length > 0 && input.match(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w+)+$/) && input.length < 50) {
             var xmlHttpReq = new XMLHttpRequest();
             xmlHttpReq.onreadystatechange= function() {
                 if (this.readyState == 4 && this.status == 200 && this.responseText == '<ok/>') {
                     document.getElementById("emailLabel").style.color = borderOk;
                     document.getElementById("alert").style.display = "none";
                     document.getElementById("alertRip").style.display = "none";
+                    document.getElementById("alertLunghezza").style.display = "none";
                     emailOk = true;
                 } else {
                     document.getElementById("emailLabel").style.color = borderNo;
                     document.getElementById("alert").style.display = "none";
                     document.getElementById("alertRip").style.display = "block";
+                    document.getElementById("alertLunghezza").style.display = "none";
                     document.getElementById("alertRip").style.color = borderNo;
                     emailOk = false;
 
@@ -185,6 +196,7 @@
             document.getElementById("emailLabel").style.color = borderNo;
             document.getElementById("alert").style.display = "block";
             document.getElementById("alertRip").style.display = "none";
+            document.getElementById("alertLunghezza").style.display = "none";
             document.getElementById("alert").style.color = borderNo;
             emailOk = false;
             cambiaStatoIscrizione();
@@ -209,6 +221,7 @@
 <script>
     if(document.getElementById("postiDisponibili").value==0){
         document.getElementById("conferma").style.display="none";
+
         alert("Non è possibile prenotarsi, non ci sono posti disponibili");
     }
 </script>

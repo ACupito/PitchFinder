@@ -59,7 +59,7 @@
             <div class="col-md-4">
                         <span class="fa-stack fa-4x">
                             <form action="torneoServlet" method="get">
-                            <button>
+                            <button id="TorneoButton">
                                 <input type="hidden" name="flag" value="3">
                             <i class="fas fa-circle fa-stack-2x text-primary"></i>
                             <i class="fas fa-trophy fa-stack-1x fa-inverse"></i>
@@ -84,7 +84,7 @@
             <div class="col-md-4">
                 <span class="fa-stack fa-4x">
                     <form action="EventoController" method="get">
-                        <button>
+                        <button id="EventoButton">
                             <i class="fas fa-circle fa-stack-2x text-primary"></i>
                             <i class="fas fa-trophy fa-stack-1x fa-inverse"></i>
                         </button>

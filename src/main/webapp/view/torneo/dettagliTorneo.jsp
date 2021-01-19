@@ -127,7 +127,7 @@
                     <input type="hidden" name="nomeTorneo" value="<%=torneo.getNome()%>">
                     <input type="hidden" name="campo" value="<%=torneo.getCampoIdentificativo()%>">
                     <input type="hidden" name="dataTorneo" value="<%=torneo.getDataInizio()%>">
-                    <button class="btn-primary button-indietro" type="submit">Iscrivi</button>
+                    <button id="iscriviti"class="btn-primary button-indietro" type="submit">Iscrivi</button>
                 </form>
             </div>
         </div>

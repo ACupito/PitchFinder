@@ -64,7 +64,7 @@
                                 <input type="hidden" name="idCampo" value="1002">
                                 <input type="hidden" name="nome" value="<%= t.getNome()%>">
                                 <input type="hidden" name="dataInizio" value="<%= t.getDataInizio()%>">
-                                <button class="btn-display btn-sm btn-flash-border-primary">INFO <i class="fas fa-arrow-right"></i></button>
+                                <button id="info" class="btn-display btn-sm btn-flash-border-primary">INFO <i class="fas fa-arrow-right"></i></button>
                             </form>
                         </div>
                     </div>
