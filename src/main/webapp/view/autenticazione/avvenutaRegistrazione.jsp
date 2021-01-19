@@ -1,14 +1,8 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: memex_99
-  Date: 05/01/2021
-  Time: 20:48
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <html>
 <head>
-    <title>Title</title>
+    <title>PitchFinder</title>
+    <link rel="icon" href="images/Logo/logo_c08.png" type="image/icon type">
     <link href = "https://fonts.googleapis.com/css?family=Poppins" rel = "stylesheet">
 
     <script src = "https://kit.fontawesome.com/a076d05399.js"></script>

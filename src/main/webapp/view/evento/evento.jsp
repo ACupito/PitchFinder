@@ -11,6 +11,7 @@
     <meta name="author" content="" />
     <title>PitchFinder</title>
     <link rel="icon" type="image/x-icon" href="assets/img/favicon.ico" />
+    <link rel="icon" href="images/Logo/logo_c08.png" type="image/icon type">
     <!-- Font Awesome icons (free version)-->
     <script src="https://use.fontawesome.com/releases/v5.15.1/js/all.js" crossorigin="anonymous"></script>
     <!-- Google fonts-->

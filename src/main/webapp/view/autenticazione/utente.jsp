@@ -1,14 +1,8 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: memex_99
-  Date: 04/01/2021
-  Time: 10:16
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <html>
 <head>
-    <title>Title</title>
+    <link rel="icon" href="images/Logo/logo_c08.png" type="image/icon type">
+    <title>PitchFinder</title>
     <link rel="stylesheet" type="text/css" href="./css/user_profile/style_user_profile.css">
     <link rel="stylesheet" type="text/css" href="./css/navbar/style_navbar.css">
 </head>
