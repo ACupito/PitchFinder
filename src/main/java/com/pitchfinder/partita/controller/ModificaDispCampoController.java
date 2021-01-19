@@ -72,7 +72,7 @@ public class ModificaDispCampoController extends HttpServlet {
             requestDispatcher.forward(request, response);
         } else if (request.getParameter("Libera") != null) {
             camp.deleteOccupazione(idcampo, data, inizio, fine);
-            response.setContentType("La liberazione va a buon fine");
+            response.setContentType("La modifica va a buon fine.");
             request.setAttribute("risultatoLibera", "1");
             RequestDispatcher requestDispatcher = request.getServletContext().getRequestDispatcher("/autentication?flag=5");
             requestDispatcher.forward(request, response);
