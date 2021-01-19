@@ -145,7 +145,7 @@ public class IscrizioneTorneoControllerTest {
         Mockito.when(mockedRequest.getParameter("campoTorneo")).thenReturn("1002");
 
         Mockito.when(mockedRequest.getParameter("nomeSquadra")).thenReturn("NomeSquadra");
-        Mockito.when(mockedRequest.getParameter("nGiocatori")).thenReturn("");
+        Mockito.when(mockedRequest.getParameter("nGiocatori")).thenReturn("3333");
         //Player
         Mockito.when(mockedRequest.getParameter("nome0")).thenReturn("Lucia");
         Mockito.when(mockedRequest.getParameter("cognome0")).thenReturn("Gaeta");
@@ -154,7 +154,6 @@ public class IscrizioneTorneoControllerTest {
 
         Mockito.when(mockedRequest.getParameter("nomeCapitano")).thenReturn("Lorenzo");
         Mockito.when(mockedRequest.getParameter("cognomeCapitano")).thenReturn("Pinolo");
-
 
 
         String message = "Lunghezza numero dei giocatori non valida";
@@ -272,7 +271,7 @@ public class IscrizioneTorneoControllerTest {
             Mockito.when(mockedRequest.getParameter("nomeCapitano")).thenReturn("");
             Mockito.when(mockedRequest.getParameter("cognomeCapitano")).thenReturn("Pinolo");
 
-            String message = "Lunghezza nome capitano non valido";
+            String message = "Lunghezza nome capitano non valida";
 
             IllegalArgumentException exception;
             exception = assertThrows(IllegalArgumentException.class,
