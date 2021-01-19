@@ -95,7 +95,7 @@
                         <label>Numero squadre prenotate</label>
                     </div>
                     <div class="col-md-12">
-                        <p>5</p>
+                        <p><%= application.getAttribute("numberTeams")%></p>
                     </div>
                 </div>
             </div>
