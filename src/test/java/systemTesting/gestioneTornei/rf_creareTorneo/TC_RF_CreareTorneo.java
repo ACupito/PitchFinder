@@ -80,19 +80,13 @@ public class TC_RF_CreareTorneo {
         driver.findElement(By.id("uname")).click();
         driver.findElement(By.id("uname")).clear();
         driver.findElement(By.id("uname")).sendKeys("Champions Five");
-        driver.findElement(By.id("data_inizio")).click();
-        driver.findElement(By.id("data_inizio")).clear();
-        driver.findElement(By.id("data_inizio")).sendKeys("10-02-0001");
-        driver.findElement(By.id("data_inizio")).clear();
-        driver.findElement(By.id("data_inizio")).sendKeys("10-02-0011");
-        driver.findElement(By.id("data_inizio")).clear();
-        driver.findElement(By.id("data_inizio")).sendKeys("10-02-0111");
-        driver.findElement(By.id("data_inizio")).clear();
-        driver.findElement(By.id("data_inizio")).sendKeys("10-02-1111");
-        driver.findElement(By.id("data_inizio")).clear();
-        driver.findElement(By.id("data_inizio")).sendKeys("");
-        driver.findElement(By.xpath("//div/div")).click();
-        assertEquals("La data di inizio non è selezionata!", driver.findElement(By.id("valid_dataInizio")).getText());
+        driver.findElement(By.id("sport")).click();
+        new Select(driver.findElement(By.id("sport"))).selectByVisibleText("Tennis");
+        driver.findElement(By.id("sport")).click();
+        driver.findElement(By.id("sport")).click();
+        new Select(driver.findElement(By.id("sport"))).selectByVisibleText("");
+        driver.findElement(By.id("sport")).click();
+        assertEquals("Lo sport non è stato selezionato!", driver.findElement(By.id("valid_sport")).getText());
     }
 
     @Test
@@ -110,9 +104,16 @@ public class TC_RF_CreareTorneo {
         driver.findElement(By.id("uname")).click();
         driver.findElement(By.id("uname")).clear();
         driver.findElement(By.id("uname")).sendKeys("Champions Five");
-        driver.findElement(By.id("data_inizio")).clear();
-        driver.findElement(By.id("data_inizio")).sendKeys("10-10-0222");
-        assertEquals("Il formato della data di inizio è sbagliato!", driver.findElement(By.id("valid_dataInizio")).getText());
+        driver.findElement(By.id("sport")).click();
+        new Select(driver.findElement(By.id("sport"))).selectByVisibleText("Tennis");
+        driver.findElement(By.id("sport")).click();
+        driver.findElement(By.id("tipo")).click();
+        new Select(driver.findElement(By.id("tipo"))).selectByVisibleText("Gironi");
+        driver.findElement(By.id("tipo")).click();
+        driver.findElement(By.id("tipo")).click();
+        new Select(driver.findElement(By.id("tipo"))).selectByVisibleText("");
+        driver.findElement(By.id("tipo")).click();
+        assertEquals("Il tipo non è stato selezionato!", driver.findElement(By.id("valid_tipo")).getText());
     }
 
     @Test
@@ -130,16 +131,21 @@ public class TC_RF_CreareTorneo {
         driver.findElement(By.id("uname")).click();
         driver.findElement(By.id("uname")).clear();
         driver.findElement(By.id("uname")).sendKeys("Champions Five");
-        driver.findElement(By.id("data_inizio")).clear();
-        driver.findElement(By.id("data_inizio")).sendKeys("18-01-2021");
-        driver.findElement(By.id("data_fine")).click();
-        driver.findElement(By.id("data_fine")).clear();
-        driver.findElement(By.id("data_fine")).sendKeys("10-02-3332");
-        driver.findElement(By.id("data_fine")).clear();
-        driver.findElement(By.id("data_fine")).sendKeys("");
-        driver.findElement(By.xpath("//body")).click();
-        assertEquals("La data di fine non è selezionata!", driver.findElement(By.id("valid_dataFine")).getText());
+        driver.findElement(By.id("sport")).click();
+        new Select(driver.findElement(By.id("sport"))).selectByVisibleText("Tennis");
+        driver.findElement(By.id("sport")).click();
+        driver.findElement(By.id("tipo")).click();
+        new Select(driver.findElement(By.id("tipo"))).selectByVisibleText("Gironi");
+        driver.findElement(By.id("tipo")).click();
+        driver.findElement(By.id("struttura")).click();
+        new Select(driver.findElement(By.id("struttura"))).selectByVisibleText("Partite singole");
+        driver.findElement(By.id("struttura")).click();
+        driver.findElement(By.id("struttura")).click();
+        new Select(driver.findElement(By.id("struttura"))).selectByVisibleText("");
+        driver.findElement(By.id("struttura")).click();
+        assertEquals("La struttura non è stata selezionata!", driver.findElement(By.id("valid_struttura")).getText());
     }
+
 
     @Test
     public void testTC216() throws Exception {
@@ -156,11 +162,30 @@ public class TC_RF_CreareTorneo {
         driver.findElement(By.id("uname")).click();
         driver.findElement(By.id("uname")).clear();
         driver.findElement(By.id("uname")).sendKeys("Champions Five");
+        driver.findElement(By.id("sport")).click();
+        driver.findElement(By.id("sport")).click();
+        driver.findElement(By.id("sport")).click();
+        new Select(driver.findElement(By.id("sport"))).selectByVisibleText("Tennis");
+        driver.findElement(By.id("sport")).click();
+        driver.findElement(By.id("tipo")).click();
+        new Select(driver.findElement(By.id("tipo"))).selectByVisibleText("Gironi");
+        driver.findElement(By.id("tipo")).click();
+        driver.findElement(By.id("struttura")).click();
+        new Select(driver.findElement(By.id("struttura"))).selectByVisibleText("Partite singole");
+        driver.findElement(By.id("struttura")).click();
+        driver.findElement(By.id("data_inizio")).click();
         driver.findElement(By.id("data_inizio")).clear();
-        driver.findElement(By.id("data_inizio")).sendKeys("18-01-2021");
-        driver.findElement(By.id("data_fine")).clear();
-        driver.findElement(By.id("data_fine")).sendKeys("25-01-0221");
-        assertEquals("Il formato della data di fine è sbagliato!", driver.findElement(By.id("valid_dataFine")).getText());
+        driver.findElement(By.id("data_inizio")).sendKeys("10-02-0001");
+        driver.findElement(By.id("data_inizio")).clear();
+        driver.findElement(By.id("data_inizio")).sendKeys("10-02-0011");
+        driver.findElement(By.id("data_inizio")).clear();
+        driver.findElement(By.id("data_inizio")).sendKeys("10-02-0111");
+        driver.findElement(By.id("data_inizio")).clear();
+        driver.findElement(By.id("data_inizio")).sendKeys("10-02-1111");
+        driver.findElement(By.id("data_inizio")).clear();
+        driver.findElement(By.id("data_inizio")).sendKeys("");
+        driver.findElement(By.xpath("//div/div")).click();
+        assertEquals("La data di inizio non è selezionata!", driver.findElement(By.id("valid_dataInizio")).getText());
     }
 
     @Test
@@ -178,19 +203,20 @@ public class TC_RF_CreareTorneo {
         driver.findElement(By.id("uname")).click();
         driver.findElement(By.id("uname")).clear();
         driver.findElement(By.id("uname")).sendKeys("Champions Five");
-        driver.findElement(By.id("data_inizio")).click();
+        driver.findElement(By.id("sport")).click();
+        driver.findElement(By.id("sport")).click();
+        driver.findElement(By.id("sport")).click();
+        new Select(driver.findElement(By.id("sport"))).selectByVisibleText("Tennis");
+        driver.findElement(By.id("sport")).click();
+        driver.findElement(By.id("tipo")).click();
+        new Select(driver.findElement(By.id("tipo"))).selectByVisibleText("Gironi");
+        driver.findElement(By.id("tipo")).click();
+        driver.findElement(By.id("struttura")).click();
+        new Select(driver.findElement(By.id("struttura"))).selectByVisibleText("Partite singole");
+        driver.findElement(By.id("struttura")).click();
         driver.findElement(By.id("data_inizio")).clear();
-        driver.findElement(By.id("data_inizio")).sendKeys("18-01-2021");
-        driver.findElement(By.id("data_fine")).click();
-        driver.findElement(By.id("data_fine")).clear();
-        driver.findElement(By.id("data_fine")).sendKeys("20-01-2021");
-        driver.findElement(By.id("giornoPartite")).click();
-        driver.findElement(By.id("giornoPartite")).clear();
-        driver.findElement(By.id("giornoPartite")).sendKeys("p");
-        driver.findElement(By.id("valid_giornoPartite")).click();
-        driver.findElement(By.xpath("//div/div/div")).click();
-        driver.findElement(By.xpath("//div/div/div")).click();
-        assertEquals("La lunghezza del giorno delle partite non è valida!", driver.findElement(By.id("valid_giornoPartite")).getText());
+        driver.findElement(By.id("data_inizio")).sendKeys("10-10-0222");
+        assertEquals("Il formato della data di inizio è sbagliato!", driver.findElement(By.id("valid_dataInizio")).getText());
     }
 
     @Test
@@ -208,18 +234,26 @@ public class TC_RF_CreareTorneo {
         driver.findElement(By.id("uname")).click();
         driver.findElement(By.id("uname")).clear();
         driver.findElement(By.id("uname")).sendKeys("Champions Five");
-        driver.findElement(By.id("data_inizio")).click();
+        driver.findElement(By.id("sport")).click();
+        driver.findElement(By.id("sport")).click();
+        driver.findElement(By.id("sport")).click();
+        new Select(driver.findElement(By.id("sport"))).selectByVisibleText("Tennis");
+        driver.findElement(By.id("sport")).click();
+        driver.findElement(By.id("tipo")).click();
+        new Select(driver.findElement(By.id("tipo"))).selectByVisibleText("Gironi");
+        driver.findElement(By.id("tipo")).click();
+        driver.findElement(By.id("struttura")).click();
+        new Select(driver.findElement(By.id("struttura"))).selectByVisibleText("Partite singole");
+        driver.findElement(By.id("struttura")).click();
         driver.findElement(By.id("data_inizio")).clear();
-        driver.findElement(By.id("data_inizio")).sendKeys("18-01-2021");
+        driver.findElement(By.id("data_inizio")).sendKeys("18-01-2022");
+        driver.findElement(By.id("data_fine")).click();
         driver.findElement(By.id("data_fine")).clear();
-        driver.findElement(By.id("data_fine")).sendKeys("20-01-2021");
-        driver.findElement(By.id("giornoPartite")).click();
-        driver.findElement(By.id("giornoPartite")).clear();
-        driver.findElement(By.id("giornoPartite")).sendKeys("??JJ");
-        driver.findElement(By.id("valid_sport")).click();
-        driver.findElement(By.xpath("//div[@id='creaTorneo']/div[2]/div/form/div[6]")).click();
-        driver.findElement(By.xpath("//div[@id='creaTorneo']/div[2]/div/form/div[6]")).click();
-        assertEquals("Il formato del giorno delle partite non è valido!", driver.findElement(By.id("valid_giornoPartite")).getText());
+        driver.findElement(By.id("data_fine")).sendKeys("10-02-3332");
+        driver.findElement(By.id("data_fine")).clear();
+        driver.findElement(By.id("data_fine")).sendKeys("");
+        driver.findElement(By.xpath("//body")).click();
+        assertEquals("La data di fine non è selezionata!", driver.findElement(By.id("valid_dataFine")).getText());
     }
 
     @Test
@@ -237,22 +271,22 @@ public class TC_RF_CreareTorneo {
         driver.findElement(By.id("uname")).click();
         driver.findElement(By.id("uname")).clear();
         driver.findElement(By.id("uname")).sendKeys("Champions Five");
-        driver.findElement(By.id("data_inizio")).click();
-        driver.findElement(By.id("data_inizio")).clear();
-        driver.findElement(By.id("data_inizio")).sendKeys("18-01-2021");
-        driver.findElement(By.id("data_fine")).click();
-        driver.findElement(By.id("data_fine")).clear();
-        driver.findElement(By.id("data_fine")).sendKeys("20-01-2021");
-        driver.findElement(By.id("giornoPartite")).click();
-        driver.findElement(By.id("giornoPartite")).clear();
-        driver.findElement(By.id("giornoPartite")).sendKeys("Lunedì");
+        driver.findElement(By.id("sport")).click();
+        driver.findElement(By.id("sport")).click();
         driver.findElement(By.id("sport")).click();
         new Select(driver.findElement(By.id("sport"))).selectByVisibleText("Tennis");
         driver.findElement(By.id("sport")).click();
-        driver.findElement(By.id("sport")).click();
-        new Select(driver.findElement(By.id("sport"))).selectByVisibleText("");
-        driver.findElement(By.id("sport")).click();
-        assertEquals("Lo sport non è stato selezionato!", driver.findElement(By.id("valid_sport")).getText());
+        driver.findElement(By.id("tipo")).click();
+        new Select(driver.findElement(By.id("tipo"))).selectByVisibleText("Gironi");
+        driver.findElement(By.id("tipo")).click();
+        driver.findElement(By.id("struttura")).click();
+        new Select(driver.findElement(By.id("struttura"))).selectByVisibleText("Partite singole");
+        driver.findElement(By.id("struttura")).click();
+        driver.findElement(By.id("data_inizio")).clear();
+        driver.findElement(By.id("data_inizio")).sendKeys("18-01-2022");
+        driver.findElement(By.id("data_fine")).clear();
+        driver.findElement(By.id("data_fine")).sendKeys("25-01-0221");
+        assertEquals("Il formato della data di fine è sbagliato!", driver.findElement(By.id("valid_dataFine")).getText());
     }
 
     @Test
@@ -270,25 +304,30 @@ public class TC_RF_CreareTorneo {
         driver.findElement(By.id("uname")).click();
         driver.findElement(By.id("uname")).clear();
         driver.findElement(By.id("uname")).sendKeys("Champions Five");
-        driver.findElement(By.id("data_inizio")).click();
-        driver.findElement(By.id("data_inizio")).clear();
-        driver.findElement(By.id("data_inizio")).sendKeys("18-01-2021");
-        driver.findElement(By.id("data_fine")).click();
-        driver.findElement(By.id("data_fine")).clear();
-        driver.findElement(By.id("data_fine")).sendKeys("20-01-2021");
-        driver.findElement(By.id("giornoPartite")).click();
-        driver.findElement(By.id("giornoPartite")).clear();
-        driver.findElement(By.id("giornoPartite")).sendKeys("Lunedì");
+        driver.findElement(By.id("sport")).click();
+        driver.findElement(By.id("sport")).click();
         driver.findElement(By.id("sport")).click();
         new Select(driver.findElement(By.id("sport"))).selectByVisibleText("Tennis");
         driver.findElement(By.id("sport")).click();
         driver.findElement(By.id("tipo")).click();
         new Select(driver.findElement(By.id("tipo"))).selectByVisibleText("Gironi");
         driver.findElement(By.id("tipo")).click();
-        driver.findElement(By.id("tipo")).click();
-        new Select(driver.findElement(By.id("tipo"))).selectByVisibleText("");
-        driver.findElement(By.id("tipo")).click();
-        assertEquals("Il tipo non è stato selezionato!", driver.findElement(By.id("valid_tipo")).getText());
+        driver.findElement(By.id("struttura")).click();
+        new Select(driver.findElement(By.id("struttura"))).selectByVisibleText("Partite singole");
+        driver.findElement(By.id("struttura")).click();
+        driver.findElement(By.id("data_inizio")).click();
+        driver.findElement(By.id("data_inizio")).clear();
+        driver.findElement(By.id("data_inizio")).sendKeys("18-01-2022");
+        driver.findElement(By.id("data_fine")).click();
+        driver.findElement(By.id("data_fine")).clear();
+        driver.findElement(By.id("data_fine")).sendKeys("25-01-2022");
+        driver.findElement(By.id("giornoPartite")).click();
+        driver.findElement(By.id("giornoPartite")).clear();
+        driver.findElement(By.id("giornoPartite")).sendKeys("p");
+        driver.findElement(By.id("valid_giornoPartite")).click();
+        driver.findElement(By.xpath("//div/div/div")).click();
+        driver.findElement(By.xpath("//div/div/div")).click();
+        assertEquals("La lunghezza del giorno delle partite non è valida!", driver.findElement(By.id("valid_giornoPartite")).getText());
     }
 
     @Test
@@ -306,15 +345,8 @@ public class TC_RF_CreareTorneo {
         driver.findElement(By.id("uname")).click();
         driver.findElement(By.id("uname")).clear();
         driver.findElement(By.id("uname")).sendKeys("Champions Five");
-        driver.findElement(By.id("data_inizio")).click();
-        driver.findElement(By.id("data_inizio")).clear();
-        driver.findElement(By.id("data_inizio")).sendKeys("18-01-2021");
-        driver.findElement(By.id("data_fine")).click();
-        driver.findElement(By.id("data_fine")).clear();
-        driver.findElement(By.id("data_fine")).sendKeys("20-01-2021");
-        driver.findElement(By.id("giornoPartite")).click();
-        driver.findElement(By.id("giornoPartite")).clear();
-        driver.findElement(By.id("giornoPartite")).sendKeys("Lunedì");
+        driver.findElement(By.id("sport")).click();
+        driver.findElement(By.id("sport")).click();
         driver.findElement(By.id("sport")).click();
         new Select(driver.findElement(By.id("sport"))).selectByVisibleText("Tennis");
         driver.findElement(By.id("sport")).click();
@@ -324,11 +356,22 @@ public class TC_RF_CreareTorneo {
         driver.findElement(By.id("struttura")).click();
         new Select(driver.findElement(By.id("struttura"))).selectByVisibleText("Partite singole");
         driver.findElement(By.id("struttura")).click();
-        driver.findElement(By.id("struttura")).click();
-        new Select(driver.findElement(By.id("struttura"))).selectByVisibleText("");
-        driver.findElement(By.id("struttura")).click();
-        assertEquals("La struttura non è stata selezionata!", driver.findElement(By.id("valid_struttura")).getText());
+        driver.findElement(By.id("data_inizio")).click();
+        driver.findElement(By.id("data_inizio")).clear();
+        driver.findElement(By.id("data_inizio")).sendKeys("18-01-2022");
+        driver.findElement(By.id("data_fine")).clear();
+        driver.findElement(By.id("data_fine")).sendKeys("25-01-2022");
+        driver.findElement(By.id("giornoPartite")).click();
+        driver.findElement(By.id("giornoPartite")).clear();
+        driver.findElement(By.id("giornoPartite")).sendKeys("??JJ");
+        driver.findElement(By.id("valid_sport")).click();
+        driver.findElement(By.xpath("//div[@id='creaTorneo']/div[2]/div/form/div[6]")).click();
+        driver.findElement(By.xpath("//div[@id='creaTorneo']/div[2]/div/form/div[6]")).click();
+        assertEquals("Il formato del giorno delle partite non è valido!", driver.findElement(By.id("valid_giornoPartite")).getText());
     }
+
+
+
 
     @Test
     public void testTC2112() throws Exception {
@@ -345,15 +388,6 @@ public class TC_RF_CreareTorneo {
         driver.findElement(By.id("uname")).click();
         driver.findElement(By.id("uname")).clear();
         driver.findElement(By.id("uname")).sendKeys("Champions Five");
-        driver.findElement(By.id("data_inizio")).click();
-        driver.findElement(By.id("data_inizio")).clear();
-        driver.findElement(By.id("data_inizio")).sendKeys("18-01-2021");
-        driver.findElement(By.id("data_fine")).click();
-        driver.findElement(By.id("data_fine")).clear();
-        driver.findElement(By.id("data_fine")).sendKeys("20-01-2021");
-        driver.findElement(By.id("giornoPartite")).click();
-        driver.findElement(By.id("giornoPartite")).clear();
-        driver.findElement(By.id("giornoPartite")).sendKeys("Lunedì");
         driver.findElement(By.id("sport")).click();
         driver.findElement(By.id("sport")).click();
         driver.findElement(By.id("sport")).click();
@@ -365,6 +399,15 @@ public class TC_RF_CreareTorneo {
         driver.findElement(By.id("struttura")).click();
         new Select(driver.findElement(By.id("struttura"))).selectByVisibleText("Partite singole");
         driver.findElement(By.id("struttura")).click();
+        driver.findElement(By.id("data_inizio")).click();
+        driver.findElement(By.id("data_inizio")).clear();
+        driver.findElement(By.id("data_inizio")).sendKeys("18-01-2022");
+        driver.findElement(By.id("data_fine")).click();
+        driver.findElement(By.id("data_fine")).clear();
+        driver.findElement(By.id("data_fine")).sendKeys("25-01-2022");
+        driver.findElement(By.id("giornoPartite")).click();
+        driver.findElement(By.id("giornoPartite")).clear();
+        driver.findElement(By.id("giornoPartite")).sendKeys("Lunedì");
         driver.findElement(By.id("maxSquadre")).click();
         driver.findElement(By.id("maxSquadre")).clear();
         driver.findElement(By.id("maxSquadre")).sendKeys("n");
@@ -387,15 +430,6 @@ public class TC_RF_CreareTorneo {
         driver.findElement(By.id("uname")).click();
         driver.findElement(By.id("uname")).clear();
         driver.findElement(By.id("uname")).sendKeys("Champions Five");
-        driver.findElement(By.id("data_inizio")).click();
-        driver.findElement(By.id("data_inizio")).clear();
-        driver.findElement(By.id("data_inizio")).sendKeys("18-01-2021");
-        driver.findElement(By.id("data_fine")).click();
-        driver.findElement(By.id("data_fine")).clear();
-        driver.findElement(By.id("data_fine")).sendKeys("20-01-2021");
-        driver.findElement(By.id("giornoPartite")).click();
-        driver.findElement(By.id("giornoPartite")).clear();
-        driver.findElement(By.id("giornoPartite")).sendKeys("Lunedì");
         driver.findElement(By.id("sport")).click();
         driver.findElement(By.id("sport")).click();
         driver.findElement(By.id("sport")).click();
@@ -407,6 +441,15 @@ public class TC_RF_CreareTorneo {
         driver.findElement(By.id("struttura")).click();
         new Select(driver.findElement(By.id("struttura"))).selectByVisibleText("Partite singole");
         driver.findElement(By.id("struttura")).click();
+        driver.findElement(By.id("data_inizio")).click();
+        driver.findElement(By.id("data_inizio")).clear();
+        driver.findElement(By.id("data_inizio")).sendKeys("18-01-2022");
+        driver.findElement(By.id("data_fine")).click();
+        driver.findElement(By.id("data_fine")).clear();
+        driver.findElement(By.id("data_fine")).sendKeys("25-01-2022");
+        driver.findElement(By.id("giornoPartite")).click();
+        driver.findElement(By.id("giornoPartite")).clear();
+        driver.findElement(By.id("giornoPartite")).sendKeys("Lunedì");
         driver.findElement(By.id("maxSquadre")).click();
         driver.findElement(By.id("maxSquadre")).clear();
         driver.findElement(By.id("maxSquadre")).sendKeys("1000");
@@ -429,15 +472,6 @@ public class TC_RF_CreareTorneo {
         driver.findElement(By.id("uname")).click();
         driver.findElement(By.id("uname")).clear();
         driver.findElement(By.id("uname")).sendKeys("Champions Five");
-        driver.findElement(By.id("data_inizio")).click();
-        driver.findElement(By.id("data_inizio")).clear();
-        driver.findElement(By.id("data_inizio")).sendKeys("18-01-2021");
-        driver.findElement(By.id("data_fine")).click();
-        driver.findElement(By.id("data_fine")).clear();
-        driver.findElement(By.id("data_fine")).sendKeys("20-01-2021");
-        driver.findElement(By.id("giornoPartite")).click();
-        driver.findElement(By.id("giornoPartite")).clear();
-        driver.findElement(By.id("giornoPartite")).sendKeys("Lunedì");
         driver.findElement(By.id("sport")).click();
         driver.findElement(By.id("sport")).click();
         driver.findElement(By.id("sport")).click();
@@ -449,6 +483,15 @@ public class TC_RF_CreareTorneo {
         driver.findElement(By.id("struttura")).click();
         new Select(driver.findElement(By.id("struttura"))).selectByVisibleText("Partite singole");
         driver.findElement(By.id("struttura")).click();
+        driver.findElement(By.id("data_inizio")).click();
+        driver.findElement(By.id("data_inizio")).clear();
+        driver.findElement(By.id("data_inizio")).sendKeys("18-01-2022");
+        driver.findElement(By.id("data_fine")).click();
+        driver.findElement(By.id("data_fine")).clear();
+        driver.findElement(By.id("data_fine")).sendKeys("25-01-2022");
+        driver.findElement(By.id("giornoPartite")).click();
+        driver.findElement(By.id("giornoPartite")).clear();
+        driver.findElement(By.id("giornoPartite")).sendKeys("Lunedì");
         driver.findElement(By.id("maxSquadre")).click();
         driver.findElement(By.id("maxSquadre")).clear();
         driver.findElement(By.id("maxSquadre")).sendKeys("20");
@@ -474,15 +517,6 @@ public class TC_RF_CreareTorneo {
         driver.findElement(By.id("uname")).click();
         driver.findElement(By.id("uname")).clear();
         driver.findElement(By.id("uname")).sendKeys("Champions Five");
-        driver.findElement(By.id("data_inizio")).click();
-        driver.findElement(By.id("data_inizio")).clear();
-        driver.findElement(By.id("data_inizio")).sendKeys("18-01-2021");
-        driver.findElement(By.id("data_fine")).click();
-        driver.findElement(By.id("data_fine")).clear();
-        driver.findElement(By.id("data_fine")).sendKeys("20-01-2021");
-        driver.findElement(By.id("giornoPartite")).click();
-        driver.findElement(By.id("giornoPartite")).clear();
-        driver.findElement(By.id("giornoPartite")).sendKeys("Lunedì");
         driver.findElement(By.id("sport")).click();
         driver.findElement(By.id("sport")).click();
         driver.findElement(By.id("sport")).click();
@@ -494,6 +528,15 @@ public class TC_RF_CreareTorneo {
         driver.findElement(By.id("struttura")).click();
         new Select(driver.findElement(By.id("struttura"))).selectByVisibleText("Partite singole");
         driver.findElement(By.id("struttura")).click();
+        driver.findElement(By.id("data_inizio")).click();
+        driver.findElement(By.id("data_inizio")).clear();
+        driver.findElement(By.id("data_inizio")).sendKeys("18-01-2022");
+        driver.findElement(By.id("data_fine")).click();
+        driver.findElement(By.id("data_fine")).clear();
+        driver.findElement(By.id("data_fine")).sendKeys("25-01-2022");
+        driver.findElement(By.id("giornoPartite")).click();
+        driver.findElement(By.id("giornoPartite")).clear();
+        driver.findElement(By.id("giornoPartite")).sendKeys("Lunedì");
         driver.findElement(By.id("maxSquadre")).click();
         driver.findElement(By.id("maxSquadre")).clear();
         driver.findElement(By.id("maxSquadre")).sendKeys("20");
@@ -519,15 +562,6 @@ public class TC_RF_CreareTorneo {
         driver.findElement(By.id("uname")).click();
         driver.findElement(By.id("uname")).clear();
         driver.findElement(By.id("uname")).sendKeys("Champions Five");
-        driver.findElement(By.id("data_inizio")).click();
-        driver.findElement(By.id("data_inizio")).clear();
-        driver.findElement(By.id("data_inizio")).sendKeys("18-01-2021");
-        driver.findElement(By.id("data_fine")).click();
-        driver.findElement(By.id("data_fine")).clear();
-        driver.findElement(By.id("data_fine")).sendKeys("20-01-2021");
-        driver.findElement(By.id("giornoPartite")).click();
-        driver.findElement(By.id("giornoPartite")).clear();
-        driver.findElement(By.id("giornoPartite")).sendKeys("Lunedì");
         driver.findElement(By.id("sport")).click();
         driver.findElement(By.id("sport")).click();
         driver.findElement(By.id("sport")).click();
@@ -539,6 +573,15 @@ public class TC_RF_CreareTorneo {
         driver.findElement(By.id("struttura")).click();
         new Select(driver.findElement(By.id("struttura"))).selectByVisibleText("Partite singole");
         driver.findElement(By.id("struttura")).click();
+        driver.findElement(By.id("data_inizio")).click();
+        driver.findElement(By.id("data_inizio")).clear();
+        driver.findElement(By.id("data_inizio")).sendKeys("18-01-2022");
+        driver.findElement(By.id("data_fine")).click();
+        driver.findElement(By.id("data_fine")).clear();
+        driver.findElement(By.id("data_fine")).sendKeys("25-01-2022");
+        driver.findElement(By.id("giornoPartite")).click();
+        driver.findElement(By.id("giornoPartite")).clear();
+        driver.findElement(By.id("giornoPartite")).sendKeys("Lunedì");
         driver.findElement(By.id("maxSquadre")).click();
         driver.findElement(By.id("maxSquadre")).clear();
         driver.findElement(By.id("maxSquadre")).sendKeys("20");
@@ -570,15 +613,6 @@ public class TC_RF_CreareTorneo {
         driver.findElement(By.id("uname")).click();
         driver.findElement(By.id("uname")).clear();
         driver.findElement(By.id("uname")).sendKeys("Champions Five");
-        driver.findElement(By.id("data_inizio")).click();
-        driver.findElement(By.id("data_inizio")).clear();
-        driver.findElement(By.id("data_inizio")).sendKeys("18-01-2021");
-        driver.findElement(By.id("data_fine")).click();
-        driver.findElement(By.id("data_fine")).clear();
-        driver.findElement(By.id("data_fine")).sendKeys("20-01-2021");
-        driver.findElement(By.id("giornoPartite")).click();
-        driver.findElement(By.id("giornoPartite")).clear();
-        driver.findElement(By.id("giornoPartite")).sendKeys("Lunedì");
         driver.findElement(By.id("sport")).click();
         driver.findElement(By.id("sport")).click();
         driver.findElement(By.id("sport")).click();
@@ -590,6 +624,15 @@ public class TC_RF_CreareTorneo {
         driver.findElement(By.id("struttura")).click();
         new Select(driver.findElement(By.id("struttura"))).selectByVisibleText("Partite singole");
         driver.findElement(By.id("struttura")).click();
+        driver.findElement(By.id("data_inizio")).click();
+        driver.findElement(By.id("data_inizio")).clear();
+        driver.findElement(By.id("data_inizio")).sendKeys("18-01-2022");
+        driver.findElement(By.id("data_fine")).click();
+        driver.findElement(By.id("data_fine")).clear();
+        driver.findElement(By.id("data_fine")).sendKeys("25-01-2022");
+        driver.findElement(By.id("giornoPartite")).click();
+        driver.findElement(By.id("giornoPartite")).clear();
+        driver.findElement(By.id("giornoPartite")).sendKeys("Lunedì");
         driver.findElement(By.id("maxSquadre")).click();
         driver.findElement(By.id("maxSquadre")).clear();
         driver.findElement(By.id("maxSquadre")).sendKeys("20");
@@ -622,15 +665,6 @@ public class TC_RF_CreareTorneo {
         driver.findElement(By.id("uname")).click();
         driver.findElement(By.id("uname")).clear();
         driver.findElement(By.id("uname")).sendKeys("Champions Five");
-        driver.findElement(By.id("data_inizio")).click();
-        driver.findElement(By.id("data_inizio")).clear();
-        driver.findElement(By.id("data_inizio")).sendKeys("18-01-2021");
-        driver.findElement(By.id("data_fine")).click();
-        driver.findElement(By.id("data_fine")).clear();
-        driver.findElement(By.id("data_fine")).sendKeys("20-01-2021");
-        driver.findElement(By.id("giornoPartite")).click();
-        driver.findElement(By.id("giornoPartite")).clear();
-        driver.findElement(By.id("giornoPartite")).sendKeys("Lunedì");
         driver.findElement(By.id("sport")).click();
         driver.findElement(By.id("sport")).click();
         driver.findElement(By.id("sport")).click();
@@ -642,6 +676,15 @@ public class TC_RF_CreareTorneo {
         driver.findElement(By.id("struttura")).click();
         new Select(driver.findElement(By.id("struttura"))).selectByVisibleText("Partite singole");
         driver.findElement(By.id("struttura")).click();
+        driver.findElement(By.id("data_inizio")).click();
+        driver.findElement(By.id("data_inizio")).clear();
+        driver.findElement(By.id("data_inizio")).sendKeys("18-01-2022");
+        driver.findElement(By.id("data_fine")).click();
+        driver.findElement(By.id("data_fine")).clear();
+        driver.findElement(By.id("data_fine")).sendKeys("25-01-2022");
+        driver.findElement(By.id("giornoPartite")).click();
+        driver.findElement(By.id("giornoPartite")).clear();
+        driver.findElement(By.id("giornoPartite")).sendKeys("Lunedì");
         driver.findElement(By.id("maxSquadre")).click();
         driver.findElement(By.id("maxSquadre")).clear();
         driver.findElement(By.id("maxSquadre")).sendKeys("20");
