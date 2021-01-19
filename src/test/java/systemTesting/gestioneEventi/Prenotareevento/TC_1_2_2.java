@@ -31,11 +31,11 @@ public class TC_1_2_2 {
         driver.findElement(By.id("email")).click();
         driver.findElement(By.id("email")).clear();
         driver.findElement(By.id("email")).sendKeys("c.Salvat!!@jwi.com");
-        // ERROR: Caught exception [ERROR: Unsupported command [mouseOver | id=alert | ]]
+
         assertEquals("Formato non valido",
                 driver.findElement(By.id("alert")).getText());
 
-        // ERROR: Caught exception [ERROR: Unsupported command [captureEntirePageScreenshot |  | ]]
+
     }
 
 

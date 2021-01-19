@@ -97,7 +97,7 @@
                                             <p id="emailLabel">Email</p>
                                         </td>
                                         <td>
-                                            <i id="alertLunghezza" style="display: none; position: relative" data-placement="top" data-toggle="tooltip" title="Lunghezza non valida" class="fas fa-fw fa-exclamation-circle mr-3 align-self-center"></i>
+                                            <i id="alertLunghezza" title="Lunghezza non valida" style="display: none; position: relative" data-placement="top" data-toggle="tooltip"  class="fas fa-fw fa-exclamation-circle mr-3 align-self-center"></i>
                                             <i id="alert" style="display: none; position: relative" data-placement="top" data-toggle="tooltip" title="Formato non valido" class="fas fa-fw fa-exclamation-circle mr-3 align-self-center"></i>
                                             <i id="alertRip" style="display: none; position: relative" data-placement="top" data-toggle="tooltip" title="Hai già effettuato una prenotazione a questo evento con questa email!" class="fas fa-fw fa-exclamation-circle mr-3 align-self-center"></i>
                                         </td>

@@ -29,6 +29,7 @@ public class TC_2_2_1 {
 
     @Test
     public void testTC221() throws Exception {
+
         driver.get("http://localhost:8080/PitchFinder_war_exploded/");
         driver.findElement(By.id("dropdownMenu1")).click();
         driver.findElement(By.id("username")).click();

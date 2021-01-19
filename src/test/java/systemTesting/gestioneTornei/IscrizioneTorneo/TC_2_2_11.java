@@ -41,7 +41,7 @@ public class TC_2_2_11 {
     }
 
     @Test
-    public void TC311() throws Exception {
+    public void TC2211() throws Exception {
 
         driver.get("http://localhost:8080/PitchFinder_war_exploded/");
         driver.findElement(By.id("dropdownMenu1")).click();
@@ -55,9 +55,9 @@ public class TC_2_2_11 {
 
 
 
-        driver.get("http://localhost:8080/PitchFinder_war_exploded/IscrizioneTorneoController?nomeTorneo=Champions+Five&dataTorneo=2021-01-18&campoTorneo=1002&nomeSquadra=I Meglio&minP=4&maxP=6&nGiocatori=4&nome0=antonia&nome1=franco&nome2=paolo&nome3=marco&cognome0=gaeta&cognome1=giglio&cognome2=buono&cognome3=bruno&nomeCapitano=Lucia&cognomeCapitano=Gaeta&nomeTorneo=Champions+Five&campo=1002&dataTorneo=2021-01-18&conferma=conferma");
-
+        driver.get("http://localhost:8080/PitchFinder_war_exploded/IscrizioneTorneoController?nomeTorneo=Champions+FIVE&dataTorneo=2021-01-18&campoTorneo=1002&nomeSquadra=I+Magnific&minP=4&maxP=6&nGiocatori=4&nome0=antonia&nome1=marco&nome2=paolo&nome3=peppe&nome4=&nome5=&cognome0=gaeta&cognome1=bruno&cognome2=buono&cognome3=ok&cognome4=&cognome5=&nomeCapitano=lucia&cognomeCapitano=gaeta&nomeTorneo=Champions+FIVE&campo=1002&dataTorneo=2021-01-18&conferma=conferma");
         assertEquals("Iscrizione avvenuta con Successo!", closeAlertAndGetItsText());
+
     }
 
     private boolean isElementPresent(By by) {
@@ -80,7 +80,7 @@ public class TC_2_2_11 {
 
     private String closeAlertAndGetItsText() {
         try {
-            WebDriverWait wait = new WebDriverWait(driver, 15);
+            WebDriverWait wait = new WebDriverWait(driver, 30);
             Alert alert = wait.until(ExpectedConditions.alertIsPresent());
             String alertText = alert.getText();
             if (acceptNextAlert) {
