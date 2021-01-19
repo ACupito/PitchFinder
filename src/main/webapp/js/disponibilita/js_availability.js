@@ -44,7 +44,7 @@ function minMaxTimeDisp() {
     function valiDateDisp() {
         if (!document.getElementById("data").value.match("^(.*[-])[0-9]*$")) {
             $("#data").css("color", "#FF0000");
-            $("#small-creation-data").text("La data non è selezionata");
+            $("#small-creation-data").text("Non viene memorizzata la disponibilità poiché la data non è stata selezionata.");
             $("#small-creation-data").css("color", "#FF0000");
             isDateValid = false;
         } else if (document.getElementById("data").value.match("^[0-9]{4}\\-[0-9]{2}\\-[0-9]{2}$")) {
@@ -64,8 +64,12 @@ function minMaxTimeDisp() {
     //Start validation
     function validateStartDisp() {
 
-
-        if (document.getElementById("inizio").value.match("^[0-2]{1}[0-9]{1}\\:[0-6]{1}[0-9]{1}$")) {
+        if (!document.getElementById("inizio").value.match("^[0-2]{1}[0-9]{1}\\:[0-6]{1}[0-9]{1}$")) {
+            $("#inizio").css("color", "#FF0000");
+            $("#small-creation-timestr").text("Non viene memorizzata la disponibilità poiché l'orario di inizio non è stata selezionato.");
+            $("#small-creation-timestr").css("color", "#FF0000");
+            isDateValid = false;
+        } else if (document.getElementById("inizio").value.match("^[0-2]{1}[0-9]{1}\\:[0-6]{1}[0-9]{1}$")) {
             $("#inizio").css("color", "#4CAF50");
             hhStr = document.getElementById("inizio").value.substring(0, 2);
             mmStr = document.getElementById("inizio").value.substring(3);
@@ -81,8 +85,13 @@ function minMaxTimeDisp() {
 
 //End validation
     function validateEndDisp() {
+        if (!document.getElementById("fine").value.match("^[0-2]{1}[0-9]{1}\\:[0-6]{1}[0-9]{1}$")) {
+            $("#fine").css("color", "#FF0000");
+            $("#small-creation-timeend").text("Non viene memorizzata la disponibilità poiché l'orario di fine non è stata selezionato.");
+            $("#small-creation-timeend").css("color", "#FF0000");
+            isDateValid = false;
 
-        if (document.getElementById("fine").value.match("^[0-2]{1}[0-9]{1}\\:[0-6]{1}[0-9]{1}$")) {
+        }else if (document.getElementById("fine").value.match("^[0-2]{1}[0-9]{1}\\:[0-6]{1}[0-9]{1}$")) {
             $("#fine").css("color", "#4CAF50");
             hhEnd = document.getElementById("fine").value.substring(0, 2);
             mmEnd = document.getElementById("fine").value.substring(3);
@@ -101,7 +110,7 @@ function minMaxTimeDisp() {
     function validateTimeDisp() {
         //Regex su entrambi i campi
 
-        if(hhEnd - hhStr == 0 || hhEnd==null || hhStr==null){
+        if(hhEnd - hhStr == 0){
             $("#inizio").css("color","#FF0000");
             $("#fine").css("color","#FF0000");
             $("#small-creation-timestr").text("Orari non validi, min 1 ora");
@@ -130,14 +139,24 @@ function minMaxTimeDisp() {
 function clickTimeValidateDispIn() {
 
     validateStartDisp();
-    validateTimeDisp();
+    if(document.getElementById("inizio").value.match("^[0-2]{1}[0-9]{1}\\:[0-6]{1}[0-9]{1}$")){
+        validateTimeDisp();
+    }
+
+
+
 
 }
     function clickTimeValidateDispFi() {
 
         validateStartDisp();
         validateEndDisp();
-        validateTimeDisp();
+        if(document.getElementById("inizio").value.match("^[0-2]{1}[0-9]{1}\\:[0-6]{1}[0-9]{1}$")
+        && document.getElementById("fine").value.match("^[0-2]{1}[0-9]{1}\\:[0-6]{1}[0-9]{1}$")){
+            validateTimeDisp();
+        }
+
+
 
     }
 

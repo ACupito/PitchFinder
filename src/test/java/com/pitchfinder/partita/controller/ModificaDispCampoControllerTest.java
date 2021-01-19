@@ -219,7 +219,7 @@ public class ModificaDispCampoControllerTest {
         Mockito.doReturn(mockedServletContext).when(mockedRequest).getServletContext();
         Mockito.doReturn(mockedDispatcher).when(mockedServletContext).getRequestDispatcher("/autentication?flag=5");
         servlet.doGet(mockedRequest, mockedResponse);
-        Mockito.verify(mockedResponse).setContentType("La liberazione va a buon fine");
+        Mockito.verify(mockedResponse).setContentType("La modifica va a buon fine.");
 
     }
 }
