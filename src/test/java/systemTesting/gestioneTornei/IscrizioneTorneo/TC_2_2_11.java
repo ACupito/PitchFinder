@@ -55,11 +55,10 @@ public class TC_2_2_11 {
 
 
 
-        driver.get("http://localhost:8080/PitchFinder_war_exploded/IscrizioneTorneoController?nomeTorneo=Champions+Five&dataTorneo=2021-01-18&campoTorneo=1002&nomeSquadra=I magnifici&minP=4&maxP=6&nGiocatori=4&&nome0=marco&nome1=Antonia&nome2=franco&nome3=paolo&cognome0=giglio&cognome1=bruno&cognome2=gaeta&cognome3=buono&nomeCapitano=Lucia&cognomeCapitano=Gaeta&nomeTorneo=Champions+Five&campo=1002&dataTorneo=2021-01-18&conferma=conferma");
+        driver.get("http://localhost:8080/PitchFinder_war_exploded/IscrizioneTorneoController?nomeTorneo=Champions+Five&dataTorneo=2021-01-18&campoTorneo=1002&nomeSquadra=ddd&minP=4&maxP=6&nGiocatori=4&nome0=fhh&nome1=bbjj&nome2=bjbj&nome3=bm&nome4=&nome5=&cognome0=bjjj&cognome1=bjj&cognome2=vj&cognome3=nnbj&cognome4=&cognome5=&nomeCapitano=jn&cognomeCapitano=bjj&nomeTorneo=Champions+Five&campo=1002&dataTorneo=2021-01-18&conferma=conferma");
 
-        assertEquals("La disponibilità viene memorizzata con successo.", closeAlertAndGetItsText());
+        assertEquals("Iscrizione avvenuta con Successo!", closeAlertAndGetItsText());
     }
-
 
     private boolean isElementPresent(By by) {
         try {
