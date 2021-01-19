@@ -101,9 +101,10 @@ public class TorneoController extends HttpServlet {
 
                 Torneo t = ts.getTorneo(nome, dataInizio, campo);
                 response.setContentType("Torneo ottenuto");
-
+                int numberTeams = ts.nIscritti(t);
                 session.setAttribute("torneo", t);
                 request.getServletContext().setAttribute("torneo", t);
+                request.getServletContext().setAttribute("numberTeams", numberTeams);
                 RequestDispatcher dispatcher = request.getServletContext().getRequestDispatcher("/view/torneo/dettagliTorneo.jsp");
                 dispatcher.forward(request, response);
             } else {
