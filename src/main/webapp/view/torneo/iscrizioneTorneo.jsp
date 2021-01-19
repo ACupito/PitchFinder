@@ -34,153 +34,153 @@
         <input type="hidden" name="nomeTorneo" value="<%=torneo.getNome()%>">
         <input type="hidden" name="dataTorneo" value="<%=torneo.getDataInizio()%>">
         <input type="hidden" name="campoTorneo" value="<%=torneo.getCampoIdentificativo()%>">
-    <div class="row">
-        <div class="card-header" style = "background: #ffffff;">
+        <div class="row">
+            <div class="card-header" style = "background: #ffffff;">
 
-            <h5 class="title">
-                <%=torneo.getNome()%>-<span style="color:#079e3e">Iscrizione Squadra</span>
-            </h5>
-            <h6 style="color: #079e3e">
-                Tennis
-            </h6>
+                <h5 class="title">
+                    <%=torneo.getNome()%>-<span style="color:#079e3e">Iscrizione Squadra</span>
+                </h5>
+                <h6 style="color: #079e3e">
+                    Tennis
+                </h6>
 
-        </div>
-    </div>
-
-    <div class="row">
-
-        <div class = "card-body">
-            <div class="row" >
-                <div class="col-md-12">
-                    <table>
-                       <tr>
-                           <td>
-                                <label id="nSquadra" > Nome Squadra</label>
-                           <td/>
-                           <td>
-                               <i id="alertNome" style="display: none; position: relative" data-placement="top" data-toggle="tooltip" title="Inserire stringhe senza caratteri speciali lunga al massimo 50 caratteri" class="fas fa-fw fa-exclamation-circle mr-3 align-self-center"></i>
-                           </td>
-                       </tr>
-                    </table>
-                </div>
-                <div class="col-md-12">
-                    <input  id="nomeSquadra" class="form-control" name="nomeSquadra" type="text" style="max-width: max-content"  onkeyup="validaNome()" >
-                </div>
             </div>
         </div>
-        <div class = "card-body">
 
-            <div class="row">
-                <div class="col-md-12">
-                    <table>
-                        <tr>
-                            <td>
-                                <label  id="numeroGiocatori">Numero Giocatori</label>
-                            <td/>
-                            <td>
-                                <i id="alertNGiocatori" style="display: none; position: relative" data-placement="top" data-toggle="tooltip" title="Inserire numero compreso tra <%=torneo.getMinNumeroPartecipantiPerSquadra()%> e <%=torneo.getMaxNumeroPartecipantiPerSquadra()%>" class="fas fa-fw fa-exclamation-circle mr-3 align-self-center"></i>
-                            </td>
-                        </tr>
-                    </table>
+        <div class="row">
 
-                </div>
-                <div class="col-md-12">
-                    <input type="hidden" id="minP" name="minP" value="<%=torneo.getMinNumeroPartecipantiPerSquadra()%>">
-                    <input type="hidden" id="maxP" name="maxP" value="<%=torneo.getMaxNumeroPartecipantiPerSquadra()%>">
-                    <p><input type="number" id="nGiocatori"  class="form-control"   onchange="validaNGiocatori()" style="max-width: max-content" class="form-control"  name="nGiocatori" onclick="Caselle()"  min="<%=torneo.getMinNumeroPartecipantiPerSquadra()%>" max="<%=torneo.getMaxNumeroPartecipantiPerSquadra()%>"></p>
-                </div>
-            </div>
-        </div>
-        <div class = "card-body">
-            <div class="row">
-                <div class="col-md-12">
-                    <table>
-                        <tr>
-                            <td>
-                                <label id="nomecognome">Giocatori</label>
-                            <td/>
-                            <td>
-                                <i id="alertNomeGiocatori" style="display: none; position: relative" data-placement="top" data-toggle="tooltip" title="Compilare tutte le caselle con caratteri alfabetici. Il NOME deve essere formato al massimo da 10 caratteri. Il COGNOME deve essere formato al massimo da 20 caratteri" class="fas fa-fw fa-exclamation-circle mr-3 align-self-center"></i>
-                            </td>
-                        </tr>
-                    </table>
-
-                </div>
-            </div>
-        </div>
-<div class="col-md-12" style="height:150px;border:1px solid grey; max-width:80%;overflow-x: hidden; margin-left:12%;overflow-y: scroll">
-        <div class="card-body">
-            <div class="row" id="divGiocatori" style="max-width: 50%">
-                <div class="col-md-12">
-                    <label id="nomeG">Nome</label>
-                </div>
-                <% for(int i = 0; i < torneo.getMaxNumeroPartecipantiPerSquadra();i++){%>
-                    <div class="col-md-12"  style="width:50%;padding-top:10px">
-                        <input type="text"  onkeyup="validaGiocatori()"  style=" display: none" name="nome<%=i%>"id="nome<%=i%>">
+            <div class = "card-body">
+                <div class="row" >
+                    <div class="col-md-12">
+                        <table>
+                            <tr>
+                                <td>
+                                    <label id="nSquadra" > Nome Squadra</label>
+                                <td/>
+                                <td>
+                                    <i id="alertNome" style="display: none; position: relative" data-placement="top" data-toggle="tooltip" title="Inserire stringhe senza caratteri speciali lunga al massimo 50 caratteri" class="fas fa-fw fa-exclamation-circle mr-3 align-self-center"></i>
+                                </td>
+                            </tr>
+                        </table>
                     </div>
-                <%}%>
-            </div>
-            <div class="row">
-                <div class="col-md-12">
-                    <label id="cognomeG">Cognome</label>
-                    <% for(int i = 0; i < torneo.getMaxNumeroPartecipantiPerSquadra();i++){%>
-                        <div class="col-md-12" style="width:50%;padding-top: 10px">
-                            <input  onkeyup="validaGiocatori()"  style="display: none" name="cognome<%=i%>" id="cognome<%=i%>">
-                        </div>
-                    <%}%>
+                    <div class="col-md-12">
+                        <input  id="nomeSquadra" class="form-control" name="nomeSquadra" type="text" style="max-width: max-content"  onkeyup="validaNome()" >
+                    </div>
                 </div>
             </div>
-        </div>
-</div>
-        <div class="card-body">
+            <div class = "card-body">
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <table>
+                            <tr>
+                                <td>
+                                    <label  id="numeroGiocatori">Numero Giocatori</label>
+                                <td/>
+                                <td>
+                                    <i id="alertNGiocatori" style="display: none; position: relative" data-placement="top" data-toggle="tooltip" title="Inserire numero compreso tra <%=torneo.getMinNumeroPartecipantiPerSquadra()%> e <%=torneo.getMaxNumeroPartecipantiPerSquadra()%>" class="fas fa-fw fa-exclamation-circle mr-3 align-self-center"></i>
+                                </td>
+                            </tr>
+                        </table>
+
+                    </div>
+                    <div class="col-md-12">
+                        <input type="hidden" id="minP" name="minP" value="<%=torneo.getMinNumeroPartecipantiPerSquadra()%>">
+                        <input type="hidden" id="maxP" name="maxP" value="<%=torneo.getMaxNumeroPartecipantiPerSquadra()%>">
+                        <p><input type="number" id="nGiocatori"  class="form-control"   onchange="validaNGiocatori()" style="max-width: max-content" class="form-control"  name="nGiocatori" onclick="Caselle()"  min="<%=torneo.getMinNumeroPartecipantiPerSquadra()%>" max="<%=torneo.getMaxNumeroPartecipantiPerSquadra()%>"></p>
+                    </div>
+                </div>
+            </div>
+            <div class = "card-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <table>
+                            <tr>
+                                <td>
+                                    <label id="nomecognome">Giocatori</label>
+                                <td/>
+                                <td>
+                                    <i id="alertNomeGiocatori" style="display: none; position: relative" data-placement="top" data-toggle="tooltip" title="Compilare tutte le caselle con caratteri alfabetici. Il NOME deve essere formato al massimo da 10 caratteri. Il COGNOME deve essere formato al massimo da 20 caratteri" class="fas fa-fw fa-exclamation-circle mr-3 align-self-center"></i>
+                                </td>
+                            </tr>
+                        </table>
+
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12" style="height:150px;border:1px solid grey; max-width:80%;overflow-x: hidden; margin-left:12%;overflow-y: scroll">
+                <div class="card-body">
+                    <div class="row" id="divGiocatori" style="max-width: 50%">
+                        <div class="col-md-12">
+                            <label id="nomeG">Nome</label>
+                        </div>
+                        <% for(int i = 0; i < torneo.getMaxNumeroPartecipantiPerSquadra();i++){%>
+                        <div class="col-md-12"  style="width:50%;padding-top:10px">
+                            <input type="text"  onkeyup="validaGiocatori()"  style=" display: none" name="nome<%=i%>"id="nome<%=i%>">
+                        </div>
+                        <%}%>
+                    </div>
                     <div class="row">
                         <div class="col-md-12">
-                            <table>
-                                <tr>
-                                    <td>
-                                        <label id="nomeCapitano">Nome Capitano</label>
-                                    <td/>
-                                    <td>
-                                        <i id="alertNomeCapitano" style="display: none; position: relative" data-placement="top" data-toggle="tooltip" title="Inserire stringhe senza caratteri speciali e senza numeri lunghezza massima 10" class="fas fa-fw fa-exclamation-circle mr-3 align-self-center"></i>
-                                    </td>
-                                </tr>
-                            </table>
-
-                        </div>
-                        <div class="col-md-12">
-                           <input type="text" style="max-width:max-content" onkeyup="validaNomeCapitano()" class="form-control" name="nomeCapitano">
+                            <label id="cognomeG">Cognome</label>
+                            <% for(int i = 0; i < torneo.getMaxNumeroPartecipantiPerSquadra();i++){%>
+                            <div class="col-md-12" style="width:50%;padding-top: 10px">
+                                <input  onkeyup="validaGiocatori()"  style="display: none" name="cognome<%=i%>" id="cognome<%=i%>">
+                            </div>
+                            <%}%>
                         </div>
                     </div>
-        </div>
-        <div class="card-body">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <table>
-                                <tr>
-                                    <td>
-                                        <label id="cognomeCapitano">Cognome Capitano</label>
-                                    <td/>
-                                    <td>
-                                        <i id="alertCognomeCapitano" style="display: none; position: relative" data-placement="top" data-toggle="tooltip" title="Inserire stringhe senza caratteri speciali e senza numeri lunghezza massima 20" class="fas fa-fw fa-exclamation-circle mr-3 align-self-center"></i>
-                                    </td>
-                                </tr>
-                            </table>
-
-                        </div>
-                        <div class="col-md-12">
-                            <input type="text" style="max-width:max-content" onkeyup="validaCognomeCapitano()" class="form-control" name="cognomeCapitano">
-                        </div>
-                    </div>
-        </div>
-
-
-
+                </div>
             </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <table>
+                            <tr>
+                                <td>
+                                    <label id="nomeCapitano">Nome Capitano</label>
+                                <td/>
+                                <td>
+                                    <i id="alertNomeCapitano" style="display: none; position: relative" data-placement="top" data-toggle="tooltip" title="Inserire stringhe senza caratteri speciali e senza numeri lunghezza massima 10" class="fas fa-fw fa-exclamation-circle mr-3 align-self-center"></i>
+                                </td>
+                            </tr>
+                        </table>
+
+                    </div>
+                    <div class="col-md-12">
+                        <input type="text" style="max-width:max-content" onkeyup="validaNomeCapitano()" class="form-control" name="nomeCapitano">
+                    </div>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <table>
+                            <tr>
+                                <td>
+                                    <label id="cognomeCapitano">Cognome Capitano</label>
+                                <td/>
+                                <td>
+                                    <i id="alertCognomeCapitano" style="display: none; position: relative" data-placement="top" data-toggle="tooltip" title="Inserire stringhe senza caratteri speciali e senza numeri lunghezza massima 20" class="fas fa-fw fa-exclamation-circle mr-3 align-self-center"></i>
+                                </td>
+                            </tr>
+                        </table>
+
+                    </div>
+                    <div class="col-md-12">
+                        <input type="text" style="max-width:max-content" onkeyup="validaCognomeCapitano()" class="form-control" name="cognomeCapitano">
+                    </div>
+                </div>
+            </div>
+
+
+
+        </div>
         <div class="card-body buttons">
-                <input type="hidden" name="nomeTorneo" value="<%=torneo.getNome()%>">
-                <input type="hidden" name="campo" value="<%=torneo.getCampoIdentificativo()%>">
-                <input type="hidden" name="dataTorneo" value="<%=torneo.getDataInizio()%>">
-                <button type="submit" name="conferma" id="conferma" class="btn-primary button-indietro" value="conferma">Iscrivi</button>
+            <input type="hidden" name="nomeTorneo" value="<%=torneo.getNome()%>">
+            <input type="hidden" name="campo" value="<%=torneo.getCampoIdentificativo()%>">
+            <input type="hidden" name="dataTorneo" value="<%=torneo.getDataInizio()%>">
+            <button type="submit" name="conferma" id="conferma" class="btn-primary button-indietro" value="conferma">Iscrivi</button>
         </div>
     </form>
 
