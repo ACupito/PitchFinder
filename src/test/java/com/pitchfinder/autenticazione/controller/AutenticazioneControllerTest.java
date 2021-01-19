@@ -62,8 +62,7 @@ class AutenticazioneControllerTest extends Mockito {
 
         Mockito.doReturn(mockedSession).when(mockedRequest).getSession(true);
 
-        String message = "Il login non va a buon fine " +
-                "perché la username non rispetta la " +
+        String message = "La username inserita non rispetta la " +
                 "lunghezza corretta";
 
         exception = assertThrows(
@@ -83,8 +82,7 @@ class AutenticazioneControllerTest extends Mockito {
 
         Mockito.doReturn(mockedSession).when(mockedRequest).getSession(true);
 
-        String message = "Il login non va a buon fine " +
-                "perché il formato della username non è corretto";
+        String message = "La username inserita non rispetta il formato corretto";
 
         exception = assertThrows(
                 IllegalArgumentException.class, () -> {
@@ -122,7 +120,7 @@ class AutenticazioneControllerTest extends Mockito {
 
         servlet.doPost(mockedRequest, mockedResponse);
 
-        Mockito.verify(mockedResponse).setContentType("Il login è avvenuto correttamente");
+        Mockito.verify(mockedResponse).setContentType("Benvenuto!");
     }
 
     @Test
@@ -153,8 +151,7 @@ class AutenticazioneControllerTest extends Mockito {
         Mockito.when(mockedRequest.getParameter("password_")).thenReturn(password);
         Mockito.when(mockedRequest.getParameter("data")).thenReturn(data);
 
-        String message = "La registrazione " +
-                "non va a buon fine perchè l'email inserita non " +
+        String message = "L'email inserita non " +
                 "rispetta la lunghezza corretta";
 
         exception = assertThrows(
@@ -176,8 +173,7 @@ class AutenticazioneControllerTest extends Mockito {
         Mockito.when(mockedRequest.getParameter("password_")).thenReturn(password);
         Mockito.when(mockedRequest.getParameter("data")).thenReturn(data);
 
-        String message = "La registrazione non va a buon " +
-                "fine perché l’email inserita " +
+        String message = "L’email inserita " +
                 "non rispetta il formato richiesto";
 
         exception = assertThrows(
@@ -199,8 +195,7 @@ class AutenticazioneControllerTest extends Mockito {
         Mockito.when(mockedRequest.getParameter("password_")).thenReturn(password);
         Mockito.when(mockedRequest.getParameter("data")).thenReturn(data);
 
-        String message = "La registrazione non va " +
-                "a buon fine perché la username non " +
+        String message = "La username inserita non " +
                 "rispetta la lunghezza corretta";
 
         exception = assertThrows(
@@ -222,9 +217,8 @@ class AutenticazioneControllerTest extends Mockito {
         Mockito.when(mockedRequest.getParameter("password_")).thenReturn(password);
         Mockito.when(mockedRequest.getParameter("data")).thenReturn(data);
 
-        String message = "La registrazione non va a buon fine " +
-                "perché la username inserita " +
-                "non rispetta il formato richiesto";
+        String message = "La username inserita " +
+                "non rispetta il formato corretto";
 
         exception = assertThrows(
                 IllegalArgumentException.class, () -> {
@@ -245,8 +239,7 @@ class AutenticazioneControllerTest extends Mockito {
         Mockito.when(mockedRequest.getParameter("password_")).thenReturn(password);
         Mockito.when(mockedRequest.getParameter("data")).thenReturn(data);
 
-        String message = "La registrazione non va a buon fine " +
-                "perché il nome inserito non " +
+        String message = "Il nome inserito non " +
                 "rispetta la lunghezza corretta";
 
         exception = assertThrows(
@@ -268,8 +261,7 @@ class AutenticazioneControllerTest extends Mockito {
         Mockito.when(mockedRequest.getParameter("password_")).thenReturn(password);
         Mockito.when(mockedRequest.getParameter("data")).thenReturn(data);
 
-        String message = "La registrazione non va a buon fine " +
-                "perché il nome inserito non " +
+        String message = "Il nome inserito non " +
                 "rispetta il formato richiesto";
 
         exception = assertThrows(
@@ -291,8 +283,7 @@ class AutenticazioneControllerTest extends Mockito {
         Mockito.when(mockedRequest.getParameter("password_")).thenReturn(password);
         Mockito.when(mockedRequest.getParameter("data")).thenReturn(data);
 
-        String message = "La registrazione non va a buon fine " +
-                "perché il cognome inserito non rispetta " +
+        String message = "Il cognome inserito non rispetta " +
                 "la lunghezza corretta";
 
         exception = assertThrows(
@@ -314,8 +305,7 @@ class AutenticazioneControllerTest extends Mockito {
         Mockito.when(mockedRequest.getParameter("password_")).thenReturn(password);
         Mockito.when(mockedRequest.getParameter("data")).thenReturn(data);
 
-        String message = "La registrazione non va a buon " +
-                "fine perché il cognome inserito " +
+        String message = "Il cognome inserito " +
                 "non rispetta il formato richiesto";
 
         exception = assertThrows(
@@ -337,8 +327,7 @@ class AutenticazioneControllerTest extends Mockito {
         Mockito.when(mockedRequest.getParameter("password_")).thenReturn("");
         Mockito.when(mockedRequest.getParameter("data")).thenReturn(data);
 
-        String message = "La registrazione non va a buon fine " +
-                "perché la password inserita non rispetta la " +
+        String message = "La password inserita non rispetta la " +
                 "lunghezza corretta";
 
         exception = assertThrows(
@@ -360,8 +349,7 @@ class AutenticazioneControllerTest extends Mockito {
         Mockito.when(mockedRequest.getParameter("password_")).thenReturn("PitchFinder 57");
         Mockito.when(mockedRequest.getParameter("data")).thenReturn(data);
 
-        String message = "La registrazione non va a buon fine "
-                + "perché la password inserita non "
+        String message = "La password inserita non "
                 + "rispetta il formato richiesto";
 
         exception = assertThrows(
@@ -383,8 +371,7 @@ class AutenticazioneControllerTest extends Mockito {
         Mockito.when(mockedRequest.getParameter("password_")).thenReturn(password);
         Mockito.when(mockedRequest.getParameter("data")).thenReturn(null);
 
-        String message = "La registrazione non va a buon fine perché " +
-                "la data di nascita non è stata selezionata";
+        String message = "Data di nascita non selezionata";
 
         exception = assertThrows(
                 IllegalArgumentException.class, () -> {
@@ -406,9 +393,8 @@ class AutenticazioneControllerTest extends Mockito {
         Mockito.when(mockedRequest.getParameter("password_")).thenReturn(password);
         Mockito.when(mockedRequest.getParameter("data")).thenReturn("1999-13-31");
 
-        String message = "La registrazione non va a buon fine " +
-                "perché la data di nascita " +
-                "non rispetta il formato richiesto";
+        String message = "La data di nascita " +
+                "non rispetta il formato corretto";
 
         exception = assertThrows(
                 IllegalArgumentException.class, () -> {
@@ -434,7 +420,7 @@ class AutenticazioneControllerTest extends Mockito {
         Mockito.doReturn(mockedDispatcher).when(mockedServletContext).getRequestDispatcher("/view/autenticazione/avvenutaRegistrazione.jsp");
 
         servlet.doPost(mockedRequest, mockedResponse);
-        Mockito.verify(mockedResponse).setContentType("La registrazione è avvenuta correttamente");
+        Mockito.verify(mockedResponse).setContentType("La registrazione è avvenuta con successo");
     }
 
     @AfterAll

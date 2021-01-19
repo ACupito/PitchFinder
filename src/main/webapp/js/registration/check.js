@@ -206,7 +206,9 @@ function cambiaStatoRegistrami() {
 
     if (emailOk && usernameOk && nomeOk && cognomeOk && passwordOk && dataOk) {
         document.getElementById('register').disabled = false;
+        $("#register").text("Registrati");
     } else {
         document.getElementById('register').disabled = true;
+        $("#register").text("Non puoi registrarti")
     }
 }

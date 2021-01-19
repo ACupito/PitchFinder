@@ -81,10 +81,11 @@ function validateStart(){
         }
     }
 
-    if(!document.getElementById("creation-timestr").value.match("^(.*[:])[0-9]*$")){
+    if(!document.getElementById("creation-timestr").value.localeCompare("")){
         $("#creation-label-str").css("color","#FF0000");
         $("#small-creation-timestr").text("L'orario di inizio non è selezionato ");
         $("#small-creation-timestr").css("color","#FF0000");
+        isTimeValid=false;
         return false;
     }else if(document.getElementById("creation-timestr").value.match("^[0-2]{1}[0-9]{1}\\:[0-6]{1}[0-9]{1}$")){
         $("#creation-label-str").css("color","#4CAF50");
@@ -92,11 +93,13 @@ function validateStart(){
         mmStr = document.getElementById("creation-timestr").value.substring(3);
         $("#small-creation-timestr").text("Orario di inizio valido, rispetta il formato");
         $("#small-creation-timestr").css("color","#4CAF50");
+        isTimeValid=true;
         return true;
     }else{
         $("#creation-label-str").css("color","#FF0000");
         $("#small-creation-timestr").text("L'orario di inizio non rispetta il formato");
         $("#small-creation-timestr").css("color","#FF0000");
+        isTimeValid=false;
         return false;
     }
 }
@@ -111,10 +114,11 @@ function validateEnd(){
         }
     }
 
-    if(!document.getElementById("creation-timeend").value.match("^(.*[:])[0-9]*$")){
+    if(!document.getElementById("creation-timeend").value.localeCompare("")){
         $("#creation-label-end").css("color","#FF0000");
         $("#small-creation-timeend").text("L'orario di fine non è selezionato");
         $("#small-creation-timeend").css("color","#FF0000");
+        isTimeValid=false;
         return false;
     }else if(document.getElementById("creation-timeend").value.match("^[0-2]{1}[0-9]{1}\\:[0-6]{1}[0-9]{1}$")){
         $("#creation-label-end").css("color","#4CAF50");
@@ -122,11 +126,13 @@ function validateEnd(){
         mmEnd = document.getElementById("creation-timeend").value.substring(3);
         $("#small-creation-timeend").text("Orario di fine valido, rispetta il formato");
         $("#small-creation-timeend").css("color","#4CAF50");
+        isTimeValid=true;
         return true;
     }else{
         $("#creation-label-end").css("color","#FF0000");
         $("#small-creation-timeend").text("L'orario di fine non rispetta il formato");
         $("#small-creation-timeend").css("color","#FF0000");
+        isTimeValid=false;
         return false;
     }
 
@@ -253,18 +259,18 @@ function validateSurname1() {
             $("#creation-label-surnameG1").css({"color": "#FF0000"});
             $("#small-surnameG1").text("La lunghezza del giocatore non è valida");
             $("#small-surnameG1").css("color", "#FF0000");
-            isNameValid = false;
+            isSurnameValid = false;
         }else{
             $("#creation-label-surnameG1").css({"color":"#4CAF50"});
-            $("#small-surnameG1").text("Nome Valido");
+            $("#small-surnameG1").text("Cognome Valido");
             $("#small-surnameG1").css("color","#4CAF50");
-            isNameValid=true;
+            isSurnameValid=true;
         }
     }else{
         $("#creation-label-surnameG1").css({"color":"#FF0000"});
         $("#small-surnameG1").text("Il formato del giocatore non è valido. ");
         $("#small-surnameG1").css("color","#FF0000");
-        isNameValid=false;
+        isSurnameValid=false;
     }
 }
 function validateSurname2() {
@@ -273,18 +279,18 @@ function validateSurname2() {
             $("#creation-label-surnameG2").css({"color": "#FF0000"});
             $("#small-surnameG2").text("La lunghezza del giocatore non è valida");
             $("#small-surnameG2").css("color", "#FF0000");
-            isNameValid = false;
+            isSurnameValid = false;
         }else{
             $("#creation-label-surnameG2").css({"color":"#4CAF50"});
-            $("#small-surnameG2").text("Nome Valido");
+            $("#small-surnameG2").text("Cognome Valido");
             $("#small-surnameG2").css("color","#4CAF50");
-            isNameValid=true;
+            isSurnameValid=true;
         }
     }else{
         $("#creation-label-surnameG2").css({"color":"#FF0000"});
         $("#small-surnameG2").text("Il formato del giocatore non è valido. ");
         $("#small-surnameG2").css("color","#FF0000");
-        isNameValid=false;
+        isSurnameValid=false;
     }
 }
 function validateSurname3() {
@@ -293,18 +299,18 @@ function validateSurname3() {
             $("#creation-label-surnameG3").css({"color": "#FF0000"});
             $("#small-surnameG3").text("La lunghezza del giocatore non è valida");
             $("#small-surnameG3").css("color", "#FF0000");
-            isNameValid = false;
+            isSurnameValid = false;
         }else{
             $("#creation-label-surnameG3").css({"color":"#4CAF50"});
-            $("#small-surnameG3").text("Nome Valido");
+            $("#small-surnameG3").text("Cognome Valido");
             $("#small-surnameG3").css("color","#4CAF50");
-            isNameValid=true;
+            isSurnameValid=true;
         }
     }else{
         $("#creation-label-surnameG3").css({"color":"#FF0000"});
         $("#small-surnameG3").text("Il formato del giocatore non è valido. ");
         $("#small-surnameG3").css("color","#FF0000");
-        isNameValid=false;
+        isSurnameValid=false;
     }
 }
 //Number of player validation
