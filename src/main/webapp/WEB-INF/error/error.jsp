@@ -52,9 +52,9 @@
             <div class="col-md-12 text-center">
                 <span class="display-1 d-block">${requestScope['javax.servlet.error.status_code']}</span>
 
-                <div id="error" class="mb-4 lead"><%= exception.getMessage()%></div>
-
-
+                <div class="mb-4 lead">
+                    <p id="error"><%= exception.getMessage()%></p>
+                </div>
                 <a href="home" class="btn btn-link">Back to Home</a>
             </div>
         </div>
