@@ -47,7 +47,7 @@
     <div class="inner">
         <form action="DareDispCampoController" onsubmit="return validateFormDisp() ">
 
-            <h3>Modifica la tua disponibilità per un campo</h3>
+            <h3>Indica la tua disponibilità per un campo</h3>
 
             <div class="form-row">
                 <div class="form-wrapper">
@@ -89,9 +89,9 @@
             </button>
 
             <%}else{ %>
-            <label  id="creation-error"> Effettuare il login per modificare la disponibilità!</label>
+            <label  id="creation-error"> Effettuare il login per indicare la disponibilità!</label>
             <script>
-                setTimeout(() => {alert("Effettuare il login per modificare la disponibilità!");}, 2000)
+                setTimeout(() => {alert("Effettuare il login per indicare la disponibilità!");}, 2000)
             </script>
             <%} %>
         </form>

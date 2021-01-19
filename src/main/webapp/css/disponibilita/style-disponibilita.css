@@ -8,7 +8,11 @@ body {
     font-family: "Poppins-Regular";
     font-size: 13px;
     margin: 0;
-    color: #999; }
+    background-image: url("../../images/disponibilita/disponibilitaSfondo.jpg");
+    background-size:cover;
+    background-repeat: no-repeat;
+
+}
 
 
 input, textarea, select {
@@ -35,7 +39,6 @@ a {
 .wrapper {
     min-height: 100vh;
     position: relative;
-    background: #079e3e;
 }
 .inner {
     position: absolute;
