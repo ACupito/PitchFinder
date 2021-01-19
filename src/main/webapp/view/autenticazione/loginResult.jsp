@@ -1,14 +1,8 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: memex_99
-  Date: 12/01/2021
-  Time: 21:51
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <html>
 <head>
     <title>Login Fallito</title>
+    <link rel="icon" href="images/Logo/logo_c08.png" type="image/icon type">
     <link rel="stylesheet" type="text/css" href="./css/navbar/style_navbar.css">
     <link rel="stylesheet" type="text/css" href="./css/user_profile/login_failed.css">
     <link href = "https://fonts.googleapis.com/css?family=Poppins" rel = "stylesheet">
