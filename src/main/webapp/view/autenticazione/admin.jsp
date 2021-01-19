@@ -189,14 +189,14 @@
                                     <div id="valid_squadra">Il numero delle squadre deve essere maggiore di 1 e minore di 20.</div>
                                 </div>
                                 <div class="form-group">
-                                    <label for="minPartecipanti">Numero minimo di partecipanti per squadra:</label>
+                                    <label for="minPartecipanti">Numero minimo di giocatori per squadra:</label>
                                     <input type="text" class="form-control" id="minPartecipanti" name="minPartecipanti" min="1" max="5" required oninput="validateMinPartecipanti()" onchange="validateMinPartecipanti()" onblur="validateMinPartecipanti()">
-                                    <div id="valid_minParteci">Il numero minimo di partecipanti deve essere maggiore di 1 e minore di 5.</div>
+                                    <div id="valid_minParteci">Il numero minimo di giocatori deve essere maggiore di 1 e minore di 5.</div>
                                 </div>
                                 <div class="form-group">
-                                    <label for="maxPartecipanti">Numero massimo di partecipanti per squadra:</label>
+                                    <label for="maxPartecipanti">Numero massimo di giocatori per squadra:</label>
                                     <input type="text" class="form-control" id="maxPartecipanti" name="maxPartecipanti" min="5" max="12" required oninput="validateMaxPartecipanti()" onchange="validateMaxPartecipanti()" onblur="validateMaxPartecipanti()">
-                                    <div id="valid_maxParteci">Il numero massimo di partecipanti deve essere maggiore di 5 e minore di 12.</div>
+                                    <div id="valid_maxParteci">Il numero massimo di giocatori deve essere maggiore di 5 e minore di 12.</div>
                                 </div>
 
                                 <button type="submit" class="btn btn-primary" id="createTorneo">Crea torneo</button>

@@ -499,7 +499,7 @@ public class TC_RF_CreareTorneo {
         driver.findElement(By.id("minPartecipanti")).clear();
         driver.findElement(By.id("minPartecipanti")).sendKeys("a");
         driver.findElement(By.xpath("//div/div/div")).click();
-        assertEquals("Il formato del numero minimo di partecipanti non è valido!", driver.findElement(By.id("valid_minParteci")).getText());
+        assertEquals("Il formato del numero minimo di giocatori non è valido!", driver.findElement(By.id("valid_minParteci")).getText());
     }
 
     @Test
@@ -544,7 +544,7 @@ public class TC_RF_CreareTorneo {
         driver.findElement(By.id("minPartecipanti")).clear();
         driver.findElement(By.id("minPartecipanti")).sendKeys("60");
         driver.findElement(By.xpath("//div/div/div")).click();
-        assertEquals("Numero minimo di partecipanti non valido!", driver.findElement(By.id("valid_minParteci")).getText());
+        assertEquals("Numero minimo di giocatori non valido!", driver.findElement(By.id("valid_minParteci")).getText());
     }
 
     @Test
@@ -595,7 +595,7 @@ public class TC_RF_CreareTorneo {
         driver.findElement(By.id("maxPartecipanti")).clear();
         driver.findElement(By.id("maxPartecipanti")).sendKeys("a");
         driver.findElement(By.xpath("//div/div/div")).click();
-        assertEquals("Il formato del numero massimo di partecipanti non è valido!", driver.findElement(By.id("valid_maxParteci")).getText());
+        assertEquals("Il formato del numero massimo di giocatori non è valido!", driver.findElement(By.id("valid_maxParteci")).getText());
     }
 
     @Test
@@ -646,7 +646,7 @@ public class TC_RF_CreareTorneo {
         driver.findElement(By.id("maxPartecipanti")).clear();
         driver.findElement(By.id("maxPartecipanti")).sendKeys("60");
         driver.findElement(By.xpath("//div/div/div")).click();
-        assertEquals("Numero massimo di partecipanti non valido!", driver.findElement(By.id("valid_maxParteci")).getText());
+        assertEquals("Numero massimo di giocatori non valido!", driver.findElement(By.id("valid_maxParteci")).getText());
     }
 
 
