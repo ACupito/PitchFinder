@@ -127,32 +127,7 @@
                                     <div id="valid_nome">Il nome non può superare 50 caratteri.</div>
 
                                 </div>
-                                <div class="form-group">
-                                    <label for="data_inizio">Data Inizio:</label>
-                                    <input type="date" class="form-control" id="data_inizio" name="dataInizio" required onchange="validateDataInizio(); activeDataFine(); activeGiornoPartite()" onblur="validateDataInizio(); validateAllDate()">
-                                    <div id="valid_dataInizio">Inserisci una data di inizio.</div>
-                                </div>
-                                <div class="form-group">
-                                    <label for="data_fine">Data Fine:</label>
-                                    <input type="date" class="form-control" id="data_fine" name="dataFine" required onclick="minDateFine(); maxDateFine()" disabled  onchange="validateDataFine(); activeGiornoPartite()" onblur="validateDataFine(); validateAllDate()">
-                                    <div id="valid_dataFine">Inserisci una data di fine.</div>
-                                    <div id="valid_AllSquadre">Inserisci una data di fine successiva alla data di inizio.</div>
-                                </div>
-                                <div class="form-group">
-                                    <label for="giornoPartite">Giorno Partite:</label>
-                                    <input type="text" list="daysPartite" name="giornoPartite" id="giornoPartite" oninput="validateGiornoPartite()" onblur="validateGiornoPartite()"/>
-                                    <datalist id="daysPartite">
-                                        <option value="Lunedì">Lunedì</option>
-                                        <option value="Martedì">Martedì</option>
-                                        <option value="Mercoledì">Mercoledì</option>
-                                        <option value="Giovedì">Giovedì</option>
-                                        <option value="Venerdì">Venerdì</option>
-                                        <option value="Sabato">Sabato</option>
-                                        <option value="Domenica">Domenica</option>
-                                    </datalist>
 
-                                    <div id="valid_giornoPartite">Seleziona un giorno in cui si giocheranno le partite.</div>
-                                </div>
                                 <div class="form-group">
                                     <label for="sport">Sport:</label>
                                     <select name="sport" id="sport" onchange="validateSport()" onblur="validateSport()">
@@ -180,6 +155,34 @@
                                     </select>
                                     <div id="valid_struttura">Seleziona una struttra del torneo.</div>
                                 </div>
+
+                                <div class="form-group">
+                                    <label for="data_inizio">Data Inizio:</label>
+                                    <input type="date" class="form-control" id="data_inizio" name="dataInizio" required onchange="validateDataInizio(); activeDataFine(); activeGiornoPartite()" onblur="validateDataInizio(); validateAllDate()">
+                                    <div id="valid_dataInizio">Inserisci una data di inizio.</div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="data_fine">Data Fine:</label>
+                                    <input type="date" class="form-control" id="data_fine" name="dataFine" required onclick="minDateFine(); maxDateFine()" disabled  onchange="validateDataFine(); activeGiornoPartite()" onblur="validateDataFine(); validateAllDate()">
+                                    <div id="valid_dataFine">Inserisci una data di fine.</div>
+                                    <div id="valid_AllSquadre">Inserisci una data di fine successiva alla data di inizio.</div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="giornoPartite">Giorno Partite:</label>
+                                    <input type="text" list="daysPartite" name="giornoPartite" id="giornoPartite" oninput="validateGiornoPartite()" onblur="validateGiornoPartite()"/>
+                                    <datalist id="daysPartite">
+                                        <option value="Lunedì">Lunedì</option>
+                                        <option value="Martedì">Martedì</option>
+                                        <option value="Mercoledì">Mercoledì</option>
+                                        <option value="Giovedì">Giovedì</option>
+                                        <option value="Venerdì">Venerdì</option>
+                                        <option value="Sabato">Sabato</option>
+                                        <option value="Domenica">Domenica</option>
+                                    </datalist>
+
+                                    <div id="valid_giornoPartite">Seleziona un giorno in cui si giocheranno le partite.</div>
+                                </div>
+
                                 <div class="form-group">
                                     <label for="maxSquadre">Numero squadre torneo:</label>
                                     <input type="text" class="form-control" id="maxSquadre" name="maxSquadre" min="1" max="20" required oninput="validateSquadre()" onchange="validateSquadre()" onblur="validateSquadre()">
