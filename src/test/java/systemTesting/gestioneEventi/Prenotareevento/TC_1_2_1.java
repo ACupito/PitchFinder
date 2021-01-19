@@ -30,15 +30,17 @@ public class TC_1_2_1 {
         driver.findElement(By.name("eventDetailsButton")).click();
         driver.findElement(By.id("email")).click();
         driver.findElement(By.id("email")).clear();
-        driver.findElement(By.id("email")).sendKeys("c");
-        driver.findElement(By.id("email")).clear();
         driver.findElement(By.id("email")).sendKeys("");
-        // ERROR: Caught exception [ERROR: Unsupported command [mouseOver | id=alert | ]]
-        assertEquals("Lunghezza non valida",
-                driver.findElement(By.id("alertLunghezza")).getText());
 
-        // ERROR: Caught exception [ERROR: Unsupported command [captureEntirePageScreenshot |  | ]]
+        try {
+            assertEquals("",
+                    driver.findElement(By.id("alertLunghezza")).getText());
+        }catch (Error e){
+            verificationErrors.append(e.toString());
+        }
     }
+
+
 
 
     @AfterAll
@@ -89,7 +91,7 @@ public class TC_1_2_1 {
         System.setProperty("webdriver.chrome.driver","src/test/java/systemTesting/katalonDriver/chromedriver.exe");
         driver = new ChromeDriver();
         baseUrl = "https://www.google.com/";
-        driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+        driver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
 
 
     }
