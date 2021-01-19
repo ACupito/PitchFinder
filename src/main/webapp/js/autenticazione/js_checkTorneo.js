@@ -53,35 +53,54 @@ function validateStruttura() {
 function validateGiornoPartite() {
     var giornoPartite = $("#giornoPartite").val();
     var validate = false;
-    if(giornoPartite.match("^[ a-zA-Z\\u00C0-\\u00ff']+$")) {
-        switch (giornoPartite) {
-            case "Domenica": validate = true; break;
-            case "Lunedì": validate = true; break;
-            case "Martedì": validate = true; break;
-            case "Mercoledì": validate = true; break;
-            case "Giovedì": validate = true; break;
-            case "Venerdì": validate = true; break;
-            case "Sabato": validate = true; break;
-            default: validate = false; break;
-        }
-        if(!validate) {
-            $("#valid_giornoPartite").css("color", "#FF0000");
-            $("#valid_giornoPartite").text("Formato Errato! Giorno non valido! (Se è un giorno inserisci lettera maiuscola all'inizio)");
-            isGiornoPartiteValid = false;
-        } else {
-            if(giornoPartite.length > 1 && giornoPartite.length < 20) {
+
+    if(giornoPartite.length > 1 && giornoPartite.length < 20) {
+
+        if(giornoPartite.match("^[ a-zA-Z\\u00C0-\\u00ff']+$")) {
+            switch (giornoPartite) {
+                case "Domenica":
+                    validate = true;
+                    break;
+                case "Lunedì":
+                    validate = true;
+                    break;
+                case "Martedì":
+                    validate = true;
+                    break;
+                case "Mercoledì":
+                    validate = true;
+                    break;
+                case "Giovedì":
+                    validate = true;
+                    break;
+                case "Venerdì":
+                    validate = true;
+                    break;
+                case "Sabato":
+                    validate = true;
+                    break;
+                default:
+                    validate = false;
+                    break;
+            }
+            if (!validate) {
+                $("#valid_giornoPartite").css("color", "#FF0000");
+                $("#valid_giornoPartite").text("Formato Errato! Giorno non valido! (Se è un giorno inserisci lettera maiuscola all'inizio)");
+                isGiornoPartiteValid = false;
+            } else {
                 $("#valid_giornoPartite").text("La lunghezza del giorno delle partite ed il formato sono validi.");
                 $("#valid_giornoPartite").css("color", "#4CAF50");
                 isGiornoPartiteValid = true;
-            } else {
-                $("#valid_giornoPartite").css("color", "#FF0000");
-                $("#valid_giornoPartite").text("La lunghezza del giorno delle partite non è valida!");
-                isGiornoPartiteValid = false;
             }
         }
+            else {
+                $("#valid_giornoPartite").css("color", "#FF0000");
+                $("#valid_giornoPartite").text("Il formato del giorno delle partite non è valido!");
+                isGiornoPartiteValid = false;
+            }
     } else {
         $("#valid_giornoPartite").css("color", "#FF0000");
-        $("#valid_giornoPartite").text("Il formato del giorno delle partite non è valido!");
+        $("#valid_giornoPartite").text("La lunghezza del giorno delle partite non è valida!");
         isGiornoPartiteValid = false;
     }
 
@@ -107,42 +126,61 @@ function validateName() {
 }
 
 function validateSquadre() {
-
-            if (parseInt($("#maxSquadre").val()) >= 1 && parseInt($("#maxSquadre").val()) <= 20) {
-            $("#valid_squadra").text("Il numero delle squadre è valido.");
-            $("#valid_squadra").css("color", "#4CAF50");
-            isSquadreValid = true;
-        } else {
+        var value = $("#maxSquadre").val();
+        if(!value.match("^[0-9]")) {
             $("#valid_squadra").css("color", "#FF0000");
-            $("#valid_squadra").text("Numero di squadre non valido!");
+            $("#valid_squadra").text("Il formato del numero di squadre non è valido!");
             isSquadreValid = false;
+        } else {
+                if (parseInt(value) >= 1 && parseInt(value) <= 20) {
+                $("#valid_squadra").text("Il numero delle squadre è valido.");
+                $("#valid_squadra").css("color", "#4CAF50");
+                isSquadreValid = true;
+            } else {
+                $("#valid_squadra").css("color", "#FF0000");
+                $("#valid_squadra").text("Numero di squadre non valido!");
+                isSquadreValid = false;
+            }
         }
 }
 
 
 function validateMinPartecipanti() {
-
-    if (parseInt($("#minPartecipanti").val()) >= 1 && parseInt($("#minPartecipanti").val()) <= 5) {
-        $("#valid_minParteci").text("Numero minimo di partecipanti valido.");
-        $("#valid_minParteci").css("color", "#4CAF50");
-        isMinPartecValid = true;
-    } else {
+    var minPartecipanti = $("#minPartecipanti").val();
+    if(!minPartecipanti.match("^[0-9]")) {
         $("#valid_minParteci").css("color", "#FF0000");
-        $("#valid_minParteci").text("Numero minimo di partecipanti non valido!");
+        $("#valid_minParteci").text("Il formato del numero minimo di giocatori non è valido!");
         isMinPartecValid = false;
+    } else {
+        if (parseInt(minPartecipanti) >= 1 && parseInt(minPartecipanti) <= 5) {
+            $("#valid_minParteci").text("Numero minimo di giocatori valido.");
+            $("#valid_minParteci").css("color", "#4CAF50");
+            isMinPartecValid = true;
+        } else {
+            $("#valid_minParteci").css("color", "#FF0000");
+            $("#valid_minParteci").text("Numero minimo di giocatori non valido!");
+            isMinPartecValid = false;
+        }
     }
 }
 
 function validateMaxPartecipanti() {
-
-    if (parseInt($("#maxPartecipanti").val()) >= 5 && parseInt($("#maxPartecipanti").val()) <= 12) {
-        $("#valid_maxParteci").text("Numero massimo di partecipanti valido.");
-        $("#valid_maxParteci").css("color", "#4CAF50");
-        isMaxPartecValid = true;
-    } else {
+    var maxPartecipanti = $("#maxPartecipanti").val();
+    if(!maxPartecipanti.match("^[0-9]")) {
         $("#valid_maxParteci").css("color", "#FF0000");
-        $("#valid_maxParteci").text("Numero massimo di partecipanti non valido!");
+        $("#valid_maxParteci").text("Il formato del numero massimo di giocatori non è valido!");
         isMaxPartecValid = false;
+    }
+    else {
+        if (parseInt(maxPartecipanti) >= 5 && parseInt(maxPartecipanti) <= 12) {
+            $("#valid_maxParteci").text("Numero massimo di giocatori valido.");
+            $("#valid_maxParteci").css("color", "#4CAF50");
+            isMaxPartecValid = true;
+        } else {
+            $("#valid_maxParteci").css("color", "#FF0000");
+            $("#valid_maxParteci").text("Numero massimo di giocatori non valido!");
+            isMaxPartecValid = false;
+        }
     }
 }
 
@@ -202,6 +240,11 @@ function validateDataInizio() {
         $("#valid_dataInizio").css("color","#FF0000");
         $("#valid_dataInizio").text("La data di inizio non è selezionata!");
         isDataInizioValid=false;
+    }
+    else if(!document.getElementById("data_inizio").value.match("^[1-9]{1}[0-9]{3}-[0-9]{2}-[0-9]{2}")){
+        $("#valid_dataInizio").css("color","#FF0000");
+        $("#valid_dataInizio").text("Il formato della data di inizio è sbagliato!");
+        isDataInizioValid=false;
     } else {
         $("#valid_dataInizio").css("color","#4CAF50");
         $("#valid_dataInizio").text("La data di inizio è valida!");
@@ -213,6 +256,10 @@ function validateDataFine() {
     if(!document.getElementById("data_fine").value.match("^(.*[-])[0-9]*$")){
         $("#valid_dataFine").css("color","#FF0000");
         $("#valid_dataFine").text("La data di fine non è selezionata!");
+        isDataFineValid=false;
+    } else if(!document.getElementById("data_fine").value.match("^[1-9]{1}[0-9]{3}-[0-9]{2}-[0-9]{2}")){
+        $("#valid_dataFine").css("color","#FF0000");
+        $("#valid_dataFine").text("Il formato della data di fine è sbagliato!");
         isDataFineValid=false;
     } else {
         $("#valid_dataFine").css("color","#4CAF50");
@@ -298,7 +345,6 @@ function validateDayInRangeDate() {
     var i = 0;
     var validate = false;
     var giorno = $("#giornoPartite").val();
-    alert("giorno" + giorno);
     for(i = 0; i < dayValid.length; i++) {
         if(giorno.localeCompare(dayValid[i]) == 0) {
             validate = true;

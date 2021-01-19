@@ -25,7 +25,7 @@
 
     <link href="css/navbar/style_navbar.css" rel="stylesheet" type="text/css"/>
     <link href="css/footer/style_footer.css" rel="stylesheet">
-    <link href="css/disponibilita/disponibilita.css" rel="stylesheet" />
+    <link href="css/disponibilita/style-disponibilita.css" rel="stylesheet" />
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.css">
@@ -47,7 +47,7 @@
     <div class="inner">
         <form action="DareDispCampoController" onsubmit="return validateFormDisp() ">
 
-            <h3>Modifica la tua disponibilità per un campo</h3>
+            <h3>Indica la tua disponibilità per un campo</h3>
 
             <div class="form-row">
                 <div class="form-wrapper">
@@ -60,14 +60,14 @@
                 <div class="form-wrapper">
                     <label for="inizio">Orario Inizio</label>
 
-                    <input type="text" class="timepicker" name="inizio" id="inizio" minTime="09:00" maxTime="23:00"  size="5" required onkeydown="return false" onmousemove="clickTimeValidateDispIn()"><br>
+                    <input type="text" class="timepicker" name="inizio" id="inizio" minTime="09:00" maxTime="23:00" onkeydown="return false"  size="5" required  onmousemove="clickTimeValidateDispIn()"><br>
                     <small id="small-creation-timestr"> Inserire un orario di inizio valido(HH:MM)</small><br>
 
                 </div>
                 <div class="form-wrapper">
                     <label for="fine">Orario Fine</label>
 
-                    <input type="text" name="fine" id="fine" class="timepicker" minTime="09:00" maxTime="23:00"  size="5" required onkeydown="return false" onmousemove="clickTimeValidateDispFi()"><br>
+                    <input type="text" name="fine" id="fine" class="timepicker" minTime="09:00" maxTime="23:00"  size="5" onkeydown="return false" required  onmousemove="clickTimeValidateDispFi()"><br>
                     <small id="small-creation-timeend"> Inserire un orario di fine valido(HH:MM)</small><br>
 
                 </div>
@@ -89,9 +89,9 @@
             </button>
 
             <%}else{ %>
-            <label  id="creation-error"> Effettuare il login per modificare la disponibilità!</label>
+            <label  id="creation-error"> Effettuare il login per indicare la disponibilità!</label>
             <script>
-                setTimeout(() => {alert("Effettuare il login per modificare la disponibilità!");}, 2000)
+                setTimeout(() => {alert("Effettuare il login per indicare la disponibilità!");}, 2000)
             </script>
             <%} %>
         </form>
@@ -100,12 +100,12 @@
     <% String esito = (String) request.getAttribute("risultato");
         if(esito!= null){
             if(esito.equals("1")){
-    request.setAttribute("risultato",null);%>
+    request.setAttribute("risultato",null); %>
     <script>
-        alert("La creazione va a buon fine");
+        alert("La disponibilità viene memorizzata con successo.");
     </script>
     <% } %>
-    <%}%>
+    <% }%>
 </div>
 
 <!-- Footer-->
