@@ -38,7 +38,7 @@ public class TC_2_2_10{
         driver.findElement(By.id("password")).clear();
         driver.findElement(By.id("password")).sendKeys("Esse3");
         driver.findElement(By.id("login")).click();
-        driver.get("http://localhost:8080/PitchFinder_war_exploded/IscrizioneTorneoController?nomeTorneo=Champions+Five&dataTorneo=2021-01-18&campoTorneo=1002&nomeSquadra=I magnifici&minP=4&maxP=6&nGiocatori=4&&nome0=marco&nome1=Antonia&nome2=franco&nome3=paolo&cognome0=giglio&cognome1=bruno&cognome2=gaeta&cognome3=buono&nomeCapitano=Lucia&cognomeCapitano=Ga€ta&nomeTorneo=Champions+Five&campo=1002&dataTorneo=2021-01-18&conferma=conferma");
+        driver.get("http://localhost:8080/PitchFinder_war_exploded/IscrizioneTorneoController?nomeTorneo=Champions+Five&dataTorneo=2021-01-18&campoTorneo=1002&nomeSquadra=I magnifici&minP=4&maxP=6&nGiocatori=4&&nome0=antonia&nome1=franco&nome2=paolo&nome3=marco&cognome0=gaeta&cognome1=giglio&cognome2=buono&cognome3=bruno&nomeCapitano=Lucia&cognomeCapitano=Ga€ta&nomeTorneo=Champions+Five&campo=1002&dataTorneo=2021-01-18&conferma=conferma");
         assertEquals("Formato cognome capitano non valido",
                 driver.findElement(By.id("error")).getText());
 
