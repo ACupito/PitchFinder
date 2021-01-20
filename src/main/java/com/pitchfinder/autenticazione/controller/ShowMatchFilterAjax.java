@@ -56,7 +56,7 @@ public class ShowMatchFilterAjax extends HttpServlet {
                 nuove.add(current);
             } else if (date == null && time != null && time.getTime() == current.getOrarioInizio().getTime()) {
                 nuove.add(current);
-            } else if (time!= null && current.getOrarioInizio().getTime() == time.getTime()
+            } else if (time != null && date != null && current.getOrarioInizio().getTime() == time.getTime()
                     && current.getData().getTime() == date.getTime()) {
                 nuove.add(current);
             }
