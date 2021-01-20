@@ -1,6 +1,9 @@
 package com.pitchfinder.partita.controller;
 
 
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 
 import com.pitchfinder.autenticazione.entity.Admin;
@@ -8,9 +11,10 @@ import com.pitchfinder.campo.services.CampoService;
 import com.pitchfinder.campo.services.CampoServiceImpl;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.sql.Date;
 import java.sql.Time;
-
+@WebServlet("/ModificaDispCampoController")
 public class ModificaDispCampoController extends HttpServlet {
     /**
      * doPost() method.
@@ -18,7 +22,7 @@ public class ModificaDispCampoController extends HttpServlet {
      * @param response is the servlet response.
      */
     public void doPost(final HttpServletRequest request,
-                       final HttpServletResponse response) {
+                       final HttpServletResponse response) throws ServletException, IOException {
 
 
         CampoService camp = new CampoServiceImpl();
@@ -60,9 +64,19 @@ public class ModificaDispCampoController extends HttpServlet {
         }
         fine = Time.valueOf(fineStr.concat(":00"));
 
-
-        camp.createOccupazione(idcampo, data, inizio, fine, admin.getUsername());
-        response.setContentType("La modifica va a buon fine");
+        if (request.getParameter("Occupa") != null) {
+            camp.createOccupazione(idcampo, data, inizio, fine, admin.getUsername());
+            response.setContentType("La modifica va a buon fine");
+            request.setAttribute("risultatoOccupa", "1");
+            RequestDispatcher requestDispatcher = request.getServletContext().getRequestDispatcher("/autentication?flag=5");
+            requestDispatcher.forward(request, response);
+        } else if (request.getParameter("Libera") != null) {
+            camp.deleteOccupazione(idcampo, data, inizio, fine);
+            response.setContentType("La modifica va a buon fine.");
+            request.setAttribute("risultatoLibera", "1");
+            RequestDispatcher requestDispatcher = request.getServletContext().getRequestDispatcher("/autentication?flag=5");
+            requestDispatcher.forward(request, response);
+        }
     }
     /**
      * doGet method.
@@ -70,8 +84,7 @@ public class ModificaDispCampoController extends HttpServlet {
      * @param response response
 
      */
-    public void doGet(final HttpServletRequest request, final HttpServletResponse response) {
+    public void doGet(final HttpServletRequest request, final HttpServletResponse response) throws ServletException, IOException {
         this.doPost(request, response);
     }
-
 }

@@ -1,7 +1,6 @@
 package com.pitchfinder.torneo.controller;
 
 import com.pitchfinder.autenticazione.entity.Admin;
-import com.pitchfinder.campo.entity.Campo;
 import com.pitchfinder.torneo.dao.TorneoDAO;
 import com.pitchfinder.torneo.dao.TorneoDAOImpl;
 import com.pitchfinder.torneo.entity.Torneo;
@@ -14,10 +13,14 @@ import org.junit.jupiter.api.TestInstance;
 import org.mockito.Mockito;
 
 
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletContext;
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import java.io.IOException;
 import java.sql.Date;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -33,7 +36,8 @@ class TorneoControllerTest {
     private HttpServletRequest mockedRequest;
     private HttpServletResponse mockedResponse;
     private HttpSession session;
-
+    private ServletContext mockedServletContext;
+    private RequestDispatcher mockedDispatcher;
 
     /**
      * Parameters declaration.
@@ -61,6 +65,8 @@ class TorneoControllerTest {
         mockedRequest = Mockito.mock(HttpServletRequest.class);
         mockedResponse = Mockito.mock(HttpServletResponse.class);
         session = Mockito.mock(HttpSession.class);
+        mockedServletContext = Mockito.mock(ServletContext.class);
+        mockedDispatcher = Mockito.mock(RequestDispatcher.class);
 
         //Admin creation for the session.
         Admin admin = new Admin();
@@ -69,15 +75,13 @@ class TorneoControllerTest {
         admin.setUsername("memex99");
         admin.setPassword("password");
 
-        //Campo creation for the session.
-        Campo campo = new Campo();
-        campo.setIdentificativo(ID_CAMPO);
-        campo.setSport(SPORT);
 
         //session setting.
         Mockito.when(mockedRequest.getSession()).thenReturn(session);
         Mockito.when(mockedRequest.getSession().getAttribute("admin")).thenReturn(admin);
-        Mockito.when(mockedRequest.getSession().getAttribute("campo")).thenReturn(campo);
+
+        //idCampo setting.
+        Mockito.when(mockedRequest.getParameter("idCampo")).thenReturn(String.valueOf(ID_CAMPO));
 
         //creation instance for tests remove tournament.
         Torneo t = new Torneo("Champions", TIPO, STRUTTURA, "Sabato", "memex99", Integer.parseInt(MAX_SQUADRE),
@@ -107,7 +111,7 @@ class TorneoControllerTest {
         Mockito.when(mockedRequest.getParameter("minPartecipanti")).thenReturn(MIN_PARTECIPANTI);
         Mockito.when(mockedRequest.getParameter("maxPartecipanti")).thenReturn(MAX_PARTECIPANTI);
 
-        String message = "Lunghezza nome non valida";
+        String message = "La creazione del torneo fallisce a causa della lunghezza del nome.";
 
         IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () ->
                 servlet.doPost(mockedRequest, mockedResponse));
@@ -134,7 +138,7 @@ class TorneoControllerTest {
         Mockito.when(mockedRequest.getParameter("minPartecipanti")).thenReturn(MIN_PARTECIPANTI);
         Mockito.when(mockedRequest.getParameter("maxPartecipanti")).thenReturn(MAX_PARTECIPANTI);
 
-        String message = "Formato nome non valido";
+        String message = "La creazione del torneo fallisce a causa del formato errato del nome.";
 
         IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () ->
                 servlet.doPost(mockedRequest, mockedResponse));
@@ -161,7 +165,7 @@ class TorneoControllerTest {
         Mockito.when(mockedRequest.getParameter("minPartecipanti")).thenReturn(MIN_PARTECIPANTI);
         Mockito.when(mockedRequest.getParameter("maxPartecipanti")).thenReturn(MAX_PARTECIPANTI);
 
-        String message = "Sport non selezionato";
+        String message = "La creazione del torneo fallisce per la mancata selezione di uno sport.";
 
         IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () ->
                 servlet.doPost(mockedRequest, mockedResponse));
@@ -188,7 +192,7 @@ class TorneoControllerTest {
         Mockito.when(mockedRequest.getParameter("minPartecipanti")).thenReturn(MIN_PARTECIPANTI);
         Mockito.when(mockedRequest.getParameter("maxPartecipanti")).thenReturn(MAX_PARTECIPANTI);
 
-        String message = "Tipo non selezionato";
+        String message = "La creazione del torneo fallisce per la mancata selezione della tipologia.";
 
         IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () ->
                 servlet.doPost(mockedRequest, mockedResponse));
@@ -215,7 +219,7 @@ class TorneoControllerTest {
         Mockito.when(mockedRequest.getParameter("minPartecipanti")).thenReturn(MIN_PARTECIPANTI);
         Mockito.when(mockedRequest.getParameter("maxPartecipanti")).thenReturn(MAX_PARTECIPANTI);
 
-        String message = "Struttura non selezionata";
+        String message = "La creazione del torneo fallisce per la mancata selezione della struttura.";
 
         IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () ->
                 servlet.doPost(mockedRequest, mockedResponse));
@@ -242,7 +246,7 @@ class TorneoControllerTest {
         Mockito.when(mockedRequest.getParameter("minPartecipanti")).thenReturn(MIN_PARTECIPANTI);
         Mockito.when(mockedRequest.getParameter("maxPartecipanti")).thenReturn(MAX_PARTECIPANTI);
 
-        String message = "Data inizio non selezionata";
+        String message = "La creazione del torneo fallisce per la mancata selezione della data di inizio.";
 
         IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () ->
                 servlet.doPost(mockedRequest, mockedResponse));
@@ -269,7 +273,7 @@ class TorneoControllerTest {
         Mockito.when(mockedRequest.getParameter("minPartecipanti")).thenReturn(MIN_PARTECIPANTI);
         Mockito.when(mockedRequest.getParameter("maxPartecipanti")).thenReturn(MAX_PARTECIPANTI);
 
-        String message = "Formato data inizio non valido";
+        String message = "La creazione del torneo fallisce a causa del formato errato della data di inizio.";
 
         IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () ->
                 servlet.doPost(mockedRequest, mockedResponse));
@@ -296,7 +300,7 @@ class TorneoControllerTest {
         Mockito.when(mockedRequest.getParameter("minPartecipanti")).thenReturn(MIN_PARTECIPANTI);
         Mockito.when(mockedRequest.getParameter("maxPartecipanti")).thenReturn(MAX_PARTECIPANTI);
 
-        String message = "Data fine non selezionata";
+        String message = "La creazione del torneo fallisce per mancata selezione della data di fine.";
 
         IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () ->
                 servlet.doPost(mockedRequest, mockedResponse));
@@ -323,7 +327,7 @@ class TorneoControllerTest {
         Mockito.when(mockedRequest.getParameter("minPartecipanti")).thenReturn(MIN_PARTECIPANTI);
         Mockito.when(mockedRequest.getParameter("maxPartecipanti")).thenReturn(MAX_PARTECIPANTI);
 
-        String message = "Formato data fine non valido";
+        String message = "La creazione del torneo fallisce a causa del formato errato della data di fine.";
 
         IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () ->
                 servlet.doPost(mockedRequest, mockedResponse));
@@ -350,7 +354,7 @@ class TorneoControllerTest {
         Mockito.when(mockedRequest.getParameter("minPartecipanti")).thenReturn(MIN_PARTECIPANTI);
         Mockito.when(mockedRequest.getParameter("maxPartecipanti")).thenReturn(MAX_PARTECIPANTI);
 
-        String message = "Lunghezza giorno partite non valida";
+        String message = "La creazione del torneo fallisce a causa della lunghezza del Giorno Partite.";
 
         IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () ->
                 servlet.doPost(mockedRequest, mockedResponse));
@@ -377,7 +381,7 @@ class TorneoControllerTest {
         Mockito.when(mockedRequest.getParameter("minPartecipanti")).thenReturn(MIN_PARTECIPANTI);
         Mockito.when(mockedRequest.getParameter("maxPartecipanti")).thenReturn(MAX_PARTECIPANTI);
 
-        String message = "Formato giorno partite non valido";
+        String message = "La creazione del torneo fallisce a causa del formato errato del Giorno partite.";
 
         IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () ->
                 servlet.doPost(mockedRequest, mockedResponse));
@@ -404,7 +408,7 @@ class TorneoControllerTest {
         Mockito.when(mockedRequest.getParameter("minPartecipanti")).thenReturn(MIN_PARTECIPANTI);
         Mockito.when(mockedRequest.getParameter("maxPartecipanti")).thenReturn(MAX_PARTECIPANTI);
 
-        String message = "Formato numero squadre non valido";
+        String message = "La creazione del torneo fallisce a causa del formato errato del Numero squadre.";
 
         IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () ->
                 servlet.doPost(mockedRequest, mockedResponse));
@@ -431,7 +435,7 @@ class TorneoControllerTest {
         Mockito.when(mockedRequest.getParameter("minPartecipanti")).thenReturn(MIN_PARTECIPANTI);
         Mockito.when(mockedRequest.getParameter("maxPartecipanti")).thenReturn(MAX_PARTECIPANTI);
 
-        String message = "Numero di squadre non valido";
+        String message = "La creazione del torneo fallisce a causa del valore errato del Numero squadre.";
 
         IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () ->
                 servlet.doPost(mockedRequest, mockedResponse));
@@ -458,7 +462,7 @@ class TorneoControllerTest {
         Mockito.when(mockedRequest.getParameter("minPartecipanti")).thenReturn("an");
         Mockito.when(mockedRequest.getParameter("maxPartecipanti")).thenReturn(MAX_PARTECIPANTI);
 
-        String message = "Formato minimo partecipanti non valido";
+        String message = "La creazione del torneo fallisce a causa del formato errato del Minimo Giocatori.";
 
         IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () ->
                 servlet.doPost(mockedRequest, mockedResponse));
@@ -485,7 +489,7 @@ class TorneoControllerTest {
         Mockito.when(mockedRequest.getParameter("minPartecipanti")).thenReturn("0");
         Mockito.when(mockedRequest.getParameter("maxPartecipanti")).thenReturn(MAX_PARTECIPANTI);
 
-        String message = "Numero minimo di partecipanti non valido";
+        String message = "La creazione del torneo fallisce a causa del valore errato del Minimo Giocatori.";
 
         IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () ->
                 servlet.doPost(mockedRequest, mockedResponse));
@@ -512,7 +516,7 @@ class TorneoControllerTest {
         Mockito.when(mockedRequest.getParameter("minPartecipanti")).thenReturn(MIN_PARTECIPANTI);
         Mockito.when(mockedRequest.getParameter("maxPartecipanti")).thenReturn("aap");
 
-        String message = "Numero massimo di partecipanti non valido";
+        String message = "La creazione del torneo fallisce a causa del formato errato del Massimo Giocatori.";
 
         IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () ->
                 servlet.doPost(mockedRequest, mockedResponse));
@@ -538,7 +542,7 @@ class TorneoControllerTest {
         Mockito.when(mockedRequest.getParameter("minPartecipanti")).thenReturn(MIN_PARTECIPANTI);
         Mockito.when(mockedRequest.getParameter("maxPartecipanti")).thenReturn("20");
 
-        String message = "Numero massimo di partecipanti non valido";
+        String message = "La creazione del torneo fallisce a causa del valore errato del Massimo Giocatori.";
 
         IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () ->
                 servlet.doPost(mockedRequest, mockedResponse));
@@ -550,7 +554,7 @@ class TorneoControllerTest {
      * Test case: TC_21_18 -> Dati corretti - Creazione torneo avvenuta.
      */
     @Test
-    void TC_21_18() {
+    void TC_21_18() throws ServletException, IOException {
 
         Mockito.when(mockedRequest.getParameter("flag")).thenReturn("1");
 
@@ -565,8 +569,11 @@ class TorneoControllerTest {
         Mockito.when(mockedRequest.getParameter("minPartecipanti")).thenReturn(MIN_PARTECIPANTI);
         Mockito.when(mockedRequest.getParameter("maxPartecipanti")).thenReturn(MAX_PARTECIPANTI);
 
+        Mockito.doReturn(mockedServletContext).when(mockedRequest).getServletContext();
+        Mockito.doReturn(mockedDispatcher).when(mockedServletContext).getRequestDispatcher("/autentication?flag=5&result=1&message=La creazione del torneo è avvenuta correttamente");
+
         servlet.doGet(mockedRequest, mockedResponse);
-        Mockito.verify(mockedResponse).setContentType("Creazione avvenuta");
+        Mockito.verify(mockedResponse).setContentType("La creazione del torneo è avvenuta correttamente.");
 
     }
 
@@ -574,12 +581,16 @@ class TorneoControllerTest {
      * This method tests the method for obtaining all tournaments.
      */
     @Test
-    void CheckTest_19() {
+    void CheckTest_19() throws ServletException, IOException {
 
         Mockito.when(mockedRequest.getParameter("flag")).thenReturn("3");
 
+        Mockito.doReturn(mockedServletContext).when(mockedRequest).getServletContext();
+        Mockito.doReturn(mockedDispatcher).when(mockedServletContext).getRequestDispatcher("/view/torneo/visualizzaTornei.jsp");
+
         servlet.doGet(mockedRequest, mockedResponse);
         Mockito.verify(mockedResponse).setContentType("Tornei ottenuti");
+
     }
 
     /**
@@ -593,7 +604,7 @@ class TorneoControllerTest {
         Mockito.when(mockedRequest.getParameter("nome")).thenReturn("");
         Mockito.when(mockedRequest.getParameter("dataInizio")).thenReturn(DATA_INIZIO);
 
-        String message = "Lunghezza nome non valida";
+        String message = "L'ottenimento del torneo fallisce a causa della lunghezza del nome.";
 
         IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () ->
                 servlet.doPost(mockedRequest, mockedResponse));
@@ -612,7 +623,7 @@ class TorneoControllerTest {
         Mockito.when(mockedRequest.getParameter("nome")).thenReturn("<<Jss>>??");
         Mockito.when(mockedRequest.getParameter("dataInizio")).thenReturn(DATA_INIZIO);
 
-        String message = "Formato nome non valido";
+        String message = "L'ottenimento del torneo fallisce a causa del formato errato del nome.";
 
         IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () ->
                 servlet.doPost(mockedRequest, mockedResponse));
@@ -631,7 +642,7 @@ class TorneoControllerTest {
         Mockito.when(mockedRequest.getParameter("nome")).thenReturn("Champions");
         Mockito.when(mockedRequest.getParameter("dataInizio")).thenReturn(null);
 
-        String message = "Data inizio non selezionata";
+        String message = "L'ottenimento del torneo fallisce a causa del mancata selezione della data di inizio.";
 
         IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () ->
                 servlet.doPost(mockedRequest, mockedResponse));
@@ -650,7 +661,7 @@ class TorneoControllerTest {
         Mockito.when(mockedRequest.getParameter("nome")).thenReturn("Champions");
         Mockito.when(mockedRequest.getParameter("dataInizio")).thenReturn("5/13/1980");
 
-        String message = "Formato data inizio non valido";
+        String message = "L'ottenimento del torneo fallisce a causa del formato errato della data di inizio.";
 
         IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () ->
                 servlet.doPost(mockedRequest, mockedResponse));
@@ -662,7 +673,7 @@ class TorneoControllerTest {
      * This method tests the method of obtaining a tournament -> Corretto.
      */
     @Test
-    void CheckTest_24() {
+    void CheckTest_24() throws ServletException, IOException {
 
         Mockito.when(mockedRequest.getParameter("flag")).thenReturn("4");
 
@@ -670,6 +681,9 @@ class TorneoControllerTest {
         Mockito.when(mockedRequest.getParameter("dataInizio")).thenReturn("2022-10-10");
         Mockito.when(mockedRequest.getParameter("dataFine")).thenReturn("2022-10-30");
         Mockito.when(mockedRequest.getParameter("giornoPartite")).thenReturn("Sabato");
+
+        Mockito.doReturn(mockedServletContext).when(mockedRequest).getServletContext();
+        Mockito.doReturn(mockedDispatcher).when(mockedServletContext).getRequestDispatcher("/view/torneo/dettagliTorneo.jsp");
 
         servlet.doGet(mockedRequest, mockedResponse);
         Mockito.verify(mockedResponse).setContentType("Torneo ottenuto");
@@ -689,7 +703,7 @@ class TorneoControllerTest {
         Mockito.when(mockedRequest.getParameter("dataFine")).thenReturn(DATA_FINE);
         Mockito.when(mockedRequest.getParameter("giornoPartite")).thenReturn(GIORNO_PARTITE);
 
-        String message = "Lunghezza nome non valida";
+        String message = "L'eliminazione del torneo fallisce a causa della lunghezza del nome.";
 
         IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () ->
                 servlet.doPost(mockedRequest, mockedResponse));
@@ -710,7 +724,7 @@ class TorneoControllerTest {
         Mockito.when(mockedRequest.getParameter("dataFine")).thenReturn(DATA_FINE);
         Mockito.when(mockedRequest.getParameter("giornoPartite")).thenReturn(GIORNO_PARTITE);
 
-        String message = "Formato nome non valido";
+        String message = "L'eliminazione del torneo fallisce a causa del formato errato del nome.";
 
         IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () ->
                 servlet.doPost(mockedRequest, mockedResponse));
@@ -731,7 +745,7 @@ class TorneoControllerTest {
         Mockito.when(mockedRequest.getParameter("dataFine")).thenReturn(DATA_FINE);
         Mockito.when(mockedRequest.getParameter("giornoPartite")).thenReturn(GIORNO_PARTITE);
 
-        String message = "Data inizio non selezionata";
+        String message = "L'eliminazione del torneo fallisce a causa della mancata selezione della data di inizio.";
 
         IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () ->
                 servlet.doPost(mockedRequest, mockedResponse));
@@ -752,7 +766,7 @@ class TorneoControllerTest {
         Mockito.when(mockedRequest.getParameter("dataFine")).thenReturn(DATA_FINE);
         Mockito.when(mockedRequest.getParameter("giornoPartite")).thenReturn(GIORNO_PARTITE);
 
-        String message = "Formato data inizio non valido";
+        String message = "L'eliminazione del torneo fallisce a causa del formato errato della data di inizio.";
 
         IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () ->
                 servlet.doPost(mockedRequest, mockedResponse));
@@ -773,7 +787,7 @@ class TorneoControllerTest {
         Mockito.when(mockedRequest.getParameter("dataFine")).thenReturn(null);
         Mockito.when(mockedRequest.getParameter("giornoPartite")).thenReturn(GIORNO_PARTITE);
 
-        String message = "Data fine non selezionata";
+        String message = "L'eliminazione del torneo fallisce a causa della mancata selezione della data di fine.";
 
         IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () ->
                 servlet.doPost(mockedRequest, mockedResponse));
@@ -794,7 +808,7 @@ class TorneoControllerTest {
         Mockito.when(mockedRequest.getParameter("dataFine")).thenReturn("10/13/1980");
         Mockito.when(mockedRequest.getParameter("giornoPartite")).thenReturn(GIORNO_PARTITE);
 
-        String message = "Formato data fine non valido";
+        String message = "L'eliminazione del torneo fallisce a causa del formato errato della data di fine.";
 
         IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () ->
                 servlet.doPost(mockedRequest, mockedResponse));
@@ -815,7 +829,7 @@ class TorneoControllerTest {
         Mockito.when(mockedRequest.getParameter("dataFine")).thenReturn("2022-10-30");
         Mockito.when(mockedRequest.getParameter("giornoPartite")).thenReturn("");
 
-        String message = "Lunghezza giorno partite non valida";
+        String message = "L'eliminazione del torneo fallisce a causa della lunghezza errata del giorno partite.";
 
         IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () ->
                 servlet.doPost(mockedRequest, mockedResponse));
@@ -836,7 +850,7 @@ class TorneoControllerTest {
         Mockito.when(mockedRequest.getParameter("dataFine")).thenReturn("2022-10-30");
         Mockito.when(mockedRequest.getParameter("giornoPartite")).thenReturn("<<??Sab?<>");
 
-        String message = "Formato giorno partite non valido";
+        String message = "L'eliminazione del torneo fallisce a causa del formato errato del giorno partite.";
 
         IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () ->
                 servlet.doPost(mockedRequest, mockedResponse));
@@ -848,7 +862,7 @@ class TorneoControllerTest {
      * This method tests the method for removing a tournament -> Corretto.
      */
     @Test
-    void CheckTest_33() {
+    void CheckTest_33() throws ServletException, IOException {
 
         Mockito.when(mockedRequest.getParameter("flag")).thenReturn("2");
 
@@ -857,8 +871,12 @@ class TorneoControllerTest {
         Mockito.when(mockedRequest.getParameter("dataFine")).thenReturn("2022-10-30");
         Mockito.when(mockedRequest.getParameter("giornoPartite")).thenReturn("Sabato");
 
+        Mockito.doReturn(mockedServletContext).when(mockedRequest).getServletContext();
+        Mockito.doReturn(mockedDispatcher).when(mockedServletContext).getRequestDispatcher("/autentication?flag=5&result=1&message=Eliminazione del torneo avvenuta correttamente");
+
+
         servlet.doGet(mockedRequest, mockedResponse);
-        Mockito.verify(mockedResponse).setContentType("Eliminazione avvenuta");
+        Mockito.verify(mockedResponse).setContentType("Eliminazione del torneo avvenuta correttamente.");
 
     }
 

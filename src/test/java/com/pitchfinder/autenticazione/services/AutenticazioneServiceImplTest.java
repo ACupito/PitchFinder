@@ -9,7 +9,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class AutenticazioneServiceImplTest {
 
-    private AutenticazioneService as = new AutenticazioneServiceImpl();
+    private final AutenticazioneService as = new AutenticazioneServiceImpl();
 
     /**
      * Start
@@ -106,7 +106,7 @@ public class AutenticazioneServiceImplTest {
 
         IllegalArgumentException exception = assertThrows(
                 IllegalArgumentException.class, () -> {
-                    as.loginUtente("memex99", "PitchFinder 57");
+                    as.loginAdmin("memex99", "SprikkePerugina98");
                 });
 
         assertEquals(message, exception.getMessage());

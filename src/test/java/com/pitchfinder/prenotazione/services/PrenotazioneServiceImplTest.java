@@ -26,6 +26,7 @@ public class PrenotazioneServiceImplTest {
     private Admin admin;
     private Prenotazione prenotazioneGetN;
     private Evento evento;
+    private Prenotazione prenotazioneGet;
     private EventoDAO eventoDAO = new EventoDAOImpl();
     private PrenotazioneDAO prenotazioneDAO = new PrenotazioneDAOImpl();
 
@@ -55,10 +56,7 @@ public class PrenotazioneServiceImplTest {
     @Test
     public void checkCreatePrenotazione() throws EmailException, MalformedURLException {
 
-
-
         PrenotazioneService prenotazioneService = new PrenotazioneServiceImpl();
-
         assertNotNull(prenotazioneService.createPrenotazione("AndreSquillante@gmail.com", evento));
 
     }
@@ -73,12 +71,23 @@ public class PrenotazioneServiceImplTest {
 
     }
 
+    @Test
+    public void checkGetPrenotazione(){
+        prenotazioneGet = new Prenotazione("pip@gmail.com", evento.getName(), evento.getDate());
+        PrenotazioneDAO prenotazioneDAO = new PrenotazioneDAOImpl();
+        prenotazioneDAO.doSavePrenotazione(prenotazioneGet);
+        PrenotazioneService prenotazioneService = new PrenotazioneServiceImpl();
+        assertNotNull(prenotazioneService.getPrenotazione(prenotazioneGet.getUtenteEmail(), prenotazioneGet.getEventoData(), prenotazioneGet.getEventoNome()));
+
+    }
+
     @AfterAll
     void clean(){
 
         Prenotazione prenotazione = new Prenotazione("AndreSquillante@gmail.com", evento.getName(), evento.getDate());
         prenotazioneDAO.doRemovePrenotazione(prenotazione);
         prenotazioneDAO.doRemovePrenotazione(prenotazioneGetN);
+        prenotazioneDAO.doRemovePrenotazione(prenotazioneGet);
         //remove admin
         try (Connection con = ConPool.getInstance().getConnection()) {
             PreparedStatement ps = con.prepareStatement(
@@ -88,7 +97,7 @@ public class PrenotazioneServiceImplTest {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-      eventoDAO.doRemoveEvento(evento);
+        eventoDAO.doRemoveEvento(evento);
 
 
     }

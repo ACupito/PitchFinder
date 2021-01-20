@@ -1,6 +1,7 @@
 package com.pitchfinder.torneo.entity;
 
 import java.sql.Date;
+import java.util.Calendar;
 
 /**
  * This class manages the Torneo entity.
@@ -284,4 +285,53 @@ public class Torneo {
             final int pitchId) {
         this.campoIdentificativo = pitchId;
     }
+
+    /**
+     * Used for the event.jsp.
+     * @param month string
+     * @return String
+     */
+    public String getStringMonth(int month) {
+        switch (month) {
+            case 0:
+                return "Gen";
+            case 1:
+                return "Feb";
+            case 2:
+                return "Mar";
+            case 3:
+                return "Apr";
+            case 4:
+                return "Mag";
+            case 5:
+                return "Giu";
+            case 6:
+                return "Lug";
+            case 7:
+                return "Ago";
+            case 8:
+                return "Set";
+            case 9:
+                return "Ott";
+            case 10:
+                return "Nov";
+            case 11:
+                return "Dic";
+            default:
+                return "";
+        }
+    }
+
+    /**
+     * Used for the event.jsp.
+     * @param data date
+     * @return String
+     */
+    public String getStringDay(Date data) {
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(data);
+        int day = cal.get(Calendar.DAY_OF_MONTH);
+        return String.valueOf(day);
+    }
+
 }

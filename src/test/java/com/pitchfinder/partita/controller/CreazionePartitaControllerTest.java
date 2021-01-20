@@ -14,6 +14,8 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 import org.mockito.Mockito;
 
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -29,6 +31,8 @@ public class CreazionePartitaControllerTest{
     private CreazionePartitaController servlet;
     private HttpServletRequest mockedRequest;
     private HttpServletResponse mockedResponse;
+    private ServletContext mockedServletContext;
+    private RequestDispatcher mockedDispatcher;
     private HttpSession session;
     private UtenteDAO utenteTest;
     private CampoDAO daoCampo = new CampoDAOImpl();
@@ -45,10 +49,12 @@ public class CreazionePartitaControllerTest{
 
     @BeforeAll
     void start(){
-        //Servlet, mockedRequest, mockedResponse and Session instantiation.
+        //Servlet, mockedRequest, mockedResponse and Session instantiation ecc...
         servlet = new CreazionePartitaController();
         mockedRequest = Mockito.mock(HttpServletRequest.class);
         mockedResponse = Mockito.mock(HttpServletResponse.class);
+        mockedServletContext = Mockito.mock(ServletContext.class);
+        mockedDispatcher = Mockito.mock(RequestDispatcher.class);
         session = Mockito.mock(HttpSession.class);
 
         //User creation for testing
@@ -191,7 +197,7 @@ public class CreazionePartitaControllerTest{
         Mockito.when(mockedRequest.getParameter("nameG1")).thenReturn(PLAYER_NAME);
         Mockito.when(mockedRequest.getParameter("surnameG1")).thenReturn(PLAYER_SURNAME);
 
-        String message = "Formato Data non valido";
+        String message = "La data non rispetta il formato";
 
         IllegalArgumentException exception;
         exception = assertThrows(IllegalArgumentException.class,
@@ -213,7 +219,7 @@ public class CreazionePartitaControllerTest{
         Mockito.when(mockedRequest.getParameter("nameG1")).thenReturn(PLAYER_NAME);
         Mockito.when(mockedRequest.getParameter("surnameG1")).thenReturn(PLAYER_SURNAME);
 
-        String message = "Formato Data non valido";
+        String message = "La data non rispetta il formato";
 
         IllegalArgumentException exception;
         exception = assertThrows(IllegalArgumentException.class,
@@ -235,7 +241,7 @@ public class CreazionePartitaControllerTest{
         Mockito.when(mockedRequest.getParameter("nameG1")).thenReturn(PLAYER_NAME);
         Mockito.when(mockedRequest.getParameter("surnameG1")).thenReturn(PLAYER_SURNAME);
 
-        String message = "Formato Orario di Inizio non valido";
+        String message = "L'orario di inizio non rispetta il formato";
 
         IllegalArgumentException exception;
         exception = assertThrows(IllegalArgumentException.class,
@@ -256,7 +262,7 @@ public class CreazionePartitaControllerTest{
         Mockito.when(mockedRequest.getParameter("nameG1")).thenReturn(PLAYER_NAME);
         Mockito.when(mockedRequest.getParameter("surnameG1")).thenReturn(PLAYER_SURNAME);
 
-        String message = "Formato Orario di Fine non valido";
+        String message = "L'orario di fine non rispetta il formato";
 
         IllegalArgumentException exception;
         exception = assertThrows(IllegalArgumentException.class,
@@ -300,7 +306,7 @@ public class CreazionePartitaControllerTest{
         Mockito.when(mockedRequest.getParameter("nameG1")).thenReturn(PLAYER_NAME);
         Mockito.when(mockedRequest.getParameter("surnameG1")).thenReturn(PLAYER_SURNAME);
 
-        String message = "Durata partita troppo lunga";
+        String message = "Orari non validi, max 2 ore";
 
         IllegalArgumentException exception;
         exception = assertThrows(IllegalArgumentException.class,
@@ -322,7 +328,7 @@ public class CreazionePartitaControllerTest{
         Mockito.when(mockedRequest.getParameter("nameG1")).thenReturn(PLAYER_NAME);
         Mockito.when(mockedRequest.getParameter("surnameG1")).thenReturn(PLAYER_SURNAME);
 
-        String message = "Durata partita troppo lunga";
+        String message = "Orari non validi, max 2 ore";
 
         IllegalArgumentException exception;
         exception = assertThrows(IllegalArgumentException.class,
@@ -344,7 +350,7 @@ public class CreazionePartitaControllerTest{
         Mockito.when(mockedRequest.getParameter("nameG1")).thenReturn(PLAYER_NAME);
         Mockito.when(mockedRequest.getParameter("surnameG1")).thenReturn(PLAYER_SURNAME);
 
-        String message = "Numero massimo giocatori non valido";
+        String message = " Formato di Numero Giocatori non valido. ";
 
         IllegalArgumentException exception;
         exception = assertThrows(IllegalArgumentException.class,
@@ -366,7 +372,7 @@ public class CreazionePartitaControllerTest{
         Mockito.when(mockedRequest.getParameter("nameG1")).thenReturn(PLAYER_NAME);
         Mockito.when(mockedRequest.getParameter("surnameG1")).thenReturn(PLAYER_SURNAME);
 
-        String message = "Numero massimo giocatori non valido";
+        String message = " Formato di Numero Giocatori non valido. ";
 
         IllegalArgumentException exception;
         exception = assertThrows(IllegalArgumentException.class,
@@ -388,7 +394,7 @@ public class CreazionePartitaControllerTest{
         Mockito.when(mockedRequest.getParameter("nameG1")).thenReturn(PLAYER_NAME);
         Mockito.when(mockedRequest.getParameter("surnameG1")).thenReturn(PLAYER_SURNAME);
 
-        String message = "Numero massimo giocatori non valido";
+        String message = " Formato di Numero Giocatori non valido. ";
 
         IllegalArgumentException exception;
         exception = assertThrows(IllegalArgumentException.class,
@@ -410,7 +416,7 @@ public class CreazionePartitaControllerTest{
         Mockito.when(mockedRequest.getParameter("nameG1")).thenReturn(PLAYER_NAME);
         Mockito.when(mockedRequest.getParameter("surnameG1")).thenReturn(PLAYER_SURNAME);
 
-        String message = "Numero massimo giocatori non valido";
+        String message = " Valore di Numero Giocatori non valido. ";
 
         IllegalArgumentException exception;
         exception = assertThrows(IllegalArgumentException.class,
@@ -432,7 +438,7 @@ public class CreazionePartitaControllerTest{
         Mockito.when(mockedRequest.getParameter("nameG1")).thenReturn(null);
         Mockito.when(mockedRequest.getParameter("surnameG1")).thenReturn(PLAYER_SURNAME);
 
-        String message = "Nome giocatore non valido";
+        String message = "Il formato del giocatore non è valido. ";
 
         IllegalArgumentException exception;
         exception = assertThrows(IllegalArgumentException.class,
@@ -454,7 +460,7 @@ public class CreazionePartitaControllerTest{
         Mockito.when(mockedRequest.getParameter("nameG1")).thenReturn("");
         Mockito.when(mockedRequest.getParameter("surnameG1")).thenReturn(PLAYER_SURNAME);
 
-        String message = "Nome giocatore non valido";
+        String message = "Il formato del giocatore non è valido. ";
 
         IllegalArgumentException exception;
         exception = assertThrows(IllegalArgumentException.class,
@@ -476,7 +482,7 @@ public class CreazionePartitaControllerTest{
         Mockito.when(mockedRequest.getParameter("nameG1")).thenReturn("Luc1a");
         Mockito.when(mockedRequest.getParameter("surnameG1")).thenReturn(PLAYER_SURNAME);
 
-        String message = "Nome giocatore non valido";
+        String message = "Il formato del giocatore non è valido. ";
 
         IllegalArgumentException exception;
         exception = assertThrows(IllegalArgumentException.class,
@@ -498,7 +504,7 @@ public class CreazionePartitaControllerTest{
         Mockito.when(mockedRequest.getParameter("nameG1")).thenReturn("UnoDueTreQuattroCinque");
         Mockito.when(mockedRequest.getParameter("surnameG1")).thenReturn(PLAYER_SURNAME);
 
-        String message = "Nome giocatore non valido";
+        String message = "La lunghezza del giocatore non è valida. ";
 
         IllegalArgumentException exception;
         exception = assertThrows(IllegalArgumentException.class,
@@ -520,7 +526,7 @@ public class CreazionePartitaControllerTest{
         Mockito.when(mockedRequest.getParameter("nameG1")).thenReturn("L");
         Mockito.when(mockedRequest.getParameter("surnameG1")).thenReturn(PLAYER_SURNAME);
 
-        String message = "Nome giocatore non valido";
+        String message = "La lunghezza del giocatore non è valida. ";
 
         IllegalArgumentException exception;
         exception = assertThrows(IllegalArgumentException.class,
@@ -542,7 +548,7 @@ public class CreazionePartitaControllerTest{
         Mockito.when(mockedRequest.getParameter("nameG1")).thenReturn(PLAYER_NAME);
         Mockito.when(mockedRequest.getParameter("surnameG1")).thenReturn(null);
 
-        String message = "Cognome giocatore non valido";
+        String message = "Il formato del giocatore non è valido. ";
 
         IllegalArgumentException exception;
         exception = assertThrows(IllegalArgumentException.class,
@@ -564,7 +570,7 @@ public class CreazionePartitaControllerTest{
         Mockito.when(mockedRequest.getParameter("nameG1")).thenReturn(PLAYER_NAME);
         Mockito.when(mockedRequest.getParameter("surnameG1")).thenReturn("");
 
-        String message = "Cognome giocatore non valido";
+        String message = "Il formato del giocatore non è valido. ";
 
         IllegalArgumentException exception;
         exception = assertThrows(IllegalArgumentException.class,
@@ -586,7 +592,7 @@ public class CreazionePartitaControllerTest{
         Mockito.when(mockedRequest.getParameter("nameG1")).thenReturn(PLAYER_NAME);
         Mockito.when(mockedRequest.getParameter("surnameG1")).thenReturn("Ga3ta");
 
-        String message = "Cognome giocatore non valido";
+        String message = "Il formato del giocatore non è valido. ";
 
         IllegalArgumentException exception;
         exception = assertThrows(IllegalArgumentException.class,
@@ -608,7 +614,7 @@ public class CreazionePartitaControllerTest{
         Mockito.when(mockedRequest.getParameter("nameG1")).thenReturn(PLAYER_NAME);
         Mockito.when(mockedRequest.getParameter("surnameG1")).thenReturn("UnoDueTreQuattroCinque");
 
-        String message = "Cognome giocatore non valido";
+        String message = "La lunghezza del giocatore non è valida. ";
 
         IllegalArgumentException exception;
         exception = assertThrows(IllegalArgumentException.class,
@@ -630,7 +636,7 @@ public class CreazionePartitaControllerTest{
         Mockito.when(mockedRequest.getParameter("nameG1")).thenReturn(PLAYER_NAME);
         Mockito.when(mockedRequest.getParameter("surnameG1")).thenReturn("G");
 
-        String message = "Cognome giocatore non valido";
+        String message = "La lunghezza del giocatore non è valida. ";
 
         IllegalArgumentException exception;
         exception = assertThrows(IllegalArgumentException.class,
@@ -652,8 +658,11 @@ public class CreazionePartitaControllerTest{
         Mockito.when(mockedRequest.getParameter("nameG1")).thenReturn(PLAYER_NAME);
         Mockito.when(mockedRequest.getParameter("surnameG1")).thenReturn(PLAYER_SURNAME);
 
+        Mockito.doReturn(mockedServletContext).when(mockedRequest).getServletContext();
+        Mockito.doReturn(mockedDispatcher).when(mockedServletContext).getRequestDispatcher("/view/partita/matchCreation.jsp");
+
         servlet.doPost(mockedRequest, mockedResponse);
-        Mockito.verify(mockedResponse).setContentType("Creazione avvenuta!");
+        Mockito.verify(mockedResponse).setContentType("La prenotazione viene memorizzata con successo");
     }
 
     /**
@@ -675,19 +684,30 @@ public class CreazionePartitaControllerTest{
                 Date.valueOf(DATA), Time.valueOf(ORARIO_INIZIO.concat(":00")),
                 Time.valueOf(ORARIO_FINE.concat(":00")),"eugenio123");
 
-        servlet.doGet(mockedRequest, mockedResponse);
-        Mockito.verify(mockedResponse).setContentType("Impossibile creare una partita!");
+        String message = "Impossibile creare una partita!";
+
+        IllegalArgumentException exception;
+
+        exception = assertThrows(IllegalArgumentException.class,
+                () -> servlet.doGet(mockedRequest, mockedResponse));
+        assertEquals(message, exception.getMessage());
+
     }
 
     /**
-     * Selected "Annulla" button
+     * Selected button.equals("Conferma") <- FAIL
      */
     @Test
     void TC_cancelButton() throws ServletException, IOException {
         Mockito.when(mockedRequest.getParameter("btnMatchCreation")).thenReturn("Annulla");
 
-        servlet.doPost(mockedRequest, mockedResponse);
-        Mockito.verify(mockedResponse).setContentType("Operazione annullata");
+        String message = "Operazione annullata!";
+
+        IllegalArgumentException exception;
+
+        exception = assertThrows(IllegalArgumentException.class,
+                () -> servlet.doGet(mockedRequest, mockedResponse));
+        assertEquals(message, exception.getMessage());
     }
 
 

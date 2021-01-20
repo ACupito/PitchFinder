@@ -1,0 +1,65 @@
+@import url(https://fonts.googleapis.com/css?family=Roboto:300);
+
+.login-page {
+    width: 100%;
+    padding: 8% 0 0;
+    margin: auto;
+}
+.div-form {
+    position: relative;
+    z-index: 1;
+    background: #FFFFFF;
+    opacity: 0.94;
+    max-width: 80%;
+    margin: 0 auto 100px;
+    padding: 45px;
+    text-align: center;
+    box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+    border-radius: 25px;
+}
+.register-form{
+    margin:0;
+    padding: 0;
+}
+.div-form input {
+    font-family: "Roboto", sans-serif;
+    outline: 0;
+    background: #f2f2f2;
+    border: 0;
+    margin: 0 0 15px;
+    padding: 15px;
+    box-sizing: border-box;
+    font-size: 14px;
+}
+.div-form input[type=button] , .div-form input[type=submit]{
+    font-family: "Roboto", sans-serif;
+    text-transform: uppercase;
+    outline: 0;
+    background: #4CAF50;
+    border: 0;
+    padding: 15px;
+    color: #FFFFFF;
+    font-size: 14px;
+    /* -webkit-transition: all 0.3 ease;
+    transition: all 0.3 ease; */
+}
+.div-form input[type=button]:hover   .div-form input[type=button]:hover,.div-form input[type=button]:active,
+.div-form input[type=button]:focus , .div-form input[type=submit]:hover , .div-form input[type=submit]:active ,
+.div-form input[type=submit]:focus{
+    background: #43A047;
+    cursor: pointer;
+}
+.div-form .message {
+    margin: 15px 0 0;
+    color: #b3b3b3;
+    font-size: 12px;
+}
+.div-form .message a {
+    color: #4CAF50;
+    text-decoration: none;
+}
+body {
+    background-image: url("../../images/partita/sfondo_match_creation.jpg");
+    background-size:cover;
+    background-repeat: no-repeat;
+}

@@ -100,6 +100,68 @@ public class Evento {
     }
 
     /**
+     * Used for the event.jsp.
+     * @param month
+     * @return String
+     */
+    public String getStringMonth(int month) {
+        switch (month) {
+            case 0:
+                return "Gen";
+            case 1:
+                return "Feb";
+            case 2:
+                return "Mar";
+            case 3:
+                return "Apr";
+            case 4:
+                return "Mag";
+            case 5:
+                return "Giu";
+            case 6:
+                return "Lug";
+            case 7:
+                return "Ago";
+            case 8:
+                return "Set";
+            case 9:
+                return "Ott";
+            case 10:
+                return "Nov";
+            case 11:
+                return "Dic";
+            default:
+                return "";
+        }
+    }
+
+    /**
+     * Used for the event.jsp.
+     * @param day
+     * @return String
+     */
+    public String getStringDay(int day) {
+        switch (day) {
+            case 0:
+                return "Dom";
+            case 1:
+                return "Lun";
+            case 2:
+                return "Mar";
+            case 3:
+                return "Mer";
+            case 4:
+                return "Gio";
+            case 5:
+                return "Ven";
+            case 6:
+                return "Sab";
+            default:
+                return "";
+        }
+    }
+
+    /**
      * @return String
      */
     public String getGuest() {
