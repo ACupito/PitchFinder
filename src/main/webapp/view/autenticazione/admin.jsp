@@ -224,7 +224,7 @@
                                     <label for="creation-name-Evento" id="creation-label-name-Evento">Nome dell'evento:</label>
                                     <input type="text" class="form-control" id="creation-name-Evento" placeholder="Inserisci il nome dell'evento" name="nome" required onkeyup="validateNameEvento()"><br>
                                     <div class="valid-feedback" id="name-evento-valid">Valido</div>
-                                    <div class="invalid-feedback" id="name-evento-invalid">Inserire il nome dell’evento</div>
+                                    <div class="invalid-feedback" id="name-evento-invalid">La lunghezza del nome non è valida</div>
                                 </div>
                                 <div class="form-group">
                                     <label for="creation-timestr-Evento" id="creation-label-str-Evento">Orario Inizio: (XX:YY)</label>
@@ -248,13 +248,13 @@
                                     <label for="creation-guest-Evento" id="creation-label-guest">Nome Ospite:</label>
                                     <input type="text" id="creation-guest-Evento" class="form-control" name="ospite" required onkeyup="validateGuestEvento()"><br>
                                     <div class="valid-feedback" id="guest-evento-valid">Valido</div>
-                                    <div class="invalid-feedback" id="guest-evento-invalid">Inserire l'ospite</div>
+                                    <div class="invalid-feedback" id="guest-evento-invalid">La lunghezza del nome dell’ospite non è valida</div>
                                 </div>
                                 <div class="form-group">
                                     <label for="creation-description-Evento" id="creation-label-description">Descrizione :</label><br>
                                     <input id="creation-description-Evento" class="form-control" name="descrizione" required onkeyup="validateDescriptionEvento()"><br>
                                     <div class="valid-feedback" id="description-evento-valid">Valido</div>
-                                    <div class="invalid-feedback" id="description-evento-invalid">Inserire la descrizione</div>
+                                    <div class="invalid-feedback" id="description-evento-invalid">La lunghezza della descrizione non è valida</div>
                                 </div>
 
 
