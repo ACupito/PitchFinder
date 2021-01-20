@@ -37,7 +37,7 @@ public class TC_RF_CreareEventi {
         driver.findElement(By.id("crea_evento")).click();
         driver.findElement(By.id("creation-name-Evento")).clear();
         driver.findElement(By.id("creation-name-Evento")).sendKeys("");
-        assertEquals("Inserire il nome dell’evento",
+        assertEquals("La lunghezza del nome non è valida",
                 driver.findElement(By.id("name-evento-invalid")).getText());
     }
 
@@ -197,7 +197,7 @@ public class TC_RF_CreareEventi {
         driver.findElement(By.id("creation-data-Evento")).sendKeys("2021-12-31");
         driver.findElement(By.id("creation-guest-Evento")).clear();
         driver.findElement(By.id("creation-guest-Evento")).sendKeys("");
-        assertEquals("Inserire l'ospite",
+        assertEquals("La lunghezza del nome dell’ospite non è valida",
                 driver.findElement(By.id("guest-evento-invalid")).getText());
     }
 
@@ -247,7 +247,7 @@ public class TC_RF_CreareEventi {
         driver.findElement(By.id("creation-guest-Evento")).sendKeys("Test Ospite");
         driver.findElement(By.id("creation-description-Evento")).clear();
         driver.findElement(By.id("creation-description-Evento")).sendKeys("");
-        assertEquals("Inserire la descrizione",
+        assertEquals("La lunghezza della descrizione non è valida",
                 driver.findElement(By.id("description-evento-invalid")).getText());
     }
 
