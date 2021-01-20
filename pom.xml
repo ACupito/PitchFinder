@@ -129,6 +129,9 @@
                         <exclude>com/pitchfinder/campo/entity/**/*</exclude>
                         <exclude>**/*EventoController.*</exclude>
                         <exclude>**/*ShowMatchAdminAj.*</exclude>
+                        <exclude>**/*ValidaEmail.*</exclude>
+                        <exclude>**/*DisponibilitaServlet.*</exclude>
+                        <exclude>**/*Iscrizione.*</exclude>
                         <exclude>**/ShowMatchFilterAjax.*</exclude>
                         <exclude>**/*HomeServlet.*</exclude>
                         <exclude>**/*AvailabilityAjaxServlet.*</exclude>
