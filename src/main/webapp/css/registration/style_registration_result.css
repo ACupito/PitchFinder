@@ -1,0 +1,12 @@
+.message {
+    position: absolute;
+    width: 35%;
+    margin-top: 15%;
+    margin-left: 35%;
+    border: 1px solid #28a745;
+    padding: 10%;
+}
+
+span {
+    color: #28a745
+}
