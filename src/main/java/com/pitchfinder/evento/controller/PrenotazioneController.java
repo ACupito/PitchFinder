@@ -15,7 +15,7 @@ import java.io.IOException;
 import java.sql.Date;
 
 @WebServlet("/Prenotazione")
-public class Prenotazione extends HttpServlet {
+public class PrenotazioneController extends HttpServlet {
     /**
      *doGet.
      * @param req - req.

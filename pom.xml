@@ -128,6 +128,7 @@
                         <exclude>com/pitchfinder/torneo/entity/**/*</exclude>
                         <exclude>com/pitchfinder/campo/entity/**/*</exclude>
                         <exclude>**/*EventoController.*</exclude>
+                        <exclude>**/*EventoAdminDeleteController.*</exclude>
                         <exclude>**/*ShowMatchAdminAj.*</exclude>
                         <exclude>**/*ValidaEmail.*</exclude>
                         <exclude>**/*DisponibilitaServlet.*</exclude>
@@ -136,7 +137,7 @@
                         <exclude>**/*HomeServlet.*</exclude>
                         <exclude>**/*AvailabilityAjaxServlet.*</exclude>
                         <exclude>**/*PartitaServlet.*</exclude>
-                        <exclude>**/*Prenotazione.*</exclude>
+                        <exclude>**/*PrenotazioneController.*</exclude>
                     </excludes>
                 </configuration>
                 <executions>
